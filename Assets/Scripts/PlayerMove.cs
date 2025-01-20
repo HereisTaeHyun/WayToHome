@@ -3,11 +3,13 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public float jumpSpeed = 5f;
     public Transform followingCamera;
+    Rigidbody2D rigidbody2D;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
