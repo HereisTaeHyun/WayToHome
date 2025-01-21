@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpSpeed = 5f;
+    public float jumpSpeed = 7f;
     public LayerMask ground;
     public float groundDistance = 0.1f;
     private bool isGround;
