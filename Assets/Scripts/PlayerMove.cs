@@ -19,8 +19,7 @@ public class PlayerMove : MonoBehaviour
     {
         // 수평 입력 값을 받아 방향 벡터 변환 후 Translate로 이동 입력
         float h = Input.GetAxis("Horizontal");
-        Vector2 movement = new Vector2(h, 0);
-        transform.Translate(movement * moveSpeed * Time.deltaTime);
+        transform.Translate(Vector2.right * h * moveSpeed * Time.deltaTime);
         
         // 점프 가능 유무 방지를 발에서 시작한 ray가 Ground에 닿는지로 체크
         Vector2 rayStart = new Vector2(transform.position.x, transform.position.y - 1);
