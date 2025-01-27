@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float jumpSpeed = 7f;
+    public int HP = 10;
+    private float moveSpeed = 5f;
+    private float jumpSpeed = 7f;
     public LayerMask ground;
-    public float groundDistance = 0.3f;
-    public bool isGround;
+    private float groundDistance = 0.3f;
+    private bool isGroundLeft;
+    private bool isGroundRight;
     Rigidbody2D rigidBody;
     public int maxJump = 1;
     public int jumpCount = 0;
-    public bool onAir;
+    private bool onAir;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,28 +26,35 @@ public class PlayerMove : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         transform.Translate(Vector2.right * h * moveSpeed * Time.deltaTime);
         
-        // 점프 가능 유무 방지를 발에서 시작한 ray가 Ground에 닿는지로 체크
+        // 점프 가능 유무 방지를 발에서 시작한 ray가 Ground에 닿는지로 체크 후 점프
         GroundCheck();
+        Jump();
+    }
+    private void GroundCheck()
+    {
+        Vector2 rayStartLeft = new Vector2(transform.position.x - 0.3f, transform.position.y - 1f);
+        Vector2 rayStartRight = new Vector2(transform.position.x + 0.3f, transform.position.y - 1f);
+        bool wasGrounded = (isGroundLeft || isGroundRight); // 이전 상태 저장
+        isGroundLeft = Physics2D.Raycast(rayStartLeft, Vector2.down, groundDistance, ground);
+        isGroundRight = Physics2D.Raycast(rayStartRight, Vector2.down, groundDistance, ground);
 
+        if ((isGroundLeft || isGroundRight) && !wasGrounded) // 땅에 처음 닿았을 때만 점프 카운트 초기화
+        {
+            jumpCount = 0;
+            onAir = false; // 점프 상태 해제
+        }
+
+        Debug.DrawRay(rayStartLeft, Vector2.down * groundDistance, Color.red);
+        Debug.DrawRay(rayStartRight, Vector2.down * groundDistance, Color.red);
+    }
+
+    private void Jump()
+    {
         if(Input.GetButtonDown("Jump") && jumpCount < maxJump) // ray가 Ground에 닿으면 점프
         {
             jumpCount += 1;
             rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumpSpeed);
             onAir = true;
         }
-    }
-    void GroundCheck()
-    {
-        Vector2 rayStart = new Vector2(transform.position.x, transform.position.y - 1f);
-        bool wasGrounded = isGround; // 이전 상태 저장
-        isGround = Physics2D.Raycast(rayStart, Vector2.down, groundDistance, ground);
-
-        if (isGround && !wasGrounded) // 땅에 처음 닿았을 때만 점프 카운트 초기화
-        {
-            jumpCount = 0;
-            onAir = false; // 점프 상태 해제
-        }
-
-        Debug.DrawRay(rayStart, Vector2.down * groundDistance, Color.red);
     }
 }
