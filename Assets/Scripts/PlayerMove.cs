@@ -31,11 +31,4 @@ public class PlayerMove : MonoBehaviour
             rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumpSpeed);
         }
     }
-
-    // MainCamera가 Player의 중심을 추적하도록
-    public Transform followingCamera;
-    void LateUpdate()
-    {
-        followingCamera.position = new Vector3(transform.position.x, transform.position.y, -10);
-    }
 }
