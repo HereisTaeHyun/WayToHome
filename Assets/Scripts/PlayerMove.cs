@@ -5,8 +5,8 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpSpeed = 7f;
     public LayerMask ground;
-    public float groundDistance = 0.1f;
-    private bool isGround;
+    public float groundDistance = 0.3f;
+    public bool isGround;
     Rigidbody2D rigidBody;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,11 +22,13 @@ public class PlayerMove : MonoBehaviour
         transform.Translate(Vector2.right * h * moveSpeed * Time.deltaTime);
         
         // 점프 가능 유무 방지를 발에서 시작한 ray가 Ground에 닿는지로 체크
-        Vector2 rayStart = new Vector2(transform.position.x, transform.position.y - 1);
+        Vector2 rayStart = new Vector2(transform.position.x, transform.position.y - 0.9f);
         isGround = Physics2D.Raycast(rayStart, Vector2.down, groundDistance, ground);
+        Debug.DrawRay(rayStart, Vector2.down * groundDistance, Color.red);
+
         if(Input.GetButtonDown("Jump") && isGround) // ray가 Ground에 닿으면 점프
         {
-            rigidBody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+            rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumpSpeed);
         }
     }
 

@@ -290,7 +290,8 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
-  groundDistance: 0.1
+  groundDistance: 0.3
+  isGround: 0
   followingCamera: {fileID: 519420032}
 --- !u!70 &492291792
 CapsuleCollider2D:
@@ -656,7 +657,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1905166072}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
