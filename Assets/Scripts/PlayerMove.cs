@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public int HP = 10;
+    public int currentHP = 10;
+    public int MaxHP = 10;
     private float moveSpeed = 5f;
     private float jumpSpeed = 7f;
     public LayerMask ground;
