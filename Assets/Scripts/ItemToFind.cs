@@ -45,7 +45,7 @@ public class ItemToFind : MonoBehaviour
                     Destroy(gameObject);
                     break;
 
-                case ItemToFindType.Money:
+                case ItemToFindType.Money: // 돈 획득
                     playerMove.money += 1;
                     Debug.Log("돈이다!");
                     Destroy(gameObject);
