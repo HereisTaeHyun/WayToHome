@@ -16,35 +16,34 @@ public class ItemToFind : MonoBehaviour
         if(other.gameObject.CompareTag("Player")) // 충돌 물체가 플레이어일 경우 컴포넌트를 받아와 아이템 사용
         {
             PlayerMove playerMove = other.GetComponent<PlayerMove>();
-            GetItem(playerMove);
-            Destroy(gameObject);
-        }
-    }
 
-    private void GetItem(PlayerMove playerMove)
-    {
-        switch(itemToFindType)
-        {
-            case ItemToFindType.MaxHpPlus:
-                playerMove.MaxHP += 1;
-                Debug.Log("최대 체력 증가");
-                break;
-            
-            case ItemToFindType.HPrecovery:
-                if(playerMove.currentHP < playerMove.MaxHP)
-                {
-                    playerMove.currentHP += 1;
-                    Debug.Log("체력 + 1");
-                }
-                else
-                {
-                    Debug.Log("이미 최대 체력입니다.");
-                }
-                break;
-            case ItemToFindType.MaxJumpPlus:
-                playerMove.maxJump += 1;
-                Debug.Log("최대 점프 증가");
-                break;
+            switch(itemToFindType) // 아이템 사용
+            {
+                case ItemToFindType.MaxHpPlus: // 최대 체력 증가
+                    playerMove.MaxHP += 1;
+                    Debug.Log("최대 체력 증가");
+                    Destroy(gameObject);
+                    break;
+                
+                case ItemToFindType.HPrecovery: // 최복
+                    if(playerMove.currentHP < playerMove.MaxHP)
+                    {
+                        playerMove.currentHP += 1;
+                        Debug.Log("체력 + 1");
+                        Destroy(gameObject);
+                    }
+                    else // 최대 체력이면 사용안됨
+                    {
+                        Debug.Log("이미 최대 체력입니다.");
+                    }
+                    break;
+
+                case ItemToFindType.MaxJumpPlus: // 점프 횟수 추가
+                    playerMove.maxJump += 1;
+                    Debug.Log("최대 점프 증가");
+                    Destroy(gameObject);
+                    break;
+            }
         }
     }
 }
