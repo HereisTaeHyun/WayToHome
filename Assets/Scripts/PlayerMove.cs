@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
     private float moveSpeed = 5f;
     private float jumpSpeed = 7f;
     public LayerMask ground;
-    private float groundDistance = 0.3f;
+    private float groundDistance = 0.1f;
     private bool isGroundLeft;
     private bool isGroundRight;
     Rigidbody2D rigidBody;
@@ -35,14 +35,13 @@ public class PlayerMove : MonoBehaviour
     {
         Vector2 rayStartLeft = new Vector2(transform.position.x - 0.3f, transform.position.y - 1f);
         Vector2 rayStartRight = new Vector2(transform.position.x + 0.3f, transform.position.y - 1f);
-        bool wasGrounded = (isGroundLeft || isGroundRight); // 이전 상태 저장
+        bool onAir = (isGroundLeft || isGroundRight); // 이전 상태 저장
         isGroundLeft = Physics2D.Raycast(rayStartLeft, Vector2.down, groundDistance, ground);
         isGroundRight = Physics2D.Raycast(rayStartRight, Vector2.down, groundDistance, ground);
 
-        if ((isGroundLeft || isGroundRight) && !wasGrounded) // 땅에 처음 닿았을 때만 점프 카운트 초기화
+        if ((isGroundLeft || isGroundRight) && !onAir) // 땅에 처음 닿았을 때만 점프 카운트 초기화
         {
             jumpCount = 0;
-            onAir = false; // 점프 상태 해제
         }
 
         Debug.DrawRay(rayStartLeft, Vector2.down * groundDistance, Color.red);
