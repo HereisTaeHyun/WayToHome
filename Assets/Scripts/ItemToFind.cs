@@ -8,6 +8,7 @@ public class ItemToFind : MonoBehaviour
         MaxHpPlus,
         HPrecovery,
         MaxJumpPlus,
+        Money,
     }
     public ItemToFindType itemToFindType;
 
@@ -41,6 +42,12 @@ public class ItemToFind : MonoBehaviour
                 case ItemToFindType.MaxJumpPlus: // 점프 횟수 추가
                     playerMove.maxJump += 1;
                     Debug.Log("최대 점프 증가");
+                    Destroy(gameObject);
+                    break;
+
+                case ItemToFindType.Money:
+                    playerMove.money += 1;
+                    Debug.Log("돈이다!");
                     Destroy(gameObject);
                     break;
             }

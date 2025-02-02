@@ -2,17 +2,21 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    // public 변수
+    Rigidbody2D rigidBody;
     public int currentHP = 10;
     public int MaxHP = 10;
+    public int money = 0;
+    public int maxJump = 1;
+
+    // private 변수
     private float moveSpeed = 5f;
-    private float jumpSpeed = 7f;
+    private float jumpSpeed = 10f;
     public LayerMask ground;
     private float groundDistance = 0.1f;
     private bool isGroundLeft;
     private bool isGroundRight;
-    Rigidbody2D rigidBody;
-    public int maxJump = 1;
-    public int jumpCount = 0;
+    private int jumpCount = 0;
     private bool onAir;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
