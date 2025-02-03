@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     public int MaxHP = 10;
     public int money = 0;
     public int maxJump = 1;
+    public int attack = 1;
 
     // private 변수
     private float moveSpeed = 5f;

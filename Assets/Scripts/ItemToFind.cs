@@ -5,7 +5,6 @@ public class ItemToFind : MonoBehaviour
     // 필드에 배치되어 있고 가까이 가면 획득되는 아이템
     public enum ItemToFindType
     {
-        MaxHpPlus,
         HPrecovery,
         MaxJumpPlus,
         Money,
@@ -19,13 +18,7 @@ public class ItemToFind : MonoBehaviour
             PlayerMove playerMove = other.GetComponent<PlayerMove>();
 
             switch(itemToFindType) // 아이템 사용
-            {
-                case ItemToFindType.MaxHpPlus: // 최대 체력 증가
-                    playerMove.MaxHP += 1;
-                    Debug.Log("최대 체력 증가");
-                    Destroy(gameObject);
-                    break;
-                
+            {           
                 case ItemToFindType.HPrecovery: // 최복
                     if(playerMove.currentHP < playerMove.MaxHP)
                     {
