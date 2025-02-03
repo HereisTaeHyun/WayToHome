@@ -12,9 +12,9 @@ public class ItemToBuy : MonoBehaviour
 
     public ItemToBuyType itemToBuyType;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit")) // 현재 버튼 안먹힘, 가능 여부를 bool로 넣고 Update에 옮기기 고려 중
+        if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit"))
         {
             PlayerMove playerMove = other.GetComponent<PlayerMove>();
 
