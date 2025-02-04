@@ -12,8 +12,9 @@ public class PlayerMove : MonoBehaviour
     public int attack = 1;
 
     // private 변수
-    private float moveSpeed = 5f;
-    private float jumpSpeed = 10f;
+    private float moveSpeed = 5.0f;
+    private float runSpeed = 10.0f;
+    private float jumpSpeed = 10.0f;
     public LayerMask ground;
     private float groundDistance = 0.1f;
     private bool isGroundLeft;
@@ -31,7 +32,15 @@ public class PlayerMove : MonoBehaviour
     {
         // 수평 입력 값을 받아 방향 벡터 변환 후 Translate로 이동 입력
         float h = Input.GetAxis("Horizontal");
-        transform.Translate(Vector2.right * h * moveSpeed * Time.deltaTime);
+
+        if(Input.GetButton("Horizontal") && Input.GetKey(KeyCode.LeftShift))
+        {
+            transform.Translate(h * runSpeed * Time.deltaTime * Vector2.right);
+        }
+        else if(Input.GetButton("Horizontal"))
+        {
+            transform.Translate(h * moveSpeed * Time.deltaTime * Vector2.right);
+        }
         
         // 점프 가능 유무 방지를 발에서 시작한 ray가 Ground에 닿는지로 체크 후 점프
         GroundCheck();
