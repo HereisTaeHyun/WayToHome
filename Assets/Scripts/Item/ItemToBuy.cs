@@ -16,15 +16,15 @@ public class ItemToBuy : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit"))
         {
-            PlayerMove playerMove = other.GetComponent<PlayerMove>();
+            PlayerCtrl playerCtrl = other.GetComponent<PlayerCtrl>();
 
             switch(itemToBuyType)
             {
                 case ItemToBuyType.MaxHpPlus: // 최대 체력 증가
-                    if(playerMove.money >= 3)
+                    if(playerCtrl.money >= 3)
                     {
-                        playerMove.money -= 3;
-                        playerMove.MaxHP += 1;
+                        playerCtrl.money -= 3;
+                        playerCtrl.MaxHP += 1;
                         Debug.Log("최대 체력 증가");
                         Destroy(gameObject);
                     }
@@ -35,10 +35,10 @@ public class ItemToBuy : MonoBehaviour
                     break;
                 
                 case ItemToBuyType.AttackPlus: // 공격력 증가
-                    if(playerMove.money >= 2)
+                    if(playerCtrl.money >= 2)
                     {
-                        playerMove.money -= 2;
-                        playerMove.attack += 1;
+                        playerCtrl.money -= 2;
+                        playerCtrl.attack += 1;
                         Debug.Log("공격력 증가");
                         Destroy(gameObject);
                     }

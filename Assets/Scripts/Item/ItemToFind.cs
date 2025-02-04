@@ -15,14 +15,16 @@ public class ItemToFind : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player")) // 충돌 물체가 플레이어일 경우 컴포넌트를 받아와 아이템 사용
         {
+            PlayerCtrl playerCtrl = other.GetComponent<PlayerCtrl>();
             PlayerMove playerMove = other.GetComponent<PlayerMove>();
 
             switch(itemToFindType) // 아이템 사용
-            {           
-                case ItemToFindType.HPrecovery: // 최복
-                    if(playerMove.currentHP < playerMove.MaxHP)
+            {    
+                // playerCtrl 제어
+                case ItemToFindType.HPrecovery: // 회복
+                    if(playerCtrl.currentHP < playerCtrl.MaxHP)
                     {
-                        playerMove.currentHP += 1;
+                        playerCtrl.currentHP += 1;
                         Debug.Log("체력 + 1");
                         Destroy(gameObject);
                     }
@@ -32,15 +34,16 @@ public class ItemToFind : MonoBehaviour
                     }
                     break;
 
-                case ItemToFindType.MaxJumpPlus: // 점프 횟수 추가
-                    playerMove.maxJump += 1;
-                    Debug.Log("최대 점프 증가");
+                case ItemToFindType.Money: // 돈 획득
+                    playerCtrl.money += 1;
+                    Debug.Log("돈이다!");
                     Destroy(gameObject);
                     break;
 
-                case ItemToFindType.Money: // 돈 획득
-                    playerMove.money += 1;
-                    Debug.Log("돈이다!");
+                // playerMove 제어
+                case ItemToFindType.MaxJumpPlus: // 점프 횟수 추가
+                    playerMove.maxJump += 1;
+                    Debug.Log("최대 점프 증가");
                     Destroy(gameObject);
                     break;
             }

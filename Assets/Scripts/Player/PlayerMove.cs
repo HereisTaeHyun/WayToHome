@@ -5,11 +5,7 @@ public class PlayerMove : MonoBehaviour
 {
     // public 변수
     Rigidbody2D rigidBody;
-    public int currentHP = 10;
-    public int MaxHP = 10;
-    public int money = 0;
     public int maxJump = 1;
-    public int attack = 1;
 
     // private 변수
     private float moveSpeed = 5.0f;
@@ -28,7 +24,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void MoveCtrl()
     {
         // 수평 입력 값을 받아 방향 벡터 변환 후 Translate로 이동 입력
         float h = Input.GetAxis("Horizontal");
