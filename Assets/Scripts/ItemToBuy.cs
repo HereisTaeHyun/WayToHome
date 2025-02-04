@@ -14,7 +14,7 @@ public class ItemToBuy : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Player") && Input.GetButtonUp("Submit"))
+        if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit"))
         {
             PlayerMove playerMove = other.GetComponent<PlayerMove>();
 
