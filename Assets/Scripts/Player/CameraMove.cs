@@ -8,9 +8,8 @@ public class CameraMove : MonoBehaviour
 
     // 프라이빗 변수
     private Vector3 vevlocity = Vector3.zero;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    // Update is called once per frame
+    // 플레이어 이동 따라가기
     void LateUpdate()
     {
         Vector3 pos = new Vector3(target.position.x, target.position.y, transform.position.z);
