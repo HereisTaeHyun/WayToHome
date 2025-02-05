@@ -17,7 +17,6 @@ public class PlayerMove : MonoBehaviour
     private bool isGroundRight;
     private int jumpCount = 0;
     private bool onAir;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
