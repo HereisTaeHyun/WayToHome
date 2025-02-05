@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ItemToFind : MonoBehaviour
 {
-    // 필드에 배치되어 있고 가까이 가면 획득되는 아이템
+    // 필드에 배치 or 드랍, 접촉하면 획득되는 아이템
     public enum ItemToFindType
     {
         HPrecovery,
@@ -15,34 +15,35 @@ public class ItemToFind : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Player")) // 충돌 물체가 플레이어일 경우 컴포넌트를 받아와 아이템 사용
+         // 충돌 물체가 플레이어일 경우 획득
+        if(other.gameObject.CompareTag("Player"))
         {
             playerCtrl = other.GetComponent<PlayerCtrl>();
             playerMove = other.GetComponent<PlayerMove>();
 
             switch(itemToFindType) // 아이템 사용
             {    
-                // playerCtrl 제어
+                // playerCtrl에 영향
                 case ItemToFindType.HPrecovery: // 회복
                     if(playerCtrl.currentHP < playerCtrl.MaxHP)
                     {
                         playerCtrl.currentHP += 1;
-                        Debug.Log("체력 + 1");
+                        Debug.Log("체력 회복");
                         Destroy(gameObject);
                     }
                     else // 최대 체력이면 사용안됨
                     {
-                        Debug.Log("이미 최대 체력입니다.");
+                        Debug.Log("이미 최대 체력");
                     }
                     break;
 
                 case ItemToFindType.Money: // 돈 획득
                     playerCtrl.money += 1;
-                    Debug.Log("돈이다!");
+                    Debug.Log("돈 획득");
                     Destroy(gameObject);
                     break;
 
-                // playerMove 제어
+                // playerMove에 영향
                 case ItemToFindType.MaxJumpPlus: // 점프 횟수 추가
                     playerMove.maxJump += 1;
                     Debug.Log("최대 점프 증가");

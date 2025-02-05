@@ -19,6 +19,7 @@ public class VendingMachineCtrl : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        // 플레이어 접촉 시 UI 활성화
         if(other.CompareTag("Player"))
         {
             vendingText.SetActive(true);
@@ -29,6 +30,7 @@ public class VendingMachineCtrl : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        // 플레이어 나가면 비활성화
         if(other.CompareTag("Player"))
         {
             vendingText.SetActive(false);

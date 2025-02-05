@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    // 컴포넌트트
     Rigidbody2D rigidBody;
     PlayerMove playerMove;
 
