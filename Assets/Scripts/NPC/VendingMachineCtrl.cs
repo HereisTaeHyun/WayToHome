@@ -3,6 +3,11 @@ using UnityEngine;
 public class VendingMachineCtrl : MonoBehaviour
 {
     public GameObject vendingText;
+    public GameObject[] SellingItem;
+    public Transform itemSpawnPoint;
+
+    private bool playerUsing;
+    private PlayerCtrl playerCtrl;
     void Start()
     {
         vendingText.SetActive(false);
@@ -17,6 +22,8 @@ public class VendingMachineCtrl : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             vendingText.SetActive(true);
+            playerCtrl = other.GetComponent<PlayerCtrl>();
+            playerUsing = true;
         }
     }
 
@@ -25,6 +32,7 @@ public class VendingMachineCtrl : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             vendingText.SetActive(false);
+            playerUsing = false;
         }
     }
 }

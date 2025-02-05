@@ -22,31 +22,15 @@ public class ItemToBuy : MonoBehaviour
             switch(itemToBuyType)
             {
                 case ItemToBuyType.MaxHpPlus: // 최대 체력 증가
-                    if(playerCtrl.money >= 3)
-                    {
-                        playerCtrl.money -= 3;
-                        playerCtrl.MaxHP += 1;
-                        Debug.Log("최대 체력 증가");
-                        Destroy(gameObject);
-                    }
-                    else
-                    {
-                        Debug.Log("돈 부족");
-                    }
+                    playerCtrl.MaxHP += 1;
+                    Debug.Log("최대 체력 증가");
+                    Destroy(gameObject);
                     break;
                 
                 case ItemToBuyType.AttackPlus: // 공격력 증가
-                    if(playerCtrl.money >= 2)
-                    {
-                        playerCtrl.money -= 2;
-                        playerCtrl.attack += 1;
-                        Debug.Log("공격력 증가");
-                        Destroy(gameObject);
-                    }
-                    else
-                    {
-                        Debug.Log("돈 부족");
-                    }
+                    playerCtrl.attack += 1;
+                    Debug.Log("공격력 증가");
+                    Destroy(gameObject);
                     break;
             }
         }
