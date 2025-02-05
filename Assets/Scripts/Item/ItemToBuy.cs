@@ -11,12 +11,13 @@ public class ItemToBuy : MonoBehaviour
     }
 
     public ItemToBuyType itemToBuyType;
+    PlayerCtrl playerCtrl;
 
     private void OnTriggerStay2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit"))
         {
-            PlayerCtrl playerCtrl = other.GetComponent<PlayerCtrl>();
+            playerCtrl = other.GetComponent<PlayerCtrl>();
 
             switch(itemToBuyType)
             {

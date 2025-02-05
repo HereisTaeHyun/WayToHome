@@ -6,12 +6,12 @@ public class PlayerMove : MonoBehaviour
     // public 변수
     Rigidbody2D rigidBody;
     public int maxJump = 1;
+    public LayerMask ground;
 
     // private 변수
     private float moveSpeed = 5.0f;
     private float runSpeed = 10.0f;
     private float jumpSpeed = 10.0f;
-    public LayerMask ground;
     private float groundDistance = 0.1f;
     private bool isGroundLeft;
     private bool isGroundRight;
@@ -54,9 +54,6 @@ public class PlayerMove : MonoBehaviour
         {
             jumpCount = 0;
         }
-
-        Debug.DrawRay(rayStartLeft, Vector2.down * groundDistance, Color.red);
-        Debug.DrawRay(rayStartRight, Vector2.down * groundDistance, Color.red);
     }
 
     private void Jump()

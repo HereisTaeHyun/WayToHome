@@ -10,13 +10,15 @@ public class ItemToFind : MonoBehaviour
         Money,
     }
     public ItemToFindType itemToFindType;
+    PlayerCtrl playerCtrl;
+    PlayerMove playerMove;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Player")) // 충돌 물체가 플레이어일 경우 컴포넌트를 받아와 아이템 사용
         {
-            PlayerCtrl playerCtrl = other.GetComponent<PlayerCtrl>();
-            PlayerMove playerMove = other.GetComponent<PlayerMove>();
+            playerCtrl = other.GetComponent<PlayerCtrl>();
+            playerMove = other.GetComponent<PlayerMove>();
 
             switch(itemToFindType) // 아이템 사용
             {    
