@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class VendingMachineCtrl : MonoBehaviour
 {
+    // 고급 아이템을 파는 자판기, 한 대당 2회 사용 가능
+    // HP+ : 5$, Attck+ : 3$
     public GameObject vendingText;
-    public GameObject[] SellingItem;
+    public GameObject[] SellingItems;
     public Transform itemSpawnPoint;
 
     private PlayerCtrl playerCtrl; // 소지금 체크에 필요
@@ -32,6 +34,36 @@ public class VendingMachineCtrl : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             vendingText.SetActive(false);
+        }
+    }
+
+    public void buyItem(int SellingItemType)
+    {
+        if(SellingItemType == 0)
+        {
+            if(playerCtrl.money >= 5)
+            {
+                playerCtrl.money -= 5;
+                Instantiate(SellingItems[SellingItemType], itemSpawnPoint.position, itemSpawnPoint.rotation);
+                Debug.Log($"잔액 : {playerCtrl.money}");
+            }
+            else
+            {
+                Debug.Log("돈 부족");
+            }
+        }
+        else if(SellingItemType == 1)
+        {
+            if(playerCtrl.money >= 3)
+            {
+                playerCtrl.money -= 3;
+                Instantiate(SellingItems[SellingItemType], itemSpawnPoint.position, itemSpawnPoint.rotation);
+                Debug.Log($"잔액 : {playerCtrl.money}");
+            }
+            else
+            {
+                Debug.Log("돈 부족");
+            }
         }
     }
 }
