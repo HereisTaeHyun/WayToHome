@@ -6,7 +6,6 @@ public class VendingMachineCtrl : MonoBehaviour
     public GameObject[] SellingItem;
     public Transform itemSpawnPoint;
 
-    private bool playerUsing;
     private PlayerCtrl playerCtrl; // 소지금 체크에 필요
     void Start()
     {
@@ -24,7 +23,6 @@ public class VendingMachineCtrl : MonoBehaviour
         {
             vendingText.SetActive(true);
             playerCtrl = other.GetComponent<PlayerCtrl>();
-            playerUsing = true;
         }
     }
 
@@ -34,7 +32,6 @@ public class VendingMachineCtrl : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             vendingText.SetActive(false);
-            playerUsing = false;
         }
     }
 }

@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    // public 변수
     Rigidbody2D rigidBody;
-    public int maxJump = 1;
-    public LayerMask ground;
 
-    // private 변수
+    // public 변수
+    public LayerMask ground;
+    // 아래 3개는 아이템에 의한 증감 가능하게 할 생각
     private float moveSpeed = 5.0f;
     private float runSpeed = 10.0f;
+    public int maxJump = 1;
+
+    // private 변수
     private float jumpSpeed = 10.0f;
     private float groundDistance = 0.1f;
     private bool isGroundLeft;
@@ -25,10 +27,10 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     public void MoveCtrl()
     {
-        // 좌우 이동
+        // 좌우 이동 메서드
         HorizontalMove();
         
-        // 점프
+        // 점프 메서드
         GroundCheck();
         Jump();
     }
@@ -46,6 +48,7 @@ public class PlayerMove : MonoBehaviour
             transform.Translate(h * moveSpeed * Time.deltaTime * Vector2.right);
         }
     }
+
     private void GroundCheck()
     {
         // Ray가 Ground에 닿으면 땅 위
@@ -60,7 +63,6 @@ public class PlayerMove : MonoBehaviour
             jumpCount = 0;
         }
     }
-
     private void Jump()
     {
         if(Input.GetButtonDown("Jump") && jumpCount < maxJump) // ray가 Ground에 닿으면 점프
