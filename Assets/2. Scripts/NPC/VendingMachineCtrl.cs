@@ -3,7 +3,7 @@ using UnityEngine;
 public class VendingMachineCtrl : MonoBehaviour
 {
     // 고급 아이템을 파는 자판기, 한 대당 2회 사용 가능
-    // HP+ : 5$, Attck+ : 3$
+    // HP+ : 5$, Attck+ : 3$, 이후 딕셔너리로 정리하는게 편할듯?
     public GameObject vendingText;
     public GameObject[] SellingItems;
     public Transform itemSpawnPoint;
