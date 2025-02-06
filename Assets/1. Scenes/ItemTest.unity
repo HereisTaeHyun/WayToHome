@@ -2074,10 +2074,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1258170956c2667418390013ee9a5507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJump: 1
   ground:
     serializedVersion: 2
     m_Bits: 64
+  maxJump: 1
 --- !u!114 &2082119077
 MonoBehaviour:
   m_ObjectHideFlags: 0
