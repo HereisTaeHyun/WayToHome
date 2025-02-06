@@ -7,7 +7,7 @@ public class VendingMachineCtrl : MonoBehaviour
     public Transform itemSpawnPoint;
 
     private bool playerUsing;
-    private PlayerCtrl playerCtrl;
+    private PlayerCtrl playerCtrl; // 소지금 체크에 필요
     void Start()
     {
         vendingText.SetActive(false);
