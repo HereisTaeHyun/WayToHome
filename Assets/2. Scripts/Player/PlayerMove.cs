@@ -14,11 +14,7 @@ public class PlayerMove : MonoBehaviour
 
     // private 변수
     private float jumpSpeed = 10.0f;
-    private float groundDistance = 0.1f;
-    private bool isGroundLeft;
-    private bool isGroundRight;
-    private int jumpCount = 0;
-    private bool onAir;
+    public int jumpCount = 0;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -31,7 +27,6 @@ public class PlayerMove : MonoBehaviour
         HorizontalMove();
         
         // 점프 메서드
-        GroundCheck();
         Jump();
     }
 
@@ -49,27 +44,20 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private void GroundCheck()
+    // Ground 위면 JumpCount 초기화
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        // Ray가 Ground에 닿으면 땅 위
-        Vector2 rayStartLeft = new Vector2(transform.position.x - 0.3f, transform.position.y - 1f);
-        Vector2 rayStartRight = new Vector2(transform.position.x + 0.3f, transform.position.y - 1f);
-        bool onAir = (isGroundLeft || isGroundRight);
-        isGroundLeft = Physics2D.Raycast(rayStartLeft, Vector2.down, groundDistance, ground);
-        isGroundRight = Physics2D.Raycast(rayStartRight, Vector2.down, groundDistance, ground);
-
-        if ((isGroundLeft || isGroundRight) && !onAir) // 땅에 닿으면 점프 카운트 초기화
+        if(other.collider.CompareTag("Ground"))
         {
             jumpCount = 0;
-        }
+        }   
     }
     private void Jump()
     {
-        if(Input.GetButtonDown("Jump") && jumpCount < maxJump) // ray가 Ground에 닿으면 점프
+        if(Input.GetButtonDown("Jump") && jumpCount < maxJump) // W에 할당된 "Jump"를 눌러 maxJump까지 점프가능
         {
             jumpCount += 1;
             rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumpSpeed);
-            onAir = true;
         }
     }
 }

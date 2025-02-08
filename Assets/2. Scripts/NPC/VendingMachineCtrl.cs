@@ -6,7 +6,6 @@ public class VendingMachineCtrl : MonoBehaviour
     // HP+ : 5$, Attck+ : 3$, 이후 딕셔너리로 정리하는게 편할듯?
     public GameObject vendingText;
     public GameObject[] SellingItems;
-    public Transform itemSpawnPoint;
 
     private PlayerCtrl playerCtrl; // 소지금 체크에 필요
     void Start()
@@ -39,12 +38,12 @@ public class VendingMachineCtrl : MonoBehaviour
 
     public void buyItem(int SellingItemType)
     {
-        if(SellingItemType == 0)
+        if(SellingItemType == 0) // HP+ 아이템, 5원
         {
             if(playerCtrl.money >= 5)
             {
                 playerCtrl.money -= 5;
-                Instantiate(SellingItems[SellingItemType], itemSpawnPoint.position, itemSpawnPoint.rotation);
+                Instantiate(SellingItems[SellingItemType], transform.position, transform.rotation);
                 Debug.Log($"잔액 : {playerCtrl.money}");
             }
             else
@@ -52,12 +51,12 @@ public class VendingMachineCtrl : MonoBehaviour
                 Debug.Log("돈 부족");
             }
         }
-        else if(SellingItemType == 1)
+        else if(SellingItemType == 1) // Attack+ 아이템, 3원
         {
             if(playerCtrl.money >= 3)
             {
                 playerCtrl.money -= 3;
-                Instantiate(SellingItems[SellingItemType], itemSpawnPoint.position, itemSpawnPoint.rotation);
+                Instantiate(SellingItems[SellingItemType], transform.position, transform.rotation);
                 Debug.Log($"잔액 : {playerCtrl.money}");
             }
             else

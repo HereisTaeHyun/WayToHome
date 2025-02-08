@@ -27,7 +27,7 @@ public class ItemToFind : MonoBehaviour
                 case ItemToFindType.HPrecovery: // 회복
                     if(playerCtrl.currentHP < playerCtrl.MaxHP)
                     {
-                        playerCtrl.currentHP += 1;
+                        Mathf.Clamp(playerCtrl.currentHP += 1, 0, playerCtrl.MaxHP);
                         Debug.Log("체력 회복");
                         Destroy(gameObject);
                     }

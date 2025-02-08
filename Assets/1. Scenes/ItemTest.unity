@@ -698,7 +698,6 @@ MonoBehaviour:
   SellingItems:
   - {fileID: 793591172324723807, guid: 3216573a02a982545b12cafbd66d579f, type: 3}
   - {fileID: 9142775600868132666, guid: a927636b45bea23478e87fd0fbc4fb9c, type: 3}
-  itemSpawnPoint: {fileID: 1163739263}
 --- !u!4 &812759146 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7290898942388002896, guid: f686e727333f9594cbd14ad263292138, type: 3}
@@ -1997,6 +1996,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   maxJump: 1
+  jumpCount: 0
 --- !u!114 &2082119077
 MonoBehaviour:
   m_ObjectHideFlags: 0
