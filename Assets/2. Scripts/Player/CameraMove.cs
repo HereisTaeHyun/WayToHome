@@ -12,7 +12,10 @@ public class CameraMove : MonoBehaviour
     // 플레이어 이동 따라가기
     void LateUpdate()
     {
-        Vector3 pos = new Vector3(target.position.x, target.position.y, transform.position.z);
-        transform.position = Vector3.SmoothDamp(transform.position, pos, ref vevlocity, damping);
+        if(target != null)
+        {
+            Vector3 pos = new Vector3(target.position.x, target.position.y, transform.position.z);
+            transform.position = Vector3.SmoothDamp(transform.position, pos, ref vevlocity, damping);
+        }
     }
 }
