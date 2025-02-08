@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,20 +6,25 @@ using UnityEngine.UI;
 public class VendingMachineCtrl : MonoBehaviour
 {
     // 고급 아이템을 파는 자판기, 한 대당 2회 사용 가능
-    // HP+ : 5$, Attck+ : 3$, 이후 딕셔너리로 정리하는게 편할듯?
 
     // 퍼블릭 변수
     public GameObject vendingUI;
     public GameObject menu;
     public TextMeshProUGUI statement;
     public GameObject[] SellingItems;
+    public int[] itemPrices; 
 
     // 프라이빗 변수
+    private Dictionary<GameObject, int> itemInformation = new Dictionary<GameObject, int>();
     private int useCount;
     private PlayerCtrl playerCtrl; // 소지금 체크에 필요
     void Start()
     {
         vendingUI.SetActive(false);
+        for(int i = 0; i < SellingItems.Length; i++)
+        {
+            itemInformation.Add(SellingItems[i], itemPrices[i]);
+        }
     }
     void Update()
     {
@@ -29,9 +35,9 @@ public class VendingMachineCtrl : MonoBehaviour
         }
     }
 
+    // 플레이어 접촉 시 UI 활성화
     private void OnTriggerStay2D(Collider2D other)
     {
-        // 플레이어 접촉 시 UI 활성화
         if(other.CompareTag("Player"))
         {
             vendingUI.SetActive(true);
@@ -39,38 +45,26 @@ public class VendingMachineCtrl : MonoBehaviour
         }
     }
 
+    // 플레이어 나가면 비활성화
     private void OnTriggerExit2D(Collider2D other)
     {
-        // 플레이어 나가면 비활성화
         if(other.CompareTag("Player"))
         {
             vendingUI.SetActive(false);
         }
     }
 
-    public void buyItem(int SellingItemType)
+    // 버튼으로 입력 받은 아이템 구매
+    public void buyItem(GameObject buyingItem)
     {
-        if(SellingItemType == 0) // HP+ 아이템, 5원
+        if(itemInformation.ContainsKey(buyingItem)) // itemInformation에 buyingItem이 있으면 itemPrice만큼 돈 차감 후 아이템 드랍
         {
-            if(playerCtrl.money >= 5)
+            int itemPrice = itemInformation[buyingItem];
+            if(playerCtrl.money >= itemPrice)
             {
-                playerCtrl.money -= 5;
+                playerCtrl.money -= itemPrice;
                 useCount += 1;
-                Instantiate(SellingItems[SellingItemType], transform.position, transform.rotation);
-                Debug.Log($"잔액 : {playerCtrl.money}");
-            }
-            else
-            {
-                Debug.Log("돈 부족");
-            }
-        }
-        else if(SellingItemType == 1) // Attack+ 아이템, 3원
-        {
-            if(playerCtrl.money >= 3)
-            {
-                playerCtrl.money -= 3;
-                useCount += 1;
-                Instantiate(SellingItems[SellingItemType], transform.position, transform.rotation);
+                Instantiate(buyingItem, transform.position, transform.rotation);
                 Debug.Log($"잔액 : {playerCtrl.money}");
             }
             else
