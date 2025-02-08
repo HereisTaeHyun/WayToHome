@@ -31,10 +31,10 @@ public class PlayerMove : MonoBehaviour
         Jump();
     }
 
+    // 좌우 이동 메서드
     private void HorizontalMove()
     {
         float h = Input.GetAxis("Horizontal");
-
         if(Input.GetButton("Horizontal") && Input.GetKey(KeyCode.LeftShift))
         {
             transform.Translate(h * runSpeed * Time.deltaTime * Vector2.right);
@@ -45,6 +45,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    // 점프에 필요한 메서드들
     // Ground 위면 JumpCount 초기화
     private void OnCollisionEnter2D(Collision2D other)
     {
