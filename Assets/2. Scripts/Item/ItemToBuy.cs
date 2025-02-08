@@ -7,13 +7,13 @@ public class ItemToBuy : MonoBehaviour
     // 자판기 NPC에서 획득 가능, UI로 가격 띄워줘야 함
 
     // public 변수
+
+    // private 변수
     [SerializeField] private enum ItemToBuyType
     {
         MaxHpPlus,
         AttackPlus,
     }
-
-    // private 변수
     [SerializeField] private ItemToBuyType itemToBuyType;
     PlayerCtrl playerCtrl;
 
