@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    Rigidbody2D rigidBody;
+    // 움직임 관련 객체
 
     // public 변수
     // 아래 3개는 아이템에 의한 증감 가능하게 할 생각
@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
 
     // private 변수
     [SerializeField] private LayerMask ground;
+    Rigidbody2D rigidBody;
     private float jumpSpeed = 10.0f;
     private int jumpCount = 0;
     void Start()
