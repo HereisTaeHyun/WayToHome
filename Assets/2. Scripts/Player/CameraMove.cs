@@ -3,8 +3,8 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
     // 퍼블릭 변수
-    public Transform target;
-    public float damping = 0.5f;
+    [SerializeField] private Transform target;
+    private float damping = 0.5f;
 
     // 프라이빗 변수
     private Vector3 vevlocity = Vector3.zero;

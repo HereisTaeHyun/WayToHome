@@ -8,13 +8,13 @@ public class VendingMachineCtrl : MonoBehaviour
     // 고급 아이템을 파는 자판기, 한 대당 2회 사용 가능
 
     // 퍼블릭 변수
-    public GameObject vendingUI;
-    public GameObject menu;
-    public TextMeshProUGUI statement;
-    public GameObject[] SellingItems;
-    public int[] itemPrices; 
 
     // 프라이빗 변수
+    [SerializeField] private GameObject vendingUI;
+    [SerializeField] private GameObject menu;
+    [SerializeField] private TextMeshProUGUI statement;
+    [SerializeField] private GameObject[] SellingItems;
+    [SerializeField] private int[] itemPrices;
     private Dictionary<GameObject, int> itemInformation = new Dictionary<GameObject, int>();
     private int useCount;
     private PlayerCtrl playerCtrl; // 소지금 체크에 필요

@@ -3,13 +3,17 @@ using UnityEngine;
 public class ItemToFind : MonoBehaviour
 {
     // 필드에 배치 or 드랍, 접촉하면 획득되는 아이템
+
+    // public 변수
     public enum ItemToFindType
     {
         HPrecovery,
         MaxJumpPlus,
         Money,
     }
-    public ItemToFindType itemToFindType;
+
+    // private 변수
+    [SerializeField] private ItemToFindType itemToFindType;
     PlayerCtrl playerCtrl;
     PlayerMove playerMove;
 

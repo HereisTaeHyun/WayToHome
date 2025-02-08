@@ -6,15 +6,15 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D rigidBody;
 
     // public 변수
-    public LayerMask ground;
     // 아래 3개는 아이템에 의한 증감 가능하게 할 생각
-    private float moveSpeed = 5.0f;
-    private float runSpeed = 10.0f;
+    public float moveSpeed = 5.0f;
+    public float runSpeed = 10.0f;
     public int maxJump = 1;
 
     // private 변수
+    [SerializeField] private LayerMask ground;
     private float jumpSpeed = 10.0f;
-    public int jumpCount = 0;
+    private int jumpCount = 0;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
