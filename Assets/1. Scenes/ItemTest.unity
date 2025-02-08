@@ -632,7 +632,6 @@ Transform:
   m_LocalScale: {x: 3.28375, y: 4.1898437, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1163739263}
   - {fileID: 2123623683}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -694,10 +693,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c50d8555da7b5445816b9ff308300aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vendingText: {fileID: 2123623682}
+  vendingUI: {fileID: 2123623682}
+  statement: {fileID: 1861455501}
   SellingItems:
   - {fileID: 793591172324723807, guid: 3216573a02a982545b12cafbd66d579f, type: 3}
   - {fileID: 9142775600868132666, guid: a927636b45bea23478e87fd0fbc4fb9c, type: 3}
+  menu: {fileID: 1584357690}
 --- !u!4 &812759146 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7290898942388002896, guid: f686e727333f9594cbd14ad263292138, type: 3}
@@ -822,7 +823,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'HP+ : 5$'
+  m_text: 'MaxHP+ : 5$'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1037,37 +1038,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957115518}
   m_CullTransparentMesh: 1
---- !u!1 &1163739262
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1163739263}
-  m_Layer: 0
-  m_Name: ItemSpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1163739263
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1163739262}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 639501043}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1172046337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1568,7 +1538,7 @@ GameObject:
   - component: {fileID: 1861455502}
   - component: {fileID: 1861455501}
   m_Layer: 5
-  m_Name: NameText
+  m_Name: Statement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2026,7 +1996,7 @@ GameObject:
   - component: {fileID: 2123623685}
   - component: {fileID: 2123623684}
   m_Layer: 5
-  m_Name: VendingCanvas
+  m_Name: VendingUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2050,7 +2020,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.08, y: 0.671}
+  m_AnchoredPosition: {x: 0, y: 0.671}
   m_SizeDelta: {x: 10, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2123623684
