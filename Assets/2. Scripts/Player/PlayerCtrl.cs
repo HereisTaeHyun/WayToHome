@@ -16,8 +16,13 @@ public class PlayerCtrl : MonoBehaviour
         playerMove = GetComponent<PlayerMove>();
     }
 
-    void Update()
+    void Update() // Jump();는 FixedUpdate()에 배정시 즉각 반응하지 않아 Update()에 배치
     {
-        playerMove.MoveCtrl();
+        playerMove.Jump();
+    }
+
+    void FixedUpdate()
+    {
+        playerMove.HorizontalMove();
     }
 }
