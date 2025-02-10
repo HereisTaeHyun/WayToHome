@@ -10,6 +10,7 @@ public class VendingMachineCtrl : MonoBehaviour
     // 퍼블릭 변수
 
     // 프라이빗 변수
+    [SerializeField] private Transform itemSpawnPoint;
     [SerializeField] private GameObject vendingUI;
     [SerializeField] private GameObject menu;
     [SerializeField] private TextMeshProUGUI statement;
@@ -64,7 +65,7 @@ public class VendingMachineCtrl : MonoBehaviour
             {
                 playerCtrl.money -= itemPrice;
                 useCount += 1;
-                Instantiate(buyingItem, transform.position, transform.rotation);
+                Instantiate(buyingItem, itemSpawnPoint.position, itemSpawnPoint.rotation);
                 Debug.Log($"잔액 : {playerCtrl.money}");
             }
             else
