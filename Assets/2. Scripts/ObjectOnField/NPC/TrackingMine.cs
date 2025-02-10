@@ -15,7 +15,7 @@ public class TrackingMine : MonoBehaviour
     [SerializeField] private float scanningRadius = 10.0f;
     [SerializeField] private float range = 10.0f;
     [SerializeField] private float attack = -2.0f;
-    [SerializeField] private float expPower = 5.0f;
+    [SerializeField] private float expPower = 10.0f;
     EnemyTracking enemyTracking;
 
     // Player에 영향 미치는 부분
@@ -35,24 +35,15 @@ public class TrackingMine : MonoBehaviour
         enemyTracking.FollowingTarget(moveSpeed, scanningRadius);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Player"))
         {
-            // 폭파
             Explosion();
             // 폭파 후 오브젝트는 삭제
-            Destroy(gameObject);
+             Destroy(gameObject);
         }
     }
-
-    // void OnCollisionEnter2D(Collision2D other)
-    // {
-    //     if(other.gameObject.CompareTag("Player"))
-    //     {
-    //         Explosion();
-    //     }
-    // }
 
     private void Explosion()
     {

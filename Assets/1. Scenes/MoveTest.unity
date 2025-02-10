@@ -510,7 +510,7 @@ MonoBehaviour:
   scanningRadius: 10
   range: 10
   attack: -2
-  expPower: 3
+  expPower: 10
 --- !u!114 &210887069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,7 +554,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
