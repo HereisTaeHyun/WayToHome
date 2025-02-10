@@ -5,7 +5,8 @@ public class TrackingMine : MonoBehaviour
 {
     // 인근을 스캐닝하여 Player Layer 감지 시 가까이 가서 폭파하는 타입의 적 엔티티
     // 이후 가까이 간 후 폭파하는 타입, 가까이 간 후 사격하는 타입으로 구분 예정
-    // OnCollision하는 경우 폭파 객체 활성화?
+    // OnCollision하는 경우 폭파 객체 활성화
+    // 현재 플레이어가 가만히 있는 경우 폭발 밀림 적용안되는 버그 있음 수정요함
     // 플레이어가 사살하는 경우 item 랜덤 드랍 기능 필요
 
     public float MaxHP = 10.0f;
@@ -60,7 +61,5 @@ public class TrackingMine : MonoBehaviour
         // 폭파력에 따라 밀려남
         Vector2 expVector = target.transform.position - transform.position;;
         playerRb.AddForce(expVector * expPower, ForceMode2D.Impulse);
-
-        Debug.Log("Addimpuse?");
     }
 }
