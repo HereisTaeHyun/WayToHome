@@ -9,12 +9,12 @@ public class EntityMoveBySec : MonoBehaviour
     // private 변수
     private float moveTimer;
     private int moveDir = 1;
-    Rigidbody2D rigidBody;
+    Rigidbody2D rb;
 
 
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         moveTimer = changeTime;
     }
 
@@ -28,6 +28,6 @@ public class EntityMoveBySec : MonoBehaviour
             moveDir = -moveDir;
             moveTimer = changeTime;
         }
-        rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, moveSpeed * moveDir);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, moveSpeed * moveDir);
     }
 }

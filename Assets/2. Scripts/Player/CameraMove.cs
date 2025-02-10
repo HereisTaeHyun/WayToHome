@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    // 퍼블릭 변수
+    // public 변수
     [SerializeField] private Transform target;
     private float damping = 0.3f;
 
-    // 프라이빗 변수
+    // private 변수
     private Vector3 vevlocity = Vector3.zero;
 
     // 플레이어 이동 따라가기

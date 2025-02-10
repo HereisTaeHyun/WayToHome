@@ -14,12 +14,12 @@ public class PlayerMove : MonoBehaviour
 
     // private 변수
     [SerializeField] private LayerMask ground;
-    Rigidbody2D rigidBody;
+    Rigidbody2D rb;
     private float jumpSpeed = 10.0f;
     private int jumpCount = 0;
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // 좌우 이동 메서드
@@ -28,11 +28,11 @@ public class PlayerMove : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         if(Input.GetButton("Horizontal") && Input.GetKey(KeyCode.LeftShift)) // 달리기
         {
-            rigidBody.linearVelocity = new Vector2(h * runSpeed, rigidBody.linearVelocity.y);
+            rb.linearVelocity = new Vector2(h * runSpeed, rb.linearVelocity.y);
         }
         else if(Input.GetButton("Horizontal")) // 걷기
         {
-            rigidBody.linearVelocity = new Vector2(h * moveSpeed, rigidBody.linearVelocity.y);
+            rb.linearVelocity = new Vector2(h * moveSpeed, rb.linearVelocity.y);
         }
     }
 
@@ -50,7 +50,7 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetButtonDown("Jump") && jumpCount < maxJump) // W에 할당된 "Jump"를 눌러 maxJump까지 점프가능
         {
             jumpCount += 1;
-            rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumpSpeed);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
         }
     }
 }

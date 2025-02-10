@@ -6,7 +6,7 @@ public class PlayerCtrl : MonoBehaviour
     // 테스트장에서는 gravity scale을 1 썼는대 너무 가벼움, 실제 게임 필드 설치는 gravity scale = 2를 바탕으로 세팅 및 수정할 것
     PlayerMove playerMove;
 
-    // 퍼블릭 변수
+    // public 변수
     public float MaxHP = 10.0f;
     public float currentHP;
     public float attack = 1.0f;
@@ -50,7 +50,7 @@ public class PlayerCtrl : MonoBehaviour
     }
 
     // 플레이어 데미지 가해
-    public void ChangeHP(int value)
+    public void ChangeHP(float value)
     {
         // 데미지일 경우 무적시간으로 설정
         if(value < 0)
