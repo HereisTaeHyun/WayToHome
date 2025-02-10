@@ -7,6 +7,7 @@ public class TrackingMine : MonoBehaviour
     // 이후 가까이 간 후 폭파하는 타입, 가까이 간 후 사격하는 타입으로 구분 예정
     // OnCollision하는 경우 폭파 객체 활성화
     // 현재 플레이어가 가만히 있는 경우 폭발 밀림 적용안되는 버그 있음 수정요함
+    // 아마 가만히 있으면 Vector가 제대로 계산이 안되서 버그 생기는듯?
     // 플레이어가 사살하는 경우 item 랜덤 드랍 기능 필요
 
     public float MaxHP = 10.0f;
