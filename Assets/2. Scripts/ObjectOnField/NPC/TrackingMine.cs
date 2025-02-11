@@ -9,6 +9,8 @@ public class TrackingMine : MonoBehaviour
     // 현재 플레이어가 가만히 있는 경우 폭발 밀림 적용안되는 버그 있음 수정요함
     // 아마 가만히 있으면 Vector가 제대로 계산이 안되서 버그 생기는듯?
     // 플레이어가 사살하는 경우 item 랜덤 드랍 기능 필요
+    // 이후는 엔티티 상위 객체에 moveSpeed, scanningRadius 등은 이동해야 할듯
+    // enemyTracking 함수도 엔티티 상위 객체로 통합 고민 중
 
     public float MaxHP = 10.0f;
     public float currentHP;
@@ -41,9 +43,9 @@ public class TrackingMine : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            Explosion();
             // 폭파 후 오브젝트는 삭제
-             Destroy(gameObject);
+            Explosion();
+            Destroy(gameObject);
         }
     }
 
@@ -56,11 +58,24 @@ public class TrackingMine : MonoBehaviour
         playerCtrl = target.GetComponent<PlayerCtrl>();
         playerRb = target.GetComponent<Rigidbody2D>();
 
+        // 폭파력에 따라 밀려남, Friction 문제 있기에 Vector를 target.transform.position - transform.position가 아닌 45도 위로 던져지게 수정하기
+        // Vector2 expVector = target.transform.position - transform.position;
+        Vector2 playerMineVector = target.transform.position - transform.position;
+        Vector2 expVector;
+        if(playerMineVector.x >= 0)
+        {
+            expVector = new Vector2(1, 1);
+        }
+        else
+        {
+            expVector = new Vector2(-1, 1);
+        }
+        playerRb.AddForce(expVector * expPower, ForceMode2D.Impulse);
+
+        
         // Player에게 데미지 가해
         playerCtrl.ChangeHP(attack);
 
-        // 폭파력에 따라 밀려남
-        Vector2 expVector = target.transform.position - transform.position;;
-        playerRb.AddForce(expVector * expPower, ForceMode2D.Impulse);
+        Debug.Log($"디버깅, expVector : {expVector}, expOn : {expVector * expPower}");
     }
 }
