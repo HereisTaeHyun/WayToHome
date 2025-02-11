@@ -5,12 +5,10 @@ public class TrackingMine : MonoBehaviour
 {
     // 인근을 스캐닝하여 Player Layer 감지 시 가까이 가서 폭파하는 타입의 적 엔티티
     // 이후 가까이 간 후 폭파하는 타입, 가까이 간 후 사격하는 타입으로 구분 예정
-    // OnCollision하는 경우 폭파 객체 활성화
-    // 현재 플레이어가 가만히 있는 경우 폭발 밀림 적용안되는 버그 있음 수정요함
-    // 아마 가만히 있으면 Vector가 제대로 계산이 안되서 버그 생기는듯?
+
     // 플레이어가 사살하는 경우 item 랜덤 드랍 기능 필요
-    // 이후는 엔티티 상위 객체에 moveSpeed, scanningRadius 등은 이동해야 할듯
-    // enemyTracking 함수도 엔티티 상위 객체로 통합 고민 중
+    // 이후 엔티티 상위 객체 만들때 moveSpeed, scanningRadius 등은 이동해야 할듯
+    // enemyTracking 함수도 함께 엔티티 상위 객체로 통합 고민 중
 
     public float MaxHP = 10.0f;
     public float currentHP;
@@ -19,7 +17,7 @@ public class TrackingMine : MonoBehaviour
     [SerializeField] private float scanningRadius = 10.0f;
     [SerializeField] private float range = 10.0f;
     [SerializeField] private float attack = -2.0f;
-    [SerializeField] private float expPower = 10.0f;
+    [SerializeField] private float expPower = 8.0f;
     EnemyTracking enemyTracking;
 
     // Player에 영향 미치는 부분
@@ -75,7 +73,5 @@ public class TrackingMine : MonoBehaviour
         
         // Player에게 데미지 가해
         playerCtrl.ChangeHP(attack);
-
-        Debug.Log($"디버깅, expVector : {expVector}, expOn : {expVector * expPower}");
     }
 }

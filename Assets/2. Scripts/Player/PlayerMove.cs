@@ -5,6 +5,8 @@ public class PlayerMove : MonoBehaviour
 {
     // 움직임 관련 객체
     // 걷기, 달리기, 점프, 대쉬 정도 생각 중
+    // canMove로 조작 가능 불가능 체크 필요 ex: 폭파에 당하면 canMove == flase 후 되돌리기 방식
+    // 폭파에 당한 후 invincible 끝날때 canMove 다시 풀기 고민 중
 
     // public 변수
     // 아래 3개는 아이템에 의한 증감 가능하게 할 생각
