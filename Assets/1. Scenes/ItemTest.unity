@@ -1424,6 +1424,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1294480057143573239, guid: 34a8048288c422041b9b36205620e59a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294480057143573239, guid: 34a8048288c422041b9b36205620e59a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3757296460062535270, guid: 34a8048288c422041b9b36205620e59a, type: 3}
       propertyPath: m_Name
       value: VendingMachine

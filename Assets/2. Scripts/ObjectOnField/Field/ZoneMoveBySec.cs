@@ -21,7 +21,6 @@ public class ZoneMoveBySec : MonoBehaviour
         pos = rb.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Timer가 0 미만이 될 경우 moveDir 역전

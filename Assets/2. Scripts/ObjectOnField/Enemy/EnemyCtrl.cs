@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyCtrl : MonoBehaviour
 {
-    // 충돌 방식 Enemy의 공통 행동에 대한 변수들, 사격 방식 Enemy는 추후 ShootingEnemyCtrl로 새로 제작 예정
+    // Enemy의 공통 행동에 대한 변수들
     // 추적, 사망 및 아이템 드롭이 들어 갈 예정
 
     // public 변수
@@ -13,19 +13,21 @@ public class EnemyCtrl : MonoBehaviour
     [SerializeField] float currentHP;
     [SerializeField] private float moveSpeed;
 
-    // readonly 변수
+    // 하위 객체에서 읽기 필요한 변수들
     [SerializeField] private float scanningRadius;
     public float readScanningRadius {get {return scanningRadius;}}
-    [SerializeField] private float attack;
-    public float readAttack {get {return attack;}}
+    [SerializeField] private float damage;
+    public float readDamage {get {return damage;}}
 
+    // target인 Player를 받아온 후 초기화
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         currentHP = MaxHP;
     }
 
-    void FixedUpdate()
+    // 행동에 대한 변수 넣을 예정
+    void Update()
     {
         FollowingTarget(moveSpeed, scanningRadius);
     }

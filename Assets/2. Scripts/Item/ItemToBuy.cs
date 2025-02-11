@@ -4,7 +4,7 @@ using UnityEngine;
 public class ItemToBuy : MonoBehaviour
 {
     // 구입 아이템, 드랍 또는 필드 아이템보다 고성능이지만 money 차감 필요
-    // 자판기 NPC에서 획득 가능, UI로 가격 띄워줘야 함
+    // 자판기 NPC에서 획득 가능
 
     // public 변수
 

@@ -7,6 +7,7 @@ public class PlayerCtrl : MonoBehaviour
 
     // canMove로 조작 가능 불가능 체크 필요 ex: 폭파에 당하면 canMove == false 후 되돌리기 방식
     // 폭파에 당한 후 invincible 끝날때 canMove 다시 풀기 고민 중
+    // 데미지 타입을 구분해야 할까? ChangeHP에서 어떤 공격인지에 따라 canMove true or false? 이 부분은 고민
     PlayerMove playerMove;
 
     // public 변수
@@ -46,7 +47,7 @@ public class PlayerCtrl : MonoBehaviour
         playerMove.HorizontalMove();
     }
 
-    // 플레이어 사망, 현재는 임시로 Destroy만 사용 중, 이후 anim 추가 예정
+    // 플레이어 사망, 현재는 임시로 Destroy만 사용 중, 이후 anim, audio 추가 예정
     private void PlayerDie()
     {
         Destroy(gameObject);
@@ -55,13 +56,15 @@ public class PlayerCtrl : MonoBehaviour
     // 플레이어 데미지 가해
     public void ChangeHP(float value)
     {
-        // 데미지일 경우 무적시간으로 설정
+        // 데미지일 경우 체크 사항
         if(value < 0)
         {
+            // 이미 무적 시간이면 다음 단계 진입하지 않음
             if(invincible == true)
             {
                 return;
             }
+            // 무적 시간이 아니었으면 무적으로 만든 후 Timer 설정
             invincible = true;
             invincibleTimer = invincibleTime;
         }

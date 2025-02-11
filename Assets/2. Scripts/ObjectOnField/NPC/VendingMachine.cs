@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class VendingMachine : MonoBehaviour
 {
-    // 고급 아이템을 파는 자판기, 한 대당 2회 사용 가능
+    // 아이템을 파는 자판기, 한 대당 2회 사용 가능
 
     // 퍼블릭 변수
 
@@ -14,7 +14,7 @@ public class VendingMachine : MonoBehaviour
     [SerializeField] private GameObject vendingUI;
     [SerializeField] private GameObject menu;
     [SerializeField] private TextMeshProUGUI statement;
-    [SerializeField] private GameObject[] SellingItems;
+    [SerializeField] private GameObject[] sellingItems;
     [SerializeField] private int[] itemPrices;
     private Dictionary<GameObject, int> itemInformation = new Dictionary<GameObject, int>();
     private int useCount;
@@ -22,9 +22,11 @@ public class VendingMachine : MonoBehaviour
     void Start()
     {
         vendingUI.SetActive(false);
-        for(int i = 0; i < SellingItems.Length; i++)
+        useCount = 0;
+        // 판매 아이템 정보 딕셔너리 형성 sellingItem이 Key, itemPrices가 value
+        for(int i = 0; i < sellingItems.Length; i++)
         {
-            itemInformation.Add(SellingItems[i], itemPrices[i]);
+            itemInformation.Add(sellingItems[i], itemPrices[i]);
         }
     }
     void Update()
@@ -36,7 +38,7 @@ public class VendingMachine : MonoBehaviour
         }
     }
 
-    // 플레이어 접촉 시 UI 활성화
+    // 플레이어 접촉 시 UI 활성화, 기본은 start에서 비활성화하기
     private void OnTriggerStay2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
@@ -58,7 +60,10 @@ public class VendingMachine : MonoBehaviour
     // 버튼으로 입력 받은 아이템 구매
     public void buyItem(GameObject buyingItem)
     {
-        if(itemInformation.ContainsKey(buyingItem)) // itemInformation에 buyingItem이 있으면 itemPrice만큼 돈 차감 후 아이템 드랍
+        // button으로 입력 받는 것은 key인 sellingItem임
+        // itemInformation에 buyingItem이 있으면 itemPrice만큼 player.money 차감 및 자판기 사용 수 증가
+        // 이후 아이템을 itemSpawnPoint에 생성
+        if(itemInformation.ContainsKey(buyingItem))
         {
             int itemPrice = itemInformation[buyingItem];
             if(playerCtrl.money >= itemPrice)
