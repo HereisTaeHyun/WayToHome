@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EntityMoveBySec : MonoBehaviour
+public class ZoneMoveBySec : MonoBehaviour
 {
     // public 변수
     public float changeTime = 2.0f;
