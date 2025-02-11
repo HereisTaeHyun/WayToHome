@@ -335,7 +335,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Attack+ : 3$'
+  m_text: 'Attack+ : 8$'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -562,7 +562,7 @@ MonoBehaviour:
   SellingItems:
   - {fileID: 793591172324723807, guid: 3216573a02a982545b12cafbd66d579f, type: 3}
   - {fileID: 9142775600868132666, guid: a927636b45bea23478e87fd0fbc4fb9c, type: 3}
-  itemPrices: 0500000003000000
+  itemPrices: 0a00000008000000
 --- !u!1 &3802678349411112375
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,7 +931,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'MaxHP+ : 5$'
+  m_text: 'MaxHP+ : 10$'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
