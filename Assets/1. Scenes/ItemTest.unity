@@ -1200,67 +1200,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
---- !u!1001 &3652891821149365643
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3697751041565213415, guid: 34a8048288c422041b9b36205620e59a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 3697751041565213415, guid: 34a8048288c422041b9b36205620e59a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 12.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 3697751041565213415, guid: 34a8048288c422041b9b36205620e59a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3697751041565213415, guid: 34a8048288c422041b9b36205620e59a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3697751041565213415, guid: 34a8048288c422041b9b36205620e59a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3697751041565213415, guid: 34a8048288c422041b9b36205620e59a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3697751041565213415, guid: 34a8048288c422041b9b36205620e59a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3697751041565213415, guid: 34a8048288c422041b9b36205620e59a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3697751041565213415, guid: 34a8048288c422041b9b36205620e59a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3697751041565213415, guid: 34a8048288c422041b9b36205620e59a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4738346580459929294, guid: 34a8048288c422041b9b36205620e59a, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1172046339}
-    - target: {fileID: 4994385257021142809, guid: 34a8048288c422041b9b36205620e59a, type: 3}
-      propertyPath: m_Name
-      value: VendingMachine
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 34a8048288c422041b9b36205620e59a, type: 3}
 --- !u!1001 &3859794384044626434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1437,6 +1376,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4677851656741474577, guid: d7a3d993a04b2674790cff4693ca9bc5, type: 3}
   m_PrefabInstance: {fileID: 349309472607825687}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8851956599075065587
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 612553917412774335, guid: 34a8048288c422041b9b36205620e59a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 612553917412774335, guid: 34a8048288c422041b9b36205620e59a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 612553917412774335, guid: 34a8048288c422041b9b36205620e59a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 612553917412774335, guid: 34a8048288c422041b9b36205620e59a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 612553917412774335, guid: 34a8048288c422041b9b36205620e59a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 612553917412774335, guid: 34a8048288c422041b9b36205620e59a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 612553917412774335, guid: 34a8048288c422041b9b36205620e59a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 612553917412774335, guid: 34a8048288c422041b9b36205620e59a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 612553917412774335, guid: 34a8048288c422041b9b36205620e59a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 612553917412774335, guid: 34a8048288c422041b9b36205620e59a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757296460062535270, guid: 34a8048288c422041b9b36205620e59a, type: 3}
+      propertyPath: m_Name
+      value: VendingMachine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6430176423395229192, guid: 34a8048288c422041b9b36205620e59a, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1172046339}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 34a8048288c422041b9b36205620e59a, type: 3}
 --- !u!4 &9023469406234011442 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5415568638637592933, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
@@ -1452,5 +1452,5 @@ SceneRoots:
   - {fileID: 754995564680330604}
   - {fileID: 1849284844}
   - {fileID: 1736046966}
-  - {fileID: 3652891821149365643}
+  - {fileID: 8851956599075065587}
   - {fileID: 1130394931}
