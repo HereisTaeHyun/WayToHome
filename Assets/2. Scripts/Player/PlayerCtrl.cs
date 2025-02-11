@@ -5,7 +5,7 @@ public class PlayerCtrl : MonoBehaviour
     // 총괄 객체로 Ctrl 객체 사용, 하위 모듈 객체로 이동, 공격, 카메라 등으로 생각 중
     // 테스트장에서는 gravity scale을 1 썼는대 너무 가벼움, 실제 게임 필드 설치는 gravity scale = 2를 바탕으로 세팅 및 수정할 것
 
-        // canMove로 조작 가능 불가능 체크 필요 ex: 폭파에 당하면 canMove == flase 후 되돌리기 방식
+    // canMove로 조작 가능 불가능 체크 필요 ex: 폭파에 당하면 canMove == false 후 되돌리기 방식
     // 폭파에 당한 후 invincible 끝날때 canMove 다시 풀기 고민 중
     PlayerMove playerMove;
 
