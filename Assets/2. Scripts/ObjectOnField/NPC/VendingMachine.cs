@@ -16,7 +16,7 @@ public class VendingMachine : MonoBehaviour
     [SerializeField] private TextMeshProUGUI statement;
     [SerializeField] private GameObject[] sellingItems;
     [SerializeField] private int[] itemPrices;
-    private Dictionary<GameObject, int> itemInformation = new Dictionary<GameObject, int>();
+    private Dictionary<GameObject, int> itemInformation = new Dictionary<GameObject, int>(); // 판매품, 가격 받는 딕셔너리
     private int useCount;
     private PlayerCtrl playerCtrl; // 소지금 체크에 필요
     void Start()
