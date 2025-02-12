@@ -191,7 +191,6 @@ MonoBehaviour:
   currentHP: 10
   attack: 1
   money: 0
-  invincibleTime: 2
 --- !u!114 &8073771396055822282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,8 +203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1258170956c2667418390013ee9a5507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
-  runSpeed: 10
+  moveSpeed: 0
+  runSpeed: 0
   maxJump: 1
   ground:
     serializedVersion: 2

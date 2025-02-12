@@ -9,13 +9,12 @@ public class EnemyCtrl : MonoBehaviour
 
     // private 변수
     private Transform target;
+    private float scanningRadius = 10.0f;
     [SerializeField] float MaxHP = 10.0f;
     [SerializeField] float currentHP;
     [SerializeField] private float moveSpeed;
 
-    // 하위 객체에서 읽기 필요한 변수들
-    [SerializeField] private float scanningRadius;
-    public float readScanningRadius {get {return scanningRadius;}}
+    // 다른 객체에서 읽기 필요한 변수
     [SerializeField] private float damage;
     public float readDamage {get {return damage;}}
 

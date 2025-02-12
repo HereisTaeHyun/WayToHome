@@ -22,12 +22,12 @@ public class PlayerCtrl : MonoBehaviour
     
     // 무적 관련
     private bool invincible;
-    public bool readInvincible {get {return invincible;}}
+    public bool readInvincible {get {return invincible;}} // 적 관련 객체에서 가끔 참고
     private float invincibleTime = 2.0f;
     private float invincibleTimer;
 
     // 디버프 관련(스턴, 슬로우 생각 중)
-    public float debuffTimer;
+    private float debuffTimer;
 
     void Start()
     {
@@ -38,8 +38,7 @@ public class PlayerCtrl : MonoBehaviour
 
     void Update() // Jump();는 FixedUpdate()에 배정시 즉각 반응하지 않아 Update()에 배치
     {
-        playerMove.Jump();
-
+        // 타이머가 위에 움직임 제어 권한 아래에, 안그러면 디버프나 무적 안풀릴떄 생김
         // 무적시간일 경우 무적 타이머 초마다 차감하여 통상상태로 되돌림
         if(invincible == true)
         {
@@ -50,27 +49,25 @@ public class PlayerCtrl : MonoBehaviour
             }
         }
 
-        if(debuffTimer > 0) // (debuffTimer > 0) == getDebuff를 당함
+         // (debuffTimer > 0) == getDebuff를 당함, 이 경우도 타이머 차감하여 통상 상태로
+        if(debuffTimer > 0)
         {
             debuffTimer -= Time.deltaTime;
             if(debuffTimer <= 0)
             {
                 canMove = true;
-                playerMove.moveSpeed = playerMove.originSpeed;
+                playerMove.moveSpeed = playerMove.readOriginSpeed;
+                playerMove.runSpeed = playerMove.moveSpeed + 3.0f;
             }
         }
-    }
 
-    void FixedUpdate()
-    {
-        if(!canMove) return;
+        // canMove == true일때만 playerMove 객체 접근 가능
+        if(canMove == false)
+        {
+            return;
+        }
         playerMove.HorizontalMove();
-    }
-
-    // 플레이어 사망, 현재는 임시로 Destroy만 사용 중, 이후 anim, audio 추가 예정
-    private void PlayerDie()
-    {
-        Destroy(gameObject);
+        playerMove.Jump();
     }
 
     // 플레이어 데미지 가해
@@ -98,6 +95,13 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+    // 플레이어 사망, 현재는 임시로 Destroy만 사용 중, 이후 anim, audio 등 추가 예정
+    private void PlayerDie()
+    {
+        Destroy(gameObject);
+    }
+
+    // 적 객체에서 디버프 타입, 시간 받아서 적용
     public void GetDebuff(DebuffType debuffType, float debuffTime)
     {
         debuffTimer = debuffTime;
@@ -108,7 +112,8 @@ public class PlayerCtrl : MonoBehaviour
                 break;
 
             case DebuffType.Slow:
-                playerMove.moveSpeed = playerMove.debuffedSpeed;
+                playerMove.moveSpeed = playerMove.readDebuffedSpeed;
+                playerMove.runSpeed = playerMove.readDebuffedSpeed;
                 break;
         }
     }
