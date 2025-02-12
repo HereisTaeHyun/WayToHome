@@ -45,7 +45,7 @@ public class PlayerCtrl : MonoBehaviour
         if(invincible == true)
         {
             invincibleTimer -= Time.deltaTime;
-            if(invincibleTimer == 0)
+            if(invincibleTimer <= 0)
             {
                 invincible = false;
             }
