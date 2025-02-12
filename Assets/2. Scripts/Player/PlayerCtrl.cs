@@ -69,6 +69,7 @@ public class PlayerCtrl : MonoBehaviour
             invincibleTimer = invincibleTime;
         }
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
+        Debug.Log($"데미지 : {value}");
 
         // 데미지가 0이거나 그 이하일 경우 사망
         if(currentHP <= 0)

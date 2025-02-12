@@ -13,6 +13,7 @@ public class ItemToBuy : MonoBehaviour
     {
         MaxHpPlus,
         AttackPlus,
+        PremiumHeal,
     }
     [SerializeField] private ItemToBuyType itemToBuyType;
     PlayerCtrl playerCtrl;
@@ -36,6 +37,19 @@ public class ItemToBuy : MonoBehaviour
                     playerCtrl.attack += 1;
                     Debug.Log("공격력 증가");
                     Destroy(gameObject);
+                    break;
+
+                case ItemToBuyType.PremiumHeal: // 체력 2 회복
+                    if(playerCtrl.currentHP < playerCtrl.MaxHP)
+                    {
+                        playerCtrl.ChangeHP(2);
+                        Debug.Log("체력 회복");
+                        Destroy(gameObject);
+                    }
+                    else // 최대 체력이면 사용안됨
+                    {
+                        Debug.Log("이미 최대 체력");
+                    }
                     break;
             }
         }

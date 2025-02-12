@@ -9,7 +9,7 @@ public class ItemToFind : MonoBehaviour
     // private 변수
     [SerializeField] private enum ItemToFindType
     {
-        HPrecovery,
+        Heal,
         MaxJumpPlus,
         Money,
     }
@@ -28,7 +28,7 @@ public class ItemToFind : MonoBehaviour
             switch(itemToFindType) // 아이템 사용
             {    
                 // playerCtrl에 영향
-                case ItemToFindType.HPrecovery: // 회복
+                case ItemToFindType.Heal: // 체력 1 회복
                     if(playerCtrl.currentHP < playerCtrl.MaxHP)
                     {
                         playerCtrl.ChangeHP(1);

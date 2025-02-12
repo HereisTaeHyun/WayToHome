@@ -141,8 +141,9 @@ MonoBehaviour:
   target: {fileID: 0}
   MaxHP: 10
   currentHP: 0
-  moveSpeed: 2
+  moveSpeed: 5
   scanningRadius: 10
+  damage: -2
 --- !u!114 &845797116589590210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +156,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8e5caa6968c0b42b0e6dda48054edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
-  attack: -2
   expPower: 8
