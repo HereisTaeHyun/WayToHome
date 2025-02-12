@@ -22,6 +22,7 @@ public class PlayerCtrl : MonoBehaviour
     
     // 무적 관련
     private bool invincible;
+    public bool readInvincible {get {return invincible;}}
     private float invincibleTime = 2.0f;
     private float invincibleTimer;
 
