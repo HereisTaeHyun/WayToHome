@@ -9,7 +9,7 @@ public class TrackingMine : MonoBehaviour
     // public 변수
 
     // private 변수
-    [SerializeField] private float expPower = 8.0f;
+    private float expPower = 8.0f;
     private float scanningRadius;
     private float damage;
     EnemyCtrl enemyCtrl;
