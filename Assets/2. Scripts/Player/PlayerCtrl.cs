@@ -5,9 +5,6 @@ public class PlayerCtrl : MonoBehaviour
     // 총괄 객체로 Ctrl 객체 사용, 하위 모듈 객체로 이동, 공격, 카메라 등으로 생각 중
     // 테스트장에서는 gravity scale을 1 썼는대 너무 가벼움, 실제 게임 필드 설치는 gravity scale = 2를 바탕으로 세팅 및 수정할 것
 
-    // canMove로 조작 가능 불가능 체크 필요 ex: 폭파에 당하면 canMove == false 후 되돌리기 방식
-    // 폭파에 당한 후 invincible 끝날때 canMove 다시 풀기 고민 중
-    // 데미지 타입을 구분해야 할까? ChangeHP에서 어떤 공격인지에 따라 canMove true or false? 이 부분은 고민
     // public 변수
     public float MaxHP = 10.0f;
     public float currentHP;
@@ -21,7 +18,8 @@ public class PlayerCtrl : MonoBehaviour
 
     // private 변수
     PlayerMove playerMove;
-    public bool canMove; // 디버깅 후 버그 없으면 private로
+    private bool canMove;
+    
     // 무적 관련
     private bool invincible;
     private float invincibleTime = 2.0f;

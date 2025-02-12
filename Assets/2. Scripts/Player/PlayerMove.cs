@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
     // 걷기, 달리기, 점프, 대쉬 정도 생각 중
 
     // public 변수
-    // 아래 3개는 아이템에 의한 증감 가능하게 할 생각
+    // 아래들은 디버프 및 아이템에 의한 증감 필요
     public float originSpeed = 7.0f;
     public float moveSpeed;
     public float runSpeed;
