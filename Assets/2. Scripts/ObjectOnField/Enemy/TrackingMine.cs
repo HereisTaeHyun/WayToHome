@@ -10,6 +10,7 @@ public class TrackingMine : MonoBehaviour
 
     // private 변수
     private float expPower = 8.0f;
+    // scanningRadius, damage는 EnemyCtrl에서 설정
     private float scanningRadius;
     private float damage;
     EnemyCtrl enemyCtrl;
@@ -59,5 +60,6 @@ public class TrackingMine : MonoBehaviour
         
         // Player에게 데미지 가해
         playerCtrl.ChangeHP(damage);
+        playerCtrl.GetDebuff(PlayerCtrl.DebuffType.Stun, 2.0f);
     }
 }

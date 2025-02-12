@@ -8,23 +8,33 @@ public class PlayerCtrl : MonoBehaviour
     // canMove로 조작 가능 불가능 체크 필요 ex: 폭파에 당하면 canMove == false 후 되돌리기 방식
     // 폭파에 당한 후 invincible 끝날때 canMove 다시 풀기 고민 중
     // 데미지 타입을 구분해야 할까? ChangeHP에서 어떤 공격인지에 따라 canMove true or false? 이 부분은 고민
-    PlayerMove playerMove;
-
     // public 변수
     public float MaxHP = 10.0f;
     public float currentHP;
     public float attack = 1.0f;
     public int money = 0;
-    public float invincibleTime = 2.0f;
+    public enum DebuffType
+    {
+        Stun,
+        Slow,
+    }
 
     // private 변수
+    PlayerMove playerMove;
+    public bool canMove; // 디버깅 후 버그 없으면 private로
+    // 무적 관련
     private bool invincible;
+    private float invincibleTime = 2.0f;
     private float invincibleTimer;
+
+    // 디버프 관련(스턴, 슬로우 생각 중)
+    public float debuffTimer;
 
     void Start()
     {
         playerMove = GetComponent<PlayerMove>();
         currentHP = MaxHP;
+        canMove = true;
     }
 
     void Update() // Jump();는 FixedUpdate()에 배정시 즉각 반응하지 않아 Update()에 배치
@@ -35,15 +45,26 @@ public class PlayerCtrl : MonoBehaviour
         if(invincible == true)
         {
             invincibleTimer -= Time.deltaTime;
-            if(invincibleTimer < 0)
+            if(invincibleTimer == 0)
             {
                 invincible = false;
+            }
+        }
+
+        if(debuffTimer > 0) // (debuffTimer > 0) == getDebuff를 당함
+        {
+            debuffTimer -= Time.deltaTime;
+            if(debuffTimer <= 0)
+            {
+                canMove = true;
+                playerMove.moveSpeed = playerMove.originSpeed;
             }
         }
     }
 
     void FixedUpdate()
     {
+        if(!canMove) return;
         playerMove.HorizontalMove();
     }
 
@@ -75,6 +96,21 @@ public class PlayerCtrl : MonoBehaviour
         if(currentHP <= 0)
         {
             PlayerDie();
+        }
+    }
+
+    public void GetDebuff(DebuffType debuffType, float debuffTime)
+    {
+        debuffTimer = debuffTime;
+        switch(debuffType)
+        {
+            case DebuffType.Stun:
+                canMove = false;
+                break;
+
+            case DebuffType.Slow:
+                playerMove.moveSpeed = playerMove.debuffedSpeed;
+                break;
         }
     }
 }

@@ -8,8 +8,10 @@ public class PlayerMove : MonoBehaviour
 
     // public 변수
     // 아래 3개는 아이템에 의한 증감 가능하게 할 생각
-    public float moveSpeed = 7.0f;
-    public float runSpeed = 10.0f;
+    public float originSpeed = 7.0f;
+    public float moveSpeed;
+    public float runSpeed;
+    public float debuffedSpeed;
     public int maxJump = 1;
 
     // private 변수
@@ -17,9 +19,14 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D rb;
     private float jumpSpeed = 10.0f;
     private int jumpCount = 0;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        moveSpeed = originSpeed;
+        runSpeed = originSpeed + 3.0f;
+        debuffedSpeed = moveSpeed * 0.5f;
     }
 
     // 좌우 이동 메서드
