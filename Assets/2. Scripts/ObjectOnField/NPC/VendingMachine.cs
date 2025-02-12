@@ -19,6 +19,7 @@ public class VendingMachine : MonoBehaviour
     private Dictionary<GameObject, int> itemInformation = new Dictionary<GameObject, int>(); // 판매품, 가격 받는 딕셔너리
     private int useCount;
     private PlayerCtrl playerCtrl; // 소지금 체크에 필요
+    
     void Start()
     {
         vendingUI.SetActive(false);

@@ -8,7 +8,7 @@ public class EnemyCtrl : MonoBehaviour
     // public 변수
 
     // private 변수
-    Transform target;
+    private Transform target;
     [SerializeField] float MaxHP = 10.0f;
     [SerializeField] float currentHP;
     [SerializeField] private float moveSpeed;
@@ -26,7 +26,7 @@ public class EnemyCtrl : MonoBehaviour
         currentHP = MaxHP;
     }
 
-    // 행동에 대한 변수 넣을 예정
+    // 행동에 대한 메서드 넣을 예정
     void Update()
     {
         FollowingTarget(moveSpeed, scanningRadius);

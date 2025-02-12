@@ -16,7 +16,7 @@ public class PlayerMove : MonoBehaviour
 
     // private 변수
     [SerializeField] private LayerMask ground;
-    Rigidbody2D rb;
+    private Rigidbody2D rb;
     private float jumpSpeed = 10.0f;
     private int jumpCount = 0;
 

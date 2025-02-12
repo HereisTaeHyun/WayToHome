@@ -10,14 +10,14 @@ public class TrackingMine : MonoBehaviour
 
     // private 변수
     private float expPower = 8.0f;
-    // scanningRadius, damage는 EnemyCtrl에서 설정
+    // scanningRadius, damage는 EnemyCtrl에서 받아옴
     private float scanningRadius;
     private float damage;
-    EnemyCtrl enemyCtrl;
+    private EnemyCtrl enemyCtrl;
 
     // Player에 영향 미치는 부분
-    PlayerCtrl playerCtrl;
-    Rigidbody2D playerRb;
+    private PlayerCtrl playerCtrl;
+    private Rigidbody2D playerRb;
 
     void Start()
     {

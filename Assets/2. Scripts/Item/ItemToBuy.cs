@@ -9,14 +9,14 @@ public class ItemToBuy : MonoBehaviour
     // public 변수
 
     // private 변수
-    [SerializeField] private enum ItemToBuyType
+    [SerializeField] private ItemToBuyType itemToBuyType;
+    private enum ItemToBuyType
     {
         MaxHpPlus,
         AttackPlus,
         PremiumHeal,
     }
-    [SerializeField] private ItemToBuyType itemToBuyType;
-    PlayerCtrl playerCtrl;
+    private PlayerCtrl playerCtrl;
 
     private void OnTriggerStay2D(Collider2D other)
     {

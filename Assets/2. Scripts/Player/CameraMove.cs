@@ -3,10 +3,10 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
     // public 변수
-    private Transform target;
-    private float damping = 0.3f;
 
     // private 변수
+    private Transform target;
+    private float damping = 0.3f;
     private Vector3 vevlocity = Vector3.zero;
 
     void Start()

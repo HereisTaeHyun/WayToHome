@@ -17,7 +17,7 @@ public class PlayerCtrl : MonoBehaviour
     }
 
     // private 변수
-    PlayerMove playerMove;
+    private PlayerMove playerMove;
     private bool canMove;
     
     // 무적 관련

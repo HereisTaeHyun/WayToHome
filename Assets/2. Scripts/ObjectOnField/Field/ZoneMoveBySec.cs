@@ -11,7 +11,7 @@ public class ZoneMoveBySec : MonoBehaviour
     private float moveTimer;
     private int moveDir = 1;
     private Vector2 pos;
-    Rigidbody2D rb;
+    private Rigidbody2D rb;
 
 
     void Start()

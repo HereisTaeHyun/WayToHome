@@ -7,15 +7,15 @@ public class ItemToFind : MonoBehaviour
     // public 변수
 
     // private 변수
-    [SerializeField] private enum ItemToFindType
+    [SerializeField] private ItemToFindType itemToFindType;
+    private enum ItemToFindType
     {
         Heal,
         MaxJumpPlus,
         Money,
     }
-    [SerializeField] private ItemToFindType itemToFindType;
-    PlayerCtrl playerCtrl;
-    PlayerMove playerMove;
+    private PlayerCtrl playerCtrl;
+    private PlayerMove playerMove;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
