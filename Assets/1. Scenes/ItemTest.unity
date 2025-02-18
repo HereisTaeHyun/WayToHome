@@ -198,6 +198,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoneyItem (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2973986831218766704, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5415568638637592933, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 33.81
@@ -259,6 +263,10 @@ PrefabInstance:
     - target: {fileID: 539637585929383674, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
       propertyPath: m_Name
       value: MoneyItem (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2973986831218766704, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5415568638637592933, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -494,6 +502,10 @@ PrefabInstance:
     - target: {fileID: 539637585929383674, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
       propertyPath: m_Name
       value: MoneyItem (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2973986831218766704, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5415568638637592933, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -775,7 +787,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb37c00a8392a640aabf76deaacd1a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 2040352397}
 --- !u!114 &1172046342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -866,6 +877,10 @@ PrefabInstance:
     - target: {fileID: 539637585929383674, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
       propertyPath: m_Name
       value: MoneyItem (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2973986831218766704, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5415568638637592933, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -986,11 +1001,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &2040352397 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2406043498758127601, guid: d2a6635978ef4e74eafa314df9ac93ce, type: 3}
-  m_PrefabInstance: {fileID: 1130394931}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2117244110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1032,6 +1042,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1736046966}
     m_Modifications:
+    - target: {fileID: 2722747274521705801, guid: d7a3d993a04b2674790cff4693ca9bc5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4498321679550260775, guid: d7a3d993a04b2674790cff4693ca9bc5, type: 3}
       propertyPath: m_Name
       value: HealItem
@@ -1155,6 +1169,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoneyItem
       objectReference: {fileID: 0}
+    - target: {fileID: 2973986831218766704, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5415568638637592933, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 26.76
@@ -1271,7 +1289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2675943377527610717, guid: 7b244d23bf83bd441bd5522b31e8d227, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.5
+      value: 17.66
       objectReference: {fileID: 0}
     - target: {fileID: 2675943377527610717, guid: 7b244d23bf83bd441bd5522b31e8d227, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1308,6 +1326,10 @@ PrefabInstance:
     - target: {fileID: 2675943377527610717, guid: 7b244d23bf83bd441bd5522b31e8d227, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8063151603284116605, guid: 7b244d23bf83bd441bd5522b31e8d227, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
