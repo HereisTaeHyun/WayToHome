@@ -10,7 +10,7 @@ public class EnemyCtrl : MonoBehaviour
     // private 변수
     private Transform target;
     private float scanningRadius = 10.0f;
-    [SerializeField] float MaxHP = 10.0f;
+    [SerializeField] float MaxHP;
     [SerializeField] float currentHP;
     [SerializeField] private float moveSpeed;
 
