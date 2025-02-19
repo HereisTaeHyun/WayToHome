@@ -8,8 +8,10 @@ public class PlayerAttack : MonoBehaviour
 
     // private 변수
     private PlayerCtrl playerCtrl;
-    private float baseAttackDamage;
     private GameObject meleeAttackRange;
+
+    public float baseAttackDamage;
+    public float readbaseAttackDamage {get {return baseAttackDamage;}}
 
     void Start()
     {

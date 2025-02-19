@@ -8,7 +8,7 @@ public class PlayerCtrl : MonoBehaviour
     // public 변수
     public float MaxHP = 10.0f;
     public float currentHP;
-    public float attack = 1.0f; // 기초 공격력, PlayerAttack에서 공격 유형에 따라 합 or 곱연삽으로 실제 데미지 배정
+    public float attack = -1.0f; // 기초 공격력, 공격 스크립트에서 공격 유형에 따라 합 or 곱연삽으로 실제 데미지 배정
     public int money = 0;
     public enum DebuffType
     {
