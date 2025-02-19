@@ -8,7 +8,7 @@ public class PlayerCtrl : MonoBehaviour
     // public 변수
     public float MaxHP = 10.0f;
     public float currentHP;
-    public float attack = 1.0f;
+    public float attack = 1.0f; // 기초 공격력, PlayerAttack에서 공격 유형에 따라 합 or 곱연삽으로 실제 데미지 배정
     public int money = 0;
     public enum DebuffType
     {
@@ -19,6 +19,7 @@ public class PlayerCtrl : MonoBehaviour
     // private 변수
     private PlayerMove playerMove;
     private bool canMove;
+    private PlayerAttack playerAttack;
     
     // 무적 관련
     private bool invincible;
@@ -32,6 +33,7 @@ public class PlayerCtrl : MonoBehaviour
     void Start()
     {
         playerMove = GetComponent<PlayerMove>();
+        playerAttack = GetComponent<PlayerAttack>();
         currentHP = MaxHP;
         canMove = true;
     }
@@ -68,6 +70,8 @@ public class PlayerCtrl : MonoBehaviour
         }
         playerMove.HorizontalMove();
         playerMove.Jump();
+        
+        playerAttack.MeleeAttack();
     }
 
     // 플레이어 데미지 가해
