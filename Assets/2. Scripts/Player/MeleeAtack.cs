@@ -6,12 +6,10 @@ public class MeleeAtack : MonoBehaviour
     // melee는 기초 공격력을 따라감
     private EnemyCtrl enemyCtrl;
     private PlayerAttack playerAttack;
-    public float meleeAtackPower;
 
     void Start()
     {
         playerAttack = GetComponentInParent<PlayerAttack>();
-        meleeAtackPower = playerAttack.attackPower;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -19,7 +17,7 @@ public class MeleeAtack : MonoBehaviour
         if(other.gameObject.CompareTag("Enemy"))
         {
             enemyCtrl = other.GetComponent<EnemyCtrl>();
-            enemyCtrl.ChangeHP(meleeAtackPower);
+            enemyCtrl.ChangeHP(playerAttack.attackPower);
         } 
     }
 }

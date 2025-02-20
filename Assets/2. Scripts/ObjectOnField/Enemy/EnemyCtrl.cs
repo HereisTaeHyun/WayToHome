@@ -48,7 +48,7 @@ public class EnemyCtrl : MonoBehaviour
     {
         // 데미지를 받고 데미지가 0이거나 그 이하일 경우 사망
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
-        Debug.Log("데미지 가해짐");
+        Debug.Log($" {value} 데미지 가해짐");
         if(currentHP <= 0)
         {
             EnemyDie();
