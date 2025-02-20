@@ -15,13 +15,14 @@ public class PlayerMove : MonoBehaviour
     // private 변수
     [SerializeField] private LayerMask ground;
     private Rigidbody2D rb;
-    private float jumpSpeed = 10.0f;
+    private float jumpSpeed = 5.0f;
     private int jumpCount = 0;
-    private Animator playeyAnim;
+    private Animator playerAnim;
+    private SpriteRenderer spriteRenderer;
     private Vector2 moveDir = new Vector2(1, 0);
 
     // 애니메이션 읽기 해시
-    private readonly int moveHash = Animator.StringToHash("Speed");
+    private readonly int speedHash = Animator.StringToHash("Speed");
     private readonly int dirHash = Animator.StringToHash("MoveDir");
 
     // 다른 객체에서 읽기 필요한 변수
@@ -34,7 +35,8 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        playeyAnim = GetComponent<Animator>();
+        playerAnim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
     }
@@ -52,10 +54,12 @@ public class PlayerMove : MonoBehaviour
             moveDir.Normalize();
         }
 
-        playeyAnim.SetFloat(moveHash, move.magnitude);
+        // 이동 방향이 left 쪽이면 Player 왼쪽으로 보게 해두기
+
+        playerAnim.SetFloat(speedHash, move.magnitude);
         if(Input.GetButton("Horizontal"))
         {
-            playeyAnim.SetFloat(dirHash, moveDir.x);
+            playerAnim.SetFloat(dirHash, moveDir.x);
             rb.linearVelocity = new Vector2(h * moveSpeed, rb.linearVelocity.y);
         }
     }
