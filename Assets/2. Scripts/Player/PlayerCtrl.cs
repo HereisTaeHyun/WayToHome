@@ -9,6 +9,15 @@ public class PlayerCtrl : MonoBehaviour
     public float MaxHP = 10.0f;
     public float currentHP;
     public int money = 0;
+    public State state;
+    public enum State
+    {
+        Idle,
+        Move,
+        Attack,
+        TakeHit,
+        Die,
+    }
     public enum DebuffType
     {
         Stun,
@@ -35,6 +44,7 @@ public class PlayerCtrl : MonoBehaviour
         playerAttack = GetComponent<PlayerAttack>();
         currentHP = MaxHP;
         canMove = true;
+        state = State.Idle;
     }
 
     void Update() // Jump();는 FixedUpdate()에 배정시 즉각 반응하지 않아 Update()에 배치
@@ -58,7 +68,6 @@ public class PlayerCtrl : MonoBehaviour
             {
                 canMove = true;
                 playerMove.moveSpeed = playerMove.readOriginSpeed;
-                playerMove.runSpeed = playerMove.moveSpeed + 3.0f;
             }
         }
 
@@ -67,6 +76,9 @@ public class PlayerCtrl : MonoBehaviour
         {
             return;
         }
+
+
+        // 모듈 클래스 함수 호출
         playerMove.HorizontalMove();
         playerMove.Jump();
         
@@ -116,7 +128,6 @@ public class PlayerCtrl : MonoBehaviour
 
             case DebuffType.Slow:
                 playerMove.moveSpeed = playerMove.readDebuffedSpeed;
-                playerMove.runSpeed = playerMove.readDebuffedSpeed;
                 break;
         }
     }

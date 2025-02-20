@@ -27,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
     // 근접 공격, 코루틴으로 공격 범위 콜라이더 생성 후 일정 시간 후 종료, 현재는 0.2초
     public void MeleeAttack()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButtonDown("Fire1") && meleeAttackRange.activeSelf == false)
         {
             StartCoroutine(MeleeAttackOn());
         }
@@ -35,7 +35,7 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator MeleeAttackOn()
     {
         meleeAttackRange.SetActive(true);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
         meleeAttackRange.SetActive(false);
     }
 }

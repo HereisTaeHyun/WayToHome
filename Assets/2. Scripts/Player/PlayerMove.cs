@@ -1,5 +1,6 @@
 using Mono.Cecil.Cil;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -8,8 +9,7 @@ public class PlayerMove : MonoBehaviour
 
     // public 변수
     // 아래들은 디버프 및 아이템에 의한 증감 있음 or 예정
-    public float moveSpeed;
-    public float runSpeed; // moveSpeed + 3.0f
+    public float moveSpeed = 7.0f;
     public int maxJump = 1;
 
     // private 변수
@@ -17,6 +17,12 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody2D rb;
     private float jumpSpeed = 10.0f;
     private int jumpCount = 0;
+    private Animator playeyAnim;
+    private Vector2 moveDir = new Vector2(1, 0);
+
+    // 애니메이션 읽기 해시
+    private readonly int moveHash = Animator.StringToHash("Speed");
+    private readonly int dirHash = Animator.StringToHash("MoveDir");
 
     // 다른 객체에서 읽기 필요한 변수
     private float originSpeed = 7.0f;
@@ -28,8 +34,8 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playeyAnim = GetComponent<Animator>();
         moveSpeed = originSpeed;
-        runSpeed = originSpeed + 3.0f;
         debuffedSpeed = moveSpeed * 0.5f;
     }
 
@@ -37,12 +43,19 @@ public class PlayerMove : MonoBehaviour
     public void HorizontalMove()
     {
         float h = Input.GetAxis("Horizontal");
-        if(Input.GetButton("Horizontal") && Input.GetKey(KeyCode.LeftShift)) // 달리기
+
+        // 이동 방향 지정
+        Vector2 move = new Vector2(h, 0);
+        if(Mathf.Approximately(move.x, 0) == false)
         {
-            rb.linearVelocity = new Vector2(h * runSpeed, rb.linearVelocity.y);
+            moveDir.Set(move.x, 0);
+            moveDir.Normalize();
         }
-        else if(Input.GetButton("Horizontal")) // 걷기
+
+        playeyAnim.SetFloat(moveHash, move.magnitude);
+        if(Input.GetButton("Horizontal"))
         {
+            playeyAnim.SetFloat(dirHash, moveDir.x);
             rb.linearVelocity = new Vector2(h * moveSpeed, rb.linearVelocity.y);
         }
     }
