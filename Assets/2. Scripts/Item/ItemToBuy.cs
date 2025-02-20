@@ -17,6 +17,7 @@ public class ItemToBuy : MonoBehaviour
         PremiumHeal,
     }
     private PlayerCtrl playerCtrl;
+    private PlayerAttack playerAttack;
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -24,19 +25,13 @@ public class ItemToBuy : MonoBehaviour
         if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit"))
         {
             playerCtrl = other.GetComponent<PlayerCtrl>();
+            playerAttack = other.GetComponent<PlayerAttack>();
 
             switch(itemToBuyType)
             {
                 case ItemToBuyType.MaxHpPlus: // 최대 체력 증가
                     playerCtrl.MaxHP += 1;
                     Debug.Log("최대 체력 증가");
-                    Destroy(gameObject);
-                    Destroy(transform.parent.gameObject);
-                    break;
-                
-                case ItemToBuyType.AttackPlus: // 공격력 증가
-                    playerCtrl.attack += 1;
-                    Debug.Log("공격력 증가");
                     Destroy(gameObject);
                     Destroy(transform.parent.gameObject);
                     break;
@@ -53,6 +48,13 @@ public class ItemToBuy : MonoBehaviour
                     {
                         Debug.Log("이미 최대 체력");
                     }
+                    break;
+                
+                case ItemToBuyType.AttackPlus: // 공격력 증가
+                    playerAttack.attackPower -= 1;
+                    Debug.Log("공격력 증가");
+                    Destroy(gameObject);
+                    Destroy(transform.parent.gameObject);
                     break;
             }
         }

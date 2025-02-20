@@ -6,17 +6,19 @@ public class PlayerAttack : MonoBehaviour
     // 공격에 관한 메서드 모음
     // 근접 공격, 원거리 직선 공격, 원거리 포물선 공격 계획
 
+    // public 변수
+    public float attackPower;
+
     // private 변수
     private PlayerCtrl playerCtrl;
     private GameObject meleeAttackRange;
 
-    public float baseAttackDamage;
-    public float readbaseAttackDamage {get {return baseAttackDamage;}}
+    [SerializeField] private float baseAttackPower = -1.0f;
 
     void Start()
     {
         playerCtrl = GetComponent<PlayerCtrl>();
-        baseAttackDamage = playerCtrl.attack;
+        attackPower = baseAttackPower;
 
         meleeAttackRange = transform.Find("MeleeAttack").gameObject;
         meleeAttackRange.SetActive(false);
