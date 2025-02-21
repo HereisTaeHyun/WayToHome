@@ -15,16 +15,17 @@ public class PlayerMove : MonoBehaviour
     // private 변수
     [SerializeField] private LayerMask ground;
     private Rigidbody2D rb;
+    private PlayerCtrl playerCtrl;
     private float jumpSpeed = 5.0f;
     private int jumpCount = 0;
     private Animator playerAnim;
     private SpriteRenderer spriteRenderer;
-    private Vector2 moveDir = new Vector2(1, 0);
     private Vector2 jumpDir = new Vector2(0, 1);
 
     // 애니메이션 읽기 해시
     private readonly int speedHash = Animator.StringToHash("Speed");
     private readonly int dirHash = Animator.StringToHash("MoveDir");
+    private readonly int jumpHash = Animator.StringToHash("Jump");
 
     // 다른 객체에서 읽기 필요한 변수
     private float originSpeed = 7.0f;
@@ -36,6 +37,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerCtrl = GetComponent<PlayerCtrl>();
         playerAnim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         moveSpeed = originSpeed;
@@ -45,15 +47,10 @@ public class PlayerMove : MonoBehaviour
     // 좌우 이동 메서드
     public void HorizontalMove()
     {
-        float h = Input.GetAxis("Horizontal");
-
         // 이동 방향 지정
+        float h = Input.GetAxis("Horizontal");
         Vector2 move = new Vector2(h, 0);
-        if(Mathf.Approximately(move.x, 0) == false)
-        {
-            moveDir.Set(move.x, 0);
-            moveDir.Normalize();
-        }
+        Vector2 moveDir = playerCtrl.moveDirSet(move);
 
         // 이동 방향이 left 쪽이면 Player 왼쪽으로 보게 해두기
 
@@ -86,7 +83,7 @@ public class PlayerMove : MonoBehaviour
             jumpCount += 1;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
 
-            playerAnim.SetTrigger("Jump");
+            playerAnim.SetTrigger(jumpHash);
         }
     }
 }

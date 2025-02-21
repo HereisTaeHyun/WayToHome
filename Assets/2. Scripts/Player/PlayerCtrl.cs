@@ -77,7 +77,6 @@ public class PlayerCtrl : MonoBehaviour
             return;
         }
 
-
         // 모듈 클래스 함수 호출
         playerMove.HorizontalMove();
         playerMove.Jump();
@@ -130,5 +129,16 @@ public class PlayerCtrl : MonoBehaviour
                 playerMove.moveSpeed = playerMove.readDebuffedSpeed;
                 break;
         }
+    }
+
+    public Vector2 moveDirSet(Vector2 move)
+    {
+        Vector2 moveDir = new Vector2(0, 0);
+        if(Mathf.Approximately(move.x, 0) == false)
+        {
+            moveDir.Set(move.x, 0);
+            moveDir.Normalize();
+        }
+        return moveDir;
     }
 }
