@@ -10,6 +10,7 @@ public class PlayerCtrl : MonoBehaviour
     public float currentHP;
     public int money = 0;
     public State state;
+    public bool canMove;
     public enum State
     {
         Idle,
@@ -26,7 +27,6 @@ public class PlayerCtrl : MonoBehaviour
 
     // private 변수
     private PlayerMove playerMove;
-    private bool canMove;
     private PlayerAttack playerAttack;
     
     // 무적 관련
