@@ -23,6 +23,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         playerCtrl = GetComponent<PlayerCtrl>();
+        playerAnim = GetComponent<Animator>();
         attackPower = baseAttackPower;
 
         attackCollier = transform.Find("MeleeAttack").gameObject;
