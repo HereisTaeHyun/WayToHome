@@ -15,6 +15,8 @@ public class PlayerAttack : MonoBehaviour
     private GameObject attackCollier;
     Vector2 attackCollierPos;
     private Vector2 lastDir = Vector2.right;
+    private readonly int attackHash = Animator.StringToHash("Attack");
+    private readonly int attackDirHash = Animator.StringToHash("AttackDir");
 
     [SerializeField] private float baseAttackPower = -1.0f;
 
@@ -46,6 +48,10 @@ public class PlayerAttack : MonoBehaviour
             attackCollierPos = attackCollier.transform.localPosition;
             attackCollierPos.x = Mathf.Abs(attackCollierPos.x) * attackDir.x;
             attackCollier.transform.localPosition = attackCollierPos;
+
+            // 공격 활성화
+            // playerAnim.SetTrigger("Attack");
+            // playerAnim.SetFloat(attackDirHash, attackDir.x);
             StartCoroutine(MeleeAttackOn());
         }
     }
