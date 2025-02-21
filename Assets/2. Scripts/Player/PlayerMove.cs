@@ -20,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     private Animator playerAnim;
     private SpriteRenderer spriteRenderer;
     private Vector2 moveDir = new Vector2(1, 0);
+    private Vector2 jumpDir = new Vector2(0, 1);
 
     // 애니메이션 읽기 해시
     private readonly int speedHash = Animator.StringToHash("Speed");
@@ -77,8 +78,15 @@ public class PlayerMove : MonoBehaviour
     {
         if(Input.GetButtonDown("Jump") && jumpCount < maxJump) // W에 할당된 "Jump"를 눌러 maxJump까지 점프가능
         {
+            // 낙하인지 아닌지 anim에 전달 필요
+            jumpDir.Set(0, rb.linearVelocity.y);
+            jumpDir.Normalize();
+
+            // jumpCount 추가 후 jump
             jumpCount += 1;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
+
+            playerAnim.SetTrigger("Jump");
         }
     }
 }

@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 6717394070331372256}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.59, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.9, z: 1}
+  m_LocalPosition: {x: 0.85, y: 0.2, z: 0}
+  m_LocalScale: {x: 1, y: 2.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2693621264504375055}
@@ -302,7 +302,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.22678137, y: -0.044507623}
+  m_Offset: {x: 0.009287357, y: -0.044507623}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -312,7 +312,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.6911497, y: 1.5633633}
+  m_Size: {x: 1.2561617, y: 1.5633633}
   m_EdgeRadius: 0
 --- !u!114 &4433098807747422927
 MonoBehaviour:
@@ -329,6 +329,7 @@ MonoBehaviour:
   MaxHP: 10
   currentHP: 0
   money: 0
+  state: 0
 --- !u!114 &8260205561483300568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,7 +357,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
-  runSpeed: 0
   maxJump: 1
   ground:
     serializedVersion: 2
