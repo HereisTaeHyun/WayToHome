@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8026375349199364189}
   - component: {fileID: 7226481641645388809}
   - component: {fileID: 1080370427870826148}
+  - component: {fileID: 3995597728389797501}
   - component: {fileID: 3676332041269713174}
   - component: {fileID: 845797116589590210}
   m_Layer: 9
@@ -120,12 +121,39 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.6
+--- !u!50 &3995597728389797501
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5011489552242601477}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &3676332041269713174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c9719d631cae4419ff1705dd26bee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropItem:
+  - {fileID: 539637585929383674, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
+  - {fileID: 4498321679550260775, guid: d7a3d993a04b2674790cff4693ca9bc5, type: 3}
   MaxHP: 10
   currentHP: 0
   moveSpeed: 5

@@ -6,8 +6,10 @@ public class EnemyCtrl : MonoBehaviour
     // 추적, 사망 및 아이템 드롭이 들어 갈 예정
 
     // public 변수
+    public GameObject[] dropItem;
 
     // private 변수
+    private Rigidbody2D rb2D;
     private Transform target;
     private float scanningRadius = 10.0f;
     [SerializeField] float MaxHP;
@@ -21,6 +23,7 @@ public class EnemyCtrl : MonoBehaviour
     // target인 Player를 받아온 후 초기화
     void Start()
     {
+        rb2D = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         currentHP = MaxHP;
     }
@@ -58,6 +61,15 @@ public class EnemyCtrl : MonoBehaviour
     // 사망 현재는 단순 Destroy이나 이후 아이템 생성 필요
     private void EnemyDie()
     {
+        float itemChoose = Random.Range(0, 100);
+        if (itemChoose < 90)
+        {
+            Instantiate(dropItem[0], transform.position, transform.rotation);
+        }
+        else if (itemChoose >= 90)
+        {
+            Instantiate(dropItem[1], transform.position, transform.rotation);
+        }
         Destroy(gameObject);
     }
 }

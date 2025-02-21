@@ -12,6 +12,10 @@ public class KillZone : MonoBehaviour
         {
             playerCtrl = other.gameObject.GetComponent<PlayerCtrl>();
             playerCtrl.ChangeHP(-9999);
-        } 
+        }
+        else if(other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

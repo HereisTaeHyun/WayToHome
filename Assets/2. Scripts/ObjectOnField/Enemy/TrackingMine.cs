@@ -24,12 +24,12 @@ public class TrackingMine : MonoBehaviour
         damage = enemyCtrl.readDamage;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            playerCtrl = other.GetComponent<PlayerCtrl>();
-            playerRb = other.GetComponent<Rigidbody2D>();
+            playerCtrl = other.collider.GetComponent<PlayerCtrl>();
+            playerRb = other.collider.GetComponent<Rigidbody2D>();
 
             // 플레이어가 무적이 아니라면 폭파
             if(playerCtrl.readInvincible != true)
@@ -40,7 +40,7 @@ public class TrackingMine : MonoBehaviour
         }
     }
 
-    private void Explosion(Collider2D target)
+    private void Explosion(Collision2D target)
     {
         // 에셋 찾으면 파티클 Instantiate 후 destroy 추가 필요, 아직 에셋은 안찾았음
         // 폭발음은 Destroy 탓에 고민 중, AudioPlayer 게임 오브젝트를 만들고 안에 TrackingMine을 두는 방식 생각 중
