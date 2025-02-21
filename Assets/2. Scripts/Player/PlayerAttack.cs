@@ -51,8 +51,8 @@ public class PlayerAttack : MonoBehaviour
             attackCollier.transform.localPosition = attackCollierPos;
 
             // 공격 활성화
-            // playerAnim.SetTrigger("Attack");
-            // playerAnim.SetFloat(attackDirHash, attackDir.x);
+            playerAnim.SetTrigger("Attack");
+            playerAnim.SetFloat(attackDirHash, attackDir.x);
             StartCoroutine(MeleeAttackOn());
         }
     }
