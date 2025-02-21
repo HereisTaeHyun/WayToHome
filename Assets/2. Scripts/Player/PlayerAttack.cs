@@ -59,6 +59,7 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator MeleeAttackOn()
     {
         playerCtrl.canMove = false;
+        yield return new WaitForSeconds(0.2f);
         attackCollier.SetActive(true);
         yield return new WaitForSeconds(0.4f);
         attackCollier.SetActive(false);
