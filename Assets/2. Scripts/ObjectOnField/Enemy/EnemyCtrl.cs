@@ -57,7 +57,7 @@ public class EnemyCtrl : MonoBehaviour
     public void ChangeHP(float value)
     {
         // 데미지를 받고 데미지가 0이거나 그 이하일 경우 사망
-        StartCoroutine(enemyStun());
+        StartCoroutine(enemyGetHIt());
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
         Debug.Log($" {value} 데미지 가해짐");
         if(currentHP <= 0)
@@ -65,10 +65,15 @@ public class EnemyCtrl : MonoBehaviour
             EnemyDie();
         }
     }
-    private IEnumerator enemyStun()
+    private IEnumerator enemyGetHIt()
     {
         canMove = false;
-        yield return new WaitForSeconds(0.2f);
+        Vector2 hitVector =  transform.position - target.transform.position;
+        hitVector = hitVector.normalized;
+
+        rb2D.AddForce(hitVector * 5.0f, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.5f);
+        rb2D.linearVelocity = Vector2.zero;
         canMove = true;
     }
 
