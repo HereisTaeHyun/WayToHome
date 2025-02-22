@@ -61,7 +61,7 @@ public class PlayerAttack : MonoBehaviour
         playerCtrl.canMove = false;
         yield return new WaitForSeconds(0.2f);
         attackCollier.SetActive(true);
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
         attackCollier.SetActive(false);
         playerCtrl.canMove = true;
     }
