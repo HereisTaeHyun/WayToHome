@@ -3,7 +3,7 @@ using UnityEngine;
 public class ZoneMoveBySec : MonoBehaviour
 {
     // public 변수
-    public float changeTime = 2.0f;
+    public static float CHANGE_TIME = 2.0f;
     public float moveSpeed = 2.0f;
     public bool vertical;
 
@@ -17,7 +17,7 @@ public class ZoneMoveBySec : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        moveTimer = changeTime;
+        moveTimer = CHANGE_TIME;
         pos = rb.position;
     }
 
@@ -28,7 +28,7 @@ public class ZoneMoveBySec : MonoBehaviour
         if(moveTimer < 0)
         {
             moveDir = -moveDir;
-            moveTimer = changeTime;
+            moveTimer = CHANGE_TIME;
         }
 
         // vertical == true면 상하 아니면 좌우

@@ -12,7 +12,8 @@ public class EnemyCtrl : MonoBehaviour
     // private 변수
     private Rigidbody2D rb2D;
     private Transform target;
-    public bool canMove;
+    private bool canMove;
+    private static float ENEMY_PUSH_POWER = 5.0f;
     private float scanningRadius = 10.0f;
     [SerializeField] float MaxHP;
     [SerializeField] float currentHP;
@@ -71,7 +72,7 @@ public class EnemyCtrl : MonoBehaviour
         Vector2 hitVector =  transform.position - target.transform.position;
         hitVector = hitVector.normalized;
 
-        rb2D.AddForce(hitVector * 5.0f, ForceMode2D.Impulse);
+        rb2D.AddForce(hitVector * ENEMY_PUSH_POWER, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.5f);
         rb2D.linearVelocity = Vector2.zero;
         canMove = true;

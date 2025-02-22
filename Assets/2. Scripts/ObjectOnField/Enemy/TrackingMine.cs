@@ -9,7 +9,7 @@ public class TrackingMine : MonoBehaviour
     // public 변수
 
     // private 변수
-    private float expPower = 8.0f;
+    private static float EXP_POWER = 8.0f;
     // damage는 EnemyCtrl 설정 값 이용
     private float damage;
     private EnemyCtrl enemyCtrl;
@@ -55,7 +55,7 @@ public class TrackingMine : MonoBehaviour
         {
             playerMineVector = new Vector2(-1, 1);
         }
-        playerRb.AddForce(playerMineVector * expPower, ForceMode2D.Impulse);
+        playerRb.AddForce(playerMineVector * EXP_POWER, ForceMode2D.Impulse);
 
         
         // Player에게 데미지 가해 및 1.5초간 스턴
