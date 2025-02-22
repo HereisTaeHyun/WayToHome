@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyCtrl : MonoBehaviour
@@ -11,6 +12,7 @@ public class EnemyCtrl : MonoBehaviour
     // private 변수
     private Rigidbody2D rb2D;
     private Transform target;
+    public bool canMove;
     private float scanningRadius = 10.0f;
     [SerializeField] float MaxHP;
     [SerializeField] float currentHP;
@@ -25,12 +27,17 @@ public class EnemyCtrl : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        canMove = true;
         currentHP = MaxHP;
     }
 
     // 행동에 대한 메서드 넣을 예정
     void Update()
     {
+        if(canMove == false)
+        {
+            return;
+        }
         FollowingTarget(moveSpeed, scanningRadius);
     }
     
@@ -50,12 +57,19 @@ public class EnemyCtrl : MonoBehaviour
     public void ChangeHP(float value)
     {
         // 데미지를 받고 데미지가 0이거나 그 이하일 경우 사망
+        StartCoroutine(enemyStun());
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
         Debug.Log($" {value} 데미지 가해짐");
         if(currentHP <= 0)
         {
             EnemyDie();
         }
+    }
+    private IEnumerator enemyStun()
+    {
+        canMove = false;
+        yield return new WaitForSeconds(0.2f);
+        canMove = true;
     }
 
     // 사망 현재는 단순 Destroy이나 이후 아이템 생성 필요
