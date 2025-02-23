@@ -12,12 +12,14 @@ public class EnemyCtrl : MonoBehaviour
     // private 변수
     private Rigidbody2D rb2D;
     private Transform target;
+    private Animator enemyAnim;
     private bool canMove;
     private static float ENEMY_PUSH_POWER = 5.0f;
     private float scanningRadius = 10.0f;
     [SerializeField] float MaxHP;
     [SerializeField] float currentHP;
     [SerializeField] private float moveSpeed;
+    private readonly int dirHash = Animator.StringToHash("MoveDir");
 
     // 다른 객체에서 읽기 필요한 변수
     [SerializeField] private float damage;
@@ -27,6 +29,7 @@ public class EnemyCtrl : MonoBehaviour
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        enemyAnim = GetComponent<Animator>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         canMove = true;
         currentHP = MaxHP;
@@ -50,9 +53,25 @@ public class EnemyCtrl : MonoBehaviour
             // 플레이어가 scanningRadius 내부면 moveSpeed만큼씩 이동 시작
             if(Vector2.Distance(transform.position, target.position) < scanningRadius)
             {
+                // 이동 방향 벡터 설정
+                Vector2 enemyMoveDir = dirSet(transform.position - target.transform.position);
+                enemyAnim.SetFloat("MoveDir", enemyMoveDir.x);
+
+                // 플레이어에게 이동
                 transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
             }
         }
+    }
+
+    public Vector2 dirSet(Vector2 move)
+    {
+        Vector2 moveDir = new Vector2(0, 0);
+        if(Mathf.Approximately(move.x, 0) == false)
+        {
+            moveDir.Set(move.x, 0);
+            moveDir.Normalize();
+        }
+        return moveDir;
     }
 
     public void ChangeHP(float value)
@@ -69,8 +88,7 @@ public class EnemyCtrl : MonoBehaviour
     private IEnumerator enemyGetHIt()
     {
         canMove = false;
-        Vector2 hitVector =  transform.position - target.transform.position;
-        hitVector = hitVector.normalized;
+        Vector2 hitVector =  dirSet(transform.position - target.transform.position);
 
         rb2D.AddForce(hitVector * ENEMY_PUSH_POWER, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.5f);
@@ -92,4 +110,5 @@ public class EnemyCtrl : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
 }
