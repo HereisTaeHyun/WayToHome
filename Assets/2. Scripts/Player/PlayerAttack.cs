@@ -47,6 +47,10 @@ public class PlayerAttack : MonoBehaviour
 
         if(Input.GetButtonDown("Fire1") && attackCollier.activeSelf == false)
         {
+            // 공격 위치 및 각도에 플레이어 고정, 각도 고정 안하면 공격 받을때 각도 뒤틀림
+            // 플레이어에게 제어권 반환은 코루틴에서 수행
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+
             // 공격 방향에 따른 attackCollier 위치 결정
             attackCollierPos = attackCollier.transform.localPosition;
             attackCollierPos.x = Mathf.Abs(attackCollierPos.x) * attackDir.x;
@@ -61,11 +65,12 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator MeleeAttackOn()
     {
         // 공격 시에는 공격 콜라이더 생성 후 공격 시에 설정한 Constraints 재설정
-        playerCtrl.canMove = false;
         yield return new WaitForSeconds(0.2f);
         attackCollier.SetActive(true);
         yield return new WaitForSeconds(0.3f);
         attackCollier.SetActive(false);
-        playerCtrl.canMove = true;
+
+        // Z축 고정만 남기고 나머지는 해제
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }

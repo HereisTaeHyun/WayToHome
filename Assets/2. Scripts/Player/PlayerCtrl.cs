@@ -78,15 +78,12 @@ public class PlayerCtrl : MonoBehaviour
         }
 
         // 모듈 클래스 함수 호출
+        playerMove.HorizontalMove();
         playerMove.Jump();
+
         playerAttack.MeleeAttack();
     }
-
-    private void FixedUpdate()
-    {
-        playerMove.HorizontalMove();
-    }
-
+    
     // 플레이어 데미지 가해
     public void ChangeHP(float value)
     {
