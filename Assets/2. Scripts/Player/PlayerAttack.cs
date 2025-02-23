@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     public float attackPower;
 
     // private 변수
+    private Rigidbody2D rb;
     private PlayerCtrl playerCtrl;
     private Animator playerAnim;
     private GameObject attackCollier;
@@ -22,6 +23,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         playerCtrl = GetComponent<PlayerCtrl>();
         playerAnim = GetComponent<Animator>();
         attackPower = baseAttackPower;
@@ -45,6 +47,9 @@ public class PlayerAttack : MonoBehaviour
 
         if(Input.GetButtonDown("Fire1") && attackCollier.activeSelf == false)
         {
+            // 공격 위치에 플레이어 고정
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+
             // 공격 방향에 따른 attackCollier 위치 결정
             attackCollierPos = attackCollier.transform.localPosition;
             attackCollierPos.x = Mathf.Abs(attackCollierPos.x) * attackDir.x;
@@ -64,5 +69,8 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         attackCollier.SetActive(false);
         playerCtrl.canMove = true;
+
+        // 고정 해제
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }
