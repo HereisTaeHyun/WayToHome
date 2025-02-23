@@ -47,9 +47,6 @@ public class PlayerAttack : MonoBehaviour
 
         if(Input.GetButtonDown("Fire1") && attackCollier.activeSelf == false)
         {
-            // 공격 위치에 플레이어 고정
-            rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-
             // 공격 방향에 따른 attackCollier 위치 결정
             attackCollierPos = attackCollier.transform.localPosition;
             attackCollierPos.x = Mathf.Abs(attackCollierPos.x) * attackDir.x;
@@ -64,12 +61,11 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator MeleeAttackOn()
     {
         // 공격 시에는 공격 콜라이더 생성 후 공격 시에 설정한 Constraints 재설정
+        playerCtrl.canMove = false;
         yield return new WaitForSeconds(0.2f);
         attackCollier.SetActive(true);
         yield return new WaitForSeconds(0.3f);
         attackCollier.SetActive(false);
-
-        // 고정 해제
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        playerCtrl.canMove = true;
     }
 }

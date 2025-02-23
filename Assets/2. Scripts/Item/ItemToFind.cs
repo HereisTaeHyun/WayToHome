@@ -33,6 +33,7 @@ public class ItemToFind : MonoBehaviour
                     {
                         playerCtrl.ChangeHP(1);
                         Debug.Log("체력 회복");
+                        Destroy(transform.parent.gameObject);
                         Destroy(gameObject);
                     }
                     else // 최대 체력이면 사용안됨
@@ -44,6 +45,7 @@ public class ItemToFind : MonoBehaviour
                 case ItemToFindType.Money: // 돈 획득
                     playerCtrl.money += 1;
                     Debug.Log("돈 획득");
+                    Destroy(transform.parent.gameObject);
                     Destroy(gameObject);
                     break;
 
