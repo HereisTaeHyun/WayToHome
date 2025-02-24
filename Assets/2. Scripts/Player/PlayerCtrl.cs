@@ -10,13 +10,10 @@ public class PlayerCtrl : MonoBehaviour
     public float currentHP;
     public int money = 0;
     public State state;
-    public bool canMove;
     public enum State
     {
         Idle,
         Move,
-        Attack,
-        TakeHit,
         Die,
     }
     public enum DebuffType
@@ -28,6 +25,7 @@ public class PlayerCtrl : MonoBehaviour
     // private 변수
     private PlayerMove playerMove;
     private PlayerAttack playerAttack;
+    private bool canMove;
     
     // 무적 관련
     private bool invincible;

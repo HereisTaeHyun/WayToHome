@@ -13,7 +13,6 @@ public class PlayerMove : MonoBehaviour
     public int maxJump = 1;
 
     // private 변수
-    [SerializeField] private LayerMask ground;
     private Rigidbody2D rb;
     private PlayerCtrl playerCtrl;
     private float jumpSpeed = 5.0f;

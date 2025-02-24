@@ -179,7 +179,7 @@ Transform:
   m_GameObject: {fileID: 8952410042083589803}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.36, y: -3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -278,7 +278,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a34906ef30ef2a645bc8ab8735a219f5, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -321,7 +321,6 @@ MonoBehaviour:
   currentHP: 0
   money: 0
   state: 0
-  canMove: 0
 --- !u!114 &8260205561483300568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,9 +349,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0
   maxJump: 1
-  ground:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!95 &3413060426356960647
 Animator:
   serializedVersion: 7
