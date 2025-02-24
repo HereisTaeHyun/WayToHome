@@ -76,12 +76,21 @@ public class PlayerCtrl : MonoBehaviour
         }
 
         // 모듈 클래스 함수 호출
-        playerMove.HorizontalMove();
         playerMove.Jump();
+        // playerMove.HorizontalMove();
 
         playerAttack.MeleeAttack();
     }
-    
+
+    private void FixedUpdate()
+    {
+        if(canMove == false)
+        {
+            return;
+        }
+        playerMove.HorizontalMove();
+    }
+
     // 플레이어 데미지 가해
     public void ChangeHP(float value)
     {
@@ -129,7 +138,7 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    public Vector2 moveDirSet(Vector2 move)
+    public Vector2 MoveDirSet(Vector2 move)
     {
         Vector2 moveDir = new Vector2(0, 0);
         if(Mathf.Approximately(move.x, 0) == false)
