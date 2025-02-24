@@ -20,6 +20,8 @@ public class PlayerMove : MonoBehaviour
     private Animator playerAnim;
     private SpriteRenderer spriteRenderer;
     private Vector2 jumpDir = new Vector2(0, 1);
+    private PhysicsMaterial2D physicsMaterial2D;
+    private Collider2D collider2D;
 
     // 애니메이션 읽기 해시
     private readonly int speedHash = Animator.StringToHash("Speed");
@@ -41,6 +43,8 @@ public class PlayerMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
+        physicsMaterial2D = new PhysicsMaterial2D();
+        collider2D = GetComponent<Collider2D>();
     }
 
     // 좌우 이동 메서드
@@ -51,9 +55,32 @@ public class PlayerMove : MonoBehaviour
         Vector2 move = new Vector2(h, 0);
         Vector2 moveDir = playerCtrl.moveDirSet(move);
 
-        // 이동 방향이 left 쪽이면 Player 왼쪽으로 보게 해두기
-
+        // 이동 방향이 left 쪽이면 Player가 왼쪽으로 보기
         playerAnim.SetFloat(speedHash, move.magnitude);
+
+        // player state가 idle인지 move인지 h에 따라 변화
+        if(h != 0)
+        {
+            playerCtrl.state = PlayerCtrl.State.Move;
+        }
+        else if(h == 0)
+        {
+            playerCtrl.state = PlayerCtrl.State.Idle;
+        }
+
+        // 정지 상태이면 마찰력 증가, 그래야 경사에서 안미끄러짐
+        if(playerCtrl.state == PlayerCtrl.State.Idle)
+        {
+            physicsMaterial2D.friction = 5.0f;
+            collider2D.sharedMaterial = physicsMaterial2D;
+        }
+        else if(playerCtrl.state == PlayerCtrl.State.Move)
+        {
+            physicsMaterial2D.friction = 1.8f;
+            collider2D.sharedMaterial = physicsMaterial2D;
+        }
+
+        // 실제 이동 함수
         if(Input.GetButton("Horizontal"))
         {
             playerAnim.SetFloat(dirHash, moveDir.x);
