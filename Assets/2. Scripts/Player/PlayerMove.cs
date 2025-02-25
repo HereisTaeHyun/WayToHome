@@ -15,9 +15,6 @@ public class PlayerMove : MonoBehaviour
 
     // private 변수
     private Rigidbody2D rb;
-    // 경사면에 사용하는 slide 변수 둘
-    // private Rigidbody2D.SlideResults slideResults;
-    // private Rigidbody2D.SlideMovement slideMovement;
     private PlayerCtrl playerCtrl;
     private float jumpSpeed = 5.0f;
     private int jumpCount = 0;
@@ -49,8 +46,6 @@ public class PlayerMove : MonoBehaviour
         debuffedSpeed = moveSpeed * 0.5f;
         physicsMaterial2D = new PhysicsMaterial2D();
         coll2D = GetComponent<Collider2D>();
-        // slideMovement = new Rigidbody2D.SlideMovement();
-        // slideResults = new Rigidbody2D.SlideResults();
     }
 
     // 좌우 이동 메서드
@@ -90,8 +85,7 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetButton("Horizontal"))
         {
             playerAnim.SetFloat(dirHash, moveDir.x);
-             rb.linearVelocity = new Vector2(h * moveSpeed, rb.linearVelocity.y);
-            // slideResults = rb.Slide(h * moveSpeed * Vector2.right, Time.deltaTime, slideMovement);
+            rb.linearVelocity = new Vector2(h * moveSpeed, rb.linearVelocity.y);
         }
     }
 
@@ -109,10 +103,8 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetButtonDown("Jump") && jumpCount < maxJump) // W에 할당된 "Jump"를 눌러 maxJump까지 점프가능
         {
             // jumpCount 추가 후 jump
-            // slideMovement.useSimulationMove = false;
             jumpCount += 1;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
-            // slideMovement.useSimulationMove = true;
 
             playerAnim.SetTrigger(jumpHash);
         }
