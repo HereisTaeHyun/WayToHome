@@ -20,6 +20,8 @@ public class EnemyCtrl : MonoBehaviour
     [SerializeField] float currentHP;
     [SerializeField] private float moveSpeed;
     private readonly int dirHash = Animator.StringToHash("MoveDir");
+    private readonly int hitHash = Animator.StringToHash("HitDir");
+    private readonly int hitTrigger = Animator.StringToHash("TakeHit");
 
     // 다른 객체에서 읽기 필요한 변수
     [SerializeField] private float damage;
@@ -54,7 +56,7 @@ public class EnemyCtrl : MonoBehaviour
             if(Vector2.Distance(transform.position, target.position) < scanningRadius)
             {
                 // 이동 방향 벡터 설정
-                Vector2 enemyMoveDir = dirSet(transform.position - target.transform.position);
+                Vector2 enemyMoveDir = DirSet(transform.position - target.transform.position);
                 enemyAnim.SetFloat("MoveDir", enemyMoveDir.x);
 
                 // 플레이어에게 이동
@@ -63,7 +65,7 @@ public class EnemyCtrl : MonoBehaviour
         }
     }
 
-    public Vector2 dirSet(Vector2 move)
+    public Vector2 DirSet(Vector2 move)
     {
         Vector2 moveDir = new Vector2(0, 0);
         if(Mathf.Approximately(move.x, 0) == false)
@@ -88,8 +90,13 @@ public class EnemyCtrl : MonoBehaviour
     private IEnumerator enemyGetHIt()
     {
         canMove = false;
-        Vector2 hitVector =  dirSet(transform.position - target.transform.position);
+        Vector2 hitVector =  DirSet(transform.position - target.transform.position);
 
+        // 타격에 따른 애니메이션 재생
+        enemyAnim.SetTrigger(hitTrigger);
+        enemyAnim.SetFloat(hitHash, hitVector.x);
+
+        // 타격 받은 방향으로 밀려남
         rb2D.AddForce(hitVector * ENEMY_PUSH_POWER, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.5f);
         rb2D.linearVelocity = Vector2.zero;
