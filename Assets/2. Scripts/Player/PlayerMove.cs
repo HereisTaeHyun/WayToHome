@@ -23,6 +23,7 @@ public class PlayerMove : MonoBehaviour
     private Vector2 newVelocity;
     private float jumpSpeed = 5.0f;
     private int jumpCount = 0;
+    private float groundDistance = 0.1f;
 
     private Animator playerAnim;
 
@@ -92,10 +93,9 @@ public class PlayerMove : MonoBehaviour
             coll2D.sharedMaterial = physicsMaterial2D;
         }
 
-        // 경사 이동인지 알기 위해 이동 각도 구함
+        // 플레이어가 있는 Ground 상태를 알기 위해 스캐닝하는 위치
         Vector2 checkPos = transform.position - new Vector3(0.0f, collSize.y / 2);
-
-        // x 이동 방향에 따라 조금 더 앞에서 스캐닝, 그래야 걸림 적어짐
+        // x 이동 방향에 따라 조금 더 앞에서 스캐닝, 그래야 모서리 걸림 현상 적어짐
         if(move.x > 0)
         {
             checkPos.x += 0.14f;
@@ -106,12 +106,13 @@ public class PlayerMove : MonoBehaviour
             checkPos.x -= 0.14f;
             VerticalSlopeCheck(checkPos);
         }
+
         // 실제 이동 함수
         if(Input.GetButton("Horizontal"))
         {
             playerAnim.SetFloat(dirHash, moveDir.x);
 
-            // Ground 위면 얻어진 각도에 따라 이동, 아니면 그냥 이전 velocity에 따라 이동
+            // Ground 위면 얻어진 수직 벡터 각도에 따라 이동, 아니면 그냥 이전 velocity에 따라 이동
             if(isGround == true)
             {
                 newVelocity.Set(-move.x * moveSpeed * slopeNormalPerp.x, -move.x * moveSpeed * slopeNormalPerp.y);
@@ -137,7 +138,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     // 점프에 필요한 메서드들
-    // Ground 위면 JumpCount 초기화
+    // Ground에 접촉하면 JumpCount 초기화
     private void OnCollisionEnter2D(Collision2D other)
     {
         if(other.collider.CompareTag("Ground"))
@@ -145,15 +146,9 @@ public class PlayerMove : MonoBehaviour
             isGround = true;
             jumpCount = 0;
             isJump = false;
-        }   
+        }  
     }
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.collider.CompareTag("Ground"))
-        {
-            isGround = false; // 땅에서 떨어지면 isGround = false 설정
-        }
-    }
+    // jumpCount가 있으며 Jump 입력 받으면
     public void Jump()
     {
         if(Input.GetButtonDown("Jump") && jumpCount < maxJump) // W에 할당된 "Jump"를 눌러 maxJump까지 점프가능

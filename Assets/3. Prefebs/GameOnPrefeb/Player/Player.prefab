@@ -303,7 +303,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1.65}
+  m_Size: {x: 1, y: 1.6}
   m_Direction: 0
 --- !u!114 &4433098807747422927
 MonoBehaviour:
@@ -321,6 +321,7 @@ MonoBehaviour:
   currentHP: 0
   money: 0
   state: 0
+  canMove: 0
 --- !u!114 &8260205561483300568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,8 +348,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1258170956c2667418390013ee9a5507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
+  moveSpeed: 7
   maxJump: 1
+  isGround: 0
+  isJump: 0
+  slopeCheckDistance: 0.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
