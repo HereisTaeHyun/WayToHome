@@ -23,6 +23,8 @@ public class PlayerMove : MonoBehaviour
     private Vector2 jumpDir = new Vector2(0, 1);
     private PhysicsMaterial2D physicsMaterial2D;
     private Collider2D coll2D;
+    private float rayLength = 0.5f;
+    [SerializeField] private LayerMask ground;
 
     // 애니메이션 읽기 해시
     private readonly int speedHash = Animator.StringToHash("Speed");
@@ -57,7 +59,7 @@ public class PlayerMove : MonoBehaviour
         Vector2 moveDir = playerCtrl.MoveDirSet(move);
 
         // 이동 방향이 left 쪽이면 Player가 왼쪽으로 보기
-        playerAnim.SetFloat(speedHash, move.x);
+        playerAnim.SetFloat(speedHash, move.magnitude);
 
         // player state가 idle인지 move인지 h에 따라 변화
         if(h != 0)
@@ -80,6 +82,10 @@ public class PlayerMove : MonoBehaviour
             physicsMaterial2D.friction = 1.8f;
             coll2D.sharedMaterial = physicsMaterial2D;
         }
+
+        // 경사 이동인지 알기 위해 이동 각도 구함
+        RaycastHit2D hit2D = Physics2D.Raycast(transform.position, Vector2.right * moveDir, rayLength, ground);
+        Debug.DrawRay(transform.position, Vector2.right * moveDir * rayLength, Color.red);
 
         // 실제 이동 함수
         if(Input.GetButton("Horizontal"))
