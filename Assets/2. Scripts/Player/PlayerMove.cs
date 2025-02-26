@@ -124,8 +124,8 @@ public class PlayerMove : MonoBehaviour
     }
     private void HorizontalSlopeCheck(Vector2 checkPos)
     {
-        RaycastHit2D hitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, groundLayer);
-        RaycastHit2D hitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, groundLayer);
+        // RaycastHit2D hitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, groundLayer);
+        // RaycastHit2D hitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, groundLayer);
     }
     private void VerticalSlopeCheck(Vector2 checkPos)
     {
