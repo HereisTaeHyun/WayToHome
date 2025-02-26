@@ -48,6 +48,7 @@ public class PlayerAttack : MonoBehaviour
         if(Input.GetButtonDown("Fire1") && attackCollier.activeSelf == false)
         {
             // 공격시 해당 위치에 정지, 제어권 반환은 코루틴 끝날때
+            playerCtrl.canMove = false;
             rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 
             // 공격 방향에 따른 attackCollier 위치 결정
@@ -71,5 +72,6 @@ public class PlayerAttack : MonoBehaviour
 
         // Z축 고정만 남기고 나머지는 해제
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        playerCtrl.canMove = true;
     }
 }

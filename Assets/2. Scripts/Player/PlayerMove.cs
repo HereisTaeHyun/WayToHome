@@ -15,7 +15,6 @@ public class PlayerMove : MonoBehaviour
     public int maxJump = 1;
     public bool isGround;
     public bool isJump;
-    public bool isSlope;
 
     // private 변수
     private Rigidbody2D rb;
@@ -30,10 +29,7 @@ public class PlayerMove : MonoBehaviour
     private PhysicsMaterial2D physicsMaterial2D;
     private CapsuleCollider2D coll2D;
     private Vector2 collSize;
-    private float slopeCheckDistance = 0.5f;
-    private float slopeDownAngle;
-    private float slopeDownAngleOld;
-    private float slopeSideAngle;
+    [SerializeField] private float slopeCheckDistance = 0.2f;
     private Vector2 slopeNormalPerp;
     [SerializeField] private LayerMask groundLayer;
 
@@ -95,17 +91,26 @@ public class PlayerMove : MonoBehaviour
             coll2D.sharedMaterial = physicsMaterial2D;
         }
 
+        // 경사 이동인지 알기 위해 이동 각도 구함
+        Vector2 checkPos = transform.position - new Vector3(0.0f, collSize.y / 2);
+        // x 이동 방향에 따라 조금 더 앞에서 스캐닝, 그래야 걸림 적어짐
+        if(move.x > 0)
+        {
+            checkPos.x += 0.14f;
+            VerticalSlopeCheck(checkPos);
+        }
+        else if(move.x < 0)
+        {
+            checkPos.x -= 0.14f;
+            VerticalSlopeCheck(checkPos);
+        }
         // 실제 이동 함수
         if(Input.GetButton("Horizontal"))
         {
             playerAnim.SetFloat(dirHash, moveDir.x);
 
-            if(isGround == true && isSlope == false)
-            {
-                newVelocity.Set(move.x * moveSpeed, 0.0f);
-                rb.linearVelocity = newVelocity;
-            }
-            else if(isGround == true && isSlope == true)
+            // Ground 위면 얻어진 각도에 따라 이동, 아니면 그냥 이전 velocity에 따라 이동
+            if(isGround == true)
             {
                 newVelocity.Set(-move.x * moveSpeed * slopeNormalPerp.x, -move.x * moveSpeed * slopeNormalPerp.y);
                 rb.linearVelocity = newVelocity;
@@ -119,33 +124,6 @@ public class PlayerMove : MonoBehaviour
     }
 
     // 경사 체크 메서드
-    public void SlopeCheck()
-    {  
-        // 경사 이동인지 알기 위해 이동 각도 구함
-        Vector2 checkPos = transform.position - new Vector3(0.0f, collSize.y / 2);
-        VerticalSlopeCheck(checkPos);
-        HorizontalSlopeCheck(checkPos);
-    }
-    private void HorizontalSlopeCheck(Vector2 checkPos)
-    {
-        RaycastHit2D hitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, groundLayer);
-        RaycastHit2D hitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, groundLayer);
-        if(hitFront)
-        {
-            isSlope = true;
-            slopeSideAngle = Vector2.Angle(hitFront.normal, Vector2.up);
-        }
-        else if(hitBack)
-        {
-            isSlope = true;
-            slopeSideAngle = Vector2.Angle(hitBack.normal, Vector2.up);
-        }
-        else
-        {
-            slopeSideAngle = 0.0f;
-            isSlope = false;
-        }
-    }
     private void VerticalSlopeCheck(Vector2 checkPos)
     {
         RaycastHit2D hit2D = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, groundLayer);
@@ -153,17 +131,6 @@ public class PlayerMove : MonoBehaviour
         {
             // 수직 2D 벡터 반환 받기
             slopeNormalPerp = Vector2.Perpendicular(hit2D.normal).normalized;
-            slopeDownAngle = Vector2.Angle(hit2D.normal, Vector2.up);
-
-            if(slopeDownAngle != slopeDownAngleOld)
-            {
-                isSlope = true;
-            }
-
-            slopeDownAngleOld = slopeDownAngle;
-
-            Debug.DrawRay(hit2D.point, slopeNormalPerp, Color.red);
-            Debug.DrawRay(hit2D.point, hit2D.normal, Color.green);
         }
     }
 

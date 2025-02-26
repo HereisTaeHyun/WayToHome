@@ -2996,12 +2996,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 450396533289962263, guid: 8a0f7bc9922e5ac4089b82ce3c4e0b72, type: 3}
-      propertyPath: ground.m_Bits
+      propertyPath: moveSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 450396533289962263, guid: 8a0f7bc9922e5ac4089b82ce3c4e0b72, type: 3}
+      propertyPath: groundLayer.m_Bits
       value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 450396533289962263, guid: 8a0f7bc9922e5ac4089b82ce3c4e0b72, type: 3}
       propertyPath: slopeCheckDistance
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2693621264504375055, guid: 8a0f7bc9922e5ac4089b82ce3c4e0b72, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3042,6 +3046,10 @@ PrefabInstance:
     - target: {fileID: 2693621264504375055, guid: 8a0f7bc9922e5ac4089b82ce3c4e0b72, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4298958904778068629, guid: 8a0f7bc9922e5ac4089b82ce3c4e0b72, type: 3}
+      propertyPath: m_Size.y
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 8952410042083589803, guid: 8a0f7bc9922e5ac4089b82ce3c4e0b72, type: 3}
       propertyPath: m_Name

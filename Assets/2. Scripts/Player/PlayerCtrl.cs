@@ -25,7 +25,7 @@ public class PlayerCtrl : MonoBehaviour
     // private 변수
     private PlayerMove playerMove;
     private PlayerAttack playerAttack;
-    private bool canMove;
+    public bool canMove;
     
     // 무적 관련
     private bool invincible;
@@ -77,18 +77,17 @@ public class PlayerCtrl : MonoBehaviour
 
         // 모듈 클래스 함수 호출
         playerMove.Jump();
-        // playerMove.HorizontalMove();
-        playerMove.SlopeCheck();
-
         playerAttack.MeleeAttack();
     }
 
     private void FixedUpdate()
     {
+        // 이동 관련 모듈 함수는 여기서 처리
         if(canMove == false)
         {
             return;
         }
+        // playerMove.SlopeCheck();
         playerMove.HorizontalMove();
     }
 
