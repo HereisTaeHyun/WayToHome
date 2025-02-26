@@ -23,7 +23,6 @@ public class PlayerMove : MonoBehaviour
     private Vector2 newVelocity;
     private float jumpSpeed = 5.0f;
     private int jumpCount = 0;
-    private float groundDistance = 0.1f;
 
     private Animator playerAnim;
 
@@ -32,7 +31,6 @@ public class PlayerMove : MonoBehaviour
     private Vector2 collSize;
     [SerializeField] private float slopeCheckDistance = 0.5f;
     private Vector2 slopeNormalPerp;
-    private float slopeAngle;
     [SerializeField] private LayerMask groundLayer;
 
     // 애니메이션 읽기 해시
@@ -137,7 +135,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    // 점프에 필요한 메서드들
+    // 점프 및 Ground 체크에 필요한 메서드들
     // Ground에 접촉하면 JumpCount 초기화
     private void OnCollisionEnter2D(Collision2D other)
     {
