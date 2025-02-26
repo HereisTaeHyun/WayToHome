@@ -20,16 +20,20 @@ public class PlayerMove : MonoBehaviour
     // private 변수
     private Rigidbody2D rb;
     private PlayerCtrl playerCtrl;
+
     private Vector2 newVelocity;
     private float jumpSpeed = 5.0f;
     private int jumpCount = 0;
+
     private Animator playerAnim;
+
     private PhysicsMaterial2D physicsMaterial2D;
     private CapsuleCollider2D coll2D;
     private Vector2 collSize;
-    private float slopeCheckDistance = 1.0f;
+    private float slopeCheckDistance = 0.5f;
     private float slopeDownAngle;
     private float slopeDownAngleOld;
+    private float slopeSideAngle;
     private Vector2 slopeNormalPerp;
     [SerializeField] private LayerMask groundLayer;
 
@@ -124,8 +128,23 @@ public class PlayerMove : MonoBehaviour
     }
     private void HorizontalSlopeCheck(Vector2 checkPos)
     {
-        // RaycastHit2D hitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, groundLayer);
-        // RaycastHit2D hitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, groundLayer);
+        RaycastHit2D hitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, groundLayer);
+        RaycastHit2D hitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, groundLayer);
+        if(hitFront)
+        {
+            isSlope = true;
+            slopeSideAngle = Vector2.Angle(hitFront.normal, Vector2.up);
+        }
+        else if(hitBack)
+        {
+            isSlope = true;
+            slopeSideAngle = Vector2.Angle(hitBack.normal, Vector2.up);
+        }
+        else
+        {
+            slopeSideAngle = 0.0f;
+            isSlope = false;
+        }
     }
     private void VerticalSlopeCheck(Vector2 checkPos)
     {

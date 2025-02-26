@@ -78,6 +78,7 @@ public class PlayerCtrl : MonoBehaviour
         // 모듈 클래스 함수 호출
         playerMove.Jump();
         // playerMove.HorizontalMove();
+        playerMove.SlopeCheck();
 
         playerAttack.MeleeAttack();
     }
@@ -88,7 +89,6 @@ public class PlayerCtrl : MonoBehaviour
         {
             return;
         }
-        playerMove.SlopeCheck();
         playerMove.HorizontalMove();
     }
 
