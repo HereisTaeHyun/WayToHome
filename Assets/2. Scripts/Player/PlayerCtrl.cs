@@ -88,6 +88,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             return;
         }
+        playerMove.SlopeCheck();
         playerMove.HorizontalMove();
     }
 

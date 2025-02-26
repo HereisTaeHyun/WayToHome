@@ -1,4 +1,5 @@
 using Mono.Cecil.Cil;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
@@ -12,16 +13,24 @@ public class PlayerMove : MonoBehaviour
     // 아래들은 디버프 및 아이템에 의한 증감 있음 or 예정
     public float moveSpeed = 7.0f;
     public int maxJump = 1;
+    public bool isGround;
+    public bool isJump;
+    public bool isSlope;
 
     // private 변수
     private Rigidbody2D rb;
     private PlayerCtrl playerCtrl;
+    private Vector2 newVelocity;
     private float jumpSpeed = 5.0f;
     private int jumpCount = 0;
     private Animator playerAnim;
     private PhysicsMaterial2D physicsMaterial2D;
-    private Collider2D coll2D;
-    private float rayLength = 0.5f;
+    private CapsuleCollider2D coll2D;
+    private Vector2 collSize;
+    private float slopeCheckDistance = 1.0f;
+    private float slopeDownAngle;
+    private float slopeDownAngleOld;
+    private Vector2 slopeNormalPerp;
     [SerializeField] private LayerMask groundLayer;
 
     // 애니메이션 읽기 해시
@@ -44,7 +53,9 @@ public class PlayerMove : MonoBehaviour
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
         physicsMaterial2D = new PhysicsMaterial2D();
-        coll2D = GetComponent<Collider2D>();
+
+        coll2D = GetComponent<CapsuleCollider2D>();
+        collSize = coll2D.size;
     }
 
     // 좌우 이동 메서드
@@ -80,15 +91,60 @@ public class PlayerMove : MonoBehaviour
             coll2D.sharedMaterial = physicsMaterial2D;
         }
 
-        // 경사 이동인지 알기 위해 이동 각도 구함
-        RaycastHit2D hit2D = Physics2D.Raycast(transform.position, Vector2.down, rayLength, groundLayer);
-        Debug.DrawRay(transform.position, Vector2.down * rayLength, Color.red);
-
         // 실제 이동 함수
         if(Input.GetButton("Horizontal"))
         {
             playerAnim.SetFloat(dirHash, moveDir.x);
-            rb.linearVelocity = new Vector2(move.x * moveSpeed, rb.linearVelocity.y);
+
+            if(isGround == true && isSlope == false)
+            {
+                newVelocity.Set(move.x * moveSpeed, 0.0f);
+                rb.linearVelocity = newVelocity;
+            }
+            else if(isGround == true && isSlope == true)
+            {
+                newVelocity.Set(-move.x * moveSpeed * slopeNormalPerp.x, -move.x * moveSpeed * slopeNormalPerp.y);
+                rb.linearVelocity = newVelocity;
+            }
+            else if(isGround == false)
+            {
+                newVelocity.Set(move.x * moveSpeed, rb.linearVelocity.y);
+                rb.linearVelocity = newVelocity;
+            }
+        }
+    }
+
+    // 경사 체크 메서드
+    public void SlopeCheck()
+    {  
+        // 경사 이동인지 알기 위해 이동 각도 구함
+        Vector2 checkPos = transform.position - new Vector3(0.0f, collSize.y / 2);
+        VerticalSlopeCheck(checkPos);
+        HorizontalSlopeCheck(checkPos);
+    }
+    private void HorizontalSlopeCheck(Vector2 checkPos)
+    {
+        RaycastHit2D hitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, groundLayer);
+        RaycastHit2D hitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, groundLayer);
+    }
+    private void VerticalSlopeCheck(Vector2 checkPos)
+    {
+        RaycastHit2D hit2D = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, groundLayer);
+        if(hit2D)
+        {
+            // 수직 2D 벡터 반환 받기
+            slopeNormalPerp = Vector2.Perpendicular(hit2D.normal).normalized;
+            slopeDownAngle = Vector2.Angle(hit2D.normal, Vector2.up);
+
+            if(slopeDownAngle != slopeDownAngleOld)
+            {
+                isSlope = true;
+            }
+
+            slopeDownAngleOld = slopeDownAngle;
+
+            Debug.DrawRay(hit2D.point, slopeNormalPerp, Color.red);
+            Debug.DrawRay(hit2D.point, hit2D.normal, Color.green);
         }
     }
 
@@ -98,7 +154,9 @@ public class PlayerMove : MonoBehaviour
     {
         if(other.collider.CompareTag("Ground"))
         {
+            isGround = true;
             jumpCount = 0;
+            isJump = false;
         }   
     }
     public void Jump()
@@ -106,8 +164,10 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetButtonDown("Jump") && jumpCount < maxJump) // W에 할당된 "Jump"를 눌러 maxJump까지 점프가능
         {
             // jumpCount 추가 후 jump
+            isJump = true;
             jumpCount += 1;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
+            isGround = false;
 
             playerAnim.SetTrigger(jumpHash);
         }
