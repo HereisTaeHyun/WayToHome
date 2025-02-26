@@ -57,7 +57,7 @@ public class PlayerMove : MonoBehaviour
         Vector2 moveDir = playerCtrl.MoveDirSet(move);
 
         // 이동 방향이 left 쪽이면 Player가 왼쪽으로 보기
-        playerAnim.SetFloat(speedHash, move.magnitude);
+        playerAnim.SetFloat(speedHash, move.x);
 
         // player state가 idle인지 move인지 h에 따라 변화
         if(h != 0)
@@ -69,7 +69,7 @@ public class PlayerMove : MonoBehaviour
             playerCtrl.state = PlayerCtrl.State.Idle;
         }
 
-        // 정지 상태이면 마찰력 증가, 그래야 경사에서 안미끄러짐
+        // 정지 상태이면 마찰력 증가, 그래야 멈출때랑 경사에서 안미끄러짐
         if(playerCtrl.state == PlayerCtrl.State.Idle)
         {
             physicsMaterial2D.friction = 5.0f;
@@ -85,7 +85,7 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetButton("Horizontal"))
         {
             playerAnim.SetFloat(dirHash, moveDir.x);
-            rb.linearVelocity = new Vector2(h * moveSpeed, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(move.x * moveSpeed, rb.linearVelocity.y);
         }
     }
 
