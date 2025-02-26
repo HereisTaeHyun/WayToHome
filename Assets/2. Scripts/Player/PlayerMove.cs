@@ -19,12 +19,10 @@ public class PlayerMove : MonoBehaviour
     private float jumpSpeed = 5.0f;
     private int jumpCount = 0;
     private Animator playerAnim;
-    private SpriteRenderer spriteRenderer;
-    private Vector2 jumpDir = new Vector2(0, 1);
     private PhysicsMaterial2D physicsMaterial2D;
     private Collider2D coll2D;
     private float rayLength = 0.5f;
-    [SerializeField] private LayerMask ground;
+    [SerializeField] private LayerMask groundLayer;
 
     // 애니메이션 읽기 해시
     private readonly int speedHash = Animator.StringToHash("Speed");
@@ -43,7 +41,6 @@ public class PlayerMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerCtrl = GetComponent<PlayerCtrl>();
         playerAnim = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
         physicsMaterial2D = new PhysicsMaterial2D();
@@ -84,8 +81,8 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 경사 이동인지 알기 위해 이동 각도 구함
-        RaycastHit2D hit2D = Physics2D.Raycast(transform.position, Vector2.right * moveDir, rayLength, ground);
-        Debug.DrawRay(transform.position, Vector2.right * moveDir * rayLength, Color.red);
+        RaycastHit2D hit2D = Physics2D.Raycast(transform.position, Vector2.down, rayLength, groundLayer);
+        Debug.DrawRay(transform.position, Vector2.down * rayLength, Color.red);
 
         // 실제 이동 함수
         if(Input.GetButton("Horizontal"))
