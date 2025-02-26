@@ -29,8 +29,9 @@ public class PlayerMove : MonoBehaviour
     private PhysicsMaterial2D physicsMaterial2D;
     private CapsuleCollider2D coll2D;
     private Vector2 collSize;
-    [SerializeField] private float slopeCheckDistance = 0.2f;
+    [SerializeField] private float slopeCheckDistance = 0.5f;
     private Vector2 slopeNormalPerp;
+    private float slopeAngle;
     [SerializeField] private LayerMask groundLayer;
 
     // 애니메이션 읽기 해시
@@ -93,6 +94,7 @@ public class PlayerMove : MonoBehaviour
 
         // 경사 이동인지 알기 위해 이동 각도 구함
         Vector2 checkPos = transform.position - new Vector3(0.0f, collSize.y / 2);
+
         // x 이동 방향에 따라 조금 더 앞에서 스캐닝, 그래야 걸림 적어짐
         if(move.x > 0)
         {
