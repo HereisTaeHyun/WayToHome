@@ -49,6 +49,7 @@ public class PlayerAttack : MonoBehaviour
         {
             // 공격시 해당 위치에 정지, 제어권 반환은 코루틴 끝날때
             playerCtrl.canMove = false;
+            rb.linearVelocity = Vector2.zero;
             rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 
             // 공격 방향에 따른 attackCollier 위치 결정

@@ -147,6 +147,13 @@ public class PlayerMove : MonoBehaviour
             isJump = false;
         }   
     }
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.collider.CompareTag("Ground"))
+        {
+            isGround = false; // 땅에서 떨어지면 isGround = false 설정
+        }
+    }
     public void Jump()
     {
         if(Input.GetButtonDown("Jump") && jumpCount < maxJump) // W에 할당된 "Jump"를 눌러 maxJump까지 점프가능
