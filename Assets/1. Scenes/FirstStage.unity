@@ -2999,10 +2999,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingEye (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4279368095460162477, guid: fd51a922778912e46adfe3169c6f3d03, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8548275294064360718, guid: fd51a922778912e46adfe3169c6f3d03, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.85
@@ -3235,17 +3231,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingEye
       objectReference: {fileID: 0}
-    - target: {fileID: 4279368095460162477, guid: fd51a922778912e46adfe3169c6f3d03, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8548275294064360718, guid: fd51a922778912e46adfe3169c6f3d03, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.96
+      value: 8.71
       objectReference: {fileID: 0}
     - target: {fileID: 8548275294064360718, guid: fd51a922778912e46adfe3169c6f3d03, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.07
+      value: -1.61
       objectReference: {fileID: 0}
     - target: {fileID: 8548275294064360718, guid: fd51a922778912e46adfe3169c6f3d03, type: 3}
       propertyPath: m_LocalPosition.z

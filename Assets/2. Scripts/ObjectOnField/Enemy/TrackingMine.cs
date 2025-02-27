@@ -1,11 +1,11 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class TrackingMine : MonoBehaviour
 {
-    // 인근을 스캐닝하여 가까이 가서 폭파하는 타입의 적 엔티티
-    // 이후 가까이 간 후 폭파하는 타입, 가까이 간 후 사격하는 타입으로 구분 예정
+    // 인근을 스캐닝하여 가까이 가서 공격하는 타입의 적 엔티티
 
     // public 변수
 
@@ -20,53 +20,61 @@ public class TrackingMine : MonoBehaviour
     private PlayerMove playerMove;
     private Rigidbody2D playerRb;
 
+    private readonly int attackHash = Animator.StringToHash("Attack");
+
     void Start()
     {
         enemyCtrl = GetComponent<EnemyCtrl>();
         damage = enemyCtrl.readDamage;
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if(other != null)
         {
-            playerCtrl = other.collider.GetComponent<PlayerCtrl>();
-            playerMove = other.collider.GetComponent<PlayerMove>();
-            playerRb = other.collider.GetComponent<Rigidbody2D>();
-
-            // 플레이어가 무적이 아니라면 폭파
-            if(playerCtrl.readInvincible != true)
+            if(other.gameObject.CompareTag("Player"))
             {
-                Explosion(other);
-                Destroy(gameObject);
+                playerCtrl = other.GetComponent<PlayerCtrl>();
+                playerMove = other.GetComponent<PlayerMove>();
+                playerRb = other.GetComponent<Rigidbody2D>();
+
+                // 플레이어가 무적이 아니라면 공격
+                if(playerCtrl.readInvincible != true)
+                {
+                    enemyCtrl.enemyAnim.SetTrigger(attackHash);
+                    StartCoroutine(Attack(other));
+                }
             }
         }
     }
 
-    private void Explosion(Collision2D target)
+    IEnumerator Attack(Collider2D target)
     {
+        yield return new WaitForSeconds(0.1f);
         // 에셋 찾으면 파티클 Instantiate 후 destroy 추가 필요, 아직 에셋은 안찾았음
-        // 폭발음은 Destroy 탓에 고민 중, AudioPlayer 게임 오브젝트를 만들고 안에 TrackingMine을 두는 방식 생각 중
 
-        // Player가 Mine의 왼쪽 or 오른쪽 계산 후 폭파력에 따라 밀려남
-        Vector2 playerMineVector = target.transform.position - transform.position;
-        if (playerMove.readIsGround)
-        {
-            // 땅에 있으면 수평으로 밀기
-            playerMineVector = (playerMineVector.x >= 0) ? new Vector2(1, 0) : new Vector2(-1, 0);
-            playerRb.linearVelocity = Vector2.zero;
-            playerRb.AddForce(playerMineVector * EXP_POWER, ForceMode2D.Impulse);
-        }
-        else if (playerMove.readIsJump)
-        {
-            // 점프 중이면 대각선 위로 밀기, 공중은 friction 없어서 폭파력 너무 커지기 줄여서 적용
-            playerMineVector = (playerMineVector.x >= 0) ? new Vector2(1, 1) : new Vector2(-1, 1);
-            playerRb.linearVelocity = Vector2.zero;
-            playerRb.AddForce(playerMineVector * (EXP_POWER / 2), ForceMode2D.Impulse);
-        }
+        if(target != null)
+        {       
+            // Player가 Mine의 왼쪽 or 오른쪽 계산 후 폭파력에 따라 밀려남
+            Vector2 playerMineVector = target.transform.position - transform.position;
+            if (playerMove.readIsGround)
+            {
+                // 땅에 있으면 수평으로 밀기
+                playerMineVector = (playerMineVector.x >= 0) ? new Vector2(1, 0) : new Vector2(-1, 0);
+                playerRb.linearVelocity = Vector2.zero;
+                playerRb.AddForce(playerMineVector * EXP_POWER, ForceMode2D.Impulse);
+            }
+            else if (playerMove.readIsJump)
+            {
+                // 점프 중이면 대각선 위로 밀기, 공중은 friction 없어서 폭파력 너무 커지기 줄여서 적용
+                playerMineVector = (playerMineVector.x >= 0) ? new Vector2(1, 1) : new Vector2(-1, 1);
+                playerRb.linearVelocity = Vector2.zero;
+                playerRb.AddForce(playerMineVector * (EXP_POWER / 2), ForceMode2D.Impulse);
+            }
 
-        // Player에게 데미지 가해 및 1.5초간 스턴
-        playerCtrl.ChangeHP(damage);
-        playerCtrl.GetDebuff(PlayerCtrl.DebuffType.Stun, 1.5f);
+            // Player에게 데미지 가해 및 1.5초간 스턴
+            playerCtrl.ChangeHP(damage);
+            playerCtrl.GetDebuff(PlayerCtrl.DebuffType.Stun, 1.5f);
+        }
     }
 }

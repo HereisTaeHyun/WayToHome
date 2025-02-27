@@ -8,11 +8,11 @@ public class EnemyCtrl : MonoBehaviour
 
     // public 변수
     public GameObject[] dropItem;
+    public Animator enemyAnim;
 
     // private 변수
     private Rigidbody2D rb2D;
     private Transform target;
-    private Animator enemyAnim;
     private bool canMove;
     private static float ENEMY_PUSH_POWER = 5.0f;
     private float scanningRadius = 10.0f;
