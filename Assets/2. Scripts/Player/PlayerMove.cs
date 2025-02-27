@@ -13,8 +13,6 @@ public class PlayerMove : MonoBehaviour
     // 아래들은 디버프 및 아이템에 의한 증감 있음 or 예정
     public float moveSpeed = 7.0f;
     public int maxJump = 1;
-    public bool isGround;
-    public bool isJump;
 
     // private 변수
     private Rigidbody2D rb;
@@ -39,6 +37,10 @@ public class PlayerMove : MonoBehaviour
     private readonly int jumpHash = Animator.StringToHash("Jump");
 
     // 다른 객체에서 읽기 필요한 변수
+    private bool isGround;
+    public bool readIsGround {get {return isGround;}}
+    private bool isJump;
+    public bool readIsJump {get {return isJump;}}
     private float originSpeed = 7.0f;
     public float readOriginSpeed {get {return originSpeed;}}
     private float debuffedSpeed; // origin * 0.5f

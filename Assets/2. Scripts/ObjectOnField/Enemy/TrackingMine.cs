@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class TrackingMine : MonoBehaviour
@@ -9,13 +10,14 @@ public class TrackingMine : MonoBehaviour
     // public 변수
 
     // private 변수
-    private static float EXP_POWER = 16.0f;
+    private static float EXP_POWER = 12.0f;
     // damage는 EnemyCtrl 설정 값 이용
     private float damage;
     private EnemyCtrl enemyCtrl;
 
     // Player에 영향 미치는 부분
     private PlayerCtrl playerCtrl;
+    private PlayerMove playerMove;
     private Rigidbody2D playerRb;
 
     void Start()
@@ -29,6 +31,7 @@ public class TrackingMine : MonoBehaviour
         if(other.gameObject.CompareTag("Player"))
         {
             playerCtrl = other.collider.GetComponent<PlayerCtrl>();
+            playerMove = other.collider.GetComponent<PlayerMove>();
             playerRb = other.collider.GetComponent<Rigidbody2D>();
 
             // 플레이어가 무적이 아니라면 폭파
@@ -47,19 +50,23 @@ public class TrackingMine : MonoBehaviour
 
         // Player가 Mine의 왼쪽 or 오른쪽 계산 후 폭파력에 따라 밀려남
         Vector2 playerMineVector = target.transform.position - transform.position;
-        if(playerMineVector.x >= 0)
+        if (playerMove.readIsGround)
         {
-            playerMineVector = new Vector2(1, 0);
+            // 땅에 있으면 수평으로 밀기
+            playerMineVector = (playerMineVector.x >= 0) ? new Vector2(1, 0) : new Vector2(-1, 0);
+            playerRb.linearVelocity = Vector2.zero;
+            playerRb.AddForce(playerMineVector * EXP_POWER, ForceMode2D.Impulse);
         }
-        else
+        else if (playerMove.readIsJump)
         {
-            playerMineVector = new Vector2(-1, 0);
+            // 점프 중이면 대각선 위로 밀기, 공중은 friction 없어서 폭파력 너무 커지기 줄여서 적용
+            playerMineVector = (playerMineVector.x >= 0) ? new Vector2(1, 1) : new Vector2(-1, 1);
+            playerRb.linearVelocity = Vector2.zero;
+            playerRb.AddForce(playerMineVector * (EXP_POWER / 2), ForceMode2D.Impulse);
         }
-        playerRb.AddForce(playerMineVector * EXP_POWER, ForceMode2D.Impulse);
 
-        
         // Player에게 데미지 가해 및 1.5초간 스턴
         playerCtrl.ChangeHP(damage);
-        playerCtrl.GetDebuff(PlayerCtrl.DebuffType.Stun, 1.0f);
+        playerCtrl.GetDebuff(PlayerCtrl.DebuffType.Stun, 1.5f);
     }
 }
