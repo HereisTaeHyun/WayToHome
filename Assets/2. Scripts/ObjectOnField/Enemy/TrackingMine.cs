@@ -9,7 +9,7 @@ public class TrackingMine : MonoBehaviour
     // public 변수
 
     // private 변수
-    private static float EXP_POWER = 8.0f;
+    private static float EXP_POWER = 16.0f;
     // damage는 EnemyCtrl 설정 값 이용
     private float damage;
     private EnemyCtrl enemyCtrl;
