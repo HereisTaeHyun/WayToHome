@@ -49,17 +49,17 @@ public class TrackingMine : MonoBehaviour
         Vector2 playerMineVector = target.transform.position - transform.position;
         if(playerMineVector.x >= 0)
         {
-            playerMineVector = new Vector2(1, 1);
+            playerMineVector = new Vector2(1, 0);
         }
         else
         {
-            playerMineVector = new Vector2(-1, 1);
+            playerMineVector = new Vector2(-1, 0);
         }
         playerRb.AddForce(playerMineVector * EXP_POWER, ForceMode2D.Impulse);
 
         
         // Player에게 데미지 가해 및 1.5초간 스턴
         playerCtrl.ChangeHP(damage);
-        playerCtrl.GetDebuff(PlayerCtrl.DebuffType.Stun, 1.5f);
+        playerCtrl.GetDebuff(PlayerCtrl.DebuffType.Stun, 1.0f);
     }
 }
