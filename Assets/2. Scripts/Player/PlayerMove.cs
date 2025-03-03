@@ -148,6 +148,7 @@ public class PlayerMove : MonoBehaviour
             isJump = false;
         }  
     }
+
     // jumpCount가 있으며 Jump 입력 받으면
     public void Jump()
     {
