@@ -350,12 +350,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 7
   maxJump: 1
-  isGround: 0
-  isJump: 0
   slopeCheckDistance: 0.5
+  groundCheckDistance: 0.25
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  isGround: 0
+  isJump: 0
+  isSlope: 0
 --- !u!95 &3413060426356960647
 Animator:
   serializedVersion: 7

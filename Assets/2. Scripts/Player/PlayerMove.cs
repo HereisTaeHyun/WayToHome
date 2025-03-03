@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Mono.Cecil.Cil;
 using TMPro;
 using UnityEngine;
@@ -30,6 +32,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float slopeCheckDistance = 0.5f;
     private Vector2 slopeNormalPerp;
     private float slopeDownAngle;
+    private float slopeSideAngle;
     private float lastSlopeAngle;
     [SerializeField] private LayerMask groundLayer;
 
@@ -48,6 +51,7 @@ public class PlayerMove : MonoBehaviour
     public float readOriginSpeed {get {return originSpeed;}}
     private float debuffedSpeed; // origin * 0.5f
     public float readDebuffedSpeed {get {return debuffedSpeed;}}
+
 
 
     void Start()
@@ -99,6 +103,8 @@ public class PlayerMove : MonoBehaviour
         // 플레이어가 있는 Ground 상태를 알기 위해 스캐닝하는 위치
         Vector2 checkPos = transform.position - new Vector3(0.0f, collSize.y / 2);
 
+        // 이동에 필요한 정보 스캐닝
+        HorizontalSlopeCheck(checkPos);
         VerticalSlopeCheck(checkPos);
         // 실제 이동 함수
         if(Input.GetButton("Horizontal"))
@@ -122,6 +128,32 @@ public class PlayerMove : MonoBehaviour
                 rb.linearVelocity = newVelocity;
             }
         }
+    }
+
+    private void HorizontalSlopeCheck(Vector2 checkPos)
+    {
+        RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, groundLayer);
+        RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, groundLayer);
+
+        if (slopeHitFront)
+        {
+            isSlope = true;
+
+            slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+
+        }
+        else if (slopeHitBack)
+        {
+            isSlope = true;
+
+            slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+        }
+        else
+        {
+            slopeSideAngle = 0.0f;
+            isSlope = false;
+        }
+
     }
 
     // 경사 체크 메서드
@@ -158,9 +190,16 @@ public class PlayerMove : MonoBehaviour
             isJump = false;
         }  
     }
-
     private void OnCollisionExit2D(Collision2D other)
     {
+        if(other.collider.CompareTag("Ground"))
+        {
+            StartCoroutine(groundCheck(other));
+        }  
+    }
+    IEnumerator groundCheck(Collision2D other)
+    {
+        yield return new WaitForSeconds(0.05f);
         if(other.collider.CompareTag("Ground"))
         {
             isGround = false;
