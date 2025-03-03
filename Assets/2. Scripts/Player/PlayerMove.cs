@@ -29,6 +29,8 @@ public class PlayerMove : MonoBehaviour
     private Vector2 collSize;
     [SerializeField] private float slopeCheckDistance = 0.5f;
     private Vector2 slopeNormalPerp;
+    private float slopeDownAngle;
+    private float lastSlopeAngle;
     [SerializeField] private LayerMask groundLayer;
 
     // 애니메이션 읽기 해시
@@ -37,10 +39,11 @@ public class PlayerMove : MonoBehaviour
     private readonly int jumpHash = Animator.StringToHash("Jump");
 
     // 다른 객체에서 읽기 필요한 변수
-    private bool isGround;
+    [SerializeField] private bool isGround;
     public bool readIsGround {get {return isGround;}}
-    private bool isJump;
+    [SerializeField] private bool isJump;
     public bool readIsJump {get {return isJump;}}
+    [SerializeField] private bool isSlope;
     private float originSpeed = 7.0f;
     public float readOriginSpeed {get {return originSpeed;}}
     private float debuffedSpeed; // origin * 0.5f
@@ -95,25 +98,20 @@ public class PlayerMove : MonoBehaviour
 
         // 플레이어가 있는 Ground 상태를 알기 위해 스캐닝하는 위치
         Vector2 checkPos = transform.position - new Vector3(0.0f, collSize.y / 2);
-        // x 이동 방향에 따라 조금 더 앞에서 스캐닝, 그래야 모서리 걸림 현상 적어짐
-        if(move.x > 0)
-        {
-            checkPos.x += 0.14f;
-            VerticalSlopeCheck(checkPos);
-        }
-        else if(move.x < 0)
-        {
-            checkPos.x -= 0.14f;
-            VerticalSlopeCheck(checkPos);
-        }
 
+        VerticalSlopeCheck(checkPos);
         // 실제 이동 함수
         if(Input.GetButton("Horizontal"))
         {
             playerAnim.SetFloat(dirHash, moveDir.x);
 
             // Ground 위면 얻어진 수직 벡터 각도에 따라 이동, 아니면 그냥 이전 velocity에 따라 이동
-            if(isGround == true)
+            if(isGround == true && isSlope != true)
+            {
+                newVelocity.Set(move.x * moveSpeed, 0.0f);
+                rb.linearVelocity = newVelocity;
+            }
+            else if(isGround == true && isSlope == true)
             {
                 newVelocity.Set(-move.x * moveSpeed * slopeNormalPerp.x, -move.x * moveSpeed * slopeNormalPerp.y);
                 rb.linearVelocity = newVelocity;
@@ -133,7 +131,19 @@ public class PlayerMove : MonoBehaviour
         if(hit2D)
         {
             // 수직 2D 벡터 반환 받기
-            slopeNormalPerp = Vector2.Perpendicular(hit2D.normal).normalized;
+            slopeNormalPerp = Vector2.Perpendicular(hit2D.normal).normalized;            
+
+            slopeDownAngle = Vector2.Angle(hit2D.normal, Vector2.up);
+
+            if(slopeDownAngle != lastSlopeAngle)
+            {
+                isSlope = true;
+            }                       
+
+            lastSlopeAngle = slopeDownAngle;
+
+            Debug.DrawRay(hit2D.point, hit2D.normal, Color.green);
+            Debug.DrawRay(hit2D.point, slopeNormalPerp, Color.red);
         }
     }
 
@@ -146,6 +156,15 @@ public class PlayerMove : MonoBehaviour
             isGround = true;
             jumpCount = 0;
             isJump = false;
+        }  
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if(other.collider.CompareTag("Ground"))
+        {
+            isGround = false;
+            isJump = true;
         }  
     }
 
