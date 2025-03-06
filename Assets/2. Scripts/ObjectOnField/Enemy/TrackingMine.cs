@@ -41,7 +41,7 @@ public class TrackingMine : MonoBehaviour
                 // 플레이어가 무적이 아니라면 공격
                 if(playerCtrl.readInvincible != true)
                 {
-                    enemyCtrl.enemyAnim.SetTrigger(attackHash);
+                    enemyCtrl.readEnemyAnim.SetTrigger(attackHash);
                     StartCoroutine(Attack(other));
                 }
             }

@@ -8,13 +8,12 @@ public class EnemyCtrl : MonoBehaviour
 
     // public 변수
     public GameObject[] dropItem;
-    public Animator enemyAnim;
 
     // private 변수
     private Rigidbody2D rb2D;
     private Transform target;
     private bool canMove;
-    private static float ENEMY_PUSH_POWER = 5.0f;
+    [SerializeField] private float enemyPushPower;
     private float scanningRadius = 10.0f;
     [SerializeField] float MaxHP;
     [SerializeField] float currentHP;
@@ -24,6 +23,8 @@ public class EnemyCtrl : MonoBehaviour
     private readonly int hitTrigger = Animator.StringToHash("TakeHit");
 
     // 다른 객체에서 읽기 필요한 변수
+    private Animator enemyAnim;
+    public Animator readEnemyAnim {get {return enemyAnim;}}
     [SerializeField] private float damage;
     public float readDamage {get {return damage;}}
 
@@ -97,7 +98,7 @@ public class EnemyCtrl : MonoBehaviour
         enemyAnim.SetFloat(hitHash, hitVector.x);
 
         // 타격 받은 방향으로 밀려남
-        rb2D.AddForce(hitVector * ENEMY_PUSH_POWER, ForceMode2D.Impulse);
+        rb2D.AddForce(hitVector * enemyPushPower, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.5f);
         rb2D.linearVelocity = Vector2.zero;
         canMove = true;
