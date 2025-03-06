@@ -194,7 +194,10 @@ public class PlayerMove : MonoBehaviour
     {
         if(other.collider.CompareTag("Ground"))
         {
-            StartCoroutine(groundCheck(other));
+            if(gameObject.activeInHierarchy == true)
+            {
+                StartCoroutine(groundCheck(other));
+            }
         }  
     }
     IEnumerator groundCheck(Collision2D other)
