@@ -25,7 +25,7 @@ public class FlyingEyeCtrl : EnemyCtrl
             if(Vector2.Distance(transform.position, target.position) < scanningRadius)
             {
                 // 이동 방향 벡터 설정
-                Vector2 enemyMoveDir = DirSet(transform.position - target.transform.position);
+                Vector2 enemyMoveDir = DirSet(target.transform.position - transform.position);
                 anim.SetFloat("MoveDir", enemyMoveDir.x);
 
                 // 플레이어에게 이동

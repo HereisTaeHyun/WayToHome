@@ -25,7 +25,7 @@ public class GroundCtrl : EnemyCtrl
             // 플레이어가 scanningRadius 내부면 moveSpeed만큼씩 이동 시작
             if(Vector2.Distance(transform.position, target.position) < scanningRadius)
             {
-                Vector2 enemyMoveDir = DirSet(transform.position - target.transform.position);
+                Vector2 enemyMoveDir = DirSet(target.transform.position - transform.position);
                 anim.SetFloat("MoveDir", enemyMoveDir.x);
             }
         }
