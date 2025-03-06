@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 4977050891915789530}
   - component: {fileID: 3833993210369653011}
   - component: {fileID: 5949403634527922427}
-  - component: {fileID: 610501440547672302}
-  m_Layer: 0
+  - component: {fileID: 3606495316531286800}
+  m_Layer: 9
   m_Name: Mushroom
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   - {fileID: 539637585929383674, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
   - {fileID: 539637585929383674, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
   enemyPushPower: 0
+  stunTime: 0
   MaxHP: 5
   currentHP: 0
   moveSpeed: 5
@@ -159,9 +160,9 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &610501440547672302
-BoxCollider2D:
+  m_Constraints: 4
+--- !u!70 &3606495316531286800
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -194,15 +195,6 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.009478092, y: -0.32579255}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.5, y: 7.5}
-    newSize: {x: 5, y: 5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1.2044878, y: 2.014824}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.00000047683716, y: -0.39697993}
+  m_Size: {x: 1.1910028, y: 1.8252423}
+  m_Direction: 0

@@ -170,7 +170,8 @@ MonoBehaviour:
   dropItem:
   - {fileID: 539637585929383674, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
   - {fileID: 4498321679550260775, guid: d7a3d993a04b2674790cff4693ca9bc5, type: 3}
-  enemyAnim: {fileID: 0}
+  enemyPushPower: 5
+  stunTime: 0.5
   MaxHP: 2
   currentHP: 0
   moveSpeed: 5

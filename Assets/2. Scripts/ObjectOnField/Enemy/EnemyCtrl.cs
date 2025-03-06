@@ -14,6 +14,7 @@ public class EnemyCtrl : MonoBehaviour
     private Transform target;
     private bool canMove;
     [SerializeField] private float enemyPushPower;
+    [SerializeField] private float stunTime;
     private float scanningRadius = 10.0f;
     [SerializeField] float MaxHP;
     [SerializeField] float currentHP;
@@ -39,7 +40,7 @@ public class EnemyCtrl : MonoBehaviour
     }
 
     // 행동에 대한 메서드 넣을 예정
-    void Update()
+    void FixedUpdate()
     {
         if(canMove == false)
         {
@@ -61,7 +62,9 @@ public class EnemyCtrl : MonoBehaviour
                 enemyAnim.SetFloat("MoveDir", enemyMoveDir.x);
 
                 // 플레이어에게 이동
-                transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+                // transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+                Vector2 newPosition = Vector2.MoveTowards(rb2D.position, target.position, moveSpeed * Time.fixedDeltaTime);
+                rb2D.MovePosition(newPosition);
             }
         }
     }
@@ -99,7 +102,7 @@ public class EnemyCtrl : MonoBehaviour
 
         // 타격 받은 방향으로 밀려남
         rb2D.AddForce(hitVector * enemyPushPower, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(stunTime);
         rb2D.linearVelocity = Vector2.zero;
         canMove = true;
     }
