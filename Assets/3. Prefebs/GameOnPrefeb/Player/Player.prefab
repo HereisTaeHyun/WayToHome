@@ -322,6 +322,7 @@ MonoBehaviour:
   money: 0
   state: 0
   canMove: 0
+  graveStone: {fileID: 3894529209947948738, guid: 8d3f9a110a49f7c498ca902310d02ee4, type: 3}
 --- !u!114 &8260205561483300568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +352,6 @@ MonoBehaviour:
   moveSpeed: 7
   maxJump: 1
   slopeCheckDistance: 0.5
-  groundCheckDistance: 0.25
   groundLayer:
     serializedVersion: 2
     m_Bits: 64

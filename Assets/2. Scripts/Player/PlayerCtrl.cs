@@ -26,6 +26,7 @@ public class PlayerCtrl : MonoBehaviour
     private PlayerMove playerMove;
     private PlayerAttack playerAttack;
     public bool canMove;
+    [SerializeField] private GameObject graveStone;
     
     // 무적 관련
     private bool invincible;
@@ -119,6 +120,7 @@ public class PlayerCtrl : MonoBehaviour
     // 플레이어 사망, 현재는 임시로 Destroy만 사용 중, 이후 anim, audio 등 추가 예정
     private void PlayerDie()
     {
+        Instantiate(graveStone, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 
