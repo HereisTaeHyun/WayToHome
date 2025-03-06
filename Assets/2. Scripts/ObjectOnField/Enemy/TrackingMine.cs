@@ -13,7 +13,7 @@ public class TrackingMine : MonoBehaviour
     private static float EXP_POWER = 12.0f;
     // damage는 EnemyCtrl 설정 값 이용
     private float damage;
-    private EnemyCtrl enemyCtrl;
+    private FlyingEyeCtrl flyingEyeCtrl;
 
     // Player에 영향 미치는 부분
     private PlayerCtrl playerCtrl;
@@ -24,8 +24,8 @@ public class TrackingMine : MonoBehaviour
 
     void Start()
     {
-        enemyCtrl = GetComponent<EnemyCtrl>();
-        damage = enemyCtrl.readDamage;
+        flyingEyeCtrl = GetComponent<FlyingEyeCtrl>();
+        damage = flyingEyeCtrl.readDamage;
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -41,7 +41,7 @@ public class TrackingMine : MonoBehaviour
                 // 플레이어가 무적이 아니라면 공격
                 if(playerCtrl.readInvincible != true)
                 {
-                    enemyCtrl.readEnemyAnim.SetTrigger(attackHash);
+                    flyingEyeCtrl.readAnim.SetTrigger(attackHash);
                     StartCoroutine(Attack(other));
                 }
             }
