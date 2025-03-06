@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1366614529401790963}
   - component: {fileID: 3751070820304717333}
   - component: {fileID: 5783092075979564632}
-  - component: {fileID: 1959779309889854907}
   - component: {fileID: 8783567242914944796}
   - component: {fileID: 3587413510655383251}
+  - component: {fileID: 1959779309889854907}
   m_Layer: 9
   m_Name: FlyingEye
   m_TagString: Enemy
@@ -155,18 +155,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1959779309889854907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8385112262749564439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff8e5caa6968c0b42b0e6dda48054edb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &8783567242914944796
 Animator:
   serializedVersion: 7
@@ -210,3 +198,15 @@ MonoBehaviour:
   currentHP: 0
   moveSpeed: 5
   damage: -2
+--- !u!114 &1959779309889854907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8385112262749564439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8e5caa6968c0b42b0e6dda48054edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
