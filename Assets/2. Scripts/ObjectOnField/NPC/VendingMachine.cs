@@ -17,12 +17,15 @@ public class VendingMachine : MonoBehaviour
     [SerializeField] private int[] itemPrices;
     private Dictionary<GameObject, int> itemInformation = new Dictionary<GameObject, int>(); // 판매품, 가격 받는 딕셔너리
     private int useCount;
+    private GameObject itemSpawnPoint;
     private PlayerCtrl playerCtrl; // 소지금 체크에 필요
     
     void Start()
     {
         vendingUI.SetActive(false);
         useCount = 0;
+        itemSpawnPoint = transform.Find("ItemSpawnPoint").gameObject;
+
         // 판매 아이템 정보 딕셔너리 형성 sellingItem이 Key, itemPrices가 value
         for(int i = 0; i < sellingItems.Length; i++)
         {
@@ -70,7 +73,7 @@ public class VendingMachine : MonoBehaviour
             {
                 playerCtrl.money -= itemPrice;
                 useCount += 1;
-                Instantiate(buyingItem, transform.position, transform.rotation);
+                Instantiate(buyingItem, itemSpawnPoint.transform.position, itemSpawnPoint.transform.rotation);
                 Debug.Log($"잔액 : {playerCtrl.money}");
             }
             else
