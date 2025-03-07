@@ -4,6 +4,7 @@ using System.Collections;
 public class GroundCtrl : EnemyCtrl
 {
     private bool isMove;
+    private Vector2 newVelocity;
     protected readonly int moveOnHash = Animator.StringToHash("OnMove");
     void Awake()
     {
@@ -30,37 +31,36 @@ public class GroundCtrl : EnemyCtrl
             {
                 Vector2 enemyMoveDir = DirSet(target.transform.position - transform.position);
                 isMove = true;
-                anim.SetBool(moveOnHash, true);
+
+                newVelocity.Set(enemyMoveDir.x * moveSpeed, rb2D.linearVelocity.y);
+                rb2D.linearVelocity = newVelocity;
+                
+                anim.SetBool(moveOnHash, isMove);
                 anim.SetFloat("MoveDir", enemyMoveDir.x);
             }
             else
             {
-                anim.SetBool(moveOnHash, false);
+                isMove = false;
+                anim.SetBool(moveOnHash, isMove);
             }
         }
     }
 
-    // HP 변경 처리 (데미지 적용)
+    // HP 변경 처리
     public override void ChangeHP(float value)
     {
-        base.ChangeHP(value);
-    }
+        currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
 
-    // 적이 피격당했을 때
-    protected override IEnumerator EnemyGetHit()
-    {
-        canMove = false;
+        // 타격 벡터 계산 및 anim 재생
         Vector2 hitVector =  DirSet(target.transform.position - transform.position);
-
-        // 타격에 따른 애니메이션 재생
         anim.SetTrigger(hitTrigger);
         anim.SetFloat(hitHash, hitVector.x);
 
-        // 타격 받은 방향으로 밀려남
-        rb2D.AddForce(hitVector * enemyPushPower, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(stunTime);
-        rb2D.linearVelocity = Vector2.zero;
-        canMove = true;
+        // 체력 0 이하면 사망처리
+        if (currentHP <= 0)
+        {
+            EnemyDie();
+        }
     }
 
     // 사망 처리
