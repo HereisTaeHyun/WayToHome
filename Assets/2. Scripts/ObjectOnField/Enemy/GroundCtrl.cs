@@ -3,9 +3,12 @@ using System.Collections;
 
 public class GroundCtrl : EnemyCtrl
 {
+    private bool isMove;
+    protected readonly int moveOnHash = Animator.StringToHash("OnMove");
     void Awake()
     {
         Init();
+        isMove = false;
     }
 
     
@@ -26,7 +29,13 @@ public class GroundCtrl : EnemyCtrl
             if(Vector2.Distance(transform.position, target.position) < scanningRadius)
             {
                 Vector2 enemyMoveDir = DirSet(target.transform.position - transform.position);
+                isMove = true;
+                anim.SetBool(moveOnHash, true);
                 anim.SetFloat("MoveDir", enemyMoveDir.x);
+            }
+            else
+            {
+                anim.SetBool(moveOnHash, false);
             }
         }
     }
@@ -41,7 +50,7 @@ public class GroundCtrl : EnemyCtrl
     protected override IEnumerator EnemyGetHit()
     {
         canMove = false;
-        Vector2 hitVector =  DirSet(transform.position - target.transform.position);
+        Vector2 hitVector =  DirSet(target.transform.position - transform.position);
 
         // 타격에 따른 애니메이션 재생
         anim.SetTrigger(hitTrigger);
