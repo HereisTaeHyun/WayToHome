@@ -7,6 +7,7 @@ public class PlayerCtrl : MonoBehaviour
     // 테스트장에서는 gravity scale을 1 썼는대 너무 가벼움, 실제 게임 필드 설치는 gravity scale = 2를 바탕으로 세팅 및 수정할 것
 
     // public 변수
+#region public
     public float MaxHP = 10.0f;
     public float currentHP;
     public int money = 0;
@@ -22,7 +23,9 @@ public class PlayerCtrl : MonoBehaviour
         Stun,
         Slow,
     }
+#endregion
 
+#region private
     // private 변수
     private PlayerMove playerMove;
     private PlayerAttack playerAttack;
@@ -39,6 +42,7 @@ public class PlayerCtrl : MonoBehaviour
 
     // 디버프 관련(스턴, 슬로우 생각 중)
     private float debuffTimer;
+#endregion
 
     void Awake()
     {

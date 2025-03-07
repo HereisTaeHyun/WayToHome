@@ -16,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 7.0f;
     public int maxJump = 1;
 
+#region private
     // private 변수
     private Rigidbody2D rb;
     private PlayerCtrl playerCtrl;
@@ -51,7 +52,7 @@ public class PlayerMove : MonoBehaviour
     public float readOriginSpeed {get {return originSpeed;}}
     private float debuffedSpeed; // origin * 0.5f
     public float readDebuffedSpeed {get {return debuffedSpeed;}}
-
+#endregion
 
 
     void Start()
@@ -67,6 +68,7 @@ public class PlayerMove : MonoBehaviour
         collSize = coll2D.size;
     }
 
+#region HorizontalMove
     // 좌우 이동 메서드
     public void HorizontalMove()
     {
@@ -129,7 +131,9 @@ public class PlayerMove : MonoBehaviour
             }
         }
     }
+#endregion
 
+#region slopeChecker
     private void HorizontalSlopeCheck(Vector2 checkPos)
     {
         RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, groundLayer);
@@ -155,7 +159,6 @@ public class PlayerMove : MonoBehaviour
         }
 
     }
-
     // 경사 체크 메서드
     private void VerticalSlopeCheck(Vector2 checkPos)
     {
@@ -178,7 +181,9 @@ public class PlayerMove : MonoBehaviour
             Debug.DrawRay(hit2D.point, slopeNormalPerp, Color.red);
         }
     }
+# endregion
 
+#region JumpGround
     // 점프 및 Ground 체크에 필요한 메서드들
     // Ground에 접촉하면 JumpCount 초기화
     private void OnCollisionEnter2D(Collision2D other)
@@ -196,11 +201,11 @@ public class PlayerMove : MonoBehaviour
         {
             if(gameObject.activeInHierarchy == true)
             {
-                StartCoroutine(groundCheck(other));
+                StartCoroutine(GroundCheck(other));
             }
         }  
     }
-    IEnumerator groundCheck(Collision2D other)
+    IEnumerator GroundCheck(Collision2D other)
     {
         yield return new WaitForSeconds(0.05f);
         if(other.collider.CompareTag("Ground"))
@@ -224,4 +229,5 @@ public class PlayerMove : MonoBehaviour
             playerAnim.SetTrigger(jumpHash);
         }
     }
+#endregion
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerAttack : MeleeAttck
 {
     // 공격에 관한 메서드 모음
-    // 근접 공격, 원거리 직선 공격, 원거리 포물선 공격 계획
 
     // public 변수
 

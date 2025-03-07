@@ -9,6 +9,7 @@ public class EnemyCtrl : MonoBehaviour
     public GameObject[] dropItem;
 
     // protected 변수
+#region private
     protected Rigidbody2D rb2D;
     protected Transform target;
     protected bool canMove;
@@ -27,6 +28,7 @@ public class EnemyCtrl : MonoBehaviour
     public Animator readAnim {get {return anim;}}
     [SerializeField] protected float damage;
     public float readDamage {get {return damage;}}
+#endregion
 
     // 초기화
     protected virtual void Init()
