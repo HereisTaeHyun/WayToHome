@@ -39,9 +39,11 @@ public class PlayerCtrl : MonoBehaviour
     public bool readInvincible {get {return invincible;}} // 적 관련 객체에서 가끔 참고
     private float invincibleTime = 2.0f;
     private float invincibleTimer;
-
+    
     // 디버프 관련(스턴, 슬로우 생각 중)
     private float debuffTimer;
+
+    protected readonly int takeHitHash = Animator.StringToHash("TakeHit");
 #endregion
 
     void Awake()
@@ -54,9 +56,10 @@ public class PlayerCtrl : MonoBehaviour
         state = State.Idle;
     }
 
-    void Update() // Jump();는 FixedUpdate()에 배정시 즉각 반응하지 않아 Update()에 배치
+    // 즉각 반응해야 하는 모듈들은 Update()에 배치
+    void Update()
     {
-        // 타이머가 위에 움직임 제어 권한 아래에, 안그러면 디버프나 무적 안풀릴떄 생김
+        // 타이머는 움직임 제어 권한 위에, 안그러면 디버프나 무적 안풀릴떄 생김
         // 무적시간일 경우 무적 타이머 초마다 차감하여 통상상태로 되돌림
         if(invincible == true)
         {
@@ -96,7 +99,6 @@ public class PlayerCtrl : MonoBehaviour
         {
             return;
         }
-        // playerMove.SlopeCheck();
         playerMove.HorizontalMove();
     }
 
