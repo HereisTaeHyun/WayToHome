@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
@@ -25,7 +26,9 @@ public class PlayerCtrl : MonoBehaviour
     // private 변수
     private PlayerMove playerMove;
     private PlayerAttack playerAttack;
+    private Animator playerAnim;
     public bool canMove;
+    private readonly int dieHash = Animator.StringToHash("Die");
     [SerializeField] private GameObject graveStone;
     
     // 무적 관련
@@ -37,10 +40,11 @@ public class PlayerCtrl : MonoBehaviour
     // 디버프 관련(스턴, 슬로우 생각 중)
     private float debuffTimer;
 
-    void Start()
+    void Awake()
     {
         playerMove = GetComponent<PlayerMove>();
         playerAttack = GetComponent<PlayerAttack>();
+        playerAnim = GetComponent<Animator>();
         currentHP = MaxHP;
         canMove = true;
         state = State.Idle;
@@ -120,6 +124,12 @@ public class PlayerCtrl : MonoBehaviour
     // 플레이어 사망, 현재는 임시로 Destroy만 사용 중, 이후 anim, audio 등 추가 예정
     private void PlayerDie()
     {
+        StartCoroutine(DieStart());
+    }
+    private IEnumerator DieStart()
+    {
+        playerAnim.SetTrigger(dieHash);
+        yield return new WaitForSeconds(1.5f);
         Instantiate(graveStone, transform.position, transform.rotation);
         Destroy(gameObject);
     }
