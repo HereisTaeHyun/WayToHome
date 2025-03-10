@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6343181246444279498}
   - component: {fileID: 4727642255247916954}
   - component: {fileID: 2230253775332051295}
-  - component: {fileID: 3800352922976186679}
   - component: {fileID: 3976553446845576498}
   m_Layer: 6
   m_Name: PF Village Props - Spike
@@ -136,18 +135,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.03125, y: 0.34375}
   m_EdgeRadius: 0
---- !u!114 &3800352922976186679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924428948729013336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f40fab334f855514a8cc57a0c05612b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3976553446845576498
 MonoBehaviour:
   m_ObjectHideFlags: 0
