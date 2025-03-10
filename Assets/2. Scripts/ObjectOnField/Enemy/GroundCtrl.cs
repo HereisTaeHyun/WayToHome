@@ -63,6 +63,11 @@ public class GroundCtrl : EnemyCtrl
                 anim.SetBool(moveOnHash, isMove);
             }
         }
+        else
+        {
+            isMove = false;
+            anim.SetBool(moveOnHash, isMove);
+        }
     }
     private void Jump()
     {

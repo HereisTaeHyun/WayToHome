@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyMeleeAtack : MonoBehaviour
 {
     private PlayerCtrl playerCtrl;
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("Player"))
         {
