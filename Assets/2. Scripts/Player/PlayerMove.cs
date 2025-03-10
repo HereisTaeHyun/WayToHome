@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
 
 #region private
     // private 변수
-    private Rigidbody2D rb;
+    private Rigidbody2D rb2D;
     private PlayerCtrl playerCtrl;
 
     private Vector2 newVelocity;
@@ -30,7 +30,7 @@ public class PlayerMove : MonoBehaviour
     private PhysicsMaterial2D physicsMaterial2D;
     private CapsuleCollider2D coll2D;
     private Vector2 collSize;
-    [SerializeField] private float slopeCheckDistance = 0.5f;
+    private float slopeCheckDistance = 0.5f;
     private Vector2 slopeNormalPerp;
     private float slopeDownAngle;
     private float slopeSideAngle;
@@ -43,11 +43,11 @@ public class PlayerMove : MonoBehaviour
     private readonly int jumpHash = Animator.StringToHash("Jump");
 
     // 다른 객체에서 읽기 필요한 변수
-    [SerializeField] private bool isGround;
+    private bool isGround;
     public bool readIsGround {get {return isGround;}}
-    [SerializeField] private bool isJump;
+    private bool isJump;
     public bool readIsJump {get {return isJump;}}
-    [SerializeField] private bool isSlope;
+    private bool isSlope;
     private float originSpeed = 7.0f;
     public float readOriginSpeed {get {return originSpeed;}}
     private float debuffedSpeed; // origin * 0.5f
@@ -57,7 +57,7 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb2D = GetComponent<Rigidbody2D>();
         playerCtrl = GetComponent<PlayerCtrl>();
         playerAnim = GetComponent<Animator>();
         moveSpeed = originSpeed;
@@ -117,17 +117,17 @@ public class PlayerMove : MonoBehaviour
             if(isGround == true && isSlope != true)
             {
                 newVelocity.Set(move.x * moveSpeed, 0.0f);
-                rb.linearVelocity = newVelocity;
+                rb2D.linearVelocity = newVelocity;
             }
             else if(isGround == true && isSlope == true)
             {
                 newVelocity.Set(-move.x * moveSpeed * slopeNormalPerp.x, -move.x * moveSpeed * slopeNormalPerp.y);
-                rb.linearVelocity = newVelocity;
+                rb2D.linearVelocity = newVelocity;
             }
             else if(isGround == false)
             {
-                newVelocity.Set(move.x * moveSpeed, rb.linearVelocity.y);
-                rb.linearVelocity = newVelocity;
+                newVelocity.Set(move.x * moveSpeed, rb2D.linearVelocity.y);
+                rb2D.linearVelocity = newVelocity;
             }
         }
     }
@@ -223,7 +223,7 @@ public class PlayerMove : MonoBehaviour
             // jumpCount 추가 후 jump
             isJump = true;
             jumpCount += 1;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
+            rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, jumpSpeed);
             isGround = false;
 
             playerAnim.SetTrigger(jumpHash);
