@@ -13,7 +13,8 @@ public class GroundCtrl : EnemyCtrl
     private EnemyAttack enemyAttack;
     private float attackRange = 1.3f;
     [SerializeField] private LayerMask playerLayer;
-    protected readonly int moveOnHash = Animator.StringToHash("OnMove");
+    private readonly int moveOnHash = Animator.StringToHash("OnMove");
+    private readonly int attackHash = Animator.StringToHash("Attack");
 
     void Awake()
     {
@@ -47,9 +48,6 @@ public class GroundCtrl : EnemyCtrl
                     jumpCount += 1;
                 }
 
-                // 공격 메서드 실행
-                enemyAttack.Attack();
-
                 // 움직이는 방향을 받아 오기
                 Vector2 enemyMoveDir = DirSet(target.transform.position - transform.position);
 
@@ -61,9 +59,19 @@ public class GroundCtrl : EnemyCtrl
                 newVelocity.Set(enemyMoveDir.x * moveSpeed, rb2D.linearVelocity.y);
                 rb2D.linearVelocity = newVelocity;
 
-                // 움직임에 따른 애니메이션 실행
-                anim.SetBool(moveOnHash, isMove);
-                anim.SetFloat("MoveDir", enemyMoveDir.x);
+                // 사거리 내부면 공격 메서드 및 공격 애니메이션 실행
+                if(canAttack == true)
+                {
+                    enemyAttack.Attack();
+                    anim.SetTrigger(attackHash);
+                    anim.SetFloat("MoveDir", enemyMoveDir.x);
+                }
+                else // 사거리 외부면 움직임 애니메이션 실행
+                {
+                    anim.SetBool(moveOnHash, isMove);
+                    anim.SetFloat("MoveDir", enemyMoveDir.x);
+                }
+
             }
             else
             {

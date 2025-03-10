@@ -23,6 +23,8 @@ public class EnemyAttack : MeleeAttack
         attackCollierPos = attackCollier.transform.localPosition;
         attackCollierPos.x = Mathf.Abs(attackCollierPos.x) * attackDir.x;
         attackCollier.transform.localPosition = attackCollierPos;
+
+        StartCoroutine(ActiveAttack());
     }
 
     protected override IEnumerator ActiveAttack()
