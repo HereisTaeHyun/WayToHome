@@ -8,6 +8,7 @@ public class GroundCtrl : EnemyCtrl
     private int maxJump = 1;
     private int jumpCount;
     private bool isMove;
+    private bool isDie;
     [SerializeField] private bool canAttack;
     private Vector2 newVelocity;
     private EnemyAttack enemyAttack;
@@ -15,11 +16,13 @@ public class GroundCtrl : EnemyCtrl
     [SerializeField] private LayerMask playerLayer;
     private readonly int moveOnHash = Animator.StringToHash("OnMove");
     private readonly int attackHash = Animator.StringToHash("Attack");
+    private readonly int dieHash = Animator.StringToHash("Die");
 
     void Awake()
     {
         Init();
         isMove = false;
+        isDie = false;
         canAttack = false;
         enemyAttack = GetComponent<EnemyAttack>();
     }
@@ -36,7 +39,7 @@ public class GroundCtrl : EnemyCtrl
     // enemyMoveDir이 음수면 왼쪽 양수면 오른쪽
     protected override void FollowingTarget(float moveSpeed, float scanningRadius)
     {
-        if(target != null)
+        if(target != null && isDie == false)
         {
             // 플레이어가 scanningRadius 내부면 moveSpeed만큼씩 이동 시작
             if(Vector2.Distance(transform.position, target.position) < scanningRadius)
@@ -114,23 +117,9 @@ public class GroundCtrl : EnemyCtrl
         // 체력 0 이하면 사망처리
         if (currentHP <= 0)
         {
+            isDie = true;
             EnemyDie();
         }
-    }
-
-    // 사망 처리
-    protected override void EnemyDie()
-    {
-        float itemChoose = Random.Range(0, 100);
-        if (itemChoose < 90)
-        {
-            Instantiate(dropItem[0], transform.position, transform.rotation);
-        }
-        else if (itemChoose >= 90)
-        {
-            Instantiate(dropItem[1], transform.position, transform.rotation);
-        }
-        Destroy(gameObject);
     }
 
     private void AttackRangeCheck(Vector2 enemyMoveDir)
@@ -144,5 +133,28 @@ public class GroundCtrl : EnemyCtrl
         {
             canAttack = false;
         }
+    }
+
+        // 사망 처리
+    protected override void EnemyDie()
+    {
+        float itemChoose = Random.Range(0, 100);
+        if (itemChoose < 90)
+        {
+            Instantiate(dropItem[0], transform.position, transform.rotation);
+        }
+        else if (itemChoose >= 90)
+        {
+            Instantiate(dropItem[1], transform.position, transform.rotation);
+        }
+        StartCoroutine(DestroyObject());
+    }
+    private IEnumerator DestroyObject()
+    {
+        rb2D.bodyType = RigidbodyType2D.Kinematic;
+        rb2D.simulated = false;
+        anim.SetTrigger(dieHash);
+        yield return new WaitForSeconds(2.0f);
+        Destroy(gameObject);
     }
 }
