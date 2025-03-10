@@ -8,14 +8,18 @@ public class GroundCtrl : EnemyCtrl
     private int maxJump = 1;
     private int jumpCount;
     private bool isMove;
+    [SerializeField] private bool canAttack;
     private Vector2 newVelocity;
     private EnemyAttack enemyAttack;
+    private float attackRange = 1.3f;
+    [SerializeField] private LayerMask playerLayer;
     protected readonly int moveOnHash = Animator.StringToHash("OnMove");
 
     void Awake()
     {
         Init();
         isMove = false;
+        canAttack = false;
         enemyAttack = GetComponent<EnemyAttack>();
     }
 
@@ -46,13 +50,18 @@ public class GroundCtrl : EnemyCtrl
                 // 공격 메서드 실행
                 enemyAttack.Attack();
 
-                // 움직이는 방향을 받아온 후 움직임 실행
+                // 움직이는 방향을 받아 오기
                 Vector2 enemyMoveDir = DirSet(target.transform.position - transform.position);
-                isMove = true;
 
+                // 사거리 체크
+                AttackRangeCheck(enemyMoveDir);
+
+                // 움직임 적용
+                isMove = true;
                 newVelocity.Set(enemyMoveDir.x * moveSpeed, rb2D.linearVelocity.y);
                 rb2D.linearVelocity = newVelocity;
-                
+
+                // 움직임에 따른 애니메이션 실행
                 anim.SetBool(moveOnHash, isMove);
                 anim.SetFloat("MoveDir", enemyMoveDir.x);
             }
@@ -114,5 +123,18 @@ public class GroundCtrl : EnemyCtrl
             Instantiate(dropItem[1], transform.position, transform.rotation);
         }
         Destroy(gameObject);
+    }
+
+    private void AttackRangeCheck(Vector2 enemyMoveDir)
+    {
+        RaycastHit2D attackRangeCheck = Physics2D.Raycast(transform.position, enemyMoveDir, attackRange, playerLayer);
+        if(attackRangeCheck)
+        {
+            canAttack = true;
+        }
+        else
+        {
+            canAttack = false;
+        }
     }
 }

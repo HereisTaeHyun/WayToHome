@@ -201,6 +201,10 @@ MonoBehaviour:
   moveSpeed: 3
   damage: -2
   jumpSpeed: 5
+  attackRange: 1.3
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &5523733009988000673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,8 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4e9aaac9fadc34e95b0a3635d6a139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 0
-  baseAttackPower: -1
+  attackDamage: 0
 --- !u!1 &6698277020813176633
 GameObject:
   m_ObjectHideFlags: 0
