@@ -15,7 +15,7 @@ public class EnemyAttack : MeleeAttack
     }
     public override void Attack()
     {
-        Vector2 attackDir = groundCtrl.DirSet(lastDir);
+        Vector2 attackDir = groundCtrl.DirSet(groundCtrl.readTarget.transform.position - transform.position);;
 
         // 공격 방향에 따른 attackCollier 위치 결정
         attackCollierPos = attackCollier.transform.localPosition;

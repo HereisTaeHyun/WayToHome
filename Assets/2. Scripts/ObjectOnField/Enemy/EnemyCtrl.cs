@@ -11,7 +11,6 @@ public class EnemyCtrl : MonoBehaviour
     // protected 변수
 #region private
     protected Rigidbody2D rb2D;
-    protected Transform target;
     protected bool canMove;
     [SerializeField] protected float enemyPushPower;
     [SerializeField] protected float stunTime;
@@ -24,6 +23,8 @@ public class EnemyCtrl : MonoBehaviour
     protected readonly int hitTrigger = Animator.StringToHash("TakeHit");
 
     // 다른 객체에서 읽기 위한 변수
+    protected Transform target;
+    public Transform readTarget {get {return target;}}
     protected Animator anim;
     public Animator readAnim {get {return anim;}}
     [SerializeField] protected float damage;

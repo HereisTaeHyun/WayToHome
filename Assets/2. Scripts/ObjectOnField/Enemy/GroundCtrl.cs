@@ -9,12 +9,14 @@ public class GroundCtrl : EnemyCtrl
     private int jumpCount;
     private bool isMove;
     private Vector2 newVelocity;
+    private EnemyAttack enemyAttack;
     protected readonly int moveOnHash = Animator.StringToHash("OnMove");
 
     void Awake()
     {
         Init();
         isMove = false;
+        enemyAttack = GetComponent<EnemyAttack>();
     }
 
     void FixedUpdate()
@@ -41,6 +43,9 @@ public class GroundCtrl : EnemyCtrl
                     jumpCount += 1;
                 }
 
+                // 공격 메서드 실행
+                enemyAttack.Attack();
+
                 // 움직이는 방향을 받아온 후 움직임 실행
                 Vector2 enemyMoveDir = DirSet(target.transform.position - transform.position);
                 isMove = true;
@@ -53,6 +58,7 @@ public class GroundCtrl : EnemyCtrl
             }
             else
             {
+                // scanningRadius 외부면 행동 불필요
                 isMove = false;
                 anim.SetBool(moveOnHash, isMove);
             }
