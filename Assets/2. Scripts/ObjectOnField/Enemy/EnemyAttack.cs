@@ -30,7 +30,7 @@ public class EnemyAttack : MeleeAttack
     protected override IEnumerator ActiveAttack()
     {
         // 공격 시에는 공격 콜라이더 생성 후 종료
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         attackCollier.SetActive(true);
         yield return new WaitForSeconds(0.3f);
         attackCollier.SetActive(false);
