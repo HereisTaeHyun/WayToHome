@@ -47,10 +47,10 @@ public class PlayerAttack : MeleeAttack
             // 공격 활성화
             playerAnim.SetTrigger("Attack");
             playerAnim.SetFloat(attackDirHash, attackDir.x);
-            StartCoroutine(MeleeAttackOn());
+            StartCoroutine(ActiveAttack());
         }
     }
-    protected override IEnumerator MeleeAttackOn()
+    protected override IEnumerator ActiveAttack()
     {
         // 공격 시에는 공격 콜라이더 생성 후 공격 시에 설정한 Constraints 재설정
         yield return new WaitForSeconds(0.2f);

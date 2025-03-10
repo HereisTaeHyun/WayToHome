@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7672249244670315222}
   - component: {fileID: 4981522163336607669}
   - component: {fileID: 738851987365397907}
+  - component: {fileID: 5523733009988000673}
   m_Layer: 9
   m_Name: Mushroom
   m_TagString: Enemy
@@ -200,6 +201,20 @@ MonoBehaviour:
   moveSpeed: 3
   damage: -2
   jumpSpeed: 5
+--- !u!114 &5523733009988000673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3941675743311660735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f4e9aaac9fadc34e95b0a3635d6a139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPower: 0
+  baseAttackPower: -1
 --- !u!1 &6698277020813176633
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,13 +225,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2393272858413092655}
   - component: {fileID: 7219829781566244279}
+  - component: {fileID: 3822515736412544666}
   m_Layer: 9
   m_Name: MeleeAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2393272858413092655
 Transform:
   m_ObjectHideFlags: 0
@@ -268,3 +284,15 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &3822515736412544666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6698277020813176633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f400afe1d7baa478c82de5e37fc3e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

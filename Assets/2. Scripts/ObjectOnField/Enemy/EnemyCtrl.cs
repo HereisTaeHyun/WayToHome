@@ -46,7 +46,7 @@ public class EnemyCtrl : MonoBehaviour
     }
 
     // 이동 방향 벡터 계산
-    protected virtual Vector2 DirSet(Vector2 move)
+    public virtual Vector2 DirSet(Vector2 move)
     {
         Vector2 moveDir = Vector2.zero;
         if (!Mathf.Approximately(move.x, 0))

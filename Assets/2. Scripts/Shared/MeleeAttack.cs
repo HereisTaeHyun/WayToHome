@@ -31,7 +31,7 @@ public class MeleeAttack : MonoBehaviour
     {
     }
 
-    protected virtual IEnumerator MeleeAttackOn()
+    protected virtual IEnumerator ActiveAttack()
     {
         yield return new WaitForSeconds(0.2f);
     }
