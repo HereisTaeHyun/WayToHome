@@ -11,8 +11,6 @@ public class GroundCtrl : EnemyCtrl
     private Vector2 newVelocity;
     protected readonly int moveOnHash = Animator.StringToHash("OnMove");
 
-    private bool isAttack;
-    public bool readIsAttck {get {return isAttack;}}
     void Awake()
     {
         Init();

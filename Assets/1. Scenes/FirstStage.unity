@@ -1425,7 +1425,7 @@ Transform:
   m_GameObject: {fileID: 931818723}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.68, y: -3.35, z: -10}
+  m_LocalPosition: {x: 18.74, y: -2.84, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2382,6 +2382,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5511225447135756698, guid: 17e8aaef9247b8349afe2688bdbaafa4, type: 3}
   m_PrefabInstance: {fileID: 1421435640}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1435865640 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6698277020813176633, guid: 990359c5cd84d1c4d90450ed4c6f4b42, type: 3}
+  m_PrefabInstance: {fileID: 1934784352}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1435865643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435865640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f400afe1d7baa478c82de5e37fc3e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1439965676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2876,7 +2893,7 @@ Transform:
   m_GameObject: {fileID: 1609727462}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.68, y: -3.35, z: -10}
+  m_LocalPosition: {x: 18.74, y: -2.84, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5987,7 +6004,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6698277020813176633, guid: 990359c5cd84d1c4d90450ed4c6f4b42, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1435865643}
   m_SourcePrefab: {fileID: 100100000, guid: 990359c5cd84d1c4d90450ed4c6f4b42, type: 3}
 --- !u!1001 &1963455974
 PrefabInstance:
@@ -6282,11 +6302,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2693621264504375055, guid: 8a0f7bc9922e5ac4089b82ce3c4e0b72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.68
+      value: 18.74
       objectReference: {fileID: 0}
     - target: {fileID: 2693621264504375055, guid: 8a0f7bc9922e5ac4089b82ce3c4e0b72, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.35
+      value: -2.84
       objectReference: {fileID: 0}
     - target: {fileID: 2693621264504375055, guid: 8a0f7bc9922e5ac4089b82ce3c4e0b72, type: 3}
       propertyPath: m_LocalPosition.z

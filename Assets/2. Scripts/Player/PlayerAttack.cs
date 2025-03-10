@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerAttack : MeleeAttck
+public class PlayerAttack : MeleeAttack
 {
     // 공격에 관한 메서드 모음
 
@@ -11,19 +11,16 @@ public class PlayerAttack : MeleeAttck
     private PlayerCtrl playerCtrl;
     private Animator playerAnim;
 
-    void Start()
+    void Awake()
     {
-        rb2D = GetComponent<Rigidbody2D>();
+        Init();
+
         playerCtrl = GetComponent<PlayerCtrl>();
         playerAnim = GetComponent<Animator>();
-        attackPower = baseAttackPower;
-
-        attackCollier = transform.Find("MeleeAttack").gameObject;
-        attackCollier.SetActive(false);
     }
 
     // 근접 공격, 코루틴으로 공격 범위 콜라이더 생성 후 일정 시간 후 종료, 현재는 0.2초
-    public override void MeleeAttack()
+    public override void Attack()
     {
 
         // 공격 방향 설정

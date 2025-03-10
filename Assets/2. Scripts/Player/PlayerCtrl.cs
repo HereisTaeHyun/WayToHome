@@ -89,7 +89,7 @@ public class PlayerCtrl : MonoBehaviour
 
         // 모듈 클래스 함수 호출
         playerMove.Jump();
-        playerAttack.MeleeAttack();
+        playerAttack.Attack();
     }
 
     private void FixedUpdate()

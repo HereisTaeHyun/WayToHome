@@ -1,9 +1,8 @@
 using UnityEngine;
 using System.Collections;
-public class MeleeAttck : MonoBehaviour
+public class MeleeAttack : MonoBehaviour
 {
-    // 공격에 관한 메서드 모음
-    // 근접 공격, 원거리 직선 공격, 원거리 포물선 공격 계획
+    // 공격에 관한 메서드
 
     // public 변수
     public float attackPower;
@@ -18,7 +17,7 @@ public class MeleeAttck : MonoBehaviour
 
     [SerializeField] protected float baseAttackPower = -1.0f;
 
-    void Start()
+    protected void Init()
     {
         rb2D = GetComponent<Rigidbody2D>();
         attackPower = baseAttackPower;
@@ -28,7 +27,7 @@ public class MeleeAttck : MonoBehaviour
     }
 
     // 근접 공격, 코루틴으로 공격 범위 콜라이더 생성 후 일정 시간 후 종료, 현재는 0.2초
-    public virtual void MeleeAttack()
+    public virtual void Attack()
     {
     }
 
