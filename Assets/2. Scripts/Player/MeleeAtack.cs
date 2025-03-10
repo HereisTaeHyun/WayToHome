@@ -17,7 +17,7 @@ public class MeleeAtack : MonoBehaviour
         if(other.gameObject.CompareTag("Enemy"))
         {
             enemyCtrl = other.GetComponent<EnemyCtrl>();
-            enemyCtrl.ChangeHP(playerAttack.attackPower);
+            enemyCtrl.ChangeHP(playerAttack.attackDamage);
         } 
     }
 }

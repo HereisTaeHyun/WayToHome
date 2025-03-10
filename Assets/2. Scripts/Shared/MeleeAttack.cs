@@ -5,7 +5,7 @@ public class MeleeAttack : MonoBehaviour
     // 공격에 관한 메서드
 
     // public 변수
-    public float attackPower;
+    public float attackDamage;
 
     // private 변수
     protected Rigidbody2D rb2D;
@@ -14,13 +14,12 @@ public class MeleeAttack : MonoBehaviour
     protected Vector2 lastDir = Vector2.right;
     protected readonly int attackHash = Animator.StringToHash("Attack");
     protected readonly int attackDirHash = Animator.StringToHash("AttackDir");
-
-    [SerializeField] protected float baseAttackPower = -1.0f;
+    protected float baseAttackDamage = -1.0f;
 
     protected void Init()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        attackPower = baseAttackPower;
+        attackDamage = baseAttackDamage;
 
         attackCollier = transform.Find("MeleeAttack").gameObject;
         attackCollier.SetActive(false);

@@ -8,10 +8,12 @@ public class EnemyAttack : MeleeAttack
 
     void Awake()
     {
-        Init();
-
         groundCtrl = GetComponent<GroundCtrl>();
         enemyAnim = GetComponent<Animator>();
+
+        baseAttackDamage = groundCtrl.readDamage;
+
+        Init();
     }
     public override void Attack()
     {

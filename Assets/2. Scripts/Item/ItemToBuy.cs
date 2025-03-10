@@ -51,7 +51,7 @@ public class ItemToBuy : MonoBehaviour
                     break;
                 
                 case ItemToBuyType.AttackPlus: // 공격력 증가
-                    playerAttack.attackPower -= 1;
+                    playerAttack.attackDamage -= 1;
                     Debug.Log("공격력 증가");
                     Destroy(gameObject);
                     Destroy(transform.parent.gameObject);
