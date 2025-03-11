@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2675943377527610717}
   - component: {fileID: 5213224248806839845}
   - component: {fileID: 8063151603284116605}
-  - component: {fileID: 3150348671232300672}
+  - component: {fileID: 960920689593008866}
   m_Layer: 0
   m_Name: MaxJumpItem
   m_TagString: Untagged
@@ -125,7 +125,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.0038518906, y: 0.42373347}
   m_Radius: 0.4653306
---- !u!114 &3150348671232300672
+--- !u!114 &960920689593008866
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1974093352892434603}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c993eeba0929a840a1506e456d4ad22, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c9b93b8ff05b6a4e9393f04c7df8676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToFindType: 1
+  itemToBuyType: 3

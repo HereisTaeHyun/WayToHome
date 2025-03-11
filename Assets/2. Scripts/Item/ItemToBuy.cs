@@ -15,8 +15,10 @@ public class ItemToBuy : MonoBehaviour
         MaxHpPlus,
         AttackPlus,
         PremiumHeal,
+        MaxJumpPlus,
     }
     private PlayerCtrl playerCtrl;
+    private PlayerMove playerMove;
     private PlayerAttack playerAttack;
 
     private void OnTriggerStay2D(Collider2D other)
@@ -25,6 +27,7 @@ public class ItemToBuy : MonoBehaviour
         if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit"))
         {
             playerCtrl = other.GetComponent<PlayerCtrl>();
+            playerMove = other.GetComponent<PlayerMove>();
             playerAttack = other.GetComponent<PlayerAttack>();
 
             switch(itemToBuyType)
@@ -55,6 +58,13 @@ public class ItemToBuy : MonoBehaviour
                     Debug.Log("공격력 증가");
                     Destroy(gameObject);
                     Destroy(transform.parent.gameObject);
+                    break;
+                
+                // playerMove에 영향
+                case ItemToBuyType.MaxJumpPlus: // 점프 횟수 추가
+                    playerMove.maxJump += 1;
+                    Debug.Log("최대 점프 증가");
+                    Destroy(gameObject);
                     break;
             }
         }

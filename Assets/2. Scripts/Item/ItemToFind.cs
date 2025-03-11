@@ -11,7 +11,6 @@ public class ItemToFind : MonoBehaviour
     private enum ItemToFindType
     {
         Heal,
-        MaxJumpPlus,
         Money,
     }
     private PlayerCtrl playerCtrl;
@@ -46,13 +45,6 @@ public class ItemToFind : MonoBehaviour
                     playerCtrl.money += 1;
                     Debug.Log("돈 획득");
                     Destroy(transform.parent.gameObject);
-                    Destroy(gameObject);
-                    break;
-
-                // playerMove에 영향
-                case ItemToFindType.MaxJumpPlus: // 점프 횟수 추가
-                    playerMove.maxJump += 1;
-                    Debug.Log("최대 점프 증가");
                     Destroy(gameObject);
                     break;
             }
