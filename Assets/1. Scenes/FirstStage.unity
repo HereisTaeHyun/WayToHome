@@ -1231,7 +1231,7 @@ Transform:
   m_GameObject: {fileID: 872940208}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 125.18, y: -4.34, z: 0}
+  m_LocalPosition: {x: 127.4, y: -4.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5975,6 +5975,7 @@ GameObject:
   - component: {fileID: 1796974652}
   - component: {fileID: 1796974648}
   - component: {fileID: 1796974651}
+  - component: {fileID: 1796974653}
   m_Layer: 7
   m_Name: Chest
   m_TagString: Untagged
@@ -6058,7 +6059,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1796974652}
-  itemInChest: {fileID: 1974093352892434603, guid: 7b244d23bf83bd441bd5522b31e8d227, type: 3}
 --- !u!95 &1796974652
 Animator:
   serializedVersion: 7
@@ -6081,6 +6081,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1796974653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796974647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ef6ea540028cc47b417d5f282cbbff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemInChest: {fileID: 1974093352892434603, guid: 7b244d23bf83bd441bd5522b31e8d227, type: 3}
 --- !u!1001 &1816809483
 PrefabInstance:
   m_ObjectHideFlags: 0
