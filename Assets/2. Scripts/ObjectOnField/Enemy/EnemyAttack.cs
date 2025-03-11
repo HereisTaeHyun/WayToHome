@@ -4,13 +4,12 @@ using System.Collections;
 public class EnemyAttack : MeleeAttack
 {
     private GroundCtrl groundCtrl;
-    private Animator enemyAnim;
+    private Animator anim;
 
     void Awake()
     {
         groundCtrl = GetComponent<GroundCtrl>();
-        enemyAnim = GetComponent<Animator>();
-
+        anim = GetComponent<Animator>();
         baseAttackDamage = groundCtrl.readDamage;
 
         Init();
@@ -24,7 +23,11 @@ public class EnemyAttack : MeleeAttack
         attackCollierPos.x = Mathf.Abs(attackCollierPos.x) * attackDir.x;
         attackCollier.transform.localPosition = attackCollierPos;
 
-        StartCoroutine(ActiveAttack());
+        if(attackCollier.activeSelf == false)
+        {
+            StartCoroutine(ActiveAttack());
+            anim.SetTrigger(attackHash);
+        }
     }
 
     protected override IEnumerator ActiveAttack()

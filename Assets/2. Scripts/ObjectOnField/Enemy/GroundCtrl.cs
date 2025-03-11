@@ -15,7 +15,6 @@ public class GroundCtrl : EnemyCtrl
     private float attackRange = 1.3f;
     [SerializeField] private LayerMask playerLayer;
     private readonly int moveOnHash = Animator.StringToHash("OnMove");
-    private readonly int attackHash = Animator.StringToHash("Attack");
     private readonly int dieHash = Animator.StringToHash("Die");
 
     void Awake()
@@ -66,7 +65,6 @@ public class GroundCtrl : EnemyCtrl
                 if(canAttack == true)
                 {
                     enemyAttack.Attack();
-                    anim.SetTrigger(attackHash);
                     anim.SetFloat("MoveDir", enemyMoveDir.x);
                 }
                 else // 사거리 외부면 움직임 애니메이션 실행
