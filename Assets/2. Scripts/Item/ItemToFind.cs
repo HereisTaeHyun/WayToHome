@@ -14,7 +14,6 @@ public class ItemToFind : MonoBehaviour
         Money,
     }
     private PlayerCtrl playerCtrl;
-    private PlayerMove playerMove;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -22,7 +21,6 @@ public class ItemToFind : MonoBehaviour
         if(other.gameObject.CompareTag("Player"))
         {
             playerCtrl = other.GetComponent<PlayerCtrl>();
-            playerMove = other.GetComponent<PlayerMove>();
 
             switch(itemToFindType) // 아이템 사용
             {    

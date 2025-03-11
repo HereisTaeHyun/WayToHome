@@ -9,8 +9,15 @@ namespace Cainos.PixelArtPlatformer_VillageProps
     {
         [FoldoutGroup("Reference")]
         public Animator animator;
+        public GameObject itemInChest;
+        private GameObject itemSpawnPoint;
 
         [FoldoutGroup("Runtime"), ShowInInspector, DisableInEditMode]
+
+        void Start()
+        {
+            itemSpawnPoint = transform.Find("ItemSpawnPoint").gameObject;
+        }
         public bool IsOpened
         {
             get { return isOpened; }
@@ -36,10 +43,19 @@ namespace Cainos.PixelArtPlatformer_VillageProps
 
         private void OnTriggerStay2D(Collider2D other)
         {
+            if(IsOpened == true)
+            {
+                return;
+            }
             if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit"))
             {
                 Open();
+                ItemOut();
             }
+        }
+        private void ItemOut()
+        {
+            Instantiate(itemInChest, itemSpawnPoint.transform.position, itemSpawnPoint.transform.rotation);
         }
     }
 }
