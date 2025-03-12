@@ -12,8 +12,25 @@ public class ItemToFind : MonoBehaviour
     {
         Heal,
         Money,
+        Gold,
     }
     private PlayerCtrl playerCtrl;
+    private static float LIFESPAN = 60;
+    public float remainLifespan;
+
+    // 생성 후 60초 동안 필드에 존재
+    private void OnEnable()
+    {
+        remainLifespan = LIFESPAN;
+    }
+    private void Update()
+    {
+        remainLifespan -= Time.deltaTime;
+        if(remainLifespan <= 0)
+        {
+            Destroy(transform.parent.gameObject);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -31,7 +48,6 @@ public class ItemToFind : MonoBehaviour
                         playerCtrl.ChangeHP(1);
                         Debug.Log("체력 회복");
                         Destroy(transform.parent.gameObject);
-                        Destroy(gameObject);
                     }
                     else // 최대 체력이면 사용안됨
                     {
@@ -43,7 +59,11 @@ public class ItemToFind : MonoBehaviour
                     playerCtrl.money += 1;
                     Debug.Log("돈 획득");
                     Destroy(transform.parent.gameObject);
-                    Destroy(gameObject);
+                    break;
+                case ItemToFindType.Gold: // 금괴 획득
+                    playerCtrl.money += 3;
+                    Debug.Log("금괴 획득");
+                    Destroy(transform.parent.gameObject);
                     break;
             }
         }
