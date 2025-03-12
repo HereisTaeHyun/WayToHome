@@ -176,9 +176,6 @@ public class PlayerMove : MonoBehaviour
             }                       
 
             lastSlopeAngle = slopeDownAngle;
-
-            Debug.DrawRay(hit2D.point, hit2D.normal, Color.green);
-            Debug.DrawRay(hit2D.point, slopeNormalPerp, Color.red);
         }
     }
 # endregion

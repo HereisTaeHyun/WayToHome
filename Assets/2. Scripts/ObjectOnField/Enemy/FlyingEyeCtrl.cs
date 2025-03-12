@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+// 하늘을 날면서 타겟을 추적하는 적에 대한 클래스
 public class FlyingEyeCtrl : EnemyCtrl
 {
     void Awake()
@@ -35,7 +36,7 @@ public class FlyingEyeCtrl : EnemyCtrl
         }
     }
 
-    // HP 변경 처리 (데미지 적용)
+    // HP 변경 처리
     public override void ChangeHP(float value)
     {
         base.ChangeHP(value);

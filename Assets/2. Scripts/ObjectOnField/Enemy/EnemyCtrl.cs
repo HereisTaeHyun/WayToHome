@@ -58,7 +58,7 @@ public class EnemyCtrl : MonoBehaviour
         return moveDir;
     }
 
-    // HP 변경 처리 (데미지 적용)
+    // HP 변경 처리
     public virtual void ChangeHP(float value)
     {
         StartCoroutine(EnemyGetHit());

@@ -23,6 +23,7 @@ public class EnemyAttack : MeleeAttack
         attackCollierPos.x = Mathf.Abs(attackCollierPos.x) * attackDir.x;
         attackCollier.transform.localPosition = attackCollierPos;
 
+        // 이전 공격 콜라이더가 없을 경우 ActiveAttack
         if(attackCollier.activeSelf == false)
         {
             StartCoroutine(ActiveAttack());
@@ -32,7 +33,7 @@ public class EnemyAttack : MeleeAttack
 
     protected override IEnumerator ActiveAttack()
     {
-        // 공격 시에는 공격 콜라이더 생성 후 종료
+        // 공격 시에는 공격 콜라이더 생성 후 제거
         yield return new WaitForSeconds(0.5f);
         attackCollier.SetActive(true);
         yield return new WaitForSeconds(0.3f);

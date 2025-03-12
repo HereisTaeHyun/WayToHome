@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
 
+// 지상 적에 대한 클래스, 현재는 버섯, 해골에 사용 생각 중
 public class GroundCtrl : EnemyCtrl
 {
     [SerializeField] private float jumpSpeed;
@@ -38,6 +39,7 @@ public class GroundCtrl : EnemyCtrl
     // enemyMoveDir이 음수면 왼쪽 양수면 오른쪽
     protected override void FollowingTarget(float moveSpeed, float scanningRadius)
     {
+        // 타겟이 존재하고 살아 있을 경우 움직임
         if(target != null && isDie == false)
         {
             // 플레이어가 scanningRadius 내부면 moveSpeed만큼씩 이동 시작
@@ -50,10 +52,10 @@ public class GroundCtrl : EnemyCtrl
                     jumpCount += 1;
                 }
 
-                // 움직이는 방향을 받아 오기
+                // 움직이는 방향 벡터 받아 오기
                 Vector2 enemyMoveDir = DirSet(target.transform.position - transform.position);
 
-                // 사거리 체크
+                // ray 사용하여 사거리 체크
                 AttackRangeCheck(enemyMoveDir);
 
                 // 움직임 적용
@@ -81,12 +83,14 @@ public class GroundCtrl : EnemyCtrl
                 anim.SetBool(moveOnHash, isMove);
             }
         }
+        // 적이 죽었다면 움직일 필요 없음
         else
         {
             isMove = false;
             anim.SetBool(moveOnHash, isMove);
         }
     }
+    // Jump 횟수가 남았으면 Jump, Ground에 닿으면 Jump 횟수 초기화
     private void Jump()
     {
         if(jumpCount < maxJump)
@@ -120,6 +124,7 @@ public class GroundCtrl : EnemyCtrl
         }
     }
 
+    // Ray를 통한 사거리 체크
     private void AttackRangeCheck(Vector2 enemyMoveDir)
     {
         RaycastHit2D attackRangeCheck = Physics2D.Raycast(transform.position, enemyMoveDir, attackRange, playerLayer);
@@ -133,9 +138,10 @@ public class GroundCtrl : EnemyCtrl
         }
     }
 
-        // 사망 처리
+    // 사망 처리
     protected override void EnemyDie()
     {
+        // 아이템 확률 계산 및 드롭, 확장성이 전무하여 수정 필요성 있음
         float itemChoose = Random.Range(0, 100);
         if (itemChoose < 90)
         {
@@ -147,6 +153,7 @@ public class GroundCtrl : EnemyCtrl
         }
         StartCoroutine(DestroyObject());
     }
+    // 사망 절차 진행, 물리 영향 제거 후 사망 애니메이션 재생
     private IEnumerator DestroyObject()
     {
         rb2D.bodyType = RigidbodyType2D.Kinematic;
