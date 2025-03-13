@@ -16,7 +16,7 @@ public class EnemyCtrl : MonoBehaviour
     [SerializeField] protected float stunTime;
     protected float scanningRadius = 10.0f;
     [SerializeField] protected float MaxHP;
-    [SerializeField] protected float currentHP;
+    protected float currentHP;
     [SerializeField] protected float moveSpeed;
     protected readonly int dirHash = Animator.StringToHash("MoveDir");
     protected readonly int hitHash = Animator.StringToHash("HitDir");

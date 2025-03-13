@@ -16,7 +16,7 @@ public class EnemyAttack : MeleeAttack
     }
     public override void Attack()
     {
-        Vector2 attackDir = groundCtrl.DirSet(groundCtrl.readTarget.transform.position - transform.position);;
+        Vector2 attackDir = groundCtrl.DirSet(groundCtrl.readTarget.transform.position - transform.position);
 
         // 공격 방향에 따른 attackCollier 위치 결정
         attackCollierPos = attackCollier.transform.localPosition;
@@ -26,17 +26,17 @@ public class EnemyAttack : MeleeAttack
         // 이전 공격 콜라이더가 없을 경우 ActiveAttack
         if(attackCollier.activeSelf == false)
         {
-            StartCoroutine(ActiveAttack());
             anim.SetTrigger(attackHash);
         }
     }
 
-    protected override IEnumerator ActiveAttack()
+    // 공격 coll 설정은 animation event로 사용 중
+    public void EnableAttackCollider()
     {
-        // 공격 시에는 공격 콜라이더 생성 후 제거
-        yield return new WaitForSeconds(0.5f);
         attackCollier.SetActive(true);
-        yield return new WaitForSeconds(0.3f);
+    }
+    public void DisableAttackCollider()
+    {
         attackCollier.SetActive(false);
     }
 }

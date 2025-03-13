@@ -5,12 +5,12 @@ using Unity.VisualScripting;
 // 지상 적에 대한 클래스, 현재는 버섯, 해골에 사용 생각 중
 public class GroundCtrl : EnemyCtrl
 {
-    [SerializeField] private float jumpSpeed;
+    private float jumpSpeed;
     private int maxJump = 1;
     private int jumpCount;
     private bool isMove;
     private bool isDie;
-    [SerializeField] private bool canAttack;
+    private bool canAttack;
     private Vector2 newVelocity;
     private EnemyAttack enemyAttack;
     private float attackRange = 1.3f;
@@ -55,13 +55,13 @@ public class GroundCtrl : EnemyCtrl
                 // 움직이는 방향 벡터 받아 오기
                 Vector2 enemyMoveDir = DirSet(target.transform.position - transform.position);
 
-                // ray 사용하여 사거리 체크
-                AttackRangeCheck(enemyMoveDir);
-
                 // 움직임 적용
                 isMove = true;
                 newVelocity.Set(enemyMoveDir.x * moveSpeed, rb2D.linearVelocity.y);
                 rb2D.linearVelocity = newVelocity;
+
+                // ray 사용하여 사거리 체크
+                AttackRangeCheck(enemyMoveDir);
 
                 // 사거리 내부면 공격 메서드 및 공격 애니메이션 실행
                 if(canAttack == true)
