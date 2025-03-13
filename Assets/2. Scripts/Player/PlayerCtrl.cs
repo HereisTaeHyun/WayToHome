@@ -135,6 +135,7 @@ public class PlayerCtrl : MonoBehaviour
     private IEnumerator DieStart()
     {
         playerAnim.SetTrigger(dieHash);
+        canMove = false;
         yield return new WaitForSeconds(1.5f);
         Instantiate(graveStone, transform.position, transform.rotation);
         Destroy(gameObject);

@@ -5,12 +5,11 @@ using Unity.VisualScripting;
 // 지상 적에 대한 클래스, 현재는 버섯, 해골에 사용 생각 중
 public class GroundCtrl : EnemyCtrl
 {
-    private float jumpSpeed;
+    private float jumpSpeed = 5.0f;
     private int maxJump = 1;
     private int jumpCount;
     private bool isMove;
     private bool isDie;
-    private bool canAttack;
     private Vector2 newVelocity;
     private EnemyAttack enemyAttack;
     private float attackRange = 1.3f;
@@ -23,7 +22,6 @@ public class GroundCtrl : EnemyCtrl
         Init();
         isMove = false;
         isDie = false;
-        canAttack = false;
         enemyAttack = GetComponent<EnemyAttack>();
     }
 
@@ -61,20 +59,7 @@ public class GroundCtrl : EnemyCtrl
                 rb2D.linearVelocity = newVelocity;
 
                 // ray 사용하여 사거리 체크
-                AttackRangeCheck(enemyMoveDir);
-
-                // 사거리 내부면 공격 메서드 및 공격 애니메이션 실행
-                if(canAttack == true)
-                {
-                    enemyAttack.Attack();
-                    anim.SetFloat("MoveDir", enemyMoveDir.x);
-                }
-                else // 사거리 외부면 움직임 애니메이션 실행
-                {
-                    anim.SetBool(moveOnHash, isMove);
-                    anim.SetFloat("MoveDir", enemyMoveDir.x);
-                }
-
+                AttackAbleCheck(enemyMoveDir);
             }
             else
             {
@@ -125,16 +110,18 @@ public class GroundCtrl : EnemyCtrl
     }
 
     // Ray를 통한 사거리 체크
-    private void AttackRangeCheck(Vector2 enemyMoveDir)
+    private void AttackAbleCheck(Vector2 enemyMoveDir)
     {
         RaycastHit2D attackRangeCheck = Physics2D.Raycast(transform.position, enemyMoveDir, attackRange, playerLayer);
         if(attackRangeCheck)
         {
-            canAttack = true;
+            enemyAttack.Attack();
+            anim.SetFloat("MoveDir", enemyMoveDir.x);
         }
         else
         {
-            canAttack = false;
+            anim.SetBool(moveOnHash, isMove);
+            anim.SetFloat("MoveDir", enemyMoveDir.x);
         }
     }
 

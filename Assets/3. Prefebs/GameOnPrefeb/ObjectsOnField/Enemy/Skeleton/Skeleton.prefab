@@ -279,7 +279,7 @@ MonoBehaviour:
   stunTime: 0
   MaxHP: 3
   moveSpeed: 3
-  damage: -2
+  damage: -3
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -296,5 +296,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 0
-  waitUntilAttack: 0
-  attackCollierLifespan: 0
