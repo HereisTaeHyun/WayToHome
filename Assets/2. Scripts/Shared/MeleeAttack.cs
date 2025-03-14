@@ -29,9 +29,12 @@ public class MeleeAttack : MonoBehaviour
     public virtual void Attack()
     {
     }
-
-    protected virtual IEnumerator ActiveAttack()
+    
+    // 공격 coll 설정은 animation event로 사용 중
+    protected virtual void EnableAttackCollider()
     {
-        yield return new WaitForSeconds(0.2f);
+    }
+    protected virtual void DisableAttackCollider()
+    {
     }
 }

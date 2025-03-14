@@ -30,13 +30,12 @@ public class EnemyAttack : MeleeAttack
         }
     }
 
-    // 공격 coll 설정은 animation event로 사용 중
-    private void EnableAttackCollider()
+    protected override void EnableAttackCollider()
     {
         rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         attackCollier.SetActive(true);
     }
-    private void DisableAttackCollider()
+    protected override void DisableAttackCollider()
     {
         rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         attackCollier.SetActive(false);

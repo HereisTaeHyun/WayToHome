@@ -47,18 +47,17 @@ public class PlayerAttack : MeleeAttack
             // 공격 활성화
             playerAnim.SetTrigger("Attack");
             playerAnim.SetFloat(attackDirHash, attackDir.x);
-            StartCoroutine(ActiveAttack());
         }
     }
-    protected override IEnumerator ActiveAttack()
-    {
-        // 공격 시에는 공격 콜라이더 생성 후 공격 시에 설정한 Constraints 재설정
-        yield return new WaitForSeconds(0.2f);
-        attackCollier.SetActive(true);
-        yield return new WaitForSeconds(0.3f);
-        attackCollier.SetActive(false);
 
-        // Z축 고정만 남기고 나머지는 해제
+    // 공격 coll 설정은 animation event로 사용 중
+    protected override void EnableAttackCollider()
+    {
+        attackCollier.SetActive(true);
+    }
+    protected override void DisableAttackCollider()
+    {
+        attackCollier.SetActive(false);
         rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         playerCtrl.canMove = true;
     }
