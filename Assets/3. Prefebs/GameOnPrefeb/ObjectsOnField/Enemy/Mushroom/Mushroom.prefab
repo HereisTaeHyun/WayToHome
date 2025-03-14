@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2953070984606876577
 Transform:
   m_ObjectHideFlags: 0
@@ -198,7 +198,9 @@ MonoBehaviour:
   stunTime: 0
   MaxHP: 5
   moveSpeed: 3
+  rb2D: {fileID: 0}
   damage: -2
+  attackRange: 1.35
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -215,8 +217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 0
-  waitUntilAttack: 0.5
-  attackCollierLifespan: 0.5
 --- !u!1 &6698277020813176633
 GameObject:
   m_ObjectHideFlags: 0

@@ -67,8 +67,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.3047017, y: -0.07638085}
-  m_Radius: 0.77286804
+  m_Offset: {x: -0.0073490143, y: -0.07638037}
+  m_Radius: 1.0849187
 --- !u!114 &108007096400011694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,7 +279,9 @@ MonoBehaviour:
   stunTime: 0
   MaxHP: 3
   moveSpeed: 3
+  rb2D: {fileID: 0}
   damage: -3
+  attackRange: 2.3
   playerLayer:
     serializedVersion: 2
     m_Bits: 8

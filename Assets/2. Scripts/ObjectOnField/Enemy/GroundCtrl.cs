@@ -12,7 +12,7 @@ public class GroundCtrl : EnemyCtrl
     private bool isDie;
     private Vector2 newVelocity;
     private EnemyAttack enemyAttack;
-    private float attackRange = 1.3f;
+    [SerializeField] float attackRange;
     [SerializeField] private LayerMask playerLayer;
     private readonly int moveOnHash = Animator.StringToHash("OnMove");
     private readonly int dieHash = Animator.StringToHash("Die");
@@ -113,6 +113,7 @@ public class GroundCtrl : EnemyCtrl
     private void AttackAbleCheck(Vector2 enemyMoveDir)
     {
         RaycastHit2D attackRangeCheck = Physics2D.Raycast(transform.position, enemyMoveDir, attackRange, playerLayer);
+        Debug.DrawRay(transform.position, enemyMoveDir * attackRange, Color.blue);
         if(attackRangeCheck)
         {
             enemyAttack.Attack();

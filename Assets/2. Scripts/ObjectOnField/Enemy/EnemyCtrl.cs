@@ -14,7 +14,7 @@ public class EnemyCtrl : MonoBehaviour
     [SerializeField] protected float stunTime;
     [SerializeField] protected float MaxHP;
     [SerializeField] protected float moveSpeed;
-    protected Rigidbody2D rb2D;
+    public Rigidbody2D rb2D;
     protected bool canMove;
     protected float scanningRadius = 10.0f;
     protected float currentHP;

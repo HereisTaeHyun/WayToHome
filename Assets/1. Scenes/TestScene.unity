@@ -1202,6 +1202,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 54895255730054507, guid: d7a549f1ff3383940986ea4b5dc4fbdc, type: 3}
+      propertyPath: attackRange
+      value: 2.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3802497873425190016, guid: d7a549f1ff3383940986ea4b5dc4fbdc, type: 3}
       propertyPath: m_Name
       value: Skeleton
@@ -1249,6 +1253,18 @@ PrefabInstance:
     - target: {fileID: 5010800656101217184, guid: d7a549f1ff3383940986ea4b5dc4fbdc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268776828742560649, guid: d7a549f1ff3383940986ea4b5dc4fbdc, type: 3}
+      propertyPath: m_Radius
+      value: 1.0849187
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268776828742560649, guid: d7a549f1ff3383940986ea4b5dc4fbdc, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0073490143
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268776828742560649, guid: d7a549f1ff3383940986ea4b5dc4fbdc, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.07638037
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
