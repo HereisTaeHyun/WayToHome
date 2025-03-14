@@ -46,18 +46,6 @@ public class EnemyCtrl : MonoBehaviour
     {
     }
 
-    // 이동 방향 벡터 계산
-    public virtual Vector2 DirSet(Vector2 move)
-    {
-        Vector2 moveDir = Vector2.zero;
-        if (!Mathf.Approximately(move.x, 0))
-        {
-            moveDir.Set(move.x, 0);
-            moveDir.Normalize();
-        }
-        return moveDir;
-    }
-
     // HP 변경 처리
     public virtual void ChangeHP(float value)
     {

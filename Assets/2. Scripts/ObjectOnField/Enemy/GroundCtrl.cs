@@ -51,7 +51,7 @@ public class GroundCtrl : EnemyCtrl
                 }
 
                 // 움직이는 방향 벡터 받아 오기
-                Vector2 enemyMoveDir = DirSet(target.transform.position - transform.position);
+                Vector2 enemyMoveDir = UtilityManager.utility.DirSet(target.transform.position - transform.position);
 
                 // 움직임 적용
                 isMove = true;
@@ -97,7 +97,7 @@ public class GroundCtrl : EnemyCtrl
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
 
         // 타격 벡터 계산 및 anim 재생
-        Vector2 hitVector =  DirSet(target.transform.position - transform.position);
+        Vector2 hitVector =  UtilityManager.utility.DirSet(target.transform.position - transform.position);
         anim.SetTrigger(hitTrigger);
         anim.SetFloat(hitHash, hitVector.x);
 
@@ -139,10 +139,10 @@ public class GroundCtrl : EnemyCtrl
         {
             Instantiate(dropItem[1], transform.position, transform.rotation);
         }
-        StartCoroutine(DestroyObject());
+        StartCoroutine(DieStart());
     }
     // 사망 절차 진행, 물리 영향 제거 후 사망 애니메이션 재생
-    private IEnumerator DestroyObject()
+    private IEnumerator DieStart()
     {
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.simulated = false;

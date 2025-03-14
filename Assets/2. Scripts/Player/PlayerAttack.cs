@@ -30,7 +30,7 @@ public class PlayerAttack : MeleeAttack
         {
             lastDir = move;
         }
-        Vector2 attackDir = playerCtrl.DirSet(lastDir);
+        Vector2 attackDir = UtilityManager.utility.DirSet(lastDir);
 
         if(Input.GetButtonDown("Fire1") && attackCollier.activeSelf == false)
         {

@@ -73,7 +73,8 @@ public class PlayerMove : MonoBehaviour
         // 이동 방향 지정
         float h = Input.GetAxis("Horizontal");
         Vector2 move = new Vector2(h, 0);
-        Vector2 moveDir = playerCtrl.DirSet(move);
+        Vector2 moveDir = UtilityManager.utility.DirSet(move);
+        // playerCtrl.DirSet(move);
 
         // 이동 방향이 left 쪽이면 Player가 왼쪽으로 보기
         playerAnim.SetFloat(speedHash, move.magnitude);

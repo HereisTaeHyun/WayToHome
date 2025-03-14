@@ -26,7 +26,7 @@ public class FlyingEyeCtrl : EnemyCtrl
             if(Vector2.Distance(transform.position, target.position) < scanningRadius)
             {
                 // 이동 방향 벡터 설정
-                Vector2 enemyMoveDir = DirSet(target.transform.position - transform.position);
+                Vector2 enemyMoveDir = UtilityManager.utility.DirSet(target.transform.position - transform.position);
                 anim.SetFloat("MoveDir", enemyMoveDir.x);
 
                 // 플레이어에게 이동
@@ -40,13 +40,14 @@ public class FlyingEyeCtrl : EnemyCtrl
     public override void ChangeHP(float value)
     {
         base.ChangeHP(value);
+        
     }
 
     // 적이 피격당했을 때
     protected override IEnumerator EnemyGetHit()
     {
         canMove = false;
-        Vector2 hitVector =  DirSet(transform.position - target.transform.position);
+        Vector2 hitVector =  UtilityManager.utility.DirSet(transform.position - target.transform.position);
 
         // 타격에 따른 애니메이션 재생
         anim.SetTrigger(hitTrigger);

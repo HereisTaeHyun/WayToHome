@@ -151,9 +151,9 @@ public class PlayerCtrl : MonoBehaviour
             // 무적 시간이 아니었으면 무적으로 만든 후 Timer 설정
             invincible = true;
             invincibleTimer = invincibleTime;
+            Debug.Log($"체력변화 : {value}");
         }
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
-        Debug.Log($"체력변화 : {value}");
 
         // 데미지가 0이거나 그 이하일 경우 사망
         if(currentHP <= 0)
@@ -191,16 +191,5 @@ public class PlayerCtrl : MonoBehaviour
                 playerMove.moveSpeed = playerMove.readDebuffedSpeed;
                 break;
         }
-    }
-
-    public Vector2 DirSet(Vector2 move)
-    {
-        Vector2 moveDir = new Vector2(0, 0);
-        if(Mathf.Approximately(move.x, 0) == false)
-        {
-            moveDir.Set(move.x, 0);
-            moveDir.Normalize();
-        }
-        return moveDir;
     }
 }
