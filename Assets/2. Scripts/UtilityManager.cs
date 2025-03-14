@@ -27,4 +27,8 @@ public class UtilityManager : MonoBehaviour
         }
         return moveDir;
     }
+
+    // public float[] ItemProbabilityNormalizer()
+    // {
+    // }
 }
