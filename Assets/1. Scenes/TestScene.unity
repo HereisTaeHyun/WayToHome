@@ -1045,7 +1045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3941675743311660735, guid: 990359c5cd84d1c4d90450ed4c6f4b42, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1293,6 +1293,10 @@ PrefabInstance:
     - target: {fileID: 3802497873425190016, guid: d7a549f1ff3383940986ea4b5dc4fbdc, type: 3}
       propertyPath: m_Name
       value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802497873425190016, guid: d7a549f1ff3383940986ea4b5dc4fbdc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5010800656101217184, guid: d7a549f1ff3383940986ea4b5dc4fbdc, type: 3}
       propertyPath: m_LocalPosition.x
