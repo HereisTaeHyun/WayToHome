@@ -27,7 +27,6 @@ public class PlayerMove : MonoBehaviour
 
     private Animator playerAnim;
 
-    private PhysicsMaterial2D physicsMaterial2D;
     private CapsuleCollider2D coll2D;
     private Vector2 collSize;
     private float slopeCheckDistance = 0.5f;
@@ -62,7 +61,6 @@ public class PlayerMove : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
-        physicsMaterial2D = new PhysicsMaterial2D();
 
         coll2D = GetComponent<CapsuleCollider2D>();
         collSize = coll2D.size;
@@ -75,7 +73,7 @@ public class PlayerMove : MonoBehaviour
         // 이동 방향 지정
         float h = Input.GetAxis("Horizontal");
         Vector2 move = new Vector2(h, 0);
-        Vector2 moveDir = playerCtrl.MoveDirSet(move);
+        Vector2 moveDir = playerCtrl.DirSet(move);
 
         // 이동 방향이 left 쪽이면 Player가 왼쪽으로 보기
         playerAnim.SetFloat(speedHash, move.magnitude);
@@ -90,25 +88,14 @@ public class PlayerMove : MonoBehaviour
             playerCtrl.state = PlayerCtrl.State.Idle;
         }
 
-        // 정지 상태이면 마찰력 증가, 그래야 멈출때랑 경사에서 안미끄러짐
-        if(playerCtrl.state == PlayerCtrl.State.Idle)
-        {
-            physicsMaterial2D.friction = 5.0f;
-            coll2D.sharedMaterial = physicsMaterial2D;
-        }
-        else if(playerCtrl.state == PlayerCtrl.State.Move)
-        {
-            physicsMaterial2D.friction = 1.8f;
-            coll2D.sharedMaterial = physicsMaterial2D;
-        }
-
         // 플레이어가 있는 Ground 상태를 알기 위해 스캐닝하는 위치
         Vector2 checkPos = transform.position - new Vector3(0.0f, collSize.y / 2);
 
         // 이동에 필요한 정보 스캐닝
         HorizontalSlopeCheck(checkPos);
         VerticalSlopeCheck(checkPos);
-        // 실제 이동 함수
+
+        // 실제 이동 적용 부분
         if(Input.GetButton("Horizontal"))
         {
             playerAnim.SetFloat(dirHash, moveDir.x);

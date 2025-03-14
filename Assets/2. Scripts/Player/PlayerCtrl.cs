@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerCtrl : MonoBehaviour
     public float MaxHP = 10.0f;
     public float currentHP;
     public int money = 0;
+    public bool canMove;
     public State state;
     public enum State
     {
@@ -29,8 +31,11 @@ public class PlayerCtrl : MonoBehaviour
     // private 변수
     private PlayerMove playerMove;
     private PlayerAttack playerAttack;
+    private Rigidbody2D rb2D;
     private Animator playerAnim;
-    public bool canMove;
+    private bool isDie;
+    private CapsuleCollider2D coll2D;
+    private PhysicsMaterial2D physicsMaterial2D;
     private readonly int dieHash = Animator.StringToHash("Die");
     [SerializeField] private GameObject graveStone;
     
@@ -50,10 +55,42 @@ public class PlayerCtrl : MonoBehaviour
     {
         playerMove = GetComponent<PlayerMove>();
         playerAttack = GetComponent<PlayerAttack>();
+        rb2D = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
+        coll2D = GetComponent<CapsuleCollider2D>();
+        physicsMaterial2D = new PhysicsMaterial2D();
+
+        StartCoroutine(ApplyState());
         currentHP = MaxHP;
         canMove = true;
         state = State.Idle;
+    }
+
+    // 각 상태에 따라 필요한 변화 적용하는 곳
+    private IEnumerator ApplyState()
+    {
+        while(isDie != true)
+        {
+            yield return new WaitForSeconds(0.3f);
+
+            if(state == State.Die)
+            {
+                canMove = false;
+                rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+                yield break;
+            }
+             // 정지 상태이면 마찰력 증가, 그래야 멈출때랑 경사에서 안미끄러짐
+            else if(state == State.Move)
+            {
+                physicsMaterial2D.friction = 1.8f;
+                coll2D.sharedMaterial = physicsMaterial2D;
+            }
+            else if(state == State.Idle)
+            {
+                physicsMaterial2D.friction = 10.0f;
+                coll2D.sharedMaterial = physicsMaterial2D;
+            }
+        }
     }
 
     // 즉각 반응해야 하는 모듈들은 Update()에 배치
@@ -69,7 +106,6 @@ public class PlayerCtrl : MonoBehaviour
                 invincible = false;
             }
         }
-
          // (debuffTimer > 0) == getDebuff를 당함, 이 경우도 타이머 차감하여 통상 상태로
         if(debuffTimer > 0)
         {
@@ -86,7 +122,6 @@ public class PlayerCtrl : MonoBehaviour
         {
             return;
         }
-
         // 모듈 클래스 함수 호출
         playerMove.Jump();
         playerAttack.Attack();
@@ -123,6 +158,7 @@ public class PlayerCtrl : MonoBehaviour
         // 데미지가 0이거나 그 이하일 경우 사망
         if(currentHP <= 0)
         {
+            state = State.Die;
             PlayerDie();
         }
     }
@@ -134,8 +170,8 @@ public class PlayerCtrl : MonoBehaviour
     }
     private IEnumerator DieStart()
     {
+        state = State.Die;
         playerAnim.SetTrigger(dieHash);
-        canMove = false;
         yield return new WaitForSeconds(1.5f);
         Instantiate(graveStone, transform.position, transform.rotation);
         Destroy(gameObject);
@@ -157,7 +193,7 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    public Vector2 MoveDirSet(Vector2 move)
+    public Vector2 DirSet(Vector2 move)
     {
         Vector2 moveDir = new Vector2(0, 0);
         if(Mathf.Approximately(move.x, 0) == false)

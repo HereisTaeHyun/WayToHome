@@ -10,14 +10,14 @@ public class EnemyCtrl : MonoBehaviour
 
     // protected 변수
 #region private
-    protected Rigidbody2D rb2D;
-    protected bool canMove;
     [SerializeField] protected float enemyPushPower;
     [SerializeField] protected float stunTime;
-    protected float scanningRadius = 10.0f;
     [SerializeField] protected float MaxHP;
-    protected float currentHP;
     [SerializeField] protected float moveSpeed;
+    protected Rigidbody2D rb2D;
+    protected bool canMove;
+    protected float scanningRadius = 10.0f;
+    protected float currentHP;
     protected readonly int dirHash = Animator.StringToHash("MoveDir");
     protected readonly int hitHash = Animator.StringToHash("HitDir");
     protected readonly int hitTrigger = Animator.StringToHash("TakeHit");

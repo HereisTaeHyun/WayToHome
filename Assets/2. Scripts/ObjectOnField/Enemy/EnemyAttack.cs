@@ -31,11 +31,11 @@ public class EnemyAttack : MeleeAttack
     }
 
     // 공격 coll 설정은 animation event로 사용 중
-    public void EnableAttackCollider()
+    private void EnableAttackCollider()
     {
         attackCollier.SetActive(true);
     }
-    public void DisableAttackCollider()
+    private void DisableAttackCollider()
     {
         attackCollier.SetActive(false);
     }
