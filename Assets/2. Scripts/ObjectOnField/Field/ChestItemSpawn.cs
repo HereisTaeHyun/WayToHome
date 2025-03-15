@@ -1,3 +1,4 @@
+using System.Collections;
 using Cainos.PixelArtPlatformer_VillageProps;
 using UnityEngine;
 
@@ -28,6 +29,12 @@ public class ChestItemSpawn : MonoBehaviour
         }
         private void ItemOut()
         {
+            StartCoroutine(ItemDrop());
+        }
+
+        IEnumerator ItemDrop()
+        {
+            yield return new WaitForSeconds(0.3f);
             Instantiate(itemInChest, itemSpawnPoint.transform.position, itemSpawnPoint.transform.rotation);
         }
 }
