@@ -61,7 +61,7 @@ public class VendingMachine : MonoBehaviour
     }
 
     // 버튼으로 입력 받은 아이템 구매
-    public void buyItem(GameObject buyingItem)
+    public void BuyItem(GameObject buyingItem)
     {
         // button으로 입력 받는 것은 key인 sellingItem임
         // itemInformation에 buyingItem이 있으면 itemPrice만큼 player.money 차감 및 자판기 사용 수 증가

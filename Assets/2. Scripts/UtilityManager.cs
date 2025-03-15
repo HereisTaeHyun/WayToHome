@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 public class UtilityManager : MonoBehaviour
 {
@@ -28,7 +30,14 @@ public class UtilityManager : MonoBehaviour
         return moveDir;
     }
 
-    // public float[] ItemProbabilityNormalizer()
-    // {
-    // }
+    public Dictionary<GameObject, float> ItemNormalizer(Dictionary<GameObject, float> inputItem)
+    {
+        List<GameObject> keys = new List<GameObject>(inputItem.Keys);
+        float sumValues = inputItem.Sum(item => item.Value);
+        foreach(GameObject elem in keys)
+        {
+            inputItem[elem] = (inputItem[elem] / sumValues) * 100.0f;
+        }
+        return inputItem;
+    }
 }

@@ -1,12 +1,15 @@
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using System.Linq;
 
 public class EnemyCtrl : MonoBehaviour
 {
     // Enemy의 공통 행동: 추적, 사망, 아이템 드롭
 
     // public 변수
-    public GameObject[] dropItem;
+    public Rigidbody2D rb2D;
 
     // protected 변수
 #region private
@@ -14,7 +17,8 @@ public class EnemyCtrl : MonoBehaviour
     [SerializeField] protected float stunTime;
     [SerializeField] protected float MaxHP;
     [SerializeField] protected float moveSpeed;
-    public Rigidbody2D rb2D;
+    [SerializeField] private GameObject[] dropItem;
+    [SerializeField] private float[] itemWeight;
     protected bool canMove;
     protected float scanningRadius = 10.0f;
     protected float currentHP;
@@ -62,6 +66,28 @@ public class EnemyCtrl : MonoBehaviour
     protected virtual IEnumerator EnemyGetHit()
     {
         yield return new WaitForSeconds(stunTime);
+    }
+    
+    // 아이템 드롭 처리
+    protected virtual GameObject ItemDrop(Dictionary<GameObject, float> item)
+    {
+        // 유틸리티 매니저의 ItemNormalizer로 가중치를 100으로 정규화
+        item = UtilityManager.utility.ItemNormalizer(item);
+
+        // 순서에 따른 영향 제거하기 위해 정렬
+        item.OrderByDescending(x => x.Value);
+
+        // 0 ~ 100 선택하여 확률을 음수로 만드는 키가 있으면 반환
+        float randomValue = Random.Range(0, 100);
+        foreach(var elem in item)
+        {
+            randomValue -= elem.Value;
+            if(randomValue <= 0)
+            {
+                return elem.Key;
+            }
+        }
+        return null;
     }
 
     // 사망 처리
