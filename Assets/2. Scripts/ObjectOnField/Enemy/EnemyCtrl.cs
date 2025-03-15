@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-using System.Linq;
 
 public class EnemyCtrl : MonoBehaviour
 {
@@ -17,8 +17,9 @@ public class EnemyCtrl : MonoBehaviour
     [SerializeField] protected float stunTime;
     [SerializeField] protected float MaxHP;
     [SerializeField] protected float moveSpeed;
-    [SerializeField] private GameObject[] dropItem;
-    [SerializeField] private float[] itemWeight;
+    [SerializeField] protected GameObject[] dropItem;
+    [SerializeField] protected float[] itemWeight;
+    protected Dictionary<GameObject, float> itemInformation = new Dictionary<GameObject, float>();
     protected bool canMove;
     protected float scanningRadius = 10.0f;
     protected float currentHP;
@@ -43,6 +44,13 @@ public class EnemyCtrl : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         canMove = true;
         currentHP = MaxHP;
+
+        
+        // 드롭 아이템 정보 딕셔너리 형성
+        for(int i = 0; i < dropItem.Length; i++)
+        {
+            itemInformation.Add(dropItem[i], itemWeight[i]);
+        }
     }
     
     // 사정 거리 내부에 집입하는 경우 따라가기 메서드

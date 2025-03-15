@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8385112262749564439}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -189,14 +189,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37eb3a36dbd68043a47d3698fcb18e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropItem:
-  - {fileID: 539637585929383674, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
-  - {fileID: 4498321679550260775, guid: d7a3d993a04b2674790cff4693ca9bc5, type: 3}
+  rb2D: {fileID: 0}
   enemyPushPower: 5
   stunTime: 0.5
   MaxHP: 3
-  currentHP: 0
   moveSpeed: 5
+  dropItem:
+  - {fileID: 539637585929383674, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
+  - {fileID: 4498321679550260775, guid: d7a3d993a04b2674790cff4693ca9bc5, type: 3}
+  itemWeight:
+  - 90
+  - 10
   damage: -2
 --- !u!114 &1959779309889854907
 MonoBehaviour:

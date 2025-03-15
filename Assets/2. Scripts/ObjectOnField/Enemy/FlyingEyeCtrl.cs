@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 // 하늘을 날면서 타겟을 추적하는 적에 대한 클래스
 public class FlyingEyeCtrl : EnemyCtrl
@@ -60,18 +62,16 @@ public class FlyingEyeCtrl : EnemyCtrl
         canMove = true;
     }
 
+    protected override GameObject ItemDrop(Dictionary<GameObject, float> item)
+    {
+        return base.ItemDrop(item);
+    }
+
     // 사망 처리
     protected override void EnemyDie()
     {
-        float itemChoose = Random.Range(0, 100);
-        if (itemChoose < 90)
-        {
-            Instantiate(dropItem[0], transform.position, transform.rotation);
-        }
-        else if (itemChoose >= 90)
-        {
-            Instantiate(dropItem[1], transform.position, transform.rotation);
-        }
+        GameObject selectedItem = ItemDrop(itemInformation);
+        Instantiate(selectedItem, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 }

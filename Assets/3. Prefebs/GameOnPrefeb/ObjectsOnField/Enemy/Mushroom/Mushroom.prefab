@@ -191,14 +191,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f310e94af69efab46bd36d28d38f583e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropItem:
-  - {fileID: 5719874273034391547, guid: c50a2965223d9b9408209efb5c3b0f4a, type: 3}
-  - {fileID: 4498321679550260775, guid: d7a3d993a04b2674790cff4693ca9bc5, type: 3}
+  rb2D: {fileID: 0}
   enemyPushPower: 0
   stunTime: 0
   MaxHP: 5
   moveSpeed: 3
-  rb2D: {fileID: 0}
+  dropItem:
+  - {fileID: 5719874273034391547, guid: c50a2965223d9b9408209efb5c3b0f4a, type: 3}
+  - {fileID: 4498321679550260775, guid: d7a3d993a04b2674790cff4693ca9bc5, type: 3}
+  itemWeight:
+  - 90
+  - 10
   damage: -2
   attackRange: 1.35
   playerLayer:
