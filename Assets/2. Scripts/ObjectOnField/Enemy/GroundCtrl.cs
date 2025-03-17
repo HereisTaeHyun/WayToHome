@@ -38,7 +38,7 @@ public class GroundCtrl : EnemyCtrl
     protected override void FollowingTarget(float moveSpeed, float scanningRadius)
     {
         // 타겟이 존재하고 살아 있을 경우 움직임
-        if(target != null && isDie == false)
+        if(GameManager.instance.readIsGameOver == false && isDie == false)
         {
             // 플레이어가 scanningRadius 내부면 moveSpeed만큼씩 이동 시작
             if(Vector2.Distance(transform.position, target.position) < scanningRadius)

@@ -169,6 +169,7 @@ public class PlayerCtrl : MonoBehaviour
             Debug.Log($"체력변화 : {value}");
         }
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
+        DisplayHP();
 
         // 데미지가 0이거나 그 이하일 경우 사망
         if(currentHP <= 0)
@@ -176,6 +177,11 @@ public class PlayerCtrl : MonoBehaviour
             state = State.Die;
             GameManager.instance.GameOverTrigger();
         }
+    }
+
+    private void DisplayHP()
+    {
+        HPBar.fillAmount = currentHP / MaxHP;
     }
 
     // 플레이어 사망

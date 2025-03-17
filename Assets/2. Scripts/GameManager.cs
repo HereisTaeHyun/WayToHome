@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     float alphaChangeTime = 1.5f;
     private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
     private bool isGameOver;
+    public bool readIsGameOver {get {return isGameOver;}}
 
     // 싱글톤 선언
     public static GameManager instance = null;
