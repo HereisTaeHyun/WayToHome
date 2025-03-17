@@ -1,6 +1,9 @@
 using System.Collections;
+using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.UI;
+using Image = UnityEngine.UI.Image;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -38,6 +41,7 @@ public class PlayerCtrl : MonoBehaviour
     private PhysicsMaterial2D physicsMaterial2D;
     private readonly int dieHash = Animator.StringToHash("Die");
     [SerializeField] private GameObject graveStone;
+    [SerializeField] private Image HPBar;
     
     // 무적 관련
     private bool invincible;
