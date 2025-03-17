@@ -166,8 +166,9 @@ public class PlayerCtrl : MonoBehaviour
             // 무적 시간이 아니었으면 무적으로 만든 후 Timer 설정
             invincible = true;
             invincibleTimer = invincibleTime;
-            Debug.Log($"체력변화 : {value}");
         }
+
+        // 체력 계산 및 체력바 표기
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
         DisplayHP();
 
@@ -179,6 +180,14 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+    // 타 객체에서 최대 체력 증가시킬떄 접근
+    public void ChangeMaxHP()
+    {
+        MaxHP += 1;
+        DisplayHP();
+    }
+
+    // HP 패녈 표시
     private void DisplayHP()
     {
         HPBar.fillAmount = currentHP / MaxHP;

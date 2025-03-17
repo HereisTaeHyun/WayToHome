@@ -101,7 +101,7 @@ public class PlayerMove : MonoBehaviour
         {
             playerAnim.SetFloat(dirHash, moveDir.x);
 
-            // Ground 위면 얻어진 수직 벡터 각도에 따라 이동, 아니면 그냥 이전 velocity에 따라 이동
+            // Ground, Slope 위면 얻어진 수직 벡터 각도에 따라 이동, 아니면 그냥 이전 velocity에 따라 이동
             if(isGround == true && isSlope != true)
             {
                 newVelocity.Set(move.x * moveSpeed, 0.0f);
@@ -122,22 +122,22 @@ public class PlayerMove : MonoBehaviour
 #endregion
 
 #region slopeChecker
+    // 수평 언덕 체크 메서드
     private void HorizontalSlopeCheck(Vector2 checkPos)
     {
         RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, groundLayer);
         RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, groundLayer);
 
+        // 잎 or 뒤에 Ground check가 돠면 == 언덕이 앞에 있음
         if (slopeHitFront)
         {
             isSlope = true;
-
             slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
 
         }
         else if (slopeHitBack)
         {
             isSlope = true;
-
             slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
         }
         else
@@ -147,7 +147,7 @@ public class PlayerMove : MonoBehaviour
         }
 
     }
-    // 경사 체크 메서드
+    // 직선 언덕 체크 메서드
     private void VerticalSlopeCheck(Vector2 checkPos)
     {
         RaycastHit2D hit2D = Physics2D.Raycast(checkPos, Vector2.down, slopeCheckDistance, groundLayer);
@@ -155,14 +155,13 @@ public class PlayerMove : MonoBehaviour
         {
             // 수직 2D 벡터 반환 받기
             slopeNormalPerp = Vector2.Perpendicular(hit2D.normal).normalized;            
-
             slopeDownAngle = Vector2.Angle(hit2D.normal, Vector2.up);
 
+            // 이전 경사 정보와 달라지면 == 경사에 올라옴
             if(slopeDownAngle != lastSlopeAngle)
             {
                 isSlope = true;
             }                       
-
             lastSlopeAngle = slopeDownAngle;
         }
     }

@@ -33,7 +33,7 @@ public class ItemToBuy : MonoBehaviour
             switch(itemToBuyType)
             {
                 case ItemToBuyType.MaxHpPlus: // 최대 체력 증가
-                    playerCtrl.MaxHP += 1;
+                    playerCtrl.ChangeMaxHP();
                     Debug.Log("최대 체력 증가");
                     Destroy(gameObject);
                     Destroy(transform.parent.gameObject);

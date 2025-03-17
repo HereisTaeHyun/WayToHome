@@ -320,9 +320,10 @@ MonoBehaviour:
   MaxHP: 10
   currentHP: 0
   money: 0
-  state: 0
   canMove: 0
+  state: 0
   graveStone: {fileID: 3894529209947948738, guid: 8d3f9a110a49f7c498ca902310d02ee4, type: 3}
+  HPBar: {fileID: 0}
 --- !u!114 &8260205561483300568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,8 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b80643ca820f404e8090bf50eb59977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 0
-  baseAttackPower: -1
+  attackDamage: 0
 --- !u!114 &450396533289962263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,13 +351,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 7
   maxJump: 1
-  slopeCheckDistance: 0.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  isGround: 0
-  isJump: 0
-  isSlope: 0
 --- !u!95 &3413060426356960647
 Animator:
   serializedVersion: 7
