@@ -1,7 +1,21 @@
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    // 게임매니저: 게임 오버 및 초기화, 풀 관리, Player UI 관리 맞길 예정
+    // 몬스터는 고정 위치 배치할 것임, 아이템을 풀 관리로 맞길 수 있을지 알아보기
+    // 게임 오버는 이벤트로 선언하여 관련 함수들 등록하기
+
+    // public 변수
+    // 게임 오버 이벤트
+    public delegate void GameOverHandler();
+    public static event GameOverHandler OnGameOver;
+
+    // private 변수
+    [SerializeField] private GameObject gameOverPanel;
+    private bool isGameOver;
+
     // 싱글톤 선언
     public static GameManager instance = null;
     void Awake()
@@ -15,5 +29,31 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    // Enable되면 함수 구독 및 UI 초기화
+    void OnEnable()
+    {
+        isGameOver = false;
+        gameOverPanel.SetActive(false);
+        OnGameOver += GameOver;
+    }
+    // Disable되면 함수 구독 해제
+    void OnDisable()
+    {
+        OnGameOver -= GameOver;
+    }
+
+    // GameOver 되면 UI 호출, 이후 다시하기 키 추가 예정
+    private void GameOver()
+    {
+        isGameOver = true;
+        gameOverPanel.SetActive(true);
+    }
+
+    // 다른 객체에서 OnGameOver 호출 시에 사용
+    public void GameOverTrigger()
+    {
+        OnGameOver?.Invoke();
     }
 }

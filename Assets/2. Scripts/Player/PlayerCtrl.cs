@@ -66,6 +66,15 @@ public class PlayerCtrl : MonoBehaviour
         state = State.Idle;
     }
 
+    void OnEnable()
+    {
+        GameManager.OnGameOver += PlayerDie;
+    }
+    void OnDisable()
+    {
+        GameManager.OnGameOver -= PlayerDie;
+    }
+
     // 각 상태에 따라 필요한 변화 적용하는 곳
     private IEnumerator ApplyState()
     {
@@ -159,7 +168,8 @@ public class PlayerCtrl : MonoBehaviour
         if(currentHP <= 0)
         {
             state = State.Die;
-            PlayerDie();
+            GameManager.instance.GameOverTrigger();
+            // PlayerDie();
         }
     }
 
@@ -173,6 +183,7 @@ public class PlayerCtrl : MonoBehaviour
         state = State.Die;
         playerAnim.SetTrigger(dieHash);
         yield return new WaitForSeconds(1.5f);
+        StopAllCoroutines();
         Instantiate(graveStone, transform.position, transform.rotation);
         Destroy(gameObject);
     }
