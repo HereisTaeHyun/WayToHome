@@ -51,6 +51,7 @@ public class PlayerCtrl : MonoBehaviour
     protected readonly int takeHitHash = Animator.StringToHash("TakeHit");
 #endregion
 
+    // 초기화
     void Awake()
     {
         playerMove = GetComponent<PlayerMove>();
@@ -66,6 +67,7 @@ public class PlayerCtrl : MonoBehaviour
         state = State.Idle;
     }
 
+    // 이벤트 등록 부분
     void OnEnable()
     {
         GameManager.OnGameOver += PlayerDie;
@@ -169,11 +171,10 @@ public class PlayerCtrl : MonoBehaviour
         {
             state = State.Die;
             GameManager.instance.GameOverTrigger();
-            // PlayerDie();
         }
     }
 
-    // 플레이어 사망, 현재는 임시로 Destroy만 사용 중, 이후 anim, audio 등 추가 예정
+    // 플레이어 사망
     private void PlayerDie()
     {
         StartCoroutine(DieStart());
@@ -183,8 +184,8 @@ public class PlayerCtrl : MonoBehaviour
         state = State.Die;
         playerAnim.SetTrigger(dieHash);
         yield return new WaitForSeconds(1.5f);
-        StopAllCoroutines();
         Instantiate(graveStone, transform.position, transform.rotation);
+        StopAllCoroutines();
         Destroy(gameObject);
     }
 

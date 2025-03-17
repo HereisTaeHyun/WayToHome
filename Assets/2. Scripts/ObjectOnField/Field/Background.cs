@@ -10,6 +10,8 @@ public class Background : MonoBehaviour
     private float distance;
     private Material[] materials;
     private float[] layerMoveSpeed;
+
+    // Background 오브젝트, 마테리얼 받아오기
     void Awake()
     {
         cameraStartPos = cameraTransform.position;
@@ -29,6 +31,7 @@ public class Background : MonoBehaviour
         CalMoveSpeedLayer(backgrounds, backgroundCount);
     }
 
+    // 가장 먼 거리로부터 계산하여 가까울 수록 높은 속도를 줌
     private void CalMoveSpeedLayer(GameObject[] backgrounds, int count)
     {
         float farthestDistance = 0;
@@ -46,6 +49,7 @@ public class Background : MonoBehaviour
         }
     }
 
+    // 마테리얼에 계산 값 적용
     void LateUpdate()
     {
         distance = cameraTransform.position.x - cameraStartPos.x;

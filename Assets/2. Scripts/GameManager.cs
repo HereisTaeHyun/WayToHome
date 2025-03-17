@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     // 게임매니저: 게임 오버 및 초기화, 풀 관리, Player UI 관리 맞길 예정
     // 몬스터는 고정 위치 배치할 것임, 아이템을 풀 관리로 맞길 수 있을지 알아보기
-    // 게임 오버는 이벤트로 선언하여 관련 함수들 등록하기
+    // 게임 오버 된 후 재시작하면 active false인 적을 true로 하는 식으로 씬 초기화 생각 중
 
     // public 변수
     // 게임 오버 이벤트
@@ -44,7 +44,12 @@ public class GameManager : MonoBehaviour
         OnGameOver -= GameOver;
     }
 
-    // GameOver 되면 UI 호출, 이후 다시하기 키 추가 예정
+    void Update()
+    {
+        // if isGameOver = true;일 경우 다시하기 진입 가능하도록
+    }
+
+    // GameOver 되면 UI 호출
     private void GameOver()
     {
         isGameOver = true;
