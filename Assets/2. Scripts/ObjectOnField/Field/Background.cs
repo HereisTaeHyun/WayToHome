@@ -49,7 +49,6 @@ public class Background : MonoBehaviour
     void LateUpdate()
     {
         distance = cameraTransform.position.x - cameraStartPos.x;
-        // transform.position = new Vector3(cameraTransform.position.x, transform.position.y, 0);
         transform.position = new Vector3(cameraTransform.position.x, cameraTransform.position.y, 0);
 
         for(int i = 0; i < materials.Length; i++)
