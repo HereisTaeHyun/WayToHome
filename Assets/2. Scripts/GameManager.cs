@@ -1,5 +1,11 @@
+using System;
+using System.Collections;
+using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using UnityEngine.UI;
+using Image = UnityEngine.UI.Image;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +20,9 @@ public class GameManager : MonoBehaviour
 
     // private 변수
     [SerializeField] private GameObject gameOverPanel;
+    private Image gameOverImage;
+    float alphaChangeTime = 1.5f;
+    private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
     private bool isGameOver;
 
     // 싱글톤 선언
@@ -44,6 +53,12 @@ public class GameManager : MonoBehaviour
         OnGameOver -= GameOver;
     }
 
+    
+    void Start()
+    {
+        gameOverImage = gameOverPanel.GetComponent<Image>();
+    }
+
     void Update()
     {
         // if isGameOver = true;일 경우 다시하기 진입 가능하도록
@@ -54,6 +69,22 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         gameOverPanel.SetActive(true);
+        StartCoroutine(ChangeAlpha());
+    }
+    // 사망시 UI 점진적으로 짙어지게
+    IEnumerator ChangeAlpha()
+    {
+        Color currentColor = gameOverImage.color;
+        float time = 0.0f;
+
+        // 현재 알파가 목표 알파보다 작은 동안 점진적으로 알파 값 변경
+        while(currentColor.a <= GAME_OVER_IMAGE_ALPHA)
+        {
+            time += Time.deltaTime / alphaChangeTime;
+            currentColor.a = Mathf.Lerp(0.0f, GAME_OVER_IMAGE_ALPHA, time);
+            gameOverImage.color = currentColor;
+            yield return null;
+        }
     }
 
     // 다른 객체에서 OnGameOver 호출 시에 사용
