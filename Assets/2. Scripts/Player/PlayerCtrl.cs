@@ -127,7 +127,7 @@ public class PlayerCtrl : MonoBehaviour
         }
 
         // canMove == true일때만 playerMove 객체 접근 가능
-        if(canMove == false && GameManager.instance.readIsGameOver == true)
+        if(canMove == false || GameManager.instance.readIsGameOver == true)
         {
             return;
         }
@@ -139,7 +139,7 @@ public class PlayerCtrl : MonoBehaviour
     private void FixedUpdate()
     {
         // 이동 관련 모듈 함수는 여기서 처리
-        if(canMove == false && GameManager.instance.readIsGameOver == true)
+        if(canMove == false || GameManager.instance.readIsGameOver == true)
         {
             return;
         }
