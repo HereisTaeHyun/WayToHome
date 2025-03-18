@@ -88,14 +88,8 @@ public class PlayerCtrl : MonoBehaviour
         {
             yield return new WaitForSeconds(0.3f);
 
-            if(state == State.Die)
-            {
-                canMove = false;
-                rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-                yield break;
-            }
-             // 정지 상태이면 마찰력 증가, 그래야 멈출때랑 경사에서 안미끄러짐
-            else if(state == State.Move)
+            // 정지 상태이면 마찰력 증가, 그래야 멈출때랑 경사에서 안미끄러짐
+            if(state == State.Move)
             {
                 physicsMaterial2D.friction = 1.8f;
                 coll2D.sharedMaterial = physicsMaterial2D;
@@ -133,7 +127,7 @@ public class PlayerCtrl : MonoBehaviour
         }
 
         // canMove == true일때만 playerMove 객체 접근 가능
-        if(canMove == false)
+        if(canMove == false && GameManager.instance.readIsGameOver == true)
         {
             return;
         }
@@ -145,7 +139,7 @@ public class PlayerCtrl : MonoBehaviour
     private void FixedUpdate()
     {
         // 이동 관련 모듈 함수는 여기서 처리
-        if(canMove == false)
+        if(canMove == false && GameManager.instance.readIsGameOver == true)
         {
             return;
         }
@@ -175,9 +169,17 @@ public class PlayerCtrl : MonoBehaviour
         // 데미지가 0이거나 그 이하일 경우 사망
         if(currentHP <= 0)
         {
-            state = State.Die;
-            GameManager.instance.GameOverTrigger();
+            GameOver();
         }
+    }
+
+    private void GameOver()
+    {
+        rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        canMove = false;
+        isDie = true;
+        state = State.Die;
+        GameManager.instance.GameOverTrigger();
     }
 
     // 타 객체에서 최대 체력 증가시킬떄 접근
