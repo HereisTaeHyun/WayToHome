@@ -9,7 +9,6 @@ public class GroundCtrl : EnemyCtrl
     private int maxJump = 1;
     private int jumpCount;
     private bool isMove;
-    private bool isDie;
     private Vector2 newVelocity;
     private EnemyAttack enemyAttack;
     [SerializeField] float attackRange;
@@ -21,7 +20,6 @@ public class GroundCtrl : EnemyCtrl
     {
         Init();
         isMove = false;
-        isDie = false;
         enemyAttack = GetComponent<EnemyAttack>();
     }
 
@@ -104,7 +102,6 @@ public class GroundCtrl : EnemyCtrl
         // 체력 0 이하면 사망처리
         if (currentHP <= 0)
         {
-            isDie = true;
             EnemyDie();
         }
     }
@@ -130,20 +127,14 @@ public class GroundCtrl : EnemyCtrl
     protected override void EnemyDie()
     {
         // 아이템 확률 계산 및 드롭, 확장성이 전무하여 수정 필요성 있음, 확률 가중치를 정하고 전체의 합을 정규화하여 확률 계산 가능할까?
-        float itemChoose = Random.Range(0, 100);
-        if (itemChoose < 90)
-        {
-            Instantiate(dropItem[0], transform.position, transform.rotation);
-        }
-        else if (itemChoose >= 90)
-        {
-            Instantiate(dropItem[1], transform.position, transform.rotation);
-        }
+        GameObject selectedItem = ItemDrop(itemInformation);
+        Instantiate(selectedItem, transform.position, transform.rotation);
         StartCoroutine(DieStart());
     }
     // 사망 절차 진행, 물리 영향 제거 후 사망 애니메이션 재생
     private IEnumerator DieStart()
     {
+        isDie = true;
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.simulated = false;
         anim.SetTrigger(dieHash);

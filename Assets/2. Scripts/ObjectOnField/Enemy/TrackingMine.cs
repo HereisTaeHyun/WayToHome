@@ -28,15 +28,15 @@ public class TrackingMine : MonoBehaviour
         damage = flyingEyeCtrl.readDamage;
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnCollisionStay2D(Collision2D other)
     {
-        if(other != null)
+        if(GameManager.instance.readIsGameOver == false && flyingEyeCtrl.isDie == false)
         {
             if(other.gameObject.CompareTag("Player"))
             {
-                playerCtrl = other.GetComponent<PlayerCtrl>();
-                playerMove = other.GetComponent<PlayerMove>();
-                playerRb = other.GetComponent<Rigidbody2D>();
+                playerCtrl = other.collider.GetComponent<PlayerCtrl>();
+                playerMove = other.collider.GetComponent<PlayerMove>();
+                playerRb = other.collider.GetComponent<Rigidbody2D>();
 
                 // 플레이어가 무적이 아니라면 공격
                 if(playerCtrl.readInvincible != true)
@@ -48,7 +48,7 @@ public class TrackingMine : MonoBehaviour
         }
     }
 
-    IEnumerator Attack(Collider2D target)
+    IEnumerator Attack(Collision2D target)
     {
         yield return new WaitForSeconds(0.1f);
         // 에셋 찾으면 파티클 Instantiate 후 destroy 추가 필요, 아직 에셋은 안찾았음
@@ -74,7 +74,7 @@ public class TrackingMine : MonoBehaviour
 
             // Player에게 데미지 가해 및 1.5초간 스턴
             playerCtrl.ChangeHP(damage);
-            playerCtrl.GetDebuff(PlayerCtrl.DebuffType.Stun, 1.5f);
+            playerCtrl.GetDebuff(PlayerCtrl.DebuffType.Stun, 0.5f);
         }
     }
 }

@@ -1,15 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyCtrl : MonoBehaviour
 {
     // Enemy의 공통 행동: 추적, 사망, 아이템 드롭
 
     // public 변수
-    public Rigidbody2D rb2D;
+    [NonSerialized] public Rigidbody2D rb2D;
+    [NonSerialized] public bool isDie;
 
     // protected 변수
 #region private
@@ -42,6 +44,7 @@ public class EnemyCtrl : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        isDie = false;
         canMove = true;
         currentHP = MaxHP;
 
