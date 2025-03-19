@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
@@ -15,8 +16,8 @@ public class PlayerCtrl : MonoBehaviour
     public float MaxHP = 10.0f;
     public float currentHP;
     public int money = 0;
-    public bool canMove;
-    public State state;
+    [NonSerialized] public bool canMove;
+    [NonSerialized] public State state;
     public enum State
     {
         Idle,

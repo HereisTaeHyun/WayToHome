@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mono.Cecil.Cil;
@@ -13,8 +14,8 @@ public class PlayerMove : MonoBehaviour
 
     // public 변수
     // 아래들은 디버프 및 아이템에 의한 증감 있음 or 예정
-    public float moveSpeed = 7.0f;
-    public int maxJump = 1;
+    [NonSerialized] public float moveSpeed = 7.0f;
+    [NonSerialized] public int maxJump = 1;
 
 #region private
     // private 변수
