@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
-using Microsoft.Unity.VisualStudio.Editor;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
 
 public class PlayerCtrl : MonoBehaviour
@@ -46,7 +43,7 @@ public class PlayerCtrl : MonoBehaviour
 
     // UI 관련
     private Image HPBar;
-    private GameObject stat;
+    private GameObject statUI;
     
     // 무적 관련
     private bool invincible;
@@ -72,8 +69,8 @@ public class PlayerCtrl : MonoBehaviour
 
         // UI 관련
         HPBar = GameObject.FindGameObjectWithTag("HPBar")?.GetComponent<Image>();
-        stat = GameObject.FindGameObjectWithTag("Stat");
-        stat.SetActive(false);
+        statUI = GameObject.FindGameObjectWithTag("StatUI");
+        statUI.SetActive(false);
 
         StartCoroutine(ApplyState());
         currentHP = MaxHP;
@@ -141,9 +138,14 @@ public class PlayerCtrl : MonoBehaviour
         {
             return;
         }
+
         // 모듈 클래스 함수 호출
+        // 이동 외 움직임 동작
         playerMove.Jump();
         playerAttack.Attack();
+        
+        // 플레이어 StatUI 관련 동작
+        DisplayStat();
     }
 
     private void FixedUpdate()
@@ -185,9 +187,20 @@ public class PlayerCtrl : MonoBehaviour
 
     private void DisplayStat()
     {
-        if(Input.GetKey(KeyCode.Q))
+        // StatUI == Q로 생각, UI가 있으면 끄고 없으면 키기
+        if(Input.GetButtonDown("StatUI") && statUI.activeSelf == false)
         {
-            stat.SetActive(true);
+            TextMeshProUGUI HPText = statUI.transform.Find("HP").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI MoneyText = statUI.transform.Find("Money").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI PowerText = statUI.transform.Find("Damage").GetComponent<TextMeshProUGUI>();
+            HPText.text = $"HP : {currentHP} / {MaxHP}";
+            MoneyText.text = $"Money : {money}";
+            PowerText.text = $"Damage : {-playerAttack.attackDamage}";
+            statUI.SetActive(true);
+        }
+        else if(Input.GetButtonDown("StatUI") && statUI.activeSelf == true)
+        {
+            statUI.SetActive(false);
         }
     }
 
