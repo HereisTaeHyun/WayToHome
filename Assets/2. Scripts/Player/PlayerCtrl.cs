@@ -45,7 +45,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private GameObject graveStone;
 
     // UI 관련
-    [SerializeField] private Image HPBar;
+    private Image HPBar;
     
     // 무적 관련
     private bool invincible;
@@ -68,6 +68,9 @@ public class PlayerCtrl : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         coll2D = GetComponent<CapsuleCollider2D>();
         physicsMaterial2D = new PhysicsMaterial2D();
+
+        // UI 관련
+        HPBar = GameObject.FindGameObjectWithTag("HPBar")?.GetComponent<Image>();
 
         StartCoroutine(ApplyState());
         currentHP = MaxHP;
