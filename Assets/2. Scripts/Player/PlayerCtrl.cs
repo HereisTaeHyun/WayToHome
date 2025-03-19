@@ -183,6 +183,14 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+    private void DisplayStat()
+    {
+        if(Input.GetKey(KeyCode.Q))
+        {
+            stat.SetActive(true);
+        }
+    }
+
     private void GameOver()
     {
         rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
