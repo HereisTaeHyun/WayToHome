@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Microsoft.Unity.VisualStudio.Editor;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,6 +43,8 @@ public class PlayerCtrl : MonoBehaviour
     private PhysicsMaterial2D physicsMaterial2D;
     private readonly int dieHash = Animator.StringToHash("Die");
     [SerializeField] private GameObject graveStone;
+
+    // UI 관련
     [SerializeField] private Image HPBar;
     
     // 무적 관련
