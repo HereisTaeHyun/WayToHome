@@ -46,6 +46,7 @@ public class PlayerCtrl : MonoBehaviour
 
     // UI 관련
     private Image HPBar;
+    private GameObject stat;
     
     // 무적 관련
     private bool invincible;
@@ -71,6 +72,8 @@ public class PlayerCtrl : MonoBehaviour
 
         // UI 관련
         HPBar = GameObject.FindGameObjectWithTag("HPBar")?.GetComponent<Image>();
+        stat = GameObject.FindGameObjectWithTag("Stat");
+        stat.SetActive(false);
 
         StartCoroutine(ApplyState());
         currentHP = MaxHP;
