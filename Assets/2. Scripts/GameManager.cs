@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
         if(Input.GetButtonDown("Restart") && isGameOver == true)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            gameOverPanel.SetActive(false);
             isGameOver = false;
         }
     }
