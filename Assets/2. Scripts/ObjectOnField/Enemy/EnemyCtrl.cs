@@ -43,7 +43,7 @@ public class EnemyCtrl : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        target = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Transform>();
         isDie = false;
         canMove = true;
         currentHP = MaxHP;
