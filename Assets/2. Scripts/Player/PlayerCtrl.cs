@@ -76,6 +76,9 @@ public class PlayerCtrl : MonoBehaviour
         currentHP = MaxHP;
         canMove = true;
         state = State.Idle;
+
+        // HP바 초기화
+        DisplayHP();
     }
 
     // 이벤트 등록 부분
