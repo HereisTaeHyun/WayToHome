@@ -3,6 +3,7 @@ using System.Collections;
 using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
@@ -63,6 +64,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // if isGameOver = true;일 경우 다시하기 진입 가능하도록
+        if(Input.GetButtonDown("Restart") && isGameOver == true)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            isGameOver = false;
+        }
     }
 
     // GameOver 되면 UI 호출
