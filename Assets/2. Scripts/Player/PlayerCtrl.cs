@@ -193,7 +193,6 @@ public class PlayerCtrl : MonoBehaviour
         // StatUI == Q로 생각, UI가 있으면 끄고 없으면 키기
         if(Input.GetButtonDown("StatUI") && statUI.activeSelf == false)
         {
-            Time.timeScale = 0f;
             TextMeshProUGUI HPText = statUI.transform.Find("HP").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI MoneyText = statUI.transform.Find("Money").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI PowerText = statUI.transform.Find("Damage").GetComponent<TextMeshProUGUI>();
@@ -204,7 +203,6 @@ public class PlayerCtrl : MonoBehaviour
         }
         else if(Input.GetButtonDown("StatUI") && statUI.activeSelf == true)
         {
-            Time.timeScale = 1f;
             statUI.SetActive(false);
         }
     }
