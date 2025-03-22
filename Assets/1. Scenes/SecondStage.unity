@@ -1594,6 +1594,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1211996963944401802, guid: d39d62d48160f2f4ea5504c713ce560c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1330180320557325943, guid: d39d62d48160f2f4ea5504c713ce560c, type: 3}
       propertyPath: m_Name
       value: PF Village Props - Platform 02 X4

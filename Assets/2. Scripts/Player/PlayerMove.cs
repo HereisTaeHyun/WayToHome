@@ -26,6 +26,11 @@ public class PlayerMove : MonoBehaviour
     private float jumpSpeed = 5.0f;
     private int jumpCount = 0;
 
+    private bool downinputFlag;
+    private bool isPlatform;
+    private static float DISABLE_COLLIDER_TIME = 1.0f;
+    private PlatformEffector2D platformEffector;
+
     private Animator playerAnim;
 
     private CapsuleCollider2D coll2D;
@@ -62,6 +67,9 @@ public class PlayerMove : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
+
+        downinputFlag = false;
+        isPlatform = false;
 
         coll2D = GetComponent<CapsuleCollider2D>();
         collSize = coll2D.size;
@@ -215,4 +223,36 @@ public class PlayerMove : MonoBehaviour
         }
     }
 #endregion
+
+#region Platform
+    public void GoDownPlatfom()
+    {
+        // Vertical negative 키를 눌렀다면, Flag가 사용 중이 아니라면
+        if(Input.GetAxis("Vertical") < 0 && downinputFlag == false)
+        {
+            downinputFlag = true;
+            StartCoroutine(DisablePlatformCollider());
+        }
+    }
+
+    IEnumerator DisablePlatformCollider()
+    {
+        platformEffector.useColliderMask = false;
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), true);
+        yield return new WaitForSeconds(DISABLE_COLLIDER_TIME);
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), false);
+        platformEffector.useColliderMask = true;
+        downinputFlag = false;
+    }
+
+    // Platform 위라면 platformEffector를 받아 오기
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Platform") && isPlatform == false)
+        {
+            isPlatform = true;
+            platformEffector = collision.gameObject.GetComponent<PlatformEffector2D>();
+        }
+    }
+    #endregion
 }
