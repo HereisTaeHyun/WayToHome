@@ -2,6 +2,7 @@ using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class Portal : MonoBehaviour
 {
@@ -23,13 +24,17 @@ public class Portal : MonoBehaviour
         if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit"))
         {
             Debug.Log("포탈 사용");
-            UsePortal();
+            StartCoroutine(UsePortal());
         }
     }
 
-    private void UsePortal()
+    IEnumerator UsePortal()
     {
-        UtilityManager.utility.ChangeAlpha(UIImange, FADE_OUT_ALPHA, alphaChangeTime);
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        // ChangeAlpha로 페이드 아웃 후 로드 씬
+        UIImange.enabled = true;
+        StartCoroutine(UtilityManager.utility.ChangeAlpha(UIImange, FADE_OUT_ALPHA, alphaChangeTime));
+        yield return new WaitForSeconds(alphaChangeTime);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        UIImange.enabled = false;
     }
 }

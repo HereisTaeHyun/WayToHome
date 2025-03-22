@@ -1421,10 +1421,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal
       objectReference: {fileID: 0}
+    - target: {fileID: 6953756675085587817, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8565275444690467341, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
       propertyPath: UIPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1604352387}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2922,67 +2926,6 @@ Transform:
   - {fileID: 163628263}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1547307377
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2991519651992615023, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -81.66719
-      objectReference: {fileID: 0}
-    - target: {fileID: 2991519651992615023, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -14.1912155
-      objectReference: {fileID: 0}
-    - target: {fileID: 2991519651992615023, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2991519651992615023, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2991519651992615023, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2991519651992615023, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2991519651992615023, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2991519651992615023, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2991519651992615023, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2991519651992615023, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6953756675085587817, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
-      propertyPath: m_Name
-      value: Portal (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8565275444690467341, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
-      propertyPath: UIPanel
-      value: 
-      objectReference: {fileID: 1604352387}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
 --- !u!1001 &1554369578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8531,7 +8474,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -73.29, y: -12.5}
+  m_AnchoredPosition: {x: -56.81, y: -12.5}
   m_SizeDelta: {x: 10, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1704050587
@@ -8838,18 +8781,6 @@ PrefabInstance:
     - target: {fileID: 8046332112444831136, guid: e0d0127a9e8df7841b6339aa491f101d, type: 3}
       propertyPath: m_Name
       value: PlayerUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 9131074246680512882, guid: e0d0127a9e8df7841b6339aa491f101d, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9131074246680512882, guid: e0d0127a9e8df7841b6339aa491f101d, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9131074246680512882, guid: e0d0127a9e8df7841b6339aa491f101d, type: 3}
-      propertyPath: m_Color.r
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9377,7 +9308,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -61.44, y: -12.5}
+  m_AnchoredPosition: {x: -44.96, y: -12.5}
   m_SizeDelta: {x: 13, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2078116343
@@ -9897,4 +9828,3 @@ SceneRoots:
   - {fileID: 1762720799}
   - {fileID: 2001950147}
   - {fileID: 1764123359616572973}
-  - {fileID: 1547307377}
