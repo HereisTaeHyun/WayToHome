@@ -173,7 +173,7 @@ public class PlayerMove : MonoBehaviour
     // Ground에 접촉하면 JumpCount 초기화
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.collider.CompareTag("Ground"))
+        if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
         {
             isGround = true;
             jumpCount = 0;
@@ -182,7 +182,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D other)
     {
-        if(other.collider.CompareTag("Ground"))
+        if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
         {
             if(gameObject.activeInHierarchy == true)
             {
@@ -193,7 +193,7 @@ public class PlayerMove : MonoBehaviour
     IEnumerator GroundCheck(Collision2D other)
     {
         yield return new WaitForSeconds(0.05f);
-        if(other.collider.CompareTag("Ground"))
+        if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
         {
             isGround = false;
             isJump = true;
