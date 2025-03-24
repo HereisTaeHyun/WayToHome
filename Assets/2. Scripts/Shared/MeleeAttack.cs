@@ -14,12 +14,11 @@ public class MeleeAttack : MonoBehaviour
     protected Vector2 lastDir = Vector2.right;
     protected readonly int attackHash = Animator.StringToHash("Attack");
     protected readonly int attackDirHash = Animator.StringToHash("AttackDir");
-    protected float baseAttackDamage = -1.0f;
+    protected float baseAttackDamage;
 
-    protected void Init()
+    public virtual void Init()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        attackDamage = baseAttackDamage;
 
         attackCollier = transform.Find("MeleeAttack").gameObject;
         attackCollier.SetActive(false);

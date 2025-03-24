@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
 {
     // 게임매니저: 게임 오버 및 초기화, 풀 관리, Player UI 관리 맞길 예정
     // 몬스터는 고정 위치 배치할 것임, 아이템을 풀 관리로 맞길 수 있을지 알아보기
-    // 게임 오버 된 후 재시작하면 active false인 적을 true로 하는 식으로 씬 초기화 생각 중
 
     // public 변수
     // 게임 오버 이벤트
@@ -20,12 +19,20 @@ public class GameManager : MonoBehaviour
     public static event GameOverHandler OnGameOver;
 
     // private 변수
+    [SerializeField] private GameObject PlayerSpawnPos;
     [SerializeField] private GameObject gameOverPanel;
     private Image gameOverImage;
     private float alphaChangeTime = 1.5f;
     private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
     private bool isGameOver;
     public bool readIsGameOver {get {return isGameOver;}}
+
+    // 플레이어 상태 저장
+    public float playerMaxHP;
+    public float playerCurrentHP;
+    public int playerMoney;
+    public float playerAttackDamage;
+    public int playerMaxJump;
 
     // 싱글톤 선언
     public static GameManager instance = null;
@@ -40,6 +47,9 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
+
+        // 시작에 있어 플레이어 초기화
+        InitPlayer();
     }
 
     // Enable되면 함수 구독 및 UI 초기화
@@ -70,6 +80,16 @@ public class GameManager : MonoBehaviour
             gameOverPanel.SetActive(false);
             isGameOver = false;
         }
+    }
+
+    // Player 시작 상태 초기화
+    private void InitPlayer()
+    {
+        playerMaxHP = 10.0f;
+        playerCurrentHP = playerMaxHP;
+        playerMoney = 0;
+        playerAttackDamage = -1.0f;
+        playerMaxJump = 1;
     }
 
     // GameOver 되면 UI 호출

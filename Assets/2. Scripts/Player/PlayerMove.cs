@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour
     // public 변수
     // 아래들은 디버프 및 아이템에 의한 증감 있음 or 예정
     [NonSerialized] public float moveSpeed = 7.0f;
-    [NonSerialized] public int maxJump = 1;
+    public int maxJump;
 
 #region private
     // private 변수
@@ -60,11 +60,12 @@ public class PlayerMove : MonoBehaviour
 #endregion
 
 
-    void Start()
+    public void Init()
     {
         rb2D = GetComponent<Rigidbody2D>();
         playerCtrl = GetComponent<PlayerCtrl>();
         playerAnim = GetComponent<Animator>();
+        maxJump = playerCtrl.maxJump;
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
 

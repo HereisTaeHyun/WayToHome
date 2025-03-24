@@ -11,9 +11,11 @@ public class PlayerCtrl : MonoBehaviour
 
     // public 변수
 #region public
-    public float MaxHP = 10.0f;
+    public float MaxHP;
     public float currentHP;
-    public int money = 0;
+    public int money;
+    public float damage;
+    public int maxJump;
     [NonSerialized] public bool canMove;
     [NonSerialized] public State state;
     public enum State
@@ -58,7 +60,7 @@ public class PlayerCtrl : MonoBehaviour
 #endregion
 
     // 초기화
-    void Awake()
+    void Start()
     {
         playerMove = GetComponent<PlayerMove>();
         playerAttack = GetComponent<PlayerAttack>();
@@ -72,13 +74,26 @@ public class PlayerCtrl : MonoBehaviour
         statUI = GameObject.FindGameObjectWithTag("StatUI");
         statUI.SetActive(false);
 
+        // 상태 초기화, stat은 GameManager에 저장
+        // 세이브 포인트에서 stat을 GameManager로 전달하는 방식
         StartCoroutine(ApplyState());
-        currentHP = MaxHP;
+        PlayerInit();
+        playerAttack.Init();
+        playerMove.Init();
         canMove = true;
         state = State.Idle;
 
         // HP바 초기화
         DisplayHP();
+    }
+
+    private void PlayerInit()
+    {
+        MaxHP = GameManager.instance.playerMaxHP;
+        currentHP = GameManager.instance.playerCurrentHP;
+        money = GameManager.instance.playerMoney;
+        damage = GameManager.instance.playerAttackDamage;
+        maxJump = GameManager.instance.playerMaxJump;
     }
 
     // 이벤트 등록 부분
