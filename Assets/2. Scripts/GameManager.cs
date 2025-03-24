@@ -70,8 +70,14 @@ public class GameManager : MonoBehaviour
     }
 
     // 씬 로드시 Player를 받아와 위치를 spawnPos에 설정
+    // 씬 로드기에 플레이어 off면 on
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if(PlayerCtrl.player.gameObject.activeSelf == false)
+        {
+            PlayerCtrl.player.gameObject.SetActive(true);
+            PlayerCtrl.player.Init();
+        }
         PlayerSet();
     }
     
