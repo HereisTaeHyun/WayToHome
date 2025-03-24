@@ -19,6 +19,12 @@ public class GameManager : MonoBehaviour
     public delegate void GameOverHandler();
     public static event GameOverHandler OnGameOver;
 
+    public float baseMaxHP = 10.0f;
+    public float baseCurrentHP;
+    public int baseMoney = 0;
+    public int baseMaxJump = 1;
+    public float baseDamage = -1.0f;
+
     // private 변수
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject playerPrefab;
@@ -37,6 +43,9 @@ public class GameManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
+            spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
+            player = Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
+            PlayerCtrl.player.Init();
         }
         else if(instance != this)
         {
@@ -60,11 +69,10 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    // 씬 로드시 Player를 받아와 위치를 spawnPos에 설정
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
-        Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
-        player = GameObject.FindGameObjectWithTag("Player");
+        PlayerSet();
     }
     
     void Start()
@@ -75,11 +83,21 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // if isGameOver = true;일 경우 다시하기 진입 가능하도록
-        if(Input.GetButtonDown("Restart") && isGameOver == true && player == null)
+        if(Input.GetButtonDown("Restart") && isGameOver == true && player.activeSelf == false)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             gameOverPanel.SetActive(false);
             isGameOver = false;
+        }
+    }
+
+    // 게임 시작, 다시하기 등 씬 세팅에서 PlayerSet에 사용
+    private void PlayerSet()
+    {
+        spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
+        if(PlayerCtrl.player != null && spawnPos != null)
+        {
+            PlayerCtrl.player.transform.position = spawnPos.transform.position;
         }
     }
 

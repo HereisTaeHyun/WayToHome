@@ -10,7 +10,7 @@ public class EnemyAttack : MeleeAttack
     {
         groundCtrl = GetComponent<GroundCtrl>();
         anim = GetComponent<Animator>();
-        baseAttackDamage = groundCtrl.readDamage;
+        attackDamage = groundCtrl.readDamage;
 
         Init();
     }

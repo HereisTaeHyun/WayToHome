@@ -11,9 +11,11 @@ public class PlayerCtrl : MonoBehaviour
 
     // public 변수
 #region public
-    public float MaxHP = 10.0f;
+    public float MaxHP;
     public float currentHP;
-    public int money = 0;
+    public int money;
+    public int maxJump;
+    public float damage;
     [NonSerialized] public bool canMove;
     [NonSerialized] public State state;
     public enum State
@@ -31,6 +33,7 @@ public class PlayerCtrl : MonoBehaviour
 
 #region private
     // private 변수
+    private GameObject spawnPos;
     private PlayerMove playerMove;
     private PlayerAttack playerAttack;
     private Rigidbody2D rb2D;
@@ -57,8 +60,25 @@ public class PlayerCtrl : MonoBehaviour
     protected readonly int takeHitHash = Animator.StringToHash("TakeHit");
 #endregion
 
+    // 싱글톤 선언
+    public static PlayerCtrl player = null;
+    void Awake()
+    {
+        if(player == null)
+        {
+            player = this;
+        }
+        else if(player != this)
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+            // spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
+            // player = Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
     // 초기화
-    void Start()
+    public void Init()
     {
         playerMove = GetComponent<PlayerMove>();
         playerAttack = GetComponent<PlayerAttack>();
@@ -72,10 +92,16 @@ public class PlayerCtrl : MonoBehaviour
         statUI = GameObject.FindGameObjectWithTag("StatUI");
         statUI.SetActive(false);
 
+        // 초기화
         StartCoroutine(ApplyState());
+        MaxHP = GameManager.instance.baseMaxHP;
         currentHP = MaxHP;
+        money = GameManager.instance.baseMoney;
         canMove = true;
         state = State.Idle;
+        // 모듈 초기화
+        playerMove.Init();
+        playerAttack.Init();
 
         // HP바 초기화
         DisplayHP();
@@ -245,7 +271,7 @@ public class PlayerCtrl : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         Instantiate(graveStone, transform.position, transform.rotation);
         StopAllCoroutines();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     // 적 객체에서 디버프 타입, 시간 받아서 적용
