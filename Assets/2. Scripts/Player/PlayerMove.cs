@@ -203,8 +203,8 @@ public class PlayerMove : MonoBehaviour
     }
 
     IEnumerator GroundCheck(Collision2D other)
-    {
-        yield return new WaitForSeconds(0.0001f);
+     {
+        yield return new WaitForSeconds(0.05f);
         if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
         {
             isGround = false;
