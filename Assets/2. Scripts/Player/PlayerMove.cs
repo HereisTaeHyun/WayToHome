@@ -191,22 +191,25 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D other)
     {
-        if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
+        if (other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
         {
-            if(gameObject.activeInHierarchy == true)
+            if (gameObject.activeInHierarchy)
             {
-                StartCoroutine(GroundCheck(other));
+                Collider2D col = other.collider; // 미리 복사
+                StartCoroutine(GroundCheck(col));
             }
-        }  
+        }
     }
-    IEnumerator GroundCheck(Collision2D other)
+
+    IEnumerator GroundCheck(Collider2D col)
     {
         yield return new WaitForSeconds(0.05f);
-        if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
+
+        if (col != null && (col.CompareTag("Ground") || col.CompareTag("Platform")))
         {
             isGround = false;
             isJump = true;
-        }  
+        }
     }
 
     // jumpCount가 있으며 Jump 입력 받으면
