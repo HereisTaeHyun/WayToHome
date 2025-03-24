@@ -1646,11 +1646,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3477511248214432131, guid: 9b44bcfbb7b4cf042b4e82f96ab68d93, type: 3}
   m_PrefabInstance: {fileID: 670727976}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &702752390 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2693621264504375055, guid: 8a0f7bc9922e5ac4089b82ce3c4e0b72, type: 3}
-  m_PrefabInstance: {fileID: 189064494597763892}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &704329953
 GameObject:
   m_ObjectHideFlags: 0
@@ -3014,9 +3009,10 @@ GameObject:
   - component: {fileID: 1609727464}
   - component: {fileID: 1609727463}
   - component: {fileID: 1609727466}
+  - component: {fileID: 1609727467}
   m_Layer: 0
   m_Name: CinemachineCamera
-  m_TagString: Untagged
+  m_TagString: Camera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3072,7 +3068,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 702752390}
+    TrackingTarget: {fileID: 0}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -3130,6 +3126,18 @@ MonoBehaviour:
     MaxWindowSize: 0
     Padding: 0
   m_LegacyMaxWindowSize: -2
+--- !u!114 &1609727467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609727462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76eb4c78fa428694b9a96d85808669f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1620039539
 GameObject:
   m_ObjectHideFlags: 0
@@ -9441,8 +9449,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2138773898}
   m_Layer: 0
-  m_Name: FirstPlayerSpawnPos
-  m_TagString: Untagged
+  m_Name: SpawnPos
+  m_TagString: SpawnPos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
