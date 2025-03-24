@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     // private 변수
     [SerializeField] private GameObject gameOverPanel;
+    private GameObject player;
     private Image gameOverImage;
     private float alphaChangeTime = 1.5f;
     private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
+            player = GameObject.FindGameObjectWithTag("Player");
         }
         else if(instance != this)
         {
@@ -64,7 +66,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // if isGameOver = true;일 경우 다시하기 진입 가능하도록
-        if(Input.GetButtonDown("Restart") && isGameOver == true)
+        if(Input.GetButtonDown("Restart") && isGameOver == true && player == null)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             gameOverPanel.SetActive(false);
