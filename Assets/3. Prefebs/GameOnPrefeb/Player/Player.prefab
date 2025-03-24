@@ -163,7 +163,6 @@ GameObject:
   - component: {fileID: 8260205561483300568}
   - component: {fileID: 450396533289962263}
   - component: {fileID: 3413060426356960647}
-  - component: {fileID: 3372888529262585596}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -321,8 +320,6 @@ MonoBehaviour:
   MaxHP: 10
   currentHP: 0
   money: 0
-  damage: 0
-  maxJump: 0
   graveStone: {fileID: 3894529209947948738, guid: 8d3f9a110a49f7c498ca902310d02ee4, type: 3}
 --- !u!114 &8260205561483300568
 MonoBehaviour:
@@ -349,7 +346,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1258170956c2667418390013ee9a5507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJump: 0
+  platformLayer:
+    serializedVersion: 2
+    m_Bits: 8192
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -375,15 +374,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3372888529262585596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8952410042083589803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3eb5809ce4ee4e4eb5b750526375222, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

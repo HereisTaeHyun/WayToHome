@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Image = UnityEngine.UI.Image;
 
 public class PlayerCtrl : MonoBehaviour
@@ -12,11 +11,9 @@ public class PlayerCtrl : MonoBehaviour
 
     // public 변수
 #region public
-    public float MaxHP;
+    public float MaxHP = 10.0f;
     public float currentHP;
-    public int money;
-    public float damage;
-    public int maxJump;
+    public int money = 0;
     [NonSerialized] public bool canMove;
     [NonSerialized] public State state;
     public enum State
@@ -45,8 +42,8 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private GameObject graveStone;
 
     // UI 관련
-    [SerializeField] private Image HPBar;
-    [SerializeField] private GameObject statUI;
+    private Image HPBar;
+    private GameObject statUI;
     
     // 무적 관련
     private bool invincible;
@@ -59,8 +56,9 @@ public class PlayerCtrl : MonoBehaviour
 
     protected readonly int takeHitHash = Animator.StringToHash("TakeHit");
 #endregion
+
     // 초기화
-    void Start()
+    void Awake()
     {
         playerMove = GetComponent<PlayerMove>();
         playerAttack = GetComponent<PlayerAttack>();
@@ -69,12 +67,13 @@ public class PlayerCtrl : MonoBehaviour
         coll2D = GetComponent<CapsuleCollider2D>();
         physicsMaterial2D = new PhysicsMaterial2D();
 
-        // 상태 초기화, stat은 GameManager에 저장
-        // 세이브 포인트에서 stat을 GameManager로 전달하는 방식
+        // UI 관련
+        HPBar = GameObject.FindGameObjectWithTag("HPBar")?.GetComponent<Image>();
+        statUI = GameObject.FindGameObjectWithTag("StatUI");
+        statUI.SetActive(false);
+
         StartCoroutine(ApplyState());
-        PlayerInit();
-        playerAttack.Init();
-        playerMove.Init();
+        currentHP = MaxHP;
         canMove = true;
         state = State.Idle;
 
@@ -82,33 +81,14 @@ public class PlayerCtrl : MonoBehaviour
         DisplayHP();
     }
 
-    private void PlayerInit()
-    {
-        MaxHP = GameManager.instance.playerMaxHP;
-        currentHP = GameManager.instance.playerCurrentHP;
-        money = GameManager.instance.playerMoney;
-        damage = GameManager.instance.playerAttackDamage;
-        maxJump = GameManager.instance.playerMaxJump;
-    }
-
     // 이벤트 등록 부분
     void OnEnable()
     {
         GameManager.OnGameOver += PlayerDie;
-        SceneManager.sceneLoaded += GetUI;
     }
     void OnDisable()
     {
         GameManager.OnGameOver -= PlayerDie;
-        SceneManager.sceneLoaded -= GetUI;
-    }
-
-    private void GetUI(Scene scene, LoadSceneMode mode)
-    {
-        // UI 관련
-        HPBar = GameObject.FindGameObjectWithTag("HPBar")?.GetComponent<Image>();
-        statUI = GameObject.FindGameObjectWithTag("StatUI");
-        statUI.SetActive(false);
     }
 
     // 각 상태에 따라 필요한 변화 적용하는 곳

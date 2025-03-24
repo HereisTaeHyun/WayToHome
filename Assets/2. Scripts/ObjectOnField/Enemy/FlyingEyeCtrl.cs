@@ -10,7 +10,7 @@ public class FlyingEyeCtrl : EnemyCtrl
     Collider2D playerColl;
     private readonly int dieHash = Animator.StringToHash("Die");
 
-    void Start()
+    void Awake()
     {
         Init();
 
