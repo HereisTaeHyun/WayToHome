@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviour
 
     // private 변수
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject playerPrefab;
     private GameObject player;
+    private GameObject spawnPos;
     private Image gameOverImage;
     private float alphaChangeTime = 1.5f;
     private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
@@ -35,7 +37,6 @@ public class GameManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
-            player = GameObject.FindGameObjectWithTag("Player");
         }
         else if(instance != this)
         {
@@ -50,13 +51,21 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         gameOverPanel.SetActive(false);
         OnGameOver += GameOver;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
     // Disable되면 함수 구독 해제
     void OnDisable()
     {
         OnGameOver -= GameOver;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
+        Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
     
     void Start()
     {

@@ -58,7 +58,7 @@ public class PlayerCtrl : MonoBehaviour
 #endregion
 
     // 초기화
-    void Awake()
+    void Start()
     {
         playerMove = GetComponent<PlayerMove>();
         playerAttack = GetComponent<PlayerAttack>();

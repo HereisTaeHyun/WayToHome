@@ -6,7 +6,7 @@ public class EnemyAttack : MeleeAttack
     private GroundCtrl groundCtrl;
     private Animator anim;
 
-    void Awake()
+    void Start()
     {
         groundCtrl = GetComponent<GroundCtrl>();
         anim = GetComponent<Animator>();

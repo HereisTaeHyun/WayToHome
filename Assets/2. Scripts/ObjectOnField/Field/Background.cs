@@ -12,7 +12,7 @@ public class Background : MonoBehaviour
     private float[] layerMoveSpeed;
 
     // Background 오브젝트, 마테리얼 받아오기
-    void Awake()
+    void Start()
     {
         cameraTransform = GameObject.FindGameObjectWithTag("Camera").transform;
         cameraStartPos = cameraTransform.position;

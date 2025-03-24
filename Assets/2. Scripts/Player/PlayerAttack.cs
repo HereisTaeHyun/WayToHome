@@ -11,7 +11,7 @@ public class PlayerAttack : MeleeAttack
     private PlayerCtrl playerCtrl;
     private Animator playerAnim;
 
-    void Awake()
+    void Start()
     {
         Init();
 
