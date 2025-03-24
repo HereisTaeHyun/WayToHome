@@ -89,7 +89,11 @@ public class PlayerCtrl : MonoBehaviour
 
         // UI 관련
         HPBar = GameObject.FindGameObjectWithTag("HPBar")?.GetComponent<Image>();
-        statUI = GameObject.FindGameObjectWithTag("StatUI");
+        statUI = transform.Find("PlayerUI/GamePlayUI/StatUI").gameObject;
+        if(statUI.activeSelf == true)
+        {
+            statUI.SetActive(false);
+        }
         statUI.SetActive(false);
 
         // 초기화

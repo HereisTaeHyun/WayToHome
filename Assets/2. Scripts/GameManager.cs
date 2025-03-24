@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
-            player = Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
+            Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
             PlayerCtrl.player.Init();
         }
         else if(instance != this)
