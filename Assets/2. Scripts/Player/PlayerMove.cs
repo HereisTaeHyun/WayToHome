@@ -15,11 +15,7 @@ public class PlayerMove : MonoBehaviour
     // public 변수
     // 아래들은 디버프 및 아이템에 의한 증감 있음 or 예정
     [NonSerialized] public float moveSpeed = 7.0f;
-<<<<<<< HEAD
     [NonSerialized] public int maxJump;
-=======
-    public int maxJump;
->>>>>>> parent of 25e2e44 (이전 버전으로 되돌리기)
 
 #region private
     // private 변수
@@ -69,7 +65,6 @@ public class PlayerMove : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         playerCtrl = GetComponent<PlayerCtrl>();
         playerAnim = GetComponent<Animator>();
-        maxJump = playerCtrl.maxJump;
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
         maxJump = GameManager.instance.baseMaxJump;
@@ -201,14 +196,11 @@ public class PlayerMove : MonoBehaviour
             if(gameObject.activeInHierarchy == true)
             {
                 StartCoroutine(GroundCheck(other));
-                isGround = false;
-                isJump = true;
             }
         }  
     }
-
     IEnumerator GroundCheck(Collision2D other)
-     {
+    {
         yield return new WaitForSeconds(0.05f);
         if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
         {
