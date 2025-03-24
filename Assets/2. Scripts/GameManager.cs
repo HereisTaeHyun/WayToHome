@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     public bool readIsGameOver {get {return isGameOver;}}
 
     // 플레이어 초기 상태
+    public GameObject playerPrefab;
+    public GameObject spawnPos;
     public float playerMaxHP;
     public float playerCurrentHP;
     public int playerMoney;
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
     public int playerMaxJump;
 
     // 세이브한 플레이어 상태
+    public GameObject savedSpawnPos;
     public float savedPlayerMaxHP;
     public float savedPlayerCurrentHP;
     public int savedPlayerMoney;
@@ -51,15 +54,14 @@ public class GameManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
+            // 시작에 있어 플레이어 초기화
+            InitPlayer();
         }
         else if(instance != this)
         {
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
-
-        // 시작에 있어 플레이어 초기화
-        InitPlayer();
     }
 
     // Enable되면 함수 구독 및 UI 초기화
@@ -98,6 +100,8 @@ public class GameManager : MonoBehaviour
     // Player 시작 상태 초기화
     private void InitPlayer()
     {
+        spawnPos = GameObject.FindWithTag("SpawnPos");
+        Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
         playerMaxHP = 10.0f;
         playerCurrentHP = playerMaxHP;
         playerMoney = 0;

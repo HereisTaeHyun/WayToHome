@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Background : MonoBehaviour
 {
-    [SerializeField] private Transform cameraTransform;
+    private Transform cameraTransform;
     [SerializeField][Range(-1.0f, 1.0f)] private float parellaxSpeed = 0.1f;
     private Vector3 cameraStartPos;
     private float distance;
@@ -12,8 +12,9 @@ public class Background : MonoBehaviour
     private float[] layerMoveSpeed;
 
     // Background 오브젝트, 마테리얼 받아오기
-    void Awake()
+    void Start()
     {
+        cameraTransform = GameObject.FindWithTag("Camera").transform;
         cameraStartPos = cameraTransform.position;
 
         int backgroundCount = transform.childCount;

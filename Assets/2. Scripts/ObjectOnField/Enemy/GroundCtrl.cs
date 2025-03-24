@@ -16,7 +16,7 @@ public class GroundCtrl : EnemyCtrl
     private readonly int moveOnHash = Animator.StringToHash("OnMove");
     private readonly int dieHash = Animator.StringToHash("Die");
 
-    void Awake()
+    void Start()
     {
         Init();
         isMove = false;

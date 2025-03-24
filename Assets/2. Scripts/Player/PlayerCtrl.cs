@@ -58,7 +58,6 @@ public class PlayerCtrl : MonoBehaviour
 
     protected readonly int takeHitHash = Animator.StringToHash("TakeHit");
 #endregion
-
     // 초기화
     void Start()
     {
