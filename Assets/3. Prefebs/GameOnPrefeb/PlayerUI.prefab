@@ -573,7 +573,11 @@ GameObject:
   - component: {fileID: 3861895511914327079}
   - component: {fileID: 3123080964979082220}
   - component: {fileID: 3899204800030172651}
+<<<<<<< HEAD
   - component: {fileID: 4533678809108922497}
+=======
+  - component: {fileID: 84345174515866776}
+>>>>>>> parent of 25e2e44 (이전 버전으로 되돌리기)
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -664,7 +668,11 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+<<<<<<< HEAD
 --- !u!114 &4533678809108922497
+=======
+--- !u!114 &84345174515866776
+>>>>>>> parent of 25e2e44 (이전 버전으로 되돌리기)
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

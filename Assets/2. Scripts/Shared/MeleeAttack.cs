@@ -14,6 +14,10 @@ public class MeleeAttack : MonoBehaviour
     protected Vector2 lastDir = Vector2.right;
     protected readonly int attackHash = Animator.StringToHash("Attack");
     protected readonly int attackDirHash = Animator.StringToHash("AttackDir");
+<<<<<<< HEAD
+=======
+    protected float baseAttackDamage;
+>>>>>>> parent of 25e2e44 (이전 버전으로 되돌리기)
 
     public virtual void Init()
     {

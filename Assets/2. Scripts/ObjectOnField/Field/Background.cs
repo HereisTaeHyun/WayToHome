@@ -14,7 +14,11 @@ public class Background : MonoBehaviour
     // Background 오브젝트, 마테리얼 받아오기
     void Start()
     {
+<<<<<<< HEAD
         cameraTransform = GameObject.FindGameObjectWithTag("Camera").transform;
+=======
+        cameraTransform = GameObject.FindWithTag("Camera").transform;
+>>>>>>> parent of 25e2e44 (이전 버전으로 되돌리기)
         cameraStartPos = cameraTransform.position;
 
         int backgroundCount = transform.childCount;

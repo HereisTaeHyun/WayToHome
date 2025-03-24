@@ -11,6 +11,7 @@ public class PlayerAttack : MeleeAttack
     private PlayerCtrl playerCtrl;
     private Animator playerAnim;
 
+<<<<<<< HEAD
     public override void Init()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -21,6 +22,26 @@ public class PlayerAttack : MeleeAttack
         playerAnim = GetComponent<Animator>();
 
         attackDamage = GameManager.instance.baseDamage;
+=======
+    // void Start()
+    // {
+    //     Init();
+
+    //     attackDamage = playerCtrl.damage;
+    //     playerCtrl = GetComponent<PlayerCtrl>();
+    //     playerAnim = GetComponent<Animator>();
+    // }
+
+    public override void Init()
+    {
+        playerCtrl = GetComponent<PlayerCtrl>();
+        playerAnim = GetComponent<Animator>();
+        rb2D = GetComponent<Rigidbody2D>();
+
+        attackCollier = transform.Find("MeleeAttack").gameObject;
+        attackCollier.SetActive(false);
+        attackDamage = playerCtrl.damage;
+>>>>>>> parent of 25e2e44 (이전 버전으로 되돌리기)
     }
 
     // 근접 공격, 공격 범위 콜라이더 생성 후 일정 시간 후 종료, 현재는 0.2초

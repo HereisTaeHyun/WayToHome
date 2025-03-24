@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Image = UnityEngine.UI.Image;
 
 public class PlayerCtrl : MonoBehaviour
@@ -14,8 +15,13 @@ public class PlayerCtrl : MonoBehaviour
     public float MaxHP;
     public float currentHP;
     public int money;
+<<<<<<< HEAD
     public int maxJump;
     public float damage;
+=======
+    public float damage;
+    public int maxJump;
+>>>>>>> parent of 25e2e44 (이전 버전으로 되돌리기)
     [NonSerialized] public bool canMove;
     [NonSerialized] public State state;
     public enum State
@@ -45,8 +51,8 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private GameObject graveStone;
 
     // UI 관련
-    private Image HPBar;
-    private GameObject statUI;
+    [SerializeField] private Image HPBar;
+    [SerializeField] private GameObject statUI;
     
     // 무적 관련
     private bool invincible;
@@ -59,10 +65,15 @@ public class PlayerCtrl : MonoBehaviour
 
     protected readonly int takeHitHash = Animator.StringToHash("TakeHit");
 #endregion
+<<<<<<< HEAD
 
     // 싱글톤 선언
     public static PlayerCtrl player = null;
     void Awake()
+=======
+    // 초기화
+    void Start()
+>>>>>>> parent of 25e2e44 (이전 버전으로 되돌리기)
     {
         if(player == null)
         {
@@ -87,6 +98,7 @@ public class PlayerCtrl : MonoBehaviour
         coll2D = GetComponent<CapsuleCollider2D>();
         physicsMaterial2D = new PhysicsMaterial2D();
 
+<<<<<<< HEAD
         // UI 관련
         HPBar = GameObject.FindGameObjectWithTag("HPBar")?.GetComponent<Image>();
         statUI = transform.Find("PlayerUI/GamePlayUI/StatUI").gameObject;
@@ -101,6 +113,14 @@ public class PlayerCtrl : MonoBehaviour
         MaxHP = GameManager.instance.baseMaxHP;
         currentHP = MaxHP;
         money = GameManager.instance.baseMoney;
+=======
+        // 상태 초기화, stat은 GameManager에 저장
+        // 세이브 포인트에서 stat을 GameManager로 전달하는 방식
+        StartCoroutine(ApplyState());
+        PlayerInit();
+        playerAttack.Init();
+        playerMove.Init();
+>>>>>>> parent of 25e2e44 (이전 버전으로 되돌리기)
         canMove = true;
         state = State.Idle;
         // 모듈 초기화
@@ -111,14 +131,33 @@ public class PlayerCtrl : MonoBehaviour
         DisplayHP();
     }
 
+    private void PlayerInit()
+    {
+        MaxHP = GameManager.instance.playerMaxHP;
+        currentHP = GameManager.instance.playerCurrentHP;
+        money = GameManager.instance.playerMoney;
+        damage = GameManager.instance.playerAttackDamage;
+        maxJump = GameManager.instance.playerMaxJump;
+    }
+
     // 이벤트 등록 부분
     void OnEnable()
     {
         GameManager.OnGameOver += PlayerDie;
+        SceneManager.sceneLoaded += GetUI;
     }
     void OnDisable()
     {
         GameManager.OnGameOver -= PlayerDie;
+        SceneManager.sceneLoaded -= GetUI;
+    }
+
+    private void GetUI(Scene scene, LoadSceneMode mode)
+    {
+        // UI 관련
+        HPBar = GameObject.FindGameObjectWithTag("HPBar")?.GetComponent<Image>();
+        statUI = GameObject.FindGameObjectWithTag("StatUI");
+        statUI.SetActive(false);
     }
 
     // 각 상태에 따라 필요한 변화 적용하는 곳
