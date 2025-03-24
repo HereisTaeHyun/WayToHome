@@ -21,18 +21,28 @@ public class GameManager : MonoBehaviour
     // private 변수
     [SerializeField] private GameObject PlayerSpawnPos;
     [SerializeField] private GameObject gameOverPanel;
+    private PlayerCtrl playerCtrl;
+    private PlayerMove playerMove;
+    private PlayerAttack playerAttack;
     private Image gameOverImage;
     private float alphaChangeTime = 1.5f;
     private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
     private bool isGameOver;
     public bool readIsGameOver {get {return isGameOver;}}
 
-    // 플레이어 상태 저장
+    // 플레이어 초기 상태
     public float playerMaxHP;
     public float playerCurrentHP;
     public int playerMoney;
     public float playerAttackDamage;
     public int playerMaxJump;
+
+    // 세이브한 플레이어 상태
+    public float savedPlayerMaxHP;
+    public float savedPlayerCurrentHP;
+    public int savedPlayerMoney;
+    public float savedPlayerAttackDamage;
+    public int savedPlayerMaxJump;
 
     // 싱글톤 선언
     public static GameManager instance = null;
@@ -69,6 +79,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameOverImage = gameOverPanel.GetComponent<Image>();
+        playerCtrl = GetComponent<PlayerCtrl>();
+        playerMove = GetComponent<PlayerMove>();
+        playerAttack = GetComponent<PlayerAttack>();
     }
 
     void Update()
@@ -90,6 +103,26 @@ public class GameManager : MonoBehaviour
         playerMoney = 0;
         playerAttackDamage = -1.0f;
         playerMaxJump = 1;
+    }
+
+    // 플레이어 상태 읽어와 세이브
+    public void SaveState()
+    {
+        savedPlayerMaxHP = playerCtrl.MaxHP;
+        savedPlayerCurrentHP = playerCtrl.currentHP;
+        savedPlayerMoney = playerCtrl.money;
+        savedPlayerAttackDamage = playerAttack.attackDamage;
+        savedPlayerMaxJump = playerMove.maxJump;
+    }
+
+    // ✅ 복원: 저장 상태를 현재 상태로 덮어쓰기
+    public void LoadSavedState()
+    {
+        playerCtrl.MaxHP = savedPlayerMaxHP;
+        playerCtrl.currentHP = savedPlayerCurrentHP;
+        playerCtrl.money = savedPlayerMoney;
+        playerAttack.attackDamage = savedPlayerAttackDamage;
+        playerMove.maxJump = savedPlayerMaxJump;
     }
 
     // GameOver 되면 UI 호출
