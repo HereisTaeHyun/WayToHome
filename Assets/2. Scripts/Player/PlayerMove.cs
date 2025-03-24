@@ -200,9 +200,20 @@ public class PlayerMove : MonoBehaviour
         {
             if(gameObject.activeInHierarchy == true)
             {
+                StartCoroutine(GroundCheck(other));
                 isGround = false;
                 isJump = true;
             }
+        }  
+    }
+
+    IEnumerator GroundCheck(Collision2D other)
+     {
+        yield return new WaitForSeconds(0.05f);
+        if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
+        {
+            isGround = false;
+            isJump = true;
         }  
     }
 
