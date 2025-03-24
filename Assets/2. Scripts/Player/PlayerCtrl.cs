@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Image = UnityEngine.UI.Image;
 
 public class PlayerCtrl : MonoBehaviour
@@ -44,8 +45,8 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private GameObject graveStone;
 
     // UI 관련
-    private Image HPBar;
-    private GameObject statUI;
+    [SerializeField] private Image HPBar;
+    [SerializeField] private GameObject statUI;
     
     // 무적 관련
     private bool invincible;
@@ -67,11 +68,6 @@ public class PlayerCtrl : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         coll2D = GetComponent<CapsuleCollider2D>();
         physicsMaterial2D = new PhysicsMaterial2D();
-
-        // UI 관련
-        HPBar = GameObject.FindGameObjectWithTag("HPBar")?.GetComponent<Image>();
-        statUI = GameObject.FindGameObjectWithTag("StatUI");
-        statUI.SetActive(false);
 
         // 상태 초기화, stat은 GameManager에 저장
         // 세이브 포인트에서 stat을 GameManager로 전달하는 방식
@@ -99,10 +95,20 @@ public class PlayerCtrl : MonoBehaviour
     void OnEnable()
     {
         GameManager.OnGameOver += PlayerDie;
+        SceneManager.sceneLoaded += GetUI;
     }
     void OnDisable()
     {
         GameManager.OnGameOver -= PlayerDie;
+        SceneManager.sceneLoaded -= GetUI;
+    }
+
+    private void GetUI(Scene scene, LoadSceneMode mode)
+    {
+        // UI 관련
+        HPBar = GameObject.FindGameObjectWithTag("HPBar")?.GetComponent<Image>();
+        statUI = GameObject.FindGameObjectWithTag("StatUI");
+        statUI.SetActive(false);
     }
 
     // 각 상태에 따라 필요한 변화 적용하는 곳

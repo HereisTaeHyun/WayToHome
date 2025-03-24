@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     // 플레이어 초기 상태
     public GameObject playerPrefab;
+    private GameObject player;
     public GameObject spawnPos;
     public float playerMaxHP;
     public float playerCurrentHP;
@@ -70,30 +71,44 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         gameOverPanel.SetActive(false);
         OnGameOver += GameOver;
+        SceneManager.sceneLoaded += Restart;
     }
     // Disable되면 함수 구독 해제
     void OnDisable()
     {
         OnGameOver -= GameOver;
+        SceneManager.sceneLoaded -= Restart;
     }
 
     
     void Start()
     {
         gameOverImage = gameOverPanel.GetComponent<Image>();
-        playerCtrl = GetComponent<PlayerCtrl>();
-        playerMove = GetComponent<PlayerMove>();
-        playerAttack = GetComponent<PlayerAttack>();
+
+        player = GameObject.FindWithTag("Player");
+        playerCtrl = player.GetComponent<PlayerCtrl>();
+        playerMove = player.GetComponent<PlayerMove>();
+        playerAttack = player.GetComponent<PlayerAttack>();
     }
 
     void Update()
     {
         // if isGameOver = true;일 경우 다시하기 진입 가능하도록
-        if(Input.GetButtonDown("Restart") && isGameOver == true)
+        if (Input.GetButtonDown("Restart") && isGameOver && player == null)
         {
+            LoadSavedState();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            gameOverPanel.SetActive(false);
+        }
+    }
+
+    private void Restart(Scene scene, LoadSceneMode mode)
+    {
+        if (isGameOver) // 사망 후 재시작된 경우
+        {
+            spawnPos = GameObject.FindWithTag("SpawnPos");
+            Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
             isGameOver = false;
+            gameOverPanel.SetActive(false);
         }
     }
 
