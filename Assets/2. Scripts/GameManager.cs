@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
-            Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
+            player = Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
             PlayerCtrl.player.Init();
         }
         else if(instance != this)
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // 게임 시작, 다시하기 등 씬 세팅에서 PlayerSet에 사용
+// 게임 시작, 다시하기 등 씬 세팅에서 PlayerSet에 사용
     private void PlayerSet()
     {
         spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
             PlayerCtrl.player.transform.position = spawnPos.transform.position;
         }
     }
+
 
     // GameOver 되면 UI 호출
     private void GameOver()
