@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
+            baseCurrentHP = baseMaxHP;
             player = Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
             PlayerCtrl.player.Init();
         }
@@ -60,12 +61,14 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         gameOverPanel.SetActive(false);
         OnGameOver += GameOver;
+        SceneManager.sceneLoaded += LoadPlayerStat;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     // Disable되면 함수 구독 해제
     void OnDisable()
     {
         OnGameOver -= GameOver;
+        SceneManager.sceneLoaded -= LoadPlayerStat;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -95,6 +98,26 @@ public class GameManager : MonoBehaviour
             gameOverPanel.SetActive(false);
             isGameOver = false;
         }
+    }
+
+    // 맵 이동 시에 상태 저장
+    public void SavePlayerStat()
+    {
+        baseMaxHP = PlayerCtrl.player.MaxHP;
+        baseCurrentHP = PlayerCtrl.player.currentHP;
+        baseMoney = PlayerCtrl.player.money;
+        baseMaxJump = PlayerCtrl.player.maxJump;
+        baseDamage = PlayerCtrl.player.damage;
+    }
+
+    // 저장된 스테이트 로드
+    public void LoadPlayerStat(Scene scene, LoadSceneMode mode)
+    {
+        PlayerCtrl.player.MaxHP = baseMaxHP;
+        PlayerCtrl.player.currentHP = baseCurrentHP;
+        PlayerCtrl.player.money = baseMoney;
+        PlayerCtrl.player.maxJump = baseMaxJump;
+        PlayerCtrl.player.damage = baseDamage;
     }
 
     // 게임 시작, 다시하기 등 씬 세팅에서 PlayerSet에 사용
