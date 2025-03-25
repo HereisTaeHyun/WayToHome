@@ -48,6 +48,7 @@ public class VendingMachine : MonoBehaviour
         {
             vendingUI.SetActive(true);
             playerCtrl = other.GetComponent<PlayerCtrl>();
+            playerCtrl.canAttack = false;
         }
     }
 
@@ -57,6 +58,7 @@ public class VendingMachine : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             vendingUI.SetActive(false);
+            playerCtrl.canAttack = true;
         }
     }
 

@@ -16,6 +16,7 @@ public class PlayerCtrl : MonoBehaviour
     public int money;
     [NonSerialized] public bool canMove;
     [NonSerialized] public State state;
+    [NonSerialized] public bool canAttack;
     public enum State
     {
         Idle,
@@ -95,9 +96,10 @@ public class PlayerCtrl : MonoBehaviour
         // 상태 체커 시작 및 상태 변수 초기화
         StartCoroutine(ApplyState());
         canMove = true;
+        canAttack = true;
         state = State.Idle;
         rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
-        
+
         // 모듈 초기화
         playerMove.Init();
         playerAttack.Init();
@@ -175,8 +177,12 @@ public class PlayerCtrl : MonoBehaviour
 
         // 모듈 클래스 함수 호출
         // 이동 외 움직임 동작
+        // 상점에서는 공격 막기위해 canAttack 플래그 존재
         playerMove.Jump();
-        playerAttack.Attack();
+        if(canAttack == true)
+        {
+            playerAttack.Attack();
+        }
         
         // 플레이어 StatUI 관련 동작
         DisplayStat();
