@@ -26,7 +26,6 @@ public class PlayerMove : MonoBehaviour
     private float jumpSpeed = 5.0f;
     private int jumpCount = 0;
 
-    private bool downinputFlag;
     private bool isPlatform;
     private static float DISABLE_COLLIDER_TIME = 1.0f;
     private PlatformEffector2D platformEffector;
@@ -68,7 +67,6 @@ public class PlayerMove : MonoBehaviour
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
 
-        downinputFlag = false;
         isPlatform = false;
 
         coll2D = GetComponent<CapsuleCollider2D>();
@@ -230,14 +228,14 @@ public class PlayerMove : MonoBehaviour
 #region Platform
     public void GoDownPlatfom()
     {
-        // Vertical negative 키를 눌렀다면, Flag가 사용 중이 아니라면
-        if(Input.GetAxis("Vertical") < 0 && downinputFlag == false)
+        // Vertical negative 키를 눌렀다면, Flag가 사용 중이 아니라면, platform 위라면
+        if(Input.GetAxis("Vertical") < 0 && isPlatform == true)
         {
-            downinputFlag = true;
             StartCoroutine(DisablePlatformCollider());
         }
     }
 
+    // 아래 키가 눌린다면 PlatformCollider를 일시적으로 무시 후 되살리기
     IEnumerator DisablePlatformCollider()
     {
         platformEffector.useColliderMask = false;
@@ -245,7 +243,6 @@ public class PlayerMove : MonoBehaviour
         yield return new WaitForSeconds(DISABLE_COLLIDER_TIME);
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), false);
         platformEffector.useColliderMask = true;
-        downinputFlag = false;
     }
 
     // Platform 위라면 platformEffector를 받아 오기
