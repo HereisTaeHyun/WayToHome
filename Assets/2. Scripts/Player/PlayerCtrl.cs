@@ -73,8 +73,6 @@ public class PlayerCtrl : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-            // spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
-            // player = Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
     // 초기화
     public void Init()
     {
@@ -94,13 +92,18 @@ public class PlayerCtrl : MonoBehaviour
         }
         statUI.SetActive(false);
 
-        // 상태 초기화
+        // 상태 체커 시작 및 상태 변수 초기화
         StartCoroutine(ApplyState());
         canMove = true;
         state = State.Idle;
+        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+        
         // 모듈 초기화
         playerMove.Init();
         playerAttack.Init();
+
+        // HPBar 초기화, 다시 되살아날 때 필요
+        DisplayHP();
     }
 
     // 이벤트 등록 부분
@@ -136,7 +139,7 @@ public class PlayerCtrl : MonoBehaviour
 
     void Start()
     {
-        // HP바 초기화, 스탯 변수들 다 임포트 되고 초기화해야 해서 얘는 Start
+        // HP바 초기화, 스탯 변수들 다 임포트 되고 초기화해야 해서 얘는 Start에서 한 번 호츌 필요
         DisplayHP();
     }
 
