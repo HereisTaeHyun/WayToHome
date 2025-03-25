@@ -221,7 +221,6 @@ public class PlayerCtrl : MonoBehaviour
             invincibleTimer = INVINCIBLE_TIME;
             StartCoroutine(BlinkUntilInvincible());
         }
-
         // 체력 계산 및 체력바 표기
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
         DisplayHP();
@@ -233,13 +232,14 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+    // 무적 시간 동안 깜빡거리기
     IEnumerator BlinkUntilInvincible()
     {
         bool isVisible = true;
         Color color = spriteRenderer.color;
         while(invincible == true)
         {
-            // 이전 상태 투명이면 불투명, 불투명이면 투명 반복시켜서 점멸 효과 적용
+            // 이전 상태 투명이면 불투명, 불투명이면 투명 반복시켜서 효과 적용
             if(isVisible == true)
             {
                 color.a = 1.0f;
@@ -254,7 +254,7 @@ public class PlayerCtrl : MonoBehaviour
             }
             yield return new WaitForSeconds(BLINK_TIME);
         }
-        // 이전 상태로 초기화
+        // 기본 상태로 초기화
         color.a = 1.0f;
         spriteRenderer.color = color;
     }
@@ -278,6 +278,7 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+    // 게임오버, GameManager 이벤트 호출 역할
     private void GameOver()
     {
         rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
@@ -300,7 +301,7 @@ public class PlayerCtrl : MonoBehaviour
         HPBar.fillAmount = currentHP / MaxHP;
     }
 
-    // 플레이어 사망
+    // 플레이어 사망, GamaManager OnGameOver 이벤트에 등록하여 사용
     private void PlayerDie()
     {
         StartCoroutine(DieStart());

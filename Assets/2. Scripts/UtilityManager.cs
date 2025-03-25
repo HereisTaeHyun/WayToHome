@@ -7,6 +7,7 @@ using Image = UnityEngine.UI.Image;
 
 public class UtilityManager : MonoBehaviour
 {
+    AudioSource audioSource;
     // 싱글톤 선언
     public static UtilityManager utility = null;
     void Awake()
@@ -20,6 +21,11 @@ public class UtilityManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
 
     public Vector2 DirSet(Vector2 move)
@@ -59,5 +65,10 @@ public class UtilityManager : MonoBehaviour
             changeTarget.color = currentColor;
             yield return null;
         }
+    }
+
+    public void PlaySFX(AudioClip audioClip)
+    {
+        audioSource.PlayOneShot(audioClip);
     }
 }
