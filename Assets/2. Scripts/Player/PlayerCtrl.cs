@@ -37,6 +37,7 @@ public class PlayerCtrl : MonoBehaviour
     private PlayerAttack playerAttack;
     private Rigidbody2D rb2D;
     private Animator playerAnim;
+    private SpriteRenderer spriteRenderer;
     private bool isDie;
     private CapsuleCollider2D coll2D;
     private PhysicsMaterial2D physicsMaterial2D;
@@ -50,8 +51,9 @@ public class PlayerCtrl : MonoBehaviour
     // 무적 관련
     private bool invincible;
     public bool readInvincible {get {return invincible;}} // 적 관련 객체에서 가끔 참고
-    private float invincibleTime = 2.0f;
+    private static float INVINCIBLE_TIME = 2.0f;
     private float invincibleTimer;
+    private static float BLINK_TIME = 0.1f;
     
     // 디버프 관련(스턴, 슬로우 생각 중)
     private float debuffTimer;
@@ -82,6 +84,7 @@ public class PlayerCtrl : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
         coll2D = GetComponent<CapsuleCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         physicsMaterial2D = new PhysicsMaterial2D();
 
         // UI 관련
@@ -215,7 +218,8 @@ public class PlayerCtrl : MonoBehaviour
             }
             // 무적 시간이 아니었으면 무적으로 만든 후 Timer 설정
             invincible = true;
-            invincibleTimer = invincibleTime;
+            invincibleTimer = INVINCIBLE_TIME;
+            StartCoroutine(BlinkUntilInvincible());
         }
 
         // 체력 계산 및 체력바 표기
@@ -227,6 +231,32 @@ public class PlayerCtrl : MonoBehaviour
         {
             GameOver();
         }
+    }
+
+    IEnumerator BlinkUntilInvincible()
+    {
+        bool isVisible = true;
+        Color color = spriteRenderer.color;
+        while(invincible == true)
+        {
+            // 이전 상태 투명이면 불투명, 불투명이면 투명 반복시켜서 점멸 효과 적용
+            if(isVisible == true)
+            {
+                color.a = 1.0f;
+                spriteRenderer.color = color;
+                isVisible = false;
+            }
+            else if(isVisible == false)
+            {
+                color.a = 0.0f;
+                spriteRenderer.color = color;
+                isVisible = true;
+            }
+            yield return new WaitForSeconds(BLINK_TIME);
+        }
+        // 이전 상태로 초기화
+        color.a = 1.0f;
+        spriteRenderer.color = color;
     }
 
     private void DisplayStat()
