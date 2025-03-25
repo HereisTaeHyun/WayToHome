@@ -38,6 +38,7 @@ public class PlayerCtrl : MonoBehaviour
     private Rigidbody2D rb2D;
     private Animator playerAnim;
     private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
     private bool isDie;
     private CapsuleCollider2D coll2D;
     private PhysicsMaterial2D physicsMaterial2D;
@@ -85,6 +86,7 @@ public class PlayerCtrl : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         coll2D = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         physicsMaterial2D = new PhysicsMaterial2D();
 
         // UI 관련
@@ -203,6 +205,11 @@ public class PlayerCtrl : MonoBehaviour
         
         // 플롯폼은 내려가기 키를 누르면 내려갈 수 있도록하기
         playerMove.GoDownPlatfom();
+    }
+
+    public void PlaySFX(AudioClip audioClip)
+    {
+        audioSource.PlayOneShot(audioClip);
     }
 
     // 플레이어 데미지 가해
