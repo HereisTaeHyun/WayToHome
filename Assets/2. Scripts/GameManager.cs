@@ -45,10 +45,12 @@ public class GameManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
-            // 게임 매니저 생성과 동시에 플레이어 초기화
+            // 게임 매니저 생성과 동시에 플레이어 생성
             spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
-            baseCurrentHP = baseMaxHP;
             player = Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
+
+            // 플레이어 초기화
+            baseCurrentHP = baseMaxHP;
             PlayerCtrl.player.Init();
         }
         else if(instance != this)

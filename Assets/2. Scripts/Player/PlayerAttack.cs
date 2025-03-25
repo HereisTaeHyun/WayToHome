@@ -19,8 +19,6 @@ public class PlayerAttack : MeleeAttack
         
         playerCtrl = GetComponent<PlayerCtrl>();
         playerAnim = GetComponent<Animator>();
-
-        attackDamage = GameManager.instance.baseDamage;
     }
 
     // 근접 공격, 공격 범위 콜라이더 생성 후 일정 시간 후 종료, 현재는 0.2초

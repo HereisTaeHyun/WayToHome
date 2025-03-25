@@ -67,7 +67,6 @@ public class PlayerMove : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
-        maxJump = GameManager.instance.baseMaxJump;
 
         downinputFlag = false;
         isPlatform = false;
