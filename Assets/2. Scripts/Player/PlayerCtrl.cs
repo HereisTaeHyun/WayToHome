@@ -14,8 +14,8 @@ public class PlayerCtrl : MonoBehaviour
     public float MaxHP;
     public float currentHP;
     public int money;
-    public int maxJump;
-    public float damage;
+    // public int maxJump;
+    // public float damage;
     [NonSerialized] public bool canMove;
     [NonSerialized] public State state;
     public enum State

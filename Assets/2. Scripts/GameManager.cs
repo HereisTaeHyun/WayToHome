@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject playerPrefab;
     private GameObject player;
+    private PlayerMove playerMove;
+    private PlayerAttack playerAttack;
     private GameObject spawnPos;
     private Image gameOverImage;
     private float alphaChangeTime = 1.5f;
@@ -43,7 +45,9 @@ public class GameManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
+            // 게임 매니저 생성과 동시에 플레이어 초기화
             spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
+            baseCurrentHP = baseMaxHP;
             player = Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
             PlayerCtrl.player.Init();
         }
@@ -60,17 +64,19 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         gameOverPanel.SetActive(false);
         OnGameOver += GameOver;
+        SceneManager.sceneLoaded += LoadPlayerStat;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     // Disable되면 함수 구독 해제
     void OnDisable()
     {
         OnGameOver -= GameOver;
+        SceneManager.sceneLoaded -= LoadPlayerStat;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     // 씬 로드시 Player를 받아와 위치를 spawnPos에 설정
-    // 씬 로드기에 플레이어 off면 on
+    // 씬 로드기에 플레이어 off면 == 사망시 on 및 다시 초기화
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if(PlayerCtrl.player.gameObject.activeSelf == false)
@@ -97,7 +103,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-// 게임 시작, 다시하기 등 씬 세팅에서 PlayerSet에 사용
+    // 게임 시작, 다시하기 등 씬 세팅에서 PlayerSet에 사용
     private void PlayerSet()
     {
         spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
@@ -105,6 +111,30 @@ public class GameManager : MonoBehaviour
         {
             PlayerCtrl.player.transform.position = spawnPos.transform.position;
         }
+    }
+
+    // 맵 이동 시에 상태 저장
+    public void SavePlayerStat()
+    {
+        baseMaxHP = PlayerCtrl.player.MaxHP;
+        baseCurrentHP = PlayerCtrl.player.currentHP;
+        baseMoney = PlayerCtrl.player.money;
+        baseMaxJump = playerMove.maxJump;
+        baseDamage = playerAttack.attackDamage;
+    }
+
+    // 저장된 스테이트 로드
+    public void LoadPlayerStat(Scene scene, LoadSceneMode mode)
+    {
+        // PlayerCtrl은 싱글톤이지만 나머지는 아니라 접근 필요
+        playerMove = player.GetComponent<PlayerMove>();
+        playerAttack = player.GetComponent<PlayerAttack>();
+
+        PlayerCtrl.player.MaxHP = baseMaxHP;
+        PlayerCtrl.player.currentHP = baseCurrentHP;
+        PlayerCtrl.player.money = baseMoney;
+        playerMove.maxJump = baseMaxJump;
+        playerAttack.attackDamage = baseDamage;
     }
 
 

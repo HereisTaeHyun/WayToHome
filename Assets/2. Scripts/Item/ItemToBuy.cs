@@ -35,7 +35,6 @@ public class ItemToBuy : MonoBehaviour
                 case ItemToBuyType.MaxHpPlus: // 최대 체력 증가
                     playerCtrl.ChangeMaxHP();
                     Debug.Log("최대 체력 증가");
-                    Destroy(gameObject);
                     Destroy(transform.parent.gameObject);
                     break;
 
@@ -44,7 +43,6 @@ public class ItemToBuy : MonoBehaviour
                     {
                         playerCtrl.ChangeHP(2);
                         Debug.Log("체력 회복");
-                        Destroy(gameObject);
                         Destroy(transform.parent.gameObject);
                     }
                     else // 최대 체력이면 사용안됨
@@ -56,7 +54,6 @@ public class ItemToBuy : MonoBehaviour
                 case ItemToBuyType.AttackPlus: // 공격력 증가
                     playerAttack.attackDamage -= 1;
                     Debug.Log("공격력 증가");
-                    Destroy(gameObject);
                     Destroy(transform.parent.gameObject);
                     break;
                 

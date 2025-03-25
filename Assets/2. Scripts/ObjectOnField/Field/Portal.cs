@@ -27,9 +27,10 @@ public class Portal : MonoBehaviour
 
     IEnumerator UsePortal()
     {
-        // ChangeAlpha로 페이드 아웃 후 로드 씬
+        // ChangeAlpha로 페이드 아웃, 그동안 플레이어 스탯 저장 후 로드 씬
         UIImange.enabled = true;
         StartCoroutine(UtilityManager.utility.ChangeAlpha(UIImange, FADE_OUT_ALPHA, alphaChangeTime));
+        GameManager.instance.SavePlayerStat();
         yield return new WaitForSeconds(alphaChangeTime);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         UIImange.enabled = false;
