@@ -27,7 +27,7 @@ public class PlayerMove : MonoBehaviour
     private int jumpCount = 0;
 
     private bool isPlatform;
-    private static float DISABLE_COLLIDER_TIME = 1.0f;
+    private static float DISABLE_COLLIDER_TIME = 0.5f;
     private PlatformEffector2D platformEffector;
 
     private Animator playerAnim;
@@ -238,11 +238,9 @@ public class PlayerMove : MonoBehaviour
     // 아래 키가 눌린다면 PlatformCollider를 일시적으로 무시 후 되살리기
     IEnumerator DisablePlatformCollider()
     {
-        platformEffector.useColliderMask = false;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), true);
         yield return new WaitForSeconds(DISABLE_COLLIDER_TIME);
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), false);
-        platformEffector.useColliderMask = true;
     }
 
     // Platform 위라면 platformEffector를 받아 오기
