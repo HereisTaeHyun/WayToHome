@@ -15,11 +15,11 @@ public class ItemToFind : MonoBehaviour
         Gold,
     }
     private PlayerCtrl playerCtrl;
-    private static float LIFESPAN = 60;
+    private static float LIFESPAN = 30;
     public float remainLifespan;
 
-    // 생성 후 60초 동안 필드에 존재
-    private void OnEnable()
+    // 생성 후 30초 동안 필드에 존재
+    private void Start()
     {
         remainLifespan = LIFESPAN;
     }

@@ -20,6 +20,22 @@ public class ItemToBuy : MonoBehaviour
     private PlayerCtrl playerCtrl;
     private PlayerMove playerMove;
     private PlayerAttack playerAttack;
+    private static float LIFESPAN = 120;
+    public float remainLifespan;
+
+    // 생성 후 120초 동안 필드에 존재
+    private void Start()
+    {
+        remainLifespan = LIFESPAN;
+    }
+    private void Update()
+    {
+        remainLifespan -= Time.deltaTime;
+        if(remainLifespan <= 0)
+        {
+            Destroy(transform.parent.gameObject);
+        }
+    }
 
     private void OnTriggerStay2D(Collider2D other)
     {

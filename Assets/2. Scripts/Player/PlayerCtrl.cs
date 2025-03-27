@@ -243,21 +243,21 @@ public class PlayerCtrl : MonoBehaviour
     // 무적 시간 동안 깜빡거리기 코루틴
     IEnumerator BlinkUntilInvincible()
     {
-        bool isBlink = true;
+        bool isBlink = false;
         Color color = spriteRenderer.color;
         // 무적이고 == 데미지를 입었고, 사망이 아니라면 깜빡임 시작
         while(invincible == true && isDie == false)
         {
-            // 이전 상태 투명이면 불투명, 불투명이면 투명 반복시켜서 효과 적용
+            // 이전 상태 깜빡이면 되돌리기, 일반이면 깜빡임 반복시켜서 효과 적용
             if(isBlink == true)
             {
-                color.a = 1.0f;
+                color.a = 0.0f;
                 spriteRenderer.color = color;
                 isBlink = false;
             }
             else if(isBlink == false)
             {
-                color.a = 0.0f;
+                color.a = 1.0f;
                 spriteRenderer.color = color;
                 isBlink = true;
             }
