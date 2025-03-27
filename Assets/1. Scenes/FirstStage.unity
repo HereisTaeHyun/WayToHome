@@ -6618,8 +6618,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3bfbd47d158d44a09a6398fe7963b47a, type: 3}
-  m_Resource: {fileID: 8300000, guid: 3bfbd47d158d44a09a6398fe7963b47a, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -6717,6 +6717,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e2c8fd0b5de274ab783abad94327f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stage1BGM: {fileID: 8300000, guid: 3bfbd47d158d44a09a6398fe7963b47a, type: 3}
+  dieBGM: {fileID: 8300000, guid: ce60ac3a9d4de41ca9f3f5d6de48e6d1, type: 3}
 --- !u!1001 &946839948
 PrefabInstance:
   m_ObjectHideFlags: 0
