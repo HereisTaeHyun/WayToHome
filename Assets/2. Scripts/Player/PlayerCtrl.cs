@@ -55,6 +55,10 @@ public class PlayerCtrl : MonoBehaviour
     private static float INVINCIBLE_TIME = 2.0f;
     private float invincibleTimer;
     private static float BLINK_TIME = 0.1f;
+
+    // 오디오 클립
+    [SerializeField] private AudioClip takeHitSFX;
+    [SerializeField] private AudioClip dieSFX;
     
     // 디버프 관련(스턴, 슬로우 생각 중)
     private float debuffTimer;
@@ -207,11 +211,6 @@ public class PlayerCtrl : MonoBehaviour
         playerMove.GoDownPlatfom();
     }
 
-    public void PlaySFX(AudioClip audioClip)
-    {
-        audioSource.PlayOneShot(audioClip);
-    }
-
     // 플레이어 데미지 가해
     public void ChangeHP(float value)
     {
@@ -223,7 +222,8 @@ public class PlayerCtrl : MonoBehaviour
             {
                 return;
             }
-            // 무적 시간이 아니었으면 무적으로 만든 후 Timer 설정
+            // 무적 시간이 아니었으면 사운드 재생 및 무적으로 만든 후 Timer 설정
+            UtilityManager.utility.PlaySFX(takeHitSFX);
             invincible = true;
             invincibleTimer = INVINCIBLE_TIME;
             // 데미지 입으면 무적 시간 동안 깜빡임
@@ -320,6 +320,7 @@ public class PlayerCtrl : MonoBehaviour
         state = State.Die;
         playerAnim.SetTrigger(dieHash);
         yield return new WaitForSeconds(1.5f);
+        UtilityManager.utility.PlaySFX(dieSFX);
         Instantiate(graveStone, transform.position, transform.rotation);
         StopAllCoroutines();
         gameObject.SetActive(false);

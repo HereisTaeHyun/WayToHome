@@ -40,6 +40,7 @@ public class PlayerMove : MonoBehaviour
     private float slopeSideAngle;
     private float lastSlopeAngle;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private AudioClip jumpSFX;
 
     // 애니메이션 읽기 해시
     private readonly int speedHash = Animator.StringToHash("Speed");
@@ -217,6 +218,8 @@ public class PlayerMove : MonoBehaviour
             // jumpCount 추가 후 jump
             isJump = true;
             jumpCount += 1;
+
+            UtilityManager.utility.PlaySFX(jumpSFX);
             rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, jumpSpeed);
             isGround = false;
 

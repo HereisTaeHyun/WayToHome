@@ -10,6 +10,7 @@ public class PlayerAttack : MeleeAttack
     // private 변수
     private PlayerCtrl playerCtrl;
     private Animator playerAnim;
+    [SerializeField] private AudioClip attackSFX;
 
     public override void Init()
     {
@@ -47,6 +48,7 @@ public class PlayerAttack : MeleeAttack
             attackCollier.transform.localPosition = attackCollierPos;
 
             // 공격 활성화
+            UtilityManager.utility.PlaySFX(attackSFX);
             playerAnim.SetTrigger("Attack");
             playerAnim.SetFloat(attackDirHash, attackDir.x);
         }
