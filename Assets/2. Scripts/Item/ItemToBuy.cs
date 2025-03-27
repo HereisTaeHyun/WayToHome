@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -20,18 +21,32 @@ public class ItemToBuy : MonoBehaviour
     private PlayerCtrl playerCtrl;
     private PlayerMove playerMove;
     private PlayerAttack playerAttack;
+    private SpriteRenderer spriteRenderer; // spriteRenderer는 부모 객체에 있음
     private static float LIFESPAN = 120;
-    public float remainLifespan;
+    private float remainLifespan;
+    private static float BLINK_TIME = 0.3f;
+    private bool isBlink;
+
 
     // 생성 후 120초 동안 필드에 존재
     private void Start()
     {
         remainLifespan = LIFESPAN;
+        spriteRenderer = GetComponentInParent<SpriteRenderer>();
+        isBlink = false;
     }
     private void Update()
     {
         remainLifespan -= Time.deltaTime;
-        if(remainLifespan <= 0)
+
+        // 남은 수명이 10초 이하라면 깜빡거리기, 점프 추가 아이템은 중요 아이템으로 예외
+        if(remainLifespan <= 10 && isBlink == false && itemToBuyType != ItemToBuyType.MaxJumpPlus)
+        {
+            isBlink = true;
+            StartCoroutine(BlinkUntilDestroy());
+        }
+        // 남은 수명이 0 이하면 파괴, 점프 추가 아이템은 중요 아이템이니 파괴하지 않기
+        if(remainLifespan <= 0 && itemToBuyType != ItemToBuyType.MaxJumpPlus)
         {
             Destroy(transform.parent.gameObject);
         }
@@ -81,5 +96,33 @@ public class ItemToBuy : MonoBehaviour
                     break;
             }
         }
+    }
+
+    // 수명이 얼마 남지 않았다면 깜빡거리기 시작
+    IEnumerator BlinkUntilDestroy()
+    {
+        bool isBlink = false;
+        Color color = spriteRenderer.color;
+        // 아직 시간이 남아 있지만 남은 시간이 적을 경우
+        while(remainLifespan >= 0)
+        {
+            // 이전 상태 깜빡이면 되돌리기, 일반이면 깜빡임 반복시켜서 효과 적용
+            if(isBlink == true)
+            {
+                color.a = 0.0f;
+                spriteRenderer.color = color;
+                isBlink = false;
+            }
+            else if(isBlink == false)
+            {
+                color.a = 1.0f;
+                spriteRenderer.color = color;
+                isBlink = true;
+            }
+            yield return new WaitForSeconds(BLINK_TIME);
+        }
+        // 기본 상태로 초기화
+        color.a = 1.0f;
+        spriteRenderer.color = color;
     }
 }
