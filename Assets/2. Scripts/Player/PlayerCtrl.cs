@@ -226,6 +226,7 @@ public class PlayerCtrl : MonoBehaviour
             // 무적 시간이 아니었으면 무적으로 만든 후 Timer 설정
             invincible = true;
             invincibleTimer = INVINCIBLE_TIME;
+            // 데미지 입으면 무적 시간 동안 깜빡임
             StartCoroutine(BlinkUntilInvincible());
         }
         // 체력 계산 및 체력바 표기
@@ -239,25 +240,26 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    // 무적 시간 동안 깜빡거리기
+    // 무적 시간 동안 깜빡거리기 코루틴
     IEnumerator BlinkUntilInvincible()
     {
-        bool isVisible = true;
+        bool isBlink = true;
         Color color = spriteRenderer.color;
-        while(invincible == true)
+        // 무적이고 == 데미지를 입었고, 사망이 아니라면 깜빡임 시작
+        while(invincible == true && isDie == false)
         {
             // 이전 상태 투명이면 불투명, 불투명이면 투명 반복시켜서 효과 적용
-            if(isVisible == true)
+            if(isBlink == true)
             {
                 color.a = 1.0f;
                 spriteRenderer.color = color;
-                isVisible = false;
+                isBlink = false;
             }
-            else if(isVisible == false)
+            else if(isBlink == false)
             {
                 color.a = 0.0f;
                 spriteRenderer.color = color;
-                isVisible = true;
+                isBlink = true;
             }
             yield return new WaitForSeconds(BLINK_TIME);
         }
