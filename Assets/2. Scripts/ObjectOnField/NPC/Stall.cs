@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VendingMachine : MonoBehaviour
+public class Stall : MonoBehaviour
 {
     // 아이템을 파는 자판기, 한 대당 2회 사용 가능
 
