@@ -56,7 +56,6 @@ public class ItemToFind : MonoBehaviour
 
             switch(itemToFindType) // 아이템 사용
             {    
-                // playerCtrl에 영향
                 case ItemToFindType.Heal: // 체력 1 회복
                     if(playerCtrl.currentHP < playerCtrl.MaxHP)
                     {
@@ -71,13 +70,11 @@ public class ItemToFind : MonoBehaviour
                     break;
 
                 case ItemToFindType.Money: // 돈 획득
-                    playerCtrl.money += 1;
-                    Debug.Log("돈 획득");
+                    playerCtrl.GetMoney(1);
                     Destroy(transform.parent.gameObject);
                     break;
                 case ItemToFindType.Gold: // 금괴 획득
-                    playerCtrl.money += 3;
-                    Debug.Log("금괴 획득");
+                    playerCtrl.GetMoney(3);
                     Destroy(transform.parent.gameObject);
                     break;
             }

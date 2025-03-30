@@ -15,6 +15,7 @@ public class VendingMachine : MonoBehaviour
     [SerializeField] private TextMeshProUGUI statement;
     [SerializeField] private GameObject[] sellingItems;
     [SerializeField] private int[] itemPrices;
+    [SerializeField] private AudioClip moneySFX;
     private Dictionary<GameObject, int> itemInformation = new Dictionary<GameObject, int>(); // 판매품, 가격 받는 딕셔너리
     private int useCount;
     private GameObject itemSpawnPoint;
@@ -75,6 +76,7 @@ public class VendingMachine : MonoBehaviour
             {
                 playerCtrl.money -= itemPrice;
                 useCount += 1;
+                UtilityManager.utility.PlaySFX(moneySFX);
                 Instantiate(buyingItem, itemSpawnPoint.transform.position, itemSpawnPoint.transform.rotation);
                 Debug.Log($"잔액 : {playerCtrl.money}");
             }

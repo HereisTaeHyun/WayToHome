@@ -64,8 +64,7 @@ public class ItemToBuy : MonoBehaviour
             switch(itemToBuyType)
             {
                 case ItemToBuyType.MaxHpPlus: // 최대 체력 증가
-                    playerCtrl.ChangeMaxHP();
-                    Debug.Log("최대 체력 증가");
+                    playerCtrl.MaxHpPlus();
                     Destroy(transform.parent.gameObject);
                     break;
 
@@ -83,15 +82,13 @@ public class ItemToBuy : MonoBehaviour
                     break;
                 
                 case ItemToBuyType.AttackPlus: // 공격력 증가
-                    playerAttack.attackDamage -= 1;
-                    Debug.Log("공격력 증가");
+                    playerCtrl.Attacklus();
                     Destroy(transform.parent.gameObject);
                     break;
                 
                 // playerMove에 영향
                 case ItemToBuyType.MaxJumpPlus: // 점프 횟수 추가
-                    playerMove.maxJump += 1;
-                    Debug.Log("최대 점프 증가");
+                    playerCtrl.MaxJumpPlus();
                     Destroy(gameObject);
                     break;
             }

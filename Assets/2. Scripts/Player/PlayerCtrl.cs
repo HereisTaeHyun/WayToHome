@@ -59,6 +59,11 @@ public class PlayerCtrl : MonoBehaviour
     // 오디오 클립
     [SerializeField] private AudioClip takeHitSFX;
     [SerializeField] private AudioClip dieSFX;
+    [SerializeField] private AudioClip maxHPPlusSFX;
+    [SerializeField] private AudioClip healSFX;
+    [SerializeField] private AudioClip attackPlusSFX;
+    [SerializeField] private AudioClip jumpPlusSFX;
+    [SerializeField] private AudioClip moneySFX;
     
     // 디버프 관련(스턴, 슬로우 생각 중)
     private float debuffTimer;
@@ -66,6 +71,7 @@ public class PlayerCtrl : MonoBehaviour
     protected readonly int takeHitHash = Animator.StringToHash("TakeHit");
 #endregion
 
+#region 초기화
     // 싱글톤 선언
     public static PlayerCtrl player = null;
     void Awake()
@@ -147,7 +153,9 @@ public class PlayerCtrl : MonoBehaviour
             }
         }
     }
+#endregion
 
+#region Unity 제공 메서드
     void Start()
     {
         // HP바 초기화, 스탯 변수들 다 임포트 되고 초기화해야 해서 얘는 Start에서 한 번 호츌 필요
@@ -210,8 +218,10 @@ public class PlayerCtrl : MonoBehaviour
         // 플롯폼은 내려가기 키를 누르면 내려갈 수 있도록하기
         playerMove.GoDownPlatfom();
     }
-
-    // 플레이어 데미지 가해
+#endregion
+ 
+#region 체력, 게임 오버 관련
+    // 플레이어 체력 수정
     public void ChangeHP(float value)
     {
         // 데미지일 경우 체크 사항
@@ -228,6 +238,10 @@ public class PlayerCtrl : MonoBehaviour
             invincibleTimer = INVINCIBLE_TIME;
             // 데미지 입으면 무적 시간 동안 깜빡임
             StartCoroutine(BlinkUntilInvincible());
+        }
+        else if(value > 0)  // value가 plus면 힐이니까 힐 사운드 재생
+        {
+            UtilityManager.utility.PlaySFX(healSFX);
         }
         // 체력 계산 및 체력바 표기
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
@@ -297,13 +311,6 @@ public class PlayerCtrl : MonoBehaviour
         GameManager.instance.GameOverTrigger();
     }
 
-    // 타 객체에서 최대 체력 증가시킬떄 접근
-    public void ChangeMaxHP()
-    {
-        MaxHP += 1;
-        DisplayHP();
-    }
-
     // HP 패녈 표시
     private void DisplayHP()
     {
@@ -325,6 +332,7 @@ public class PlayerCtrl : MonoBehaviour
         StopAllCoroutines();
         gameObject.SetActive(false);
     }
+#endregion
 
     // 적 객체에서 디버프 타입, 시간 받아서 적용
     public void GetDebuff(DebuffType debuffType, float debuffTime)
@@ -341,4 +349,35 @@ public class PlayerCtrl : MonoBehaviour
                 break;
         }
     }
+
+#region Stat
+    // Stat 수정 관련
+    
+    public void MaxHpPlus()
+    {
+        MaxHP += 1;
+        UtilityManager.utility.PlaySFX(maxHPPlusSFX);
+        DisplayHP();
+        Debug.Log("최대 체력 증가");
+    }
+    public void GetMoney(int plusMoney)
+    {
+        money += plusMoney;
+        UtilityManager.utility.PlaySFX(moneySFX);
+        Debug.Log($"{plusMoney} 골드 획득");
+    }
+    public void Attacklus()
+    {
+        playerAttack.attackDamage -= 1;
+        UtilityManager.utility.PlaySFX(attackPlusSFX);
+        Debug.Log("공격력 증가");
+    }
+
+    public void MaxJumpPlus()
+    {
+        playerMove.maxJump += 1;
+        UtilityManager.utility.PlaySFX(jumpPlusSFX);
+        Debug.Log("최대 점프 증가");
+    }
+#endregion
 }
