@@ -6,8 +6,8 @@ using System.Linq;
 // 하늘을 날면서 타겟을 추적하는 적에 대한 클래스
 public class FlyingEyeCtrl : EnemyCtrl
 {
-    Collider2D coll;
-    Collider2D playerColl;
+    private Collider2D coll;
+    private Collider2D playerColl;
     private readonly int dieHash = Animator.StringToHash("Die");
 
     void Start()
@@ -49,6 +49,7 @@ public class FlyingEyeCtrl : EnemyCtrl
     public override void ChangeHP(float value)
     {
         base.ChangeHP(value);
+        UtilityManager.utility.PlaySFX(enemyGetHitSFX);
     }
 
     // 적이 피격당했을 때
@@ -91,6 +92,9 @@ public class FlyingEyeCtrl : EnemyCtrl
         anim.SetTrigger(dieHash);
         Physics2D.IgnoreCollision(coll, playerColl, true);
         yield return new WaitForSeconds(0.5f);
+
+        // 사운드 재생
+        UtilityManager.utility.PlaySFX(enemyDieSFX);
 
         // 물리 제거 후 파괴
         rb2D.bodyType = RigidbodyType2D.Kinematic;

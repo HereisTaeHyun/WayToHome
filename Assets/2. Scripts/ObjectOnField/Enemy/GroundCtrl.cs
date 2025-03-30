@@ -94,8 +94,9 @@ public class GroundCtrl : EnemyCtrl
     {
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
 
-        // 타격 벡터 계산 및 anim 재생
+        // 타격 벡터 계산 및 sfx, anim 재생
         Vector2 hitVector =  UtilityManager.utility.DirSet(target.transform.position - transform.position);
+        UtilityManager.utility.PlaySFX(enemyGetHitSFX);
         anim.SetTrigger(hitTrigger);
         anim.SetFloat(hitHash, hitVector.x);
 
@@ -131,10 +132,11 @@ public class GroundCtrl : EnemyCtrl
         Instantiate(selectedItem, transform.position, transform.rotation);
         StartCoroutine(DieStart());
     }
-    // 사망 절차 진행, 물리 영향 제거 후 사망 애니메이션 재생
+    // 사망 절차 진행, 사운드 재생 및 물리 영향 제거 후 사망 애니메이션 재생
     private IEnumerator DieStart()
     {
         isDie = true;
+        UtilityManager.utility.PlaySFX(enemyDieSFX);
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.simulated = false;
         anim.SetTrigger(dieHash);

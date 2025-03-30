@@ -272,7 +272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f310e94af69efab46bd36d28d38f583e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb2D: {fileID: 0}
   enemyPushPower: 0
   stunTime: 0
   MaxHP: 3
@@ -284,6 +283,7 @@ MonoBehaviour:
   - 95
   - 5
   damage: -3
+  enemyDieSFX: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
   attackRange: 2.3
   playerLayer:
     serializedVersion: 2

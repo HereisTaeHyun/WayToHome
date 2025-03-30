@@ -21,6 +21,8 @@ public class EnemyCtrl : MonoBehaviour
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected GameObject[] dropItem;
     [SerializeField] protected float[] itemWeight;
+    [SerializeField] protected AudioClip enemyGetHitSFX;
+    [SerializeField] protected AudioClip enemyDieSFX;
     protected Dictionary<GameObject, float> itemInformation = new Dictionary<GameObject, float>();
     protected bool canMove;
     protected float scanningRadius = 10.0f;

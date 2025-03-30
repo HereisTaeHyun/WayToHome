@@ -189,7 +189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37eb3a36dbd68043a47d3698fcb18e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb2D: {fileID: 0}
   enemyPushPower: 5
   stunTime: 0.5
   MaxHP: 3
@@ -200,6 +199,8 @@ MonoBehaviour:
   itemWeight:
   - 90
   - 10
+  enemyGetHitSFX: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
+  enemyDieSFX: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
   damage: -2
 --- !u!114 &1959779309889854907
 MonoBehaviour:
