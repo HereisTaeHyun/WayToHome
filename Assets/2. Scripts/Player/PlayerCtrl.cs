@@ -32,13 +32,11 @@ public class PlayerCtrl : MonoBehaviour
 
 #region private
     // private 변수
-    private GameObject spawnPos;
     private PlayerMove playerMove;
     private PlayerAttack playerAttack;
     private Rigidbody2D rb2D;
     private Animator playerAnim;
     private SpriteRenderer spriteRenderer;
-    private AudioSource audioSource;
     private bool isDie;
     private CapsuleCollider2D coll2D;
     private PhysicsMaterial2D physicsMaterial2D;
@@ -98,7 +96,6 @@ public class PlayerCtrl : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         coll2D = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        audioSource = GetComponent<AudioSource>();
         physicsMaterial2D = new PhysicsMaterial2D();
 
         // UI 관련

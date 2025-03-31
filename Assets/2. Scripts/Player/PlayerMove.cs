@@ -28,7 +28,6 @@ public class PlayerMove : MonoBehaviour
 
     private bool isPlatform;
     private static float DISABLE_COLLIDER_TIME = 0.5f;
-    private PlatformEffector2D platformEffector;
 
     private Animator playerAnim;
 
@@ -231,7 +230,7 @@ public class PlayerMove : MonoBehaviour
 #region Platform
     public void GoDownPlatfom()
     {
-        // Vertical negative 키를 눌렀다면, Flag가 사용 중이 아니라면, platform 위라면
+        // Vertical negative 키를 눌렀다면, platform 위라면
         if(Input.GetAxis("Vertical") < 0 && isPlatform == true)
         {
             StartCoroutine(DisablePlatformCollider());
@@ -246,13 +245,12 @@ public class PlayerMove : MonoBehaviour
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), false);
     }
 
-    // Platform 위라면 platformEffector를 받아 오기
+    // Platform 위라면 isPlatform
     void OnCollisionStay2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Platform") && isPlatform == false)
         {
             isPlatform = true;
-            platformEffector = collision.gameObject.GetComponent<PlatformEffector2D>();
         }
     }
     #endregion
