@@ -191,30 +191,24 @@ public class PlayerCtrl : MonoBehaviour
         }
 
         // 모듈 클래스 함수 호출
-        // 이동 외 움직임 동작
         // 상점에서는 공격 막기위해 canAttack 플래그 존재
         playerMove.Jump();
         if(canAttack == true)
         {
             playerAttack.Attack();
         }
-        
-        // 플레이어 StatUI 관련 동작
-        DisplayStat();
-    }
 
-    private void FixedUpdate()
-    {
-        // 이동 관련 모듈 함수는 여기서 처리
+        // 이동 관련 모듈 함수
         if(canMove == false || GameManager.instance.readIsGameOver == true)
         {
             return;
         }
         playerMove.HorizontalMove();
-
-        
         // 플롯폼은 내려가기 키를 누르면 내려갈 수 있도록하기
         playerMove.GoDownPlatfom();
+        
+        // 플레이어 StatUI 관련 동작
+        DisplayStat();
     }
 #endregion
  
