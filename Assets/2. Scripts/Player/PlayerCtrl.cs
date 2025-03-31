@@ -146,7 +146,7 @@ public class PlayerCtrl : MonoBehaviour
             }
             else if(state == State.Idle)
             {
-                physicsMaterial2D.friction = 10.0f;
+                physicsMaterial2D.friction = 20.0f;
                 coll2D.sharedMaterial = physicsMaterial2D;
             }
         }
