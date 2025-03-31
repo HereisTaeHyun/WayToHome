@@ -51,7 +51,7 @@ public class PlayerMove : MonoBehaviour
     public bool readIsGround {get {return isGround;}}
     private bool isJump;
     public bool readIsJump {get {return isJump;}}
-    [SerializeField] private bool isSlope;
+    private bool isSlope;
     private float originSpeed = 7.0f;
     public float readOriginSpeed {get {return originSpeed;}}
     private float debuffedSpeed; // origin * 0.5f
