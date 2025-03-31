@@ -48,6 +48,8 @@ public class PlayerCtrl : MonoBehaviour
     // UI 관련
     private Image HPBar;
     private GameObject statUI;
+    private TextMeshProUGUI itemText;
+    private static float DISPLAY_ITEM_EFFECT_TIME = 1.0f;
     
     // 무적 관련
     private bool invincible;
@@ -100,12 +102,11 @@ public class PlayerCtrl : MonoBehaviour
         physicsMaterial2D = new PhysicsMaterial2D();
 
         // UI 관련
-        HPBar = GameObject.FindGameObjectWithTag("HPBar")?.GetComponent<Image>();
+        HPBar = GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>();
+        itemText = transform.Find("TextCanvas/ItemText").GetComponent<TextMeshProUGUI>();
         statUI = transform.Find("PlayerUI/GamePlayUI/StatUI").gameObject;
-        if(statUI.activeSelf == true)
-        {
-            statUI.SetActive(false);
-        }
+
+        itemText.text = "";
         statUI.SetActive(false);
 
         // 상태 체커 시작 및 상태 변수 초기화
@@ -356,6 +357,7 @@ public class PlayerCtrl : MonoBehaviour
     public void MaxHpPlus()
     {
         MaxHP += 1;
+        StartCoroutine(DisplayItemEffect("MaxHP+ !"));
         UtilityManager.utility.PlaySFX(maxHPPlusSFX);
         DisplayHP();
         Debug.Log("최대 체력 증가");
@@ -369,6 +371,7 @@ public class PlayerCtrl : MonoBehaviour
     public void Attacklus()
     {
         playerAttack.attackDamage -= 1;
+        StartCoroutine(DisplayItemEffect("Attack+ !"));
         UtilityManager.utility.PlaySFX(attackPlusSFX);
         Debug.Log("공격력 증가");
     }
@@ -376,8 +379,16 @@ public class PlayerCtrl : MonoBehaviour
     public void MaxJumpPlus()
     {
         playerMove.maxJump += 1;
+        StartCoroutine(DisplayItemEffect("Jump+ !"));
         UtilityManager.utility.PlaySFX(jumpPlusSFX);
         Debug.Log("최대 점프 증가");
+    }
+
+    IEnumerator DisplayItemEffect(string ItemEffectText)
+    {
+        itemText.text = ItemEffectText;
+        yield return new WaitForSeconds(DISPLAY_ITEM_EFFECT_TIME);
+        itemText.text = "";
     }
 #endregion
 }
