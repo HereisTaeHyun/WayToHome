@@ -56,7 +56,6 @@ public class ItemToBuy : ItemBase
                     if(playerCtrl.currentHP < playerCtrl.MaxHP)
                     {
                         playerCtrl.ChangeHP(2);
-                        Debug.Log("체력 회복");
                         Destroy(transform.parent.gameObject);
                     }
                     break;

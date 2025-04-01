@@ -35,7 +35,7 @@ public class Stall : MonoBehaviour
     }
     void Update()
     {
-        if(useCount == 2)
+        if(useCount >= 2)
         {
             statement.text = "Sold Out";
             menu.SetActive(false);
@@ -78,10 +78,10 @@ public class Stall : MonoBehaviour
                 useCount += 1;
                 UtilityManager.utility.PlaySFX(moneySFX);
                 Instantiate(buyingItem, itemSpawnPoint.transform.position, itemSpawnPoint.transform.rotation);
-                Debug.Log($"잔액 : {playerCtrl.money}");
             }
             else
             {
+                // 이후 실패 알림음으로 변경 ㄱㄱ
                 Debug.Log("돈 부족");
             }
         }

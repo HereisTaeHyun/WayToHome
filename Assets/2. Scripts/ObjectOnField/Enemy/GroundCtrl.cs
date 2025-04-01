@@ -111,7 +111,6 @@ public class GroundCtrl : EnemyCtrl
     private void AttackAbleCheck(Vector2 enemyMoveDir)
     {
         RaycastHit2D attackRangeCheck = Physics2D.Raycast(transform.position, enemyMoveDir, attackRange, playerLayer);
-        Debug.DrawRay(transform.position, enemyMoveDir * attackRange, Color.blue);
         if(attackRangeCheck)
         {
             enemyAttack.Attack();

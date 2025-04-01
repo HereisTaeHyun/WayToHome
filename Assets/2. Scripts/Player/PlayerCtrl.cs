@@ -184,14 +184,14 @@ public class PlayerCtrl : MonoBehaviour
             }
         }
 
-        // canMove == true일때만 playerMove 객체 접근 가능
+        // canMove == true거나 isGameOver == false playerMove 객체 접근
         if(canMove == false || GameManager.instance.readIsGameOver == true)
         {
             return;
         }
 
         // 모듈 클래스 함수 호출
-        // 상점에서는 공격 막기위해 canAttack 플래그 존재
+        // canAttack은 상점에서는 공격 막기에 사용 중
         playerMove.Jump();
         if(canAttack == true)
         {
