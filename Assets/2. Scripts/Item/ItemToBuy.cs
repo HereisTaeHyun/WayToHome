@@ -2,7 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ItemToBuy : MonoBehaviour
+public class ItemToBuy : ItemBase
 {
     // 구입 아이템, 드랍 또는 필드 아이템보다 고성능이지만 money 차감 필요
     // 자판기 NPC에서 획득 가능
@@ -18,24 +18,10 @@ public class ItemToBuy : MonoBehaviour
         PremiumHeal,
         MaxJumpPlus,
     }
-    private PlayerCtrl playerCtrl;
-    private PlayerMove playerMove;
-    private PlayerAttack playerAttack;
-    private SpriteRenderer spriteRenderer; // spriteRenderer는 부모 객체에 있음
-    private static float LIFESPAN = 120;
-    private float remainLifespan;
-    private static float BLINK_TIME = 0.3f;
-    private bool isBlink;
 
 
     // 생성 후 120초 동안 필드에 존재
-    private void Start()
-    {
-        remainLifespan = LIFESPAN;
-        spriteRenderer = GetComponentInParent<SpriteRenderer>();
-        isBlink = false;
-    }
-    private void Update()
+    protected override void Update()
     {
         remainLifespan -= Time.deltaTime;
 
@@ -52,14 +38,12 @@ public class ItemToBuy : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    protected override void OnTriggerStay2D(Collider2D other)
     {
         // Player 감지, Submit(E에 할당)입력시 획득
         if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit"))
         {
             playerCtrl = other.GetComponent<PlayerCtrl>();
-            playerMove = other.GetComponent<PlayerMove>();
-            playerAttack = other.GetComponent<PlayerAttack>();
 
             switch(itemToBuyType)
             {
@@ -75,10 +59,6 @@ public class ItemToBuy : MonoBehaviour
                         Debug.Log("체력 회복");
                         Destroy(transform.parent.gameObject);
                     }
-                    else // 최대 체력이면 사용안됨
-                    {
-                        Debug.Log("이미 최대 체력");
-                    }
                     break;
                 
                 case ItemToBuyType.AttackPlus: // 공격력 증가
@@ -93,33 +73,5 @@ public class ItemToBuy : MonoBehaviour
                     break;
             }
         }
-    }
-
-    // 수명이 얼마 남지 않았다면 깜빡거리기 시작
-    IEnumerator BlinkUntilDestroy()
-    {
-        bool isBlink = false;
-        Color color = spriteRenderer.color;
-        // 아직 시간이 남아 있지만 남은 시간이 적을 경우
-        while(remainLifespan >= 0)
-        {
-            // 이전 상태 깜빡이면 되돌리기, 일반이면 깜빡임 반복시켜서 효과 적용
-            if(isBlink == true)
-            {
-                color.a = 0.0f;
-                spriteRenderer.color = color;
-                isBlink = false;
-            }
-            else if(isBlink == false)
-            {
-                color.a = 1.0f;
-                spriteRenderer.color = color;
-                isBlink = true;
-            }
-            yield return new WaitForSeconds(BLINK_TIME);
-        }
-        // 기본 상태로 초기화
-        color.a = 1.0f;
-        spriteRenderer.color = color;
     }
 }
