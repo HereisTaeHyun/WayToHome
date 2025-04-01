@@ -1809,6 +1809,68 @@ Transform:
   - {fileID: 499084537}
   m_Father: {fileID: 163628263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &374644157
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1668110831}
+    m_Modifications:
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -164.23497
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 38.307426
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.04473989
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041703485034250795, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_Name
+      value: PF Village Props - Platform 01 L X1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+--- !u!4 &374644158 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+  m_PrefabInstance: {fileID: 374644157}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &376275506
 GameObject:
   m_ObjectHideFlags: 0
@@ -7937,6 +7999,72 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3477511248214432131, guid: 9b44bcfbb7b4cf042b4e82f96ab68d93, type: 3}
   m_PrefabInstance: {fileID: 1301465566}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1375037267
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1668110831}
+    m_Modifications:
+    - target: {fileID: 4080499543719604242, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -150.66696
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 38.307426
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.04473989
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041703485034250795, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+      propertyPath: m_Name
+      value: PF Village Props - Platform 01 L X1 (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+--- !u!4 &1375037268 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5291341128151504621, guid: 02446f50b0550964483ead78fef7e098, type: 3}
+  m_PrefabInstance: {fileID: 1375037267}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1403819414
 PrefabInstance:
@@ -22258,6 +22386,8 @@ Transform:
   - {fileID: 1577616236}
   - {fileID: 822234114}
   - {fileID: 2027630144}
+  - {fileID: 374644158}
+  - {fileID: 1375037268}
   m_Father: {fileID: 163628263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1669200045
