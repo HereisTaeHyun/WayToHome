@@ -16,6 +16,7 @@ public class Stall : MonoBehaviour
     [SerializeField] private GameObject[] sellingItems;
     [SerializeField] private int[] itemPrices;
     [SerializeField] private AudioClip moneySFX;
+    [SerializeField] private AudioClip buyFailSFX;
     private Dictionary<GameObject, int> itemInformation = new Dictionary<GameObject, int>(); // 판매품, 가격 받는 딕셔너리
     private int useCount;
     private GameObject itemSpawnPoint;
@@ -81,8 +82,7 @@ public class Stall : MonoBehaviour
             }
             else
             {
-                // 이후 실패 알림음으로 변경 ㄱㄱ
-                Debug.Log("돈 부족");
+                UtilityManager.utility.PlaySFX(buyFailSFX);
             }
         }
     }
