@@ -184,7 +184,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3946463790144408715}
   - component: {fileID: 4450447127477985867}
-  - component: {fileID: 3392259297736667942}
   m_Layer: 6
   m_Name: PF Village Props - Platform
   m_TagString: Ground
@@ -240,7 +239,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 1.3123398, y: -0.11087394}
@@ -255,22 +254,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5.011551, y: 0.15831137}
   m_EdgeRadius: 0
---- !u!251 &3392259297736667942
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4300243651923752528}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
