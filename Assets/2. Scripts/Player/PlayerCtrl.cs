@@ -352,20 +352,17 @@ public class PlayerCtrl : MonoBehaviour
         StartCoroutine(DisplayItemEffect("MaxHP+ !"));
         UtilityManager.utility.PlaySFX(maxHPPlusSFX);
         DisplayHP();
-        Debug.Log("최대 체력 증가");
     }
     public void GetMoney(int plusMoney)
     {
         money += plusMoney;
         UtilityManager.utility.PlaySFX(moneySFX);
-        Debug.Log($"{plusMoney} 골드 획득");
     }
     public void Attacklus()
     {
         playerAttack.attackDamage -= 1;
         StartCoroutine(DisplayItemEffect("Attack+ !"));
         UtilityManager.utility.PlaySFX(attackPlusSFX);
-        Debug.Log("공격력 증가");
     }
 
     public void MaxJumpPlus()
@@ -373,7 +370,6 @@ public class PlayerCtrl : MonoBehaviour
         playerMove.maxJump += 1;
         StartCoroutine(DisplayItemEffect("Jump+ !"));
         UtilityManager.utility.PlaySFX(jumpPlusSFX);
-        Debug.Log("최대 점프 증가");
     }
 
     IEnumerator DisplayItemEffect(string ItemEffectText)

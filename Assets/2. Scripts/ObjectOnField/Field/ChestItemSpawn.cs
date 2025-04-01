@@ -7,29 +7,25 @@ public class ChestItemSpawn : MonoBehaviour
         public GameObject itemInChest;
         private Chest chest;
         private GameObject itemSpawnPoint;
+        private bool isOpened = false;
 
         void Start()
         {
             chest = GetComponent<Chest>();
             itemSpawnPoint = transform.Find("ItemSpawnPoint").gameObject;
         }
-        private bool isOpened;
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            if(chest.IsOpened == true)
+            if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit") && isOpened == false)
             {
-                return;
-            }
-            if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit"))
-            {
+                isOpened = true;
                 chest.Open();
-                ItemOut();
+                if(itemInChest != null)
+                {
+                    StartCoroutine(ItemDrop());
+                }
             }
-        }
-        private void ItemOut()
-        {
-            StartCoroutine(ItemDrop());
         }
 
         IEnumerator ItemDrop()
