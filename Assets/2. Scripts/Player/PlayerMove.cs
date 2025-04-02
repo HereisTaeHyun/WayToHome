@@ -244,18 +244,10 @@ public class PlayerMove : MonoBehaviour
             isJump = true;
             jumpCount += 1;
 
-            UtilityManager.utility.PlaySFX(jumpSFX);
             rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, jumpSpeed);
             isGround = false;
-        }
-        // 점프 중인지 하강 중인지
-        if(rb2D.linearVelocity.y > 0 && isJump)
-        {
-            playerAnim.SetBool(jumpHash, true);
-        }
-        else if(rb2D.linearVelocity.y <= 0)
-        {
-            playerAnim.SetBool(jumpHash, false);
+            UtilityManager.utility.PlaySFX(jumpSFX);
+            playerAnim.SetTrigger(jumpHash);
         }
     }
 #endregion
