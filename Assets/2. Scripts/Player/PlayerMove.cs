@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
 
     private Vector2 newVelocity;
     private float jumpSpeed = 5.0f;
-    private int jumpCount = 0;
+    [SerializeField] private int jumpCount = 0;
 
     private bool isPlatform;
     private static float DISABLE_COLLIDER_TIME = 0.5f;
@@ -81,7 +81,6 @@ public class PlayerMove : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         Vector2 move = new Vector2(h, 0);
         Vector2 moveDir = UtilityManager.utility.DirSet(move);
-        // playerCtrl.DirSet(move);
 
         // 이동 방향이 left 쪽이면 Player가 왼쪽으로 보기
         playerAnim.SetFloat(speedHash, move.magnitude);
@@ -106,24 +105,29 @@ public class PlayerMove : MonoBehaviour
         // 실제 이동 적용 부분
         if(Input.GetButton("Horizontal"))
         {
-            playerAnim.SetFloat(dirHash, moveDir.x);
+            ApplyMove(move, moveDir);
+        }
+    }
 
-            // Ground, Slope 위면 얻어진 수직 벡터 각도에 따라 이동, 아니면 그냥 이전 velocity에 따라 이동
-            if(isGround == true && isSlope != true)
-            {
-                newVelocity.Set(move.x * moveSpeed, 0.0f);
-                rb2D.linearVelocity = newVelocity;
-            }
-            else if(isGround == true && isSlope == true)
-            {
-                newVelocity.Set(-move.x * moveSpeed * slopeNormalPerp.x, -move.x * moveSpeed * slopeNormalPerp.y);
-                rb2D.linearVelocity = newVelocity;
-            }
-            else if(isGround == false)
-            {
-                newVelocity.Set(move.x * moveSpeed, rb2D.linearVelocity.y);
-                rb2D.linearVelocity = newVelocity;
-            }
+    private void ApplyMove(Vector2 move, Vector2 moveDir)
+    {
+        playerAnim.SetFloat(dirHash, moveDir.x);
+
+        // Ground, Slope 위면 얻어진 수직 벡터 각도에 따라 이동, 아니면 그냥 이전 velocity에 따라 이동
+        if(isGround == true && isSlope != true)
+        {
+            newVelocity.Set(move.x * moveSpeed, 0.0f);
+            rb2D.linearVelocity = newVelocity;
+        }
+        else if(isGround == true && isSlope == true)
+        {
+            newVelocity.Set(-move.x * moveSpeed * slopeNormalPerp.x, -move.x * moveSpeed * slopeNormalPerp.y);
+            rb2D.linearVelocity = newVelocity;
+        }
+        else if(isGround == false)
+        {
+            newVelocity.Set(move.x * moveSpeed, rb2D.linearVelocity.y);
+            rb2D.linearVelocity = newVelocity;
         }
     }
 #endregion
@@ -186,6 +190,27 @@ public class PlayerMove : MonoBehaviour
             isJump = false;
         }  
     }
+
+    // 점프 초기화 버그 보조용
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        // 땅이나 플랫폼에 닿았음
+        if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
+        {
+            // jumpCount가 초기화되지 않았고 하강 중임
+            // rb2D.linearVelocity.y < 0.01f 없으면 점프 키를 누른 프레임때도 초기화해서 2중 점프됨 삭제하지 말 것
+            if(jumpCount != 0 && rb2D.linearVelocity.y < 0.01f)
+            {
+                jumpCount = 0;
+            }
+        }
+        // Platform 위지만 isPlatform이 아니면 isPlatform
+        if(other.gameObject.CompareTag("Platform") && isPlatform == false)
+        {
+            isPlatform = true;
+        }
+    }
+
     private void OnCollisionExit2D(Collision2D other)
     {
         if (other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
@@ -198,6 +223,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    // 삭제 금지 필요 없어 보이는데 얘 지우면 에러남
     IEnumerator GroundCheck(Collider2D col)
     {
         yield return new WaitForSeconds(0.05f);
@@ -243,15 +269,6 @@ public class PlayerMove : MonoBehaviour
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), true);
         yield return new WaitForSeconds(DISABLE_COLLIDER_TIME);
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), false);
-    }
-
-    // Platform 위라면 isPlatform
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Platform") && isPlatform == false)
-        {
-            isPlatform = true;
-        }
     }
     #endregion
 }
