@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
 
     private Vector2 newVelocity;
     private float jumpSpeed = 5.0f;
-    [SerializeField] private int jumpCount = 0;
+    private int jumpCount = 0;
 
     private bool isPlatform;
     private static float DISABLE_COLLIDER_TIME = 0.5f;
@@ -199,7 +199,7 @@ public class PlayerMove : MonoBehaviour
         {
             // jumpCount가 초기화되지 않았고 하강 중임
             // rb2D.linearVelocity.y < 0.01f 없으면 점프 키를 누른 프레임때도 초기화해서 2중 점프됨 삭제하지 말 것
-            if(jumpCount != 0 && rb2D.linearVelocity.y < 0.01f)
+            if(jumpCount != 0 && rb2D.linearVelocity.y < 0)
             {
                 jumpCount = 0;
             }
@@ -247,8 +247,15 @@ public class PlayerMove : MonoBehaviour
             UtilityManager.utility.PlaySFX(jumpSFX);
             rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, jumpSpeed);
             isGround = false;
-
-            playerAnim.SetTrigger(jumpHash);
+        }
+        // 점프 중인지 하강 중인지
+        if(rb2D.linearVelocity.y > 0 && isJump)
+        {
+            playerAnim.SetBool(jumpHash, true);
+        }
+        else if(rb2D.linearVelocity.y <= 0)
+        {
+            playerAnim.SetBool(jumpHash, false);
         }
     }
 #endregion
