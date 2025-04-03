@@ -26,6 +26,10 @@ public class PlayerMove : MonoBehaviour
     private float jumpSpeed = 5.0f;
     private int jumpCount = 0;
 
+    // 땅인지 체크하는 Ray 시작 위치
+    private Vector2 groundCheckStartPos;
+    private float groundCheckDistance = 0.05f;
+
     private bool isPlatform;
     private static float DISABLE_COLLIDER_TIME = 0.5f;
 
@@ -39,6 +43,7 @@ public class PlayerMove : MonoBehaviour
     private float slopeSideAngle;
     private float lastSlopeAngle;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask platformLayer;
     [SerializeField] private AudioClip jumpSFX;
 
     // 애니메이션 읽기 해시
@@ -185,9 +190,12 @@ public class PlayerMove : MonoBehaviour
     {
         if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
         {
-            isGround = true;
-            jumpCount = 0;
-            isJump = false;
+            if(footOnGround())
+            {
+                isGround = true;
+                jumpCount = 0;
+                isJump = false;
+            }
         }  
     }
 
@@ -199,7 +207,9 @@ public class PlayerMove : MonoBehaviour
         {
             // jumpCount가 초기화되지 않았고 하강 중임
             // rb2D.linearVelocity.y < 0.01f 없으면 점프 키를 누른 프레임때도 초기화해서 2중 점프됨 삭제하지 말 것
-            if(jumpCount != 0 && rb2D.linearVelocity.y < 0)
+            Debug.DrawRay(groundCheckStartPos, Vector2.down * 0.05f, Color.blue);
+
+            if(jumpCount != 0 && rb2D.linearVelocity.y < 0 && footOnGround())
             {
                 jumpCount = 0;
             }
@@ -223,7 +233,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    // 삭제 금지 필요 없어 보이는데 얘 지우면 에러남
+    // 삭제 금지 필요 없어 보이는데 얘 지우면 허공답보 버그남
     IEnumerator GroundCheck(Collider2D col)
     {
         yield return new WaitForSeconds(0.05f);
@@ -232,6 +242,23 @@ public class PlayerMove : MonoBehaviour
         {
             isGround = false;
             isJump = true;
+        }
+    }
+
+    // 땅이 발에 닿는지 체크
+    private bool footOnGround()
+    {
+        groundCheckStartPos = new Vector2(rb2D.position.x, rb2D.position.y - (collSize.y / 2));
+        RaycastHit2D hitGround = Physics2D.Raycast(groundCheckStartPos, Vector2.down, groundCheckDistance, groundLayer);
+        RaycastHit2D hitPlatform = Physics2D.Raycast(groundCheckStartPos, Vector2.down, groundCheckDistance, platformLayer);
+
+        if(hitGround || hitPlatform)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -247,14 +274,7 @@ public class PlayerMove : MonoBehaviour
             rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, jumpSpeed);
             isGround = false;
             UtilityManager.utility.PlaySFX(jumpSFX);
-        }
-        if(rb2D.linearVelocity.y > 0 && isJump)
-        {
-            playerAnim.SetBool(jumpHash, true);
-        }
-        else if(rb2D.linearVelocity.y < 0)
-        {
-            playerAnim.SetBool(jumpHash, false);
+            playerAnim.SetTrigger(jumpHash);
         }
     }
 #endregion
