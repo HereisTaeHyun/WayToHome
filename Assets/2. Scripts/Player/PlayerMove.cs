@@ -128,7 +128,7 @@ public class PlayerMove : MonoBehaviour
         }
         else if(isGround == true && isSlope == false)
         {
-            newVelocity.Set(move.x * moveSpeed, 0);
+            newVelocity.Set(move.x * moveSpeed, rb2D.linearVelocity.y);
             rb2D.linearVelocity = newVelocity;
         }
         else if(isGround == true && isSlope == true)
@@ -258,6 +258,9 @@ public class PlayerMove : MonoBehaviour
         {
             // jumpCount 추가 후 jump
             isJump = true;
+            isGround = false;
+            isSlope = false;
+            
             jumpCount += 1;
 
             rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, jumpSpeed);
