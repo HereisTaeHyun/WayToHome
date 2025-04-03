@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class ZoneMoveBySec : MonoBehaviour
+public class MovingObject : MonoBehaviour
 {
-    // public 변수
-    public static float CHANGE_TIME = 2.0f;
+    // 움직이는 객체
+    // 위에 있는 객체와 함께 움직여야 함
+    public float changeTime = 2.0f;
     public float moveSpeed = 2.0f;
     public bool vertical;
 
@@ -17,7 +18,7 @@ public class ZoneMoveBySec : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        moveTimer = CHANGE_TIME;
+        moveTimer = changeTime;
         pos = rb.position;
     }
 
@@ -28,7 +29,7 @@ public class ZoneMoveBySec : MonoBehaviour
         if(moveTimer < 0)
         {
             moveDir = -moveDir;
-            moveTimer = CHANGE_TIME;
+            moveTimer = changeTime;
         }
 
         // vertical == true면 상하 아니면 좌우
