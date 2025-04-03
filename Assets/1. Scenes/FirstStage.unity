@@ -3548,7 +3548,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &671963598
 Transform:
   m_ObjectHideFlags: 0
@@ -6261,9 +6261,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF Village Props - Platform (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5056159611846765502, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
+      propertyPath: m_SurfaceArc
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 7699502630282009161, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 36.24
+      value: 19.12
       objectReference: {fileID: 0}
     - target: {fileID: 7699502630282009161, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6322,6 +6326,10 @@ PrefabInstance:
     - target: {fileID: 2280771843599528538, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
       propertyPath: m_Name
       value: PF Village Props - Platform (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056159611846765502, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
+      propertyPath: m_SurfaceArc
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7699502630282009161, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9290,6 +9298,10 @@ PrefabInstance:
     - target: {fileID: 2280771843599528538, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
       propertyPath: m_Name
       value: PF Village Props - Platform (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056159611846765502, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
+      propertyPath: m_SurfaceArc
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7699502630282009161, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28282,9 +28294,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF Village Props - Platform (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5056159611846765502, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
+      propertyPath: m_SurfaceArc
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 7699502630282009161, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.15
+      value: 23.5
       objectReference: {fileID: 0}
     - target: {fileID: 7699502630282009161, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
       propertyPath: m_LocalPosition.y
@@ -28466,7 +28482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2138773898
 Transform:
   m_ObjectHideFlags: 0
@@ -28493,6 +28509,10 @@ PrefabInstance:
     - target: {fileID: 2280771843599528538, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
       propertyPath: m_Name
       value: PF Village Props - Platform (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5056159611846765502, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
+      propertyPath: m_SurfaceArc
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7699502630282009161, guid: 5abe22dcfc33fc54bbd8a4e77a910423, type: 3}
       propertyPath: m_LocalPosition.x

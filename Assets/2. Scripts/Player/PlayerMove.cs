@@ -207,8 +207,6 @@ public class PlayerMove : MonoBehaviour
         {
             // jumpCount가 초기화되지 않았고 하강 중임
             // rb2D.linearVelocity.y < 0.01f 없으면 점프 키를 누른 프레임때도 초기화해서 2중 점프됨 삭제하지 말 것
-            Debug.DrawRay(groundCheckStartPos, Vector2.down * 0.05f, Color.blue);
-
             if(jumpCount != 0 && rb2D.linearVelocity.y < 0 && footOnGround())
             {
                 jumpCount = 0;
