@@ -52,11 +52,11 @@ public class PlayerMove : MonoBehaviour
     private readonly int jumpHash = Animator.StringToHash("Jump");
 
     // 다른 객체에서 읽기 필요한 변수
-    private bool isGround;
+    [SerializeField] private bool isGround;
     public bool readIsGround {get {return isGround;}}
-    private bool isJump;
+    [SerializeField] private bool isJump;
     public bool readIsJump {get {return isJump;}}
-    private bool isSlope;
+    [SerializeField] private bool isSlope;
     private float originSpeed = 7.0f;
     public float readOriginSpeed {get {return originSpeed;}}
     private float debuffedSpeed; // origin * 0.5f
@@ -190,10 +190,10 @@ public class PlayerMove : MonoBehaviour
     {
         if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
         {
-            isGround = true;
-            isJump = false;
             if(footOnGround())
             {
+                isGround = true;
+                isJump = false;
                 jumpCount = 0;
             }
         }  
@@ -248,11 +248,10 @@ public class PlayerMove : MonoBehaviour
     {
         // Ground, Platform 체크
         groundCheckStartPos = new Vector2(rb2D.position.x, rb2D.position.y - (collSize.y / 2));
-        RaycastHit2D hitGround = Physics2D.Raycast(groundCheckStartPos, Vector2.down, groundCheckDistance, groundLayer);
-        RaycastHit2D hitPlatform = Physics2D.Raycast(groundCheckStartPos, Vector2.down, groundCheckDistance, platformLayer);
+        RaycastHit2D hit = Physics2D.Raycast(groundCheckStartPos, Vector2.down, groundCheckDistance, groundLayer | platformLayer);
 
         // 둘 중 하나라도 체크가 되면
-        if(hitGround || hitPlatform)
+        if(hit)
         {
             return true;
         }
