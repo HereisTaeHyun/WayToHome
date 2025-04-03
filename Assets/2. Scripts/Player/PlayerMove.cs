@@ -52,11 +52,11 @@ public class PlayerMove : MonoBehaviour
     private readonly int jumpHash = Animator.StringToHash("Jump");
 
     // 다른 객체에서 읽기 필요한 변수
-    private bool isGround;
+    [SerializeField] private bool isGround;
     public bool readIsGround {get {return isGround;}}
-    private bool isJump;
+    [SerializeField] private bool isJump;
     public bool readIsJump {get {return isJump;}}
-    private bool isSlope;
+    [SerializeField] private bool isSlope;
     private float originSpeed = 7.0f;
     public float readOriginSpeed {get {return originSpeed;}}
     private float debuffedSpeed; // origin * 0.5f
@@ -191,7 +191,7 @@ public class PlayerMove : MonoBehaviour
         {
             // jumpCount가 초기화되지 않았고 하강 중임
             // rb2D.linearVelocity.y < 0.01f 없으면 점프 키를 누른 프레임때도 초기화해서 2중 점프됨 삭제하지 말 것
-            if(footOnGround())
+            if(footOnGround() && rb2D.linearVelocity.y < 0.01f)
             {
                 isJump = false;
                 isGround = true;
