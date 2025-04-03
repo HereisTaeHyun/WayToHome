@@ -121,19 +121,19 @@ public class PlayerMove : MonoBehaviour
         playerAnim.SetFloat(dirHash, moveDir.x);
 
         // Ground, Slope 위면 얻어진 수직 벡터 각도에 따라 이동, 아니면 그냥 이전 velocity에 따라 이동
-        if(isGround == true && isSlope != true)
+        if(isGround == false)
         {
-            newVelocity.Set(move.x * moveSpeed, 0.0f);
+            newVelocity.Set(move.x * moveSpeed, rb2D.linearVelocity.y);
+            rb2D.linearVelocity = newVelocity;
+        }
+        else if(isGround == true && isSlope == false)
+        {
+            newVelocity.Set(move.x * moveSpeed, 0);
             rb2D.linearVelocity = newVelocity;
         }
         else if(isGround == true && isSlope == true)
         {
             newVelocity.Set(-move.x * moveSpeed * slopeNormalPerp.x, -move.x * moveSpeed * slopeNormalPerp.y);
-            rb2D.linearVelocity = newVelocity;
-        }
-        else if(isGround == false)
-        {
-            newVelocity.Set(move.x * moveSpeed, rb2D.linearVelocity.y);
             rb2D.linearVelocity = newVelocity;
         }
     }

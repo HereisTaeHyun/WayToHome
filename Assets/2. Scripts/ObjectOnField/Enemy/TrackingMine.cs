@@ -64,13 +64,6 @@ public class TrackingMine : MonoBehaviour
                 playerRb.linearVelocity = Vector2.zero;
                 playerRb.AddForce(playerMineVector * EXP_POWER, ForceMode2D.Impulse);
             }
-            else if (playerMove.readIsJump)
-            {
-                // 점프 중이면 대각선 위로 밀기, 공중은 friction 없어서 폭파력 너무 커지기 줄여서 적용
-                playerMineVector = (playerMineVector.x >= 0) ? new Vector2(1, 1) : new Vector2(-1, 1);
-                playerRb.linearVelocity = Vector2.zero;
-                playerRb.AddForce(playerMineVector * (EXP_POWER / 2), ForceMode2D.Impulse);
-            }
 
             // Player에게 데미지 가해 및 1.5초간 스턴
             playerCtrl.ChangeHP(damage);
