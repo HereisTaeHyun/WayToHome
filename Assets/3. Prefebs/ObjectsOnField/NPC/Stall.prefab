@@ -433,7 +433,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.83}
+  m_AnchoredPosition: {x: 0, y: 0.02}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4120276065650750341
@@ -866,7 +866,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Attack+ : 8$'
+  m_text: 'Attack+ : 20$'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 69ed47145e9e09b42a3261cf47a99240, type: 2}
   m_sharedMaterial: {fileID: -779949713026888260, guid: 69ed47145e9e09b42a3261cf47a99240, type: 2}
@@ -1327,10 +1327,10 @@ MonoBehaviour:
   menu: {fileID: 3335194675144355987}
   statement: {fileID: 3266531493094482185}
   sellingItems:
-  - {fileID: 793591172324723807, guid: 3216573a02a982545b12cafbd66d579f, type: 3}
   - {fileID: 9142775600868132666, guid: a927636b45bea23478e87fd0fbc4fb9c, type: 3}
+  - {fileID: 793591172324723807, guid: 3216573a02a982545b12cafbd66d579f, type: 3}
   - {fileID: 4549197007615165001, guid: 0e36af38f3566aa4792b35f6be2806bc, type: 3}
-  itemPrices: 0a0000000800000003000000
+  itemPrices: 140000000f00000003000000
   moneySFX: {fileID: 8300000, guid: abdbbfd33a46f4549987385f85c536b5, type: 3}
   buyFailSFX: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
 --- !u!1 &2789347311284348574
@@ -1448,8 +1448,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2506995087967946696}
   - {fileID: 6062747025912866212}
+  - {fileID: 2506995087967946696}
   - {fileID: 3112369513242570472}
   m_Father: {fileID: 7614723400871552567}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1963,7 +1963,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'MaxHP+ : 10$'
+  m_text: 'MaxHP+ : 15$'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 69ed47145e9e09b42a3261cf47a99240, type: 2}
   m_sharedMaterial: {fileID: -779949713026888260, guid: 69ed47145e9e09b42a3261cf47a99240, type: 2}
@@ -2725,7 +2725,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00000071526, y: -0.00000047684}
+  m_AnchoredPosition: {x: -0, y: 0.84}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2504754526665247141
