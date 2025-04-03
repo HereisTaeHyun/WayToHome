@@ -51,7 +51,7 @@ public class PlayerMove : MonoBehaviour
     public bool readIsGround {get {return isGround;}}
     private bool isJump;
     public bool readIsJump {get {return isJump;}}
-    [SerializeField] private bool isSlope;
+    private bool isSlope;
     private float originSpeed = 7.0f;
     public float readOriginSpeed {get {return originSpeed;}}
     private float debuffedSpeed; // origin * 0.5f
@@ -247,7 +247,14 @@ public class PlayerMove : MonoBehaviour
             rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, jumpSpeed);
             isGround = false;
             UtilityManager.utility.PlaySFX(jumpSFX);
-            playerAnim.SetTrigger(jumpHash);
+        }
+        if(rb2D.linearVelocity.y > 0 && isJump)
+        {
+            playerAnim.SetBool(jumpHash, true);
+        }
+        else if(rb2D.linearVelocity.y < 0)
+        {
+            playerAnim.SetBool(jumpHash, false);
         }
     }
 #endregion
