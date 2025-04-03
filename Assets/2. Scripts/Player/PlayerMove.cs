@@ -28,7 +28,7 @@ public class PlayerMove : MonoBehaviour
 
     // 땅인지 체크하는 Ray 시작 위치
     private Vector2 groundCheckStartPos;
-    private float groundCheckDistance = 0.05f;
+    [SerializeField] private float groundCheckDistance = 0.5f;
 
     private bool isPlatform;
     private static float DISABLE_COLLIDER_TIME = 0.5f;
@@ -106,6 +106,8 @@ public class PlayerMove : MonoBehaviour
         // 이동에 필요한 정보 스캐닝
         HorizontalSlopeCheck(checkPos);
         VerticalSlopeCheck(checkPos);
+
+        Debug.DrawRay(new Vector2(rb2D.position.x, rb2D.position.y - (collSize.y / 2)), Vector2.down * groundCheckDistance, Color.blue);
 
         // 실제 이동 적용 부분
         if(Input.GetButton("Horizontal"))
@@ -186,20 +188,6 @@ public class PlayerMove : MonoBehaviour
 #region JumpGround
     // 점프 및 Ground 체크에 필요한 메서드들
     // Ground에 접촉하면 JumpCount 초기화
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
-        {
-            if(footOnGround())
-            {
-                isGround = true;
-                isJump = false;
-                jumpCount = 0;
-            }
-        }  
-    }
-
-    // 점프 초기화 버그 보조용
     private void OnCollisionStay2D(Collision2D other)
     {
         // 땅이나 플랫폼에 닿았음
@@ -207,8 +195,10 @@ public class PlayerMove : MonoBehaviour
         {
             // jumpCount가 초기화되지 않았고 하강 중임
             // rb2D.linearVelocity.y < 0.01f 없으면 점프 키를 누른 프레임때도 초기화해서 2중 점프됨 삭제하지 말 것
-            if(jumpCount != 0 && rb2D.linearVelocity.y < 0 && footOnGround())
+            if(footOnGround())
             {
+                isJump = false;
+                isGround = true;
                 jumpCount = 0;
             }
         }
@@ -271,7 +261,6 @@ public class PlayerMove : MonoBehaviour
             jumpCount += 1;
 
             rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, jumpSpeed);
-            isGround = false;
             UtilityManager.utility.PlaySFX(jumpSFX);
             playerAnim.SetTrigger(jumpHash);
         }
