@@ -190,11 +190,11 @@ public class PlayerMove : MonoBehaviour
     {
         if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
         {
+            isGround = true;
+            isJump = false;
             if(footOnGround())
             {
-                isGround = true;
                 jumpCount = 0;
-                isJump = false;
             }
         }  
     }
@@ -246,10 +246,12 @@ public class PlayerMove : MonoBehaviour
     // 땅이 발에 닿는지 체크
     private bool footOnGround()
     {
+        // Ground, Platform 체크
         groundCheckStartPos = new Vector2(rb2D.position.x, rb2D.position.y - (collSize.y / 2));
         RaycastHit2D hitGround = Physics2D.Raycast(groundCheckStartPos, Vector2.down, groundCheckDistance, groundLayer);
         RaycastHit2D hitPlatform = Physics2D.Raycast(groundCheckStartPos, Vector2.down, groundCheckDistance, platformLayer);
 
+        // 둘 중 하나라도 체크가 되면
         if(hitGround || hitPlatform)
         {
             return true;
