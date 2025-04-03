@@ -52,11 +52,11 @@ public class PlayerMove : MonoBehaviour
     private readonly int jumpHash = Animator.StringToHash("Jump");
 
     // 다른 객체에서 읽기 필요한 변수
-    [SerializeField] private bool isGround;
+    private bool isGround;
     public bool readIsGround {get {return isGround;}}
-    [SerializeField] private bool isJump;
+    private bool isJump;
     public bool readIsJump {get {return isJump;}}
-    [SerializeField] private bool isSlope;
+    private bool isSlope;
     private float originSpeed = 7.0f;
     public float readOriginSpeed {get {return originSpeed;}}
     private float debuffedSpeed; // origin * 0.5f
@@ -120,17 +120,13 @@ public class PlayerMove : MonoBehaviour
     {
         playerAnim.SetFloat(dirHash, moveDir.x);
 
-        // Ground, Slope 위면 얻어진 수직 벡터 각도에 따라 이동, 아니면 그냥 이전 velocity에 따라 이동
-        if(isGround == false)
+        // 땅 위거나 공중이면 기존 이동에 따라
+        if(isSlope == false)
         {
             newVelocity.Set(move.x * moveSpeed, rb2D.linearVelocity.y);
             rb2D.linearVelocity = newVelocity;
         }
-        else if(isGround == true && isSlope == false)
-        {
-            newVelocity.Set(move.x * moveSpeed, rb2D.linearVelocity.y);
-            rb2D.linearVelocity = newVelocity;
-        }
+        // 지상이고 경사면 얻어진 벡터에 따라 이동
         else if(isGround == true && isSlope == true)
         {
             newVelocity.Set(-move.x * moveSpeed * slopeNormalPerp.x, -move.x * moveSpeed * slopeNormalPerp.y);
