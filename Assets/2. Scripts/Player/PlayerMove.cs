@@ -27,7 +27,7 @@ public class PlayerMove : MonoBehaviour
     private int jumpCount = 0;
 
     // 땅인지 체크하는 Ray 시작 위치
-    private Vector2 groundCheckStartPos;
+    private Vector2 checkPos;
     [SerializeField] private float groundCheckDistance = 0.5f;
 
     private bool isPlatform;
@@ -101,13 +101,11 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 플레이어가 있는 Ground 상태를 알기 위해 스캐닝하는 위치
-        Vector2 checkPos = transform.position - new Vector3(0.0f, collSize.y / 2);
+        checkPos = new Vector2(rb2D.position.x, rb2D.position.y - (collSize.y / 2));
 
         // 이동에 필요한 정보 스캐닝
         HorizontalSlopeCheck(checkPos);
         VerticalSlopeCheck(checkPos);
-
-        Debug.DrawRay(new Vector2(rb2D.position.x, rb2D.position.y - (collSize.y / 2)), Vector2.down * groundCheckDistance, Color.blue);
 
         // 실제 이동 적용 부분
         if(Input.GetButton("Horizontal"))
@@ -233,8 +231,8 @@ public class PlayerMove : MonoBehaviour
     private bool footOnGround()
     {
         // Ground, Platform 체크
-        groundCheckStartPos = new Vector2(rb2D.position.x, rb2D.position.y - (collSize.y / 2));
-        RaycastHit2D hit = Physics2D.Raycast(groundCheckStartPos, Vector2.down, groundCheckDistance, groundLayer | platformLayer);
+        checkPos = new Vector2(rb2D.position.x, rb2D.position.y - (collSize.y / 2));
+        RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, groundCheckDistance, groundLayer | platformLayer);
 
         // 둘 중 하나라도 체크가 되면
         if(hit)
