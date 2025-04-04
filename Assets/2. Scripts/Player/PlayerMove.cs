@@ -28,7 +28,7 @@ public class PlayerMove : MonoBehaviour
 
     // 땅인지 체크하는 Ray 시작 위치
     private Vector2 checkPos;
-    [SerializeField] private float groundCheckDistance = 0.5f;
+    private float groundCheckDistance = 0.25f;
 
     private bool isPlatform;
     private static float DISABLE_COLLIDER_TIME = 0.5f;
@@ -52,11 +52,11 @@ public class PlayerMove : MonoBehaviour
     private readonly int jumpHash = Animator.StringToHash("Jump");
 
     // 다른 객체에서 읽기 필요한 변수
-    [SerializeField] private bool isGround;
+    private bool isGround;
     public bool readIsGround {get {return isGround;}}
-    [SerializeField] private bool isJump;
+    private bool isJump;
     public bool readIsJump {get {return isJump;}}
-    [SerializeField] private bool isSlope;
+    private bool isSlope;
     private float originSpeed = 7.0f;
     public float readOriginSpeed {get {return originSpeed;}}
     private float debuffedSpeed; // origin * 0.5f
