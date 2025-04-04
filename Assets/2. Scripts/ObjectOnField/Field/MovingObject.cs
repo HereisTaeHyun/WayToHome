@@ -7,10 +7,11 @@ public class MovingObject : MonoBehaviour
     public float changeTime = 2.0f;
     public float moveSpeed = 2.0f;
     public bool vertical;
+    public bool startRight = true;
 
     // private 변수
     private float moveTimer;
-    private int moveDir = 1;
+    private int moveDir;
     private Vector2 pos;
     private Rigidbody2D rb;
 
@@ -20,6 +21,16 @@ public class MovingObject : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         moveTimer = changeTime;
         pos = rb.position;
+
+        // Start Right 변수로 시작 이동 포지션 정하기
+        if(startRight)
+        {
+            moveDir = 1;
+        }
+        else
+        {
+            moveDir = -1;
+        }
     }
 
     void Update()
