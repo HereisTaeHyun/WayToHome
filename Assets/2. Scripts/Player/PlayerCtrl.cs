@@ -108,6 +108,7 @@ public class PlayerCtrl : MonoBehaviour
 
         // 상태 체커 시작 및 상태 변수 초기화
         StartCoroutine(ApplyState());
+        isDie = false;
         canMove = true;
         canAttack = true;
         state = State.Idle;
