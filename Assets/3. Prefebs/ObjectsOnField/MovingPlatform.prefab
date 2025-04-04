@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3620809147129382641
 Transform:
@@ -101,11 +101,11 @@ GameObject:
   - component: {fileID: 9198979422222958968}
   - component: {fileID: 1864977051407742724}
   m_Layer: 6
-  m_Name: PF Village Props - MovingPlatform
+  m_Name: MovingPlatform
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6878587808043509112
 Transform:
@@ -116,7 +116,7 @@ Transform:
   m_GameObject: {fileID: 4986555653829003046}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.25, y: 25.570978, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -211,7 +211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeTime: 2
   moveSpeed: 2
-  vertical: 0
 --- !u!114 &1864977051407742724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +239,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5150417476987637118
 Transform:
