@@ -189,7 +189,7 @@ public class PlayerMove : MonoBehaviour
         {
             // jumpCount가 초기화되지 않았고 하강 중임
             // rb2D.linearVelocity.y < 0.01f 없으면 점프 키를 누른 프레임때도 초기화해서 2중 점프됨 삭제하지 말 것
-            if(footOnGround() && rb2D.linearVelocity.y < 0.01f)
+            if(FootOnGround() && rb2D.linearVelocity.y < 0.01f)
             {
                 isJump = false;
                 isGround = true;
@@ -215,7 +215,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    // 삭제 금지 필요 없어 보이는데 얘 지우면 허공답보 버그남
+    // 삭제 금지 얘 지우면 허공답보 버그남
     IEnumerator GroundCheck(Collider2D col)
     {
         yield return new WaitForSeconds(0.05f);
@@ -228,7 +228,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     // 땅이 발에 닿는지 체크
-    private bool footOnGround()
+    private bool FootOnGround()
     {
         // Ground, Platform 체크
         checkPos = new Vector2(rb2D.position.x, rb2D.position.y - (collSize.y / 2));
