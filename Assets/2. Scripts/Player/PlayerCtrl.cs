@@ -113,6 +113,7 @@ public class PlayerCtrl : MonoBehaviour
         canAttack = true;
         state = State.Idle;
         rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+        spriteRenderer.flipX = false;
 
         // 모듈 초기화
         playerMove.Init();
@@ -320,7 +321,9 @@ public class PlayerCtrl : MonoBehaviour
         // 사망 과정은 점진적, 사망 애니메이션 재생 후 묘비 배치 및 끄기
         state = State.Die;
         playerAnim.SetTrigger(dieHash);
+
         yield return new WaitForSeconds(1.5f);
+
         UtilityManager.utility.PlaySFX(dieSFX);
         Instantiate(graveStone, transform.position, transform.rotation);
         StopAllCoroutines();
