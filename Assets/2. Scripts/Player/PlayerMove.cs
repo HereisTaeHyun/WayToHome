@@ -23,6 +23,9 @@ public class PlayerMove : MonoBehaviour
     private PlayerCtrl playerCtrl;
 
     private Vector2 newVelocity;
+    private float horizontalInput;
+    private Vector2 move;
+    private Vector2 moveDir;
     private float jumpSpeed = 5.0f;
     private int jumpCount = 0;
 
@@ -83,19 +86,19 @@ public class PlayerMove : MonoBehaviour
     public void HorizontalMove()
     {
         // 이동 방향 지정
-        float h = Input.GetAxis("Horizontal");
-        Vector2 move = new Vector2(h, 0);
-        Vector2 moveDir = UtilityManager.utility.DirSet(move);
+        horizontalInput = Input.GetAxis("Horizontal");
+        move = new Vector2(horizontalInput, 0);
+        moveDir = UtilityManager.utility.DirSet(move);
 
         // 이동 방향이 left 쪽이면 Player가 왼쪽으로 보기
         playerAnim.SetFloat(speedHash, move.magnitude);
 
         // player state가 idle인지 move인지 h에 따라 변화
-        if(h != 0)
+        if(horizontalInput != 0)
         {
             playerCtrl.state = PlayerCtrl.State.Move;
         }
-        else if(h == 0)
+        else if(horizontalInput == 0)
         {
             playerCtrl.state = PlayerCtrl.State.Idle;
         }
