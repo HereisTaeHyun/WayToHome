@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
     public float baseDamage = -1.0f;
 
     // private 변수
-    [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject playerPrefab;
+    private GameObject gameOverPanel;
     private GameObject player;
     private PlayerMove playerMove;
     private PlayerAttack playerAttack;
@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         isGameOver = false;
-        gameOverPanel.SetActive(false);
         OnGameOver += GameOver;
         SceneManager.sceneLoaded += LoadPlayerStat;
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -81,17 +80,16 @@ public class GameManager : MonoBehaviour
     // 씬 로드기에 플레이어 off면 == 사망시 on 및 다시 초기화
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // UI Set
+        ScreeUISet();
+
+        // Player Set
         if(PlayerCtrl.player.gameObject.activeSelf == false)
         {
             PlayerCtrl.player.gameObject.SetActive(true);
             PlayerCtrl.player.Init();
         }
         PlayerSet();
-    }
-    
-    void Start()
-    {
-        gameOverImage = gameOverPanel.GetComponent<Image>();
     }
 
     void Update()
@@ -113,6 +111,14 @@ public class GameManager : MonoBehaviour
         {
             PlayerCtrl.player.transform.position = spawnPos.transform.position;
         }
+    }
+    private void ScreeUISet()
+    {
+        gameOverPanel = GameObject.FindGameObjectWithTag("GameOverPanel");
+        gameOverImage = gameOverPanel.GetComponent<Image>();
+        Color currentColor = gameOverImage.color;
+        currentColor.a = 0.0f;
+        gameOverPanel.SetActive(false);
     }
 
     // 맵 이동 시에 상태 저장

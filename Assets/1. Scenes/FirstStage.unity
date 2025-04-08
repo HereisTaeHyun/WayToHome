@@ -776,7 +776,6 @@ MonoBehaviour:
   baseMoney: 0
   baseMaxJump: 1
   baseDamage: -1
-  gameOverPanel: {fileID: 6271300710456100656}
   playerPrefab: {fileID: 8167438280805672438, guid: 8a0f7bc9922e5ac4089b82ce3c4e0b72, type: 3}
 --- !u!4 &169953910
 Transform:
@@ -28625,11 +28624,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31df7e4492a8ad24587e95a30bf948c5, type: 3}
---- !u!1 &6271300710456100656 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6012418548465421966, guid: 365f635af127c6d4885520d5636a6e30, type: 3}
-  m_PrefabInstance: {fileID: 6776409000600543116}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6776409000600543116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28722,10 +28716,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScreenUI
       objectReference: {fileID: 0}
-    - target: {fileID: 7816960666117378552, guid: 365f635af127c6d4885520d5636a6e30, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28741,11 +28731,11 @@ SceneRoots:
   - {fileID: 1526348826}
   - {fileID: 2032312303}
   - {fileID: 1429082324}
+  - {fileID: 6776409000600543116}
   - {fileID: 640793496}
   - {fileID: 161953588}
   - {fileID: 169953910}
   - {fileID: 1653170724}
-  - {fileID: 6776409000600543116}
   - {fileID: 171994669}
   - {fileID: 473021473}
   - {fileID: 367319671}
