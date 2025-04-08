@@ -317,7 +317,7 @@ public class PlayerCtrl : MonoBehaviour
     }
     private IEnumerator DieStart()
     {
-        // 사망 과정은 점진적, 사망 애니메이션 재생 후 묘비 배치 및 끄기
+        // 사망 애니메이션 재생 후 묘비 배치 및 false
         state = State.Die;
         playerAnim.SetTrigger(dieHash);
 
