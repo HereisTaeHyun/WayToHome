@@ -13,6 +13,7 @@ public class GroundCtrl : EnemyCtrl
     private EnemyAttack enemyAttack;
     [SerializeField] float attackRange;
     [SerializeField] private LayerMask playerLayer;
+    private readonly int moveDirHash = Animator.StringToHash("MoveDir");
     private readonly int moveOnHash = Animator.StringToHash("OnMove");
     private readonly int dieHash = Animator.StringToHash("Die");
 
@@ -114,12 +115,12 @@ public class GroundCtrl : EnemyCtrl
         if(attackRangeCheck)
         {
             enemyAttack.Attack();
-            anim.SetFloat("MoveDir", enemyMoveDir.x);
+            anim.SetFloat(moveDirHash, enemyMoveDir.x);
         }
         else
         {
             anim.SetBool(moveOnHash, isMove);
-            anim.SetFloat("MoveDir", enemyMoveDir.x);
+            anim.SetFloat(moveDirHash, enemyMoveDir.x);
         }
     }
 
