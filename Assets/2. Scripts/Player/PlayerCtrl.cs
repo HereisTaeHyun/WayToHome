@@ -7,7 +7,6 @@ using Image = UnityEngine.UI.Image;
 public class PlayerCtrl : MonoBehaviour
 {
     // 총괄 객체로 Ctrl 객체 사용, 하위 모듈 객체로 이동, 공격, 카메라 등으로 생각 중
-    // 테스트장에서는 gravity scale을 1 썼는대 너무 가벼움, 실제 게임 필드 설치는 gravity scale = 2를 바탕으로 세팅 및 수정할 것
 
     // public 변수
 #region public
