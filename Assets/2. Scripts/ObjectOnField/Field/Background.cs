@@ -5,6 +5,7 @@ using UnityEngine;
 public class Background : MonoBehaviour
 {
     private Transform cameraTransform;
+    [SerializeField] private float raiseYPos = 0;
     [SerializeField][Range(-1.0f, 1.0f)] private float parellaxSpeed = 0.1f;
     private Vector3 cameraStartPos;
     private float distance;
@@ -54,7 +55,7 @@ public class Background : MonoBehaviour
     void LateUpdate()
     {
         distance = cameraTransform.position.x - cameraStartPos.x;
-        transform.position = new Vector3(cameraTransform.position.x, cameraTransform.position.y, 0);
+        transform.position = new Vector3(cameraTransform.position.x, cameraTransform.position.y + raiseYPos, 0);
 
         for(int i = 0; i < materials.Length; i++)
         {
