@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -24,8 +25,6 @@ public class GameManager : MonoBehaviour
     [NonSerialized] public int baseMoney = 0;
     [NonSerialized] public int baseMaxJump = 1;
     [NonSerialized] public float baseDamage = -1.0f;
-    public Transform firstSpawnPos;
-    public Vector2 currentSpawnPos;
 
     // private 변수
     [SerializeField] private GameObject playerPrefab;
@@ -33,6 +32,11 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     private PlayerMove playerMove;
     private PlayerAttack playerAttack;
+    private GameObject vcam;
+    private CinemachineCamera vcamComp;
+    private CameraCtrl cameraCtrl;
+    private Transform firstSpawnPos;
+    private Vector2 currentSpawnPos;
     private Image gameOverImage;
     private float alphaChangeTime = 1.5f;
     private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
@@ -92,6 +96,13 @@ public class GameManager : MonoBehaviour
             PlayerCtrl.player.Init();
         }
         PlayerSet();
+        StartCoroutine(CameraSetAfterFrame());
+    }
+
+    IEnumerator CameraSetAfterFrame()
+    {
+        yield return null; // 한 프레임 기다리면 모든 Start() 실행 완료
+        CameraSet();
     }
 
     void Update()
@@ -105,7 +116,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // 게임 시작, 다시하기 등 씬 세팅에서 PlayerSet에 사용
+    // 다시하기 세팅에서 사용
     private void PlayerSet()
     {
         if(PlayerCtrl.player != null && currentSpawnPos != null)
@@ -113,6 +124,23 @@ public class GameManager : MonoBehaviour
             PlayerCtrl.player.transform.position = currentSpawnPos;
         }
     }
+    public void CameraSet()
+    {
+        // 카메라 위치 설정 = player 위치
+        vcam = GameObject.FindGameObjectWithTag("Camera");
+        vcamComp = vcam.GetComponent<CinemachineCamera>();
+        vcamComp.ForceCameraPosition(PlayerCtrl.player.transform.position, Quaternion.identity);
+
+        // 콘파이너 찾기
+        RaycastHit2D hit = Physics2D.Raycast(PlayerCtrl.player.transform.position, Vector2.up, 0.5f);
+        if(hit.collider.CompareTag("Confiner"))
+        {
+            cameraCtrl = vcam.GetComponent<CameraCtrl>();
+            PolygonCollider2D polygonCollider2D = hit.collider.GetComponent<PolygonCollider2D>();
+            cameraCtrl.ConfinerChanger(polygonCollider2D);
+        }
+    }
+
     private void ScreeUISet()
     {
         gameOverPanel = GameObject.FindGameObjectWithTag("GameOverPanel");
