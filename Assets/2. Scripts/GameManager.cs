@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     [NonSerialized] public int baseMaxJump = 1;
     [NonSerialized] public float baseDamage = -1.0f;
     public Transform firstSpawnPos;
-    public Transform currentSpawnPos;
+    public Vector2 currentSpawnPos;
 
     // private 변수
     [SerializeField] private GameObject playerPrefab;
@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     private PlayerMove playerMove;
     private PlayerAttack playerAttack;
-    private GameObject spawnPos;
     private Image gameOverImage;
     private float alphaChangeTime = 1.5f;
     private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
@@ -48,8 +47,9 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             // 게임 매니저 생성과 동시에 플레이어 생성
-            spawnPos = GameObject.FindGameObjectWithTag("spawnPos").transform;
-            player = Instantiate(playerPrefab, firstSpawnPos.position, playerPrefab.transform.rotation);
+            firstSpawnPos = GameObject.FindGameObjectWithTag("FirstSpawnPos").transform;
+            currentSpawnPos = new Vector2(firstSpawnPos.position.x, firstSpawnPos.position.y);
+            player = Instantiate(playerPrefab, currentSpawnPos, playerPrefab.transform.rotation);
 
             // 플레이어 초기화
             baseCurrentHP = baseMaxHP;
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
     {
         if(PlayerCtrl.player != null && currentSpawnPos != null)
         {
-            PlayerCtrl.player.transform.position = currentSpawnPos.position;
+            PlayerCtrl.player.transform.position = currentSpawnPos;
         }
     }
     private void ScreeUISet()
@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
     }
 
     // SpawnPos 셋업
-    public void SetSpawnPos(Transform newSpawnPos)
+    public void SetSpawnPos(Vector2 newSpawnPos)
     {
         currentSpawnPos = newSpawnPos;
     }
