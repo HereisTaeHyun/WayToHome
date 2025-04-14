@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [NonSerialized] public int baseMoney = 0;
     [NonSerialized] public int baseMaxJump = 1;
     [NonSerialized] public float baseDamage = -1.0f;
+    public bool usePortal = true;
 
     // private 변수
     [SerializeField] private GameObject playerPrefab;
@@ -50,9 +51,6 @@ public class GameManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
-            // 게임 매니저 생성과 동시에 플레이어 생성
-            firstSpawnPos = GameObject.FindGameObjectWithTag("FirstSpawnPos").transform;
-            currentSpawnPos = new Vector2(firstSpawnPos.position.x, firstSpawnPos.position.y);
             player = Instantiate(playerPrefab, currentSpawnPos, playerPrefab.transform.rotation);
 
             // 플레이어 초기화
@@ -95,14 +93,16 @@ public class GameManager : MonoBehaviour
             PlayerCtrl.player.gameObject.SetActive(true);
             PlayerCtrl.player.Init();
         }
+
+        // 포탈을 통해서 넘어온 경우 해당 맵의 firstSpawnPos를 찾아야 함
+        if(usePortal == true)
+        {
+            firstSpawnPos = GameObject.FindGameObjectWithTag("FirstSpawnPos").transform;
+            currentSpawnPos = new Vector2(firstSpawnPos.position.x, firstSpawnPos.position.y);
+            usePortal = false;
+        }
         PlayerSet();
         StartCoroutine(CameraSetAfterFrame());
-    }
-
-    IEnumerator CameraSetAfterFrame()
-    {
-        yield return null; // 한 프레임 기다리면 모든 Start() 실행 완료
-        CameraSet();
     }
 
     void Update()
@@ -123,6 +123,13 @@ public class GameManager : MonoBehaviour
         {
             PlayerCtrl.player.transform.position = currentSpawnPos;
         }
+    }
+
+     // 가끔 카메라 생성보다 CameraSet()이 먼저 호출되는 경우 방지
+    IEnumerator CameraSetAfterFrame()
+    {
+        yield return null;
+        CameraSet();
     }
     public void CameraSet()
     {

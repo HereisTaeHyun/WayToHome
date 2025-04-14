@@ -28,6 +28,9 @@ public class Portal : MonoBehaviour
 
     IEnumerator UsePortal()
     {
+        // 포탈 사용 플래그 true
+        GameManager.instance.usePortal = true;
+        
         // ChangeAlpha로 페이드 아웃 및 SFX 재생
         UIImange.enabled = true;
         UtilityManager.utility.PlaySFX(usePortalSFX);
