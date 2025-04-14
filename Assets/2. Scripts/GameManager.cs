@@ -19,11 +19,13 @@ public class GameManager : MonoBehaviour
     public delegate void GameOverHandler();
     public static event GameOverHandler OnGameOver;
 
-    public float baseMaxHP = 10.0f;
-    public float baseCurrentHP;
-    public int baseMoney = 0;
-    public int baseMaxJump = 1;
-    public float baseDamage = -1.0f;
+    [NonSerialized] public float baseMaxHP = 10.0f;
+    [NonSerialized] public float baseCurrentHP;
+    [NonSerialized] public int baseMoney = 0;
+    [NonSerialized] public int baseMaxJump = 1;
+    [NonSerialized] public float baseDamage = -1.0f;
+    public Transform firstSpawnPos;
+    public Transform currentSpawnPos;
 
     // private 변수
     [SerializeField] private GameObject playerPrefab;
@@ -46,8 +48,8 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             // 게임 매니저 생성과 동시에 플레이어 생성
-            spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
-            player = Instantiate(playerPrefab, spawnPos.transform.position, playerPrefab.transform.rotation);
+            spawnPos = GameObject.FindGameObjectWithTag("spawnPos").transform;
+            player = Instantiate(playerPrefab, firstSpawnPos.position, playerPrefab.transform.rotation);
 
             // 플레이어 초기화
             baseCurrentHP = baseMaxHP;
@@ -106,10 +108,9 @@ public class GameManager : MonoBehaviour
     // 게임 시작, 다시하기 등 씬 세팅에서 PlayerSet에 사용
     private void PlayerSet()
     {
-        spawnPos = GameObject.FindGameObjectWithTag("SpawnPos");
-        if(PlayerCtrl.player != null && spawnPos != null)
+        if(PlayerCtrl.player != null && currentSpawnPos != null)
         {
-            PlayerCtrl.player.transform.position = spawnPos.transform.position;
+            PlayerCtrl.player.transform.position = currentSpawnPos.position;
         }
     }
     private void ScreeUISet()
@@ -143,6 +144,12 @@ public class GameManager : MonoBehaviour
         PlayerCtrl.player.money = baseMoney;
         playerMove.maxJump = baseMaxJump;
         playerAttack.attackDamage = baseDamage;
+    }
+
+    // SpawnPos 셋업
+    public void SetSpawnPos(Transform newSpawnPos)
+    {
+        currentSpawnPos = newSpawnPos;
     }
 
 
