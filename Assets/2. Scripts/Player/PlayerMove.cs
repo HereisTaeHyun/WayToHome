@@ -262,7 +262,16 @@ public class PlayerMove : MonoBehaviour
 
             rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, jumpSpeed);
             UtilityManager.utility.PlaySFX(jumpSFX);
-            playerAnim.SetTrigger(jumpHash);
+
+            // 이전 점프가 재생 중이면 파라미터 전달 x
+            if(playerAnim.GetCurrentAnimatorStateInfo(0).IsName("PlayerJump"))
+            {
+                return;
+            }
+            else
+            {
+                playerAnim.SetTrigger(jumpHash);
+            }
         }
     }
 #endregion
