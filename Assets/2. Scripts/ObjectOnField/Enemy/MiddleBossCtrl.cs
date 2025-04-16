@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class MiddleBossCtrl : EnemyCtrl
@@ -26,11 +27,31 @@ public class MiddleBossCtrl : EnemyCtrl
 
         if(distance > scanningRadius)
         {
-            Debug.Log("Warp");
+            Warp();
         }
         else
         {
             Debug.Log("Attack");
+        }
+    }
+
+    private void Warp()
+    {
+        Transform pointAbleAttack = null;
+
+        foreach(Transform point in warpPoints)
+        {
+            float currentChecking = Vector2.Distance(target.position, point.position);
+
+            if(currentChecking < scanningRadius)
+            {
+                pointAbleAttack = point;
+            }
+        }
+
+        if(pointAbleAttack != null)
+        {
+            transform.position = pointAbleAttack.position;
         }
     }
 }
