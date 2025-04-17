@@ -5,7 +5,7 @@ public class MiddleBossMeleeDamaze : MonoBehaviour
     private PlayerCtrl playerCtrl;
     private MiddleBossCtrl middleBossCtrl;
     private Rigidbody2D playerRb;
-    private static float PUSH_POWER = 30.0f;
+    private static float PUSH_POWER = 10.0f;
 
     // enemyAttack의 공격력 읽어오기 위해 필요
     private void Start()
@@ -25,6 +25,7 @@ public class MiddleBossMeleeDamaze : MonoBehaviour
             playerVector.y = 0.0f;
 
             playerRb.linearVelocity = playerVector * PUSH_POWER;
+            playerCtrl.GetDebuff(PlayerCtrl.DebuffType.Stun, 0.5f);
         }
     }
 }

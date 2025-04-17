@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -13,6 +14,10 @@ public class MiddleBossCtrl : EnemyCtrl
     private MiddleBossMeleeAttack middleBossMeleeAttack;
     [SerializeField] float attackRange;
     [SerializeField] private LayerMask playerLayer;
+
+    [SerializeField] private bool canAttack;
+    private float coolTime = 1.0f;
+
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
     void Start()
     {
@@ -27,6 +32,7 @@ public class MiddleBossCtrl : EnemyCtrl
         warpPoints.ToArray();
 
         middleBossMeleeAttack = GetComponent<MiddleBossMeleeAttack>();
+        canAttack = true;
     }
 
     void Update()
@@ -75,11 +81,20 @@ public class MiddleBossCtrl : EnemyCtrl
     // Ray를 통한 사거리 체크
     private void MeleeAttackAbleCheck(Vector2 moveDir)
     {
+        // ray 내부면 근접, 아니면 마법
         RaycastHit2D attackTypeCheck = Physics2D.Raycast(transform.position, moveDir, attackRange, playerLayer);
-        if(attackTypeCheck)
+        if(attackTypeCheck && canAttack == true)
         {
             middleBossMeleeAttack.Attack();
+            StartCoroutine(CoolTimeCheck());
             anim.SetFloat(moveDirHash, moveDir.x);
         }
+    }
+
+    private IEnumerator CoolTimeCheck()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(coolTime);
+        canAttack = true;
     }
 }
