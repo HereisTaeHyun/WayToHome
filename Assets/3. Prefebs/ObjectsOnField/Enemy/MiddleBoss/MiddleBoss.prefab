@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: -6345634326775543482}
   - component: {fileID: 4637144498123355615}
   - component: {fileID: 2995235987185132521}
-  - component: {fileID: 4734575359693392631}
+  - component: {fileID: 5836171181390998666}
   - component: {fileID: 1595233922274359546}
   m_Layer: 9
   m_Name: MiddleBoss
@@ -270,7 +270,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4734575359693392631
+--- !u!114 &5836171181390998666
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -290,9 +290,8 @@ MonoBehaviour:
   itemWeight: []
   enemyGetHitSFX: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
   enemyDieSFX: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
-  scanningRadius: 15
+  scanningRadius: 10
   damage: -1
-  distance: 0
   warpPointSet: {fileID: 0}
   attackRange: 3
   playerLayer:
@@ -311,3 +310,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 0
+  meleeAttackSFX: {fileID: 8300000, guid: c91fcf414acc0344cb03b13996f1bf3b, type: 3}

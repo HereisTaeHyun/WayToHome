@@ -5,6 +5,7 @@ public class MiddleBossMeleeAttack : MeleeAttack
     // 중간 보스의 근접 공격 컨트롤
     private MiddleBossCtrl middleBossCtrl;
     private Animator anim;
+    [SerializeField] AudioClip meleeAttackSFX;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class MiddleBossMeleeAttack : MeleeAttack
 
     protected override void EnableAttackCollider()
     {
+        UtilityManager.utility.PlaySFX(meleeAttackSFX);
         attackCollier.SetActive(true);
     }
     protected override void DisableAttackCollider()

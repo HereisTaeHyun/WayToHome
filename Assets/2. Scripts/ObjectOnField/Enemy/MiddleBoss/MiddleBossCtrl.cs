@@ -6,11 +6,10 @@ using UnityEngine;
 public class MiddleBossCtrl : EnemyCtrl
 {
     // public 변수
-    public float distance;
     // private 변수
+    private float distance;
     [SerializeField] private Transform warpPointSet;
     private List<Transform> warpPoints = new List<Transform>();
-    private SpriteRenderer spriteRenderer;
     private MiddleBossMeleeAttack middleBossMeleeAttack;
     [SerializeField] float attackRange;
     [SerializeField] private LayerMask playerLayer;
@@ -22,8 +21,6 @@ public class MiddleBossCtrl : EnemyCtrl
     void Start()
     {
         Init();
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         foreach(Transform warpPoint in warpPointSet)
         {
@@ -37,6 +34,13 @@ public class MiddleBossCtrl : EnemyCtrl
 
     void Update()
     {
+        // 게임 오버가 아닐 경우 행동
+        if(GameManager.instance.readIsGameOver == true)
+        {
+            return;
+        }
+
+        // distance에 따라 행동 분리
         distance = Vector2.Distance(target.position, transform.position);
 
         if(distance > scanningRadius)
@@ -96,5 +100,20 @@ public class MiddleBossCtrl : EnemyCtrl
         canAttack = false;
         yield return new WaitForSeconds(coolTime);
         canAttack = true;
+    }
+
+        // HP 변경 처리
+    public override void ChangeHP(float value)
+    {
+        currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
+
+        // 타격 벡터 계산 및 sfx, anim 재생
+        UtilityManager.utility.PlaySFX(enemyGetHitSFX);
+
+        // 체력 0 이하면 사망처리
+        if (currentHP <= 0)
+        {
+            EnemyDie();
+        }
     }
 }
