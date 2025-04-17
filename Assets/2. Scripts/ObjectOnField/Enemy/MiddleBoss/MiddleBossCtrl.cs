@@ -15,7 +15,7 @@ public class MiddleBossCtrl : EnemyCtrl
     [SerializeField] float attackRange;
     [SerializeField] private LayerMask playerLayer;
 
-    [SerializeField] private bool canAttack;
+    private bool canAttack;
     private float coolTime = 1.0f;
 
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
