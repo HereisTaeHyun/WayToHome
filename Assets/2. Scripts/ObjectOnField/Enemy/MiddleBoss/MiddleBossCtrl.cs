@@ -13,11 +13,13 @@ public class MiddleBossCtrl : EnemyCtrl
     private MiddleBossMeleeAttack middleBossMeleeAttack;
     [SerializeField] float attackRange;
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private AudioClip warpSfx;
 
     private bool canAttack;
-    private float coolTime = 1.0f;
+    private float coolTime = 2.0f;
 
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
+    private readonly int warpHash = Animator.StringToHash("Warp");
     void Start()
     {
         Init();
@@ -78,6 +80,7 @@ public class MiddleBossCtrl : EnemyCtrl
         // 할당된 변수로 이동
         if(pointAbleAttack != null)
         {
+            UtilityManager.utility.PlaySFX(warpSfx);
             transform.position = pointAbleAttack.position;
         }
     }
