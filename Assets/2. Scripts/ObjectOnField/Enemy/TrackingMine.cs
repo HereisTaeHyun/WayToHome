@@ -51,7 +51,6 @@ public class TrackingMine : MonoBehaviour
     IEnumerator Attack(Collision2D target)
     {
         yield return new WaitForSeconds(0.1f);
-        // 에셋 찾으면 파티클 Instantiate 후 destroy 추가 필요, 아직 에셋은 안찾았음
 
         if(target != null)
         {       
