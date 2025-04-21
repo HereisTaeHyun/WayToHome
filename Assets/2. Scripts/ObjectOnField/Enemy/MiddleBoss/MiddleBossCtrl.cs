@@ -14,6 +14,7 @@ public class MiddleBossCtrl : EnemyCtrl
     private MiddleBossMeleeAttack middleBossMeleeAttack;
     private Transform magicSpawnPos;
     private ObjectPool<GameObject> magicPool;
+    private int maxMagic = 3;
     [SerializeField] float melleAttackRange;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private AudioClip warpSfx;
@@ -36,7 +37,7 @@ public class MiddleBossCtrl : EnemyCtrl
         // 공격 관련 초기화
         middleBossMeleeAttack = GetComponent<MiddleBossMeleeAttack>();
         magicSpawnPos = transform.Find("MagicSpawnPos");
-        UtilityManager.utility.CreatePool(ref magicPool, fireBall, 3, 3);
+        UtilityManager.utility.CreatePool(ref magicPool, fireBall, maxMagic, maxMagic);
 
         canAttack = true;
     }
@@ -66,10 +67,12 @@ public class MiddleBossCtrl : EnemyCtrl
             if(distance < melleAttackRange && canAttack == true)
             {
                 MeleeAttackAble(moveDir);
+                StartCoroutine(CoolTimeCheck());
             }
             else if(distance > melleAttackRange && canAttack == true)
             {
                 UseFireBall();
+                StartCoroutine(CoolTimeCheck());
             }
         }
     }
@@ -98,23 +101,26 @@ public class MiddleBossCtrl : EnemyCtrl
         }
     }
 
+    // 마법 공격
     private void UseFireBall()
     {
         // 풀 오브젝트 가져오기
-        GameObject fireBall = UtilityManager.utility.GetFromPool(magicPool);
-        fireBall.transform.position = magicSpawnPos.position;
-        fireBall.transform.rotation = magicSpawnPos.rotation;
+        GameObject fireBall = UtilityManager.utility.GetFromPool(magicPool, maxMagic);
 
-        // fireBall에개 돌아와야 하는 풀 전달하기
-        fireBall.GetComponent<FireBall>().SetPool(magicPool);
+        if(fireBall != null)
+        { 
+            // fireBall에개 돌아와야 하는 풀 전달하기
+            fireBall.GetComponent<FireBall>().SetPool(magicPool);
+            // 위치 셋업
+            fireBall.transform.position = magicSpawnPos.position;
+            fireBall.transform.rotation = magicSpawnPos.rotation;
+        }
     }
 
-    // Ray를 통한 사거리 체크
+    // 근접 공격격
     private void MeleeAttackAble(Vector2 moveDir)
     {
-        // ray 내부면 근접, 아니면 마법
         middleBossMeleeAttack.Attack();
-        StartCoroutine(CoolTimeCheck());
         anim.SetFloat(moveDirHash, moveDir.x);
     }
 

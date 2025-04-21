@@ -85,17 +85,17 @@ public class UtilityManager : MonoBehaviour
             defaultCapacity : count,
             maxSize : max
         );
-
-        // pool 저장
-        for (int i = 0; i < count; i++)
-        {
-            var obj = pool.Get();
-            pool.Release(obj);
-        }
     }
-    public GameObject GetFromPool(ObjectPool<GameObject> pool)
+    public GameObject GetFromPool(ObjectPool<GameObject> pool, int maxSize)
     {
-        return pool.Get();
+        if(pool.CountActive >= maxSize)
+        {
+            return null;
+        }
+        else
+        {
+            return pool.Get();
+        }
     }
     public void ReturnToPool(ObjectPool<GameObject> pool, GameObject go)
     {
