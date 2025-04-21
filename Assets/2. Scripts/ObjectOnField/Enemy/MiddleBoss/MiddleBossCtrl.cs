@@ -64,6 +64,7 @@ public class MiddleBossCtrl : EnemyCtrl
             anim.SetFloat(moveDirHash, moveDir.x);
 
             // 사거리 내부면 근접 공격, 외부면 마법 공격
+            Debug.Log(distance);
             if(distance < melleAttackRange && canAttack == true)
             {
                 MeleeAttackAble(moveDir);

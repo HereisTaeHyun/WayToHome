@@ -325,12 +325,11 @@ MonoBehaviour:
   scanningRadius: 10
   damage: -1
   warpPointSet: {fileID: 0}
-  melleAttackRange: 0
+  melleAttackRange: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
   warpSfx: {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
-  fireBallGenerate: {fileID: 6917182468242610991, guid: 5254d441d67d111468f217e5d6a32254, type: 3}
   fireBall: {fileID: 7442625623315705553, guid: 455d84a056f7a404dbf2019e3d50d4c9, type: 3}
 --- !u!114 &1595233922274359546
 MonoBehaviour:
