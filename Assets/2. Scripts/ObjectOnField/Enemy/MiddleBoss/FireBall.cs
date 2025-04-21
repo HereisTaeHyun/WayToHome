@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class FireBall : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class FireBall : MonoBehaviour
     private Transform target;
     private PlayerCtrl playerCtrl;
     private Rigidbody2D rb2D;
+    private ObjectPool<GameObject> originPool;
 
     void Start()
     {
@@ -27,6 +29,11 @@ public class FireBall : MonoBehaviour
     void FixedUpdate()
     {
         FollowingTarget(moveSpeed, scanningRadius);
+    }
+
+    public void SetPool(ObjectPool<GameObject> pool)
+    {
+        originPool = pool;
     }
 
     private void FollowingTarget(float moveSpeed, float scanningRadius)
@@ -42,7 +49,7 @@ public class FireBall : MonoBehaviour
             }
             else if (Vector2.Distance(transform.position, target.position) > scanningRadius)
             {
-                Destroy(gameObject);
+                originPool.Release(gameObject);
             }
         }
     }
@@ -59,7 +66,7 @@ public class FireBall : MonoBehaviour
                 if(playerCtrl.readInvincible != true)
                 {
                     playerCtrl.ChangeHP(damage);
-                    Destroy(gameObject);
+                    originPool.Release(gameObject);
                 }
             }
         }

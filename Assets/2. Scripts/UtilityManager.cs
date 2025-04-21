@@ -72,7 +72,7 @@ public class UtilityManager : MonoBehaviour
     }
 
     // 풀 관리 메서드들
-    public void CreatePool(ref ObjectPool<GameObject> pool, GameObject prefab, int count)
+    public void CreatePool(ref ObjectPool<GameObject> pool, GameObject prefab, int count, int max)
     {
         // pool 생성
         pool = new ObjectPool<GameObject>
@@ -83,7 +83,7 @@ public class UtilityManager : MonoBehaviour
         	actionOnDestroy : (go) => Destroy(go),
             collectionCheck : false,
             defaultCapacity : count,
-            maxSize : 100
+            maxSize : max
         );
 
         // pool 저장
@@ -97,7 +97,7 @@ public class UtilityManager : MonoBehaviour
     {
         return pool.Get();
     }
-    public void ReturnFromPool(ObjectPool<GameObject> pool, GameObject go)
+    public void ReturnToPool(ObjectPool<GameObject> pool, GameObject go)
     {
         pool.Release(go);
     }

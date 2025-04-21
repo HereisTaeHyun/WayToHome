@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class MiddleBossCtrl : EnemyCtrl
 {
@@ -12,10 +13,10 @@ public class MiddleBossCtrl : EnemyCtrl
     private List<Transform> warpPoints = new List<Transform>();
     private MiddleBossMeleeAttack middleBossMeleeAttack;
     private Transform magicSpawnPos;
+    private ObjectPool<GameObject> magicPool;
     [SerializeField] float melleAttackRange;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private AudioClip warpSfx;
-    [SerializeField] private GameObject fireBallGenerate;
     [SerializeField] private GameObject fireBall;
 
     private bool canAttack;
@@ -32,8 +33,11 @@ public class MiddleBossCtrl : EnemyCtrl
         }
         warpPoints.ToArray();
 
+        // 공격 관련 초기화
         middleBossMeleeAttack = GetComponent<MiddleBossMeleeAttack>();
         magicSpawnPos = transform.Find("MagicSpawnPos");
+        UtilityManager.utility.CreatePool(ref magicPool, fireBall, 3, 3);
+
         canAttack = true;
     }
 
@@ -59,14 +63,13 @@ public class MiddleBossCtrl : EnemyCtrl
             anim.SetFloat(moveDirHash, moveDir.x);
 
             // 사거리 내부면 근접 공격, 외부면 마법 공격
-            // RaycastHit2D attackTypeCheck = Physics2D.Raycast(transform.position, moveDir, melleAttackRange, playerLayer);
             if(distance < melleAttackRange && canAttack == true)
             {
                 MeleeAttackAble(moveDir);
             }
             else if(distance > melleAttackRange && canAttack == true)
             {
-                StartCoroutine(UseFireBall());
+                UseFireBall();
             }
         }
     }
@@ -95,11 +98,15 @@ public class MiddleBossCtrl : EnemyCtrl
         }
     }
 
-    IEnumerator UseFireBall()
+    private void UseFireBall()
     {
-        Instantiate(fireBallGenerate, magicSpawnPos.position, magicSpawnPos.rotation);
-        yield return new WaitForSeconds(1.0f);
-        Instantiate(fireBall, magicSpawnPos.position, magicSpawnPos.rotation);
+        // 풀 오브젝트 가져오기
+        GameObject fireBall = UtilityManager.utility.GetFromPool(magicPool);
+        fireBall.transform.position = magicSpawnPos.position;
+        fireBall.transform.rotation = magicSpawnPos.rotation;
+
+        // fireBall에개 돌아와야 하는 풀 전달하기
+        fireBall.GetComponent<FireBall>().SetPool(magicPool);
     }
 
     // Ray를 통한 사거리 체크
