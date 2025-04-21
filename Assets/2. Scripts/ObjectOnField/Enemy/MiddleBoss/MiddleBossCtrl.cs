@@ -11,9 +11,12 @@ public class MiddleBossCtrl : EnemyCtrl
     [SerializeField] private Transform warpPointSet;
     private List<Transform> warpPoints = new List<Transform>();
     private MiddleBossMeleeAttack middleBossMeleeAttack;
-    [SerializeField] float attackRange;
+    private Transform magicSpawnPos;
+    [SerializeField] float melleAttackRange;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private AudioClip warpSfx;
+    [SerializeField] private GameObject fireBallGenerate;
+    [SerializeField] private GameObject fireBall;
 
     private bool canAttack;
     private float coolTime = 2.0f;
@@ -30,6 +33,7 @@ public class MiddleBossCtrl : EnemyCtrl
         warpPoints.ToArray();
 
         middleBossMeleeAttack = GetComponent<MiddleBossMeleeAttack>();
+        magicSpawnPos = transform.Find("MagicSpawnPos");
         canAttack = true;
     }
 
@@ -48,15 +52,22 @@ public class MiddleBossCtrl : EnemyCtrl
         {
             Warp();
         }
-        else
+        if(distance <= scanningRadius)
         {
             // radious 내부라면 바라보기 + 공격
             Vector2 moveDir = UtilityManager.utility.DirSet(target.transform.position - transform.position);
             anim.SetFloat(moveDirHash, moveDir.x);
 
             // 사거리 내부면 근접 공격, 외부면 마법 공격
-            // 근접 공격은 밀어내기 효과, 외부는 둔화 효과 고민 중
-            MeleeAttackAbleCheck(moveDir);
+            // RaycastHit2D attackTypeCheck = Physics2D.Raycast(transform.position, moveDir, melleAttackRange, playerLayer);
+            if(distance < melleAttackRange && canAttack == true)
+            {
+                MeleeAttackAble(moveDir);
+            }
+            else if(distance > melleAttackRange && canAttack == true)
+            {
+                StartCoroutine(UseFireBall());
+            }
         }
     }
 
@@ -84,17 +95,20 @@ public class MiddleBossCtrl : EnemyCtrl
         }
     }
 
+    IEnumerator UseFireBall()
+    {
+        Instantiate(fireBallGenerate, magicSpawnPos.position, magicSpawnPos.rotation);
+        yield return new WaitForSeconds(1.0f);
+        Instantiate(fireBall, magicSpawnPos.position, magicSpawnPos.rotation);
+    }
+
     // Ray를 통한 사거리 체크
-    private void MeleeAttackAbleCheck(Vector2 moveDir)
+    private void MeleeAttackAble(Vector2 moveDir)
     {
         // ray 내부면 근접, 아니면 마법
-        RaycastHit2D attackTypeCheck = Physics2D.Raycast(transform.position, moveDir, attackRange, playerLayer);
-        if(attackTypeCheck && canAttack == true)
-        {
-            middleBossMeleeAttack.Attack();
-            StartCoroutine(CoolTimeCheck());
-            anim.SetFloat(moveDirHash, moveDir.x);
-        }
+        middleBossMeleeAttack.Attack();
+        StartCoroutine(CoolTimeCheck());
+        anim.SetFloat(moveDirHash, moveDir.x);
     }
 
     private IEnumerator CoolTimeCheck()
