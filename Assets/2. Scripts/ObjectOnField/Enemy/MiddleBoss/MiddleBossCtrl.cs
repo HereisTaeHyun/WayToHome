@@ -19,7 +19,6 @@ public class MiddleBossCtrl : EnemyCtrl
     private float coolTime = 2.0f;
 
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
-    private readonly int warpHash = Animator.StringToHash("Warp");
     void Start()
     {
         Init();

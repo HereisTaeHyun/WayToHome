@@ -10,32 +10,64 @@ public class FireBall : MonoBehaviour
     // public 변수
 
     // private 변수
-    private static float EXP_POWER = 12.0f;
     // damage는 EnemyCtrl 설정 값 이용
-    private float damage = 1.0f;
-
-    // Player에 영향 미치는 부분
+    private float moveSpeed = 3.0f;
+    private float scanningRadius = 10.0f;
+    private float damage = -1.0f;
+    private Transform target;
     private PlayerCtrl playerCtrl;
+    private Rigidbody2D rb2D;
 
-    void Update()
+    void Start()
     {
-        
+        target = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Transform>();
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
-    void OnCollisionStay2D(Collision2D other)
+    void FixedUpdate()
     {
+        FollowingTarget(moveSpeed, scanningRadius);
+    }
+
+    private void FollowingTarget(float moveSpeed, float scanningRadius)
+    {
+        if(GameManager.instance.readIsGameOver == false)
+        {
+            // 플레이어가 scanningRadius 내부면 moveSpeed만큼씩 이동 시작
+            if(Vector2.Distance(transform.position, target.position) < scanningRadius)
+            {
+                // 플레이어에게 이동
+                Vector2 newPosition = Vector2.MoveTowards(rb2D.position, target.position, moveSpeed * Time.fixedDeltaTime);
+                rb2D.MovePosition(newPosition);
+            }
+            else if (Vector2.Distance(transform.position, target.position) > scanningRadius)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {    
         if(GameManager.instance.readIsGameOver == false)
         {
             if(other.gameObject.CompareTag("Player"))
             {
-                playerCtrl = other.collider.GetComponent<PlayerCtrl>();
+                playerCtrl = other.GetComponent<PlayerCtrl>();
 
                 // 플레이어가 무적이 아니라면 공격
                 if(playerCtrl.readInvincible != true)
                 {
                     playerCtrl.ChangeHP(damage);
+                    Destroy(gameObject);
                 }
             }
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, scanningRadius);
     }
 }
