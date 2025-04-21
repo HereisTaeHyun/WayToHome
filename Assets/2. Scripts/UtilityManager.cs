@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
+using UnityEngine.Pool;
 
 public class UtilityManager : MonoBehaviour
 {
@@ -68,5 +69,36 @@ public class UtilityManager : MonoBehaviour
     public void PlaySFX(AudioClip audioClip)
     {
         audioSource.PlayOneShot(audioClip);
+    }
+
+    // 풀 관리 메서드들
+    public void CreatePool(ref ObjectPool<GameObject> pool, GameObject prefab, int count)
+    {
+        // pool 생성
+        pool = new ObjectPool<GameObject>
+        (
+            createFunc : () => Instantiate(prefab),
+            actionOnGet : (go) => go.SetActive(true),
+            actionOnRelease : (go) => go.SetActive(false),
+        	actionOnDestroy : (go) => Destroy(go),
+            collectionCheck : false,
+            defaultCapacity : count,
+            maxSize : 100
+        );
+
+        // pool 저장
+        for (int i = 0; i < count; i++)
+        {
+            var obj = pool.Get();
+            pool.Release(obj);
+        }
+    }
+    public GameObject GetFromPool(ObjectPool<GameObject> pool)
+    {
+        return pool.Get();
+    }
+    public void ReturnFromPool(ObjectPool<GameObject> pool, GameObject go)
+    {
+        pool.Release(go);
     }
 }
