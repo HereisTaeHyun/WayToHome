@@ -6,6 +6,7 @@ public class BossRoomSensor : MonoBehaviour
     [SerializeField] GameObject boss;
     [SerializeField] GameObject leftWall;
     [SerializeField] GameObject rightWall;
+    [SerializeField] GameObject[] rewards;
 
     // 보스룸 오브젝트는 기본적으로 비활성화
     void Start()
@@ -13,6 +14,11 @@ public class BossRoomSensor : MonoBehaviour
         boss.SetActive(false);
         leftWall.SetActive(false);
         rightWall.SetActive(false);
+
+        foreach (var reward in rewards)
+        {
+            reward.SetActive(false);   
+        }
     }
 
     void Update()
@@ -21,6 +27,10 @@ public class BossRoomSensor : MonoBehaviour
         {
             leftWall.SetActive(false);
             rightWall.SetActive(false);
+            foreach (var reward in rewards)
+            {
+                reward.SetActive(true);
+            }
         }
     }
 
