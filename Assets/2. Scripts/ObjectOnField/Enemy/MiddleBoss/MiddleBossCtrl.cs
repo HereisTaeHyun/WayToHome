@@ -148,7 +148,10 @@ public class MiddleBossCtrl : EnemyCtrl
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
 
         // 타격 벡터 계산 및 sfx, anim 재생
+        Vector2 hitVector =  UtilityManager.utility.DirSet(target.transform.position - transform.position);
         UtilityManager.utility.PlaySFX(enemyGetHitSFX);
+        anim.SetTrigger(hitTrigger);
+        anim.SetFloat(hitHash, hitVector.x);
 
         // 체력 0 이하면 사망처리
         if (currentHP <= 0)
