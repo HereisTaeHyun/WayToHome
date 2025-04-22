@@ -27,7 +27,7 @@ public class BossRoomSensor : MonoBehaviour
     // 플레이어가 센서 진입 시 보스룸 요소들 활성화
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Player") && boss != null)
         {
             boss.SetActive(true);
             leftWall.SetActive(true);
