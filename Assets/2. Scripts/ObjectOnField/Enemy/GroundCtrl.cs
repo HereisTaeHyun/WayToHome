@@ -127,7 +127,7 @@ public class GroundCtrl : EnemyCtrl
     // 사망 처리
     protected override void EnemyDie()
     {
-        // 아이템 확률 계산 및 드롭, 확장성이 전무하여 수정 필요성 있음, 확률 가중치를 정하고 전체의 합을 정규화하여 확률 계산 가능할까?
+        // 아이템 확률 계산 및 드롭
         GameObject selectedItem = ItemDrop(itemInformation);
         Instantiate(selectedItem, transform.position, transform.rotation);
         StartCoroutine(DieStart());

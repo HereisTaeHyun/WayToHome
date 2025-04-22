@@ -21,6 +21,7 @@ public class MiddleBossCtrl : EnemyCtrl
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private AudioClip warpSfx;
     [SerializeField] private GameObject fireBall;
+    private readonly int dieHash = Animator.StringToHash("Die");
 
     private bool canAttack;
     private float coolTime = 2.0f;
@@ -141,7 +142,7 @@ public class MiddleBossCtrl : EnemyCtrl
         canAttack = true;
     }
 
-        // HP 변경 처리
+    // HP 변경 처리
     public override void ChangeHP(float value)
     {
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
@@ -154,5 +155,22 @@ public class MiddleBossCtrl : EnemyCtrl
         {
             EnemyDie();
         }
+    }
+
+        // 사망 처리
+    protected override void EnemyDie()
+    {
+        StartCoroutine(DieStart());
+    }
+    // 사망 절차 진행, 사운드 재생 및 물리 영향 제거 후 사망 애니메이션 재생
+    private IEnumerator DieStart()
+    {
+        isDie = true;
+        UtilityManager.utility.PlaySFX(enemyDieSFX);
+        rb2D.bodyType = RigidbodyType2D.Kinematic;
+        rb2D.simulated = false;
+        anim.SetTrigger(dieHash);
+        yield return new WaitForSeconds(2.0f);
+        Destroy(gameObject);
     }
 }
