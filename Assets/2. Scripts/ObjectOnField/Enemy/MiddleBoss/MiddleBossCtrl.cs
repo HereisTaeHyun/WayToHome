@@ -15,7 +15,7 @@ public class MiddleBossCtrl : EnemyCtrl
     private Transform magicSpawnPos;
     private ObjectPool<GameObject> magicPool;
     private int maxMagic = 3;
-    private float magicHP = 3.0f;
+    private float magicHP = 2.0f;
     private FireBall fireBallComp;
     [SerializeField] float melleAttackRange;
     [SerializeField] private LayerMask playerLayer;
@@ -112,12 +112,16 @@ public class MiddleBossCtrl : EnemyCtrl
         if(fireBall != null)
         { 
             fireBallComp = fireBall.GetComponent<FireBall>();
-            
+
             // fireBall에개 돌아와야 하는 풀 전달하기
             fireBallComp.SetPool(magicPool);
 
             // 파이어볼 셋업
             fireBallComp.currentHP = magicHP;
+            if(fireBallComp.canMove == false)
+            {
+                fireBallComp.canMove = true;
+            }
             fireBall.transform.position = magicSpawnPos.position;
             fireBall.transform.rotation = magicSpawnPos.rotation;
         }

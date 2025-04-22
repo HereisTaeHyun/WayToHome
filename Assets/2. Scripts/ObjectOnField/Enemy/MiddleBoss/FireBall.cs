@@ -9,13 +9,14 @@ public class FireBall : MonoBehaviour
     // 인근을 스캐닝하여 가까이 가서 공격하는 타입의 적 엔티티
 
     // public 변수
+    public float currentHP;
+    public bool canMove = true;
 
     // private 변수
-    // damage는 EnemyCtrl 설정 값 이용
-    public float currentHP;
     private float moveSpeed = 3.0f;
     private float scanningRadius = 10.0f;
     private float damage = -1.0f;
+    private float STOP_TIME = 0.5f;
     private Transform target;
     private PlayerCtrl playerCtrl;
     private Rigidbody2D rb2D;
@@ -42,7 +43,7 @@ public class FireBall : MonoBehaviour
         if(GameManager.instance.readIsGameOver == false)
         {
             // 플레이어가 scanningRadius 내부면 moveSpeed만큼씩 이동 시작
-            if(Vector2.Distance(transform.position, target.position) < scanningRadius)
+            if(Vector2.Distance(transform.position, target.position) < scanningRadius && canMove == true)
             {
                 // 플레이어에게 이동
                 Vector2 newPosition = Vector2.MoveTowards(rb2D.position, target.position, moveSpeed * Time.fixedDeltaTime);
@@ -70,7 +71,29 @@ public class FireBall : MonoBehaviour
                     originPool.Release(gameObject);
                 }
             }
+            else if(other.gameObject.CompareTag("PlayerMelee"))
+            {
+                GetHit(-1);
+            }
         }
+    }
+
+    // 플레이어 밀리에 타격 시
+    private void GetHit(float value)
+    {
+        StartCoroutine(StopOnHit());
+        currentHP += value;
+
+        if (currentHP <= 0)
+        {
+            originPool.Release(gameObject);
+        }
+    }
+    IEnumerator StopOnHit()
+    {
+        canMove = false;
+        yield return new WaitForSeconds(STOP_TIME);
+        canMove = true;
     }
 
     private void OnDrawGizmosSelected()
