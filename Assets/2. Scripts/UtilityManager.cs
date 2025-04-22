@@ -81,7 +81,7 @@ public class UtilityManager : MonoBehaviour
             actionOnGet : (go) => go.SetActive(true),
             actionOnRelease : (go) => go.SetActive(false),
         	actionOnDestroy : (go) => Destroy(go),
-            collectionCheck : false,
+            collectionCheck : true,
             defaultCapacity : count,
             maxSize : max
         );

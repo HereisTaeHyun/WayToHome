@@ -12,6 +12,7 @@ public class FireBall : MonoBehaviour
 
     // private 변수
     // damage는 EnemyCtrl 설정 값 이용
+    public float currentHP;
     private float moveSpeed = 3.0f;
     private float scanningRadius = 10.0f;
     private float damage = -1.0f;
