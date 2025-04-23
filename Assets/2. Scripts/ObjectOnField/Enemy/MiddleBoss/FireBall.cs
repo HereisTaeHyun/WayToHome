@@ -16,21 +16,25 @@ public class FireBall : MonoBehaviour
 
     // private 변수
     private bool isPool;
+    private bool canAttack;
     private float moveSpeed = 3.0f;
     private float scanningRadius = 10.0f;
     private float damage = -1.0f;
     private static float ON_HIT_PUSH_POWER = 5.0F;
     private float STOP_TIME = 0.5f;
+    private Animator anim;
     private Transform target;
     private PlayerCtrl playerCtrl;
     private Rigidbody2D rb2D;
     private ObjectPool<GameObject> originPool;
+    private readonly int fireBallOffHash = Animator.StringToHash("FireBallOff");
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Transform>();
         rb2D = GetComponent<Rigidbody2D>();
         isHited = false;
+        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -44,6 +48,7 @@ public class FireBall : MonoBehaviour
         originPool = pool;
         isPool = false;
         isHited = false;
+        canAttack = true;
         currentHP = maxHP;
         if(canMove == false)
         {
@@ -78,7 +83,7 @@ public class FireBall : MonoBehaviour
                 playerCtrl = other.GetComponent<PlayerCtrl>();
 
                 // 플레이어가 무적이 아니라면 공격
-                if(playerCtrl.readInvincible != true)
+                if(playerCtrl.readInvincible != true && canAttack == true)
                 {
                     playerCtrl.ChangeHP(damage);
                     ReturnToPool();
@@ -100,20 +105,30 @@ public class FireBall : MonoBehaviour
         }
         else
         {
-            isPool = true;
-            originPool.Release(gameObject);
+            canMove = false;
+            canAttack = false;
+            anim.SetTrigger(fireBallOffHash);
         }
+    }
+    // FireBallOff 애니메이션 이벤트로 재생
+    private void ReturnAfterAnim()
+    {
+        isPool = true;
+        originPool.Release(gameObject);
     }
 
     // 플레이어 밀리에 타격 시
     private void GetHit(float value)
     {
-        StartCoroutine(PushOnHit());
         currentHP += value;
 
         if (currentHP <= 0)
         {
-            originPool.Release(gameObject);
+            ReturnToPool();
+        }
+        else
+        {
+            StartCoroutine(PushOnHit());
         }
     }
 
