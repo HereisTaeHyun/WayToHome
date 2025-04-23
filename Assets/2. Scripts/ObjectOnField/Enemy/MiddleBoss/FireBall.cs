@@ -37,8 +37,12 @@ public class FireBall : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
+        if(canMove == false)
+        {
+            return;
+        }
         FollowingTarget(moveSpeed, scanningRadius);
     }
 
@@ -61,7 +65,7 @@ public class FireBall : MonoBehaviour
         if(GameManager.instance.readIsGameOver == false)
         {
             // 플레이어가 scanningRadius 내부면 moveSpeed만큼씩 이동 시작
-            if(Vector2.Distance(transform.position, target.position) < scanningRadius && canMove == true)
+            if(Vector2.Distance(transform.position, target.position) < scanningRadius)
             {
                 // 플레이어에게 이동
                 Vector2 newPosition = Vector2.MoveTowards(rb2D.position, target.position, moveSpeed * Time.fixedDeltaTime);
@@ -89,10 +93,16 @@ public class FireBall : MonoBehaviour
                     ReturnToPool();
                 }
             }
+            // 플레이어의 공격에 맞은 경우
             else if(other.gameObject.CompareTag("PlayerMelee"))
             {
                 isHited = true;
                 GetHit(-1);
+            }
+            // 플레이어에게 맞고 튕겨져 나간 파이어볼이 적과 부딪힘
+            else if(other.gameObject.CompareTag("Enemy") && isHited == true)
+            {
+                GetHit(-2);
             }
         }
     }
@@ -121,7 +131,6 @@ public class FireBall : MonoBehaviour
     private void GetHit(float value)
     {
         currentHP += value;
-
         if (currentHP <= 0)
         {
             ReturnToPool();
