@@ -19,6 +19,9 @@ public class MiddleBossCtrl : EnemyCtrl
     private ObjectPool<GameObject> magicPool;
     private int maxMagic = 3;
     private FireBall fireBallComp;
+    private bool isStun;
+    private int maxMagicResist = 3;
+    private int getHitbyMagic; // 일정 이상 마법에 타격시 isStun
     [SerializeField] float melleAttackRange;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private AudioClip warpSfx;
@@ -52,7 +55,7 @@ public class MiddleBossCtrl : EnemyCtrl
     void Update()
     {
         // 게임 오버가 아닐 경우 행동
-        if(GameManager.instance.readIsGameOver == true)
+        if(GameManager.instance.readIsGameOver == true || isStun == true)
         {
             return;
         }
@@ -82,6 +85,34 @@ public class MiddleBossCtrl : EnemyCtrl
                 StartCoroutine(CoolTimeCheck());
             }
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("FireBall"))
+        {
+            fireBallComp = collision.gameObject.GetComponent<FireBall>();
+            if(fireBallComp.isHited == true)
+            {
+                Debug.Log($"{getHitbyMagic}");
+                getHitbyMagic += 1;
+                if(getHitbyMagic == maxMagicResist)
+                {
+                    Debug.Log($"Debug");
+                    StartCoroutine(MagicStunTimer());
+                }
+            }
+        }
+    }
+
+    IEnumerator MagicStunTimer()
+    {
+        isStun = true;
+        Debug.Log($"{isStun}");
+        yield return new WaitForSeconds(stunTime);
+        isStun = false;
+        Debug.Log($"end");
+        getHitbyMagic = 0;
     }
 
     private void Warp()

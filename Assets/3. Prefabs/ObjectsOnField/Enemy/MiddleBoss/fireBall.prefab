@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 8460042040553194864}
   - component: {fileID: -4622419722915522374}
   m_Layer: 0
-  m_Name: fireBall
-  m_TagString: Untagged
+  m_Name: FireBall
+  m_TagString: FireBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,4 +190,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 2
   currentHP: 0
+  isHited: 0
   canMove: 1

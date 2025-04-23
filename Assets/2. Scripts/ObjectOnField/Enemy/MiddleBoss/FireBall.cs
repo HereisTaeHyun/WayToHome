@@ -11,6 +11,7 @@ public class FireBall : MonoBehaviour
     // public 변수
     public float maxHP = 2.0f;
     public float currentHP;
+    public bool isHited;
     public bool canMove = true;
 
     // private 변수
@@ -29,6 +30,7 @@ public class FireBall : MonoBehaviour
     {
         target = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Transform>();
         rb2D = GetComponent<Rigidbody2D>();
+        isHited = false;
     }
 
     void FixedUpdate()
@@ -41,6 +43,7 @@ public class FireBall : MonoBehaviour
     {
         originPool = pool;
         isPool = false;
+        isHited = false;
         currentHP = maxHP;
         if(canMove == false)
         {
@@ -83,6 +86,7 @@ public class FireBall : MonoBehaviour
             }
             else if(other.gameObject.CompareTag("PlayerMelee"))
             {
+                isHited = true;
                 GetHit(-1);
             }
         }
@@ -123,6 +127,7 @@ public class FireBall : MonoBehaviour
         yield return new WaitForSeconds(STOP_TIME);
         rb2D.linearVelocity = Vector2.zero;
         canMove = true;
+        isHited = false;
     }
 
     private void OnDrawGizmosSelected()
