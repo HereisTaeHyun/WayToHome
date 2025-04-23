@@ -8,6 +8,9 @@ public class MiddleBossCtrl : EnemyCtrl
 {
     // public 변수
     // private 변수
+    private SpriteRenderer spriteRenderer;
+    private bool ableBlink;
+    private static float BLINK_TIME = 0.1f;
     private float distance;
     [SerializeField] private Transform warpPointSet;
     private List<Transform> warpPoints = new List<Transform>();
@@ -29,6 +32,7 @@ public class MiddleBossCtrl : EnemyCtrl
     void Start()
     {
         Init();
+        spriteRenderer =GetComponent<SpriteRenderer>();
 
         foreach(Transform warpPoint in warpPointSet)
         {
@@ -42,6 +46,7 @@ public class MiddleBossCtrl : EnemyCtrl
         UtilityManager.utility.CreatePool(ref magicPool, fireBall, maxMagic, maxMagic);
 
         canAttack = true;
+        ableBlink = true;
     }
 
     void Update()
@@ -139,6 +144,10 @@ public class MiddleBossCtrl : EnemyCtrl
     // HP 변경 처리
     public override void ChangeHP(float value)
     {
+        if(ableBlink == true)
+        {
+            StartCoroutine(BlinkOnDamage());
+        }
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
 
         // 타격 sfx 재생
@@ -151,7 +160,42 @@ public class MiddleBossCtrl : EnemyCtrl
         }
     }
 
-        // 사망 처리
+    // 무적 시간 동안 깜빡거리기 코루틴
+    IEnumerator BlinkOnDamage()
+    {
+        ableBlink = false;
+        bool isBlink = false;
+        Color color = spriteRenderer.color;
+
+        float maxBlinkTime = 1.0f; // 깜빡이는 총 시간
+        float currentBlinkTIme = 0.0f;
+
+        // 데미지를 입으면 깜빡임
+        while(currentBlinkTIme < maxBlinkTime)
+        {
+            // 이전 상태 깜빡이면 되돌리기, 일반이면 깜빡임 반복시켜서 효과 적용
+            if(isBlink == true)
+            {
+                color.a = 0.0f;
+                spriteRenderer.color = color;
+                isBlink = false;
+            }
+            else if(isBlink == false)
+            {
+                color.a = 1.0f;
+                spriteRenderer.color = color;
+                isBlink = true;
+            }
+            currentBlinkTIme += BLINK_TIME;
+            yield return new WaitForSeconds(BLINK_TIME);
+        }
+        // 기본 상태로 초기화
+        ableBlink = true;
+        color.a = 1.0f;
+        spriteRenderer.color = color;
+    }
+
+    // 사망 처리
     protected override void EnemyDie()
     {
         StartCoroutine(DieStart());
