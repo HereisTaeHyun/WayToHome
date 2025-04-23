@@ -50,7 +50,7 @@ public class GroundCtrl : EnemyCtrl
                 }
 
                 // 움직이는 방향 벡터 받아 오기
-                Vector2 enemyMoveDir = UtilityManager.utility.DirSet(target.transform.position - transform.position);
+                Vector2 enemyMoveDir = UtilityManager.utility.HorizontalDirSet(target.transform.position - transform.position);
 
                 // 움직임 적용
                 isMove = true;
@@ -96,7 +96,7 @@ public class GroundCtrl : EnemyCtrl
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
 
         // 타격 벡터 계산 및 sfx, anim 재생
-        Vector2 hitVector =  UtilityManager.utility.DirSet(target.transform.position - transform.position);
+        Vector2 hitVector =  UtilityManager.utility.HorizontalDirSet(target.transform.position - transform.position);
         UtilityManager.utility.PlaySFX(enemyGetHitSFX);
         anim.SetTrigger(hitTrigger);
         anim.SetFloat(hitHash, hitVector.x);

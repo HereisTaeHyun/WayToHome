@@ -70,7 +70,7 @@ public class MiddleBossCtrl : EnemyCtrl
         if(distance <= scanningRadius)
         {
             // radious 내부라면 바라보기 + 공격
-            Vector2 moveDir = UtilityManager.utility.DirSet(target.transform.position - transform.position);
+            Vector2 moveDir = UtilityManager.utility.HorizontalDirSet(target.transform.position - transform.position);
             anim.SetFloat(moveDirHash, moveDir.x);
 
             // 사거리 내부면 근접 공격, 외부면 마법 공격

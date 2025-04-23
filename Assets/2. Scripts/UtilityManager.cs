@@ -27,7 +27,7 @@ public class UtilityManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
     }
-    public Vector2 DirSet(Vector2 move)
+    public Vector2 HorizontalDirSet(Vector2 move)
     {
         Vector2 moveDir = new Vector2(0, 0);
         if(Mathf.Approximately(move.x, 0) == false)
@@ -37,6 +37,18 @@ public class UtilityManager : MonoBehaviour
         }
         return moveDir;
     }
+
+    public Vector2 AllDirSet(Vector2 move)
+    {
+        Vector2 moveDir = new Vector2(0, 0);
+        if(Mathf.Approximately(move.x, 0) == false || Mathf.Approximately(0, move.y) == false)
+        {
+            moveDir.Set(move.x, move.y);
+            moveDir.Normalize();
+        }
+        return moveDir;
+    }
+
 
     public Dictionary<GameObject, float> ItemNormalizer(Dictionary<GameObject, float> inputItem)
     {

@@ -120,7 +120,7 @@ public class FireBall : MonoBehaviour
     IEnumerator PushOnHit()
     {
         canMove = false;
-        Vector2 hitVector =  UtilityManager.utility.DirSet(transform.position - target.transform.position);
+        Vector2 hitVector =  UtilityManager.utility.AllDirSet(transform.position - target.transform.position);
 
         // 타격 받은 방향으로 밀려남
         rb2D.AddForce(hitVector * ON_HIT_PUSH_POWER, ForceMode2D.Impulse);
