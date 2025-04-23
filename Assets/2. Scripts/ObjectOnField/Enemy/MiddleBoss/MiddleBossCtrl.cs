@@ -69,7 +69,7 @@ public class MiddleBossCtrl : EnemyCtrl
             if(distance < melleAttackRange && canAttack == true)
             {
                 MeleeAttackAble(moveDir);
-                StartCoroutine(CoolTimeCheck());
+                // StartCoroutine(CoolTimeCheck());
             }
             else if(distance > melleAttackRange && canAttack == true)
             {
@@ -141,11 +141,8 @@ public class MiddleBossCtrl : EnemyCtrl
     {
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
 
-        // 타격 벡터 계산 및 sfx, anim 재생
-        Vector2 hitVector =  UtilityManager.utility.DirSet(target.transform.position - transform.position);
+        // 타격 sfx 재생
         UtilityManager.utility.PlaySFX(enemyGetHitSFX);
-        anim.SetTrigger(hitTrigger);
-        anim.SetFloat(hitHash, hitVector.x);
 
         // 체력 0 이하면 사망처리
         if (currentHP <= 0)
