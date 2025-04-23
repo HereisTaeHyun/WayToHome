@@ -112,12 +112,6 @@ public class FireBall : MonoBehaviour
             originPool.Release(gameObject);
         }
     }
-    // IEnumerator StopOnHit()
-    // {
-    //     canMove = false;
-    //     yield return new WaitForSeconds(STOP_TIME);
-    //     canMove = true;
-    // }
 
     IEnumerator PushOnHit()
     {
