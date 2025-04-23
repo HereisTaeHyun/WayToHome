@@ -18,6 +18,7 @@ public class FireBall : MonoBehaviour
     private float moveSpeed = 3.0f;
     private float scanningRadius = 10.0f;
     private float damage = -1.0f;
+    private static float ON_HIT_PUSH_POWER = 5.0F;
     private float STOP_TIME = 0.5f;
     private Transform target;
     private PlayerCtrl playerCtrl;
@@ -103,7 +104,7 @@ public class FireBall : MonoBehaviour
     // 플레이어 밀리에 타격 시
     private void GetHit(float value)
     {
-        StartCoroutine(StopOnHit());
+        StartCoroutine(PushOnHit());
         currentHP += value;
 
         if (currentHP <= 0)
@@ -111,10 +112,22 @@ public class FireBall : MonoBehaviour
             originPool.Release(gameObject);
         }
     }
-    IEnumerator StopOnHit()
+    // IEnumerator StopOnHit()
+    // {
+    //     canMove = false;
+    //     yield return new WaitForSeconds(STOP_TIME);
+    //     canMove = true;
+    // }
+
+    IEnumerator PushOnHit()
     {
         canMove = false;
+        Vector2 hitVector =  UtilityManager.utility.DirSet(transform.position - target.transform.position);
+
+        // 타격 받은 방향으로 밀려남
+        rb2D.AddForce(hitVector * ON_HIT_PUSH_POWER, ForceMode2D.Impulse);
         yield return new WaitForSeconds(STOP_TIME);
+        rb2D.linearVelocity = Vector2.zero;
         canMove = true;
     }
 

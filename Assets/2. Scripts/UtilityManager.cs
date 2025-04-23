@@ -32,7 +32,7 @@ public class UtilityManager : MonoBehaviour
         Vector2 moveDir = new Vector2(0, 0);
         if(Mathf.Approximately(move.x, 0) == false)
         {
-            moveDir.Set(move.x, 0);
+            moveDir.Set(move.x, move.y);
             moveDir.Normalize();
         }
         return moveDir;
