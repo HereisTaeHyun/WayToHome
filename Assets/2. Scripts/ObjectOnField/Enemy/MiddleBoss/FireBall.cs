@@ -9,14 +9,14 @@ public class FireBall : MonoBehaviour
     // 인근을 스캐닝하여 가까이 가서 공격하는 타입의 적 엔티티
 
     // public 변수
-    public float maxHP = 2.0f;
-    public float currentHP;
-    public bool isHited;
-    public bool canMove = true;
+    [NonSerialized] public bool isHited;
 
     // private 변수
+    private float maxHP = 2.0f;
+    private float currentHP;
     private bool isPool;
     private bool canAttack;
+    private bool canMove = true;
     private float moveSpeed = 3.0f;
     private float scanningRadius = 10.0f;
     private float damage = -1.0f;
@@ -115,6 +115,8 @@ public class FireBall : MonoBehaviour
         }
         else
         {
+            StopAllCoroutines();
+            rb2D.linearVelocity = Vector2.zero;
             canMove = false;
             canAttack = false;
             anim.SetTrigger(fireBallOffHash);
