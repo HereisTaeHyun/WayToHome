@@ -94,11 +94,9 @@ public class MiddleBossCtrl : EnemyCtrl
             fireBallComp = collision.gameObject.GetComponent<FireBall>();
             if(fireBallComp.isHited == true)
             {
-                Debug.Log($"{getHitbyMagic}");
                 getHitbyMagic += 1;
                 if(getHitbyMagic == maxMagicResist)
                 {
-                    Debug.Log($"Debug");
                     StartCoroutine(MagicStunTimer());
                 }
             }
@@ -108,10 +106,8 @@ public class MiddleBossCtrl : EnemyCtrl
     IEnumerator MagicStunTimer()
     {
         isStun = true;
-        Debug.Log($"{isStun}");
         yield return new WaitForSeconds(stunTime);
         isStun = false;
-        Debug.Log($"end");
         getHitbyMagic = 0;
     }
 
