@@ -91,6 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195bafa2f24872a48a987af8cc5369e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  encounterSFX: {fileID: 8300000, guid: 21c4a490b24ba2045bc815f7626a40ef, type: 3}
   boss: {fileID: 0}
   leftWall: {fileID: 0}
   rightWall: {fileID: 0}
+  rewards: []

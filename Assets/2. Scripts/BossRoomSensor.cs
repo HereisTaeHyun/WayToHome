@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class BossRoomSensor : MonoBehaviour
 {
+    [SerializeField] AudioClip encounterSFX;
     [SerializeField] GameObject boss;
     [SerializeField] GameObject leftWall;
     [SerializeField] GameObject rightWall;
     [SerializeField] GameObject[] rewards;
+    private bool isEntered;
 
     // 보스룸 오브젝트는 기본적으로 비활성화
     void Start()
@@ -19,6 +21,8 @@ public class BossRoomSensor : MonoBehaviour
         {
             reward.SetActive(false);   
         }
+
+        isEntered = false;
     }
 
     void Update()
@@ -37,8 +41,10 @@ public class BossRoomSensor : MonoBehaviour
     // 플레이어가 센서 진입 시 보스룸 요소들 활성화
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player") && boss != null)
+        if(collision.gameObject.CompareTag("Player") && boss != null && isEntered == false)
         {
+            isEntered = true;
+            UtilityManager.utility.PlaySFX(encounterSFX);
             boss.SetActive(true);
             leftWall.SetActive(true);
             rightWall.SetActive(true);

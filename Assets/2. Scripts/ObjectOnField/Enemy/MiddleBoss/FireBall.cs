@@ -9,10 +9,12 @@ public class FireBall : MonoBehaviour
     // 인근을 스캐닝하여 가까이 가서 공격하는 타입의 적 엔티티
 
     // public 변수
+    public float maxHP = 2.0f;
     public float currentHP;
     public bool canMove = true;
 
     // private 변수
+    private bool isPool;
     private float moveSpeed = 3.0f;
     private float scanningRadius = 10.0f;
     private float damage = -1.0f;
@@ -33,9 +35,16 @@ public class FireBall : MonoBehaviour
         FollowingTarget(moveSpeed, scanningRadius);
     }
 
+    // 초기화 및 풀 전달, 일종의 Init 역할
     public void SetPool(ObjectPool<GameObject> pool)
     {
         originPool = pool;
+        isPool = false;
+        currentHP = maxHP;
+        if(canMove == false)
+        {
+            canMove = true;
+        }
     }
 
     private void FollowingTarget(float moveSpeed, float scanningRadius)
@@ -51,7 +60,7 @@ public class FireBall : MonoBehaviour
             }
             else if (Vector2.Distance(transform.position, target.position) > scanningRadius)
             {
-                originPool.Release(gameObject);
+                ReturnToPool();
             }
         }
     }
@@ -68,13 +77,26 @@ public class FireBall : MonoBehaviour
                 if(playerCtrl.readInvincible != true)
                 {
                     playerCtrl.ChangeHP(damage);
-                    originPool.Release(gameObject);
+                    ReturnToPool();
                 }
             }
             else if(other.gameObject.CompareTag("PlayerMelee"))
             {
                 GetHit(-1);
             }
+        }
+    }
+
+    private void ReturnToPool()
+    {
+        if(isPool == true)
+        {
+            return;
+        }
+        else
+        {
+            isPool = true;
+            originPool.Release(gameObject);
         }
     }
 
