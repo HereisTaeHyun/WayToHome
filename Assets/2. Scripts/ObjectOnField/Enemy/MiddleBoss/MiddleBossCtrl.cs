@@ -24,7 +24,8 @@ public class MiddleBossCtrl : EnemyCtrl
     private int getHitbyMagic; // 일정 이상 마법에 타격시 isStun
     [SerializeField] float melleAttackRange;
     [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private AudioClip warpSfx;
+    [SerializeField] private AudioClip warpSFX;
+    [SerializeField] private AudioClip stunSFX;
     [SerializeField] private GameObject fireBall;
     private readonly int dieHash = Animator.StringToHash("Die");
 
@@ -32,6 +33,7 @@ public class MiddleBossCtrl : EnemyCtrl
     private float coolTime = 2.0f;
 
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
+    private readonly int stunHash = Animator.StringToHash("Stun");
     void Start()
     {
         Init();
@@ -54,7 +56,7 @@ public class MiddleBossCtrl : EnemyCtrl
 
     void Update()
     {
-        // 게임 오버가 아닐 경우 행동
+        // 게임 오버나 스턴이 아닐 경우 행동
         if(GameManager.instance.readIsGameOver == true || isStun == true)
         {
             return;
@@ -94,6 +96,7 @@ public class MiddleBossCtrl : EnemyCtrl
             fireBallComp = collision.gameObject.GetComponent<FireBall>();
             if(fireBallComp.isHited == true)
             {
+                ChangeHP(-0.00001f);
                 getHitbyMagic += 1;
                 if(getHitbyMagic == maxMagicResist)
                 {
@@ -103,11 +106,17 @@ public class MiddleBossCtrl : EnemyCtrl
         }
     }
 
+    // 마법에 연속해서 맞으면 스턴 발생
     IEnumerator MagicStunTimer()
     {
         isStun = true;
+        anim.SetBool(stunHash, true);
+        UtilityManager.utility.PlaySFX(stunSFX);
+
         yield return new WaitForSeconds(stunTime);
+
         isStun = false;
+        anim.SetBool(stunHash, false);
         getHitbyMagic = 0;
     }
 
@@ -130,7 +139,7 @@ public class MiddleBossCtrl : EnemyCtrl
         // 할당된 변수로 이동
         if(pointAbleAttack != null)
         {
-            UtilityManager.utility.PlaySFX(warpSfx);
+            UtilityManager.utility.PlaySFX(warpSFX);
             transform.position = pointAbleAttack.position;
         }
     }
