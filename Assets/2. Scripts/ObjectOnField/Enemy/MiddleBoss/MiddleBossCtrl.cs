@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Pool;
+using Random = UnityEngine.Random;
 
 public class MiddleBossCtrl : EnemyCtrl
 {
@@ -15,6 +16,8 @@ public class MiddleBossCtrl : EnemyCtrl
     [SerializeField] private Transform warpPointSet;
     private List<Transform> warpPoints = new List<Transform>();
     private MiddleBossMeleeAttack middleBossMeleeAttack;
+    private Transform magicSpawnPosSet;
+    private List<Transform> magicSpawnPoses = new List<Transform>();
     private Transform magicSpawnPos;
     private ObjectPool<GameObject> magicPool;
     private int maxMagic = 3;
@@ -43,11 +46,15 @@ public class MiddleBossCtrl : EnemyCtrl
         {
             warpPoints.Add(warpPoint);
         }
-        warpPoints.ToArray();
 
         // 공격 관련 초기화
         middleBossMeleeAttack = GetComponent<MiddleBossMeleeAttack>();
-        magicSpawnPos = transform.Find("MagicSpawnPos");
+        magicSpawnPosSet = transform.Find("MagicSpawnPosSet");
+        foreach(Transform elem in magicSpawnPosSet)
+        {
+            magicSpawnPoses.Add(elem);
+        }
+
         UtilityManager.utility.CreatePool(ref magicPool, fireBall, maxMagic, maxMagic);
 
         canAttack = true;
@@ -79,7 +86,6 @@ public class MiddleBossCtrl : EnemyCtrl
             if(distance < melleAttackRange && canAttack == true)
             {
                 MeleeAttackAble(moveDir);
-                // StartCoroutine(CoolTimeCheck());
             }
             else if(distance > melleAttackRange && canAttack == true)
             {
@@ -158,6 +164,8 @@ public class MiddleBossCtrl : EnemyCtrl
             fireBallComp.SetPool(magicPool);
 
             // 파이어볼 셋업
+            int idx = Random.Range(0, magicSpawnPoses.Count);
+            magicSpawnPos = magicSpawnPoses[idx];
             fireBall.transform.position = magicSpawnPos.position;
             fireBall.transform.rotation = magicSpawnPos.rotation;
         }
