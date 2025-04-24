@@ -7559,6 +7559,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6990050470845292822, guid: 78b640646a6323f449071dc3f2b6ad17, type: 3}
   m_PrefabInstance: {fileID: 1963455974}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1079422665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1079422666}
+  - component: {fileID: 1079422667}
+  m_Layer: 0
+  m_Name: ItemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1079422666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079422665}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -42.192677, y: 4.4334598, z: -0.18404746}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1079422667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079422665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1f5145b3978c8c4fb028eb792b059c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healItem: {fileID: 0}
+  moneyItem: {fileID: 0}
+  goldItem: {fileID: 0}
+  PremiumHealItem: {fileID: 0}
+  maxHpPlusItem: {fileID: 0}
+  attackPlusItem: {fileID: 0}
+  maxJumpPlusItem: {fileID: 0}
 --- !u!1001 &1103187801
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29244,6 +29295,7 @@ SceneRoots:
   - {fileID: 161953588}
   - {fileID: 169953910}
   - {fileID: 1653170724}
+  - {fileID: 1079422666}
   - {fileID: 171994669}
   - {fileID: 473021473}
   - {fileID: 367319671}

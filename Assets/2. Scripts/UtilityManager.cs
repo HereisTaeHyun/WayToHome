@@ -23,10 +23,12 @@ public class UtilityManager : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
     }
+    
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
+    
     public Vector2 HorizontalDirSet(Vector2 move)
     {
         Vector2 moveDir = new Vector2(0, 0);

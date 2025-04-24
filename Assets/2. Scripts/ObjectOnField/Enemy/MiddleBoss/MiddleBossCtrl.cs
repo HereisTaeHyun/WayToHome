@@ -40,7 +40,7 @@ public class MiddleBossCtrl : EnemyCtrl
     void Start()
     {
         Init();
-        spriteRenderer =GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         foreach(Transform warpPoint in warpPointSet)
         {
@@ -171,7 +171,7 @@ public class MiddleBossCtrl : EnemyCtrl
         }
     }
 
-    // 근접 공격격
+    // 근접 공격
     private void MeleeAttackAble(Vector2 moveDir)
     {
         middleBossMeleeAttack.Attack();
