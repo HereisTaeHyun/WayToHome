@@ -253,6 +253,7 @@ public class MiddleBossCtrl : EnemyCtrl
         rb2D.simulated = false;
         anim.SetTrigger(dieHash);
         yield return new WaitForSeconds(2.0f);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        // Destroy(gameObject);
     }
 }

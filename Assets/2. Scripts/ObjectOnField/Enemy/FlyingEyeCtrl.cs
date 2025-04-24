@@ -100,6 +100,7 @@ public class FlyingEyeCtrl : EnemyCtrl
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.simulated = false;
         yield return new WaitForSeconds(2.0f);
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

@@ -141,6 +141,7 @@ public class GroundCtrl : EnemyCtrl
         rb2D.simulated = false;
         anim.SetTrigger(dieHash);
         yield return new WaitForSeconds(2.0f);
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

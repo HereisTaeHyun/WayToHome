@@ -39,17 +39,20 @@ public class ItemToFind : ItemBase
                     if(playerCtrl.currentHP < playerCtrl.MaxHP)
                     {
                         playerCtrl.ChangeHP(1);
-                        Destroy(transform.parent.gameObject);
+                        // Destroy(transform.parent.gameObject);
+                        transform.parent.gameObject.SetActive(false);
                     }
                     break;
 
                 case ItemToFindType.Money: // 돈 획득
                     playerCtrl.GetMoney(1);
-                    Destroy(transform.parent.gameObject);
+                    // Destroy(transform.parent.gameObject);
+                    transform.parent.gameObject.SetActive(false);
                     break;
                 case ItemToFindType.Gold: // 금괴 획득
                     playerCtrl.GetMoney(3);
-                    Destroy(transform.parent.gameObject);
+                    // Destroy(transform.parent.gameObject);
+                    transform.parent.gameObject.SetActive(false);
                     break;
             }
         }

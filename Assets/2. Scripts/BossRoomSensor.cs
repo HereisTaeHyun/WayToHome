@@ -8,11 +8,13 @@ public class BossRoomSensor : MonoBehaviour
     [SerializeField] GameObject leftWall;
     [SerializeField] GameObject rightWall;
     [SerializeField] GameObject[] rewards;
+    private EnemyCtrl enemyCtrl;
     private bool isEntered;
 
     // 보스룸 오브젝트는 기본적으로 비활성화
     void Start()
     {
+        enemyCtrl = boss.GetComponent<EnemyCtrl>();
         boss.SetActive(false);
         leftWall.SetActive(false);
         rightWall.SetActive(false);
@@ -27,7 +29,7 @@ public class BossRoomSensor : MonoBehaviour
 
     void Update()
     {
-        if(boss == null)
+        if(enemyCtrl.isDie == true)
         {
             leftWall.SetActive(false);
             rightWall.SetActive(false);

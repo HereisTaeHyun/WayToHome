@@ -106,7 +106,8 @@ public class EnemyCtrl : MonoBehaviour
     // 사망 처리
     protected virtual void EnemyDie()
     {
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     protected void OnDrawGizmosSelected()

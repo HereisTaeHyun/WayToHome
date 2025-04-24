@@ -34,7 +34,8 @@ public class ItemToBuy : ItemBase
         // 남은 수명이 0 이하면 파괴, 점프 추가 아이템은 중요 아이템이니 파괴하지 않기
         if(remainLifespan <= 0 && itemToBuyType != ItemToBuyType.MaxJumpPlus)
         {
-            Destroy(transform.parent.gameObject);
+            // Destroy(transform.parent.gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -49,26 +50,30 @@ public class ItemToBuy : ItemBase
             {
                 case ItemToBuyType.MaxHpPlus: // 최대 체력 증가
                     playerCtrl.MaxHpPlus();
-                    Destroy(transform.parent.gameObject);
+                    // Destroy(transform.parent.gameObject);
+                    transform.parent.gameObject.SetActive(false);
                     break;
 
                 case ItemToBuyType.PremiumHeal: // 체력 2 회복
                     if(playerCtrl.currentHP < playerCtrl.MaxHP)
                     {
                         playerCtrl.ChangeHP(2);
-                        Destroy(transform.parent.gameObject);
+                        // Destroy(transform.parent.gameObject);
+                        transform.parent.gameObject.SetActive(false);
                     }
                     break;
                 
                 case ItemToBuyType.AttackPlus: // 공격력 증가
                     playerCtrl.Attacklus();
-                    Destroy(transform.parent.gameObject);
+                    // Destroy(transform.parent.gameObject);
+                    transform.parent.gameObject.SetActive(false);
                     break;
                 
                 // playerMove에 영향
                 case ItemToBuyType.MaxJumpPlus: // 점프 횟수 추가
                     playerCtrl.MaxJumpPlus();
-                    Destroy(gameObject);
+                    // Destroy(gameObject);
+                    transform.parent.gameObject.SetActive(false);
                     break;
             }
         }

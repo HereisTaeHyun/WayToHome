@@ -34,7 +34,8 @@ public class ItemBase : MonoBehaviour
         // 남은 수명이 0 이하면 파괴
         if(remainLifespan <= 0)
         {
-            Destroy(transform.parent.gameObject);
+            // Destroy(transform.parent.gameObject);
+            transform.parent.gameObject.SetActive(false);
         }
     }
 
