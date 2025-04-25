@@ -1,12 +1,14 @@
 using System.Collections;
 using Cainos.PixelArtPlatformer_VillageProps;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class ChestItemSpawn : MonoBehaviour
 {
         public GameObject itemInChest;
         private Chest chest;
         private GameObject itemSpawnPoint;
+        private ObjectPool<GameObject> usingPool;
         private bool isOpened = false; // OnTriggerStay2D기에 프레임 연속 입력 방지 위해 플래그 필요
 
         void Start()
@@ -31,6 +33,10 @@ public class ChestItemSpawn : MonoBehaviour
         IEnumerator ItemDrop()
         {
             yield return new WaitForSeconds(0.3f);
-            Instantiate(itemInChest, itemSpawnPoint.transform.position, itemSpawnPoint.transform.rotation);
+
+            usingPool = ItemManager.itemManager.SelectPool(itemInChest);
+            itemInChest = UtilityManager.utility.GetFromPool(usingPool, 5);
+            itemInChest.transform.position = itemSpawnPoint.transform.position;
+            itemInChest.transform.rotation = itemSpawnPoint.transform.rotation;
         }
 }

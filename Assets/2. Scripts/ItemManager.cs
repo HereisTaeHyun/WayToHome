@@ -46,7 +46,7 @@ public class ItemManager : MonoBehaviour
         UtilityManager.utility.CreatePool(ref premiumHealPool, PremiumHealItem, 3, 3);
         UtilityManager.utility.CreatePool(ref maxHpPlusPool, maxHpPlusItem, 3, 3);
         UtilityManager.utility.CreatePool(ref attakPlusPool, attackPlusItem, 3, 3);
-        UtilityManager.utility.CreatePool(ref maxJumpPlusPool, maxJumpPlusItem, 1, 1);
+        UtilityManager.utility.CreatePool(ref maxJumpPlusPool, maxJumpPlusItem, 3, 3);
 
         PoolData.Add(healItem, healPool);
         PoolData.Add(moneyItem, moneyPool);
@@ -54,7 +54,7 @@ public class ItemManager : MonoBehaviour
         PoolData.Add(PremiumHealItem, premiumHealPool);
         PoolData.Add(maxHpPlusItem, maxHpPlusPool);
         PoolData.Add(attackPlusItem, attakPlusPool);
-        PoolData.Add(maxJumpPlusItem, maxHpPlusPool);
+        PoolData.Add(maxJumpPlusItem, maxJumpPlusPool);
     }
 
     public ObjectPool<GameObject> SelectPool(GameObject prefab)

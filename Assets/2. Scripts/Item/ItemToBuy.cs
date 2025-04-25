@@ -89,7 +89,7 @@ public class ItemToBuy : ItemBase
                 case ItemToBuyType.MaxJumpPlus: // 점프 횟수 추가
                     playerCtrl.MaxJumpPlus();
                     usingPool = ItemManager.itemManager.maxJumpPlusPool;
-                    UtilityManager.utility.ReturnToPool(usingPool, transform.parent.gameObject);
+                    UtilityManager.utility.ReturnToPool(usingPool, gameObject);
                     break;
             }
         }

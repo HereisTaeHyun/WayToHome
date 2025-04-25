@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.UI;
 
 public class Stall : MonoBehaviour
@@ -20,6 +21,7 @@ public class Stall : MonoBehaviour
     private Dictionary<GameObject, int> itemInformation = new Dictionary<GameObject, int>(); // 판매품, 가격 받는 딕셔너리
     private int useCount;
     private GameObject itemSpawnPoint;
+    private ObjectPool<GameObject> usingPool;
     private PlayerCtrl playerCtrl; // 소지금 체크에 필요
     
     void Start()
@@ -78,7 +80,11 @@ public class Stall : MonoBehaviour
                 playerCtrl.money -= itemPrice;
                 useCount += 1;
                 UtilityManager.utility.PlaySFX(moneySFX);
-                Instantiate(buyingItem, itemSpawnPoint.transform.position, itemSpawnPoint.transform.rotation);
+
+                usingPool = ItemManager.itemManager.SelectPool(buyingItem);
+                buyingItem = UtilityManager.utility.GetFromPool(usingPool, 5);
+                buyingItem.transform.position = itemSpawnPoint.transform.position;
+                buyingItem.transform.rotation = itemSpawnPoint.transform.rotation;
             }
             else
             {
