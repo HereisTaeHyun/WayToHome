@@ -2,22 +2,21 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ItemToBuy : ItemBase
-{
-    // 구입 아이템, 드랍 또는 필드 아이템보다 고성능이지만 money 차감 필요
-    // 자판기 NPC에서 획득 가능
-
-    // public 변수
-
-    // private 변수
-    [SerializeField] private ItemToBuyType itemToBuyType;
-    private enum ItemToBuyType
+    public enum ItemToBuyType
     {
         MaxHpPlus,
         AttackPlus,
         PremiumHeal,
         MaxJumpPlus,
     }
+
+public class ItemToBuy : ItemBase
+{
+    // 구입 아이템, 드랍 또는 필드 아이템보다 고성능이지만 money 차감 필요
+    // 자판기 NPC에서 획득 가능
+
+    // public 변수
+    [SerializeField] private ItemToBuyType itemToBuyType;
 
 
     // 생성 후 120초 동안 필드에 존재

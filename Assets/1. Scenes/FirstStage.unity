@@ -7603,13 +7603,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1f5145b3978c8c4fb028eb792b059c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healItem: {fileID: 0}
-  moneyItem: {fileID: 0}
-  goldItem: {fileID: 0}
-  PremiumHealItem: {fileID: 0}
-  maxHpPlusItem: {fileID: 0}
-  attackPlusItem: {fileID: 0}
-  maxJumpPlusItem: {fileID: 0}
+  healItem: {fileID: 4498321679550260775, guid: d7a3d993a04b2674790cff4693ca9bc5, type: 3}
+  moneyItem: {fileID: 539637585929383674, guid: e7e1b36044590514ba003c52b5745f7d, type: 3}
+  goldItem: {fileID: 5719874273034391547, guid: c50a2965223d9b9408209efb5c3b0f4a, type: 3}
+  PremiumHealItem: {fileID: 4549197007615165001, guid: 0e36af38f3566aa4792b35f6be2806bc, type: 3}
+  maxHpPlusItem: {fileID: 793591172324723807, guid: 3216573a02a982545b12cafbd66d579f, type: 3}
+  attackPlusItem: {fileID: 9142775600868132666, guid: a927636b45bea23478e87fd0fbc4fb9c, type: 3}
+  maxJumpPlusItem: {fileID: 1974093352892434603, guid: 7b244d23bf83bd441bd5522b31e8d227, type: 3}
 --- !u!1001 &1103187801
 PrefabInstance:
   m_ObjectHideFlags: 0

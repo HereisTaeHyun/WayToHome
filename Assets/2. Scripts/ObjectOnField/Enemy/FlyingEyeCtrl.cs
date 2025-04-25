@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using UnityEngine.Pool;
 
 // 하늘을 날면서 타겟을 추적하는 적에 대한 클래스
 public class FlyingEyeCtrl : EnemyCtrl
@@ -77,8 +77,14 @@ public class FlyingEyeCtrl : EnemyCtrl
     // 사망 처리
     protected override void EnemyDie()
     {
+        // 아이템 확률 계산 및 드롭
         GameObject selectedItem = ItemDrop(itemInformation);
-        Instantiate(selectedItem, transform.position, transform.rotation);
+        ObjectPool<GameObject> usingPool = ItemManager.itemManager.SelectPool(selectedItem);
+
+        selectedItem = UtilityManager.utility.GetFromPool(usingPool, 5);
+        selectedItem.transform.position = transform.position;
+        selectedItem.transform.rotation = transform.rotation;
+
         StartCoroutine(DieStart());
     }
 
