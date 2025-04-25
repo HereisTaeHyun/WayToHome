@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class ItemBase : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ItemBase : MonoBehaviour
     protected float remainLifespan;
     protected static float BLINK_TIME = 0.3f;
     protected bool isBlink;
+    protected ObjectPool<GameObject> usingPool;
 
     // 생성 후 30초 동안 필드에 존재
     protected virtual void Start()
@@ -34,7 +36,6 @@ public class ItemBase : MonoBehaviour
         // 남은 수명이 0 이하면 파괴
         if(remainLifespan <= 0)
         {
-            // Destroy(transform.parent.gameObject);
             transform.parent.gameObject.SetActive(false);
         }
     }

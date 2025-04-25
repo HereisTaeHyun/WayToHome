@@ -73,7 +73,7 @@ public class FireBall : MonoBehaviour
             }
             else if (Vector2.Distance(transform.position, target.position) > scanningRadius)
             {
-                ReturnToPool();
+                ReturnToOriginPool();
             }
         }
     }
@@ -90,7 +90,7 @@ public class FireBall : MonoBehaviour
                 if(playerCtrl.readInvincible != true && canAttack == true)
                 {
                     playerCtrl.ChangeHP(damage);
-                    ReturnToPool();
+                    ReturnToOriginPool();
                 }
             }
             // 플레이어의 공격에 맞은 경우
@@ -107,7 +107,7 @@ public class FireBall : MonoBehaviour
         }
     }
 
-    private void ReturnToPool()
+    private void ReturnToOriginPool()
     {
         if(isPool == true)
         {
@@ -135,7 +135,7 @@ public class FireBall : MonoBehaviour
         currentHP += value;
         if (currentHP <= 0)
         {
-            ReturnToPool();
+            ReturnToOriginPool();
         }
         else
         {

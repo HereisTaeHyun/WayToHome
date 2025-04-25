@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-    public enum ItemToFindType
+public enum ItemToFindType
     {
         Heal,
         Money,
@@ -14,6 +14,7 @@ public class ItemToFind : ItemBase
 
     // public 변수
     [SerializeField] private ItemToFindType itemToFindType;
+    
 
     // 생성 후 30초 동안 필드에 존재
     protected override void Start()
@@ -38,20 +39,20 @@ public class ItemToFind : ItemBase
                     if(playerCtrl.currentHP < playerCtrl.MaxHP)
                     {
                         playerCtrl.ChangeHP(1);
-                        // Destroy(transform.parent.gameObject);
-                        transform.parent.gameObject.SetActive(false);
+                        usingPool = ItemManager.itemManager.healPool;
+                        UtilityManager.utility.ReturnToPool(usingPool, transform.parent.gameObject);
                     }
                     break;
 
                 case ItemToFindType.Money: // 돈 획득
                     playerCtrl.GetMoney(1);
-                    // Destroy(transform.parent.gameObject);
-                    transform.parent.gameObject.SetActive(false);
+                    usingPool = ItemManager.itemManager.moneyPool;
+                    UtilityManager.utility.ReturnToPool(usingPool, transform.parent.gameObject);
                     break;
                 case ItemToFindType.Gold: // 금괴 획득
                     playerCtrl.GetMoney(3);
-                    // Destroy(transform.parent.gameObject);
-                    transform.parent.gameObject.SetActive(false);
+                    usingPool = ItemManager.itemManager.goldPool;
+                    UtilityManager.utility.ReturnToPool(usingPool, transform.parent.gameObject);
                     break;
             }
         }

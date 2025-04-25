@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1809646075321205942}
-  - component: {fileID: 1280457465655234216}
   - component: {fileID: 3467408812011949718}
+  - component: {fileID: 1280457465655234216}
   m_Layer: 0
   m_Name: HealItem
   m_TagString: Untagged
@@ -33,20 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4677851656741474577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1280457465655234216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3474818975576288981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c993eeba0929a840a1506e456d4ad22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LIFESPAN: 30
-  itemToFindType: 0
 --- !u!58 &3467408812011949718
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -83,6 +69,21 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.0011126638, y: 0.05111267}
   m_Radius: 0.05768911
+--- !u!114 &1280457465655234216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3474818975576288981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c993eeba0929a840a1506e456d4ad22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LIFESPAN: 30
+  prefabReference: {fileID: 4498321679550260775}
+  itemToFindType: 0
 --- !u!1 &4498321679550260775
 GameObject:
   m_ObjectHideFlags: 0
