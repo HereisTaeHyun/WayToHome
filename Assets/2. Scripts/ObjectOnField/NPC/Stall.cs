@@ -80,11 +80,7 @@ public class Stall : MonoBehaviour
                 playerCtrl.money -= itemPrice;
                 useCount += 1;
                 UtilityManager.utility.PlaySFX(moneySFX);
-
-                usingPool = ItemManager.itemManager.SelectPool(buyingItem);
-                buyingItem = UtilityManager.utility.GetFromPool(usingPool, 5);
-                buyingItem.transform.position = itemSpawnPoint.transform.position;
-                buyingItem.transform.rotation = itemSpawnPoint.transform.rotation;
+                UtilityManager.utility.SetItemFromPool(itemSpawnPoint.transform, buyingItem);
             }
             else
             {

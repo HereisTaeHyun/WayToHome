@@ -126,7 +126,7 @@ public class FireBall : MonoBehaviour
     private void ReturnAfterAnim()
     {
         isPool = true;
-        originPool.Release(gameObject);
+        UtilityManager.utility.ReturnToPool(originPool, gameObject);;
     }
 
     // 플레이어 밀리에 타격 시

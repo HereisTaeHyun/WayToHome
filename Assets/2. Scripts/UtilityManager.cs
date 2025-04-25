@@ -116,5 +116,11 @@ public class UtilityManager : MonoBehaviour
         pool.Release(go);
     }
 
-    // public GetFromPool()
+    public void SetItemFromPool(Transform targetTransform, GameObject target)
+    {
+        ObjectPool<GameObject> pool = ItemManager.itemManager.SelectPool(target);
+        target = GetFromPool(pool, 5);
+        target.transform.position = targetTransform.position;
+        target.transform.rotation = targetTransform.rotation;
+    }
 }

@@ -40,7 +40,7 @@ public class ItemToBuy : ItemBase
                     break;
 
                 case ItemToBuyType.AttackPlus:
-                    usingPool = ItemManager.itemManager.attakPlusPool;
+                    usingPool = ItemManager.itemManager.attackPlusPool;
                     break;
 
                 case ItemToBuyType.PremiumHeal:
@@ -81,7 +81,7 @@ public class ItemToBuy : ItemBase
                 
                 case ItemToBuyType.AttackPlus: // 공격력 증가
                     playerCtrl.Attacklus();
-                    usingPool = ItemManager.itemManager.attakPlusPool;
+                    usingPool = ItemManager.itemManager.attackPlusPool;
                     UtilityManager.utility.ReturnToPool(usingPool, transform.parent.gameObject);
                     break;
                 

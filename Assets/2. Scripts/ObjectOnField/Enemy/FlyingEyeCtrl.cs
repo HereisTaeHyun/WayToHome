@@ -80,11 +80,7 @@ public class FlyingEyeCtrl : EnemyCtrl
     {
         // 아이템 확률 계산 및 드롭
         GameObject selectedItem = ItemDrop(itemInformation);
-        usingPool = ItemManager.itemManager.SelectPool(selectedItem);
-
-        selectedItem = UtilityManager.utility.GetFromPool(usingPool, 5);
-        selectedItem.transform.position = transform.position;
-        selectedItem.transform.rotation = transform.rotation;
+        UtilityManager.utility.SetItemFromPool(transform, selectedItem);
 
         StartCoroutine(DieStart());
     }

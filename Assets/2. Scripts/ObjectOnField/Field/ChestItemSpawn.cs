@@ -33,10 +33,6 @@ public class ChestItemSpawn : MonoBehaviour
         IEnumerator ItemDrop()
         {
             yield return new WaitForSeconds(0.3f);
-
-            usingPool = ItemManager.itemManager.SelectPool(itemInChest);
-            itemInChest = UtilityManager.utility.GetFromPool(usingPool, 5);
-            itemInChest.transform.position = itemSpawnPoint.transform.position;
-            itemInChest.transform.rotation = itemSpawnPoint.transform.rotation;
+            UtilityManager.utility.SetItemFromPool(itemSpawnPoint.transform, itemInChest);
         }
 }
