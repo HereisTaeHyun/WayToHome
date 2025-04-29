@@ -6,8 +6,9 @@ public class BreakableGround : MonoBehaviour
     [SerializeField] private float breakTime;
     public IEnumerator StartBreak()
     {
-        Debug.Log("붕괴 시작");
+        PlayerCtrl.player.canMove = false;
         yield return new WaitForSeconds(breakTime);
-        Debug.Log("붕괴 종료");
+        PlayerCtrl.player.canMove = true;
+        gameObject.SetActive(false);
     }
 }
