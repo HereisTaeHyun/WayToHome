@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerSensor : MonoBehaviour
 {
     protected bool isEntered;
-    public bool readIsEntered {get {return isEntered;}}
 
     protected virtual void Start()
     {

@@ -1,16 +1,13 @@
+using System.Collections;
 using UnityEngine;
 
 public class BreakableGround : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private float breakTime;
+    public IEnumerator StartBreak()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("붕괴 시작");
+        yield return new WaitForSeconds(breakTime);
+        Debug.Log("붕괴 종료");
     }
 }
