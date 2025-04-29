@@ -17,7 +17,7 @@ public class BreakableGroundSensor : PlayerSensor
         if(collision.gameObject.CompareTag("Player")&& isEntered == false)
         {
             isEntered = true;
-            StartCoroutine(breakableGround.StartBreak());
+            StartCoroutine(breakableGround.StartBreak(collision));
         }
     }
 }

@@ -90,7 +90,7 @@ public class PlayerMove : MonoBehaviour
         move = new Vector2(horizontalInput, 0);
         moveDir = UtilityManager.utility.HorizontalDirSet(move);
 
-        // 이동 방향이 left 쪽이면 Player가 왼쪽으로 보기
+        // 이동 방향 및 move 중인지 체크
         playerAnim.SetFloat(speedHash, move.magnitude);
 
         // player state가 idle인지 move인지 h에 따라 변화
@@ -133,6 +133,12 @@ public class PlayerMove : MonoBehaviour
             newVelocity.Set(-move.x * moveSpeed * slopeNormalPerp.x, -move.x * moveSpeed * slopeNormalPerp.y);
             rb2D.linearVelocity = newVelocity;
         }
+    }
+
+    public void ForceIdle()
+    {
+        move = Vector2.zero;
+        playerAnim.SetFloat(speedHash, move.x);
     }
 #endregion
 
