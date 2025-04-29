@@ -8,6 +8,7 @@ public class FlyingEyeCtrl : EnemyCtrl
 {
     private Collider2D coll;
     private Collider2D playerColl;
+    private readonly int fallHash = Animator.StringToHash("Fall");
     private readonly int dieHash = Animator.StringToHash("Die");
 
     void Start()
@@ -74,6 +75,7 @@ public class FlyingEyeCtrl : EnemyCtrl
         return base.ItemDrop(item);
     }
 
+#region 사망 처리 관련
     // 사망 처리
     protected override void EnemyDie()
     {
@@ -84,13 +86,13 @@ public class FlyingEyeCtrl : EnemyCtrl
         StartCoroutine(DieStart());
     }
 
-    // 사망 절차 진행, 물리 영향 제거 후 사망 애니메이션 재생
-    // Flying Eye는 공중 비행형이기에 지면까지 떨어지는 시간이 필요함
+    // 사망 절차 진행
     private IEnumerator DieStart()
     {
         // 사망 및 중력 적용
         isDie = true;
         rb2D.gravityScale = 1.0f;
+        anim.SetTrigger(fallHash);
         Physics2D.IgnoreCollision(coll, playerColl, true);
 
         // 잠시 후 setfalse
@@ -98,20 +100,19 @@ public class FlyingEyeCtrl : EnemyCtrl
         gameObject.SetActive(false);
     }
 
-    // 사망한 적이 땋에 닿으면
     private void OnCollisionEnter2D(Collision2D other)
     {
         if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
         {
+            // 사망한 적이 땅에 닿으면
             if(isDie == true)
             {
+                UtilityManager.utility.PlaySFX(enemyDieSFX);
                 anim.SetTrigger(dieHash);
                 rb2D.bodyType = RigidbodyType2D.Kinematic;
                 rb2D.simulated = false;
-                
-                // 사운드 재생
-                UtilityManager.utility.PlaySFX(enemyDieSFX);
             }
         }
     }
+#endregion
 }
