@@ -13,7 +13,7 @@ public class PlayerSensor : MonoBehaviour
     // 플레이어가 센서 진입
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Player") && isEntered == false)
         {
             isEntered = true;
         }
