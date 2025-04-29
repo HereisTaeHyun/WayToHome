@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BossRoomSensor : MonoBehaviour
+public class BossRoomSensor : PlayerSensor
 {
     [SerializeField] AudioClip encounterSFX;
     [SerializeField] GameObject boss;
@@ -9,11 +9,13 @@ public class BossRoomSensor : MonoBehaviour
     [SerializeField] GameObject rightWall;
     [SerializeField] GameObject[] rewards;
     private EnemyCtrl enemyCtrl;
-    private bool isEntered;
 
     // 보스룸 오브젝트는 기본적으로 비활성화
-    void Start()
+    protected override void Start()
     {
+        // isEntered 초기화는 부모에서
+        base.Start();
+
         enemyCtrl = boss.GetComponent<EnemyCtrl>();
         boss.SetActive(false);
         leftWall.SetActive(false);
@@ -23,10 +25,9 @@ public class BossRoomSensor : MonoBehaviour
         {
             reward.SetActive(false);   
         }
-
-        isEntered = false;
     }
 
+     // 보스가 사망했을 때 보상 오브젝트 활성화
     void Update()
     {
         if(enemyCtrl.isDie == true)
@@ -41,7 +42,7 @@ public class BossRoomSensor : MonoBehaviour
     }
 
     // 플레이어가 센서 진입 시 보스룸 요소들 활성화
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Player") && boss != null && isEntered == false)
         {
