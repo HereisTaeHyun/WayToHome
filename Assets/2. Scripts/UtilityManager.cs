@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
-using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
 using UnityEngine.Pool;
 
@@ -91,7 +90,11 @@ public class UtilityManager : MonoBehaviour
         // pool 생성
         pool = new ObjectPool<GameObject>
         (
-            createFunc : () => Instantiate(prefab),
+            createFunc : () => {
+                GameObject go = Instantiate(prefab);
+                DontDestroyOnLoad(go);
+                return go;
+            },
             actionOnGet : (go) => go.SetActive(true),
             actionOnRelease : (go) => go.SetActive(false),
         	actionOnDestroy : (go) => Destroy(go),
@@ -119,8 +122,13 @@ public class UtilityManager : MonoBehaviour
     public void SetItemFromPool(Transform targetTransform, GameObject target)
     {
         ObjectPool<GameObject> pool = ItemManager.itemManager.SelectPool(target);
-        target = GetFromPool(pool, 5);
-        target.transform.position = targetTransform.position;
-        target.transform.rotation = targetTransform.rotation;
+        target = GetFromPool(pool, 10);
+        // target == null이란 것은 아이템 최대 생성치 초과했다는 뜻
+        // 현재 겜 설계에서 한 씬에 한 아이템이 10 이상일 확률은 희박하니 그냥 드롭 안하게 처리
+        if(target != null)
+        {
+            target.transform.position = targetTransform.position;
+            target.transform.rotation = targetTransform.rotation;
+        }
     }
 }

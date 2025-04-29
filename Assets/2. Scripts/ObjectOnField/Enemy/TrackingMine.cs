@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class TrackingMine : MonoBehaviour
@@ -16,7 +14,6 @@ public class TrackingMine : MonoBehaviour
     private FlyingEyeCtrl flyingEyeCtrl;
 
     // Player에 영향 미치는 부분
-    private PlayerCtrl playerCtrl;
     private PlayerMove playerMove;
     private Rigidbody2D playerRb;
 
@@ -34,12 +31,11 @@ public class TrackingMine : MonoBehaviour
         {
             if(other.gameObject.CompareTag("Player"))
             {
-                playerCtrl = other.collider.GetComponent<PlayerCtrl>();
                 playerMove = other.collider.GetComponent<PlayerMove>();
                 playerRb = other.collider.GetComponent<Rigidbody2D>();
 
                 // 플레이어가 무적이 아니라면 공격
-                if(playerCtrl.readInvincible != true)
+                if(PlayerCtrl.player.readInvincible != true)
                 {
                     flyingEyeCtrl.readAnim.SetTrigger(attackHash);
                     StartCoroutine(Attack(other));
@@ -65,8 +61,8 @@ public class TrackingMine : MonoBehaviour
             }
 
             // Player에게 데미지 가해 및 1.5초간 스턴
-            playerCtrl.ChangeHP(damage);
-            playerCtrl.GetDebuff(PlayerCtrl.DebuffType.Stun, 0.5f);
+            PlayerCtrl.player.ChangeHP(damage);
+            PlayerCtrl.player.GetDebuff(PlayerCtrl.DebuffType.Stun, 0.5f);
         }
     }
 }

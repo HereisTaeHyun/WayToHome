@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.SceneManagement;
 
 public class ItemManager : MonoBehaviour
 {
@@ -38,15 +39,15 @@ public class ItemManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    void Start()
+    private void Start()
     {
-        UtilityManager.utility.CreatePool(ref healPool, healItem, 3, 3);
+        UtilityManager.utility.CreatePool(ref healPool, healItem, 10, 10);
         UtilityManager.utility.CreatePool(ref moneyPool, moneyItem, 10, 10);
-        UtilityManager.utility.CreatePool(ref goldPool, goldItem, 3, 3);
-        UtilityManager.utility.CreatePool(ref premiumHealPool, PremiumHealItem, 3, 3);
-        UtilityManager.utility.CreatePool(ref maxHpPlusPool, maxHpPlusItem, 3, 3);
-        UtilityManager.utility.CreatePool(ref attackPlusPool, attackPlusItem, 3, 3);
-        UtilityManager.utility.CreatePool(ref maxJumpPlusPool, maxJumpPlusItem, 3, 3);
+        UtilityManager.utility.CreatePool(ref goldPool, goldItem, 10, 10);
+        UtilityManager.utility.CreatePool(ref premiumHealPool, PremiumHealItem, 10, 10);
+        UtilityManager.utility.CreatePool(ref maxHpPlusPool, maxHpPlusItem, 10, 10);
+        UtilityManager.utility.CreatePool(ref attackPlusPool, attackPlusItem, 10, 10);
+        UtilityManager.utility.CreatePool(ref maxJumpPlusPool, maxJumpPlusItem, 10, 10);
 
         PoolData.Add(healItem, healPool);
         PoolData.Add(moneyItem, moneyPool);

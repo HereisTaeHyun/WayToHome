@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.UI;
 
 public class Stall : MonoBehaviour
 {
@@ -22,7 +21,6 @@ public class Stall : MonoBehaviour
     private int useCount;
     private GameObject itemSpawnPoint;
     private ObjectPool<GameObject> usingPool;
-    private PlayerCtrl playerCtrl; // 소지금 체크에 필요
     
     void Start()
     {
@@ -51,8 +49,7 @@ public class Stall : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             vendingUI.SetActive(true);
-            playerCtrl = other.GetComponent<PlayerCtrl>();
-            playerCtrl.canAttack = false;
+            PlayerCtrl.player.canAttack = false;
         }
     }
 
@@ -62,7 +59,7 @@ public class Stall : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             vendingUI.SetActive(false);
-            playerCtrl.canAttack = true;
+            PlayerCtrl.player.canAttack = true;
         }
     }
 
@@ -75,9 +72,9 @@ public class Stall : MonoBehaviour
         if(itemInformation.ContainsKey(buyingItem))
         {
             int itemPrice = itemInformation[buyingItem];
-            if(playerCtrl.money >= itemPrice)
+            if(PlayerCtrl.player.money >= itemPrice)
             {
-                playerCtrl.money -= itemPrice;
+                PlayerCtrl.player.money -= itemPrice;
                 useCount += 1;
                 UtilityManager.utility.PlaySFX(moneySFX);
                 UtilityManager.utility.SetItemFromPool(itemSpawnPoint.transform, buyingItem);

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public enum ItemToFindType
@@ -31,26 +30,24 @@ public class ItemToFind : ItemBase
          // 충돌 물체가 플레이어일 경우 획득
         if(other.gameObject.CompareTag("Player"))
         {
-            playerCtrl = other.GetComponent<PlayerCtrl>();
-
             switch(itemToFindType) // 아이템 사용
             {    
                 case ItemToFindType.Heal: // 체력 1 회복
-                    if(playerCtrl.currentHP < playerCtrl.MaxHP)
+                    if(PlayerCtrl.player.currentHP < PlayerCtrl.player.MaxHP)
                     {
-                        playerCtrl.ChangeHP(1);
+                        PlayerCtrl.player.ChangeHP(1);
                         usingPool = ItemManager.itemManager.healPool;
                         UtilityManager.utility.ReturnToPool(usingPool, transform.parent.gameObject);
                     }
                     break;
 
                 case ItemToFindType.Money: // 돈 획득
-                    playerCtrl.GetMoney(1);
+                    PlayerCtrl.player.GetMoney(1);
                     usingPool = ItemManager.itemManager.moneyPool;
                     UtilityManager.utility.ReturnToPool(usingPool, transform.parent.gameObject);
                     break;
                 case ItemToFindType.Gold: // 금괴 획득
-                    playerCtrl.GetMoney(3);
+                    PlayerCtrl.player.GetMoney(3);
                     usingPool = ItemManager.itemManager.goldPool;
                     UtilityManager.utility.ReturnToPool(usingPool, transform.parent.gameObject);
                     break;

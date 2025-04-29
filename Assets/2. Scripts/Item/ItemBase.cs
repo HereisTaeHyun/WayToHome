@@ -7,7 +7,6 @@ public class ItemBase : MonoBehaviour
     // public 변수
 
     // private 변수
-    protected PlayerCtrl playerCtrl;
     protected SpriteRenderer spriteRenderer; // spriteRenderer는 부모 객체에 있음
     [SerializeField] protected float LIFESPAN;
     protected float remainLifespan;
@@ -45,7 +44,6 @@ public class ItemBase : MonoBehaviour
         // 충돌 물체가 플레이어일 경우 획득
         if(other.gameObject.CompareTag("Player"))
         {
-            playerCtrl = other.GetComponent<PlayerCtrl>();
         }
     }
 

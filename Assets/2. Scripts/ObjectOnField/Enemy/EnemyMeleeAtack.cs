@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class EnemyMeleeAtack : MonoBehaviour
 {
-    private PlayerCtrl playerCtrl;
     private EnemyAttack enemyAttack;
 
     // enemyAttack의 공격력 읽어오기 위해 필요
@@ -14,8 +13,7 @@ public class EnemyMeleeAtack : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            playerCtrl = other.GetComponent<PlayerCtrl>();
-            playerCtrl.ChangeHP(enemyAttack.attackDamage);
+            PlayerCtrl.player.ChangeHP(enemyAttack.attackDamage);
         } 
     }
 }

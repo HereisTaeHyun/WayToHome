@@ -8,7 +8,6 @@ public class FlyingEyeCtrl : EnemyCtrl
 {
     private Collider2D coll;
     private Collider2D playerColl;
-    private ObjectPool<GameObject> usingPool;
     private readonly int dieHash = Animator.StringToHash("Die");
 
     void Start()
@@ -103,7 +102,6 @@ public class FlyingEyeCtrl : EnemyCtrl
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.simulated = false;
         yield return new WaitForSeconds(2.0f);
-        // Destroy(gameObject);
         gameObject.SetActive(false);
     }
 }

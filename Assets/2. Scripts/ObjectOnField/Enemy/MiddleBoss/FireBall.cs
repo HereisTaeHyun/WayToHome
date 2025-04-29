@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -24,7 +23,6 @@ public class FireBall : MonoBehaviour
     private float STOP_TIME = 0.5f;
     private Animator anim;
     private Transform target;
-    private PlayerCtrl playerCtrl;
     private Rigidbody2D rb2D;
     private ObjectPool<GameObject> originPool;
     private readonly int fireBallOffHash = Animator.StringToHash("FireBallOff");
@@ -84,12 +82,11 @@ public class FireBall : MonoBehaviour
         {
             if(other.gameObject.CompareTag("Player"))
             {
-                playerCtrl = other.GetComponent<PlayerCtrl>();
 
                 // 플레이어가 무적이 아니라면 공격
-                if(playerCtrl.readInvincible != true && canAttack == true)
+                if(PlayerCtrl.player.readInvincible != true && canAttack == true)
                 {
-                    playerCtrl.ChangeHP(damage);
+                    PlayerCtrl.player.ChangeHP(damage);
                     ReturnToOriginPool();
                 }
             }

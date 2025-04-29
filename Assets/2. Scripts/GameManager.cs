@@ -1,19 +1,14 @@
 using System;
 using System.Collections;
-using Microsoft.Unity.VisualStudio.Editor;
-using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
 
 public class GameManager : MonoBehaviour
 {
     // 게임매니저: 게임 오버 및 초기화, 풀 관리, Player UI 관리 맞길 예정
     // 몬스터는 고정 위치 배치할 것임, 아이템을 풀 관리로 맞길 수 있을지 알아보기
-    // 게임 오버 된 후 재시작하면 active false인 적을 true로 하는 식으로 씬 초기화 생각 중
 
     // public 변수
     // 게임 오버 이벤트

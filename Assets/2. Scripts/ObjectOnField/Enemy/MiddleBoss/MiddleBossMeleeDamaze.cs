@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class MiddleBossMeleeDamaze : MonoBehaviour
 {
-    private PlayerCtrl playerCtrl;
     private MiddleBossCtrl middleBossCtrl;
     private Rigidbody2D playerRb;
     private static float PUSH_POWER = 5.0f;
@@ -11,14 +10,13 @@ public class MiddleBossMeleeDamaze : MonoBehaviour
     private void Start()
     {
         middleBossCtrl = GetComponentInParent<MiddleBossCtrl>();
-        playerCtrl = middleBossCtrl.readTarget.GetComponent<PlayerCtrl>();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Player") && playerCtrl.readInvincible == false)
+        if(other.gameObject.CompareTag("Player") && PlayerCtrl.player.readInvincible == false)
         {
             // 데미지 가해
-            playerCtrl.ChangeHP(middleBossCtrl.readDamage);
+            PlayerCtrl.player.ChangeHP(middleBossCtrl.readDamage);
 
             // 밀어내기
             playerRb = other.GetComponent<Rigidbody2D>();
@@ -29,7 +27,7 @@ public class MiddleBossMeleeDamaze : MonoBehaviour
             playerRb.AddForce(playerVector * PUSH_POWER, ForceMode2D.Impulse);
 
             // 공중에서 멈추는 현상 방지 위해 스턴
-            playerCtrl.GetDebuff(PlayerCtrl.DebuffType.Stun, 1.0f);
+            PlayerCtrl.player.GetDebuff(PlayerCtrl.DebuffType.Stun, 1.0f);
         }
     }
 }

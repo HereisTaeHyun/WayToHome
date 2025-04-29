@@ -11,7 +11,6 @@ public class GroundCtrl : EnemyCtrl
     private bool isMove;
     private Vector2 newVelocity;
     private EnemyAttack enemyAttack;
-    private ObjectPool<GameObject> usingPool;
     [SerializeField] float attackRange;
     [SerializeField] private LayerMask playerLayer;
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");

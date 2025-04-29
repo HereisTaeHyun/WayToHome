@@ -1,5 +1,3 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
     public enum ItemToBuyType
@@ -60,34 +58,32 @@ public class ItemToBuy : ItemBase
         // Player 감지, Submit(E에 할당)입력시 획득
         if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit"))
         {
-            playerCtrl = other.GetComponent<PlayerCtrl>();
-
             switch(itemToBuyType)
             {
                 case ItemToBuyType.MaxHpPlus: // 최대 체력 증가
-                    playerCtrl.MaxHpPlus();
+                    PlayerCtrl.player.MaxHpPlus();
                     usingPool = ItemManager.itemManager.maxHpPlusPool;
                     UtilityManager.utility.ReturnToPool(usingPool, transform.parent.gameObject);
                     break;
 
                 case ItemToBuyType.PremiumHeal: // 체력 2 회복
-                    if(playerCtrl.currentHP < playerCtrl.MaxHP)
+                    if(PlayerCtrl.player.currentHP < PlayerCtrl.player.MaxHP)
                     {
-                        playerCtrl.ChangeHP(2);
+                        PlayerCtrl.player.ChangeHP(2);
                         usingPool = ItemManager.itemManager.premiumHealPool;
                         UtilityManager.utility.ReturnToPool(usingPool, transform.parent.gameObject);
                     }
                     break;
                 
                 case ItemToBuyType.AttackPlus: // 공격력 증가
-                    playerCtrl.Attacklus();
+                    PlayerCtrl.player.Attacklus();
                     usingPool = ItemManager.itemManager.attackPlusPool;
                     UtilityManager.utility.ReturnToPool(usingPool, transform.parent.gameObject);
                     break;
                 
                 // playerMove에 영향
                 case ItemToBuyType.MaxJumpPlus: // 점프 횟수 추가
-                    playerCtrl.MaxJumpPlus();
+                    PlayerCtrl.player.MaxJumpPlus();
                     usingPool = ItemManager.itemManager.maxJumpPlusPool;
                     UtilityManager.utility.ReturnToPool(usingPool, gameObject);
                     break;

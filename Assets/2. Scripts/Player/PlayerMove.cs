@@ -1,11 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Mono.Cecil.Cil;
-using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -20,7 +15,6 @@ public class PlayerMove : MonoBehaviour
 #region private
     // private 변수
     private Rigidbody2D rb2D;
-    private PlayerCtrl playerCtrl;
 
     private Vector2 newVelocity;
     private float horizontalInput;
@@ -70,7 +64,6 @@ public class PlayerMove : MonoBehaviour
     public void Init()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        playerCtrl = GetComponent<PlayerCtrl>();
         playerAnim = GetComponent<Animator>();
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
@@ -96,11 +89,11 @@ public class PlayerMove : MonoBehaviour
         // player state가 idle인지 move인지 h에 따라 변화
         if(horizontalInput != 0)
         {
-            playerCtrl.state = PlayerCtrl.State.Move;
+            PlayerCtrl.player.state = PlayerCtrl.State.Move;
         }
         else if(horizontalInput == 0)
         {
-            playerCtrl.state = PlayerCtrl.State.Idle;
+            PlayerCtrl.player.state = PlayerCtrl.State.Idle;
         }
 
         // 플레이어가 있는 Ground 상태를 알기 위해 스캐닝하는 위치

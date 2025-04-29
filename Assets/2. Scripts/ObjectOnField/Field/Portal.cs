@@ -1,9 +1,7 @@
-using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using Unity.VisualScripting;
 
 public class Portal : MonoBehaviour
 {
