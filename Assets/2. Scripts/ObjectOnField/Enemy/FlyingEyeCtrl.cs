@@ -91,17 +91,27 @@ public class FlyingEyeCtrl : EnemyCtrl
         // 사망 및 중력 적용
         isDie = true;
         rb2D.gravityScale = 1.0f;
-        anim.SetTrigger(dieHash);
         Physics2D.IgnoreCollision(coll, playerColl, true);
-        yield return new WaitForSeconds(0.5f);
 
-        // 사운드 재생
-        UtilityManager.utility.PlaySFX(enemyDieSFX);
-
-        // 물리 제거 후 파괴
-        rb2D.bodyType = RigidbodyType2D.Kinematic;
-        rb2D.simulated = false;
-        yield return new WaitForSeconds(2.0f);
+        // 잠시 후 setfalse
+        yield return new WaitForSeconds(3.0f);
         gameObject.SetActive(false);
+    }
+
+    // 사망한 적이 땋에 닿으면
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.collider.CompareTag("Ground") || other.collider.CompareTag("Platform"))
+        {
+            if(isDie == true)
+            {
+                anim.SetTrigger(dieHash);
+                rb2D.bodyType = RigidbodyType2D.Kinematic;
+                rb2D.simulated = false;
+                
+                // 사운드 재생
+                UtilityManager.utility.PlaySFX(enemyDieSFX);
+            }
+        }
     }
 }
