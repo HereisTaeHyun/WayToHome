@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6086032356073128727}
   - component: {fileID: -6093583150498112127}
   - component: {fileID: 1605868753674244102}
+  - component: {fileID: -8180444586896039772}
   m_Layer: 0
   m_Name: FireCannon
   m_TagString: Untagged
@@ -104,7 +105,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -152,3 +153,25 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.4, y: 0}
   m_Radius: 0.8390312
+--- !u!95 &-8180444586896039772
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6997166447179216951}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49477415c5c004340b30cc20c4f0b61c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
