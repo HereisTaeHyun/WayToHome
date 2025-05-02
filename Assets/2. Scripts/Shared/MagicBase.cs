@@ -64,7 +64,7 @@ public class MagicBase : MonoBehaviour
                     ReturnToOriginPool();
                 }
             }
-            // 플레이어에게 맞고 튕겨져 나간 파이어볼이 적과 부딪힘
+            // 
             else if(other.gameObject.CompareTag("Ground"))
             {
                 ReturnToOriginPool();
