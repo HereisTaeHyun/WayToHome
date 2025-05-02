@@ -11,7 +11,6 @@ public class FireBall : MagicBase
     // private 변수
     private float maxHP = 2.0f;
     private float currentHP;
-    private new bool isPool;
     private bool canAttack;
     private float scanningRadius = 10.0f;
     private static float ON_HIT_PUSH_POWER = 5.0F;
