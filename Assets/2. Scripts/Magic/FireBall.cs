@@ -21,8 +21,7 @@ public class FireBall : MagicBase
 
     protected override void Start()
     {
-        rb2D = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        base.Start();
 
         moveSpeed = 3.0f;
         damage = -1.0f;
@@ -69,7 +68,7 @@ public class FireBall : MagicBase
         }
     }
 
-    protected override void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerStay2D(Collider2D other)
     {    
         if(GameManager.instance.readIsGameOver == false)
         {
@@ -84,7 +83,7 @@ public class FireBall : MagicBase
                 }
             }
             // 플레이어의 공격에 맞은 경우
-            else if(other.gameObject.CompareTag("PlayerMelee"))
+            else if(other.gameObject.CompareTag("PlayerMelee") && isHited == false)
             {
                 isHited = true;
                 GetHit(-1);

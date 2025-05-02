@@ -1,4 +1,5 @@
 using System.Net.Http.Headers;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -12,11 +13,12 @@ public class MagicBase : MonoBehaviour
     protected Rigidbody2D rb2D;
     protected ObjectPool<GameObject> originPool;
 
+    // moveSpeed, damage는 자식 객체에서 선언할 것
+    // isLaunch 플래그는 마법 타입에 따라 SetPool에서 결정할 것
     protected virtual void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        isLaunch = false;
     }
 
     
@@ -38,6 +40,7 @@ public class MagicBase : MonoBehaviour
         isPool = false;
     }
 
+    // 플레이어가 있는 방향으로 설정된 속도만큼 이동
     protected virtual void FollowingTarget()
     {
         if(GameManager.instance.readIsGameOver == false)
@@ -47,7 +50,7 @@ public class MagicBase : MonoBehaviour
         }
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerStay2D(Collider2D other)
     {    
         if(GameManager.instance.readIsGameOver == false)
         {
