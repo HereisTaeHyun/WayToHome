@@ -18,7 +18,6 @@ public class ShockWave : MagicBase
         anim.SetFloat(moveDirHash, moveDir.x);
     }
 
-    // Update is called once per frame
     protected override void FixedUpdate()
     {
         // if(isLaunch == true)
@@ -38,6 +37,7 @@ public class ShockWave : MagicBase
         }
     }
 
+    // Player, Wall\ 등에 닿으면 풀 리턴
     protected override void OnTriggerStay2D(Collider2D other)
     {    
         if(GameManager.instance.readIsGameOver == false)
