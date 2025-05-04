@@ -41,13 +41,13 @@ public class ItemManager : MonoBehaviour
 
     private void Start()
     {
-        UtilityManager.utility.CreatePool(ref healPool, healItem, 10, 10);
-        UtilityManager.utility.CreatePool(ref moneyPool, moneyItem, 10, 10);
-        UtilityManager.utility.CreatePool(ref goldPool, goldItem, 10, 10);
-        UtilityManager.utility.CreatePool(ref premiumHealPool, PremiumHealItem, 10, 10);
-        UtilityManager.utility.CreatePool(ref maxHpPlusPool, maxHpPlusItem, 10, 10);
-        UtilityManager.utility.CreatePool(ref attackPlusPool, attackPlusItem, 10, 10);
-        UtilityManager.utility.CreatePool(ref maxJumpPlusPool, maxJumpPlusItem, 10, 10);
+        UtilityManager.utility.CreateDoNotDestroyPool(ref healPool, healItem, 10, 10);
+        UtilityManager.utility.CreateDoNotDestroyPool(ref moneyPool, moneyItem, 10, 10);
+        UtilityManager.utility.CreateDoNotDestroyPool(ref goldPool, goldItem, 10, 10);
+        UtilityManager.utility.CreateDoNotDestroyPool(ref premiumHealPool, PremiumHealItem, 10, 10);
+        UtilityManager.utility.CreateDoNotDestroyPool(ref maxHpPlusPool, maxHpPlusItem, 10, 10);
+        UtilityManager.utility.CreateDoNotDestroyPool(ref attackPlusPool, attackPlusItem, 10, 10);
+        UtilityManager.utility.CreateDoNotDestroyPool(ref maxJumpPlusPool, maxJumpPlusItem, 10, 10);
 
         PoolData.Add(healItem, healPool);
         PoolData.Add(moneyItem, moneyPool);

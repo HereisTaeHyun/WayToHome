@@ -90,6 +90,20 @@ public class UtilityManager : MonoBehaviour
         // pool 생성
         pool = new ObjectPool<GameObject>
         (
+            createFunc : () => Instantiate(prefab),
+            actionOnGet : (go) => go.SetActive(true),
+            actionOnRelease : (go) => go.SetActive(false),
+        	actionOnDestroy : (go) => Destroy(go),
+            collectionCheck : true,
+            defaultCapacity : count,
+            maxSize : max
+        );
+    }
+    public void CreateDoNotDestroyPool(ref ObjectPool<GameObject> pool, GameObject prefab, int count, int max)
+    {
+        // pool 생성
+        pool = new ObjectPool<GameObject>
+        (
             createFunc : () => {
                 GameObject go = Instantiate(prefab);
                 DontDestroyOnLoad(go);
