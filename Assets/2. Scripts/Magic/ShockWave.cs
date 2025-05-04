@@ -20,10 +20,6 @@ public class ShockWave : MagicBase
 
     protected override void FixedUpdate()
     {
-        // if(isLaunch == true)
-        // {
-        //     MoveMagic();
-        // }
         MoveMagic();
     }
 

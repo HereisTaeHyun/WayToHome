@@ -20,10 +20,6 @@ public class FireCannon : MagicBase
     }
     protected override void FixedUpdate()
     {
-        // if(isLaunch == true)
-        // {
-        //     MoveMagic();
-        // }
         MoveMagic();
         moveSpeed += Time.deltaTime * 2;
     }

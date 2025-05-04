@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class FireMissile : MagicBase
 {
+    [SerializeField] float lineLength;
+    LineRenderer lineRenderer;
     private Vector2 moveDir;
     private Vector2 newVelocity;
-    [SerializeField] private float aimTime = 3.0f;
+    private GameObject lineStartPos;
+    private float aimTime = 3.0f;
 
     protected override void Start()
     {
         base.Start();
+        lineStartPos = transform.Find("LineStartPos").gameObject;
+        lineRenderer = GetComponent<LineRenderer>();
 
-        moveSpeed = 10.0f;
+        moveSpeed = 20.0f;
         damage = -1.0f;
 
         // 이동 방향 세팅 및 조준 시작
@@ -36,11 +41,15 @@ public class FireMissile : MagicBase
 
             float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            
+
+            lineRenderer.SetPosition(0, lineStartPos.transform.position);
+            lineRenderer.SetPosition(1, PlayerCtrl.player.transform.position);
+
             aimTime -= Time.deltaTime;
             yield return null;
         }
 
+        lineRenderer.enabled = false;
         isLaunch = true;
     }
 
