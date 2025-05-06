@@ -13967,6 +13967,10 @@ PrefabInstance:
       value: Dragon
       objectReference: {fileID: 0}
     - target: {fileID: 7278813343581756725, guid: 08916b133ac81b543b3a12b19a3f234f, type: 3}
+      propertyPath: standingPosSet
+      value: 
+      objectReference: {fileID: 51850703}
+    - target: {fileID: 7278813343581756725, guid: 08916b133ac81b543b3a12b19a3f234f, type: 3}
       propertyPath: standingPointSet
       value: 
       objectReference: {fileID: 51850703}

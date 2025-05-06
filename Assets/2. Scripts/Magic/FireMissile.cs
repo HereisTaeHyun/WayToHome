@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class FireMissile : MagicBase
 {
@@ -12,30 +13,48 @@ public class FireMissile : MagicBase
     private Vector2 newVelocity;
     private GameObject lineStartPos;
     private float aimTime = 3.0f;
+    [SerializeField] private float LifeSpan = 5.0f;
+    // private new ObjectPool<GameObject> originPool;
 
     protected override void Start()
     {
         base.Start();
-        lineStartPos = transform.Find("LineStartPos").gameObject;
-        lineRenderer = GetComponent<LineRenderer>();
 
         moveSpeed = 20.0f;
         damage = -1.0f;
-
-        // 이동 방향 세팅 및 조준 시작
-        StartCoroutine(Aim());
     }
     protected override void FixedUpdate()
     {
         if(isLaunch == true)
         {
             MoveMagic();
+            LifeSpan -= Time.deltaTime;
         }
+        if(LifeSpan <= 0)
+        {
+            ReturnToOriginPool();
+        }
+    }
+
+    public override void SetPool(ObjectPool<GameObject> pool)
+    {
+        originPool = pool;
+        isPool = false;
+        aimTime = 3.0f;
+        LifeSpan = 5.0f;
+        isLaunch = false;
+
+        lineRenderer = GetComponent<LineRenderer>();
+        lineStartPos = transform.Find("LineStartPos").gameObject;
+
+        // 이동 방향 세팅 및 조준 시작
+        StartCoroutine(Aim());
     }
 
     // aimTime 동안 플레이어 바라보다 발사되는 로직
     private IEnumerator Aim()
     {
+        lineRenderer.enabled = true;
         // 바라봄 축 설정
         while (aimTime >= 0)
         {
