@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 public class DragonCtrl : MonoBehaviour
 {
     // private 변수
+    private Animator anim;
     private bool canAttack;
     private float coolTime = 3.0f;
 
@@ -39,9 +40,14 @@ public class DragonCtrl : MonoBehaviour
     private FireCannon fireCannonComp;
     private ShockWave shockWaveComp;
 
+    // 애니메이션 관련
+    private readonly int moveDirHash = Animator.StringToHash("MoveDir");
+
 
     void Start()
     {
+        anim = GetComponent<Animator>();
+
         // 이동, 마법 필요 위치 전달 및 저장
         foreach(Transform standingPoint in standingPosSet)
         {
@@ -67,9 +73,11 @@ public class DragonCtrl : MonoBehaviour
 
     void Update()
     {
+        Vector2 moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
+        anim.SetFloat(moveDirHash, moveDir.x);
+
         if(canAttack == true)
         {
-            UseFireMissile();
             StartCoroutine(CoolTimeCheck());
         }
     }
@@ -123,5 +131,10 @@ public class DragonCtrl : MonoBehaviour
             }
         }
     }
+
+    // private void UseFireCannon()
+    // {
+
+    // }
 #endregion
 }
