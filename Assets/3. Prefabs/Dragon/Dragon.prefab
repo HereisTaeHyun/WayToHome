@@ -217,8 +217,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1529144741193501772}
   - {fileID: 8190591437193991321}
+  - {fileID: 1529144741193501772}
   m_Father: {fileID: 3869464795719985933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3432654846761181969
@@ -521,6 +521,7 @@ MonoBehaviour:
   - {fileID: 7442625623315705553, guid: 455d84a056f7a404dbf2019e3d50d4c9, type: 3}
   - {fileID: 6327653318441162158, guid: d37ab7d52ba5ffa4394813b5a9ec6e5b, type: 3}
   - {fileID: 6997166447179216951, guid: 51c199c7e9122f34ca48414cea60d6a6, type: 3}
+  - {fileID: 8342106926275895796, guid: 90905a74fbba83147879f305402d1666, type: 3}
   - {fileID: 5718377263268134130, guid: 93321457295f9ff48a2d93f01da096de, type: 3}
   fireBallSpawnPoses:
   - {fileID: 908029030397138446}

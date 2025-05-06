@@ -9,6 +9,7 @@ public class DragonCtrl : MonoBehaviour
 {
     // private 변수
     private Animator anim;
+    private Vector2 moveDir;
     private bool canAttack;
     private float coolTime = 3.0f;
 
@@ -25,8 +26,10 @@ public class DragonCtrl : MonoBehaviour
     [SerializeField] private List<Transform> fireMissileSpawnPoses;
     [SerializeField] private List<Transform> fireCannonSpawnPoses;
     [SerializeField] private List<Transform> shockWaveSpawnPoses;
-    // 마법이 실제 시행될 개별 위치
+    // 마법이 실제 시행될 개별 위치, missile은 개별 생성이 아니기에 여기 없음
     private Transform fireBallSpawnPos;
+    private Transform fireCannonSpawnPos;
+    private Transform shockWaveSpawnPos;
     private Transform meteorSpawnPos;
 
     private ObjectPool<GameObject> fireBallPool;
@@ -73,7 +76,7 @@ public class DragonCtrl : MonoBehaviour
 
     void Update()
     {
-        Vector2 moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
+        moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
         anim.SetFloat(moveDirHash, moveDir.x);
 
         if(canAttack == true)
@@ -105,19 +108,20 @@ public class DragonCtrl : MonoBehaviour
         { 
             fireBallComp = fireBall.GetComponent<FireBall>();
 
-            // fireBall에개 돌아와야 하는 풀 전달하기, 초기화
-            fireBallComp.SetPool(fireBallPool);
-
             // 파이어볼 셋업
             int idx = Random.Range(0, fireBallSpawnPoses.Count);
             fireBallSpawnPos = fireBallSpawnPoses[idx];
             fireBall.transform.position = fireBallSpawnPos.position;
             fireBall.transform.rotation = fireBallSpawnPos.rotation;
+
+            // fireBall에개 돌아와야 하는 풀 전달하기, 초기화
+            fireBallComp.SetPool(fireBallPool);
         }
     }
 
     private void UseFireMissile()
     {
+        // 각 위치 순회하여 미사일 배치
         foreach(Transform fireMissileSpawnPos in fireMissileSpawnPoses)
         {
             GameObject fireMissile = UtilityManager.utility.GetFromPool(fireMissilePool, maxMagic);
@@ -125,16 +129,32 @@ public class DragonCtrl : MonoBehaviour
             if(fireMissile != null)
             {
                 fireMissileComp = fireMissile.GetComponent<FireMissile>();
-                fireMissileComp.SetPool(fireMissilePool);
                 fireMissile.transform.position = fireMissileSpawnPos.transform.position;
                 fireMissile.transform.rotation = fireMissileSpawnPos.transform.rotation;
+                fireMissileComp.SetPool(fireMissilePool);
             }
         }
     }
 
-    // private void UseFireCannon()
-    // {
+    // 파이어 캐논은 위치가 플레이어가 왼쪽인지 오른쪽인지에 따라 발사 위치 결정
+    private void UseFireCannon()
+    {
+        GameObject fireCannon = UtilityManager.utility.GetFromPool(fireCannonPool, maxMagic);
+        fireCannonComp = fireCannon.GetComponent<FireCannon>();
 
-    // }
+        if(moveDir.x < 0)
+        {
+            fireCannonSpawnPos = fireCannonSpawnPoses[0];
+        }
+        else if(moveDir.x > 0)
+        {
+            fireCannonSpawnPos = fireCannonSpawnPoses[1];
+        }
+
+        fireCannon.transform.position = fireCannonSpawnPos.transform.position;
+        fireCannon.transform.rotation = fireCannonSpawnPos.transform.rotation;
+
+        fireCannonComp.SetPool(fireCannonPool);
+    }
 #endregion
 }

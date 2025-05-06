@@ -1,28 +1,44 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class FireCannon : MagicBase
 {
     public MagicType magicType;
     private Vector2 moveDir;
     private Vector2 newVelocity;
+    private float lifeSpan = 5.0f;
 
     protected override void Start()
     {
         base.Start();
 
-        moveSpeed = 1.0f;
         damage = -1.0f;
-
-        moveDir = UtilityManager.utility.AllDirSet(PlayerCtrl.player.transform.position - transform.position);
-
-        // 바라봄 축 설정
-        float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
     protected override void FixedUpdate()
     {
+        // 이동 로직 및 바라봄 축 설정
         MoveMagic();
-        moveSpeed += Time.deltaTime * 2;
+
+        // 날아감에 따라 빨라짐
+        moveSpeed += Time.deltaTime * 3;
+
+        lifeSpan -= Time.deltaTime;
+        if(lifeSpan <= 0)
+        {
+            ReturnToOriginPool();
+        }
+    }
+
+    public override void SetPool(ObjectPool<GameObject> pool)
+    {
+        originPool = pool;
+        isPool = false;
+        moveSpeed = 1.0f;
+        lifeSpan = 5.0f;
+
+        moveDir = UtilityManager.utility.AllDirSet(PlayerCtrl.player.transform.position - transform.position);
+        float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     private void MoveMagic()

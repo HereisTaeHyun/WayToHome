@@ -13,7 +13,7 @@ public class FireMissile : MagicBase
     private Vector2 newVelocity;
     private GameObject lineStartPos;
     private float aimTime = 3.0f;
-    [SerializeField] private float LifeSpan = 5.0f;
+    private float lifeSpan = 5.0f;
     // private new ObjectPool<GameObject> originPool;
 
     protected override void Start()
@@ -28,9 +28,9 @@ public class FireMissile : MagicBase
         if(isLaunch == true)
         {
             MoveMagic();
-            LifeSpan -= Time.deltaTime;
+            lifeSpan -= Time.deltaTime;
         }
-        if(LifeSpan <= 0)
+        if(lifeSpan <= 0)
         {
             ReturnToOriginPool();
         }
@@ -41,7 +41,7 @@ public class FireMissile : MagicBase
         originPool = pool;
         isPool = false;
         aimTime = 3.0f;
-        LifeSpan = 5.0f;
+        lifeSpan = 5.0f;
         isLaunch = false;
 
         lineRenderer = GetComponent<LineRenderer>();
@@ -55,11 +55,10 @@ public class FireMissile : MagicBase
     private IEnumerator Aim()
     {
         lineRenderer.enabled = true;
-        // 바라봄 축 설정
         while (aimTime >= 0)
         {
+            // 바라봄 축 설정
             moveDir = UtilityManager.utility.AllDirSet(PlayerCtrl.player.transform.position - transform.position);
-
             float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 

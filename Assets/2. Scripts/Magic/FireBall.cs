@@ -16,7 +16,6 @@ public class FireBall : MagicBase
     private float scanningRadius = 10.0f;
     private static float ON_HIT_PUSH_POWER = 5.0F;
     private float STOP_TIME = 0.5f;
-    private new ObjectPool<GameObject> originPool;
     private readonly int fireBallOffHash = Animator.StringToHash("FireBallOff");
 
     protected override void Start()
