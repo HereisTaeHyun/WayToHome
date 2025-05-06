@@ -69,7 +69,7 @@ public class MiddleBossCtrl : EnemyCtrl
         }
 
         // distance에 따라 행동 분리
-        distance = Vector2.Distance(target.position, transform.position);
+        distance = Vector2.Distance(PlayerCtrl.player.transform.position, transform.position);
 
         if(distance > scanningRadius)
         {
@@ -78,7 +78,7 @@ public class MiddleBossCtrl : EnemyCtrl
         if(distance <= scanningRadius)
         {
             // radious 내부라면 바라보기 + 공격
-            Vector2 moveDir = UtilityManager.utility.HorizontalDirSet(target.transform.position - transform.position);
+            Vector2 moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
             anim.SetFloat(moveDirHash, moveDir.x);
 
             // 사거리 내부면 근접 공격, 외부면 마법 공격
@@ -134,7 +134,7 @@ public class MiddleBossCtrl : EnemyCtrl
         foreach(Transform point in warpPoints)
         {
             // 포인트가 타겟을 공격 가능한 거리에 있게 하면 변수에 할당
-            float currentChecking = Vector2.Distance(target.position, point.position);
+            float currentChecking = Vector2.Distance(PlayerCtrl.player.transform.position, point.position);
             if(currentChecking < scanningRadius)
             {
                 pointAbleAttack = point;

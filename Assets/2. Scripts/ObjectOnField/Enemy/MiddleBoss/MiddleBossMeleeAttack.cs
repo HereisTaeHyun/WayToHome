@@ -16,7 +16,7 @@ public class MiddleBossMeleeAttack : MeleeAttack
     }
     public override void Attack()
     {
-        Vector2 attackDir = UtilityManager.utility.HorizontalDirSet(middleBossCtrl.readTarget.transform.position - transform.position);
+        Vector2 attackDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
 
         // 공격 방향에 따른 attackCollier 위치 결정
         attackCollierPos = attackCollier.transform.localPosition;
