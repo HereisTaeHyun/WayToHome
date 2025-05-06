@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ShockWave : MagicBase
 {
+    public MagicType magicType;
+    
     private Vector2 moveDir;
     private Vector2 newVelocity;
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class FireCannon : MagicBase
 {
+    public MagicType magicType;
     private Vector2 moveDir;
     private Vector2 newVelocity;
 

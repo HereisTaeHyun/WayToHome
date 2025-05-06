@@ -7,6 +7,7 @@ public class FireBall : MagicBase
 {
     // public 변수
     [NonSerialized] public bool isHited;
+    public MagicType magicType;
 
     // private 변수
     private float maxHP = 2.0f;

@@ -3,7 +3,17 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
+public enum MagicType
+{
+    FireBall,
+    FireCannon,
+    FireMissile,
+    Meteor,
+    ShockWave
+}
+
 public class MagicBase : MonoBehaviour
+
 {
     protected bool isLaunch;
     protected bool isPool;
