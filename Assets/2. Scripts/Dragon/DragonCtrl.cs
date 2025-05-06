@@ -1,9 +1,15 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Pool;
+using Random = UnityEngine.Random;
 
 public class DragonCtrl : MonoBehaviour
 {
     // private 변수
+    private bool canAttack;
+    private float coolTime = 2.0f;
+
     [SerializeField] private Transform standingPointSet;
     private List<Transform> standingPoints = new List<Transform>();
 
@@ -32,5 +38,12 @@ public class DragonCtrl : MonoBehaviour
             {"FireBall", fireBallSpawnPoses},
             {"FireMissle", fireMissileSpawnPoses},
         };
+    }
+
+    private IEnumerator CoolTimeCheck()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(coolTime);
+        canAttack = true;
     }
 }
