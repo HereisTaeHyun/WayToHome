@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class ShockWave : MagicBase
 {
@@ -14,7 +15,8 @@ public class ShockWave : MagicBase
 
         moveSpeed = 4.0f;
         damage = -1.0f;
-
+    
+        
         // 음직임 방향 설정
         moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
         anim.SetFloat(moveDirHash, moveDir.x);
@@ -23,6 +25,12 @@ public class ShockWave : MagicBase
     protected override void FixedUpdate()
     {
         MoveMagic();
+    }
+
+    public override void SetPool(ObjectPool<GameObject> pool)
+    {
+        originPool = pool;
+        isPool = false;
     }
 
     private void MoveMagic()

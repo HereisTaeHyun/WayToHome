@@ -36,12 +36,14 @@ public class DragonCtrl : MonoBehaviour
     private ObjectPool<GameObject> fireMissilePool;
     private ObjectPool<GameObject> fireCannonPool;
     private ObjectPool<GameObject> shockWavePool;
+    private ObjectPool<GameObject> meteorPool;
 
     // 마법 개별 컴포넌트
     private FireBall fireBallComp;
     private FireMissile fireMissileComp;
     private FireCannon fireCannonComp;
     private ShockWave shockWaveComp;
+     private Meteor meteorComp;
 
     // 애니메이션 관련
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
@@ -70,6 +72,7 @@ public class DragonCtrl : MonoBehaviour
         UtilityManager.utility.CreatePool(ref fireMissilePool, magicList[1], maxMagic, maxMagic);
         UtilityManager.utility.CreatePool(ref fireCannonPool, magicList[2], maxMagic, maxMagic);
         UtilityManager.utility.CreatePool(ref shockWavePool, magicList[3], maxMagic, maxMagic);
+        UtilityManager.utility.CreatePool(ref meteorPool, magicList[4], maxMagic, maxMagic);
 
         canAttack = true;
     }
@@ -81,6 +84,7 @@ public class DragonCtrl : MonoBehaviour
 
         if(canAttack == true)
         {
+            UseShockWave();
             StartCoroutine(CoolTimeCheck());
         }
     }
@@ -136,25 +140,51 @@ public class DragonCtrl : MonoBehaviour
         }
     }
 
-    // 파이어 캐논은 위치가 플레이어가 왼쪽인지 오른쪽인지에 따라 발사 위치 결정
+    // 파이어 캐논, 쇼크웨이브는 위치가 플레이어가 왼쪽인지 오른쪽인지에 따라 발사 위치 결정
     private void UseFireCannon()
     {
         GameObject fireCannon = UtilityManager.utility.GetFromPool(fireCannonPool, maxMagic);
-        fireCannonComp = fireCannon.GetComponent<FireCannon>();
 
-        if(moveDir.x < 0)
+        if(fireCannon != null)
         {
-            fireCannonSpawnPos = fireCannonSpawnPoses[0];
+            fireCannonComp = fireCannon.GetComponent<FireCannon>();
+            if(moveDir.x < 0)
+            {
+                fireCannonSpawnPos = fireCannonSpawnPoses[0];
+            }
+            else if(moveDir.x > 0)
+            {
+                fireCannonSpawnPos = fireCannonSpawnPoses[1];
+            }
+
+            fireCannon.transform.position = fireCannonSpawnPos.transform.position;
+            fireCannon.transform.rotation = fireCannonSpawnPos.transform.rotation;
+
+            fireCannonComp.SetPool(fireCannonPool);
         }
-        else if(moveDir.x > 0)
+    }
+
+    private void UseShockWave()
+    {
+        GameObject shockWave = UtilityManager.utility.GetFromPool(shockWavePool, maxMagic);
+
+        if(shockWave != null)
         {
-            fireCannonSpawnPos = fireCannonSpawnPoses[1];
+            shockWaveComp = shockWave.GetComponent<ShockWave>();
+            if(moveDir.x < 0)
+            {
+                shockWaveSpawnPos = shockWaveSpawnPoses[0];
+            }
+            else if(moveDir.x > 0)
+            {
+                shockWaveSpawnPos = shockWaveSpawnPoses[1];
+            }
+
+            shockWave.transform.position = shockWaveSpawnPos.transform.position;
+            shockWave.transform.rotation = shockWaveSpawnPos.transform.rotation;
+
+            shockWaveComp.SetPool(shockWavePool);
         }
-
-        fireCannon.transform.position = fireCannonSpawnPos.transform.position;
-        fireCannon.transform.rotation = fireCannonSpawnPos.transform.rotation;
-
-        fireCannonComp.SetPool(fireCannonPool);
     }
 #endregion
 }
