@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 public class DragonCtrl : MonoBehaviour
 {
     // private 변수
+    private float maxHP = 50.0f;
+    private float currentHP;
     private Animator anim;
     private Vector2 moveDir;
     private bool canAttack;
@@ -75,6 +77,7 @@ public class DragonCtrl : MonoBehaviour
         UtilityManager.utility.CreatePool(ref shockWavePool, magicList[3], maxMagic, maxMagic);
         UtilityManager.utility.CreatePool(ref meteorPool, magicList[4], maxMagic, maxMagic);
 
+        currentHP = maxHP;
         canAttack = true;
     }
 
