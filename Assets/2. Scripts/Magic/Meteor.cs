@@ -64,6 +64,7 @@ public class Meteor : MagicBase
             rb2D.linearVelocity = Vector2.zero;
             rb2D.simulated = false;
             anim.SetTrigger(meteorOffHash);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
     // FireMagicOff 애니메이션 이벤트로 재생
@@ -72,5 +73,6 @@ public class Meteor : MagicBase
         UtilityManager.utility.ReturnToPool(originPool, gameObject);
         isPool = true;
         rb2D.simulated = true;
+        transform.rotation = Quaternion.Euler(0, 0, -90);
     }
 }
