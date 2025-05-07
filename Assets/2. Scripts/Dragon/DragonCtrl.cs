@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
-using System.Diagnostics;
 
 public class DragonCtrl : MonoBehaviour
 {
@@ -65,6 +64,7 @@ public class DragonCtrl : MonoBehaviour
             {MagicType.FireMissile},
             {MagicType.FireCannon},
             {MagicType.ShockWave},
+            {MagicType.Meteor},
         };
 
         // 마법 풀 생성
@@ -88,18 +88,22 @@ public class DragonCtrl : MonoBehaviour
             // 마법을 선택 후 스위칭하여 마법 함수 실행
             int magicIdx = Random.Range(0, usingMagic.Count);
             MagicType currentMagic = usingMagic[magicIdx];
-
             switch(currentMagic)
             {
                 case MagicType.FireBall:
+                    UseFireBall();
                     break;
                 case MagicType.FireMissile:
+                    UseFireMissile();
                     break;
                 case MagicType.FireCannon:
+                    UseFireCannon();
                     break;
                 case MagicType.ShockWave:
+                    UseShockWave();
                     break;
                 case MagicType.Meteor:
+                    UseMeteor();
                     break;
             }
 
@@ -112,7 +116,6 @@ public class DragonCtrl : MonoBehaviour
 // 마법 관련 로직들 정리
 // 마법은 3번을 1세트로 사용
 // 마법을 3번 시전하면 standingPoses 중 하나를 골라 비행 이동
-// 연속으로 동일 마법 사용은 막을 것
 
     // 마법 쿨 타임
     private IEnumerator CoolTimeCheck()
@@ -147,7 +150,8 @@ public class DragonCtrl : MonoBehaviour
         // 각 위치 순회하여 미사일 배치
         foreach(Transform fireMissileSpawnPos in fireMissileSpawnPoses)
         {
-            GameObject fireMissile = UtilityManager.utility.GetFromPool(fireMissilePool, maxMagic);
+            // 파이어 미사일은 생성 로직상 다른 마법보다 많이 필요함, 하나만 필요하니 일단 하드코딩 처리
+            GameObject fireMissile = UtilityManager.utility.GetFromPool(fireMissilePool, 10);
 
             if(fireMissile != null)
             {
