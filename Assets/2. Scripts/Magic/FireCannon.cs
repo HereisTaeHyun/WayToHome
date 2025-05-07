@@ -7,6 +7,7 @@ public class FireCannon : MagicBase
     private Vector2 moveDir;
     private Vector2 newVelocity;
     private float lifeSpan = 5.0f;
+    private readonly int fireMagicOffHash = Animator.StringToHash("FireMagicOff");
 
     protected override void Start()
     {
@@ -72,5 +73,27 @@ public class FireCannon : MagicBase
                 ReturnToOriginPool();
             }
         }
+    }
+
+    protected override void ReturnToOriginPool()
+    {
+        if(isPool == true)
+        {
+            return;
+        }
+        else
+        {
+            isPool = true;
+            rb2D.linearVelocity = Vector2.zero;
+            rb2D.simulated = false;
+            anim.SetTrigger(fireMagicOffHash);
+        }
+    }
+    // FireMagicOff 애니메이션 이벤트로 재생
+    private void ReturnAfterAnim()
+    {
+        UtilityManager.utility.ReturnToPool(originPool, gameObject);
+        isPool = true;
+        rb2D.simulated = true;
     }
 }

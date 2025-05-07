@@ -13,7 +13,7 @@ public class FireMissile : MagicBase
     private GameObject lineStartPos;
     private float aimTime = 3.0f;
     private float lifeSpan = 5.0f;
-    // private new ObjectPool<GameObject> originPool;
+    private readonly int fireMagicOffHash = Animator.StringToHash("FireMagicOff");
 
     protected override void Start()
     {
@@ -104,5 +104,27 @@ public class FireMissile : MagicBase
                 ReturnToOriginPool();
             }
         }
+    }
+
+    protected override void ReturnToOriginPool()
+    {
+        if(isPool == true)
+        {
+            return;
+        }
+        else
+        {
+            isPool = true;
+            rb2D.linearVelocity = Vector2.zero;
+            rb2D.simulated = false;
+            anim.SetTrigger(fireMagicOffHash);
+        }
+    }
+    // FireMagicOff 애니메이션 이벤트로 재생
+    private void ReturnAfterAnim()
+    {
+        UtilityManager.utility.ReturnToPool(originPool, gameObject);
+        isPool = true;
+        rb2D.simulated = true;
     }
 }

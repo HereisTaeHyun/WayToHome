@@ -5,6 +5,7 @@ public class Meteor : MagicBase
     public MagicType magicType;
     
     private Vector2 newVelocity;
+    private readonly int meteorOffHash = Animator.StringToHash("MeteorOff");
 
     protected override void Start()
     {
@@ -49,5 +50,27 @@ public class Meteor : MagicBase
                 ReturnToOriginPool();
             }
         }
+    }
+
+    protected override void ReturnToOriginPool()
+    {
+        if(isPool == true)
+        {
+            return;
+        }
+        else
+        {
+            isPool = true;
+            rb2D.linearVelocity = Vector2.zero;
+            rb2D.simulated = false;
+            anim.SetTrigger(meteorOffHash);
+        }
+    }
+    // FireMagicOff 애니메이션 이벤트로 재생
+    private void ReturnAfterAnim()
+    {
+        UtilityManager.utility.ReturnToPool(originPool, gameObject);
+        isPool = true;
+        rb2D.simulated = true;
     }
 }

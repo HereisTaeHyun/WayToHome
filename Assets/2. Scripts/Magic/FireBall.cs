@@ -16,7 +16,7 @@ public class FireBall : MagicBase
     private float scanningRadius = 10.0f;
     private static float ON_HIT_PUSH_POWER = 5.0F;
     private float STOP_TIME = 0.5f;
-    private readonly int fireBallOffHash = Animator.StringToHash("FireBallOff");
+    private readonly int fireMagicOffHash = Animator.StringToHash("FireMagicOff");
 
     protected override void Start()
     {
@@ -105,15 +105,17 @@ public class FireBall : MagicBase
         {
             StopAllCoroutines();
             rb2D.linearVelocity = Vector2.zero;
+            rb2D.simulated = false;
             isLaunch = false;
             canAttack = false;
-            anim.SetTrigger(fireBallOffHash);
+            anim.SetTrigger(fireMagicOffHash);
         }
     }
-    // FireBallOff 애니메이션 이벤트로 재생
+    // FireMagicOff 애니메이션 이벤트로 재생
     private void ReturnAfterAnim()
     {
         UtilityManager.utility.ReturnToPool(originPool, gameObject);
+        rb2D.simulated = true;
         isPool = true;
     }
 

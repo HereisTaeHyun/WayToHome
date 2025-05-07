@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FireBallOff
+  m_Name: FireMagicOff
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -57,30 +57,8 @@ AnimationClip:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
-    genericBindings:
-    - serializedVersion: 2
-      path: 0
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 23
-      isPPtrCurve: 1
-      isIntCurve: 0
-      isSerializeReferenceCurve: 0
-    pptrCurveMapping:
-    - {fileID: 21300000, guid: fd6cc53e1caf54bdd865b1fb0b0cec7f, type: 3}
-    - {fileID: 21300000, guid: f8f3575c5bbfe42bd85d85acf1a77099, type: 3}
-    - {fileID: 21300000, guid: 3dd5ce84613c44e86bc3ad7bce61ce9d, type: 3}
-    - {fileID: 21300000, guid: cf574c7b323b54a488dd06b5c9333084, type: 3}
-    - {fileID: 21300000, guid: 9c8215997a16b4b70abd31578104ef78, type: 3}
-    - {fileID: 21300000, guid: 2da6d1225f2494a769aae6cf1c4dfc93, type: 3}
-    - {fileID: 21300000, guid: 645bfc9898d8c4d6781b28f49be4b8cf, type: 3}
-    - {fileID: 21300000, guid: ea4ef56c61e784f3e851555f7fc8546f, type: 3}
-    - {fileID: 21300000, guid: 9263bf3ce4c224e91a923ff54a405145, type: 3}
-    - {fileID: 21300000, guid: 14eab60bcf4494413a81ad9675370e24, type: 3}
-    - {fileID: 21300000, guid: 15255c3e1ad504ebdaaba343b924c83c, type: 3}
-    - {fileID: 21300000, guid: 3ea7a5c97598541da831a04fd8ad91b3, type: 3}
-    - {fileID: 21300000, guid: 34a546850ec7747bf89244b67463bbee, type: 3}
+    genericBindings: []
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
