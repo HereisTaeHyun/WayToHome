@@ -7,7 +7,6 @@ public class FireMissile : MagicBase
 {
     public MagicType magicType;
 
-    [SerializeField] private float lineLength;
     private LineRenderer lineRenderer;
     private Vector2 moveDir;
     private Vector2 newVelocity;

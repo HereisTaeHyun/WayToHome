@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
+using System.Diagnostics;
 
 public class DragonCtrl : MonoBehaviour
 {
@@ -16,7 +17,8 @@ public class DragonCtrl : MonoBehaviour
     private List<Transform> standingPoses = new List<Transform>();
 
     // magic List에 마법 저장, 스폰 포인트는 딕셔너리 관리
-    Dictionary<MagicType, List<Transform>> magicSpawnPosDict;
+    // Dictionary<MagicType, List<Transform>> magicSpawnPosDict;
+    private List<MagicType> usingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
     private int maxMagic = 5;
 
@@ -29,7 +31,7 @@ public class DragonCtrl : MonoBehaviour
     private Transform fireBallSpawnPos;
     private Transform fireCannonSpawnPos;
     private Transform shockWaveSpawnPos;
-    private Transform meteorSpawnPos;
+    private Vector3 meteorSpawnPos;
 
     private ObjectPool<GameObject> fireBallPool;
     private ObjectPool<GameObject> fireMissilePool;
@@ -57,12 +59,12 @@ public class DragonCtrl : MonoBehaviour
         {
             standingPoses.Add(standingPoint);
         }
-        magicSpawnPosDict = new Dictionary<MagicType, List<Transform>>()
+        usingMagic = new List<MagicType>()
         {
-            {MagicType.FireBall, fireBallSpawnPoses},
-            {MagicType.FireMissile, fireMissileSpawnPoses},
-            {MagicType.FireCannon, fireCannonSpawnPoses},
-            {MagicType.ShockWave, shockWaveSpawnPoses},
+            {MagicType.FireBall},
+            {MagicType.FireMissile},
+            {MagicType.FireCannon},
+            {MagicType.ShockWave},
         };
 
         // 마법 풀 생성
@@ -83,7 +85,25 @@ public class DragonCtrl : MonoBehaviour
 
         if(canAttack == true)
         {
-            UseShockWave();
+            // 마법을 선택 후 스위칭하여 마법 함수 실행
+            int magicIdx = Random.Range(0, usingMagic.Count);
+            MagicType currentMagic = usingMagic[magicIdx];
+
+            switch(currentMagic)
+            {
+                case MagicType.FireBall:
+                    break;
+                case MagicType.FireMissile:
+                    break;
+                case MagicType.FireCannon:
+                    break;
+                case MagicType.ShockWave:
+                    break;
+                case MagicType.Meteor:
+                    break;
+            }
+
+            // 공격 후 3초간 휴식
             StartCoroutine(CoolTimeCheck());
         }
     }
@@ -183,6 +203,26 @@ public class DragonCtrl : MonoBehaviour
             shockWave.transform.rotation = shockWaveSpawnPos.transform.rotation;
 
             shockWaveComp.SetPool(shockWavePool);
+        }
+    }
+
+    private void UseMeteor()
+    {
+        GameObject meteor = UtilityManager.utility.GetFromPool(meteorPool, maxMagic);
+
+        if(meteor != null)
+        {
+            meteorComp = meteor.GetComponent<Meteor>();
+
+            // 플레이어 머리 위에 생성
+            meteorSpawnPos = new Vector3
+            (PlayerCtrl.player.transform.position.x, 
+            PlayerCtrl.player.transform.position.y + 10f, 
+            PlayerCtrl.player.transform.position.z);
+
+            meteor.transform.position = meteorSpawnPos;
+
+            meteorComp.SetPool(meteorPool);
         }
     }
 #endregion

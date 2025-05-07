@@ -3,6 +3,7 @@ using UnityEngine;
 public class Meteor : MagicBase
 {
     public MagicType magicType;
+    
     private Vector2 newVelocity;
 
     protected override void Start()
@@ -40,7 +41,6 @@ public class Meteor : MagicBase
                 if(PlayerCtrl.player.readInvincible != true)
                 {
                     PlayerCtrl.player.ChangeHP(damage);
-                    ReturnToOriginPool();
                 }
             }
             // 
