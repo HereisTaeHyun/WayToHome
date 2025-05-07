@@ -5,6 +5,7 @@ public class ShockWave : MagicBase
 {
     public MagicType magicType;
     
+    private SpriteRenderer spriteRenderer;
     private Vector2 moveDir;
     private Vector2 newVelocity;
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
@@ -13,12 +14,10 @@ public class ShockWave : MagicBase
     {
         base.Start();
 
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         moveSpeed = 4.0f;
         damage = -1.0f;
-    
-        
-        // 음직임 방향 설정
-        moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
         anim.SetFloat(moveDirHash, moveDir.x);
     }
 
@@ -31,13 +30,26 @@ public class ShockWave : MagicBase
     {
         originPool = pool;
         isPool = false;
+        
+        // 음직임 방향 설정
+        moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
     }
 
     private void MoveMagic()
     {
         if(GameManager.instance.readIsGameOver == false)
         {
+            // 애니메이션 설정에 필요한 방향
+            if(moveDir.x > 0)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else if(moveDir.x < 0)
+            {
+                spriteRenderer.flipX = true;
+            }
             // 이동
+            anim.SetFloat(moveDirHash, moveDir.x);
             newVelocity.Set(moveDir.x * moveSpeed, rb2D.linearVelocity.y);
             rb2D.linearVelocity = newVelocity;
         }
