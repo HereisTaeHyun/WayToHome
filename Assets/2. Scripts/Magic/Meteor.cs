@@ -3,9 +3,9 @@ using UnityEngine;
 public class Meteor : MagicBase
 {
     public MagicType magicType;
-    
+
+    private MeteorOff meteorOff;
     private Vector2 newVelocity;
-    private readonly int meteorOffHash = Animator.StringToHash("MeteorOff");
 
     protected override void Start()
     {
@@ -13,6 +13,8 @@ public class Meteor : MagicBase
 
         moveSpeed = 5.0f;
         damage = -3.0f;
+
+        meteorOff = GetComponentInChildren<MeteorOff>();
     }
 
     protected override void FixedUpdate()
@@ -63,16 +65,14 @@ public class Meteor : MagicBase
             isPool = true;
             rb2D.linearVelocity = Vector2.zero;
             rb2D.simulated = false;
-            anim.SetTrigger(meteorOffHash);
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            meteorOff.Explode();
         }
     }
     // FireMagicOff 애니메이션 이벤트로 재생
-    private void ReturnAfterAnim()
+    public void ReturnAfterAnim()
     {
         UtilityManager.utility.ReturnToPool(originPool, gameObject);
         isPool = true;
         rb2D.simulated = true;
-        transform.rotation = Quaternion.Euler(0, 0, -90);
     }
 }
