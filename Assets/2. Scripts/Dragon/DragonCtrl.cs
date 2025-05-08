@@ -154,13 +154,16 @@ public class DragonCtrl : MonoBehaviour
         rb2D.gravityScale = 0.0f;
 
         // 현재 위치에서 10만큼 위로 이동
-        // nextPos = new Vector2(transform.position.x, transform.position.y + 10.0f);
-        // newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
-        // rb2D.MovePosition(newPosition);
+        nextPos = new Vector2(transform.position.x, transform.position.y + 10.0f);
+        newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
+        rb2D.MovePosition(newPosition);
 
         // 다음 타겟 포지션을 잡아 이동
-        int moveIdx = Random.Range(0, standingPoses.Count);
-        targetPos = standingPoses[moveIdx];
+        // int moveIdx = Random.Range(0, standingPoses.Count);
+        // targetPos = standingPoses[moveIdx];
+
+        targetPos = standingPoses[3];
+
         nextPos = new Vector2(targetPos.position.x, transform.position.y);
         newPosition = Vector2.MoveTowards(transform.position, nextPos, flyingSpeed * Time.fixedDeltaTime);
         rb2D.MovePosition(newPosition);
