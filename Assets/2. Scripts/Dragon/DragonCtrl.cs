@@ -9,19 +9,25 @@ public class DragonCtrl : MonoBehaviour
     // private 변수
     private float maxHP = 50.0f;
     private float currentHP;
+
+    // 이동 및 상태 관련 변수
     private Animator anim;
     private Vector2 moveDir;
     private bool canAttack;
-    private float coolTime = 3.0f;
-
     [SerializeField] private Transform standingPosSet;
     private List<Transform> standingPoses = new List<Transform>();
+
+    // 마법 사용시마다 증가, magicCount == 5이면 standingPos 중 하나로 이동
+    private int magicCount;
+    private int magicCountUntilMove;
+
 
     // magic List에 마법 저장, 스폰 포인트는 딕셔너리 관리
     // Dictionary<MagicType, List<Transform>> magicSpawnPosDict;
     private List<MagicType> usingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
-    private int maxMagic = 5;
+    private int magicCountInPool = 5;
+    private float coolTime = 3.0f;
 
     // 위치 저장 셋
     [SerializeField] private List<Transform> fireBallSpawnPoses;
@@ -71,20 +77,33 @@ public class DragonCtrl : MonoBehaviour
 
         // 마법 풀 생성
         // 인덱스 번호는 위 마법 위치 딕셔너리와 같은 순서
-        UtilityManager.utility.CreatePool(ref fireBallPool, magicList[0], maxMagic, maxMagic);
-        UtilityManager.utility.CreatePool(ref fireMissilePool, magicList[1], maxMagic, maxMagic);
-        UtilityManager.utility.CreatePool(ref fireCannonPool, magicList[2], maxMagic, maxMagic);
-        UtilityManager.utility.CreatePool(ref shockWavePool, magicList[3], maxMagic, maxMagic);
-        UtilityManager.utility.CreatePool(ref meteorPool, magicList[4], maxMagic, maxMagic);
+        UtilityManager.utility.CreatePool(ref fireBallPool, magicList[0], magicCountInPool, magicCountInPool);
+        UtilityManager.utility.CreatePool(ref fireMissilePool, magicList[1], magicCountInPool, magicCountInPool);
+        UtilityManager.utility.CreatePool(ref fireCannonPool, magicList[2], magicCountInPool, magicCountInPool);
+        UtilityManager.utility.CreatePool(ref shockWavePool, magicList[3], magicCountInPool, magicCountInPool);
+        UtilityManager.utility.CreatePool(ref meteorPool, magicList[4], magicCountInPool, magicCountInPool);
 
+        // 변수 초기화
         currentHP = maxHP;
         canAttack = true;
+        magicCountUntilMove = 0;
+        magicCountUntilMove = 5;
     }
 
     void Update()
     {
         moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
-        anim.SetFloat(moveDirHash, moveDir.x);
+
+        // 땅에 있는지 비행 상태인지 체크하여 분기
+        // 마법을 5 회 사용하면 비행, 아니면 지상에서 바라보기
+        if(magicCount == magicCountUntilMove)
+        {
+            Fly();
+        }
+        else
+        {
+            anim.SetFloat(moveDirHash, moveDir.x);
+        }
 
         if(canAttack == true)
         {
@@ -111,14 +130,26 @@ public class DragonCtrl : MonoBehaviour
             }
 
             // 공격 후 3초간 휴식
+            magicCount += 1;
             StartCoroutine(CoolTimeCheck());
         }
     }
 
+#region move
+
+    private void Fly()
+    {
+        // 마법 사용 횟수 초기화 후 타겟 목표를 잡아 이동
+        // 비행 시 canAttack false하고 이동 끝나면 canAttack true
+        magicCount = 0;
+    }
+
+#endregion
+
 #region magic
 // 마법 관련 로직들 정리
-// 마법은 3번을 1세트로 사용
-// 마법을 3번 시전하면 standingPoses 중 하나를 골라 비행 이동
+// 마법은 5번을 1세트로 사용
+// 마법을 5번 시전하면 standingPoses 중 하나를 골라 비행 이동
 
     // 마법 쿨 타임
     private IEnumerator CoolTimeCheck()
@@ -131,7 +162,7 @@ public class DragonCtrl : MonoBehaviour
     private void UseFireBall()
     {
         // 풀 오브젝트 가져오기
-        GameObject fireBall = UtilityManager.utility.GetFromPool(fireBallPool, maxMagic);
+        GameObject fireBall = UtilityManager.utility.GetFromPool(fireBallPool, magicCountInPool);
 
         if(fireBall != null)
         { 
@@ -169,7 +200,7 @@ public class DragonCtrl : MonoBehaviour
     // 파이어 캐논, 쇼크웨이브는 위치가 플레이어가 왼쪽인지 오른쪽인지에 따라 발사 위치 결정
     private void UseFireCannon()
     {
-        GameObject fireCannon = UtilityManager.utility.GetFromPool(fireCannonPool, maxMagic);
+        GameObject fireCannon = UtilityManager.utility.GetFromPool(fireCannonPool, magicCountInPool);
 
         if(fireCannon != null)
         {
@@ -192,7 +223,7 @@ public class DragonCtrl : MonoBehaviour
 
     private void UseShockWave()
     {
-        GameObject shockWave = UtilityManager.utility.GetFromPool(shockWavePool, maxMagic);
+        GameObject shockWave = UtilityManager.utility.GetFromPool(shockWavePool, magicCountInPool);
 
         if(shockWave != null)
         {
@@ -215,7 +246,7 @@ public class DragonCtrl : MonoBehaviour
 
     private void UseMeteor()
     {
-        GameObject meteor = UtilityManager.utility.GetFromPool(meteorPool, maxMagic);
+        GameObject meteor = UtilityManager.utility.GetFromPool(meteorPool, magicCountInPool);
 
         if(meteor != null)
         {
