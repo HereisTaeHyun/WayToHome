@@ -6,6 +6,8 @@ public class Meteor : MagicBase
 
     private MeteorOff meteorOff;
     private Vector2 newVelocity;
+    private SpriteRenderer spriteRenderer;
+    private Color color;
 
     protected override void Start()
     {
@@ -15,6 +17,8 @@ public class Meteor : MagicBase
         damage = -3.0f;
 
         meteorOff = GetComponentInChildren<MeteorOff>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        color = spriteRenderer.color;
     }
 
     protected override void FixedUpdate()
@@ -54,6 +58,7 @@ public class Meteor : MagicBase
         }
     }
 
+    // 풀로 되돌리기
     protected override void ReturnToOriginPool()
     {
         if(isPool == true)
@@ -65,6 +70,10 @@ public class Meteor : MagicBase
             isPool = true;
             rb2D.linearVelocity = Vector2.zero;
             rb2D.simulated = false;
+
+            color.a = 0.0f;
+            spriteRenderer.color = color;
+
             meteorOff.Explode();
         }
     }
@@ -74,5 +83,8 @@ public class Meteor : MagicBase
         UtilityManager.utility.ReturnToPool(originPool, gameObject);
         isPool = true;
         rb2D.simulated = true;
+
+        color.a = 1.0f;
+        spriteRenderer.color = color;
     }
 }
