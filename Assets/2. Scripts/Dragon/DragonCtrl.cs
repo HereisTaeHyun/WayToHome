@@ -117,7 +117,6 @@ public class DragonCtrl : MonoBehaviour
         // 마법을 5 회 사용하면 비행, 아니면 지상에서 바라보기
         if(magicCount == magicCountUntilMove)
         {
-            dragonState = DragonState.StartFly;
             Fly();
         }
         else
@@ -167,32 +166,45 @@ public class DragonCtrl : MonoBehaviour
         // 상태 전이 체크를 어떻게 해야 할까?
         switch(dragonState)
         {
+            // 초기 타겟 위치 설정 후 전이
+            case DragonState.Idle:
+                nextPos = new Vector2(transform.position.x, transform.position.y + 13.0f);
+                dragonState = DragonState.StartFly;
+                break;
             // 현재 위치에서 10만큼 위로 이동
             case DragonState.StartFly:
-                nextPos = new Vector2(transform.position.x, transform.position.y + 10.0f);
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
                 rb2D.MovePosition(newPosition);
+
+                // 위치 도달 시 다음 위치 설정 후 전이
+                if (Mathf.Abs(transform.position.y - nextPos.y) < 0.1f)
+                {
+                    dragonState = DragonState.OnFly;
+                    int moveIdx = Random.Range(0, standingPoses.Count);
+                    targetPos = standingPoses[moveIdx];
+                }
                 break;
 
             // 다음 타겟 포지션을 잡아 이동
             case DragonState.OnFly:
-                int moveIdx = Random.Range(0, standingPoses.Count);
-                targetPos = standingPoses[moveIdx];
-
                 nextPos = new Vector2(targetPos.position.x, transform.position.y);
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyingSpeed * Time.fixedDeltaTime);
                 rb2D.MovePosition(newPosition);
+
+                // 위치 도달 시 전이
+                if (Mathf.Abs(transform.position.x - targetPos.position.x) < 0.1f)
+                {
+                    dragonState = DragonState.EndFly;
+                }
                 break;
 
             // 타겟 위치로 천천히 강하
-            case DragonState.EndFly:
-                break;
-
             // 이동 완료일 경우 초기화
-            case DragonState.Idle:
-                rb2D.gravityScale = 1.0f;
-                canAttack = true;
-                magicCount = 0;
+            case DragonState.EndFly:
+                //     rb2D.gravityScale = 1.0f;
+                //     canAttack = true;
+                //     magicCount = 0;
+                //     break;
                 break;
         }
     }
