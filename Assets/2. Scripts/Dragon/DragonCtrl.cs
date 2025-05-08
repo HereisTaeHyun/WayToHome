@@ -158,10 +158,10 @@ public class DragonCtrl : MonoBehaviour
 
     private void Fly()
     {
-        Debug.Log("비행 함수 호출됨");
         rb2D.gravityScale = 0.0f;
         canAttack = false;
 
+        // 상태 변경 체크를 어떻게 해야 할까?
         switch(dragonState)
         {
             // 현재 위치에서 10만큼 위로 이동
@@ -169,28 +169,18 @@ public class DragonCtrl : MonoBehaviour
                 nextPos = new Vector2(transform.position.x, transform.position.y + 10.0f);
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
                 rb2D.MovePosition(newPosition);
-
-                if (Mathf.Abs(transform.position.y - nextPos.y) < 0.1f)
-                {
-                    // 상태 변경 및 다음 이동 위치 설정
-                    dragonState = DragonState.OnFly;
-                    int moveIdx = Random.Range(0, standingPoses.Count);
-                    targetPos = standingPoses[moveIdx];
-                }
                 break;
 
             // 다음 타겟 포지션을 잡아 이동
             case DragonState.OnFly:
+                int moveIdx = Random.Range(0, standingPoses.Count);
+                targetPos = standingPoses[moveIdx];
+
                 nextPos = new Vector2(targetPos.position.x, transform.position.y);
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyingSpeed * Time.fixedDeltaTime);
                 rb2D.MovePosition(newPosition);
-
-                // 상태 변경
-                if (Mathf.Abs(transform.position.x - targetPos.position.x) < 0.1f)
-                {
-                    dragonState = DragonState.Idle;
-                }
                 break;
+
             // 이동 완료일 경우 초기화
             case DragonState.Idle:
                 rb2D.gravityScale = 1.0f;
