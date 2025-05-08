@@ -20,9 +20,9 @@ public class MeteorOff : MonoBehaviour
 
     public void Explode()
     {
+        anim.SetTrigger(explodeHash);
         color.a = 1.0f;
         spriteRenderer.color = color;
-        anim.SetTrigger(explodeHash);
     }
 
     // 중계 함수로서 부모의 동명 함수를 부르기 위한 역할
