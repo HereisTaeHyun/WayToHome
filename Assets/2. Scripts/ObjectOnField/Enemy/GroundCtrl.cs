@@ -40,17 +40,17 @@ public class GroundCtrl : EnemyCtrl
         if(GameManager.instance.readIsGameOver == false && isDie == false)
         {
             // 플레이어가 scanningRadius 내부면 moveSpeed만큼씩 이동 시작
-            if(Vector2.Distance(transform.position, target.position) < scanningRadius)
+            if(Vector2.Distance(transform.position, PlayerCtrl.player.transform.position) < scanningRadius)
             {
                 // 플레이어가 적보다 높으면 Jump 메서드 실행
-                if(target.position.y > transform.position.y)
+                if(PlayerCtrl.player.transform.position.y > transform.position.y)
                 {
                     Jump();
                     jumpCount += 1;
                 }
 
                 // 움직이는 방향 벡터 받아 오기
-                Vector2 enemyMoveDir = UtilityManager.utility.HorizontalDirSet(target.transform.position - transform.position);
+                Vector2 enemyMoveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
 
                 // 움직임 적용
                 isMove = true;
@@ -96,7 +96,7 @@ public class GroundCtrl : EnemyCtrl
         currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
 
         // 타격 벡터 계산 및 sfx, anim 재생
-        Vector2 hitVector =  UtilityManager.utility.HorizontalDirSet(target.transform.position - transform.position);
+        Vector2 hitVector =  UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
         UtilityManager.utility.PlaySFX(enemyGetHitSFX);
         anim.SetTrigger(hitTrigger);
         anim.SetFloat(hitHash, hitVector.x);

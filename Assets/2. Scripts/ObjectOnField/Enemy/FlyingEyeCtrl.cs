@@ -33,14 +33,14 @@ public class FlyingEyeCtrl : EnemyCtrl
         if(GameManager.instance.readIsGameOver == false && isDie == false)
         {
             // 플레이어가 scanningRadius 내부면 moveSpeed만큼씩 이동 시작
-            if(Vector2.Distance(transform.position, target.position) < scanningRadius)
+            if(Vector2.Distance(transform.position, PlayerCtrl.player.transform.position) < scanningRadius)
             {
                 // 이동 방향 벡터 설정
-                Vector2 enemyMoveDir = UtilityManager.utility.HorizontalDirSet(target.transform.position - transform.position);
+                Vector2 enemyMoveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
                 anim.SetFloat("MoveDir", enemyMoveDir.x);
 
                 // 플레이어에게 이동
-                Vector2 newPosition = Vector2.MoveTowards(rb2D.position, target.position, moveSpeed * Time.fixedDeltaTime);
+                Vector2 newPosition = Vector2.MoveTowards(rb2D.position, PlayerCtrl.player.transform.position, moveSpeed * Time.fixedDeltaTime);
                 rb2D.MovePosition(newPosition);
             }
         }
@@ -57,7 +57,7 @@ public class FlyingEyeCtrl : EnemyCtrl
     protected override IEnumerator EnemyGetHit()
     {
         canMove = false;
-        Vector2 hitVector =  UtilityManager.utility.AllDirSet(transform.position - target.transform.position);
+        Vector2 hitVector =  UtilityManager.utility.AllDirSet(transform.position - PlayerCtrl.player.transform.position);
 
         // 타격에 따른 애니메이션 재생
         anim.SetTrigger(hitTrigger);
