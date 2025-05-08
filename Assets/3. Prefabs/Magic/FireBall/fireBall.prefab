@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8460042040553194864}
   - component: {fileID: -4622419722915522374}
   m_Layer: 0
-  m_Name: FireBall
+  m_Name: fireBall
   m_TagString: FireBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 7442625623315705553}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 310.423, y: 33.099228, z: 0}
+  m_LocalPosition: {x: 310.423, y: 33.099228, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
