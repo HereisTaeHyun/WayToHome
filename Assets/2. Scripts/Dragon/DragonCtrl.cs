@@ -3,9 +3,19 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
+using System;
 
 public class DragonCtrl : MonoBehaviour
 {
+    // public 변수
+    public enum DragonState
+    {
+        Idle,
+        StartFly,
+        OnFly,
+    }
+    [NonSerialized] public DragonState dragonState;
+
     // private 변수
     private float maxHP = 50.0f;
     private float currentHP;
@@ -67,6 +77,7 @@ public class DragonCtrl : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
+        dragonState = DragonState.Idle;
 
         // 이동, 마법 필요 위치 전달 및 저장
         foreach(Transform standingPoint in standingPosSet)
@@ -105,6 +116,7 @@ public class DragonCtrl : MonoBehaviour
         // 마법을 5 회 사용하면 비행, 아니면 지상에서 바라보기
         if(magicCount == magicCountUntilMove)
         {
+            dragonState = DragonState.StartFly;
             Fly();
         }
         else
@@ -147,28 +159,45 @@ public class DragonCtrl : MonoBehaviour
     private void Fly()
     {
         Debug.Log("비행 함수 호출됨");
-        // 마법 사용 횟수 초기화 후 타겟 목표를 잡아 이동
-        // 비행 시 canAttack false하고 이동 끝나면 canAttack true
-
-        // 비행 시 그래비티 0 착륙 후 1
         rb2D.gravityScale = 0.0f;
+        canAttack = false;
 
-        // 현재 위치에서 10만큼 위로 이동
-        nextPos = new Vector2(transform.position.x, transform.position.y + 10.0f);
-        newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
-        rb2D.MovePosition(newPosition);
+        switch(dragonState)
+        {
+            // 현재 위치에서 10만큼 위로 이동
+            case DragonState.StartFly:
+                nextPos = new Vector2(transform.position.x, transform.position.y + 10.0f);
+                newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
+                rb2D.MovePosition(newPosition);
 
-        // 다음 타겟 포지션을 잡아 이동
-        // int moveIdx = Random.Range(0, standingPoses.Count);
-        // targetPos = standingPoses[moveIdx];
+                if (Mathf.Abs(transform.position.y - nextPos.y) < 0.1f)
+                {
+                    // 상태 변경 및 다음 이동 위치 설정
+                    dragonState = DragonState.OnFly;
+                    int moveIdx = Random.Range(0, standingPoses.Count);
+                    targetPos = standingPoses[moveIdx];
+                }
+                break;
 
-        targetPos = standingPoses[3];
+            // 다음 타겟 포지션을 잡아 이동
+            case DragonState.OnFly:
+                nextPos = new Vector2(targetPos.position.x, transform.position.y);
+                newPosition = Vector2.MoveTowards(transform.position, nextPos, flyingSpeed * Time.fixedDeltaTime);
+                rb2D.MovePosition(newPosition);
 
-        nextPos = new Vector2(targetPos.position.x, transform.position.y);
-        newPosition = Vector2.MoveTowards(transform.position, nextPos, flyingSpeed * Time.fixedDeltaTime);
-        rb2D.MovePosition(newPosition);
-
-        // magicCount = 0;
+                // 상태 변경
+                if (Mathf.Abs(transform.position.x - targetPos.position.x) < 0.1f)
+                {
+                    dragonState = DragonState.Idle;
+                }
+                break;
+            // 이동 완료일 경우 초기화
+            case DragonState.Idle:
+                rb2D.gravityScale = 1.0f;
+                canAttack = true;
+                magicCount = 0;
+                break;
+        }
     }
 
 #endregion
