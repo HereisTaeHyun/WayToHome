@@ -20,7 +20,7 @@ public class DragonCtrl : MonoBehaviour
     private Transform movingPos;
     private float flyUpDownSpeed = 5.0f;
     private float flyingSpeed = 10.0f;
-    private Vector2 newVelocity;
+    private Vector2 newPosition;
 
     // 마법 사용시마다 증가, magicCount == 5이면 standingPos 중 하나로 이동
     private int magicCount;
@@ -148,14 +148,18 @@ public class DragonCtrl : MonoBehaviour
         Debug.Log("비행 함수 호출됨");
         // 마법 사용 횟수 초기화 후 타겟 목표를 잡아 이동
         // 비행 시 canAttack false하고 이동 끝나면 canAttack true
-        magicCount = 0;
 
+        // 현재 위치에서 10만큼 위로 이동
+        Vector2 targetPos = new Vector2(transform.position.x, transform.position.y + 10.0f);
+        newPosition = Vector2.MoveTowards(transform.position, targetPos, flyUpDownSpeed * Time.fixedDeltaTime);
         rb2D.gravityScale = 0.0f;
-        newVelocity.Set(rb2D.linearVelocity.x, flyUpDownSpeed * Vector2.up.y);
-        rb2D.linearVelocity = newVelocity;
+        rb2D.MovePosition(newPosition);
 
-        // int moveIdx = Random.Range(0, standingPoses.Count);
-        // movingPos = standingPoses[moveIdx];
+        // 다음 타겟 포지션을 잡아 이동
+        int moveIdx = Random.Range(0, standingPoses.Count);
+        movingPos = standingPoses[moveIdx];
+
+        // magicCount = 0;
     }
 
 #endregion
