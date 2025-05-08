@@ -9,13 +9,18 @@ public class DragonCtrl : MonoBehaviour
     // private 변수
     private float maxHP = 50.0f;
     private float currentHP;
+    private Rigidbody2D rb2D;
+    private Animator anim;
 
     // 이동 및 상태 관련 변수
-    private Animator anim;
     private Vector2 moveDir;
     private bool canAttack;
     [SerializeField] private Transform standingPosSet;
     private List<Transform> standingPoses = new List<Transform>();
+    private Transform movingPos;
+    private float flyUpDownSpeed = 5.0f;
+    private float flyingSpeed = 10.0f;
+    private Vector2 newVelocity;
 
     // 마법 사용시마다 증가, magicCount == 5이면 standingPos 중 하나로 이동
     private int magicCount;
@@ -60,6 +65,7 @@ public class DragonCtrl : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        rb2D = GetComponent<Rigidbody2D>();
 
         // 이동, 마법 필요 위치 전달 및 저장
         foreach(Transform standingPoint in standingPosSet)
@@ -139,9 +145,17 @@ public class DragonCtrl : MonoBehaviour
 
     private void Fly()
     {
+        Debug.Log("비행 함수 호출됨");
         // 마법 사용 횟수 초기화 후 타겟 목표를 잡아 이동
         // 비행 시 canAttack false하고 이동 끝나면 canAttack true
         magicCount = 0;
+
+        rb2D.gravityScale = 0.0f;
+        newVelocity.Set(rb2D.linearVelocity.x, flyUpDownSpeed * Vector2.up.y);
+        rb2D.linearVelocity = newVelocity;
+
+        // int moveIdx = Random.Range(0, standingPoses.Count);
+        // movingPos = standingPoses[moveIdx];
     }
 
 #endregion
