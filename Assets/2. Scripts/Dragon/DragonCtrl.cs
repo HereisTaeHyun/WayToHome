@@ -17,7 +17,8 @@ public class DragonCtrl : MonoBehaviour
     private bool canAttack;
     [SerializeField] private Transform standingPosSet;
     private List<Transform> standingPoses = new List<Transform>();
-    private Transform movingPos;
+    private Vector2 nextPos;
+    private Transform targetPos;
     private float flyUpDownSpeed = 5.0f;
     private float flyingSpeed = 10.0f;
     private Vector2 newPosition;
@@ -93,7 +94,7 @@ public class DragonCtrl : MonoBehaviour
         currentHP = maxHP;
         canAttack = true;
         magicCountUntilMove = 0;
-        magicCountUntilMove = 5;
+        magicCountUntilMove = 1;
     }
 
     void Update()
@@ -149,15 +150,20 @@ public class DragonCtrl : MonoBehaviour
         // 마법 사용 횟수 초기화 후 타겟 목표를 잡아 이동
         // 비행 시 canAttack false하고 이동 끝나면 canAttack true
 
-        // 현재 위치에서 10만큼 위로 이동
-        Vector2 targetPos = new Vector2(transform.position.x, transform.position.y + 10.0f);
-        newPosition = Vector2.MoveTowards(transform.position, targetPos, flyUpDownSpeed * Time.fixedDeltaTime);
+        // 비행 시 그래비티 0 착륙 후 1
         rb2D.gravityScale = 0.0f;
-        rb2D.MovePosition(newPosition);
+
+        // 현재 위치에서 10만큼 위로 이동
+        // nextPos = new Vector2(transform.position.x, transform.position.y + 10.0f);
+        // newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
+        // rb2D.MovePosition(newPosition);
 
         // 다음 타겟 포지션을 잡아 이동
         int moveIdx = Random.Range(0, standingPoses.Count);
-        movingPos = standingPoses[moveIdx];
+        targetPos = standingPoses[moveIdx];
+        nextPos = new Vector2(targetPos.position.x, transform.position.y);
+        newPosition = Vector2.MoveTowards(transform.position, nextPos, flyingSpeed * Time.fixedDeltaTime);
+        rb2D.MovePosition(newPosition);
 
         // magicCount = 0;
     }
