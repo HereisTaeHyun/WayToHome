@@ -74,6 +74,8 @@ public class DragonCtrl : MonoBehaviour
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
     private readonly int attackHash = Animator.StringToHash("Attack");
     private readonly int attackTypeHash = Animator.StringToHash("AttackType");
+    private readonly int flyHash = Animator.StringToHash("Fly");
+    private readonly int flyStateHash = Animator.StringToHash("FlyState");
 
 
     void Start()
@@ -181,6 +183,8 @@ public class DragonCtrl : MonoBehaviour
                 break;
             // 현재 위치에서 10만큼 위로 이동
             case DragonState.StartFly:
+                anim.SetBool(flyHash, true);
+                anim.SetInteger(flyStateHash, 0);
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
                 rb2D.MovePosition(newPosition);
 
@@ -195,6 +199,7 @@ public class DragonCtrl : MonoBehaviour
 
             // 다음 타겟 포지션을 잡아 이동
             case DragonState.OnFly:
+                anim.SetInteger(flyStateHash, 1);
                 nextPos = new Vector2(targetPos.position.x, transform.position.y);
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyingSpeed * Time.fixedDeltaTime);
                 rb2D.MovePosition(newPosition);
@@ -208,6 +213,7 @@ public class DragonCtrl : MonoBehaviour
 
             // 타겟 위치로 천천히 강하
             case DragonState.EndFly:
+                anim.SetInteger(flyStateHash, 2);
                 nextPos = new Vector2(transform.position.x, targetPos.position.y);
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
                 rb2D.MovePosition(newPosition);
@@ -215,6 +221,8 @@ public class DragonCtrl : MonoBehaviour
                 // 얘 조건은 Approximately로 안되서 직접 비교 처리
                 if (Mathf.Abs(transform.position.y - targetPos.position.y) < 0.1f)
                 {
+                    anim.SetInteger(flyStateHash, 3);
+                    anim.SetBool(flyHash, false);
                     dragonState = DragonState.Idle;
                     rb2D.gravityScale = 1.0f;
                     canAttack = true;
