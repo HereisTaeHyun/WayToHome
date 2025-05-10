@@ -36,7 +36,7 @@ public class DragonCtrl : MonoBehaviour
 
     // 마법 사용시마다 증가, magicCount == 5이면 standingPos 중 하나로 이동
     private int magicCount;
-    private int magicCountUntilMove;
+    private int magicCountUntilMove = 5;
 
 
     // magic List에 마법 저장, 스폰 포인트는 딕셔너리 관리
@@ -105,8 +105,7 @@ public class DragonCtrl : MonoBehaviour
         // 변수 초기화
         currentHP = maxHP;
         canAttack = true;
-        magicCountUntilMove = 0;
-        magicCountUntilMove = 1;
+        magicCount = 0;
     }
 
     void Update()
@@ -199,15 +198,15 @@ public class DragonCtrl : MonoBehaviour
                 break;
 
             // 타겟 위치로 천천히 강하
-            // 이동 완료일 경우 초기화
             case DragonState.EndFly:
                 nextPos = new Vector2(transform.position.x, targetPos.position.y);
-                newPosition = Vector2.MoveTowards(transform.position, nextPos, flyingSpeed * Time.fixedDeltaTime);
+                newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
                 rb2D.MovePosition(newPosition);
 
-                if (Mathf.Approximately(transform.position.y, targetPos.position.y))
+                // 얘 조건은 Approximately로 안되서 직접 비교 처리
+                if (Mathf.Abs(transform.position.y - targetPos.position.y) < 0.1f)
                 {
-                    dragonState = DragonState.EndFly;
+                    dragonState = DragonState.Idle;
                     rb2D.gravityScale = 1.0f;
                     canAttack = true;
                     magicCount = 0;
