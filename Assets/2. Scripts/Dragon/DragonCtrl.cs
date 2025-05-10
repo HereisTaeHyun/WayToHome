@@ -177,7 +177,7 @@ public class DragonCtrl : MonoBehaviour
                 rb2D.MovePosition(newPosition);
 
                 // 위치 도달 시 다음 위치 설정 후 전이
-                if (Mathf.Abs(transform.position.y - nextPos.y) < 0.1f)
+                if (Mathf.Approximately(transform.position.y, nextPos.y))
                 {
                     dragonState = DragonState.OnFly;
                     int moveIdx = Random.Range(0, standingPoses.Count);
@@ -192,7 +192,7 @@ public class DragonCtrl : MonoBehaviour
                 rb2D.MovePosition(newPosition);
 
                 // 위치 도달 시 전이
-                if (Mathf.Abs(transform.position.x - targetPos.position.x) < 0.1f)
+                if (Mathf.Approximately(transform.position.x, targetPos.position.x))
                 {
                     dragonState = DragonState.EndFly;
                 }
@@ -201,10 +201,17 @@ public class DragonCtrl : MonoBehaviour
             // 타겟 위치로 천천히 강하
             // 이동 완료일 경우 초기화
             case DragonState.EndFly:
-                //     rb2D.gravityScale = 1.0f;
-                //     canAttack = true;
-                //     magicCount = 0;
-                //     break;
+                nextPos = new Vector2(transform.position.x, targetPos.position.y);
+                newPosition = Vector2.MoveTowards(transform.position, nextPos, flyingSpeed * Time.fixedDeltaTime);
+                rb2D.MovePosition(newPosition);
+
+                if (Mathf.Approximately(transform.position.y, targetPos.position.y))
+                {
+                    dragonState = DragonState.EndFly;
+                    rb2D.gravityScale = 1.0f;
+                    canAttack = true;
+                    magicCount = 0;
+                }
                 break;
         }
     }
