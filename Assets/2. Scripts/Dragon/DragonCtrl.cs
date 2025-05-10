@@ -24,7 +24,7 @@ public class DragonCtrl : MonoBehaviour
     private Animator anim;
 
     // 이동 및 상태 관련 변수
-    private Vector2 moveDir;
+    private Vector2 seeDir;
     private bool canAttack;
     [SerializeField] private Transform standingPosSet;
     private List<Transform> standingPoses = new List<Transform>();
@@ -71,7 +71,7 @@ public class DragonCtrl : MonoBehaviour
      private Meteor meteorComp;
 
     // 애니메이션 관련
-    private readonly int moveDirHash = Animator.StringToHash("MoveDir");
+    private readonly int seeDirHash = Animator.StringToHash("SeeDir");
     private readonly int attackHash = Animator.StringToHash("Attack");
     private readonly int attackTypeHash = Animator.StringToHash("AttackType");
     private readonly int flyHash = Animator.StringToHash("Fly");
@@ -114,18 +114,19 @@ public class DragonCtrl : MonoBehaviour
 
     void Update()
     {
-        moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
+        seeDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
 
         // 땅에 있는지 비행 상태인지 체크하여 분기
         // 마법을 5 회 사용하면 비행, 아니면 지상에서 바라보기
-        if(magicCount == magicCountUntilMove)
-        {
-            Fly();
-        }
-        else
-        {
-            anim.SetFloat(moveDirHash, moveDir.x);
-        }
+        // if(magicCount == magicCountUntilMove)
+        // {
+        //     Fly();
+        // }
+        // else
+        // {
+        //     anim.SetFloat(moveDirHash, moveDir.x);
+        // }
+        anim.SetFloat(seeDirHash, seeDir.x);
 
         if(canAttack == true)
         {
@@ -137,17 +138,17 @@ public class DragonCtrl : MonoBehaviour
                 case MagicType.FireBall:
                     UseFireBall();
                     anim.SetTrigger(attackHash);
-                    anim.SetFloat(attackTypeHash, 0);
+                    anim.SetFloat(attackTypeHash, -1);
                     break;
                 case MagicType.FireMissile:
                     UseFireMissile();
                     anim.SetTrigger(attackHash);
-                    anim.SetFloat(attackTypeHash, 0);
+                    anim.SetFloat(attackTypeHash, -1);
                     break;
                 case MagicType.FireCannon:
                     UseFireCannon();
                     anim.SetTrigger(attackHash);
-                    anim.SetFloat(attackTypeHash, 0);
+                    anim.SetFloat(attackTypeHash, -1);
                     break;
                 case MagicType.ShockWave:
                     UseShockWave();
@@ -157,7 +158,7 @@ public class DragonCtrl : MonoBehaviour
                 case MagicType.Meteor:
                     UseMeteor();
                     anim.SetTrigger(attackHash);
-                    anim.SetFloat(attackTypeHash, 0);
+                    anim.SetFloat(attackTypeHash, -1);
                     break;
             }
 
@@ -293,11 +294,11 @@ public class DragonCtrl : MonoBehaviour
         if(fireCannon != null)
         {
             fireCannonComp = fireCannon.GetComponent<FireCannon>();
-            if(moveDir.x < 0)
+            if(seeDir.x < 0)
             {
                 fireCannonSpawnPos = fireCannonSpawnPoses[0];
             }
-            else if(moveDir.x > 0)
+            else if(seeDir.x > 0)
             {
                 fireCannonSpawnPos = fireCannonSpawnPoses[1];
             }
@@ -316,11 +317,11 @@ public class DragonCtrl : MonoBehaviour
         if(shockWave != null)
         {
             shockWaveComp = shockWave.GetComponent<ShockWave>();
-            if(moveDir.x < 0)
+            if(seeDir.x < 0)
             {
                 shockWaveSpawnPos = shockWaveSpawnPoses[0];
             }
-            else if(moveDir.x > 0)
+            else if(seeDir.x > 0)
             {
                 shockWaveSpawnPos = shockWaveSpawnPoses[1];
             }
