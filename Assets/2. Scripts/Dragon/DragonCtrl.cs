@@ -121,7 +121,7 @@ public class DragonCtrl : MonoBehaviour
 
         // 땅에 있는지 비행 상태인지 체크하여 분기
         // 마법을 5 회 사용하면 비행, 아니면 지상에서 바라보기
-        if(magicCount == magicCountUntilMove || !anim.GetCurrentAnimatorStateInfo(0).IsName("UseMagic") || !anim.IsInTransition(0))
+        if(magicCount == magicCountUntilMove)
         {
             Fly();
         }
