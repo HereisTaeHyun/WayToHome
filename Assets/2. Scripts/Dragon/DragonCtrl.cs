@@ -25,6 +25,7 @@ public class DragonCtrl : MonoBehaviour
 
     // 이동 및 상태 관련 변수
     private Vector2 seeDir;
+    private Vector2 moveDir;
     private bool canAttack;
     [SerializeField] private Transform standingPosSet;
     private List<Transform> standingPoses = new List<Transform>();
@@ -36,7 +37,7 @@ public class DragonCtrl : MonoBehaviour
 
     // 마법 사용시마다 증가, magicCount == 5이면 standingPos 중 하나로 이동
     private int magicCount;
-    private int magicCountUntilMove = 5;
+    private int magicCountUntilMove = 2;
 
 
     // magic List에 마법 저장, 스폰 포인트는 딕셔너리 관리
@@ -72,6 +73,7 @@ public class DragonCtrl : MonoBehaviour
 
     // 애니메이션 관련
     private readonly int seeDirHash = Animator.StringToHash("SeeDir");
+    private readonly int moveDirHash = Animator.StringToHash("MoveDir");
     private readonly int attackHash = Animator.StringToHash("Attack");
     private readonly int attackTypeHash = Animator.StringToHash("AttackType");
     private readonly int flyHash = Animator.StringToHash("Fly");
@@ -115,18 +117,20 @@ public class DragonCtrl : MonoBehaviour
     void Update()
     {
         seeDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
+        anim.SetFloat(seeDirHash, seeDir.x);
 
         // 땅에 있는지 비행 상태인지 체크하여 분기
         // 마법을 5 회 사용하면 비행, 아니면 지상에서 바라보기
-        // if(magicCount == magicCountUntilMove)
-        // {
-        //     Fly();
-        // }
-        // else
-        // {
-        //     anim.SetFloat(moveDirHash, moveDir.x);
-        // }
-        anim.SetFloat(seeDirHash, seeDir.x);
+        if(magicCount == magicCountUntilMove || !anim.GetCurrentAnimatorStateInfo(0).IsName("UseMagic") || !anim.IsInTransition(0))
+        {
+            Fly();
+        }
+
+        // 이하 코드는 Idle일때만 가능
+        if(!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            return;
+        }
 
         if(canAttack == true)
         {
@@ -172,7 +176,6 @@ public class DragonCtrl : MonoBehaviour
 
     private void Fly()
     {
-        rb2D.gravityScale = 0.0f;
         canAttack = false;
 
         switch(dragonState)
@@ -187,6 +190,7 @@ public class DragonCtrl : MonoBehaviour
                 anim.SetBool(flyHash, true);
                 anim.SetInteger(flyStateHash, 0);
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
+                rb2D.gravityScale = 0.0f;
                 rb2D.MovePosition(newPosition);
 
                 // 위치 도달 시 다음 위치 설정 후 전이
@@ -203,6 +207,10 @@ public class DragonCtrl : MonoBehaviour
                 anim.SetInteger(flyStateHash, 1);
                 nextPos = new Vector2(targetPos.position.x, transform.position.y);
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyingSpeed * Time.fixedDeltaTime);
+
+                moveDir = UtilityManager.utility.HorizontalDirSet(nextPos);
+                anim.SetFloat(moveDirHash, moveDir.x);
+
                 rb2D.MovePosition(newPosition);
 
                 // 위치 도달 시 전이
