@@ -72,6 +72,8 @@ public class DragonCtrl : MonoBehaviour
 
     // 애니메이션 관련
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
+    private readonly int attackHash = Animator.StringToHash("Attack");
+    private readonly int attackTypeHash = Animator.StringToHash("AttackType");
 
 
     void Start()
@@ -132,18 +134,28 @@ public class DragonCtrl : MonoBehaviour
             {
                 case MagicType.FireBall:
                     UseFireBall();
+                    anim.SetTrigger(attackHash);
+                    anim.SetFloat(attackTypeHash, 0);
                     break;
                 case MagicType.FireMissile:
                     UseFireMissile();
+                    anim.SetTrigger(attackHash);
+                    anim.SetFloat(attackTypeHash, 0);
                     break;
                 case MagicType.FireCannon:
                     UseFireCannon();
+                    anim.SetTrigger(attackHash);
+                    anim.SetFloat(attackTypeHash, 0);
                     break;
                 case MagicType.ShockWave:
                     UseShockWave();
+                    anim.SetTrigger(attackHash);
+                    anim.SetFloat(attackTypeHash, 1);
                     break;
                 case MagicType.Meteor:
                     UseMeteor();
+                    anim.SetTrigger(attackHash);
+                    anim.SetFloat(attackTypeHash, 0);
                     break;
             }
 
@@ -160,9 +172,6 @@ public class DragonCtrl : MonoBehaviour
         rb2D.gravityScale = 0.0f;
         canAttack = false;
 
-        Debug.Log(dragonState);
-
-        // 상태 전이 체크를 어떻게 해야 할까?
         switch(dragonState)
         {
             // 초기 타겟 위치 설정 후 전이
