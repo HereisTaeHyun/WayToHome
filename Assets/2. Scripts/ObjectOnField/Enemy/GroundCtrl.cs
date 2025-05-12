@@ -12,7 +12,6 @@ public class GroundCtrl : EnemyCtrl
     private Vector2 newVelocity;
     private EnemyAttack enemyAttack;
     [SerializeField] float attackRange;
-    [SerializeField] private LayerMask playerLayer;
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
     private readonly int moveOnHash = Animator.StringToHash("OnMove");
     private readonly int dieHash = Animator.StringToHash("Die");

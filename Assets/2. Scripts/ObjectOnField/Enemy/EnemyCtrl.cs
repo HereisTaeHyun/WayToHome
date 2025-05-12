@@ -25,15 +25,17 @@ public class EnemyCtrl : MonoBehaviour
     [SerializeField] protected AudioClip enemyDieSFX;
     protected Dictionary<GameObject, float> itemInformation = new Dictionary<GameObject, float>();
     protected bool canMove;
-    [SerializeField] protected float scanningRadius = 10.0f;
     protected float currentHP;
+
+    // 플레이어 감지 변수
+    [SerializeField] protected float scanningRadius = 10.0f;
+    protected LayerMask playerLayer;
+
     protected readonly int dirHash = Animator.StringToHash("MoveDir");
     protected readonly int hitHash = Animator.StringToHash("HitDir");
     protected readonly int hitTrigger = Animator.StringToHash("TakeHit");
 
     // 다른 객체에서 읽기 위한 변수
-    protected Transform target;
-    public Transform readTarget {get {return target;}}
     protected Animator anim;
     public Animator readAnim {get {return anim;}}
     [SerializeField] protected float damage;
@@ -45,10 +47,10 @@ public class EnemyCtrl : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        target = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Transform>();
         isDie = false;
         canMove = true;
         currentHP = MaxHP;
+        playerLayer = LayerMask.GetMask("Player");
 
         
         // 드롭 아이템 정보 딕셔너리 형성
@@ -56,6 +58,25 @@ public class EnemyCtrl : MonoBehaviour
         {
             itemInformation.Add(dropItem[i], itemWeight[i]);
         }
+    }
+
+    // ray를 쏘아 첫 대상이 플레이어인지 감지 = 시야 개념
+    private bool SeeingPlayer()
+    {
+        Vector2 direction = PlayerCtrl.player.transform.position - transform.position;
+        Vector2 directionNorm = UtilityManager.utility.AllDirSet(direction);
+        float distance = Vector2.Distance(transform.position, PlayerCtrl.player.transform.position);
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionNorm, distance, playerLayer);
+
+        if(hit.collider != null)
+        {
+            if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
     
     // 사정 거리 내부에 집입하는 경우 따라가기 메서드
