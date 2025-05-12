@@ -121,7 +121,7 @@ public class DragonCtrl : MonoBehaviour
 
         // 땅에 있는지 비행 상태인지 체크하여 분기
         // 마법을 5 회 사용하면 비행, 아니면 지상에서 바라보기
-        if(magicCount == magicCountUntilMove)
+        if(magicCount == magicCountUntilMove && !anim.GetCurrentAnimatorStateInfo(0).IsName("UseMagic") && !anim.IsInTransition(0))
         {
             Fly();
         }
@@ -189,6 +189,7 @@ public class DragonCtrl : MonoBehaviour
             case DragonState.StartFly:
                 anim.SetBool(flyHash, true);
                 anim.SetInteger(flyStateHash, 0);
+
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
                 rb2D.gravityScale = 0.0f;
                 Debug.Log("상승 진입");
