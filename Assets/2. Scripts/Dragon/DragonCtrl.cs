@@ -37,7 +37,7 @@ public class DragonCtrl : MonoBehaviour
 
     // 마법 사용시마다 증가, magicCount == 5이면 standingPos 중 하나로 이동
     private int magicCount;
-    private int magicCountUntilMove = 2;
+    private int magicCountUntilMove = 5;
 
 
     // magic List에 마법 저장, 스폰 포인트는 딕셔너리 관리
@@ -45,6 +45,7 @@ public class DragonCtrl : MonoBehaviour
     private List<MagicType> usingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
     private int magicCountInPool = 5;
+    private static float MAGIC_WAIT_TIME = 0.5f; // 마법 사용과 애니메이션간 타이밍 맞추기에 사용
     private float coolTime = 3.0f;
 
     // 위치 저장 셋
@@ -140,27 +141,27 @@ public class DragonCtrl : MonoBehaviour
             switch(currentMagic)
             {
                 case MagicType.FireBall:
-                    UseFireBall();
+                    StartCoroutine(UseFireBall());
                     anim.SetTrigger(attackHash);
                     anim.SetFloat(attackTypeHash, -1);
                     break;
                 case MagicType.FireMissile:
-                    UseFireMissile();
+                    StartCoroutine(UseFireMissile());
                     anim.SetTrigger(attackHash);
                     anim.SetFloat(attackTypeHash, -1);
                     break;
                 case MagicType.FireCannon:
-                    UseFireCannon();
+                    StartCoroutine(UseFireCannon());
                     anim.SetTrigger(attackHash);
                     anim.SetFloat(attackTypeHash, -1);
                     break;
                 case MagicType.ShockWave:
-                    UseShockWave();
+                    StartCoroutine(UseShockWave());
                     anim.SetTrigger(attackHash);
                     anim.SetFloat(attackTypeHash, 1);
                     break;
                 case MagicType.Meteor:
-                    UseMeteor();
+                    StartCoroutine(UseMeteor());
                     anim.SetTrigger(attackHash);
                     anim.SetFloat(attackTypeHash, -1);
                     break;
@@ -251,8 +252,9 @@ public class DragonCtrl : MonoBehaviour
     }
 
     // FireBall 마법을 스폰 위치에 따라 생성 및 초기화
-    private void UseFireBall()
+    private IEnumerator UseFireBall()
     {
+        yield return new WaitForSeconds(MAGIC_WAIT_TIME);
         foreach(Transform fireBallSpawnPos in fireBallSpawnPoses)
         {
             GameObject fireBall = UtilityManager.utility.GetFromPool(fireBallPool, magicCountInPool);
@@ -268,8 +270,9 @@ public class DragonCtrl : MonoBehaviour
     }
 
     // FireMissile 마법을 각 지정된 위치에 생성 및 초기화
-    private void UseFireMissile()
+    private IEnumerator UseFireMissile()
     {
+        yield return new WaitForSeconds(MAGIC_WAIT_TIME);
         foreach(Transform fireMissileSpawnPos in fireMissileSpawnPoses)
         {
             GameObject fireMissile = UtilityManager.utility.GetFromPool(fireMissilePool, 10);
@@ -285,8 +288,9 @@ public class DragonCtrl : MonoBehaviour
     }
 
     // FireCannon 마법을 플레이어 방향에 따라 좌/우 위치에 생성
-    private void UseFireCannon()
+    private IEnumerator UseFireCannon()
     {
+        yield return new WaitForSeconds(MAGIC_WAIT_TIME);
         GameObject fireCannon = UtilityManager.utility.GetFromPool(fireCannonPool, magicCountInPool);
 
         if(fireCannon != null)
@@ -309,8 +313,9 @@ public class DragonCtrl : MonoBehaviour
     }
 
     // ShockWave 마법을 플레이어 방향에 따라 좌/우 위치에 생성
-    private void UseShockWave()
+    private IEnumerator UseShockWave()
     {
+        yield return new WaitForSeconds(MAGIC_WAIT_TIME);
         GameObject shockWave = UtilityManager.utility.GetFromPool(shockWavePool, magicCountInPool);
 
         if(shockWave != null)
@@ -333,8 +338,9 @@ public class DragonCtrl : MonoBehaviour
     }
 
     // Meteor 마법을 플레이어 머리 위에 생성
-    private void UseMeteor()
+    private IEnumerator UseMeteor()
     {
+        yield return new WaitForSeconds(MAGIC_WAIT_TIME);
         GameObject meteor = UtilityManager.utility.GetFromPool(meteorPool, magicCountInPool);
 
         if(meteor != null)
