@@ -25,7 +25,6 @@ public class MiddleBossCtrl : EnemyCtrl
     private int maxMagicResist = 3;
     private int getHitbyMagic; // 일정 이상 마법에 타격시 isStun
     [SerializeField] float melleAttackRange;
-    [SerializeField] private LayerMask playerLayer;
     [SerializeField] private AudioClip warpSFX;
     [SerializeField] private AudioClip stunSFX;
     [SerializeField] private GameObject fireBall;

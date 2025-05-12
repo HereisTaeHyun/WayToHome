@@ -33,7 +33,7 @@ public class FlyingEyeCtrl : EnemyCtrl
         if(GameManager.instance.readIsGameOver == false && isDie == false)
         {
             // 플레이어가 scanningRadius 내부면 moveSpeed만큼씩 이동 시작
-            if(Vector2.Distance(transform.position, PlayerCtrl.player.transform.position) < scanningRadius)
+            if(Vector2.Distance(transform.position, PlayerCtrl.player.transform.position) < scanningRadius && SeeingPlayer())
             {
                 // 이동 방향 벡터 설정
                 Vector2 enemyMoveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);

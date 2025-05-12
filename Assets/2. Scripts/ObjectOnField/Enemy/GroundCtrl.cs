@@ -11,6 +11,7 @@ public class GroundCtrl : EnemyCtrl
     private bool isMove;
     private Vector2 newVelocity;
     private EnemyAttack enemyAttack;
+    private LayerMask playerLayer;
     [SerializeField] float attackRange;
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
     private readonly int moveOnHash = Animator.StringToHash("OnMove");
@@ -19,6 +20,7 @@ public class GroundCtrl : EnemyCtrl
     void Start()
     {
         Init();
+        playerLayer = LayerMask.GetMask("Player");
         isMove = false;
         enemyAttack = GetComponent<EnemyAttack>();
     }
@@ -39,7 +41,7 @@ public class GroundCtrl : EnemyCtrl
         if(GameManager.instance.readIsGameOver == false && isDie == false)
         {
             // 플레이어가 scanningRadius 내부면 moveSpeed만큼씩 이동 시작
-            if(Vector2.Distance(transform.position, PlayerCtrl.player.transform.position) < scanningRadius)
+            if(Vector2.Distance(transform.position, PlayerCtrl.player.transform.position) < scanningRadius && SeeingPlayer())
             {
                 // 플레이어가 적보다 높으면 Jump 메서드 실행
                 if(PlayerCtrl.player.transform.position.y > transform.position.y)

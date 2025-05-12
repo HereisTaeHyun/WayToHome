@@ -29,7 +29,8 @@ public class EnemyCtrl : MonoBehaviour
 
     // 플레이어 감지 변수
     [SerializeField] protected float scanningRadius = 10.0f;
-    protected LayerMask playerLayer;
+    private LayerMask detectLayer;
+    private RaycastHit2D[] rayHits = new RaycastHit2D[10];
 
     protected readonly int dirHash = Animator.StringToHash("MoveDir");
     protected readonly int hitHash = Animator.StringToHash("HitDir");
@@ -50,7 +51,7 @@ public class EnemyCtrl : MonoBehaviour
         isDie = false;
         canMove = true;
         currentHP = MaxHP;
-        playerLayer = LayerMask.GetMask("Player");
+        detectLayer = LayerMask.GetMask("Player", "Ground", "Wall");
 
         
         // 드롭 아이템 정보 딕셔너리 형성
@@ -61,17 +62,21 @@ public class EnemyCtrl : MonoBehaviour
     }
 
     // ray를 쏘아 첫 대상이 플레이어인지 감지 = 시야 개념
-    private bool SeeingPlayer()
+    protected bool SeeingPlayer()
     {
         Vector2 direction = PlayerCtrl.player.transform.position - transform.position;
         Vector2 directionNorm = UtilityManager.utility.AllDirSet(direction);
         float distance = Vector2.Distance(transform.position, PlayerCtrl.player.transform.position);
+        int count = Physics2D.RaycastNonAlloc(transform.position, directionNorm, rayHits, distance, detectLayer);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionNorm, distance, playerLayer);
+        Debug.DrawRay(transform.position, directionNorm * distance, Color.red, 0.1f); 
 
-        if(hit.collider != null)
+        // ray에 닿은 존재가 있으며 첫 충돌이 playerLayer라면 true
+        if (count > 0)
         {
-            if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+            var hit = rayHits[0];
+
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 return true;
             }
