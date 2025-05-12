@@ -176,14 +176,14 @@ public class DragonCtrl : MonoBehaviour
 
     private void Fly()
     {
-        canAttack = false;
-
+        canAttack = false;  
         switch(dragonState)
         {
             // 초기 타겟 위치 설정 후 전이
             case DragonState.Idle:
                 nextPos = new Vector2(transform.position.x, transform.position.y + 13.0f);
                 dragonState = DragonState.StartFly;
+                Debug.Log("비행 진입");
                 break;
             // 현재 위치에서 10만큼 위로 이동
             case DragonState.StartFly:
@@ -191,6 +191,7 @@ public class DragonCtrl : MonoBehaviour
                 anim.SetInteger(flyStateHash, 0);
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
                 rb2D.gravityScale = 0.0f;
+                Debug.Log("상승 진입");
                 rb2D.MovePosition(newPosition);
 
                 // 위치 도달 시 다음 위치 설정 후 전이
@@ -206,6 +207,7 @@ public class DragonCtrl : MonoBehaviour
             case DragonState.OnFly:
                 anim.SetInteger(flyStateHash, 1);
                 nextPos = new Vector2(targetPos.position.x, transform.position.y);
+                Debug.Log("비행 진입");
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyingSpeed * Time.fixedDeltaTime);
 
                 moveDir = UtilityManager.utility.HorizontalDirSet(nextPos);
@@ -225,6 +227,7 @@ public class DragonCtrl : MonoBehaviour
                 anim.SetInteger(flyStateHash, 2);
                 nextPos = new Vector2(transform.position.x, targetPos.position.y);
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
+                Debug.Log("착륙 진입");
                 rb2D.MovePosition(newPosition);
 
                 // 얘 조건은 Approximately로 안되서 직접 비교 처리
@@ -238,7 +241,7 @@ public class DragonCtrl : MonoBehaviour
                     magicCount = 0;
                 }
                 break;
-        }
+            }
     }
 
 #endregion
