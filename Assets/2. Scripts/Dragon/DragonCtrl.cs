@@ -52,8 +52,8 @@ public class DragonCtrl : MonoBehaviour
     [SerializeField] private List<Transform> fireMissileSpawnPoses;
     [SerializeField] private List<Transform> fireCannonSpawnPoses;
     [SerializeField] private List<Transform> shockWaveSpawnPoses;
-    // 마법이 실제 시행될 개별 위치, missile은 개별 생성이 아니기에 여기 없음
-    private Transform fireBallSpawnPos;
+
+    // 마법이 실제 시행될 개별 위치, ball과 missile은 개별 생성이 아니기에 여기 없음
     private Transform fireCannonSpawnPos;
     private Transform shockWaveSpawnPos;
     private Vector3 meteorSpawnPos;
@@ -208,7 +208,8 @@ public class DragonCtrl : MonoBehaviour
                 nextPos = new Vector2(targetPos.position.x, transform.position.y);
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyingSpeed * Time.fixedDeltaTime);
 
-                moveDir = UtilityManager.utility.HorizontalDirSet(nextPos);
+                Vector2 moveDirX = new Vector2(targetPos.position.x - transform.position.x, transform.position.y);
+                moveDir = UtilityManager.utility.HorizontalDirSet(moveDirX);
                 anim.SetFloat(moveDirHash, moveDir.x);
 
                 rb2D.MovePosition(newPosition);
@@ -241,7 +242,7 @@ public class DragonCtrl : MonoBehaviour
 #endregion
 
 #region magic
-    // 마법 공격 후 일정 시간 동안 공격 불가하게 만드는 쿨타임 처리
+    // 마법 공격 후 일정 시간 동안 쿨타임 처리
     private IEnumerator CoolTimeCheck()
     {
         canAttack = false;
