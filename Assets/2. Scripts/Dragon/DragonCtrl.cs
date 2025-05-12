@@ -172,30 +172,28 @@ public class DragonCtrl : MonoBehaviour
         }
     }
 
-#region move
-
+#region Fly
+// 드래곤이 공중으로 이동하는 비행 로직을 처리
     private void Fly()
     {
         canAttack = false;  
         switch(dragonState)
         {
-            // 초기 타겟 위치 설정 후 전이
+            // 비행 시작 전 대기 상태에서 초기 상승 위치 설정
             case DragonState.Idle:
                 nextPos = new Vector2(transform.position.x, transform.position.y + 13.0f);
                 dragonState = DragonState.StartFly;
-                Debug.Log("비행 진입");
                 break;
-            // 현재 위치에서 10만큼 위로 이동
+
+            // 위로 상승하면서 비행 시작, 목표 높이에 도달하면 다음 이동 위치 설정
             case DragonState.StartFly:
                 anim.SetBool(flyHash, true);
                 anim.SetInteger(flyStateHash, 0);
 
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
                 rb2D.gravityScale = 0.0f;
-                Debug.Log("상승 진입");
                 rb2D.MovePosition(newPosition);
 
-                // 위치 도달 시 다음 위치 설정 후 전이
                 if (Mathf.Approximately(transform.position.y, nextPos.y))
                 {
                     dragonState = DragonState.OnFly;
@@ -204,11 +202,10 @@ public class DragonCtrl : MonoBehaviour
                 }
                 break;
 
-            // 다음 타겟 포지션을 잡아 이동
+            // 비행 상태에서 수평 방향으로 목표 위치까지 이동
             case DragonState.OnFly:
                 anim.SetInteger(flyStateHash, 1);
                 nextPos = new Vector2(targetPos.position.x, transform.position.y);
-                Debug.Log("비행 진입");
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyingSpeed * Time.fixedDeltaTime);
 
                 moveDir = UtilityManager.utility.HorizontalDirSet(nextPos);
@@ -216,22 +213,19 @@ public class DragonCtrl : MonoBehaviour
 
                 rb2D.MovePosition(newPosition);
 
-                // 위치 도달 시 전이
                 if (Mathf.Approximately(transform.position.x, targetPos.position.x))
                 {
                     dragonState = DragonState.EndFly;
                 }
                 break;
 
-            // 타겟 위치로 천천히 강하
+            // 목표 위치에 도달하면 천천히 하강하면서 착지
             case DragonState.EndFly:
                 anim.SetInteger(flyStateHash, 2);
                 nextPos = new Vector2(transform.position.x, targetPos.position.y);
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
-                Debug.Log("착륙 진입");
                 rb2D.MovePosition(newPosition);
 
-                // 얘 조건은 Approximately로 안되서 직접 비교 처리
                 if (Mathf.Abs(transform.position.y - targetPos.position.y) < 0.1f)
                 {
                     anim.SetInteger(flyStateHash, 3);
@@ -242,17 +236,12 @@ public class DragonCtrl : MonoBehaviour
                     magicCount = 0;
                 }
                 break;
-            }
+        }
     }
-
 #endregion
 
 #region magic
-// 마법 관련 로직들 정리
-// 마법은 5번을 1세트로 사용
-// 마법을 5번 시전하면 standingPoses 중 하나를 골라 비행 이동
-
-    // 마법 쿨 타임
+    // 마법 공격 후 일정 시간 동안 공격 불가하게 만드는 쿨타임 처리
     private IEnumerator CoolTimeCheck()
     {
         canAttack = false;
@@ -260,32 +249,28 @@ public class DragonCtrl : MonoBehaviour
         canAttack = true;
     }
 
+    // FireBall 마법을 스폰 위치에 따라 생성 및 초기화
     private void UseFireBall()
     {
-        // 풀 오브젝트 가져오기
-        GameObject fireBall = UtilityManager.utility.GetFromPool(fireBallPool, magicCountInPool);
-
-        if(fireBall != null)
-        { 
-            fireBallComp = fireBall.GetComponent<FireBall>();
-
-            // 파이어볼 셋업
-            int idx = Random.Range(0, fireBallSpawnPoses.Count);
-            fireBallSpawnPos = fireBallSpawnPoses[idx];
-            fireBall.transform.position = fireBallSpawnPos.position;
-            fireBall.transform.rotation = fireBallSpawnPos.rotation;
-
-            // fireBall에개 돌아와야 하는 풀 전달하기, 초기화
-            fireBallComp.SetPool(fireBallPool);
+        foreach(Transform fireBallSpawnPos in fireBallSpawnPoses)
+        {
+            GameObject fireBall = UtilityManager.utility.GetFromPool(fireBallPool, magicCountInPool);
+            
+            if(fireBall != null)
+            { 
+                fireBallComp = fireBall.GetComponent<FireBall>();
+                fireBall.transform.position = fireBallSpawnPos.position;
+                fireBall.transform.rotation = fireBallSpawnPos.rotation;
+                fireBallComp.SetPool(fireBallPool);
+            }
         }
     }
 
+    // FireMissile 마법을 각 지정된 위치에 생성 및 초기화
     private void UseFireMissile()
     {
-        // 각 위치 순회하여 미사일 배치
         foreach(Transform fireMissileSpawnPos in fireMissileSpawnPoses)
         {
-            // 파이어 미사일은 생성 로직상 다른 마법보다 많이 필요함, 하나만 필요하니 일단 하드코딩 처리
             GameObject fireMissile = UtilityManager.utility.GetFromPool(fireMissilePool, 10);
 
             if(fireMissile != null)
@@ -298,7 +283,7 @@ public class DragonCtrl : MonoBehaviour
         }
     }
 
-    // 파이어 캐논, 쇼크웨이브는 위치가 플레이어가 왼쪽인지 오른쪽인지에 따라 발사 위치 결정
+    // FireCannon 마법을 플레이어 방향에 따라 좌/우 위치에 생성
     private void UseFireCannon()
     {
         GameObject fireCannon = UtilityManager.utility.GetFromPool(fireCannonPool, magicCountInPool);
@@ -322,6 +307,7 @@ public class DragonCtrl : MonoBehaviour
         }
     }
 
+    // ShockWave 마법을 플레이어 방향에 따라 좌/우 위치에 생성
     private void UseShockWave()
     {
         GameObject shockWave = UtilityManager.utility.GetFromPool(shockWavePool, magicCountInPool);
@@ -345,6 +331,7 @@ public class DragonCtrl : MonoBehaviour
         }
     }
 
+    // Meteor 마법을 플레이어 머리 위에 생성
     private void UseMeteor()
     {
         GameObject meteor = UtilityManager.utility.GetFromPool(meteorPool, magicCountInPool);
@@ -353,7 +340,6 @@ public class DragonCtrl : MonoBehaviour
         {
             meteorComp = meteor.GetComponent<Meteor>();
 
-            // 플레이어 머리 위에 생성
             meteorSpawnPos = new Vector3
             (PlayerCtrl.player.transform.position.x, 
             PlayerCtrl.player.transform.position.y + 10f, 

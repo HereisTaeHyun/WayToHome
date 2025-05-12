@@ -19,7 +19,7 @@ public class PlayerAttack : MeleeAttack
         playerAnim = GetComponent<Animator>();
     }
 
-    // 근접 공격, 공격 범위 콜라이더 생성 후 일정 시간 후 종료, 현재는 0.2초
+    // 근접 공격, 공격 범위 콜라이더 생성 후 일정 시간 후 종료
     public override void Attack()
     {
 

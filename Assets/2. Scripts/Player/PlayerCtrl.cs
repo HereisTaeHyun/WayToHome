@@ -6,8 +6,6 @@ using Image = UnityEngine.UI.Image;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    // 총괄 객체로 Ctrl 객체 사용, 하위 모듈 객체로 이동, 공격, 카메라 등으로 생각 중
-
     // public 변수
 #region public
     public float MaxHP;

@@ -10,12 +10,8 @@ public class CameraCtrl : MonoBehaviour
     {
         cam = GetComponent<CinemachineCamera>();
         confiner = cam.GetComponent<CinemachineConfiner2D>();
-            
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player != null)
-        {
-            cam.Follow = player.transform;
-        }
+
+        cam.Follow = PlayerCtrl.player.transform;
     }
 
     public void ConfinerChanger(PolygonCollider2D newConfiner)
