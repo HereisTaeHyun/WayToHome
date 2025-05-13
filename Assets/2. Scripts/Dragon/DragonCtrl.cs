@@ -116,6 +116,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
         currentHP = maxHP;
         canAttack = true;
         magicCount = 0;
+        detectLayer = LayerMask.GetMask("Player", "Ground", "Wall");
     }
 
     void Update()
@@ -170,6 +171,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
         }
     }
 
+    // ray를 쏘아 첫 대상이 플레이어인지 감지 = 시야 개념
     private bool SeeingPlayer()
     {
         Vector2 direction = PlayerCtrl.player.transform.position - transform.position;
