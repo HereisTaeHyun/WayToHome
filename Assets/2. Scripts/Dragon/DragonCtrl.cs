@@ -40,8 +40,7 @@ public class DragonCtrl : MonoBehaviour
     private int magicCountUntilMove = 5;
 
 
-    // magic List에 마법 저장, 스폰 포인트는 딕셔너리 관리
-    // Dictionary<MagicType, List<Transform>> magicSpawnPosDict;
+    // magic List에 마법 저장
     private List<MagicType> usingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
     private int magicCountInPool = 5;
