@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 using System;
 
-public class DragonCtrl : MonoBehaviour
+public class DragonCtrl : MonoBehaviour, IDamageable
 {
     // public 변수
     public enum DragonState
@@ -26,7 +26,6 @@ public class DragonCtrl : MonoBehaviour
     // 이동 및 상태 관련 변수
     private Vector2 seeDir;
     private Vector2 moveDir;
-    private bool canAttack;
     [SerializeField] private Transform standingPosSet;
     private List<Transform> standingPoses = new List<Transform>();
     private Vector2 nextPos;
@@ -34,6 +33,11 @@ public class DragonCtrl : MonoBehaviour
     private float flyUpDownSpeed = 5.0f;
     private float flyingSpeed = 10.0f;
     private Vector2 newPosition;
+
+    // 공격 조건 변수
+    private bool canAttack;
+    private LayerMask detectLayer;
+    private RaycastHit2D[] rayHits = new RaycastHit2D[10];
 
     // 마법 사용시마다 증가, magicCount == 5이면 standingPos 중 하나로 이동
     private int magicCount;
@@ -126,13 +130,7 @@ public class DragonCtrl : MonoBehaviour
             Fly();
         }
 
-        // 이하 코드는 Idle일때만 가능
-        if(!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
-        {
-            return;
-        }
-
-        if(canAttack == true)
+        if(canAttack == true && SeeingPlayer())
         {
             // 마법을 선택 후 스위칭하여 마법 함수 실행
             int magicIdx = Random.Range(0, usingMagic.Count);
@@ -172,6 +170,46 @@ public class DragonCtrl : MonoBehaviour
         }
     }
 
+    private bool SeeingPlayer()
+    {
+        Vector2 direction = PlayerCtrl.player.transform.position - transform.position;
+        Vector2 directionNorm = UtilityManager.utility.AllDirSet(direction);
+        float distance = Vector2.Distance(transform.position, PlayerCtrl.player.transform.position);
+        int count = Physics2D.RaycastNonAlloc(transform.position, directionNorm, rayHits, distance, detectLayer);
+
+        Debug.DrawRay(transform.position, directionNorm * distance, Color.red, 0.1f); 
+
+        // ray에 닿은 존재가 있으며 첫 충돌이 playerLayer라면 true
+        if (count > 0)
+        {
+            var hit = rayHits[0];
+
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+#region HP
+    public virtual void ChangeHP(float value)
+    {
+        currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
+        Debug.Log(currentHP);
+
+        if (currentHP <= 0)
+        {
+            EnemyDie();
+        }
+    }
+
+    private void EnemyDie()
+    {
+        Debug.Log("드래곤 사망");
+    }
+#endregion
+
 #region Fly
 // 드래곤이 공중으로 이동하는 비행 로직을 처리
     private void Fly()
@@ -191,7 +229,6 @@ public class DragonCtrl : MonoBehaviour
                 anim.SetInteger(flyStateHash, 0);
 
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
-                rb2D.gravityScale = 0.0f;
                 rb2D.MovePosition(newPosition);
 
                 if (Mathf.Approximately(transform.position.y, nextPos.y))
@@ -232,7 +269,6 @@ public class DragonCtrl : MonoBehaviour
                     anim.SetInteger(flyStateHash, 3);
                     anim.SetBool(flyHash, false);
                     dragonState = DragonState.Idle;
-                    rb2D.gravityScale = 1.0f;
                     canAttack = true;
                     magicCount = 0;
                 }

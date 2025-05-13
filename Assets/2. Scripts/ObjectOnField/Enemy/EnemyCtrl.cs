@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemyCtrl : MonoBehaviour
+public class EnemyCtrl : MonoBehaviour, IDamageable
 {
     // Enemy의 공통 행동: 추적, 사망, 아이템 드롭
 
