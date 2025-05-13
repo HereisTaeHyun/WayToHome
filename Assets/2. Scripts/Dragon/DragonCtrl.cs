@@ -20,6 +20,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     // private 변수
     private float maxHP = 50.0f;
     private float currentHP;
+    private bool isDie;
     private Rigidbody2D rb2D;
     private Animator anim;
 
@@ -82,6 +83,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     private readonly int attackTypeHash = Animator.StringToHash("AttackType");
     private readonly int flyHash = Animator.StringToHash("Fly");
     private readonly int flyStateHash = Animator.StringToHash("FlyState");
+    private readonly int dieHash = Animator.StringToHash("Die");
 
 
     void Start()
@@ -113,6 +115,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
         UtilityManager.utility.CreatePool(ref meteorPool, magicList[4], magicCountInPool, magicCountInPool);
 
         // 변수 초기화
+        isDie = false;
         currentHP = maxHP;
         canAttack = true;
         magicCount = 0;
@@ -121,6 +124,11 @@ public class DragonCtrl : MonoBehaviour, IDamageable
 
     void Update()
     {
+        if(isDie == true)
+        {
+            return;
+        }
+        
         seeDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
         anim.SetFloat(seeDirHash, seeDir.x);
 
@@ -194,7 +202,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
         return false;
     }
 
-#region HP
+#region HP, Die
     public virtual void ChangeHP(float value)
     {
         currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
@@ -209,7 +217,12 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     private void EnemyDie()
     {
         Debug.Log("드래곤 사망");
+        isDie = true;
+        rb2D.bodyType = RigidbodyType2D.Kinematic;
+        rb2D.simulated = false;
+        anim.SetTrigger(dieHash);
     }
+
 #endregion
 
 #region Fly
