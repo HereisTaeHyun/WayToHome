@@ -14,7 +14,7 @@ public class CameraCtrl : MonoBehaviour
         cam.Follow = PlayerCtrl.player.transform;
     }
 
-    public void ConfinerChanger(PolygonCollider2D newConfiner)
+    public void ConfinerChanger(Collider2D newConfiner)
     {
         confiner.BoundingShape2D = newConfiner;
     }
