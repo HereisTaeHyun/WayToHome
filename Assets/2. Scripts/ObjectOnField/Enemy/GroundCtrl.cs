@@ -94,7 +94,7 @@ public class GroundCtrl : EnemyCtrl
     // HP 변경 처리
     public override void ChangeHP(float value)
     {
-        currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
+        currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
 
         // 타격 벡터 계산 및 sfx, anim 재생
         Vector2 hitVector =  UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);

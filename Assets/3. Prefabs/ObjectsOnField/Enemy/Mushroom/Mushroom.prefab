@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPushPower: 0
   stunTime: 0
-  MaxHP: 7
+  maxHP: 5
   moveSpeed: 3
   dropItem:
   - {fileID: 5719874273034391547, guid: c50a2965223d9b9408209efb5c3b0f4a, type: 3}
@@ -206,9 +206,6 @@ MonoBehaviour:
   scanningRadius: 10
   damage: -2
   attackRange: 1.5
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &5523733009988000673
 MonoBehaviour:
   m_ObjectHideFlags: 0

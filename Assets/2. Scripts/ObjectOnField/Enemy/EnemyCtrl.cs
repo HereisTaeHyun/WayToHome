@@ -17,7 +17,7 @@ public class EnemyCtrl : MonoBehaviour
 #region private
     [SerializeField] protected float enemyPushPower;
     [SerializeField] protected float stunTime;
-    [SerializeField] protected float MaxHP;
+    [SerializeField] protected float maxHP;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected GameObject[] dropItem;
     [SerializeField] protected float[] itemWeight;
@@ -50,7 +50,7 @@ public class EnemyCtrl : MonoBehaviour
         anim = GetComponent<Animator>();
         isDie = false;
         canMove = true;
-        currentHP = MaxHP;
+        currentHP = maxHP;
         detectLayer = LayerMask.GetMask("Player", "Ground", "Wall");
 
         
@@ -93,7 +93,7 @@ public class EnemyCtrl : MonoBehaviour
     public virtual void ChangeHP(float value)
     {
         StartCoroutine(EnemyGetHit());
-        currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
+        currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
 
         if (currentHP <= 0)
         {

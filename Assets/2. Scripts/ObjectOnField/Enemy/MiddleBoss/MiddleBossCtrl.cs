@@ -190,7 +190,7 @@ public class MiddleBossCtrl : EnemyCtrl
         {
             StartCoroutine(BlinkOnDamage());
         }
-        currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
+        currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
 
         // 타격 sfx 재생
         UtilityManager.utility.PlaySFX(enemyGetHitSFX);

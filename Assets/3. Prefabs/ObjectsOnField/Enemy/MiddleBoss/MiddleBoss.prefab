@@ -382,7 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPushPower: 0
   stunTime: 3
-  MaxHP: 20
+  maxHP: 20
   moveSpeed: 0
   dropItem: []
   itemWeight: []
@@ -392,9 +392,6 @@ MonoBehaviour:
   damage: -1
   warpPointSet: {fileID: 0}
   melleAttackRange: 3
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
   warpSFX: {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
   stunSFX: {fileID: 8300000, guid: 5c7b6d4002009e842bd2621585546d19, type: 3}
   fireBall: {fileID: 7442625623315705553, guid: 455d84a056f7a404dbf2019e3d50d4c9, type: 3}
