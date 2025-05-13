@@ -517,6 +517,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   standingPosSet: {fileID: 0}
+  cam: {fileID: 0}
+  getHitSFX: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
+  dieSFX: {fileID: 8300000, guid: 566d2ea6240b489479a6e9fd608c2621, type: 3}
   magicList:
   - {fileID: 7442625623315705553, guid: 455d84a056f7a404dbf2019e3d50d4c9, type: 3}
   - {fileID: 6327653318441162158, guid: d37ab7d52ba5ffa4394813b5a9ec6e5b, type: 3}

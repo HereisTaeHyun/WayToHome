@@ -28,17 +28,21 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     // 이동 및 상태 관련 변수
     private Vector2 seeDir;
     private Vector2 moveDir;
+
     [SerializeField] private Transform standingPosSet;
     private List<Transform> standingPoses = new List<Transform>();
     private Vector2 nextPos;
     private Transform targetPos;
-    [SerializeField] private CinemachineCamera cam;
     private float flyUpDownSpeed = 5.0f;
     private float flyingSpeed = 10.0f;
     private Vector2 newPosition;
     private SpriteRenderer spriteRenderer;
     private bool ableBlink;
     private static float BLINK_TIME = 0.1f;
+
+    [SerializeField] private CinemachineCamera cam;
+    [SerializeField] protected AudioClip getHitSFX;
+    [SerializeField] protected AudioClip dieSFX;
 
     // 공격 조건 변수
     private bool canAttack;
@@ -217,6 +221,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
             StartCoroutine(BlinkOnDamage());
         }
         currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
+        UtilityManager.utility.PlaySFX(getHitSFX);
 
         if (currentHP <= 0)
         {
@@ -262,7 +267,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
 
     private void EnemyDie()
     {
-        Debug.Log("드래곤 사망");
+        UtilityManager.utility.PlaySFX(dieSFX);
         isDie = true;
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.simulated = false;

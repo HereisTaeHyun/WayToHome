@@ -191,8 +191,6 @@ public class MiddleBossCtrl : EnemyCtrl
             StartCoroutine(BlinkOnDamage());
         }
         currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
-
-        // 타격 sfx 재생
         UtilityManager.utility.PlaySFX(enemyGetHitSFX);
 
         // 체력 0 이하면 사망처리
