@@ -202,7 +202,7 @@ public class MiddleBossCtrl : EnemyCtrl
         }
     }
 
-    // 무적 시간 동안 깜빡거리기 코루틴
+    // 데미지 입으면 깜빡거리기 코루틴
     IEnumerator BlinkOnDamage()
     {
         ableBlink = false;

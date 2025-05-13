@@ -34,6 +34,9 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     private float flyUpDownSpeed = 5.0f;
     private float flyingSpeed = 10.0f;
     private Vector2 newPosition;
+    private SpriteRenderer spriteRenderer;
+    private bool ableBlink;
+    private static float BLINK_TIME = 0.1f;
 
     // 공격 조건 변수
     private bool canAttack;
@@ -90,6 +93,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     {
         anim = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         dragonState = DragonState.Idle;
 
         // 이동, 마법 필요 위치 전달 및 저장
@@ -118,6 +122,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
         isDie = false;
         currentHP = maxHP;
         canAttack = true;
+        ableBlink = true;
         magicCount = 0;
         detectLayer = LayerMask.GetMask("Player", "Ground", "Wall");
     }
@@ -128,7 +133,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
         {
             return;
         }
-        
+
         seeDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
         anim.SetFloat(seeDirHash, seeDir.x);
 
@@ -205,13 +210,52 @@ public class DragonCtrl : MonoBehaviour, IDamageable
 #region HP, Die
     public virtual void ChangeHP(float value)
     {
+        if(ableBlink == true)
+        {
+            StartCoroutine(BlinkOnDamage());
+        }
         currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
-        Debug.Log(currentHP);
 
         if (currentHP <= 0)
         {
             EnemyDie();
         }
+    }
+
+    
+    // 데미지 입으면 깜빡거리기 코루틴
+    IEnumerator BlinkOnDamage()
+    {
+        ableBlink = false;
+        bool isBlink = false;
+        Color color = spriteRenderer.color;
+
+        float maxBlinkTime = 1.0f; // 깜빡이는 총 시간
+        float currentBlinkTIme = 0.0f;
+
+        // 데미지를 입으면 깜빡임
+        while(currentBlinkTIme < maxBlinkTime)
+        {
+            // 이전 상태 깜빡이면 되돌리기, 일반이면 깜빡임 반복시켜서 효과 적용
+            if(isBlink == true)
+            {
+                color.a = 0.0f;
+                spriteRenderer.color = color;
+                isBlink = false;
+            }
+            else if(isBlink == false)
+            {
+                color.a = 1.0f;
+                spriteRenderer.color = color;
+                isBlink = true;
+            }
+            currentBlinkTIme += BLINK_TIME;
+            yield return new WaitForSeconds(BLINK_TIME);
+        }
+        // 기본 상태로 초기화
+        ableBlink = true;
+        color.a = 1.0f;
+        spriteRenderer.color = color;
     }
 
     private void EnemyDie()
