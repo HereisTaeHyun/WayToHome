@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 using System;
+using Unity.Cinemachine;
 
 public class DragonCtrl : MonoBehaviour, IDamageable
 {
@@ -31,6 +32,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     private List<Transform> standingPoses = new List<Transform>();
     private Vector2 nextPos;
     private Transform targetPos;
+    [SerializeField] private CinemachineCamera cam;
     private float flyUpDownSpeed = 5.0f;
     private float flyingSpeed = 10.0f;
     private Vector2 newPosition;
