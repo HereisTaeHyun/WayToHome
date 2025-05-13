@@ -330,7 +330,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
                     anim.SetInteger(flyStateHash, 3);
                     anim.SetBool(flyHash, false);
                     dragonState = DragonState.Idle;
-                    canAttack = true;
+                    StartCoroutine(CoolTimeCheck());
                     magicCount = 0;
                 }
                 break;
