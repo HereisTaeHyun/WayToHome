@@ -353,15 +353,19 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     private IEnumerator ZoomInOut(float targetSize, float changeTime)
     {
         float time = 0.0f;
-
         var lens = cam.Lens;
-        float curretnSize = lens.OrthographicSize;
+        float currentSize = lens.OrthographicSize;
+
+        // 줌인이면 카메라를 하강, 줌아웃이면 카메라를 상승, 테스팅 결과 y 기준 7 정도 달라짐
+        bool isZoomIn = targetSize < currentSize;
+        float camDir = isZoomIn ? -1.0f : 1.0f;
 
         while(time <= changeTime)
         {
             time += Time.deltaTime;
             float t = time/changeTime;
-            lens.OrthographicSize = Mathf.Lerp(curretnSize, targetSize, t);
+
+            lens.OrthographicSize = Mathf.Lerp(currentSize, targetSize, t);
             cam.Lens = lens;
             yield return null;
         }
