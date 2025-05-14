@@ -416,7 +416,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     // ShockWave 마법을 플레이어 방향에 따라 좌/우 위치에 생성
     private IEnumerator UseShockWave()
     {
-        yield return new WaitForSeconds(MAGIC_WAIT_TIME);
+        yield return new WaitForSeconds(1.7f);
         GameObject shockWave = UtilityManager.utility.GetFromPool(shockWavePool, magicCountInPool);
 
         if(shockWave != null)
