@@ -41,8 +41,6 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     private static float BLINK_TIME = 0.1f;
 
     [SerializeField] private CinemachineCamera cam;
-    [SerializeField] protected AudioClip getHitSFX;
-    [SerializeField] protected AudioClip dieSFX;
 
     // 공격 조건 변수
     private bool canAttack;
@@ -84,6 +82,13 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     private FireCannon fireCannonComp;
     private ShockWave shockWaveComp;
      private Meteor meteorComp;
+
+    // 오디오 관련
+    [SerializeField] private AudioClip getHitSFX;
+    [SerializeField] private AudioClip dieSFX;
+    [SerializeField] private AudioClip UseFireMagic;
+    [SerializeField] private AudioClip UseMeteorMagic;
+    [SerializeField] private AudioClip ShockWaveSFX;
 
     // 애니메이션 관련
     private readonly int seeDirHash = Animator.StringToHash("SeeDir");
@@ -364,7 +369,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
         lens.OrthographicSize = targetSize;
         cam.Lens = lens;
     }
-    
+
 #endregion
 
 #region magic
@@ -380,6 +385,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     private IEnumerator UseFireBall()
     {
         yield return new WaitForSeconds(MAGIC_WAIT_TIME);
+        UtilityManager.utility.PlaySFX(UseFireMagic);
         foreach(Transform fireBallSpawnPos in fireBallSpawnPoses)
         {
             GameObject fireBall = UtilityManager.utility.GetFromPool(fireBallPool, magicCountInPool);
@@ -398,6 +404,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     private IEnumerator UseFireMissile()
     {
         yield return new WaitForSeconds(MAGIC_WAIT_TIME);
+        UtilityManager.utility.PlaySFX(UseFireMagic);
         foreach(Transform fireMissileSpawnPos in fireMissileSpawnPoses)
         {
             GameObject fireMissile = UtilityManager.utility.GetFromPool(fireMissilePool, 10);
@@ -416,6 +423,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     private IEnumerator UseFireCannon()
     {
         yield return new WaitForSeconds(MAGIC_WAIT_TIME);
+        UtilityManager.utility.PlaySFX(UseFireMagic);
         GameObject fireCannon = UtilityManager.utility.GetFromPool(fireCannonPool, magicCountInPool);
 
         if(fireCannon != null)
@@ -441,6 +449,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     private IEnumerator UseShockWave()
     {
         yield return new WaitForSeconds(1.7f);
+        UtilityManager.utility.PlaySFX(ShockWaveSFX);
         GameObject shockWave = UtilityManager.utility.GetFromPool(shockWavePool, magicCountInPool);
 
         if(shockWave != null)
@@ -466,6 +475,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     private IEnumerator UseMeteor()
     {
         yield return new WaitForSeconds(MAGIC_WAIT_TIME);
+        UtilityManager.utility.PlaySFX(UseMeteorMagic);
         GameObject meteor = UtilityManager.utility.GetFromPool(meteorPool, magicCountInPool);
 
         if(meteor != null)
