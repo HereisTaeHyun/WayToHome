@@ -296,6 +296,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
 
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
                 rb2D.MovePosition(newPosition);
+                StartCoroutine(ZoomInOut(10.0f, 3.0f));
 
                 if (Mathf.Approximately(transform.position.y, nextPos.y))
                 {
@@ -327,8 +328,10 @@ public class DragonCtrl : MonoBehaviour, IDamageable
             case DragonState.EndFly:
                 anim.SetInteger(flyStateHash, 2);
                 nextPos = new Vector2(transform.position.x, targetPos.position.y);
+
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
                 rb2D.MovePosition(newPosition);
+                StartCoroutine(ZoomInOut(3.5f, 3.0f));
 
                 if (Mathf.Abs(transform.position.y - targetPos.position.y) < 0.1f)
                 {
@@ -341,6 +344,27 @@ public class DragonCtrl : MonoBehaviour, IDamageable
                 break;
         }
     }
+
+    private IEnumerator ZoomInOut(float targetSize, float changeTime)
+    {
+        float time = 0.0f;
+
+        var lens = cam.Lens;
+        float curretnSize = lens.OrthographicSize;
+
+        while(time <= changeTime)
+        {
+            time += Time.deltaTime;
+            float t = time/changeTime;
+            lens.OrthographicSize = Mathf.Lerp(curretnSize, targetSize, t);
+            cam.Lens = lens;
+            yield return null;
+        }
+
+        lens.OrthographicSize = targetSize;
+        cam.Lens = lens;
+    }
+    
 #endregion
 
 #region magic
