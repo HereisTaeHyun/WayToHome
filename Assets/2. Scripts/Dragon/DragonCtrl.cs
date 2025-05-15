@@ -369,10 +369,6 @@ public class DragonCtrl : MonoBehaviour, IDamageable
         var lens = cam.Lens;
         float currentSize = lens.OrthographicSize;
 
-        // 줌인이면 카메라를 하강, 줌아웃이면 카메라를 상승, 테스팅 결과 y 기준 7 정도 달라짐
-        bool isZoomIn = targetSize < currentSize;
-        float camDir = isZoomIn ? -1.0f : 1.0f;
-
         while(time <= changeTime)
         {
             time += Time.deltaTime;
