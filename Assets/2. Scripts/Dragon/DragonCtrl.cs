@@ -41,6 +41,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     private static float BLINK_TIME = 0.1f;
 
     [SerializeField] private CinemachineCamera cam;
+    CinemachineConfiner2D confiner;
 
     // 공격 조건 변수
     private bool canAttack;
@@ -352,7 +353,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
 
     private IEnumerator ZoomInOut(float targetSize, float changeTime)
     {
-        CinemachineConfiner2D confiner = cam.GetComponent<CinemachineConfiner2D>();
+        confiner = cam.GetComponent<CinemachineConfiner2D>();
         float time = 0.0f;
         var lens = cam.Lens;
         float currentSize = lens.OrthographicSize;
