@@ -8,6 +8,7 @@ public class MeteorOff : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Meteor meteor;
     private Color color;
+    [SerializeField] AudioClip explodeSFX;
     public readonly int explodeHash = Animator.StringToHash("Explode");
     void Start()
     {
@@ -20,6 +21,7 @@ public class MeteorOff : MonoBehaviour
 
     public void Explode()
     {
+        UtilityManager.utility.PlaySFX(explodeSFX);
         anim.SetTrigger(explodeHash);
         color.a = 1.0f;
         spriteRenderer.color = color;
