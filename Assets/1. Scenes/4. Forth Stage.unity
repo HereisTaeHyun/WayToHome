@@ -36661,6 +36661,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   breakTime: 3
+--- !u!1 &1024555700 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6953756675085587817, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
+  m_PrefabInstance: {fileID: 1089947489}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1027346742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36795,11 +36800,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2991519651992615023, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 326.92093
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2991519651992615023, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 109.21704
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2991519651992615023, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -36836,6 +36841,10 @@ PrefabInstance:
     - target: {fileID: 6953756675085587817, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
       propertyPath: m_Name
       value: Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6953756675085587817, guid: f4ab6d575eb938c448c4d208d62678bd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46671,6 +46680,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1887225892}
     - target: {fileID: 7278813343581756725, guid: 08916b133ac81b543b3a12b19a3f234f, type: 3}
+      propertyPath: portalOnScene
+      value: 
+      objectReference: {fileID: 1024555700}
+    - target: {fileID: 7278813343581756725, guid: 08916b133ac81b543b3a12b19a3f234f, type: 3}
       propertyPath: standingPosSet
       value: 
       objectReference: {fileID: 51850703}
@@ -46687,7 +46700,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 333642316088633755, guid: 08916b133ac81b543b3a12b19a3f234f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08916b133ac81b543b3a12b19a3f234f, type: 3}
