@@ -27,6 +27,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
 
     // 죽으면 Set할 포탈, 씬에 있는 active false해 둔 포탈임, 프레팝 아님
     [SerializeField] private GameObject portalOnScene;
+    private GameObject portalSpawnPoint;
 
     // 이동 및 상태 관련 변수
     private Vector2 seeDir;
@@ -109,6 +110,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
         anim = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        portalSpawnPoint = transform.Find("PortalSpawnPoint").gameObject;
         dragonState = DragonState.Idle;
 
         // 이동, 마법 필요 위치 전달 및 저장
@@ -286,7 +288,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
 
         // 사망 시 다음 스테이지로 가기 위한 포탈을 자기 위치에 생성
         portalOnScene.SetActive(true);
-        portalOnScene.transform.position = transform.position;
+        portalOnScene.transform.position = portalSpawnPoint.transform.position;
     }
 
 #endregion
