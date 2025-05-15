@@ -24,6 +24,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     private bool isDie;
     private Rigidbody2D rb2D;
     private Animator anim;
+    private GameObject portal;
 
     // 이동 및 상태 관련 변수
     private Vector2 seeDir;
@@ -106,6 +107,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
         anim = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        portal = transform.Find("Portal").gameObject;
         dragonState = DragonState.Idle;
 
         // 이동, 마법 필요 위치 전달 및 저장
@@ -231,7 +233,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
 
         if (currentHP <= 0)
         {
-            EnemyDie();
+            StartCoroutine(EnemyDie());
         }
     }
 
@@ -271,13 +273,15 @@ public class DragonCtrl : MonoBehaviour, IDamageable
         spriteRenderer.color = color;
     }
 
-    private void EnemyDie()
+    private IEnumerator EnemyDie()
     {
         UtilityManager.utility.PlaySFX(dieSFX);
         isDie = true;
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.simulated = false;
         anim.SetTrigger(dieHash);
+        yield return new WaitForSeconds(3.0f);
+        portal.SetActive(true);
     }
 
 #endregion
