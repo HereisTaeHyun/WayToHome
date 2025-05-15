@@ -13,8 +13,6 @@ public class Home : MonoBehaviour
     {
         distance = Vector2.Distance(transform.position, PlayerCtrl.player.transform.position);
 
-        Debug.Log(distance);
-
         if(distance <= 5.0f)
         {
             End();
