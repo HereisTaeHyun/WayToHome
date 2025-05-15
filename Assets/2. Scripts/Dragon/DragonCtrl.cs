@@ -352,6 +352,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
 
     private IEnumerator ZoomInOut(float targetSize, float changeTime)
     {
+        CinemachineConfiner2D confiner = cam.GetComponent<CinemachineConfiner2D>();
         float time = 0.0f;
         var lens = cam.Lens;
         float currentSize = lens.OrthographicSize;
@@ -367,11 +368,13 @@ public class DragonCtrl : MonoBehaviour, IDamageable
 
             lens.OrthographicSize = Mathf.Lerp(currentSize, targetSize, t);
             cam.Lens = lens;
+            confiner?.InvalidateLensCache();
             yield return null;
         }
 
         lens.OrthographicSize = targetSize;
         cam.Lens = lens;
+        confiner?.InvalidateLensCache();
     }
 
 #endregion
