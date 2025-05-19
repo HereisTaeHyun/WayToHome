@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1529144741193501772}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireCannonSpawnPosRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3195641016971423380}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireBallSpawnPos (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 908029030397138446}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireBallSpawnPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6540719756883426444}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireBallSpawnPos (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3185317479032096677}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ShockWaveSpawnPosLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7075723377116756771}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ShockWaveSpawnPoses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1873392836815728788}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireCannonSpawnPoses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3410716314541739357}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireMissleSpawnPos (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8190591437193991321}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireCannonSpawnPosLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8967131154930068682}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ShockWaveSpawnPosRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,9 +328,9 @@ GameObject:
   - component: {fileID: 7298561116718886464}
   - component: {fileID: 5142076632958838746}
   - component: {fileID: 7278813343581756725}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Dragon
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -556,7 +556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8579993056442248491}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireMissleSpawnPos (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 819289797287018730}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireBallSpawnPoses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +652,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 65898469527477164}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireMissleSpawnPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,7 +683,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3622663472718709330}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireMissleSpawnPoses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -719,7 +719,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2840816969722023471}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireMissleSpawnPos (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -750,7 +750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 800035021052878059}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireMissleSpawnPos (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

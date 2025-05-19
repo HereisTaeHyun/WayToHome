@@ -48,6 +48,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     CinemachineConfiner2D confiner;
 
     // 공격 조건 변수
+    private bool isFly;
     private bool canAttack;
     private LayerMask detectLayer;
     private RaycastHit2D[] rayHits = new RaycastHit2D[10];
@@ -138,6 +139,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
         // 변수 초기화
         isDie = false;
         currentHP = maxHP;
+        isFly = false;
         canAttack = true;
         ableBlink = true;
         magicCount = 0;
@@ -227,10 +229,14 @@ public class DragonCtrl : MonoBehaviour, IDamageable
 #region HP, Die
     public virtual void ChangeHP(float value)
     {
-        if(ableBlink == true)
+        if (isFly == true)
         {
-            StartCoroutine(BlinkOnDamage());
+            return;
         }
+        if (ableBlink == true)
+            {
+                StartCoroutine(BlinkOnDamage());
+            }
         currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
         UtilityManager.utility.PlaySFX(getHitSFX);
 
@@ -297,6 +303,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
 // 드래곤이 공중으로 이동하는 비행 로직을 처리
     private void Fly()
     {
+        isFly = true;
         canAttack = false;  
         switch(dragonState)
         {
@@ -356,6 +363,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
                     anim.SetBool(flyHash, false);
                     dragonState = DragonState.Idle;
                     StartCoroutine(CoolTimeCheck());
+                    isFly = false;
                     magicCount = 0;
                 }
                 break;
