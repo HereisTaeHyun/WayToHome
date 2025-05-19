@@ -5,13 +5,13 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemyCtrl : MonoBehaviour, IDamageable
+public class EnemyCtrl : MonoBehaviour, IDamageable, IDie
 {
     // Enemy의 공통 행동: 추적, 사망, 아이템 드롭
 
     // public 변수
     [NonSerialized] public Rigidbody2D rb2D;
-    [NonSerialized] public bool isDie;
+    public bool isDie { get; protected set; }
 
     // protected 변수
 #region private

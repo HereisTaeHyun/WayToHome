@@ -7,7 +7,7 @@ public class BossRoomSensor : PlayerSensor
     [SerializeField] GameObject leftWall;
     [SerializeField] GameObject rightWall;
     [SerializeField] GameObject[] rewards;
-    private EnemyCtrl enemyCtrl;
+    private IDie bossCtrl;
 
     // 보스룸 오브젝트는 기본적으로 비활성화
     protected override void Start()
@@ -15,7 +15,7 @@ public class BossRoomSensor : PlayerSensor
         // isEntered 초기화는 부모에서
         base.Start();
 
-        enemyCtrl = boss.GetComponent<EnemyCtrl>();
+        bossCtrl = boss.GetComponent<IDie>();
         boss.SetActive(false);
         leftWall.SetActive(false);
         rightWall.SetActive(false);
@@ -29,7 +29,7 @@ public class BossRoomSensor : PlayerSensor
      // 보스가 사망했을 때 보상 오브젝트 활성화
     void Update()
     {
-        if(enemyCtrl.isDie == true)
+        if(bossCtrl.isDie == true)
         {
             leftWall.SetActive(false);
             rightWall.SetActive(false);

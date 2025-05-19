@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 using System;
 using Unity.Cinemachine;
 
-public class DragonCtrl : MonoBehaviour, IDamageable
+public class DragonCtrl : MonoBehaviour, IDamageable, IDie
 {
     // public 변수
     public enum DragonState
@@ -21,7 +21,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable
     // private 변수
     private float maxHP = 50.0f;
     private float currentHP;
-    private bool isDie;
+    public bool isDie { get; private set; }
     private Rigidbody2D rb2D;
     private Animator anim;
 
