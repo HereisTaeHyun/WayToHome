@@ -17,12 +17,16 @@ public class BossRoomSensor : PlayerSensor
 
         bossCtrl = boss.GetComponent<IDie>();
         boss.SetActive(false);
-        leftWall.SetActive(false);
-        rightWall.SetActive(false);
 
+        if (leftWall != null && rightWall != null)
+        {
+            leftWall.SetActive(false);
+            rightWall.SetActive(false);
+        }
+        
         foreach (var reward in rewards)
         {
-            reward.SetActive(false);   
+            reward.SetActive(false);
         }
     }
 
@@ -31,8 +35,11 @@ public class BossRoomSensor : PlayerSensor
     {
         if(bossCtrl.isDie == true)
         {
-            leftWall.SetActive(false);
-            rightWall.SetActive(false);
+            if (leftWall != null && rightWall != null)
+            {
+                leftWall.SetActive(false);
+                rightWall.SetActive(false);
+            }
             foreach (var reward in rewards)
             {
                 reward.SetActive(true);
@@ -48,8 +55,11 @@ public class BossRoomSensor : PlayerSensor
             isEntered = true;
             UtilityManager.utility.PlaySFX(encounterSFX);
             boss.SetActive(true);
-            leftWall.SetActive(true);
-            rightWall.SetActive(true);
+            if (leftWall != null && rightWall != null)
+            {
+                leftWall.SetActive(true);
+                rightWall.SetActive(true);
+            }
         }
     }
 }
