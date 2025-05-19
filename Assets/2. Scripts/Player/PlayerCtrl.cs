@@ -11,6 +11,7 @@ public class PlayerCtrl : MonoBehaviour
     public float MaxHP;
     public float currentHP;
     public int money;
+    public SpriteRenderer spriteRenderer;
     [NonSerialized] public bool canMove;
     [NonSerialized] public State state;
     [NonSerialized] public bool canAttack;
@@ -29,11 +30,10 @@ public class PlayerCtrl : MonoBehaviour
 
 #region private
     // private 변수
-    private PlayerMove playerMove;
+    public PlayerMove playerMove { get; private set; }
     private PlayerAttack playerAttack;
     private Rigidbody2D rb2D;
     private Animator playerAnim;
-    private SpriteRenderer spriteRenderer;
     private bool isDie;
     private CapsuleCollider2D coll2D;
     private PhysicsMaterial2D physicsMaterial2D;
