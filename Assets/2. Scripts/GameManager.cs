@@ -223,5 +223,10 @@ public class GameManager : MonoBehaviour
         screenPanel.SetActive(true);
         stateText.text = "Thanks for your play";
         restartText.text = "Press R to return to menu";
+
+        screenImage = screenPanel.GetComponent<Image>();
+        Color currentColor = new Color32(255, 255, 255, 0);
+        screenImage.color = currentColor; 
+        StartCoroutine(UtilityManager.utility.ChangeAlpha(screenImage, GAME_OVER_IMAGE_ALPHA, alphaChangeTime));
     }
 }
