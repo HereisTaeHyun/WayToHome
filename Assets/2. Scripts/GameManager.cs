@@ -218,6 +218,8 @@ public class GameManager : MonoBehaviour
     public void End()
     {
         isEnd = true;
-        Debug.Log(isEnd);
+        screenPanel.SetActive(true);
+        stateText.text = "Thanks for your play";
+        restartText.text = "Press R to return to menu";
     }
 }
