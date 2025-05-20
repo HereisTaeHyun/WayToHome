@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Home : MonoBehaviour
 {
-    private bool isPlayerNear;
     private bool isEnd;
     private float distance;
     private GameObject endPoint;
@@ -12,7 +11,6 @@ public class Home : MonoBehaviour
     
     void Start()
     {
-        isPlayerNear = false;
         isEnd = false;
         endPoint = transform.Find("EndPoint").gameObject;
     }
@@ -22,7 +20,7 @@ public class Home : MonoBehaviour
     {
         distance = Vector2.Distance(transform.position, PlayerCtrl.player.transform.position);
 
-        if(distance <= 10.0f && isPlayerNear == false)
+        if(distance <= 10.0f && isEnd == false)
         {
             StartCoroutine(End());
         }
@@ -30,8 +28,7 @@ public class Home : MonoBehaviour
 
     private IEnumerator End()
     {
-        isPlayerNear = true;
-        Debug.Log("End");
+        isEnd = true;
 
         PlayerCtrl.player.canMove = false;
         PlayerCtrl.player.playerMove.ForceIdle();
@@ -55,7 +52,6 @@ public class Home : MonoBehaviour
         PlayerCtrl.player.spriteRenderer.sortingOrder = -1;
 
         // 플레이어가 집에 들어간 후 페이드 아웃 후 엔딩씬으로
-        isEnd = true;
         yield return new WaitForSeconds(2.0f);
     }
 }
