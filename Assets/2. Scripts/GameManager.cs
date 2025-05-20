@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     private GameObject screenPanel;
     private TextMeshProUGUI stateText;
     private TextMeshProUGUI restartText;
-    private Image gameOverImage;
+    private Image screenImage;
     private float alphaChangeTime = 1.5f;
     private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
 
@@ -163,9 +163,9 @@ public class GameManager : MonoBehaviour
         stateText.text = "You Died";
         restartText.text = "Press R to Restart";
 
-        gameOverImage = screenPanel.GetComponent<Image>();
-        Color currentColor = gameOverImage.color;
-        currentColor.a = 0.0f;
+        screenImage = screenPanel.GetComponent<Image>();
+        Color currentColor = new Color32(255, 255, 255, 0);
+        screenImage.color = currentColor; 
         screenPanel.SetActive(false);
     }
 
@@ -206,7 +206,7 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         screenPanel.SetActive(true);
         // 사망시 UI 점진적으로 짙어지게
-        StartCoroutine(UtilityManager.utility.ChangeAlpha(gameOverImage, GAME_OVER_IMAGE_ALPHA, alphaChangeTime));
+        StartCoroutine(UtilityManager.utility.ChangeAlpha(screenImage, GAME_OVER_IMAGE_ALPHA, alphaChangeTime));
     }
 
     // 다른 객체에서 OnGameOver 호출 시에 사용
