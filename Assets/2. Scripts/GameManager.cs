@@ -24,12 +24,13 @@ public class GameManager : MonoBehaviour
 
     // private 변수
     [SerializeField] private GameObject playerPrefab;
-    private GameObject gameOverPanel;
+    [SerializeField] private GameObject screenUI;
+    private GameObject screenPanel;
     private GameObject player;
     private PlayerMove playerMove;
     private PlayerAttack playerAttack;
-    private GameObject vcam;
-    private CinemachineCamera vcamComp;
+    private GameObject cam;
+    private CinemachineCamera camComp;
     private CameraCtrl cameraCtrl;
     private Transform firstSpawnPos;
     private Vector2 currentSpawnPos;
@@ -106,7 +107,7 @@ public class GameManager : MonoBehaviour
         if(Input.GetButtonDown("Restart") && isGameOver == true && player.activeSelf == false)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            gameOverPanel.SetActive(false);
+            screenPanel.SetActive(false);
             isGameOver = false;
         }
     }
@@ -129,15 +130,15 @@ public class GameManager : MonoBehaviour
     public void CameraSet()
     {
         // 카메라 위치 설정 = player 위치
-        vcam = GameObject.FindGameObjectWithTag("Camera");
-        vcamComp = vcam.GetComponent<CinemachineCamera>();
-        vcamComp.ForceCameraPosition(PlayerCtrl.player.transform.position, Quaternion.identity);
+        cam = GameObject.FindGameObjectWithTag("Camera");
+        camComp = cam.GetComponent<CinemachineCamera>();
+        camComp.ForceCameraPosition(PlayerCtrl.player.transform.position, Quaternion.identity);
 
         // 콘파이너 찾기
         RaycastHit2D hit = Physics2D.Raycast(PlayerCtrl.player.transform.position, Vector2.up, 0.5f);
         if(hit.collider.CompareTag("Confiner"))
         {
-            cameraCtrl = vcam.GetComponent<CameraCtrl>();
+            cameraCtrl = cam.GetComponent<CameraCtrl>();
             PolygonCollider2D polygonCollider2D = hit.collider.GetComponent<PolygonCollider2D>();
             cameraCtrl.ConfinerChanger(polygonCollider2D);
         }
@@ -145,11 +146,11 @@ public class GameManager : MonoBehaviour
 
     private void ScreeUISet()
     {
-        gameOverPanel = GameObject.FindGameObjectWithTag("GameOverPanel");
-        gameOverImage = gameOverPanel.GetComponent<Image>();
+        screenPanel = screenUI.transform.Find("ScreenPanel").gameObject;
+        gameOverImage = screenPanel.GetComponent<Image>();
         Color currentColor = gameOverImage.color;
         currentColor.a = 0.0f;
-        gameOverPanel.SetActive(false);
+        screenPanel.SetActive(false);
     }
 
     // 맵 이동 시에 상태 저장
@@ -187,7 +188,7 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         isGameOver = true;
-        gameOverPanel.SetActive(true);
+        screenPanel.SetActive(true);
         // 사망시 UI 점진적으로 짙어지게
         StartCoroutine(UtilityManager.utility.ChangeAlpha(gameOverImage, GAME_OVER_IMAGE_ALPHA, alphaChangeTime));
     }

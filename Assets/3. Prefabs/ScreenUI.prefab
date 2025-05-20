@@ -148,8 +148,8 @@ GameObject:
   - component: {fileID: 4240159219248009139}
   - component: {fileID: 550187033311189221}
   m_Layer: 5
-  m_Name: GameOverPanel
-  m_TagString: GameOverPanel
+  m_Name: ScreenPanel
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 5109536111232573041}
   - component: {fileID: 4950766898266351144}
   - component: {fileID: 235892114806155119}
+  - component: {fileID: 3214853838410042401}
   m_Layer: 5
   m_Name: ScreenUI
   m_TagString: Untagged
@@ -451,3 +452,15 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3214853838410042401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7816960666117378552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bf0aed58852334fbab7ee94b2e4682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
