@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 using Image = UnityEngine.UI.Image;
 
 public class GameManager : MonoBehaviour
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject screenUI;
     private GameObject screenPanel;
+    private TextMeshProUGUI stateText;
+    private TextMeshProUGUI restartText;
     private Image gameOverImage;
     private float alphaChangeTime = 1.5f;
     private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
@@ -153,6 +156,13 @@ public class GameManager : MonoBehaviour
     private void ScreeUISet()
     {
         screenPanel = screenUI.transform.Find("ScreenPanel").gameObject;
+
+        stateText = screenPanel.transform.Find("StateText").gameObject.GetComponent<TextMeshProUGUI>();
+        restartText = screenPanel.transform.Find("RestartText").gameObject.GetComponent<TextMeshProUGUI>();
+
+        stateText.text = "You Died";
+        restartText.text = "Press R to Restart";
+
         gameOverImage = screenPanel.GetComponent<Image>();
         Color currentColor = gameOverImage.color;
         currentColor.a = 0.0f;
