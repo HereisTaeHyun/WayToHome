@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class Home : MonoBehaviour
 {
+    private bool isPlayerNear;
     private bool isEnd;
     private float distance;
     private GameObject endPoint;
@@ -10,6 +12,7 @@ public class Home : MonoBehaviour
     
     void Start()
     {
+        isPlayerNear = false;
         isEnd = false;
         endPoint = transform.Find("EndPoint").gameObject;
     }
@@ -19,7 +22,7 @@ public class Home : MonoBehaviour
     {
         distance = Vector2.Distance(transform.position, PlayerCtrl.player.transform.position);
 
-        if(distance <= 10.0f && isEnd == false)
+        if(distance <= 10.0f && isPlayerNear == false)
         {
             StartCoroutine(End());
         }
@@ -27,7 +30,7 @@ public class Home : MonoBehaviour
 
     private IEnumerator End()
     {
-        isEnd = true;
+        isPlayerNear = true;
         Debug.Log("End");
 
         PlayerCtrl.player.canMove = false;
@@ -39,16 +42,20 @@ public class Home : MonoBehaviour
         {
             Vector2 targetPoint = new Vector2(endPoint.transform.position.x, PlayerCtrl.player.transform.position.y);
             
+            PlayerCtrl.player.playerMove.playerAnim.SetFloat("Speed", 1.0f);
             PlayerCtrl.player.state = PlayerCtrl.State.Move;
             PlayerCtrl.player.transform.position = Vector2.MoveTowards(PlayerCtrl.player.transform.position, targetPoint, Time.deltaTime * 3.0f);
             yield return null;
         }
 
+        // 엔딩 포인트에 도착
+        PlayerCtrl.player.playerMove.playerAnim.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(2.0f);
         UtilityManager.utility.PlaySFX(getInSFX);
         PlayerCtrl.player.spriteRenderer.sortingOrder = -1;
 
         // 플레이어가 집에 들어간 후 페이드 아웃 후 엔딩씬으로
+        isEnd = true;
         yield return new WaitForSeconds(2.0f);
     }
 }

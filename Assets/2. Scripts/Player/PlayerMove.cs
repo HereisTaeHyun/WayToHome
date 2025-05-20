@@ -8,9 +8,9 @@ public class PlayerMove : MonoBehaviour
     // 걷기, 달리기, 점프, 대쉬 정도 생각 중
 
     // public 변수
-    // 아래들은 디버프 및 아이템에 의한 증감 있음 or 예정
     [NonSerialized] public float moveSpeed = 7.0f;
     [NonSerialized] public int maxJump;
+    public Animator playerAnim;
 
 #region private
     // private 변수
@@ -29,8 +29,6 @@ public class PlayerMove : MonoBehaviour
 
     private bool isPlatform;
     private static float DISABLE_COLLIDER_TIME = 0.5f;
-
-    private Animator playerAnim;
 
     private CapsuleCollider2D coll2D;
     private Vector2 collSize;
