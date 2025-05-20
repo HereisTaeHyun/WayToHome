@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     // private 변수
     [SerializeField] private GameObject playerPrefab;
 
-    [SerializeField] private GameObject screenUI;
+    private GameObject screenUI;
     private GameObject screenPanel;
     private TextMeshProUGUI stateText;
     private TextMeshProUGUI restartText;
@@ -116,7 +116,6 @@ public class GameManager : MonoBehaviour
         if(Input.GetButtonDown("Restart") && isGameOver == true && player.activeSelf == false)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            screenPanel.SetActive(false);
             isGameOver = false;
         }
     }
@@ -155,8 +154,8 @@ public class GameManager : MonoBehaviour
 
     private void ScreeUISet()
     {
+        screenUI = GameObject.FindGameObjectWithTag("ScreenUI");
         screenPanel = screenUI.transform.Find("ScreenPanel").gameObject;
-
         stateText = screenPanel.transform.Find("StateText").gameObject.GetComponent<TextMeshProUGUI>();
         restartText = screenPanel.transform.Find("RestartText").gameObject.GetComponent<TextMeshProUGUI>();
 
@@ -166,6 +165,7 @@ public class GameManager : MonoBehaviour
         screenImage = screenPanel.GetComponent<Image>();
         Color currentColor = new Color32(255, 255, 255, 0);
         screenImage.color = currentColor; 
+
         screenPanel.SetActive(false);
     }
 
@@ -206,6 +206,8 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         screenPanel.SetActive(true);
         // 사망시 UI 점진적으로 짙어지게
+        Color currentColor = new Color32(255, 30, 30, 0);
+        screenImage.color = currentColor; 
         StartCoroutine(UtilityManager.utility.ChangeAlpha(screenImage, GAME_OVER_IMAGE_ALPHA, alphaChangeTime));
     }
 
