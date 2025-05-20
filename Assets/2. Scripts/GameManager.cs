@@ -24,21 +24,27 @@ public class GameManager : MonoBehaviour
 
     // private 변수
     [SerializeField] private GameObject playerPrefab;
+
     [SerializeField] private GameObject screenUI;
     private GameObject screenPanel;
-    private GameObject player;
-    private PlayerMove playerMove;
-    private PlayerAttack playerAttack;
-    private GameObject cam;
-    private CinemachineCamera camComp;
-    private CameraCtrl cameraCtrl;
-    private Transform firstSpawnPos;
-    private Vector2 currentSpawnPos;
     private Image gameOverImage;
     private float alphaChangeTime = 1.5f;
     private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
+
+    private GameObject player;
+    private PlayerMove playerMove;
+    private PlayerAttack playerAttack;
+
+    private GameObject cam;
+    private CinemachineCamera camComp;
+    private CameraCtrl cameraCtrl;
+
+    private Transform firstSpawnPos;
+    private Vector2 currentSpawnPos;
+
     private bool isGameOver;
     public bool readIsGameOver {get {return isGameOver;}}
+    private bool isEnd;
 
     // 싱글톤 선언
     public static GameManager instance = null;
@@ -197,5 +203,11 @@ public class GameManager : MonoBehaviour
     public void GameOverTrigger()
     {
         OnGameOver?.Invoke();
+    }
+
+    public void End()
+    {
+        isEnd = true;
+        Debug.Log(isEnd);
     }
 }

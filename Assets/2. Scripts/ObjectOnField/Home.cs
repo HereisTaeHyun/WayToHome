@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Home : MonoBehaviour
 {
-    private bool isEnd;
+    private bool isPlayerNear;
     private float distance;
     private GameObject endPoint;
     [SerializeField] private AudioClip getInSFX;
     
     void Start()
     {
-        isEnd = false;
+        isPlayerNear = false;
         endPoint = transform.Find("EndPoint").gameObject;
     }
 
@@ -20,7 +20,7 @@ public class Home : MonoBehaviour
     {
         distance = Vector2.Distance(transform.position, PlayerCtrl.player.transform.position);
 
-        if(distance <= 10.0f && isEnd == false)
+        if(distance <= 10.0f && isPlayerNear == false)
         {
             StartCoroutine(End());
         }
@@ -28,7 +28,7 @@ public class Home : MonoBehaviour
 
     private IEnumerator End()
     {
-        isEnd = true;
+        isPlayerNear = true;
 
         PlayerCtrl.player.canMove = false;
         PlayerCtrl.player.playerMove.ForceIdle();
@@ -51,7 +51,8 @@ public class Home : MonoBehaviour
         UtilityManager.utility.PlaySFX(getInSFX);
         PlayerCtrl.player.spriteRenderer.sortingOrder = -1;
 
-        // 플레이어가 집에 들어간 후 페이드 아웃 후 엔딩씬으로
+        // 플레이어가 집에 들어간 후 엔딩
         yield return new WaitForSeconds(2.0f);
+        GameManager.instance.End();
     }
 }
