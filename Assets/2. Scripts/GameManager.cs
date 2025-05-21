@@ -118,6 +118,19 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             isGameOver = false;
         }
+        
+        // if isEnd = true;일 경우 첫 씬 진입 가능하도록
+        if(Input.GetButtonDown("Restart") && isEnd == true)
+        {
+            // 싱글톤들 리셋
+            Destroy(GameManager.instance.gameObject);
+            Destroy(UtilityManager.utility.gameObject);
+            Destroy(ItemManager.itemManager.gameObject);
+            Destroy(PlayerCtrl.player.gameObject);
+
+            SceneManager.LoadScene(0);;
+            isEnd = false;
+        }
     }
 
     // 다시하기 세팅에서 사용
