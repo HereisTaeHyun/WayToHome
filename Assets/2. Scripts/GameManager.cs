@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
+            isEnd = false;
             player = Instantiate(playerPrefab, currentSpawnPos, playerPrefab.transform.rotation);
 
             // 플레이어 초기화
@@ -128,7 +129,7 @@ public class GameManager : MonoBehaviour
             Destroy(ItemManager.itemManager.gameObject);
             Destroy(PlayerCtrl.player.gameObject);
 
-            SceneManager.LoadScene(0);;
+            SceneManager.LoadScene(0);
             isEnd = false;
         }
     }
