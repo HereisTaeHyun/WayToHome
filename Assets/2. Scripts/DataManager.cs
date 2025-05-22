@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 // 플레이어 데이터 구조 클래스
@@ -56,5 +58,8 @@ public class DataManager : MonoBehaviour
         playerData.maxJump = PlayerCtrl.player.playerMove.maxJump;
         playerData.attackDamage = PlayerCtrl.player.playerAttack.attackDamage;
         playerData.currentSpawnPos = GameManager.instance.readCurrentSpawnPos;
+
+        string jsonData = JsonUtility.ToJson(playerData);
+        File.WriteAllText(savePath, jsonData);
     }
 }
