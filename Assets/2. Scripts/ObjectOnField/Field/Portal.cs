@@ -35,7 +35,7 @@ public class Portal : MonoBehaviour
         StartCoroutine(UtilityManager.utility.ChangeAlpha(UIImange, FADE_OUT_ALPHA, fadeOutTime));
 
         //  플레이어 스탯 저장 후 로드 씬
-        GameManager.instance.SavePlayerStat();
+        DataManager.dataManager.Save();
         yield return new WaitForSeconds(fadeOutTime);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         UIImange.enabled = false;

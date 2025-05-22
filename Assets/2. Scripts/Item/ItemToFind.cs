@@ -33,7 +33,7 @@ public class ItemToFind : ItemBase
             switch(itemToFindType) // 아이템 사용
             {    
                 case ItemToFindType.Heal: // 체력 1 회복
-                    if(PlayerCtrl.player.currentHP < PlayerCtrl.player.MaxHP)
+                    if(PlayerCtrl.player.currentHP < PlayerCtrl.player.maxHP)
                     {
                         PlayerCtrl.player.ChangeHP(1);
                         usingPool = ItemManager.itemManager.healPool;

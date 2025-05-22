@@ -8,7 +8,7 @@ public class PlayerCtrl : MonoBehaviour
 {
     // public 변수
 #region public
-    public float MaxHP;
+    public float maxHP;
     public float currentHP;
     public int money;
     public SpriteRenderer spriteRenderer;
@@ -31,7 +31,7 @@ public class PlayerCtrl : MonoBehaviour
 #region private
     // private 변수
     public PlayerMove playerMove { get; private set; }
-    private PlayerAttack playerAttack;
+    public PlayerAttack playerAttack { get; private set; }
     private Rigidbody2D rb2D;
     private Animator playerAnim;
     private bool isDie;
@@ -230,7 +230,7 @@ public class PlayerCtrl : MonoBehaviour
             UtilityManager.utility.PlaySFX(healSFX);
         }
         // 체력 계산 및 체력바 표기
-        currentHP = Mathf.Clamp(currentHP + value, 0, MaxHP);
+        currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
         DisplayHP();
 
         // 데미지가 0이거나 그 이하일 경우 사망
@@ -276,7 +276,7 @@ public class PlayerCtrl : MonoBehaviour
             TextMeshProUGUI HPText = statUI.transform.Find("HP").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI MoneyText = statUI.transform.Find("Money").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI PowerText = statUI.transform.Find("Damage").GetComponent<TextMeshProUGUI>();
-            HPText.text = $"HP : {currentHP} / {MaxHP}";
+            HPText.text = $"HP : {currentHP} / {maxHP}";
             MoneyText.text = $"Money : {money}";
             PowerText.text = $"Damage : {-playerAttack.attackDamage}";
             statUI.SetActive(true);
@@ -300,7 +300,7 @@ public class PlayerCtrl : MonoBehaviour
     // HP 패녈 표시
     private void DisplayHP()
     {
-        HPBar.fillAmount = currentHP / MaxHP;
+        HPBar.fillAmount = currentHP / maxHP;
     }
 
     // 플레이어 사망, GamaManager OnGameOver 이벤트에 등록하여 사용
@@ -344,7 +344,7 @@ public class PlayerCtrl : MonoBehaviour
     
     public void MaxHpPlus()
     {
-        MaxHP += 1;
+        maxHP += 1;
         StartCoroutine(DisplayItemEffect("MaxHP+ !"));
         UtilityManager.utility.PlaySFX(maxHPPlusSFX);
         DisplayHP();

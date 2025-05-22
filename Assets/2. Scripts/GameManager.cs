@@ -8,19 +8,11 @@ using Image = UnityEngine.UI.Image;
 
 public class GameManager : MonoBehaviour
 {
-    // 게임매니저: 게임 오버 및 초기화, 풀 관리, Player UI 관리 맞길 예정
-    // 몬스터는 고정 위치 배치할 것임, 아이템을 풀 관리로 맞길 수 있을지 알아보기
-
     // public 변수
     // 게임 오버 이벤트
     public delegate void GameOverHandler();
     public static event GameOverHandler OnGameOver;
 
-    [NonSerialized] public float baseMaxHP = 10.0f;
-    [NonSerialized] public float baseCurrentHP;
-    [NonSerialized] public int baseMoney = 0;
-    [NonSerialized] public int baseMaxJump = 1;
-    [NonSerialized] public float baseDamage = -1.0f;
     public bool usePortal = true;
 
     // private 변수
@@ -44,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     private Transform firstSpawnPos;
     private Vector2 currentSpawnPos;
+    public Vector2 readCurrentSpawnPos {get {return currentSpawnPos;}}
 
     private bool isGameOver;
     public bool readIsGameOver {get {return isGameOver;}}
@@ -60,7 +53,6 @@ public class GameManager : MonoBehaviour
             player = Instantiate(playerPrefab, currentSpawnPos, playerPrefab.transform.rotation);
 
             // 플레이어 초기화
-            baseCurrentHP = baseMaxHP;
             PlayerCtrl.player.Init();
         }
         else if(instance != this)
@@ -183,28 +175,14 @@ public class GameManager : MonoBehaviour
         screenPanel.SetActive(false);
     }
 
-    // 맵 이동 시에 상태 저장
-    public void SavePlayerStat()
-    {
-        baseMaxHP = PlayerCtrl.player.MaxHP;
-        baseCurrentHP = PlayerCtrl.player.currentHP;
-        baseMoney = PlayerCtrl.player.money;
-        baseMaxJump = playerMove.maxJump;
-        baseDamage = playerAttack.attackDamage;
-    }
-
     // 저장된 스테이트 로드
     public void LoadPlayerStat(Scene scene, LoadSceneMode mode)
     {
-        // PlayerCtrl은 싱글톤이지만 나머지는 아니라 접근 필요
-        playerMove = player.GetComponent<PlayerMove>();
-        playerAttack = player.GetComponent<PlayerAttack>();
-
-        PlayerCtrl.player.MaxHP = baseMaxHP;
-        PlayerCtrl.player.currentHP = baseCurrentHP;
-        PlayerCtrl.player.money = baseMoney;
-        playerMove.maxJump = baseMaxJump;
-        playerAttack.attackDamage = baseDamage;
+        PlayerCtrl.player.maxHP = DataManager.dataManager.playerData.maxHP;
+        PlayerCtrl.player.currentHP = DataManager.dataManager.playerData.currentHP;
+        PlayerCtrl.player.money = DataManager.dataManager.playerData.money;
+        PlayerCtrl.player.playerMove.maxJump = DataManager.dataManager.playerData.maxJump;
+        PlayerCtrl.player.playerAttack.attackDamage = DataManager.dataManager.playerData.attackDamage;
     }
 
     // SpawnPos 셋업
