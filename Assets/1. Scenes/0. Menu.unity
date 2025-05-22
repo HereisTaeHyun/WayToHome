@@ -1518,7 +1518,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 979979665}
         m_TargetAssemblyTypeName: MenuCtrl, Assembly-CSharp
-        m_MethodName: LoadGame
+        m_MethodName: LoadButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1617,7 +1617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1778,6 +1778,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1608602ffa13434419db0577fc3e6622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runningPlayer: {fileID: 2027434753}
+  fade: {fileID: 854137990}
 --- !u!1 &1079514085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1901,7 +1903,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 979979665}
         m_TargetAssemblyTypeName: MenuCtrl, Assembly-CSharp
-        m_MethodName: ExitGame
+        m_MethodName: ExitButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2871,7 +2873,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 979979665}
         m_TargetAssemblyTypeName: MenuCtrl, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: StartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
