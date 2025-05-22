@@ -9,6 +9,7 @@ using Image = UnityEngine.UI.Image;
 public class GameManager : MonoBehaviour
 {
     // public 변수
+
     // 게임 오버 이벤트
     public delegate void GameOverHandler();
     public static event GameOverHandler OnGameOver;
@@ -175,9 +176,11 @@ public class GameManager : MonoBehaviour
         screenPanel.SetActive(false);
     }
 
-    // 저장된 스테이트 로드
+    // 저장된 스테이트 로드 및 적용
     public void LoadPlayerStat(Scene scene, LoadSceneMode mode)
     {
+        DataManager.dataManager.Load();
+
         PlayerCtrl.player.maxHP = DataManager.dataManager.playerData.maxHP;
         PlayerCtrl.player.currentHP = DataManager.dataManager.playerData.currentHP;
         PlayerCtrl.player.money = DataManager.dataManager.playerData.money;

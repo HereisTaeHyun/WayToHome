@@ -14,12 +14,6 @@ public class PlayerData
     public Vector2 currentSpawnPos;
 }
 
-    // [NonSerialized] public float baseMaxHP = 10.0f;
-    // [NonSerialized] public float baseCurrentHP;
-    // [NonSerialized] public int baseMoney = 0;
-    // [NonSerialized] public int baseMaxJump = 1;
-    // [NonSerialized] public float baseDamage = -1.0f;
-
 public class DataManager : MonoBehaviour
 {
 
@@ -35,19 +29,15 @@ public class DataManager : MonoBehaviour
         if(dataManager == null)
         {
             dataManager = this;
+            playerData = new PlayerData();
+            playerData.currentHP = playerData.maxHP;
+            savePath = Application.persistentDataPath + "/save.json";
         }
         else if(dataManager != this)
         {
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
-    }
-
-    void Start()
-    {
-        savePath = Application.persistentDataPath + "/save.json";
-        playerData = new PlayerData();
-        playerData.currentHP = playerData.maxHP;
     }
 
     public void Save()
@@ -61,5 +51,14 @@ public class DataManager : MonoBehaviour
 
         string jsonData = JsonUtility.ToJson(playerData);
         File.WriteAllText(savePath, jsonData);
+    }
+
+    public void Load()
+    {
+        if (File.Exists(savePath))
+        {
+            string jsonData = File.ReadAllText(savePath);
+            playerData = JsonUtility.FromJson<PlayerData>(jsonData);
+        }
     }
 }
