@@ -93,19 +93,19 @@ public class GameManager : MonoBehaviour
         // UI Set
         ScreeUISet();
 
-        // Player Set
-        if(PlayerCtrl.player.gameObject.activeSelf == false)
-        {
-            PlayerCtrl.player.gameObject.SetActive(true);
-            PlayerCtrl.player.Init();
-        }
-
         // 포탈을 통해서 넘어온 경우 해당 맵의 firstSpawnPos를 찾아야 함
         if(usePortal == true)
         {
             firstSpawnPos = GameObject.FindGameObjectWithTag("FirstSpawnPos").transform;
             currentSpawnPos = new Vector2(firstSpawnPos.position.x, firstSpawnPos.position.y);
             usePortal = false;
+        }
+
+        // 플레이어 위치, 저장된 스탯 set
+        if(PlayerCtrl.player.gameObject.activeSelf == false)
+        {
+            PlayerCtrl.player.gameObject.SetActive(true);
+            PlayerCtrl.player.Init();
         }
         PlayerSet();
         StartCoroutine(CameraSetAfterFrame());
