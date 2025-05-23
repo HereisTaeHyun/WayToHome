@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            currentSpawnPos = DataManager.dataManager.playerData.currentSpawnPos;
+            currentSpawnPos = DataManager.dataManager.playerData.savedSpawnPos;
         }
 
         // 플레이어 위치, 저장된 스탯 set
@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
         // if isGameOver = true;일 경우 다시하기 진입 가능하도록
         if(Input.GetButtonDown("Restart") && isGameOver == true && player.activeSelf == false)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(DataManager.dataManager.playerData.savedStage);
             isGameOver = false;
         }
         

@@ -38,7 +38,7 @@ public class MenuCtrl : MonoBehaviour
         {
             StartCoroutine(ChangeAlpha(fadeImage, FADE_OUT_ALPHA, fadeOutTime));
             yield return new WaitForSeconds(fadeOutTime);
-            SceneManager.LoadScene(DataManager.dataManager.playerData.currentStage);
+            SceneManager.LoadScene(DataManager.dataManager.playerData.savedStage);
         }
     }
 

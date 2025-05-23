@@ -12,8 +12,8 @@ public class PlayerData
     public int money = 0;
     public int maxJump = 1;
     public float attackDamage = -1.0f;
-    public Vector2 currentSpawnPos;
-    public string currentStage;
+    public Vector2 savedSpawnPos;
+    public string savedStage;
 }
 
 public class DataManager : MonoBehaviour
@@ -49,8 +49,8 @@ public class DataManager : MonoBehaviour
         playerData.money = PlayerCtrl.player.money;
         playerData.maxJump = PlayerCtrl.player.playerMove.maxJump;
         playerData.attackDamage = PlayerCtrl.player.playerAttack.attackDamage;
-        playerData.currentSpawnPos = GameManager.instance.readCurrentSpawnPos;
-        playerData.currentStage = SceneManager.GetActiveScene().name;
+        playerData.savedSpawnPos = GameManager.instance.readCurrentSpawnPos;
+        playerData.savedStage = SceneManager.GetActiveScene().name;
 
         string jsonData = JsonUtility.ToJson(playerData);
         File.WriteAllText(savePath, jsonData);
@@ -74,8 +74,8 @@ public class DataManager : MonoBehaviour
         playerData.money = 0;
         playerData.maxJump = 1;
         playerData.attackDamage = -1.0f;
-        playerData.currentSpawnPos = new Vector2(-81.66f, -15.06f);
-        playerData.currentStage = "1. First Stage";
+        playerData.savedSpawnPos = new Vector2(-81.66f, -15.06f);
+        playerData.savedStage = "1. First Stage";
 
         string jsonData = JsonUtility.ToJson(playerData);
         File.WriteAllText(savePath, jsonData);
