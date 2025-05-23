@@ -26,14 +26,14 @@ public class DataManager : MonoBehaviour
     public static DataManager dataManager = null;
     void Awake()
     {
-        if(dataManager == null)
+        if (dataManager == null)
         {
             dataManager = this;
             playerData = new PlayerData();
             playerData.currentHP = playerData.maxHP;
             savePath = Application.persistentDataPath + "/save.json";
         }
-        else if(dataManager != this)
+        else if (dataManager != this)
         {
             Destroy(this.gameObject);
         }
@@ -60,5 +60,14 @@ public class DataManager : MonoBehaviour
             string jsonData = File.ReadAllText(savePath);
             playerData = JsonUtility.FromJson<PlayerData>(jsonData);
         }
+    }
+
+    public void NewGame()
+    {
+        playerData.maxHP = 10.0f;
+        playerData.currentHP = playerData.maxHP;
+        playerData.money = 0;
+        playerData.maxJump = 1;
+        playerData.attackDamage = -1.0f;
     }
 }
