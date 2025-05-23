@@ -34,10 +34,12 @@ public class MenuCtrl : MonoBehaviour
 
     public IEnumerator LoadGame()
     {
-        StartCoroutine(ChangeAlpha(fadeImage, FADE_OUT_ALPHA, fadeOutTime));
-        yield return new WaitForSeconds(fadeOutTime);
-        DataManager.dataManager.Load();
-        SceneManager.LoadScene(DataManager.dataManager.playerData.currentStage);
+        if(DataManager.dataManager.Load())
+        {
+            StartCoroutine(ChangeAlpha(fadeImage, FADE_OUT_ALPHA, fadeOutTime));
+            yield return new WaitForSeconds(fadeOutTime);
+            SceneManager.LoadScene(DataManager.dataManager.playerData.currentStage);
+        }
     }
 
 

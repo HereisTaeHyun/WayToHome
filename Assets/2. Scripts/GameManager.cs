@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public delegate void GameOverHandler();
     public static event GameOverHandler OnGameOver;
 
-    public bool usePortal = true;
+    public bool usePortal = false;
 
     // private 변수
     [SerializeField] private GameObject playerPrefab;
@@ -92,6 +92,10 @@ public class GameManager : MonoBehaviour
             firstSpawnPos = GameObject.FindGameObjectWithTag("FirstSpawnPos").transform;
             currentSpawnPos = new Vector2(firstSpawnPos.position.x, firstSpawnPos.position.y);
             usePortal = false;
+        }
+        else
+        {
+            currentSpawnPos = DataManager.dataManager.playerData.currentSpawnPos;
         }
 
         // 플레이어 위치, 저장된 스탯 set

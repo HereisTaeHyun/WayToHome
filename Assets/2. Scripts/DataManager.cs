@@ -56,13 +56,15 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(savePath, jsonData);
     }
 
-    public void Load()
+    public bool Load()
     {
         if (File.Exists(savePath))
         {
             string jsonData = File.ReadAllText(savePath);
             playerData = JsonUtility.FromJson<PlayerData>(jsonData);
+            return true;
         }
+        return false;
     }
 
     public void NewGame()
@@ -72,6 +74,7 @@ public class DataManager : MonoBehaviour
         playerData.money = 0;
         playerData.maxJump = 1;
         playerData.attackDamage = -1.0f;
+        playerData.currentSpawnPos = new Vector2(-81.66f, -15.06f);
         playerData.currentStage = "1. First Stage";
 
         string jsonData = JsonUtility.ToJson(playerData);
