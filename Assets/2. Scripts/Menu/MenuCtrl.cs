@@ -29,8 +29,17 @@ public class MenuCtrl : MonoBehaviour
 
     public void LoadButton()
     {
-
+        StartCoroutine(LoadGame());
     }
+
+    public IEnumerator LoadGame()
+    {
+        StartCoroutine(ChangeAlpha(fadeImage, FADE_OUT_ALPHA, fadeOutTime));
+        yield return new WaitForSeconds(fadeOutTime);
+        DataManager.dataManager.Load();
+        SceneManager.LoadScene(DataManager.dataManager.playerData.currentStage);
+    }
+
 
     public void ExitButton()
     {

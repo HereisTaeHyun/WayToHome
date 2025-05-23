@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // 플레이어 데이터 구조 클래스
 [System.Serializable]
@@ -12,6 +13,7 @@ public class PlayerData
     public int maxJump = 1;
     public float attackDamage = -1.0f;
     public Vector2 currentSpawnPos;
+    public string currentStage;
 }
 
 public class DataManager : MonoBehaviour
@@ -48,6 +50,7 @@ public class DataManager : MonoBehaviour
         playerData.maxJump = PlayerCtrl.player.playerMove.maxJump;
         playerData.attackDamage = PlayerCtrl.player.playerAttack.attackDamage;
         playerData.currentSpawnPos = GameManager.instance.readCurrentSpawnPos;
+        playerData.currentStage = SceneManager.GetActiveScene().name;
 
         string jsonData = JsonUtility.ToJson(playerData);
         File.WriteAllText(savePath, jsonData);
@@ -69,6 +72,7 @@ public class DataManager : MonoBehaviour
         playerData.money = 0;
         playerData.maxJump = 1;
         playerData.attackDamage = -1.0f;
+        playerData.currentStage = "1. First Stage";
 
         string jsonData = JsonUtility.ToJson(playerData);
         File.WriteAllText(savePath, jsonData);
