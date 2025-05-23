@@ -69,5 +69,8 @@ public class DataManager : MonoBehaviour
         playerData.money = 0;
         playerData.maxJump = 1;
         playerData.attackDamage = -1.0f;
+
+        string jsonData = JsonUtility.ToJson(playerData);
+        File.WriteAllText(savePath, jsonData);
     }
 }
