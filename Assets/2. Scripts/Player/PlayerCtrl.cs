@@ -2,12 +2,18 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Image = UnityEngine.UI.Image;
 
 public class PlayerCtrl : MonoBehaviour
 {
     // public 변수
-#region public
+    #region public
+    [NonSerialized] public PlayerInput inputActions;
+    public Vector2 moveInput { get; private set; }
+    public bool jumpInput { get; private set; }
+    public bool attackInput { get; private set; }
+
     public float maxHP;
     public float currentHP;
     public int money;
@@ -73,11 +79,12 @@ public class PlayerCtrl : MonoBehaviour
     public static PlayerCtrl player = null;
     void Awake()
     {
-        if(player == null)
+        if (player == null)
         {
             player = this;
+            inputActions = new PlayerInput();
         }
-        else if(player != this)
+        else if (player != this)
         {
             Destroy(this.gameObject);
         }
@@ -123,10 +130,32 @@ public class PlayerCtrl : MonoBehaviour
     void OnEnable()
     {
         GameManager.OnGameOver += PlayerDie;
+
+        inputActions.Enable();
+
+        inputActions.Player.Move.performed += OnMove;
+        inputActions.Player.Move.canceled += CancelMove;
+
+        inputActions.Player.Jump.performed += ctx => jumpInput = true;
+        inputActions.Player.Jump.canceled += ctx => jumpInput = false;
+
+        inputActions.Player.Attack.performed += ctx => attackInput = true;
+        inputActions.Player.Attack.canceled += ctx => attackInput = false;
     }
     void OnDisable()
     {
         GameManager.OnGameOver -= PlayerDie;
+
+        inputActions.Disable();
+
+        inputActions.Player.Move.performed -= OnMove;
+        inputActions.Player.Move.canceled -= CancelMove;
+
+        inputActions.Player.Jump.performed -= ctx => jumpInput = true;
+        inputActions.Player.Jump.canceled -= ctx => jumpInput = false;
+
+        inputActions.Player.Attack.performed -= ctx => attackInput = true;
+        inputActions.Player.Attack.canceled -= ctx => attackInput = false;
     }
 
     // 각 상태에 따라 필요한 변화 적용하는 곳
@@ -149,9 +178,20 @@ public class PlayerCtrl : MonoBehaviour
             }
         }
     }
-#endregion
+    #endregion
 
-#region Unity 제공 메서드
+    #region 입력 감지
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+    }
+    private void CancelMove(InputAction.CallbackContext context)
+    {
+        moveInput = Vector2.zero;
+    }
+    #endregion
+
+    #region Unity 제공 메서드
     void Start()
     {
         // HP바 초기화, 스탯 변수들 다 임포트 되고 초기화해야 해서 얘는 Start에서 한 번 호츌 필요
@@ -190,8 +230,12 @@ public class PlayerCtrl : MonoBehaviour
 
         // 모듈 클래스 함수 호출
         // canAttack은 상점에서는 공격 막기에 사용 중
-        playerMove.Jump();
-        if(canAttack == true)
+        if (jumpInput)
+        {
+            playerMove.Jump();
+        }
+        
+        if (attackInput && canAttack == true)
         {
             playerAttack.Attack();
         }
@@ -339,7 +383,7 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-#region Stat
+#region 스탯
     // Stat 수정 관련
     
     public void MaxHpPlus()

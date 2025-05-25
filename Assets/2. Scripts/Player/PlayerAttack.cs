@@ -24,15 +24,14 @@ public class PlayerAttack : MeleeAttack
     {
 
         // 공격 방향 설정
-        float h = Input.GetAxis("Horizontal");
-        Vector2 move = new Vector2(h, 0);
-        if(h != 0)
+        Vector2 move = new Vector2(PlayerCtrl.player.moveInput.x, 0);
+        if(PlayerCtrl.player.moveInput.x != 0)
         {
             lastDir = move;
         }
         Vector2 attackDir = UtilityManager.utility.HorizontalDirSet(lastDir);
 
-        if(Input.GetButtonDown("Fire1") && attackCollier.activeSelf == false)
+        if(attackCollier.activeSelf == false)
         {
             // 공격시 해당 위치에 정지, 제어권 반환은 코루틴 끝날때
             PlayerCtrl.player.canMove = false;

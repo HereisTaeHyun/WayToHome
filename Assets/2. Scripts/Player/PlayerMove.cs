@@ -17,7 +17,6 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody2D rb2D;
 
     private Vector2 newVelocity;
-    private float horizontalInput;
     private Vector2 move;
     private Vector2 moveDir;
     private float jumpSpeed = 5.0f;
@@ -77,19 +76,18 @@ public class PlayerMove : MonoBehaviour
     public void HorizontalMove()
     {
         // 이동 방향 지정
-        horizontalInput = Input.GetAxis("Horizontal");
-        move = new Vector2(horizontalInput, 0);
+        move = new Vector2(PlayerCtrl.player.moveInput.x, 0);
         moveDir = UtilityManager.utility.HorizontalDirSet(move);
 
         // 이동 방향 및 move 중인지 체크
         playerAnim.SetFloat(speedHash, move.magnitude);
 
         // player state가 idle인지 move인지 h에 따라 변화
-        if(horizontalInput != 0)
+        if(PlayerCtrl.player.moveInput.x != 0)
         {
             PlayerCtrl.player.state = PlayerCtrl.State.Move;
         }
-        else if(horizontalInput == 0)
+        else if(PlayerCtrl.player.moveInput.x == 0)
         {
             PlayerCtrl.player.state = PlayerCtrl.State.Idle;
         }
@@ -102,10 +100,7 @@ public class PlayerMove : MonoBehaviour
         VerticalSlopeCheck(checkPos);
 
         // 실제 이동 적용 부분
-        if(Input.GetButton("Horizontal"))
-        {
-            ApplyMove(move, moveDir);
-        }
+        ApplyMove(move, moveDir);
     }
 
     private void ApplyMove(Vector2 move, Vector2 moveDir)
@@ -248,7 +243,7 @@ public class PlayerMove : MonoBehaviour
     // jumpCount가 있으며 Jump 입력 받으면
     public void Jump()
     {
-        if(Input.GetButtonDown("Jump") && jumpCount < maxJump) // W에 할당된 "Jump"를 눌러 maxJump까지 점프가능
+        if(jumpCount < maxJump) // W에 할당된 "Jump"를 눌러 maxJump까지 점프가능
         {
             // jumpCount 추가 후 jump
             isJump = true;
@@ -277,7 +272,7 @@ public class PlayerMove : MonoBehaviour
     public void GoDownPlatfom()
     {
         // Vertical negative 키를 눌렀다면, platform 위라면
-        if(Input.GetAxis("Vertical") < 0 && isPlatform == true)
+        if(PlayerCtrl.player.moveInput.y < 0 && isPlatform == true)
         {
             StartCoroutine(DisablePlatformCollider());
         }
