@@ -11,6 +11,7 @@ public class PlayerCtrl : MonoBehaviour
     #region public
     [NonSerialized] public PlayerInput inputActions;
     public Vector2 moveInput { get; private set; }
+    public Vector2 lastMoveDir { get; private set; }
     public bool jumpInput { get; private set; }
     public bool attackInput { get; private set; }
 
@@ -184,6 +185,11 @@ public class PlayerCtrl : MonoBehaviour
     private void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+
+        if (moveInput.x != 0)
+        {
+            lastMoveDir = UtilityManager.utility.HorizontalDirSet(moveInput);
+        }
     }
     private void CancelMove(InputAction.CallbackContext context)
     {

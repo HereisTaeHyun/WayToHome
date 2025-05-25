@@ -77,7 +77,7 @@ public class PlayerMove : MonoBehaviour
     {
         // 이동 방향 지정
         move = new Vector2(PlayerCtrl.player.moveInput.x, 0);
-        moveDir = UtilityManager.utility.HorizontalDirSet(move);
+        moveDir = PlayerCtrl.player.lastMoveDir;
 
         // 이동 방향 및 move 중인지 체크
         playerAnim.SetFloat(speedHash, move.magnitude);

@@ -25,11 +25,7 @@ public class PlayerAttack : MeleeAttack
 
         // 공격 방향 설정
         Vector2 move = new Vector2(PlayerCtrl.player.moveInput.x, 0);
-        if(PlayerCtrl.player.moveInput.x != 0)
-        {
-            lastDir = move;
-        }
-        Vector2 attackDir = UtilityManager.utility.HorizontalDirSet(lastDir);
+        Vector2 attackDir = PlayerCtrl.player.lastMoveDir;
 
         if(attackCollier.activeSelf == false)
         {
