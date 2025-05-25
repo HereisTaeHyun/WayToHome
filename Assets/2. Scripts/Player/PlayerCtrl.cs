@@ -140,6 +140,7 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.Jump.performed += ctx => jumpInput = true;
         inputActions.Player.Jump.canceled += ctx => jumpInput = false;
 
+        inputActions.Player.Attack.performed += OnAttack;
         inputActions.Player.Attack.performed += ctx => attackInput = true;
         inputActions.Player.Attack.canceled += ctx => attackInput = false;
     }
@@ -155,6 +156,7 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.Jump.performed -= ctx => jumpInput = true;
         inputActions.Player.Jump.canceled -= ctx => jumpInput = false;
 
+        inputActions.Player.Attack.performed -= OnAttack;
         inputActions.Player.Attack.performed -= ctx => attackInput = true;
         inputActions.Player.Attack.canceled -= ctx => attackInput = false;
     }
@@ -194,6 +196,14 @@ public class PlayerCtrl : MonoBehaviour
     private void CancelMove(InputAction.CallbackContext context)
     {
         moveInput = Vector2.zero;
+    }
+
+    private void OnAttack(InputAction.CallbackContext context)
+    {
+        if (canAttack)
+        {
+            playerAttack.Attack();
+        }
     }
     #endregion
 
@@ -239,11 +249,6 @@ public class PlayerCtrl : MonoBehaviour
         if (jumpInput)
         {
             playerMove.Jump();
-        }
-        
-        if (attackInput && canAttack == true)
-        {
-            playerAttack.Attack();
         }
 
         // 이동 관련 모듈 함수
