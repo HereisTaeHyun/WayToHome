@@ -53,6 +53,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DisplayStat"",
+                    ""type"": ""Button"",
+                    ""id"": ""8c3327a4-2633-4eba-9255-7be391528d38"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -121,6 +130,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e8d95a8-071a-451f-93ba-66225352fc6a"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DisplayStat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -160,6 +180,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_DisplayStat = m_Player.FindAction("DisplayStat", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -229,6 +250,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_DisplayStat;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -236,6 +258,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @DisplayStat => m_Wrapper.m_Player_DisplayStat;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -254,6 +277,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @DisplayStat.started += instance.OnDisplayStat;
+            @DisplayStat.performed += instance.OnDisplayStat;
+            @DisplayStat.canceled += instance.OnDisplayStat;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -267,6 +293,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @DisplayStat.started -= instance.OnDisplayStat;
+            @DisplayStat.performed -= instance.OnDisplayStat;
+            @DisplayStat.canceled -= instance.OnDisplayStat;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -307,5 +336,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnDisplayStat(InputAction.CallbackContext context);
     }
 }

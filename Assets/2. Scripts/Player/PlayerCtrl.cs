@@ -143,6 +143,8 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.Attack.performed += OnAttack;
         inputActions.Player.Attack.performed += ctx => attackInput = true;
         inputActions.Player.Attack.canceled += ctx => attackInput = false;
+
+        inputActions.Player.DisplayStat.performed += OnDisPlayStat;
     }
     void OnDisable()
     {
@@ -159,6 +161,8 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.Attack.performed -= OnAttack;
         inputActions.Player.Attack.performed -= ctx => attackInput = true;
         inputActions.Player.Attack.canceled -= ctx => attackInput = false;
+
+        inputActions.Player.DisplayStat.performed -= OnDisPlayStat;
     }
 
     // 각 상태에 따라 필요한 변화 적용하는 곳
@@ -204,6 +208,11 @@ public class PlayerCtrl : MonoBehaviour
         {
             playerAttack.Attack();
         }
+    }
+
+    private void OnDisPlayStat(InputAction.CallbackContext context)
+    {
+        DisplayStat();
     }
     #endregion
 
@@ -255,9 +264,6 @@ public class PlayerCtrl : MonoBehaviour
         playerMove.HorizontalMove();
         // 플롯폼은 내려가기 키를 누르면 내려갈 수 있도록하기
         playerMove.GoDownPlatfom();
-        
-        // 플레이어 StatUI 관련 동작
-        DisplayStat();
     }
 #endregion
  
@@ -326,7 +332,7 @@ public class PlayerCtrl : MonoBehaviour
     private void DisplayStat()
     {
         // StatUI == Q로 생각, UI가 있으면 끄고 없으면 키기
-        if(Input.GetButtonDown("StatUI") && statUI.activeSelf == false)
+        if(statUI.activeSelf == false)
         {
             TextMeshProUGUI HPText = statUI.transform.Find("HP").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI MoneyText = statUI.transform.Find("Money").GetComponent<TextMeshProUGUI>();
@@ -336,7 +342,7 @@ public class PlayerCtrl : MonoBehaviour
             PowerText.text = $"Damage : {-playerAttack.attackDamage}";
             statUI.SetActive(true);
         }
-        else if(Input.GetButtonDown("StatUI") && statUI.activeSelf == true)
+        else if(statUI.activeSelf == true)
         {
             statUI.SetActive(false);
         }
