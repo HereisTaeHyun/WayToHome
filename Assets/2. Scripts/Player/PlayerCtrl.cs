@@ -50,6 +50,7 @@ public class PlayerCtrl : MonoBehaviour
     // UI 관련
     private Image HPBar;
     private GameObject statUI;
+    private GameObject menuUI;
     private TextMeshProUGUI text;
     private static float DISPLAY_ITEM_EFFECT_TIME = 1.0f;
     
@@ -107,9 +108,11 @@ public class PlayerCtrl : MonoBehaviour
         HPBar = GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>();
         text = transform.Find("TextCanvas/Text").GetComponent<TextMeshProUGUI>();
         statUI = transform.Find("PlayerUI/GamePlayUI/StatUI").gameObject;
+        menuUI = transform.Find("PlayerUI/MenuUI").gameObject;
 
         text.text = "";
         statUI.SetActive(false);
+        menuUI.SetActive(false);
 
         // 상태 체커 시작 및 상태 변수 초기화
         StartCoroutine(ApplyState());
@@ -145,6 +148,7 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.Attack.canceled += ctx => attackInput = false;
 
         inputActions.Player.DisplayStat.performed += OnDisPlayStat;
+        inputActions.Player.DisplayMenu.performed += OnDisPlayMenu;
     }
     void OnDisable()
     {
@@ -163,6 +167,7 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.Attack.canceled -= ctx => attackInput = false;
 
         inputActions.Player.DisplayStat.performed -= OnDisPlayStat;
+        inputActions.Player.DisplayMenu.performed -= OnDisPlayMenu;
     }
 
     // 각 상태에 따라 필요한 변화 적용하는 곳
@@ -204,7 +209,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private void OnAttack(InputAction.CallbackContext context)
     {
-        if (canAttack)
+        if (canAttack == true)
         {
             playerAttack.Attack();
         }
@@ -213,6 +218,11 @@ public class PlayerCtrl : MonoBehaviour
     private void OnDisPlayStat(InputAction.CallbackContext context)
     {
         DisplayStat();
+    }
+
+    private void OnDisPlayMenu(InputAction.CallbackContext context)
+    {
+        DisplayMenu();
     }
     #endregion
 
@@ -331,7 +341,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private void DisplayStat()
     {
-        // StatUI == Q로 생각, UI가 있으면 끄고 없으면 키기
+        // StatUI == Q, UI가 있으면 끄고 없으면 키기
         if(statUI.activeSelf == false)
         {
             TextMeshProUGUI HPText = statUI.transform.Find("HP").GetComponent<TextMeshProUGUI>();
@@ -345,6 +355,23 @@ public class PlayerCtrl : MonoBehaviour
         else if(statUI.activeSelf == true)
         {
             statUI.SetActive(false);
+        }
+    }
+
+    // esc로 메뉴 열고 닫기 가능 첫 화면으로, 리트라이 정도 기능 필요
+    private void DisplayMenu()
+    {
+        if (menuUI.activeSelf == false)
+        {
+            menuUI.SetActive(true);
+            canAttack = false;
+            Time.timeScale = 0f;
+        }
+        else if (menuUI.activeSelf == true)
+        {
+            menuUI.SetActive(false);
+            canAttack = true;
+            Time.timeScale = 1f;
         }
     }
 
