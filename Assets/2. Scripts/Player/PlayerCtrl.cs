@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using Image = UnityEngine.UI.Image;
 
 public class PlayerCtrl : MonoBehaviour
@@ -33,9 +34,9 @@ public class PlayerCtrl : MonoBehaviour
         Stun,
         Slow,
     }
-#endregion
+    #endregion
 
-#region private
+    #region private
     // private 변수
     public PlayerMove playerMove { get; private set; }
     public PlayerAttack playerAttack { get; private set; }
@@ -53,10 +54,10 @@ public class PlayerCtrl : MonoBehaviour
     private GameObject menuUI;
     private TextMeshProUGUI text;
     private static float DISPLAY_ITEM_EFFECT_TIME = 1.0f;
-    
+
     // 무적 관련
     private bool invincible;
-    public bool readInvincible {get {return invincible;}} // 적 관련 객체에서 가끔 참고
+    public bool readInvincible { get { return invincible; } } // 적 관련 객체에서 가끔 참고
     private static float INVINCIBLE_TIME = 2.0f;
     private float invincibleTimer;
     private static float BLINK_TIME = 0.1f;
@@ -69,14 +70,14 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private AudioClip attackPlusSFX;
     [SerializeField] private AudioClip jumpPlusSFX;
     [SerializeField] private AudioClip moneySFX;
-    
+
     // 디버프 관련(스턴, 슬로우 생각 중)
     private float debuffTimer;
 
     protected readonly int takeHitHash = Animator.StringToHash("TakeHit");
-#endregion
+    #endregion
 
-#region 초기화
+    #region 초기화
     // 싱글톤 선언
     public static PlayerCtrl player = null;
     void Awake()
@@ -173,17 +174,17 @@ public class PlayerCtrl : MonoBehaviour
     // 각 상태에 따라 필요한 변화 적용하는 곳
     private IEnumerator ApplyState()
     {
-        while(isDie != true)
+        while (isDie != true)
         {
             yield return new WaitForSeconds(0.3f);
 
             // 정지 상태이면 마찰력 증가, 그래야 멈출때랑 경사에서 안미끄러짐
-            if(state == State.Move)
+            if (state == State.Move)
             {
                 physicsMaterial2D.friction = 1.8f;
                 coll2D.sharedMaterial = physicsMaterial2D;
             }
-            else if(state == State.Idle)
+            else if (state == State.Idle)
             {
                 physicsMaterial2D.friction = 20.0f;
                 coll2D.sharedMaterial = physicsMaterial2D;
@@ -217,6 +218,10 @@ public class PlayerCtrl : MonoBehaviour
 
     private void OnDisPlayStat(InputAction.CallbackContext context)
     {
+        if (canMove == false)
+        {
+            return;
+        }
         DisplayStat();
     }
 
@@ -238,19 +243,19 @@ public class PlayerCtrl : MonoBehaviour
     {
         // 타이머는 움직임 제어 권한 위에, 안그러면 디버프나 무적 안풀릴떄 생김
         // 무적시간일 경우 무적 타이머 초마다 차감하여 통상상태로 되돌림
-        if(invincible == true)
+        if (invincible == true)
         {
             invincibleTimer -= Time.deltaTime;
-            if(invincibleTimer <= 0)
+            if (invincibleTimer <= 0)
             {
                 invincible = false;
             }
         }
-         // (debuffTimer > 0) == getDebuff를 당함, 이 경우도 타이머 차감하여 통상 상태로
-        if(debuffTimer > 0)
+        // (debuffTimer > 0) == getDebuff를 당함, 이 경우도 타이머 차감하여 통상 상태로
+        if (debuffTimer > 0)
         {
             debuffTimer -= Time.deltaTime;
-            if(debuffTimer <= 0)
+            if (debuffTimer <= 0)
             {
                 canMove = true;
                 playerMove.moveSpeed = playerMove.readOriginSpeed;
@@ -258,7 +263,7 @@ public class PlayerCtrl : MonoBehaviour
         }
 
         // canMove == true거나 isGameOver == false playerMove 객체 접근
-        if(canMove == false || GameManager.instance.readIsGameOver == true)
+        if (canMove == false || GameManager.instance.readIsGameOver == true)
         {
             return;
         }
@@ -275,17 +280,17 @@ public class PlayerCtrl : MonoBehaviour
         // 플롯폼은 내려가기 키를 누르면 내려갈 수 있도록하기
         playerMove.GoDownPlatfom();
     }
-#endregion
- 
-#region 체력, 게임 오버 관련
+    #endregion
+
+    #region 체력, 게임 오버 관련
     // 플레이어 체력 수정
     public void ChangeHP(float value)
     {
         // 데미지일 경우 체크 사항
-        if(value < 0)
+        if (value < 0)
         {
             // 이미 무적 시간이면 다음 단계 진입하지 않음
-            if(invincible == true)
+            if (invincible == true)
             {
                 return;
             }
@@ -296,7 +301,7 @@ public class PlayerCtrl : MonoBehaviour
             // 데미지 입으면 무적 시간 동안 깜빡임
             StartCoroutine(BlinkUntilInvincible());
         }
-        else if(value > 0)  // value가 plus면 힐이니까 힐 사운드 재생
+        else if (value > 0)  // value가 plus면 힐이니까 힐 사운드 재생
         {
             UtilityManager.utility.PlaySFX(healSFX);
         }
@@ -305,7 +310,7 @@ public class PlayerCtrl : MonoBehaviour
         DisplayHP();
 
         // 데미지가 0이거나 그 이하일 경우 사망
-        if(currentHP <= 0)
+        if (currentHP <= 0)
         {
             GameOver();
         }
@@ -317,16 +322,16 @@ public class PlayerCtrl : MonoBehaviour
         bool isBlink = false;
         Color color = spriteRenderer.color;
         // 무적이고 == 데미지를 입었고, 사망이 아니라면 깜빡임 시작
-        while(invincible == true && isDie == false)
+        while (invincible == true && isDie == false)
         {
             // 이전 상태 깜빡이면 되돌리기, 일반이면 깜빡임 반복시켜서 효과 적용
-            if(isBlink == true)
+            if (isBlink == true)
             {
                 color.a = 0.0f;
                 spriteRenderer.color = color;
                 isBlink = false;
             }
-            else if(isBlink == false)
+            else if (isBlink == false)
             {
                 color.a = 1.0f;
                 spriteRenderer.color = color;
@@ -342,7 +347,7 @@ public class PlayerCtrl : MonoBehaviour
     private void DisplayStat()
     {
         // StatUI == Q, UI가 있으면 끄고 없으면 키기
-        if(statUI.activeSelf == false)
+        if (statUI.activeSelf == false)
         {
             TextMeshProUGUI HPText = statUI.transform.Find("HP").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI MoneyText = statUI.transform.Find("Money").GetComponent<TextMeshProUGUI>();
@@ -352,7 +357,7 @@ public class PlayerCtrl : MonoBehaviour
             PowerText.text = $"Damage : {-playerAttack.attackDamage}";
             statUI.SetActive(true);
         }
-        else if(statUI.activeSelf == true)
+        else if (statUI.activeSelf == true)
         {
             statUI.SetActive(false);
         }
@@ -364,12 +369,14 @@ public class PlayerCtrl : MonoBehaviour
         if (menuUI.activeSelf == false)
         {
             menuUI.SetActive(true);
+            canMove = false;
             canAttack = false;
             Time.timeScale = 0f;
         }
         else if (menuUI.activeSelf == true)
         {
             menuUI.SetActive(false);
+            canMove = true;
             canAttack = true;
             Time.timeScale = 1f;
         }
@@ -409,13 +416,13 @@ public class PlayerCtrl : MonoBehaviour
         StopAllCoroutines();
         gameObject.SetActive(false);
     }
-#endregion
+    #endregion
 
     // 적 객체에서 디버프 타입, 시간 받아서 적용
     public void GetDebuff(DebuffType debuffType, float debuffTime)
     {
         debuffTimer = debuffTime;
-        switch(debuffType)
+        switch (debuffType)
         {
             case DebuffType.Stun:
                 canMove = false;
@@ -427,9 +434,9 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-#region 스탯
+    #region 스탯
     // Stat 수정 관련
-    
+
     public void MaxHpPlus()
     {
         maxHP += 1;
@@ -462,5 +469,15 @@ public class PlayerCtrl : MonoBehaviour
         yield return new WaitForSeconds(DISPLAY_ITEM_EFFECT_TIME);
         text.text = "";
     }
-#endregion
+    #endregion
+
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void ReloadSavedScene()
+    {
+        SceneManager.LoadScene(DataManager.dataManager.playerData.savedStage);
+    }
 }
