@@ -31,8 +31,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5638001944380687770}
   - {fileID: 8479638449850638209}
+  - {fileID: 5638001944380687770}
   m_Father: {fileID: 4656661011157553747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1375,7 +1375,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1220307346567023135}
         m_TargetAssemblyTypeName: PlayerCtrl, Assembly-CSharp
-        m_MethodName: ReloadSavedScene
+        m_MethodName: ReloadSavedSceneButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2503,7 +2503,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1220307346567023135}
         m_TargetAssemblyTypeName: PlayerCtrl, Assembly-CSharp
-        m_MethodName: ReturnToMenu
+        m_MethodName: ReturnToMenuButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

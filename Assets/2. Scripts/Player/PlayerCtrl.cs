@@ -50,10 +50,14 @@ public class PlayerCtrl : MonoBehaviour
 
     // UI 관련
     private Image HPBar;
+    private GameObject gamePlayUI;
+    private Image fadeImage;
     private GameObject statUI;
     private GameObject menuUI;
     private TextMeshProUGUI text;
     private static float DISPLAY_ITEM_EFFECT_TIME = 1.0f;
+    private float fadeOutTime = 1.5f;
+    private const float FADE_OUT_ALPHA = 1.0f;
 
     // 무적 관련
     private bool invincible;
@@ -108,6 +112,8 @@ public class PlayerCtrl : MonoBehaviour
         // UI 관련
         HPBar = GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>();
         text = transform.Find("TextCanvas/Text").GetComponent<TextMeshProUGUI>();
+        gamePlayUI = transform.Find("PlayerUI/GamePlayUI").gameObject;
+        fadeImage = gamePlayUI.GetComponent<Image>();
         statUI = transform.Find("PlayerUI/GamePlayUI/StatUI").gameObject;
         menuUI = transform.Find("PlayerUI/MenuUI").gameObject;
 
@@ -131,10 +137,16 @@ public class PlayerCtrl : MonoBehaviour
         DisplayHP();
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Init();
+    }
+
     // 이벤트 등록 부분
     void OnEnable()
     {
         GameManager.OnGameOver += PlayerDie;
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
         inputActions.Enable();
 
@@ -154,6 +166,7 @@ public class PlayerCtrl : MonoBehaviour
     void OnDisable()
     {
         GameManager.OnGameOver -= PlayerDie;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
 
         inputActions.Disable();
 
@@ -471,13 +484,38 @@ public class PlayerCtrl : MonoBehaviour
     }
     #endregion
 
-    public void ReturnToMenu()
+
+    public void ReturnToMenuButton()
     {
+        Time.timeScale = 1f;
+        StartCoroutine(ReturnToMenu());
+    }
+
+    private IEnumerator ReturnToMenu()
+    {
+        StartCoroutine(UtilityManager.utility.ChangeAlpha(fadeImage, FADE_OUT_ALPHA, fadeOutTime));
+        yield return new WaitForSeconds(fadeOutTime);
+
+        // 싱글톤들 리셋
+        Destroy(GameManager.instance.gameObject);
+        Destroy(UtilityManager.utility.gameObject);
+        Destroy(ItemManager.itemManager.gameObject);
+        Destroy(PlayerCtrl.player.gameObject);
+
         SceneManager.LoadScene(0);
     }
 
-    public void ReloadSavedScene()
+    public void ReloadSavedSceneButton()
     {
+        Time.timeScale = 1f;
+        StartCoroutine(ReloadSavedScene());
+    }
+    private IEnumerator ReloadSavedScene()
+    {
+        StartCoroutine(UtilityManager.utility.ChangeAlpha(fadeImage, FADE_OUT_ALPHA, fadeOutTime));
+        yield return new WaitForSeconds(fadeOutTime);
+
+        menuUI.SetActive(false);
         SceneManager.LoadScene(DataManager.dataManager.playerData.savedStage);
     }
 }
