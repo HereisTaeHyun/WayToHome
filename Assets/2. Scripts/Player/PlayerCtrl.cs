@@ -50,7 +50,7 @@ public class PlayerCtrl : MonoBehaviour
 
     // UI 관련
     private Image HPBar;
-    private GameObject gamePlayUI;
+    private GameObject fadeUI;
     private Image fadeImage;
     private GameObject statUI;
     private GameObject menuUI;
@@ -112,11 +112,14 @@ public class PlayerCtrl : MonoBehaviour
         // UI 관련
         HPBar = GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>();
         text = transform.Find("TextCanvas/Text").GetComponent<TextMeshProUGUI>();
-        gamePlayUI = transform.Find("PlayerUI/GamePlayUI").gameObject;
-        fadeImage = gamePlayUI.GetComponent<Image>();
+        fadeUI = transform.Find("PlayerUI/FadeUI").gameObject;
+        fadeImage = fadeUI.GetComponent<Image>();
         statUI = transform.Find("PlayerUI/GamePlayUI/StatUI").gameObject;
         menuUI = transform.Find("PlayerUI/MenuUI").gameObject;
 
+        Color newColor = fadeImage.color;
+        newColor.a = 0.0f;
+        fadeImage.color = newColor;
         text.text = "";
         statUI.SetActive(false);
         menuUI.SetActive(false);
