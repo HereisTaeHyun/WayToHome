@@ -101,6 +101,8 @@ public class PlayerCtrl : MonoBehaviour
     // 초기화
     public void Init()
     {
+        StopAllCoroutines();
+        
         playerMove = GetComponent<PlayerMove>();
         playerAttack = GetComponent<PlayerAttack>();
         rb2D = GetComponent<Rigidbody2D>();
