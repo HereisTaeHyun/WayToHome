@@ -370,9 +370,9 @@ public class PlayerCtrl : MonoBehaviour
             TextMeshProUGUI HPText = statUI.transform.Find("HP").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI MoneyText = statUI.transform.Find("Money").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI PowerText = statUI.transform.Find("Damage").GetComponent<TextMeshProUGUI>();
-            HPText.text = $"HP : {currentHP} / {maxHP}";
-            MoneyText.text = $"Money : {money}";
-            PowerText.text = $"Damage : {-playerAttack.attackDamage}";
+            HPText.text = $" :  {currentHP} / {maxHP}";
+            MoneyText.text = $" :  {money}";
+            PowerText.text = $" :  {-playerAttack.attackDamage}";
             statUI.SetActive(true);
         }
         else if (statUI.activeSelf == true)
