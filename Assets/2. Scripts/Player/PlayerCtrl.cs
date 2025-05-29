@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 using Image = UnityEngine.UI.Image;
 
 public class PlayerCtrl : MonoBehaviour
@@ -58,6 +59,10 @@ public class PlayerCtrl : MonoBehaviour
     private static float DISPLAY_ITEM_EFFECT_TIME = 1.0f;
     private float fadeOutTime = 1.5f;
     private const float FADE_OUT_ALPHA = 1.0f;
+
+    private Dictionary<GameObject, GameObject> HPCoreData = new Dictionary<GameObject, GameObject>();
+    private Dictionary<GameObject, GameObject> moneyCoreData = new Dictionary<GameObject, GameObject>();
+    private Dictionary<GameObject, GameObject> damageCoreData = new Dictionary<GameObject, GameObject>();
 
     // 무적 관련
     private bool invincible;
@@ -387,9 +392,9 @@ public class PlayerCtrl : MonoBehaviour
 
     private void WriteCurrentStat()
     {
-        TextMeshProUGUI HPText = statUI.transform.Find("HP").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI MoneyText = statUI.transform.Find("Money").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI PowerText = statUI.transform.Find("Damage").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI HPText = statUI.transform.Find("Text/HP").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI MoneyText = statUI.transform.Find("Text/Money").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI PowerText = statUI.transform.Find("Text/Damage").GetComponent<TextMeshProUGUI>();
         HPText.text = $" :  {currentHP} / {maxHP}";
         MoneyText.text = $" :  {money}";
         PowerText.text = $" :  {-playerAttack.attackDamage}";
