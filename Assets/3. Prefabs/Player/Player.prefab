@@ -189,7 +189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8195893422293348951}
   m_Layer: 5
-  m_Name: DamageGemDesign
+  m_Name: GemDesign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 1297052904829599052}
   - component: {fileID: 2333085473215106166}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: Pipe (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -717,7 +717,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7853269525530482267}
   m_Layer: 5
-  m_Name: MoneyGemDesign
+  m_Name: GemDesign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1583,7 +1583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8485736825936000649}
   m_Layer: 5
-  m_Name: MoneyGem
+  m_Name: MoneyCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2000,7 +2000,7 @@ GameObject:
   - component: {fileID: 3334881662265045394}
   - component: {fileID: 7112011431755539709}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: Pipe (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3094,7 +3094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1372683127527348130}
   m_Layer: 5
-  m_Name: HPGemDesign
+  m_Name: GemDesign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3759,7 +3759,7 @@ GameObject:
   - component: {fileID: 7893721030935520117}
   - component: {fileID: 4458965483678854405}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Pipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4194,7 +4194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8353978524033864140}
   m_Layer: 5
-  m_Name: HPGem
+  m_Name: HPCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4269,7 +4269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 93300251162055040}
   m_Layer: 5
-  m_Name: DamageGem
+  m_Name: DamageCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4533,7 +4533,7 @@ GameObject:
   - component: {fileID: 3918932894115200054}
   - component: {fileID: 5284486325693422866}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Pipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5497,7 +5497,7 @@ GameObject:
   - component: {fileID: 3011436096592365874}
   - component: {fileID: 7736589063542974483}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Pipe (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5573,7 +5573,7 @@ GameObject:
   - component: {fileID: 4110510501819081383}
   - component: {fileID: 437809041658961014}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Pipe (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6139,7 +6139,7 @@ GameObject:
   - component: {fileID: 6532590859944821459}
   - component: {fileID: 3861790502925770744}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Pipe (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6351,7 +6351,7 @@ GameObject:
   - component: {fileID: 2102405345899836027}
   - component: {fileID: 8244913359568491241}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: Pipe (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6427,7 +6427,7 @@ GameObject:
   - component: {fileID: 1643869010854317234}
   - component: {fileID: 1404745976221494661}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Pipe (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7702,7 +7702,7 @@ GameObject:
   - component: {fileID: 8226794754101770054}
   - component: {fileID: 7866261202635307554}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Pipe (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8401,7 +8401,7 @@ GameObject:
   - component: {fileID: 6410947060309913060}
   - component: {fileID: 248389496977398282}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Pipe (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8688,7 +8688,7 @@ GameObject:
   - component: {fileID: 9213087543780021548}
   - component: {fileID: 5225890456689237211}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Pipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
