@@ -361,24 +361,42 @@ public class PlayerCtrl : MonoBehaviour
         color.a = 1.0f;
         spriteRenderer.color = color;
     }
+    #endregion
 
+    #region UI 관련
+    // HP 패널 표시
+    private void DisplayHP()
+    {
+        HPBar.fillAmount = currentHP / maxHP;
+    }
+
+    // StatUI == Q, UI가 있으면 끄고 없으면 키기
     private void DisplayStat()
     {
-        // StatUI == Q, UI가 있으면 끄고 없으면 키기
         if (statUI.activeSelf == false)
         {
-            TextMeshProUGUI HPText = statUI.transform.Find("HP").GetComponent<TextMeshProUGUI>();
-            TextMeshProUGUI MoneyText = statUI.transform.Find("Money").GetComponent<TextMeshProUGUI>();
-            TextMeshProUGUI PowerText = statUI.transform.Find("Damage").GetComponent<TextMeshProUGUI>();
-            HPText.text = $" :  {currentHP} / {maxHP}";
-            MoneyText.text = $" :  {money}";
-            PowerText.text = $" :  {-playerAttack.attackDamage}";
+            WriteCurrentStat();
+            DrawStatGem();
             statUI.SetActive(true);
         }
         else if (statUI.activeSelf == true)
         {
             statUI.SetActive(false);
         }
+    }
+
+    private void WriteCurrentStat()
+    {
+        TextMeshProUGUI HPText = statUI.transform.Find("HP").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI MoneyText = statUI.transform.Find("Money").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI PowerText = statUI.transform.Find("Damage").GetComponent<TextMeshProUGUI>();
+        HPText.text = $" :  {currentHP} / {maxHP}";
+        MoneyText.text = $" :  {money}";
+        PowerText.text = $" :  {-playerAttack.attackDamage}";
+    }
+    private void DrawStatGem()
+    {
+        Debug.Log("DrawStatGem 구현 필요");
     }
 
     // esc로 메뉴 열고 닫기 가능 첫 화면으로, 리트라이 정도 기능 필요
@@ -399,6 +417,7 @@ public class PlayerCtrl : MonoBehaviour
             Time.timeScale = 1f;
         }
     }
+    #endregion
 
     // 게임오버, GameManager 이벤트 호출 역할
     private void GameOver()
@@ -408,12 +427,6 @@ public class PlayerCtrl : MonoBehaviour
         isDie = true;
         state = State.Die;
         GameManager.instance.GameOverTrigger();
-    }
-
-    // HP 패녈 표시
-    private void DisplayHP()
-    {
-        HPBar.fillAmount = currentHP / maxHP;
     }
 
     // 플레이어 사망, GamaManager OnGameOver 이벤트에 등록하여 사용
@@ -434,7 +447,6 @@ public class PlayerCtrl : MonoBehaviour
         StopAllCoroutines();
         gameObject.SetActive(false);
     }
-    #endregion
 
     // 적 객체에서 디버프 타입, 시간 받아서 적용
     public void GetDebuff(DebuffType debuffType, float debuffTime)
@@ -487,9 +499,9 @@ public class PlayerCtrl : MonoBehaviour
         yield return new WaitForSeconds(DISPLAY_ITEM_EFFECT_TIME);
         text.text = "";
     }
-    #endregion
+#endregion
 
-
+# region 메뉴 버튼 관련
     public void ReturnToMenuButton()
     {
         Time.timeScale = 1f;
@@ -523,4 +535,5 @@ public class PlayerCtrl : MonoBehaviour
         menuUI.SetActive(false);
         SceneManager.LoadScene(DataManager.dataManager.playerData.savedStage);
     }
+    #endregion
 }
