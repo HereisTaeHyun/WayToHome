@@ -48,6 +48,9 @@ public class PlayerCtrl : MonoBehaviour
     private PhysicsMaterial2D physicsMaterial2D;
     private readonly int dieHash = Animator.StringToHash("Die");
     [SerializeField] private GameObject graveStone;
+    [SerializeField] private StatGemBar HPGemBar;
+    [SerializeField] private StatGemBar moneyGemBar;
+    [SerializeField] private StatGemBar damageGemBar;
 
     // UI 관련
     private Image HPBar;
@@ -397,7 +400,9 @@ public class PlayerCtrl : MonoBehaviour
     }
     private void DrawStatGem()
     {
-        Debug.Log("DrawStatGem 구현 필요");
+        HPGemBar.RefreshGem(currentHP);
+        moneyGemBar.RefreshGem(money);
+        damageGemBar.RefreshGem(Mathf.Abs(playerAttack.attackDamage));
     }
 
     // esc로 메뉴 열고 닫기 가능 첫 화면으로, 리트라이 정도 기능 필요

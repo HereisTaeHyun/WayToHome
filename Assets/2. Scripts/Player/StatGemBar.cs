@@ -27,7 +27,7 @@ public class StatGemBar : MonoBehaviour
     private const int DAMAGE_BENCH = 1;
     private int activeBench;
 
-    void Start()
+    void Awake()
     {
         switch (statType)
         {
@@ -43,8 +43,9 @@ public class StatGemBar : MonoBehaviour
         }
     }
 
-    public void RefreshGem(int currentStat)
+    public void RefreshGem(float currentStat)
     {
-        int filled = Mathf.Clamp(Mathf.CeilToInt((float)currentStat / activeBench), 0, statGems.Count);
+        int filled = Mathf.Clamp(Mathf.FloorToInt(currentStat / activeBench), 0, statGems.Count);
+        Debug.Log($"{statType} : {filled}");
     }
 }

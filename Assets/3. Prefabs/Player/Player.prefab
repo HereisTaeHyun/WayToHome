@@ -8446,6 +8446,9 @@ MonoBehaviour:
   money: 0
   spriteRenderer: {fileID: 0}
   graveStone: {fileID: 3894529209947948738, guid: 8d3f9a110a49f7c498ca902310d02ee4, type: 3}
+  HPGemBar: {fileID: 882312419360472479}
+  moneyGemBar: {fileID: 5890927320424893066}
+  damageGemBar: {fileID: 1925342885837156669}
   takeHitSFX: {fileID: 8300000, guid: fd25a15f9797641458336cccfb445343, type: 3}
   dieSFX: {fileID: 8300000, guid: f11db4559b3ffff45b62e9327fc5535d, type: 3}
   maxHPPlusSFX: {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}
