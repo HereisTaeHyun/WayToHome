@@ -189,7 +189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8195893422293348951}
   m_Layer: 5
-  m_Name: GemDesign
+  m_Name: Pipes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -717,7 +717,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7853269525530482267}
   m_Layer: 5
-  m_Name: GemDesign
+  m_Name: Pipes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1620,8 +1620,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8485736825936000649}
+  - component: {fileID: 5890927320424893066}
   m_Layer: 5
-  m_Name: MoneyCore
+  m_Name: MoneyGemBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1648,6 +1649,33 @@ RectTransform:
   m_AnchoredPosition: {x: -35.100002, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5890927320424893066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938668529501977278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed861251beb5c4140985162020f0eb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statType: 1
+  statGems:
+  - pipe: {fileID: 4291642112673227595}
+    core: {fileID: 1267655850982567233}
+  - pipe: {fileID: 7656850260324025578}
+    core: {fileID: 7887410445857297877}
+  - pipe: {fileID: 5773337681638800049}
+    core: {fileID: 4613827249610729720}
+  - pipe: {fileID: 752895844701943295}
+    core: {fileID: 6594676358797282956}
+  - pipe: {fileID: 0}
+    core: {fileID: 2920786782952281425}
+  gemStyle:
+    emptyPipe: {r: 1, g: 1, b: 1, a: 1}
+    filledPipe: {r: 1, g: 0.84313726, b: 0, a: 1}
 --- !u!1 &2145349527662089589
 GameObject:
   m_ObjectHideFlags: 0
@@ -3132,7 +3160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1372683127527348130}
   m_Layer: 5
-  m_Name: GemDesign
+  m_Name: Pipes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4231,8 +4259,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8353978524033864140}
+  - component: {fileID: 882312419360472479}
   m_Layer: 5
-  m_Name: HPCore
+  m_Name: HPGemBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4259,6 +4288,33 @@ RectTransform:
   m_AnchoredPosition: {x: -35.1, y: 80}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &882312419360472479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4554955004557180757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed861251beb5c4140985162020f0eb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statType: 0
+  statGems:
+  - pipe: {fileID: 8567138315736645279}
+    core: {fileID: 8608753617907573092}
+  - pipe: {fileID: 8194416253828570221}
+    core: {fileID: 1322514613435130997}
+  - pipe: {fileID: 6456370380041287146}
+    core: {fileID: 4263622626511682710}
+  - pipe: {fileID: 2556728667857514239}
+    core: {fileID: 3033112582824347782}
+  - pipe: {fileID: 0}
+    core: {fileID: 2350354545289499093}
+  gemStyle:
+    emptyPipe: {r: 1, g: 1, b: 1, a: 1}
+    filledPipe: {r: 0.6039216, g: 0, b: 0, a: 1}
 --- !u!1 &4613827249610729720
 GameObject:
   m_ObjectHideFlags: 0
@@ -4306,8 +4362,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 93300251162055040}
+  - component: {fileID: 1925342885837156669}
   m_Layer: 5
-  m_Name: DamageCore
+  m_Name: DamageGemBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4334,6 +4391,33 @@ RectTransform:
   m_AnchoredPosition: {x: -35.100002, y: -80}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1925342885837156669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4638380508522970503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed861251beb5c4140985162020f0eb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statType: 2
+  statGems:
+  - pipe: {fileID: 4808506955362377296}
+    core: {fileID: 4173602816551848963}
+  - pipe: {fileID: 5703436484934729425}
+    core: {fileID: 7853755562169244438}
+  - pipe: {fileID: 6359949097317827483}
+    core: {fileID: 1278077949506628782}
+  - pipe: {fileID: 6416922074483438305}
+    core: {fileID: 1834127274879054939}
+  - pipe: {fileID: 0}
+    core: {fileID: 7573385549505924097}
+  gemStyle:
+    emptyPipe: {r: 1, g: 1, b: 1, a: 1}
+    filledPipe: {r: 0.8862745, g: 0.38039216, b: 0.039215688, a: 1}
 --- !u!1 &4695766564451747287
 GameObject:
   m_ObjectHideFlags: 0

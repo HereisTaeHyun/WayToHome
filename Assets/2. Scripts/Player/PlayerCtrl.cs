@@ -60,10 +60,6 @@ public class PlayerCtrl : MonoBehaviour
     private float fadeOutTime = 1.5f;
     private const float FADE_OUT_ALPHA = 1.0f;
 
-    private Dictionary<GameObject, GameObject> HPCoreData = new Dictionary<GameObject, GameObject>();
-    private Dictionary<GameObject, GameObject> moneyCoreData = new Dictionary<GameObject, GameObject>();
-    private Dictionary<GameObject, GameObject> damageCoreData = new Dictionary<GameObject, GameObject>();
-
     // 무적 관련
     private bool invincible;
     public bool readInvincible { get { return invincible; } } // 적 관련 객체에서 가끔 참고
