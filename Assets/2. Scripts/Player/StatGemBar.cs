@@ -43,6 +43,7 @@ public class StatGemBar : MonoBehaviour
         }
     }
 
+    // 젬 계산 및 스프라이트 적용
     public void RefreshGem(float currentStat)
     {
         int filled = Mathf.Clamp(Mathf.FloorToInt(currentStat / activeBench), 0, statGems.Count);
