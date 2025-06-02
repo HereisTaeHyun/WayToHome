@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public enum StatType
@@ -30,6 +31,20 @@ public class StatGemBar : MonoBehaviour
     private int activeBench;
     private Image pipeImage;
 
+    public void Init()
+    {
+        foreach (StatGem elem in statGems)
+        {
+            elem.core.SetActive(false);
+
+            if (elem.pipe != null)
+            {
+                pipeImage = elem.pipe.GetComponent<Image>();
+                pipeImage.color = gemStyle.emptyPipe;   
+            }
+        }
+    }
+
     void Awake()
     {
         // 각 바에 맞는 상태 지정
@@ -52,7 +67,7 @@ public class StatGemBar : MonoBehaviour
     {
         int filled = Mathf.Clamp(Mathf.FloorToInt(currentStat / activeBench), 0, statGems.Count);
 
-        for (int i = 0; i <= filled; i++)
+        for (int i = 0; i < filled; i++)
         {
             statGems[i].core.SetActive(true);
 
