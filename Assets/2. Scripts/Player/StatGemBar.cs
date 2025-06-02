@@ -31,20 +31,6 @@ public class StatGemBar : MonoBehaviour
     private int activeBench;
     private Image pipeImage;
 
-    public void Init()
-    {
-        foreach (StatGem elem in statGems)
-        {
-            elem.core.SetActive(false);
-
-            if (elem.pipe != null)
-            {
-                pipeImage = elem.pipe.GetComponent<Image>();
-                pipeImage.color = gemStyle.emptyPipe;   
-            }
-        }
-    }
-
     void Awake()
     {
         // 각 바에 맞는 상태 지정
@@ -62,9 +48,25 @@ public class StatGemBar : MonoBehaviour
         }
     }
 
+    // 젬 상태 리셋
+    public void Reset()
+    {
+        foreach (StatGem elem in statGems)
+        {
+            elem.core.SetActive(false);
+
+            if (elem.pipe != null)
+            {
+                pipeImage = elem.pipe.GetComponent<Image>();
+                pipeImage.color = gemStyle.emptyPipe;
+            }
+        }
+    }
+
     // 젬 계산 및 스프라이트 적용
     public void RefreshGem(float currentStat)
     {
+        Reset();
         int filled = Mathf.Clamp(Mathf.FloorToInt(currentStat / activeBench), 0, statGems.Count);
 
         for (int i = 0; i < filled; i++)
@@ -77,6 +79,5 @@ public class StatGemBar : MonoBehaviour
                 pipeImage.color = gemStyle.filledPipe;
             }
         }
-        Debug.Log($"{statType} : {filled}");
     }
 }
