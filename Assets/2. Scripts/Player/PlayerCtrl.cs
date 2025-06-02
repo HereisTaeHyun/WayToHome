@@ -142,10 +142,6 @@ public class PlayerCtrl : MonoBehaviour
         playerMove.Init();
         playerAttack.Init();
 
-        // HPGemBar.Init();
-        // moneyGemBar.Init();
-        // damageGemBar.Init();
-
         // HPBar 초기화, 다시 되살아날 때 필요
         DisplayHP();
     }

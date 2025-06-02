@@ -16,7 +16,7 @@ public class FlyingEyeCtrl : EnemyCtrl
         Init();
 
         coll = GetComponent<Collider2D>();
-        playerColl = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
+        playerColl = PlayerCtrl.player.GetComponent<Collider2D>();
     }
 
     
