@@ -74,7 +74,7 @@ public class DataManager : MonoBehaviour
         playerData.money = 0;
         playerData.maxJump = 1;
         playerData.attackDamage = -1.0f;
-        playerData.savedSpawnPos = new Vector2(-81.66f, -15.06f);
+        playerData.savedSpawnPos = new Vector2(-102.83f, -15.06f);
         playerData.savedStage = "1. First Stage";
 
         string jsonData = JsonUtility.ToJson(playerData);
