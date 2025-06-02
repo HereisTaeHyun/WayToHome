@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public enum StatType
 {
@@ -12,8 +14,8 @@ public enum StatType
 [System.Serializable]
 public class GemStyle
 {
-    [SerializeField] private Color emptyPipe;
-    [SerializeField] private Color filledPipe;
+    public Color emptyPipe;
+    public Color filledPipe;
 }
 
 public class StatGemBar : MonoBehaviour
@@ -26,9 +28,11 @@ public class StatGemBar : MonoBehaviour
     private const int MONEY_BENCH = 10;
     private const int DAMAGE_BENCH = 1;
     private int activeBench;
+    private Image pipeImage;
 
     void Awake()
     {
+        // 각 바에 맞는 상태 지정
         switch (statType)
         {
             case StatType.HP:
@@ -47,6 +51,17 @@ public class StatGemBar : MonoBehaviour
     public void RefreshGem(float currentStat)
     {
         int filled = Mathf.Clamp(Mathf.FloorToInt(currentStat / activeBench), 0, statGems.Count);
+
+        for (int i = 0; i <= filled; i++)
+        {
+            statGems[i].core.SetActive(true);
+
+            if (statGems[i].pipe != null)
+            {
+                pipeImage = statGems[i].pipe.GetComponent<Image>();
+                pipeImage.color = gemStyle.filledPipe;
+            }
+        }
         Debug.Log($"{statType} : {filled}");
     }
 }
