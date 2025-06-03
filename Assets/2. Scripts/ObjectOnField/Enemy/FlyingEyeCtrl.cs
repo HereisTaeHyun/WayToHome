@@ -80,8 +80,11 @@ public class FlyingEyeCtrl : EnemyCtrl
     protected override void EnemyDie()
     {
         // 아이템 확률 계산 및 드롭
-        GameObject selectedItem = ItemDrop(itemInformation);
-        UtilityManager.utility.SetItemFromPool(transform, selectedItem);
+        if(isDie == false)
+        {
+            GameObject selectedItem = ItemDrop(itemInformation);
+            UtilityManager.utility.SetItemFromPool(transform, selectedItem);
+        }
 
         StartCoroutine(DieStart());
     }
