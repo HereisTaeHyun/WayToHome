@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
     // public 변수
     [NonSerialized] public float moveSpeed = 7.0f;
     [NonSerialized] public int maxJump;
+    [NonSerialized] public int jumpCount = 0;
     public Animator playerAnim;
 
 #region private
@@ -20,7 +21,6 @@ public class PlayerMove : MonoBehaviour
     private Vector2 move;
     private Vector2 moveDir;
     private float jumpSpeed = 5.0f;
-    private int jumpCount = 0;
 
     // 땅인지 체크하는 Ray 시작 위치
     private Vector2 checkPos;
@@ -243,27 +243,24 @@ public class PlayerMove : MonoBehaviour
     // jumpCount가 있으며 Jump 입력 받으면
     public void Jump()
     {
-        if(jumpCount < maxJump) // W에 할당된 "Jump"를 눌러 maxJump까지 점프가능
-        {
-            // jumpCount 추가 후 jump
-            isJump = true;
-            isGround = false;
-            isSlope = false;
+        // jumpCount 추가 후 jump
+        isJump = true;
+        isGround = false;
+        isSlope = false;
             
-            jumpCount += 1;
+        jumpCount += 1;
 
-            rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, jumpSpeed);
-            UtilityManager.utility.PlaySFX(jumpSFX);
+        rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, jumpSpeed);
+        UtilityManager.utility.PlaySFX(jumpSFX);
 
-            // 이전 점프가 재생 중이면 파라미터 전달 x
-            if(playerAnim.GetCurrentAnimatorStateInfo(0).IsName("PlayerJump"))
-            {
-                return;
-            }
-            else
-            {
-                playerAnim.SetTrigger(jumpHash);
-            }
+        // 이전 점프가 재생 중이면 파라미터 전달 x
+        if(playerAnim.GetCurrentAnimatorStateInfo(0).IsName("PlayerJump"))
+        {
+            return;
+        }
+        else
+        {
+            playerAnim.SetTrigger(jumpHash);
         }
     }
 #endregion

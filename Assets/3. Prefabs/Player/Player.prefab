@@ -7135,7 +7135,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1220307346567023135}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerCtrl, Assembly-CSharp
         m_MethodName: ReloadSavedSceneButton
         m_Mode: 1
@@ -9338,7 +9338,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1220307346567023135}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerCtrl, Assembly-CSharp
         m_MethodName: ReturnToMenuButton
         m_Mode: 1

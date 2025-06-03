@@ -291,8 +291,7 @@ public class PlayerCtrl : MonoBehaviour
         }
 
         // 모듈 클래스 함수 호출
-        // canAttack은 상점에서는 공격 막기에 사용 중
-        if (jumpInput)
+        if (jumpInput && playerMove.jumpCount <= playerMove.maxJump)
         {
             playerMove.Jump();
         }
