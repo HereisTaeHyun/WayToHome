@@ -33,6 +33,10 @@ public class PlayerCtrl : MonoBehaviour
         Stun,
         Slow,
     }
+
+    // 마법 관련
+    public GameObject[] UsingMagic = new GameObject [2];
+    
     #endregion
 
     #region private
