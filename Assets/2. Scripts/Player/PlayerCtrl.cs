@@ -14,8 +14,6 @@ public class PlayerCtrl : MonoBehaviour
     [NonSerialized] public PlayerInput inputActions;
     public Vector2 moveInput { get; private set; }
     public Vector2 lastMoveDir { get; private set; }
-    public bool jumpInput { get; private set; }
-    public bool attackInput { get; private set; }
 
     public float maxHP;
     public float currentHP;
@@ -162,12 +160,9 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.Move.performed += OnMove;
         inputActions.Player.Move.canceled += CancelMove;
 
-        inputActions.Player.Jump.performed += ctx => jumpInput = true;
-        inputActions.Player.Jump.canceled += ctx => jumpInput = false;
+        inputActions.Player.Jump.performed += OnJump;
 
         inputActions.Player.Attack.performed += OnAttack;
-        inputActions.Player.Attack.performed += ctx => attackInput = true;
-        inputActions.Player.Attack.canceled += ctx => attackInput = false;
 
         inputActions.Player.DisplayStat.performed += OnDisPlayStat;
         inputActions.Player.DisplayMenu.performed += OnDisPlayMenu;
@@ -182,12 +177,9 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.Move.performed -= OnMove;
         inputActions.Player.Move.canceled -= CancelMove;
 
-        inputActions.Player.Jump.performed -= ctx => jumpInput = true;
-        inputActions.Player.Jump.canceled -= ctx => jumpInput = false;
+        inputActions.Player.Jump.performed -= OnJump;
 
         inputActions.Player.Attack.performed -= OnAttack;
-        inputActions.Player.Attack.performed -= ctx => attackInput = true;
-        inputActions.Player.Attack.canceled -= ctx => attackInput = false;
 
         inputActions.Player.DisplayStat.performed -= OnDisPlayStat;
         inputActions.Player.DisplayMenu.performed -= OnDisPlayMenu;
@@ -225,9 +217,18 @@ public class PlayerCtrl : MonoBehaviour
             lastMoveDir = UtilityManager.utility.HorizontalDirSet(moveInput);
         }
     }
+
     private void CancelMove(InputAction.CallbackContext context)
     {
         moveInput = Vector2.zero;
+    }
+
+    private void OnJump(InputAction.CallbackContext context)
+    {
+        if (playerMove.jumpCount < playerMove.maxJump)
+        {
+            playerMove.Jump();
+        }
     }
 
     private void OnAttack(InputAction.CallbackContext context)
@@ -288,12 +289,6 @@ public class PlayerCtrl : MonoBehaviour
         if (canMove == false || GameManager.instance.readIsGameOver == true)
         {
             return;
-        }
-
-        // 모듈 클래스 함수 호출
-        if (jumpInput && playerMove.jumpCount <= playerMove.maxJump)
-        {
-            playerMove.Jump();
         }
 
         // 이동 관련 모듈 함수
