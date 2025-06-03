@@ -293,7 +293,6 @@ public class PlayerCtrl : MonoBehaviour
 
         // 이동 관련 모듈 함수
         playerMove.HorizontalMove();
-        // 플롯폼은 내려가기 키를 누르면 내려갈 수 있도록하기
         playerMove.GoDownPlatfom();
     }
     #endregion
