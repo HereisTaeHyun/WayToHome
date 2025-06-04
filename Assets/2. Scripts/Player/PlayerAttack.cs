@@ -16,11 +16,12 @@ public class PlayerAttack : MeleeAttack
     private readonly int attckHash = Animator.StringToHash("Attack");
 
     // 마법 관련
+    private GameObject selectedMagic;
     private Transform magicSpawnPos;
-    private int currentMagicIdx;
+    private int selectedMagicIdx;
+    private int maxMagic = 10;
 
-    private Kunai kunaiComp;
-    private Shuriken shurikenComp;
+    private PlayerMagicBase magicComp;
 
     public override void Init()
     {
@@ -71,6 +72,8 @@ public class PlayerAttack : MeleeAttack
             Vector3 spawnPos = magicSpawnPos.localPosition;
             spawnPos.x = Mathf.Abs(spawnPos.x) * attackDir.x;
             magicSpawnPos.localPosition = spawnPos;
+
+            CastMagic();
         }
     }
 
@@ -88,7 +91,19 @@ public class PlayerAttack : MeleeAttack
 
     private void SelectMagic(int idx)
     {
-        currentMagicIdx = idx;
-        Debug.Log(currentMagicIdx);
+        selectedMagicIdx = idx;
+        Debug.Log(selectedMagicIdx);
+    }
+
+    private void CastMagic()
+    {
+        selectedMagic = UsingMagic[selectedMagicIdx];
+
+        var pool = UtilityManager.utility.CreatePlayerMagicPool(selectedMagic);
+        var magic = UtilityManager.utility.GetFromPool(pool, maxMagic);
+
+        magic.transform.position = magicSpawnPos.transform.position;
+        magic.transform.rotation = magicSpawnPos.transform.rotation;
+        // magicComp.SetPool(pool);
     }
 }

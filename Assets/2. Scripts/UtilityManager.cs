@@ -143,17 +143,15 @@ public class UtilityManager : MonoBehaviour
         return pool;
     }
 
-    public GameObject GetFromPool(ObjectPool<GameObject> pool, int maxSize)
+    public T GetFromPool<T>(ObjectPool<T> pool, int maxActive) where T : UnityEngine.Object
     {
-        if (pool.CountActive >= maxSize)
+        if (pool.CountActive >= maxActive)
         {
-            return null;
+             return null;
         }
-        else
-        {
-            return pool.Get();
-        }
+        return pool.Get();
     }
+
     public void ReturnToPool(ObjectPool<GameObject> pool, GameObject go)
     {
         pool.Release(go);
