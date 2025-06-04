@@ -4,17 +4,23 @@ public class Kunai : PlayerMagicBase
 {
     private Vector2 moveDir;
     private Vector2 newVelocity;
+    private float lifeSpan = 5.0f;
     protected override void Start()
     {
         base.Start();
 
-        moveSpeed = 5.0f;
+        moveSpeed = 1.0f;
         damage = -1.0f;
     }
 
     private void FixedUpdate()
     {
         MoveMagic();
+        lifeSpan -= Time.deltaTime;
+        if(lifeSpan <= 0)
+        {
+            ReturnToOriginPool();
+        }
     }
 
     private void MoveMagic()

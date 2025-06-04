@@ -4,9 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 using Image = UnityEngine.UI.Image;
-using UnityEngine.Pool;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -15,6 +13,7 @@ public class PlayerCtrl : MonoBehaviour
     [NonSerialized] public PlayerInput inputActions;
     public Vector2 moveInput { get; private set; }
     public Vector2 lastMoveDir { get; private set; }
+    public bool isMagic { get; private set; }
 
     public float maxHP;
     public float currentHP;
@@ -34,9 +33,6 @@ public class PlayerCtrl : MonoBehaviour
         Stun,
         Slow,
     }
-
-    // 마법 관련
-    public GameObject[] UsingMagic = new GameObject [2];
     
     #endregion
 
@@ -54,10 +50,6 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private StatGemBar HPGemBar;
     [SerializeField] private StatGemBar moneyGemBar;
     [SerializeField] private StatGemBar damageGemBar;
-
-    // 마법 관련
-    private ObjectPool<GameObject> firstMagicPool;
-    private ObjectPool<GameObject> secondMagicPool;
 
     // UI 관련
     private Image HPBar;
@@ -172,6 +164,7 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.Jump.performed += OnJump;
 
         inputActions.Player.Attack.performed += OnAttack;
+        inputActions.Player.EnableMagic.performed += ToggleAttackMode;
 
         inputActions.Player.DisplayStat.performed += OnDisPlayStat;
         inputActions.Player.DisplayMenu.performed += OnDisPlayMenu;
@@ -189,6 +182,7 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.Jump.performed -= OnJump;
 
         inputActions.Player.Attack.performed -= OnAttack;
+        inputActions.Player.EnableMagic.performed -= ToggleAttackMode;
 
         inputActions.Player.DisplayStat.performed -= OnDisPlayStat;
         inputActions.Player.DisplayMenu.performed -= OnDisPlayMenu;
@@ -246,6 +240,11 @@ public class PlayerCtrl : MonoBehaviour
         {
             playerAttack.Attack();
         }
+    }
+
+    private void ToggleAttackMode(InputAction.CallbackContext ctx)
+    {
+        isMagic = !isMagic;
     }
 
     private void OnDisPlayStat(InputAction.CallbackContext context)

@@ -71,6 +71,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnableMagic"",
+                    ""type"": ""Button"",
+                    ""id"": ""e044d4cf-6e7c-4b4f-9589-a7c6d145d8e2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -161,6 +170,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""DisplayMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56b9abb2-6c76-4caa-8868-be1dec52a68e"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnableMagic"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -202,6 +222,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_DisplayStat = m_Player.FindAction("DisplayStat", throwIfNotFound: true);
         m_Player_DisplayMenu = m_Player.FindAction("DisplayMenu", throwIfNotFound: true);
+        m_Player_EnableMagic = m_Player.FindAction("EnableMagic", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -273,6 +294,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_DisplayStat;
     private readonly InputAction m_Player_DisplayMenu;
+    private readonly InputAction m_Player_EnableMagic;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -282,6 +304,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @DisplayStat => m_Wrapper.m_Player_DisplayStat;
         public InputAction @DisplayMenu => m_Wrapper.m_Player_DisplayMenu;
+        public InputAction @EnableMagic => m_Wrapper.m_Player_EnableMagic;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -306,6 +329,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @DisplayMenu.started += instance.OnDisplayMenu;
             @DisplayMenu.performed += instance.OnDisplayMenu;
             @DisplayMenu.canceled += instance.OnDisplayMenu;
+            @EnableMagic.started += instance.OnEnableMagic;
+            @EnableMagic.performed += instance.OnEnableMagic;
+            @EnableMagic.canceled += instance.OnEnableMagic;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -325,6 +351,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @DisplayMenu.started -= instance.OnDisplayMenu;
             @DisplayMenu.performed -= instance.OnDisplayMenu;
             @DisplayMenu.canceled -= instance.OnDisplayMenu;
+            @EnableMagic.started -= instance.OnEnableMagic;
+            @EnableMagic.performed -= instance.OnEnableMagic;
+            @EnableMagic.canceled -= instance.OnEnableMagic;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -367,5 +396,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnDisplayStat(InputAction.CallbackContext context);
         void OnDisplayMenu(InputAction.CallbackContext context);
+        void OnEnableMagic(InputAction.CallbackContext context);
     }
 }
