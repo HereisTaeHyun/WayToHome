@@ -19,6 +19,7 @@ public class PlayerAttack : MeleeAttack
     private int currentMagicIdx;
     private ObjectPool<GameObject> firstMagicPool;
     private ObjectPool<GameObject> secondMagicPool;
+    private int maxMagic = 5;
 
     private Kunai kunaiComp;
     private Shuriken shurikenComp;
