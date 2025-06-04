@@ -12,6 +12,7 @@ public class PlayerAttack : MeleeAttack
     // private 변수
     private Animator playerAnim;
     [SerializeField] private AudioClip attackSFX;
+    private readonly int attckHash = Animator.StringToHash("Attack");
 
     // 마법 관련
     private Transform magicSpawnPos;
@@ -52,7 +53,7 @@ public class PlayerAttack : MeleeAttack
 
             // 공격 활성화
             UtilityManager.utility.PlaySFX(attackSFX);
-            playerAnim.SetTrigger("Attack");
+            playerAnim.SetTrigger(attackHash);
             playerAnim.SetFloat(attackDirHash, attackDir.x);
         }
         else if (PlayerCtrl.player.isMagic == true)
@@ -61,7 +62,7 @@ public class PlayerAttack : MeleeAttack
             Vector3 spawnPos = magicSpawnPos.localPosition;
             spawnPos.x = Mathf.Abs(spawnPos.x) * attackDir.x;
             magicSpawnPos.localPosition = spawnPos;
-            
+
             Debug.Log(magicSpawnPos.transform.position);
         }
     }
