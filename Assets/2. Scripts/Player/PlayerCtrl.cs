@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using Image = UnityEngine.UI.Image;
+using UnityEngine.Pool;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -53,6 +54,10 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private StatGemBar HPGemBar;
     [SerializeField] private StatGemBar moneyGemBar;
     [SerializeField] private StatGemBar damageGemBar;
+
+    // 마법 관련
+    private ObjectPool<GameObject> firstMagicPool;
+    private ObjectPool<GameObject> secondMagicPool;
 
     // UI 관련
     private Image HPBar;
