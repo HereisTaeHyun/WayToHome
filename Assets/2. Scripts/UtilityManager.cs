@@ -7,31 +7,32 @@ using UnityEngine.Pool;
 
 public class UtilityManager : MonoBehaviour
 {
+    private Dictionary<PlayerMagicType, ObjectPool<PlayerMagicBase>> magicPools = new Dictionary<PlayerMagicType, ObjectPool<PlayerMagicBase>>();
     private AudioSource audioSource;
     // 싱글톤 선언
     public static UtilityManager utility = null;
     void Awake()
     {
-        if(utility == null)
+        if (utility == null)
         {
             utility = this;
         }
-        else if(utility != this)
+        else if (utility != this)
         {
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
     }
-    
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
-    
+
     public Vector2 HorizontalDirSet(Vector2 move)
     {
         Vector2 moveDir = new Vector2(0, 0);
-        if(Mathf.Approximately(move.x, 0) == false)
+        if (Mathf.Approximately(move.x, 0) == false)
         {
             moveDir.Set(move.x, 0);
             moveDir.Normalize();
@@ -42,7 +43,7 @@ public class UtilityManager : MonoBehaviour
     public Vector2 AllDirSet(Vector2 move)
     {
         Vector2 moveDir = new Vector2(0, 0);
-        if(Mathf.Approximately(move.x, 0) == false || Mathf.Approximately(0, move.y) == false)
+        if (Mathf.Approximately(move.x, 0) == false || Mathf.Approximately(0, move.y) == false)
         {
             moveDir.Set(move.x, move.y);
             moveDir.Normalize();
@@ -55,14 +56,14 @@ public class UtilityManager : MonoBehaviour
     {
         List<GameObject> keys = new List<GameObject>(inputItem.Keys);
         float sumValues = inputItem.Sum(item => item.Value);
-        foreach(GameObject elem in keys)
+        foreach (GameObject elem in keys)
         {
             inputItem[elem] = (inputItem[elem] / sumValues) * 100.0f;
         }
         return inputItem;
     }
 
-        
+
     // UI 알파 변경자   
     public IEnumerator ChangeAlpha(Image changeTarget, float targetAlpah, float changeTime)
     {
@@ -70,7 +71,7 @@ public class UtilityManager : MonoBehaviour
         float time = 0.0f;
 
         // 현재 알파가 목표 알파보다 작은 동안 점진적으로 알파 값 변경
-        while(currentColor.a <= targetAlpah)
+        while (currentColor.a <= targetAlpah)
         {
             time += Time.deltaTime / changeTime;
             currentColor.a = Mathf.Lerp(0.0f, targetAlpah, time);
@@ -90,13 +91,13 @@ public class UtilityManager : MonoBehaviour
         // pool 생성
         pool = new ObjectPool<GameObject>
         (
-            createFunc : () => Instantiate(prefab),
-            actionOnGet : (go) => go.SetActive(true),
-            actionOnRelease : (go) => go.SetActive(false),
-        	actionOnDestroy : (go) => Destroy(go),
-            collectionCheck : true,
-            defaultCapacity : count,
-            maxSize : max
+            createFunc: () => Instantiate(prefab),
+            actionOnGet: (go) => go.SetActive(true),
+            actionOnRelease: (go) => go.SetActive(false),
+            actionOnDestroy: (go) => Destroy(go),
+            collectionCheck: true,
+            defaultCapacity: count,
+            maxSize: max
         );
     }
     public void CreateDoNotDestroyPool(ref ObjectPool<GameObject> pool, GameObject prefab, int count, int max)
@@ -104,22 +105,47 @@ public class UtilityManager : MonoBehaviour
         // pool 생성
         pool = new ObjectPool<GameObject>
         (
-            createFunc : () => {
+            createFunc: () =>
+            {
                 GameObject go = Instantiate(prefab);
                 DontDestroyOnLoad(go);
                 return go;
             },
-            actionOnGet : (go) => go.SetActive(true),
-            actionOnRelease : (go) => go.SetActive(false),
-        	actionOnDestroy : (go) => Destroy(go),
-            collectionCheck : true,
-            defaultCapacity : count,
-            maxSize : max
+            actionOnGet: (go) => go.SetActive(true),
+            actionOnRelease: (go) => go.SetActive(false),
+            actionOnDestroy: (go) => Destroy(go),
+            collectionCheck: true,
+            defaultCapacity: count,
+            maxSize: max
         );
     }
+
+    public ObjectPool<PlayerMagicBase> CreatePlayerMagicPool(GameObject prefab, int count = 5, int max = 10)
+    {
+        var magicComp = prefab.GetComponent<PlayerMagicBase>();
+        var magicId = magicComp.Id;
+
+        if (magicPools.TryGetValue(magicId, out var pool)) return pool;
+
+        // pool 생성
+        pool = new ObjectPool<PlayerMagicBase>
+        (
+            createFunc: () => Instantiate(prefab).GetComponent<PlayerMagicBase>(),
+            actionOnGet: (go) => go.gameObject.SetActive(true),
+            actionOnRelease: (go) => go.gameObject.SetActive(false),
+            actionOnDestroy: (go) => Destroy(go),
+            collectionCheck: true,
+            defaultCapacity: count,
+            maxSize: max
+        );
+
+        magicPools.Add(magicId, pool);
+        return pool;
+    }
+
     public GameObject GetFromPool(ObjectPool<GameObject> pool, int maxSize)
     {
-        if(pool.CountActive >= maxSize)
+        if (pool.CountActive >= maxSize)
         {
             return null;
         }
@@ -139,10 +165,12 @@ public class UtilityManager : MonoBehaviour
         target = GetFromPool(pool, 10);
         // target == null이란 것은 아이템 최대 생성치 초과했다는 뜻
         // 현재 겜 설계에서 한 씬에 한 아이템이 10 이상일 확률은 희박하니 그냥 드롭 안하게 처리
-        if(target != null)
+        if (target != null)
         {
             target.transform.position = targetTransform.position;
             target.transform.rotation = targetTransform.rotation;
         }
     }
+    
+    // Player 마법 관련
 }

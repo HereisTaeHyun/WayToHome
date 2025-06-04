@@ -16,17 +16,11 @@ public class Kunai : PlayerMagicBase
 
     private void FixedUpdate()
     {
-        MoveMagic();
+
         lifeSpan -= Time.deltaTime;
         if(lifeSpan <= 0)
         {
             ReturnToOriginPool();
         }
-    }
-
-    private void MoveMagic()
-    {
-        newVelocity.Set(moveDir.x * moveSpeed, moveDir.y * moveSpeed);
-        rb2D.linearVelocity = newVelocity;
     }
 }

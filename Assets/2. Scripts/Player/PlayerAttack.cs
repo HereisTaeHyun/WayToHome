@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -17,9 +18,6 @@ public class PlayerAttack : MeleeAttack
     // 마법 관련
     private Transform magicSpawnPos;
     private int currentMagicIdx;
-    private ObjectPool<GameObject> firstMagicPool;
-    private ObjectPool<GameObject> secondMagicPool;
-    private int maxMagic = 5;
 
     private Kunai kunaiComp;
     private Shuriken shurikenComp;
