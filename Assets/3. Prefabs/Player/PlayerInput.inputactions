@@ -58,6 +58,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SelectMagic1",
+                    "type": "Button",
+                    "id": "ac31c56c-53bc-4f89-b16e-7e730620be65",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectMagic2",
+                    "type": "Button",
+                    "id": "50977fcf-2eae-4b19-aa2e-3c307a746d48",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -157,6 +175,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "EnableMagic",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af2260b3-dccc-4a00-9e6b-a3d8802af81c",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectMagic1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bdb2298a-7aaf-4c75-b9fd-f555faff5d8c",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectMagic2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

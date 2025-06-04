@@ -7,7 +7,7 @@ public class PlayerAttack : MeleeAttack
 
     // public 변수
     // 마법 관련
-    public GameObject[] UsingMagic = new GameObject [2];
+    public GameObject[] UsingMagic = new GameObject[2];
 
     // private 변수
     private Animator playerAnim;
@@ -16,6 +16,7 @@ public class PlayerAttack : MeleeAttack
 
     // 마법 관련
     private Transform magicSpawnPos;
+    private int currentMagicIdx;
     private ObjectPool<GameObject> firstMagicPool;
     private ObjectPool<GameObject> secondMagicPool;
 
@@ -31,6 +32,15 @@ public class PlayerAttack : MeleeAttack
         magicSpawnPos = transform.Find("MagicSpawnPos").transform;
 
         playerAnim = GetComponent<Animator>();
+    }
+
+    void OnEnable()
+    {
+        PlayerCtrl.player.SelectMagic += SelectMagic;
+    }
+    void OnDisable()
+    {
+        PlayerCtrl.player.SelectMagic -= SelectMagic;
     }
 
     // 근접 공격, 공격 범위 콜라이더 생성 후 일정 시간 후 종료
@@ -62,8 +72,6 @@ public class PlayerAttack : MeleeAttack
             Vector3 spawnPos = magicSpawnPos.localPosition;
             spawnPos.x = Mathf.Abs(spawnPos.x) * attackDir.x;
             magicSpawnPos.localPosition = spawnPos;
-
-            Debug.Log(magicSpawnPos.transform.position);
         }
     }
 
@@ -77,5 +85,11 @@ public class PlayerAttack : MeleeAttack
         attackCollier.SetActive(false);
         rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         PlayerCtrl.player.canMove = true;
+    }
+
+    private void SelectMagic(int idx)
+    {
+        currentMagicIdx = idx;
+        Debug.Log(currentMagicIdx);
     }
 }

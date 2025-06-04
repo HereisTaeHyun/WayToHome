@@ -15,6 +15,8 @@ public class PlayerCtrl : MonoBehaviour
     public Vector2 lastMoveDir { get; private set; }
     public bool isMagic { get; private set; }
 
+    public event Action<int> SelectMagic;
+
     public float maxHP;
     public float currentHP;
     public int money;
@@ -165,6 +167,8 @@ public class PlayerCtrl : MonoBehaviour
 
         inputActions.Player.Attack.performed += OnAttack;
         inputActions.Player.EnableMagic.performed += ToggleAttackMode;
+        inputActions.Player.SelectMagic1.performed += ctx => SelectMagic(0);
+        inputActions.Player.SelectMagic2.performed += ctx => SelectMagic(1);
 
         inputActions.Player.DisplayStat.performed += OnDisPlayStat;
         inputActions.Player.DisplayMenu.performed += OnDisPlayMenu;
@@ -183,6 +187,8 @@ public class PlayerCtrl : MonoBehaviour
 
         inputActions.Player.Attack.performed -= OnAttack;
         inputActions.Player.EnableMagic.performed -= ToggleAttackMode;
+        inputActions.Player.SelectMagic1.performed -= ctx => SelectMagic(0);
+        inputActions.Player.SelectMagic2.performed -= ctx => SelectMagic(1);
 
         inputActions.Player.DisplayStat.performed -= OnDisPlayStat;
         inputActions.Player.DisplayMenu.performed -= OnDisPlayMenu;

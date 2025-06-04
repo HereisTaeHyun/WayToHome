@@ -80,6 +80,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectMagic1"",
+                    ""type"": ""Button"",
+                    ""id"": ""ac31c56c-53bc-4f89-b16e-7e730620be65"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectMagic2"",
+                    ""type"": ""Button"",
+                    ""id"": ""50977fcf-2eae-4b19-aa2e-3c307a746d48"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -181,6 +199,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""EnableMagic"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af2260b3-dccc-4a00-9e6b-a3d8802af81c"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectMagic1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bdb2298a-7aaf-4c75-b9fd-f555faff5d8c"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectMagic2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -223,6 +263,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_DisplayStat = m_Player.FindAction("DisplayStat", throwIfNotFound: true);
         m_Player_DisplayMenu = m_Player.FindAction("DisplayMenu", throwIfNotFound: true);
         m_Player_EnableMagic = m_Player.FindAction("EnableMagic", throwIfNotFound: true);
+        m_Player_SelectMagic1 = m_Player.FindAction("SelectMagic1", throwIfNotFound: true);
+        m_Player_SelectMagic2 = m_Player.FindAction("SelectMagic2", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -295,6 +337,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_DisplayStat;
     private readonly InputAction m_Player_DisplayMenu;
     private readonly InputAction m_Player_EnableMagic;
+    private readonly InputAction m_Player_SelectMagic1;
+    private readonly InputAction m_Player_SelectMagic2;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -305,6 +349,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @DisplayStat => m_Wrapper.m_Player_DisplayStat;
         public InputAction @DisplayMenu => m_Wrapper.m_Player_DisplayMenu;
         public InputAction @EnableMagic => m_Wrapper.m_Player_EnableMagic;
+        public InputAction @SelectMagic1 => m_Wrapper.m_Player_SelectMagic1;
+        public InputAction @SelectMagic2 => m_Wrapper.m_Player_SelectMagic2;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -332,6 +378,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @EnableMagic.started += instance.OnEnableMagic;
             @EnableMagic.performed += instance.OnEnableMagic;
             @EnableMagic.canceled += instance.OnEnableMagic;
+            @SelectMagic1.started += instance.OnSelectMagic1;
+            @SelectMagic1.performed += instance.OnSelectMagic1;
+            @SelectMagic1.canceled += instance.OnSelectMagic1;
+            @SelectMagic2.started += instance.OnSelectMagic2;
+            @SelectMagic2.performed += instance.OnSelectMagic2;
+            @SelectMagic2.canceled += instance.OnSelectMagic2;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -354,6 +406,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @EnableMagic.started -= instance.OnEnableMagic;
             @EnableMagic.performed -= instance.OnEnableMagic;
             @EnableMagic.canceled -= instance.OnEnableMagic;
+            @SelectMagic1.started -= instance.OnSelectMagic1;
+            @SelectMagic1.performed -= instance.OnSelectMagic1;
+            @SelectMagic1.canceled -= instance.OnSelectMagic1;
+            @SelectMagic2.started -= instance.OnSelectMagic2;
+            @SelectMagic2.performed -= instance.OnSelectMagic2;
+            @SelectMagic2.canceled -= instance.OnSelectMagic2;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -397,5 +455,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnDisplayStat(InputAction.CallbackContext context);
         void OnDisplayMenu(InputAction.CallbackContext context);
         void OnEnableMagic(InputAction.CallbackContext context);
+        void OnSelectMagic1(InputAction.CallbackContext context);
+        void OnSelectMagic2(InputAction.CallbackContext context);
     }
 }
