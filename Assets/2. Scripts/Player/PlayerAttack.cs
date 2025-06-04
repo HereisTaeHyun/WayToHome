@@ -14,14 +14,20 @@ public class PlayerAttack : MeleeAttack
     [SerializeField] private AudioClip attackSFX;
 
     // 마법 관련
+    private Transform magicSpawnPos;
     private ObjectPool<GameObject> firstMagicPool;
     private ObjectPool<GameObject> secondMagicPool;
+
+    private Kunai kunaiComp;
+    private Shuriken shurikenComp;
 
     public override void Init()
     {
         rb2D = GetComponent<Rigidbody2D>();
         attackCollier = transform.Find("MeleeAttack").gameObject;
         attackCollier.SetActive(false);
+
+        magicSpawnPos = transform.Find("MagicSpawnPos").transform;
 
         playerAnim = GetComponent<Animator>();
     }
@@ -51,7 +57,12 @@ public class PlayerAttack : MeleeAttack
         }
         else if (PlayerCtrl.player.isMagic == true)
         {
-            Debug.Log("UseMagic");
+            // 공격 방향에 따른 magicSpawnPos 위치 결정
+            Vector3 spawnPos = magicSpawnPos.localPosition;
+            spawnPos.x = Mathf.Abs(spawnPos.x) * attackDir.x;
+            magicSpawnPos.localPosition = spawnPos;
+            
+            Debug.Log(magicSpawnPos.transform.position);
         }
     }
 

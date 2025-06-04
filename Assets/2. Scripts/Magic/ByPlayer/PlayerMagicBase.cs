@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.Pool;
-
+public enum PlayerMagicType
+{
+    Kunai,
+    Shuriken,
+}
 public class PlayerMagicBase : MonoBehaviour
 {
     protected bool isPool;
