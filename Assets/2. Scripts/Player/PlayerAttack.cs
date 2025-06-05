@@ -101,9 +101,11 @@ public class PlayerAttack : MeleeAttack
 
         var pool = UtilityManager.utility.CreatePlayerMagicPool(selectedMagic);
         var magic = UtilityManager.utility.GetFromPool(pool, maxMagic);
+        magicComp = magic.GetComponent<PlayerMagicBase>();
 
         magic.transform.position = magicSpawnPos.transform.position;
         magic.transform.rotation = magicSpawnPos.transform.rotation;
-        // magicComp.SetPool(pool);
+
+        magicComp.SetPool(pool);
     }
 }

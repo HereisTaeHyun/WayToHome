@@ -4,6 +4,8 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Collections.Generic;
+using UnityEngine.Pool;
 using Image = UnityEngine.UI.Image;
 
 public class GameManager : MonoBehaviour
@@ -13,6 +15,7 @@ public class GameManager : MonoBehaviour
     // 게임 오버 이벤트
     public delegate void GameOverHandler();
     public static event GameOverHandler OnGameOver;
+    public Dictionary<GameObject, ObjectPool<GameObject>> magicPools = new Dictionary<GameObject, ObjectPool<GameObject>>();
 
     public bool usePortal = false;
 

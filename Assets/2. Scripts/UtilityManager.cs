@@ -7,7 +7,6 @@ using UnityEngine.Pool;
 
 public class UtilityManager : MonoBehaviour
 {
-    private Dictionary<PlayerMagicType, ObjectPool<PlayerMagicBase>> magicPools = new Dictionary<PlayerMagicType, ObjectPool<PlayerMagicBase>>();
     private AudioSource audioSource;
     // 싱글톤 선언
     public static UtilityManager utility = null;
@@ -120,26 +119,24 @@ public class UtilityManager : MonoBehaviour
         );
     }
 
-    public ObjectPool<PlayerMagicBase> CreatePlayerMagicPool(GameObject prefab, int count = 5, int max = 10)
+    public ObjectPool<GameObject> CreatePlayerMagicPool(GameObject prefab, int count = 5, int max = 20)
     {
-        var magicComp = prefab.GetComponent<PlayerMagicBase>();
-        var magicId = magicComp.Id;
 
-        if (magicPools.TryGetValue(magicId, out var pool)) return pool;
+        if (GameManager.instance.magicPools.TryGetValue(prefab, out var pool)) return pool;
 
         // pool 생성
-        pool = new ObjectPool<PlayerMagicBase>
+        pool = new ObjectPool<GameObject>
         (
-            createFunc: () => Instantiate(prefab).GetComponent<PlayerMagicBase>(),
-            actionOnGet: (go) => go.gameObject.SetActive(true),
-            actionOnRelease: (go) => go.gameObject.SetActive(false),
+            createFunc: () => Instantiate(prefab),
+            actionOnGet: (go) => go.SetActive(true),
+            actionOnRelease: (go) => go.SetActive(false),
             actionOnDestroy: (go) => Destroy(go),
             collectionCheck: true,
             defaultCapacity: count,
             maxSize: max
         );
 
-        magicPools.Add(magicId, pool);
+        GameManager.instance.magicPools.Add(prefab, pool);
         return pool;
     }
 
@@ -152,9 +149,9 @@ public class UtilityManager : MonoBehaviour
         return pool.Get();
     }
 
-    public void ReturnToPool(ObjectPool<GameObject> pool, GameObject go)
+    public void ReturnToPool<T>(ObjectPool<T> pool, T obj) where T : UnityEngine.Object
     {
-        pool.Release(go);
+        pool.Release(obj);
     }
 
     public void SetItemFromPool(Transform targetTransform, GameObject target)
