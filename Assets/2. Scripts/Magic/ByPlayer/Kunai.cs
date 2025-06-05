@@ -36,6 +36,9 @@ public class Kunai : PlayerMagicBase
     public override void SetPool(ObjectPool<GameObject> pool)
     {
         moveDir = UtilityManager.utility.AllDirSet(PlayerCtrl.player.aimPos);
+        float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        
         lifeSpan = 5.0f;
         originPool = pool;
         isPool = false;

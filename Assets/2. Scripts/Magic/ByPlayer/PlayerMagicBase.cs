@@ -31,7 +31,7 @@ public class PlayerMagicBase : MonoBehaviour
         isPool = false;
     }
 
-    protected virtual void OnTriggerStay2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {    
         if(other.TryGetComponent<IDamageable>(out var target))
         {
