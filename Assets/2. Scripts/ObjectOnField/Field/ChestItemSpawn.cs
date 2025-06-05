@@ -2,10 +2,13 @@ using System.Collections;
 using Cainos.PixelArtPlatformer_VillageProps;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.SceneManagement;
 
 public class ChestItemSpawn : MonoBehaviour
 {
         public GameObject itemInChest;
+
+        [SerializeField] string chestID;
         private Chest chest;
         private GameObject itemSpawnPoint;
         private ObjectPool<GameObject> usingPool;
@@ -13,6 +16,7 @@ public class ChestItemSpawn : MonoBehaviour
 
         void Start()
         {
+            chestID = $"{SceneManager.GetActiveScene().name}_{gameObject.name}";
             chest = GetComponent<Chest>();
             itemSpawnPoint = transform.Find("ItemSpawnPoint").gameObject;
         }
