@@ -56,7 +56,7 @@ public class ItemToBuy : ItemBase
     protected override void OnTriggerStay2D(Collider2D other)
     {
         // Player 감지, Submit(E에 할당)입력시 획득
-        if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit"))
+        if(other.gameObject.CompareTag("Player") && PlayerCtrl.player.isSubmit == true)
         {
             switch(itemToBuyType)
             {

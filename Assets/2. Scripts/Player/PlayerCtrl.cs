@@ -14,6 +14,7 @@ public class PlayerCtrl : MonoBehaviour
     public Vector2 moveInput { get; private set; }
     public Vector2 lastMoveDir { get; private set; }
     public bool isMagic { get; private set; }
+    public bool isSubmit { get; private set; }
 
     public event Action<int> SelectMagic;
 
@@ -165,6 +166,9 @@ public class PlayerCtrl : MonoBehaviour
 
         inputActions.Player.Jump.performed += OnJump;
 
+        inputActions.Player.Submit.performed += ctx => isSubmit = true;
+        inputActions.Player.Submit.canceled += ctx => isSubmit = false;
+
         inputActions.Player.Attack.performed += OnAttack;
         inputActions.Player.EnableMagic.performed += ToggleAttackMode;
         inputActions.Player.SelectMagic1.performed += ctx => SelectMagic(0);
@@ -184,6 +188,9 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.Move.canceled -= CancelMove;
 
         inputActions.Player.Jump.performed -= OnJump;
+
+        inputActions.Player.Submit.performed += ctx => isSubmit = true;
+        inputActions.Player.Submit.canceled += ctx => isSubmit = false;
 
         inputActions.Player.Attack.performed -= OnAttack;
         inputActions.Player.EnableMagic.performed -= ToggleAttackMode;

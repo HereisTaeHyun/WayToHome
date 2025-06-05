@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Submit",
+                    "type": "Button",
+                    "id": "90c20e6f-cddb-4086-813d-fd47806b5068",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "DisplayStat",
                     "type": "Button",
                     "id": "8c3327a4-2633-4eba-9255-7be391528d38",
@@ -197,6 +206,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SelectMagic2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4754206c-4a3b-428e-93a5-79c05b4e39c8",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

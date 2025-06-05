@@ -55,6 +55,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""90c20e6f-cddb-4086-813d-fd47806b5068"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""DisplayStat"",
                     ""type"": ""Button"",
                     ""id"": ""8c3327a4-2633-4eba-9255-7be391528d38"",
@@ -221,6 +230,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""SelectMagic2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4754206c-4a3b-428e-93a5-79c05b4e39c8"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -260,6 +280,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_Submit = m_Player.FindAction("Submit", throwIfNotFound: true);
         m_Player_DisplayStat = m_Player.FindAction("DisplayStat", throwIfNotFound: true);
         m_Player_DisplayMenu = m_Player.FindAction("DisplayMenu", throwIfNotFound: true);
         m_Player_EnableMagic = m_Player.FindAction("EnableMagic", throwIfNotFound: true);
@@ -334,6 +355,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_Submit;
     private readonly InputAction m_Player_DisplayStat;
     private readonly InputAction m_Player_DisplayMenu;
     private readonly InputAction m_Player_EnableMagic;
@@ -346,6 +368,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @Submit => m_Wrapper.m_Player_Submit;
         public InputAction @DisplayStat => m_Wrapper.m_Player_DisplayStat;
         public InputAction @DisplayMenu => m_Wrapper.m_Player_DisplayMenu;
         public InputAction @EnableMagic => m_Wrapper.m_Player_EnableMagic;
@@ -369,6 +392,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @Submit.started += instance.OnSubmit;
+            @Submit.performed += instance.OnSubmit;
+            @Submit.canceled += instance.OnSubmit;
             @DisplayStat.started += instance.OnDisplayStat;
             @DisplayStat.performed += instance.OnDisplayStat;
             @DisplayStat.canceled += instance.OnDisplayStat;
@@ -397,6 +423,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @Submit.started -= instance.OnSubmit;
+            @Submit.performed -= instance.OnSubmit;
+            @Submit.canceled -= instance.OnSubmit;
             @DisplayStat.started -= instance.OnDisplayStat;
             @DisplayStat.performed -= instance.OnDisplayStat;
             @DisplayStat.canceled -= instance.OnDisplayStat;
@@ -452,6 +481,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnSubmit(InputAction.CallbackContext context);
         void OnDisplayStat(InputAction.CallbackContext context);
         void OnDisplayMenu(InputAction.CallbackContext context);
         void OnEnableMagic(InputAction.CallbackContext context);

@@ -7,7 +7,7 @@ public class SavePoint : MonoBehaviour
     [SerializeField] AudioClip saveSfx;
     void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player") && Input.GetButton("Submit") && isSaved == false)
+        if(collision.gameObject.CompareTag("Player") && PlayerCtrl.player.isSubmit == true && isSaved == false)
         {
             // 스탯 저장 후 스폰 포인트를 해당 포인트로 설정
             isSaved = true;

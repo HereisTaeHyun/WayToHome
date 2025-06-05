@@ -23,7 +23,7 @@ public class ChestItemSpawn : MonoBehaviour
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit") && isOpened == false)
+            if(other.gameObject.CompareTag("Player") && PlayerCtrl.player.isSubmit == true && isOpened == false)
             {
                 isOpened = true;
                 chest.Open();
