@@ -11,7 +11,6 @@ public class PlayerMove : MonoBehaviour
     [NonSerialized] public float moveSpeed = 7.0f;
     [NonSerialized] public int maxJump;
     [NonSerialized] public int jumpCount = 0;
-    public Animator playerAnim;
 
 #region private
     // private 변수
@@ -61,7 +60,6 @@ public class PlayerMove : MonoBehaviour
     public void Init()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        playerAnim = GetComponent<Animator>();
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
 
@@ -80,7 +78,7 @@ public class PlayerMove : MonoBehaviour
         moveDir = PlayerCtrl.player.lastMoveDir;
 
         // 이동 방향 및 move 중인지 체크
-        playerAnim.SetFloat(speedHash, move.magnitude);
+        PlayerCtrl.player.playerAnim.SetFloat(speedHash, move.magnitude);
 
         // player state가 idle인지 move인지 h에 따라 변화
         if(PlayerCtrl.player.moveInput.x != 0)
@@ -105,7 +103,7 @@ public class PlayerMove : MonoBehaviour
 
     private void ApplyMove(Vector2 move, Vector2 moveDir)
     {
-        playerAnim.SetFloat(dirHash, moveDir.x);
+        PlayerCtrl.player.playerAnim.SetFloat(dirHash, moveDir.x);
 
         // 땅 위거나 공중이면 기존 이동에 따라
         if(isSlope == false)
@@ -124,7 +122,7 @@ public class PlayerMove : MonoBehaviour
     public void ForceIdle()
     {
         move = Vector2.zero;
-        playerAnim.SetFloat(speedHash, move.x);
+        PlayerCtrl.player.playerAnim.SetFloat(speedHash, move.x);
     }
 #endregion
 
@@ -254,13 +252,13 @@ public class PlayerMove : MonoBehaviour
         UtilityManager.utility.PlaySFX(jumpSFX);
 
         // 이전 점프가 재생 중이면 파라미터 전달 x
-        if(playerAnim.GetCurrentAnimatorStateInfo(0).IsName("PlayerJump"))
+        if(PlayerCtrl.player.playerAnim.GetCurrentAnimatorStateInfo(0).IsName("PlayerJump"))
         {
             return;
         }
         else
         {
-            playerAnim.SetTrigger(jumpHash);
+            PlayerCtrl.player.playerAnim.SetTrigger(jumpHash);
         }
     }
 #endregion

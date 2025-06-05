@@ -11,7 +11,6 @@ public class PlayerAttack : MeleeAttack
     public GameObject[] UsingMagic = new GameObject[2];
 
     // private 변수
-    private Animator playerAnim;
     [SerializeField] private AudioClip attackSFX;
     private readonly int attckHash = Animator.StringToHash("Attack");
 
@@ -30,8 +29,6 @@ public class PlayerAttack : MeleeAttack
         attackCollier.SetActive(false);
 
         magicSpawnPos = transform.Find("MagicSpawnPos").transform;
-
-        playerAnim = GetComponent<Animator>();
     }
 
     void OnEnable()
@@ -63,8 +60,8 @@ public class PlayerAttack : MeleeAttack
 
             // 공격 활성화
             UtilityManager.utility.PlaySFX(attackSFX);
-            playerAnim.SetTrigger(attackHash);
-            playerAnim.SetFloat(attackDirHash, attackDir.x);
+            PlayerCtrl.player.playerAnim.SetTrigger(attackHash);
+            PlayerCtrl.player.playerAnim.SetFloat(attackDirHash, attackDir.x);
         }
         else if (PlayerCtrl.player.isMagic == true)
         {

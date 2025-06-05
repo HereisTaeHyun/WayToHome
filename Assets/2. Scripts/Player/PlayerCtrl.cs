@@ -25,6 +25,7 @@ public class PlayerCtrl : MonoBehaviour
     [NonSerialized] public bool canMove;
     [NonSerialized] public State state;
     [NonSerialized] public bool canAttack;
+    [NonSerialized] public Animator playerAnim;
     public enum State
     {
         Idle,
@@ -44,7 +45,6 @@ public class PlayerCtrl : MonoBehaviour
     public PlayerMove playerMove { get; private set; }
     public PlayerAttack playerAttack { get; private set; }
     private Rigidbody2D rb2D;
-    private Animator playerAnim;
     private bool isDie;
     private CapsuleCollider2D coll2D;
     private PhysicsMaterial2D physicsMaterial2D;

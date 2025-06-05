@@ -39,14 +39,14 @@ public class Home : MonoBehaviour
         {
             Vector2 targetPoint = new Vector2(endPoint.transform.position.x, PlayerCtrl.player.transform.position.y);
             
-            PlayerCtrl.player.playerMove.playerAnim.SetFloat("Speed", 1.0f);
+            PlayerCtrl.player.playerAnim.SetFloat("Speed", 1.0f);
             PlayerCtrl.player.state = PlayerCtrl.State.Move;
             PlayerCtrl.player.transform.position = Vector2.MoveTowards(PlayerCtrl.player.transform.position, targetPoint, Time.deltaTime * 3.0f);
             yield return null;
         }
 
         // 엔딩 포인트에 도착
-        PlayerCtrl.player.playerMove.playerAnim.SetFloat("Speed", 0.0f);
+        PlayerCtrl.player.playerAnim.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(2.0f);
         UtilityManager.utility.PlaySFX(getInSFX);
         PlayerCtrl.player.spriteRenderer.sortingOrder = -1;
