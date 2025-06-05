@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Pool;
+
 public enum PlayerMagicType
 {
     Kunai,

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Kunai : PlayerMagicBase
 {
@@ -6,6 +7,7 @@ public class Kunai : PlayerMagicBase
     private Vector2 moveDir;
     private Vector2 newVelocity;
     private float lifeSpan = 5.0f;
+
     protected override void Start()
     {
         base.Start();
@@ -22,5 +24,12 @@ public class Kunai : PlayerMagicBase
         {
             ReturnToOriginPool();
         }
+    }
+
+    public override void SetPool(ObjectPool<GameObject> pool)
+    {
+        lifeSpan = 5.0f;
+        originPool = pool;
+        isPool = false;
     }
 }

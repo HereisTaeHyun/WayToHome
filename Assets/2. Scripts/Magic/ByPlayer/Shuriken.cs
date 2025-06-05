@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Shuriken : PlayerMagicBase
 {
@@ -22,5 +23,12 @@ public class Shuriken : PlayerMagicBase
         {
             ReturnToOriginPool();
         }
+    }
+
+    public override void SetPool(ObjectPool<GameObject> pool)
+    {
+        lifeSpan = 5.0f;
+        originPool = pool;
+        isPool = false;
     }
 }

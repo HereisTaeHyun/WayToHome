@@ -19,7 +19,7 @@ public class PlayerAttack : MeleeAttack
     private GameObject selectedMagic;
     private Transform magicSpawnPos;
     private int selectedMagicIdx;
-    private int maxMagic = 10;
+    private int maxMagic = 20;
 
     private PlayerMagicBase magicComp;
 
@@ -99,13 +99,14 @@ public class PlayerAttack : MeleeAttack
     {
         selectedMagic = UsingMagic[selectedMagicIdx];
 
-        var pool = UtilityManager.utility.CreatePlayerMagicPool(selectedMagic);
+        var pool = UtilityManager.utility.CreatePlayerMagicPool(selectedMagic, maxMagic, maxMagic);
         var magic = UtilityManager.utility.GetFromPool(pool, maxMagic);
-        magicComp = magic.GetComponent<PlayerMagicBase>();
-
-        magic.transform.position = magicSpawnPos.transform.position;
-        magic.transform.rotation = magicSpawnPos.transform.rotation;
-
-        magicComp.SetPool(pool);
+        if(magic != null)
+        {
+            magicComp = magic.GetComponent<PlayerMagicBase>();
+            magic.transform.position = magicSpawnPos.transform.position;
+            magic.transform.rotation = magicSpawnPos.transform.rotation;
+            magicComp.SetPool(pool);
+        }
     }
 }
