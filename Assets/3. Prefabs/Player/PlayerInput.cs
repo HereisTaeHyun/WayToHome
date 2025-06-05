@@ -107,6 +107,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AimPos"",
+                    ""type"": ""Value"",
+                    ""id"": ""05936b97-d781-4004-b000-98966711e1bb"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -241,6 +250,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a72a5a7-8573-4e97-9070-ba6dd67abd63"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AimPos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -286,6 +306,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_EnableMagic = m_Player.FindAction("EnableMagic", throwIfNotFound: true);
         m_Player_SelectMagic1 = m_Player.FindAction("SelectMagic1", throwIfNotFound: true);
         m_Player_SelectMagic2 = m_Player.FindAction("SelectMagic2", throwIfNotFound: true);
+        m_Player_AimPos = m_Player.FindAction("AimPos", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -361,6 +382,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_EnableMagic;
     private readonly InputAction m_Player_SelectMagic1;
     private readonly InputAction m_Player_SelectMagic2;
+    private readonly InputAction m_Player_AimPos;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -374,6 +396,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @EnableMagic => m_Wrapper.m_Player_EnableMagic;
         public InputAction @SelectMagic1 => m_Wrapper.m_Player_SelectMagic1;
         public InputAction @SelectMagic2 => m_Wrapper.m_Player_SelectMagic2;
+        public InputAction @AimPos => m_Wrapper.m_Player_AimPos;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -410,6 +433,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SelectMagic2.started += instance.OnSelectMagic2;
             @SelectMagic2.performed += instance.OnSelectMagic2;
             @SelectMagic2.canceled += instance.OnSelectMagic2;
+            @AimPos.started += instance.OnAimPos;
+            @AimPos.performed += instance.OnAimPos;
+            @AimPos.canceled += instance.OnAimPos;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -441,6 +467,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SelectMagic2.started -= instance.OnSelectMagic2;
             @SelectMagic2.performed -= instance.OnSelectMagic2;
             @SelectMagic2.canceled -= instance.OnSelectMagic2;
+            @AimPos.started -= instance.OnAimPos;
+            @AimPos.performed -= instance.OnAimPos;
+            @AimPos.canceled -= instance.OnAimPos;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -487,5 +516,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnEnableMagic(InputAction.CallbackContext context);
         void OnSelectMagic1(InputAction.CallbackContext context);
         void OnSelectMagic2(InputAction.CallbackContext context);
+        void OnAimPos(InputAction.CallbackContext context);
     }
 }

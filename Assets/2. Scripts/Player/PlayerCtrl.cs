@@ -13,6 +13,7 @@ public class PlayerCtrl : MonoBehaviour
     [NonSerialized] public PlayerInput inputActions;
     public Vector2 moveInput { get; private set; }
     public Vector2 lastMoveDir { get; private set; }
+    public Vector2 aimPos { get; private set; }
     public bool isMagic { get; private set; }
     public bool isSubmit { get; private set; }
 
@@ -48,6 +49,8 @@ public class PlayerCtrl : MonoBehaviour
     private bool isDie;
     private CapsuleCollider2D coll2D;
     private PhysicsMaterial2D physicsMaterial2D;
+    private Camera mainCam;
+    private Vector2 mouseScreenPos;
     private readonly int dieHash = Animator.StringToHash("Die");
     [SerializeField] private GameObject graveStone;
     [SerializeField] private StatGemBar HPGemBar;
@@ -116,6 +119,7 @@ public class PlayerCtrl : MonoBehaviour
         coll2D = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         physicsMaterial2D = new PhysicsMaterial2D();
+        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
         // UI 관련
         HPBar = GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>();
@@ -171,6 +175,7 @@ public class PlayerCtrl : MonoBehaviour
 
         inputActions.Player.Attack.performed += OnAttack;
         inputActions.Player.EnableMagic.performed += ToggleAttackMode;
+        inputActions.Player.AimPos.performed += OnAim;
         inputActions.Player.SelectMagic1.performed += ctx => SelectMagic(0);
         inputActions.Player.SelectMagic2.performed += ctx => SelectMagic(1);
 
@@ -194,6 +199,7 @@ public class PlayerCtrl : MonoBehaviour
 
         inputActions.Player.Attack.performed -= OnAttack;
         inputActions.Player.EnableMagic.performed -= ToggleAttackMode;
+        inputActions.Player.AimPos.performed -= OnAim;
         inputActions.Player.SelectMagic1.performed -= ctx => SelectMagic(0);
         inputActions.Player.SelectMagic2.performed -= ctx => SelectMagic(1);
 
@@ -253,6 +259,13 @@ public class PlayerCtrl : MonoBehaviour
         {
             playerAttack.Attack();
         }
+    }
+
+    private void OnAim(InputAction.CallbackContext context)
+    {
+        mouseScreenPos = context.ReadValue<Vector2>();
+        Vector3 worldPos = mainCam.ScreenToWorldPoint(mouseScreenPos);
+        aimPos = ((Vector2)worldPos - (Vector2)transform.position);
     }
 
     private void ToggleAttackMode(InputAction.CallbackContext ctx)

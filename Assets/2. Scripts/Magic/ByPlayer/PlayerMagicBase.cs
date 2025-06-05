@@ -54,6 +54,8 @@ public class PlayerMagicBase : MonoBehaviour
         {
             UtilityManager.utility.ReturnToPool(originPool, gameObject);
             isPool = true;
+            transform.position = Vector3.zero;
+            transform.rotation  = Quaternion.Euler(0f, 0f, 0f);
         }
     }
 }
