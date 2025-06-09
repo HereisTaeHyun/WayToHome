@@ -43,7 +43,7 @@ public class EnemyCtrl : MonoBehaviour, IDamageable, IDie
     public Animator readAnim {get {return anim;}}
     [SerializeField] protected float damage;
     public float readDamage {get {return damage;}}
-#endregion
+    #endregion
 
     // 초기화
     protected virtual void Init()
@@ -57,9 +57,14 @@ public class EnemyCtrl : MonoBehaviour, IDamageable, IDie
         detectLayer = LayerMask.GetMask("Player", "Ground", "Wall");
 
         // 드롭 아이템 정보 딕셔너리 형성
-        for(int i = 0; i < dropItem.Length; i++)
+        for (int i = 0; i < dropItem.Length; i++)
         {
             itemInformation.Add(dropItem[i], itemWeight[i]);
+        }
+        
+        if (DataManager.dataManager.playerData.didedEnemy.Contains(enemyID))
+        {
+            gameObject.SetActive(false);
         }
     }
 
