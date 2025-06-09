@@ -14,8 +14,8 @@ public class PlayerData
     public float attackDamage = -1.0f;
     public Vector2 savedSpawnPos;
     public string savedStage;
-    public List<int> openedChests = new List<int>();
-    public List<int> didedEnemy = new List<int>();
+    public List<int> openedChests;
+    public List<int> didedEnemy;
 }
 
 public class DataManager : MonoBehaviour
@@ -78,6 +78,8 @@ public class DataManager : MonoBehaviour
         playerData.attackDamage = -1.0f;
         playerData.savedSpawnPos = new Vector2(-102.83f, -15.06f);
         playerData.savedStage = "1. First Stage";
+        playerData.openedChests = new List<int>();
+        playerData.didedEnemy = new List<int>();
 
         string jsonData = JsonUtility.ToJson(playerData);
         File.WriteAllText(savePath, jsonData);
