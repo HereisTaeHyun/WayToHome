@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class EnemyCtrl : MonoBehaviour, IDamageable, IDie
@@ -14,7 +15,8 @@ public class EnemyCtrl : MonoBehaviour, IDamageable, IDie
     public bool isDie { get; protected set; }
 
     // protected 변수
-#region private
+    #region private
+    [SerializeField] protected string enemyID;
     [SerializeField] protected float enemyPushPower;
     [SerializeField] protected float stunTime;
     [SerializeField] protected float maxHP;
@@ -46,6 +48,7 @@ public class EnemyCtrl : MonoBehaviour, IDamageable, IDie
     // 초기화
     protected virtual void Init()
     {
+        enemyID = $"{SceneManager.GetActiveScene().name}_{gameObject.name}";
         rb2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         isDie = false;

@@ -1,17 +1,15 @@
 using System.Collections;
 using Cainos.PixelArtPlatformer_VillageProps;
 using UnityEngine;
-using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
 
 public class ChestItemSpawn : MonoBehaviour
 {
         public GameObject itemInChest;
 
-        [SerializeField] string chestID;
+        [SerializeField] private string chestID;
         private Chest chest;
         private GameObject itemSpawnPoint;
-        private ObjectPool<GameObject> usingPool;
         private bool isOpened = false; // OnTriggerStay2D기에 프레임 연속 입력 방지 위해 플래그 필요
 
         void Start()
