@@ -16,7 +16,7 @@ public class EnemyCtrl : MonoBehaviour, IDamageable, IDie
 
     // protected 변수
     #region private
-    [SerializeField] protected int enemyID;
+    protected int enemyID;
     [SerializeField] protected float enemyPushPower;
     [SerializeField] protected float stunTime;
     [SerializeField] protected float maxHP;
