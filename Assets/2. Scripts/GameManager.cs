@@ -31,8 +31,6 @@ public class GameManager : MonoBehaviour
     private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
 
     private GameObject player;
-    private PlayerMove playerMove;
-    private PlayerAttack playerAttack;
 
     private GameObject cam;
     private CinemachineCamera camComp;

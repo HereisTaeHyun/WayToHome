@@ -35,6 +35,7 @@ public class ChestItemSpawn : MonoBehaviour
         IEnumerator ItemDrop()
         {
             yield return new WaitForSeconds(0.3f);
+            DataManager.dataManager.playerData.openedChests.Add(chestID);
             UtilityManager.utility.SetItemFromPool(itemSpawnPoint.transform, itemInChest);
         }
 }

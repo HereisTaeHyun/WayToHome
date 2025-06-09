@@ -137,10 +137,14 @@ public class GroundCtrl : EnemyCtrl
     // 사망 절차 진행, 사운드 재생 및 물리 영향 제거 후 사망 애니메이션 재생
     private IEnumerator DieStart()
     {
-        isDie = true;
+        DataManager.dataManager.playerData.didedEnemy.Add(enemyID);
         UtilityManager.utility.PlaySFX(enemyDieSFX);
+
+        isDie = true;
+
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.simulated = false;
+
         anim.SetTrigger(dieHash);
         yield return new WaitForSeconds(2.0f);
         gameObject.SetActive(false);
