@@ -16,7 +16,7 @@ public class EnemyCtrl : MonoBehaviour, IDamageable, IDie
 
     // protected 변수
     #region private
-    [SerializeField] protected string enemyID;
+    [SerializeField] protected int enemyID;
     [SerializeField] protected float enemyPushPower;
     [SerializeField] protected float stunTime;
     [SerializeField] protected float maxHP;
@@ -48,7 +48,7 @@ public class EnemyCtrl : MonoBehaviour, IDamageable, IDie
     // 초기화
     protected virtual void Init()
     {
-        enemyID = $"{SceneManager.GetActiveScene().name}_{gameObject.name}";
+        enemyID = Animator.StringToHash($"{SceneManager.GetActiveScene().name}_{gameObject.name}");
         rb2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         isDie = false;
@@ -56,7 +56,6 @@ public class EnemyCtrl : MonoBehaviour, IDamageable, IDie
         currentHP = maxHP;
         detectLayer = LayerMask.GetMask("Player", "Ground", "Wall");
 
-        
         // 드롭 아이템 정보 딕셔너리 형성
         for(int i = 0; i < dropItem.Length; i++)
         {

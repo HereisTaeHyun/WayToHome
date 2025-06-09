@@ -7,14 +7,14 @@ public class ChestItemSpawn : MonoBehaviour
 {
         public GameObject itemInChest;
 
-        [SerializeField] private string chestID;
+        [SerializeField] private int chestID;
         private Chest chest;
         private GameObject itemSpawnPoint;
         private bool isOpened = false; // OnTriggerStay2D기에 프레임 연속 입력 방지 위해 플래그 필요
 
         void Start()
         {
-            chestID = $"{SceneManager.GetActiveScene().name}_{gameObject.name}";
+            chestID = Animator.StringToHash($"{SceneManager.GetActiveScene().name}_{gameObject.name}");
             chest = GetComponent<Chest>();
             itemSpawnPoint = transform.Find("ItemSpawnPoint").gameObject;
         }

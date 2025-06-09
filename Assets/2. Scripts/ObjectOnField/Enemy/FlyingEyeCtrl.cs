@@ -95,7 +95,7 @@ public class FlyingEyeCtrl : EnemyCtrl
         // 사망 및 중력 적용
         DataManager.dataManager.playerData.didedEnemy.Add(enemyID);
         UtilityManager.utility.PlaySFX(enemyDieSFX);
-        
+
         isDie = true;
         rb2D.gravityScale = 1.0f;
 

@@ -14,8 +14,8 @@ public class PlayerData
     public float attackDamage = -1.0f;
     public Vector2 savedSpawnPos;
     public string savedStage;
-    public List<string> openedChests = new List<string>();
-    public List<string> didedEnemy = new List<string>();
+    public List<int> openedChests = new List<int>();
+    public List<int> didedEnemy = new List<int>();
 }
 
 public class DataManager : MonoBehaviour
