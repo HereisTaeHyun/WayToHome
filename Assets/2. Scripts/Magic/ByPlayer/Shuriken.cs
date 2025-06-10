@@ -18,19 +18,11 @@ public class Shuriken : PlayerMagicBase
 
     private void FixedUpdate()
     {
-        MoveMagic();
-
         lifeSpan -= Time.deltaTime;
         if(lifeSpan <= 0)
         {
             ReturnToOriginPool();
         }
-    }
-    
-    private void MoveMagic()
-    {
-        newVelocity.Set(moveDir.x * moveSpeed, moveDir.y * moveSpeed);
-        rb2D.linearVelocity = newVelocity;
     }
 
     public override void SetPool(ObjectPool<GameObject> pool)
@@ -38,7 +30,7 @@ public class Shuriken : PlayerMagicBase
         moveDir = UtilityManager.utility.AllDirSet(PlayerCtrl.player.aimPos);
         float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
+        
         lifeSpan = 5.0f;
         originPool = pool;
         isPool = false;
