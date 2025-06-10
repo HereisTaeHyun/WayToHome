@@ -48,6 +48,10 @@ public class DataManager : MonoBehaviour
             savePath = Application.persistentDataPath + "/save.json";
             keyPath = Application.persistentDataPath + "/aesKey.dat";
             ivPath = Application.persistentDataPath + "/aesIV.dat";
+
+            // 암호화 키 생성
+            InitCrypto();
+
         }
         else if (dataManager != this)
         {
@@ -68,14 +72,16 @@ public class DataManager : MonoBehaviour
         playerData.savedStage = SceneManager.GetActiveScene().name;
 
         string jsonData = JsonUtility.ToJson(playerData);
-        File.WriteAllText(savePath, jsonData);
+        string encryptedJson = Encryptor(jsonData);
+        File.WriteAllText(savePath, encryptedJson);
     }
 
     public bool Load()
     {
         if (File.Exists(savePath))
         {
-            string jsonData = File.ReadAllText(savePath);
+            string encryptedJson  = File.ReadAllText(savePath);
+            string jsonData = Decryptor(encryptedJson);
             playerData = JsonUtility.FromJson<PlayerData>(jsonData);
             return true;
         }
@@ -95,12 +101,13 @@ public class DataManager : MonoBehaviour
         playerData.didedEnemy = new List<int>();
 
         string jsonData = JsonUtility.ToJson(playerData);
-        File.WriteAllText(savePath, jsonData);
+        string encryptedJson = Encryptor(jsonData);
+        File.WriteAllText(savePath, encryptedJson);
     }
     #endregion
 
     #region 암복호화
-    private void Crypto()
+    private void InitCrypto()
     {
         if (File.Exists(keyPath) && File.Exists(ivPath))
         {
@@ -111,6 +118,8 @@ public class DataManager : MonoBehaviour
         {
             key = GenerateRandomByte(keyLength);
             iv = GenerateRandomByte(ivLength);
+            File.WriteAllBytes(keyPath, key);
+            File.WriteAllBytes(ivPath, iv);
         }
     }
 
@@ -125,25 +134,27 @@ public class DataManager : MonoBehaviour
         return randomBytes;
     }
 
-    private string Encrypter(string plainText)
+    private string Encryptor(string plainText)
     {
         using (Aes aes = Aes.Create())
         {
+            byte[] plainBytes = Encoding.UTF8.GetBytes(plainText);
+
             aes.Key = key;
             aes.IV = iv;
 
             ICryptoTransform encryptor = aes.CreateEncryptor();
-            byte[] encrypted = encryptor.TransformFinalBlock(Encoding.UTF8.GetBytes(plainText), 0, plainText.Length);
+            byte[] encrypted = encryptor.TransformFinalBlock(plainBytes, 0, plainBytes.Length);
             return Convert.ToBase64String(encrypted);
         }
     }
 
-    private string Decrypter(string cipherText)
+    private string Decryptor(string cipherText)
     {
-        byte[] cipherByte = Convert.FromBase64String(cipherText);
-
         using (Aes aes = Aes.Create())
         {
+            byte[] cipherByte = Convert.FromBase64String(cipherText);
+
             aes.Key = key;
             aes.IV = iv;
 
