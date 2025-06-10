@@ -8,7 +8,6 @@ public enum PlayerMagicType
 }
 public class PlayerMagicBase : MonoBehaviour
 {
-    public PlayerMagicType Id { get; }
     protected bool isPool;
     protected float moveSpeed;
     protected float damage;

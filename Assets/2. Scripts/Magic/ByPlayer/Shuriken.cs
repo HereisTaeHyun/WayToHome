@@ -5,7 +5,6 @@ public class Shuriken : PlayerMagicBase
 {
     public PlayerMagicType playerMagicType;
     private Vector2 moveDir;
-    private Vector2 newVelocity;
     private float lifeSpan = 5.0f;
 
     protected override void Start()
@@ -30,9 +29,11 @@ public class Shuriken : PlayerMagicBase
         moveDir = UtilityManager.utility.AllDirSet(PlayerCtrl.player.aimPos);
         float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        
+
         lifeSpan = 5.0f;
         originPool = pool;
         isPool = false;
+
+        rb2D.linearVelocity = gameObject.transform.right * 10.0f;
     }
 }
