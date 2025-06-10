@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Security.Cryptography;
 using UnityEngine.LightTransport;
+using System.Text;
+using System;
 
 // 플레이어 데이터 구조 클래스
 [System.Serializable]
@@ -44,8 +46,8 @@ public class DataManager : MonoBehaviour
             playerData = new PlayerData();
             playerData.currentHP = playerData.maxHP;
             savePath = Application.persistentDataPath + "/save.json";
-            keyPath = Application.persistentDataPath + "aesKey.dat";
-            ivPath = Application.persistentDataPath + "aesIV.dat";
+            keyPath = Application.persistentDataPath + "/aesKey.dat";
+            ivPath = Application.persistentDataPath + "/aesIV.dat";
         }
         else if (dataManager != this)
         {
@@ -123,14 +125,32 @@ public class DataManager : MonoBehaviour
         return randomBytes;
     }
 
-    // private string Encrypter(string plainText)
-    // {
+    private string Encrypter(string plainText)
+    {
+        using (Aes aes = Aes.Create())
+        {
+            aes.Key = key;
+            aes.IV = iv;
 
-    // }
+            ICryptoTransform encryptor = aes.CreateEncryptor();
+            byte[] encrypted = encryptor.TransformFinalBlock(Encoding.UTF8.GetBytes(plainText), 0, plainText.Length);
+            return Convert.ToBase64String(encrypted);
+        }
+    }
 
-    // private string Decrypter(string plainText)
-    // {
+    private string Decrypter(string cipherText)
+    {
+        byte[] cipherByte = Convert.FromBase64String(cipherText);
 
-    // }
+        using (Aes aes = Aes.Create())
+        {
+            aes.Key = key;
+            aes.IV = iv;
+
+            ICryptoTransform decryptor = aes.CreateDecryptor();
+            byte[] decrypted = decryptor.TransformFinalBlock(cipherByte, 0, cipherByte.Length);
+            return Encoding.UTF8.GetString(decrypted);
+        }
+    }
     #endregion
 }
