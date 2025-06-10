@@ -26,6 +26,10 @@ public class Shuriken : PlayerMagicBase
 
     public override void SetPool(ObjectPool<GameObject> pool)
     {
+        if (rb2D == null)
+        {
+            rb2D = GetComponent<Rigidbody2D>();
+        }
         moveDir = UtilityManager.utility.AllDirSet(PlayerCtrl.player.aimPos);
         float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
