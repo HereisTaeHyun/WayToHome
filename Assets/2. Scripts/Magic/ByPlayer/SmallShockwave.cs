@@ -1,16 +1,20 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Kunai : PlayerMagicBase
+public class SmallShockwave : PlayerMagicBase
 {
     public PlayerMagicType playerMagicType;
+    private SpriteRenderer spriteRenderer;
     private Vector2 moveDir;
     private Vector2 newVelocity;
-    private float lifeSpan = 5.0f;
+    public float lifeSpan = 1.5f;
 
     protected override void Start()
     {
         base.Start();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         moveSpeed = 5.0f;
         damage = -1.0f;
@@ -26,14 +30,14 @@ public class Kunai : PlayerMagicBase
             ReturnToOriginPool();
         }
     }
-
+    
     protected override void OnTriggerEnter2D(Collider2D other)
     {    
         if(other.TryGetComponent<IDamageable>(out var target))
         {
             target.ChangeHP(damage);
         } 
-        else if(other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Wall"))
+        else if(other.gameObject.CompareTag("Wall"))
         {
             ReturnToOriginPool();
         }
@@ -41,17 +45,25 @@ public class Kunai : PlayerMagicBase
 
     private void MoveMagic()
     {
-        newVelocity.Set(moveDir.x * moveSpeed, moveDir.y * moveSpeed);
+        // 애니메이션 설정에 필요한 방향
+        if (moveDir.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (moveDir.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        // 이동
+        newVelocity.Set(moveDir.x * moveSpeed, rb2D.linearVelocity.y);
         rb2D.linearVelocity = newVelocity;
     }
 
     public override void SetPool(ObjectPool<GameObject> pool)
     {
-        moveDir = UtilityManager.utility.AllDirSet(PlayerCtrl.player.aimPos);
-        float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.lastMoveDir);
         
-        lifeSpan = 5.0f;
+        lifeSpan = 1.5f;
         originPool = pool;
         isPool = false;
     }

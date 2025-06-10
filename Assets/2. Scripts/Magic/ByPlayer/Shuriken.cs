@@ -23,6 +23,18 @@ public class Shuriken : PlayerMagicBase
             ReturnToOriginPool();
         }
     }
+    
+    protected override void OnTriggerEnter2D(Collider2D other)
+    {    
+        if(other.TryGetComponent<IDamageable>(out var target))
+        {
+            target.ChangeHP(damage);
+        } 
+        else if(other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Wall"))
+        {
+            ReturnToOriginPool();
+        }
+    }
 
     public override void SetPool(ObjectPool<GameObject> pool)
     {

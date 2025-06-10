@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -8528094563447905945}
   - component: {fileID: 315143254691801340}
   - component: {fileID: 5984415981932073978}
+  - component: {fileID: -3829180214605034933}
   m_Layer: 0
   m_Name: SmallShockwave
   m_TagString: Untagged
@@ -100,7 +101,7 @@ Animator:
   m_GameObject: {fileID: 7588971363049298109}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aabf9f7344fe97348ad632ce43616af3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -185,3 +186,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.5555782, y: 1.0958579}
   m_EdgeRadius: 0
+--- !u!114 &-3829180214605034933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7588971363049298109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3fe4eff8727b8445bdef120ee638042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMagicType: 2
+  lifeSpan: 2
