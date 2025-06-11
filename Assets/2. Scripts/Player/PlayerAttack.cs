@@ -66,12 +66,21 @@ public class PlayerAttack : MeleeAttack
         }
         else if (PlayerCtrl.player.isMagic == true)
         {
+            // 공격시 해당 위치에 정지, 제어권 반환은 코루틴 끝날때
+            PlayerCtrl.player.canMove = false;
+            rb2D.linearVelocity = Vector2.zero;
+            rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+
             // 공격 방향에 따른 magicSpawnPos 위치 결정
             Vector3 spawnPos = magicSpawnPos.localPosition;
             spawnPos.x = Mathf.Abs(spawnPos.x) * attackDir.x;
             magicSpawnPos.localPosition = spawnPos;
 
-            CastMagic();
+            UtilityManager.utility.PlaySFX(attackSFX);
+            PlayerCtrl.player.playerAnim.SetTrigger(attackHash);
+            PlayerCtrl.player.playerAnim.SetFloat(attackDirHash, attackDir.x);
+
+            StartCoroutine(CastMagic());
         }
     }
     // 공격 coll 설정은 animation event로 사용 중
@@ -91,18 +100,25 @@ public class PlayerAttack : MeleeAttack
         selectedMagicIdx = idx;
     }
 
-    private void CastMagic()
+    // 마법 사용
+    private IEnumerator CastMagic()
     {
         selectedMagic = UsingMagic[selectedMagicIdx];
 
+        yield return new WaitForSeconds(0.3f);
+
         var pool = UtilityManager.utility.CreatePlayerMagicPool(selectedMagic, maxMagic, maxMagic);
         var magic = UtilityManager.utility.GetFromPool(pool, maxMagic);
-        if(magic != null)
+        if (magic != null)
         {
             magicComp = magic.GetComponent<PlayerMagicBase>();
             magic.transform.position = magicSpawnPos.transform.position;
             magic.transform.rotation = magicSpawnPos.transform.rotation;
             magicComp.SetPool(pool);
         }
+
+        yield return new WaitForSeconds(0.3f);
+        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+        PlayerCtrl.player.canMove = true;
     }
 }
