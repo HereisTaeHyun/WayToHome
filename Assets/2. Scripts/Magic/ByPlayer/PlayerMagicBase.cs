@@ -57,7 +57,7 @@ public class PlayerMagicBase : MonoBehaviour
     }
     
     // MagicOff 애니메이션 이벤트로 재생
-    private void ReturnAfterAnim()
+    public void ReturnAfterAnim()
     {
         UtilityManager.utility.ReturnToPool(originPool, gameObject);
         rb2D.simulated = true;

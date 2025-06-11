@@ -11,9 +11,9 @@ public class WaterSplash : PlayerMagicBase
 
     protected override void Start()
     {
-        rb2D = GetComponentInChildren<Rigidbody2D>();
+        rb2D = GetComponent<Rigidbody2D>();
+        coll2D = GetComponent<Collider2D>();
         anim = GetComponentInChildren<Animator>();
-        coll2D = GetComponentInChildren<Collider2D>();
 
         coll2D.enabled = false;
 
@@ -42,7 +42,7 @@ public class WaterSplash : PlayerMagicBase
     }
 
     // 애니메이션 이벤트로 제어
-    private void EnableAttackCollider()
+    public void EnableAttackCollider()
     {
         coll2D.enabled = true;
     }
