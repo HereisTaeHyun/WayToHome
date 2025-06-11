@@ -63,7 +63,6 @@ public class PlayerAttack : MeleeAttack
             UtilityManager.utility.PlaySFX(attackSFX);
             PlayerCtrl.player.playerAnim.SetTrigger(attackHash);
             PlayerCtrl.player.playerAnim.SetFloat(attackDirHash, attackDir.x);
-            StartCoroutine(UseAttackCollider());
         }
         else if (PlayerCtrl.player.isMagic == true)
         {
@@ -75,11 +74,13 @@ public class PlayerAttack : MeleeAttack
             CastMagic();
         }
     }
-    private IEnumerator UseAttackCollider()
+    // 공격 coll 설정은 animation event로 사용 중
+    protected override void EnableAttackCollider()
     {
-        yield return new WaitForSeconds(0.2f);
         attackCollier.SetActive(true);
-        yield return new WaitForSeconds(0.3f);
+    }
+    protected override void DisableAttackCollider()
+    {
         attackCollier.SetActive(false);
         rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         PlayerCtrl.player.canMove = true;
