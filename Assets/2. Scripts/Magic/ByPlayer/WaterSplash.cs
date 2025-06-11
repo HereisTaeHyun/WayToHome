@@ -11,9 +11,10 @@ public class WaterSplash : PlayerMagicBase
 
     protected override void Start()
     {
-        base.Start();
+        rb2D = GetComponentInChildren<Rigidbody2D>();
+        anim = GetComponentInChildren<Animator>();
+        coll2D = GetComponentInChildren<Collider2D>();
 
-        coll2D = GetComponent<Collider2D>();
         coll2D.enabled = false;
 
         moveSpeed = 5.0f;
@@ -32,7 +33,7 @@ public class WaterSplash : PlayerMagicBase
     {
         if (coll2D == null)
         {
-            coll2D = GetComponent<Collider2D>();
+            coll2D = GetComponentInChildren<Collider2D>();
         }
         coll2D.enabled = false;
 

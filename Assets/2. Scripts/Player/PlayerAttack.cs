@@ -111,7 +111,7 @@ public class PlayerAttack : MeleeAttack
         var magic = UtilityManager.utility.GetFromPool(pool, maxMagic);
         if (magic != null)
         {
-            magicComp = magic.GetComponent<PlayerMagicBase>();
+            magicComp = magic.GetComponentInChildren<PlayerMagicBase>();
             magic.transform.position = magicSpawnPos.transform.position;
             magic.transform.rotation = magicSpawnPos.transform.rotation;
             magicComp.SetPool(pool);
