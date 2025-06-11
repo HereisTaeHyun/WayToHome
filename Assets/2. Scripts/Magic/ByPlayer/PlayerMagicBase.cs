@@ -6,6 +6,7 @@ public enum PlayerMagicType
     Kunai,
     Shuriken,
     SmallShockwave,
+    WaterSplash,
 }
 public class PlayerMagicBase : MonoBehaviour
 {
