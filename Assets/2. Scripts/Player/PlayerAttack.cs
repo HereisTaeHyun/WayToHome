@@ -104,7 +104,7 @@ public class PlayerAttack : MeleeAttack
     private IEnumerator CastMagic()
     {
         selectedMagic = UsingMagic[selectedMagicIdx];
-
+        
         yield return new WaitForSeconds(0.3f);
 
         var pool = UtilityManager.utility.CreatePlayerMagicPool(selectedMagic, maxMagic, maxMagic);
