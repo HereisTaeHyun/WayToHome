@@ -17,7 +17,7 @@ public class SmallShockwave : PlayerMagicBase
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         moveSpeed = 5.0f;
-        damage = -1.0f;
+        damage = -0.5f;
     }
 
     private void FixedUpdate()
@@ -61,6 +61,9 @@ public class SmallShockwave : PlayerMagicBase
 
     public override void SetPool(ObjectPool<GameObject> pool)
     {
+        transform.position = PlayerCtrl.player.playerAttack.magicSpawnPos.transform.position;
+        transform.rotation = PlayerCtrl.player.playerAttack.magicSpawnPos.transform.rotation;
+
         moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.lastMoveDir);
         
         lifeSpan = 1.5f;

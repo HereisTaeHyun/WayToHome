@@ -43,6 +43,10 @@ public class Shuriken : PlayerMagicBase
         {
             rb2D = GetComponent<Rigidbody2D>();
         }
+        
+        transform.position = PlayerCtrl.player.playerAttack.magicSpawnPos.transform.position;
+        transform.rotation = PlayerCtrl.player.playerAttack.magicSpawnPos.transform.rotation;
+
         moveDir = UtilityManager.utility.AllDirSet(PlayerCtrl.player.aimPos);
         float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

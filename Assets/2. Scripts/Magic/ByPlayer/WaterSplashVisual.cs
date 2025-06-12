@@ -4,7 +4,7 @@ public class WaterSplashVisual : MonoBehaviour
 {
     private WaterSplash waterSplash;
 
-    void Awake()  // 한 번만 캐싱
+    void Awake()
     {
         waterSplash = GetComponentInParent<WaterSplash>();
     }
@@ -12,4 +12,5 @@ public class WaterSplashVisual : MonoBehaviour
     // === AnimationEvent용 메서드 ===
     public void EnableAttackCollider() => waterSplash?.EnableAttackCollider();
     public void ReturnAfterAnim() => waterSplash?.ReturnAfterAnim();
+    public void DisableAttackCollider() => waterSplash?.DisableAttackCollider();
 }

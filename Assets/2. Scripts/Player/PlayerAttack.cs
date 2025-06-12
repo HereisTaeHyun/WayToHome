@@ -17,7 +17,7 @@ public class PlayerAttack : MeleeAttack
 
     // 마법 관련
     private GameObject selectedMagic;
-    private Transform magicSpawnPos;
+    public Transform magicSpawnPos { get; private set; }
     private int selectedMagicIdx;
     private int maxMagic = 20;
 
@@ -112,8 +112,8 @@ public class PlayerAttack : MeleeAttack
         if (magic != null)
         {
             magicComp = magic.GetComponentInChildren<PlayerMagicBase>();
-            magic.transform.position = magicSpawnPos.transform.position;
-            magic.transform.rotation = magicSpawnPos.transform.rotation;
+            // magic.transform.position = magicSpawnPos.transform.position;
+            // magic.transform.rotation = magicSpawnPos.transform.rotation;
             magicComp.SetPool(pool);
         }
 

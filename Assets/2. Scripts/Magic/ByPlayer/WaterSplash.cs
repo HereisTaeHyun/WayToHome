@@ -16,8 +16,6 @@ public class WaterSplash : PlayerMagicBase
         anim = GetComponentInChildren<Animator>();
 
         coll2D.enabled = false;
-
-        moveSpeed = 5.0f;
         damage = -1.0f;
     }
 
@@ -31,11 +29,24 @@ public class WaterSplash : PlayerMagicBase
 
     public override void SetPool(ObjectPool<GameObject> pool)
     {
+        Vector3 spawnPos = PlayerCtrl.player.playerAttack.magicSpawnPos.transform.position;
+        if(PlayerCtrl.player.lastMoveDir.x == 1)
+        {
+            spawnPos.x += 1.0f;
+        }
+        else if(PlayerCtrl.player.lastMoveDir.x == -1)
+        {
+            spawnPos.x -= 1.0f;
+        }
+
+        transform.position = spawnPos;
+        transform.rotation = PlayerCtrl.player.playerAttack.magicSpawnPos.transform.rotation;
+
         if (coll2D == null)
         {
             coll2D = GetComponentInChildren<Collider2D>();
         }
-        coll2D.enabled = false;
+        DisableAttackCollider();
 
         originPool = pool;
         isPool = false;
@@ -45,5 +56,10 @@ public class WaterSplash : PlayerMagicBase
     public void EnableAttackCollider()
     {
         coll2D.enabled = true;
+    }
+
+    public void DisableAttackCollider()
+    {
+        coll2D.enabled = false;
     }
 }
