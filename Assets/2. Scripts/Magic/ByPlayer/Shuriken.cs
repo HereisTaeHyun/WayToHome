@@ -7,6 +7,11 @@ public class Shuriken : PlayerMagicBase
     private Vector2 moveDir;
     private float lifeSpan = 5.0f;
 
+    private void Awake()
+    {
+        costMana = 30.0f;
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -43,7 +48,7 @@ public class Shuriken : PlayerMagicBase
         {
             rb2D = GetComponent<Rigidbody2D>();
         }
-        
+
         transform.position = PlayerCtrl.player.playerAttack.magicSpawnPos.transform.position;
         transform.rotation = PlayerCtrl.player.playerAttack.magicSpawnPos.transform.rotation;
 

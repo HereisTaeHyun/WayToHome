@@ -10,6 +10,8 @@ public enum PlayerMagicType
 }
 public class PlayerMagicBase : MonoBehaviour
 {
+    public float costMana;
+    
     protected bool isPool;
     protected float moveSpeed;
     protected float damage;
@@ -18,8 +20,7 @@ public class PlayerMagicBase : MonoBehaviour
     protected ObjectPool<GameObject> originPool;
     private readonly int magicOffHash = Animator.StringToHash("MagicOff");
 
-    // moveSpeed, damage는 자식 객체에서 선언할 것
-    // isLaunch 플래그는 마법 타입에 따라 SetPool에서 결정할 것
+    // moveSpeed, damage는 자식 객체에서 값을 정할 것
     protected virtual void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();

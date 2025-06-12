@@ -9,6 +9,11 @@ public class WaterSplash : PlayerMagicBase
     private Vector2 moveDir;
     private Collider2D coll2D;
 
+    private void Awake()
+    {
+        costMana = 20.0f;
+    }
+
     protected override void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();

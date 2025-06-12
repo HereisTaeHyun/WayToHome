@@ -13,6 +13,8 @@ public class PlayerData
 {
     public float maxHP = 10.0f;
     public float currentHP;
+    public float maxMana = 100.0f;
+    public float currentMana;
     public int money = 0;
     public int maxJump = 1;
     public float attackDamage = -1.0f;
@@ -65,6 +67,8 @@ public class DataManager : MonoBehaviour
     {
         playerData.maxHP = PlayerCtrl.player.maxHP;
         playerData.currentHP = PlayerCtrl.player.currentHP;
+        playerData.maxMana = PlayerCtrl.player.maxMana;
+        playerData.currentMana = PlayerCtrl.player.currentMana;
         playerData.money = PlayerCtrl.player.money;
         playerData.maxJump = PlayerCtrl.player.playerMove.maxJump;
         playerData.attackDamage = PlayerCtrl.player.playerAttack.attackDamage;
@@ -92,6 +96,8 @@ public class DataManager : MonoBehaviour
     {
         playerData.maxHP = 10.0f;
         playerData.currentHP = playerData.maxHP;
+        playerData.maxMana = 100.0f;
+        playerData.currentMana = playerData.maxMana;
         playerData.money = 0;
         playerData.maxJump = 1;
         playerData.attackDamage = -1.0f;

@@ -23,7 +23,7 @@ public class MagicBase : MonoBehaviour
     protected Rigidbody2D rb2D;
     protected ObjectPool<GameObject> originPool;
 
-    // moveSpeed, damage는 자식 객체에서 선언할 것
+    // moveSpeed, damage는 자식 객체에서 정할 것
     // isLaunch 플래그는 마법 타입에 따라 SetPool에서 결정할 것
     protected virtual void Start()
     {

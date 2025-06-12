@@ -8,6 +8,11 @@ public class Kunai : PlayerMagicBase
     private Vector2 newVelocity;
     private float lifeSpan = 5.0f;
 
+    private void Awake()
+    {
+        costMana = 20.0f;
+    }
+
     protected override void Start()
     {
         base.Start();

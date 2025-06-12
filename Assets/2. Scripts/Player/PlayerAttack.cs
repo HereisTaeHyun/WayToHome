@@ -112,9 +112,8 @@ public class PlayerAttack : MeleeAttack
         if (magic != null)
         {
             magicComp = magic.GetComponentInChildren<PlayerMagicBase>();
-            // magic.transform.position = magicSpawnPos.transform.position;
-            // magic.transform.rotation = magicSpawnPos.transform.rotation;
             magicComp.SetPool(pool);
+            PlayerCtrl.player.currentMana -= magicComp.costMana;
         }
 
         yield return new WaitForSeconds(0.3f);

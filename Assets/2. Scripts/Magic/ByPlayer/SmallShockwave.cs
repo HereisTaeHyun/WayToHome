@@ -10,6 +10,11 @@ public class SmallShockwave : PlayerMagicBase
     private Vector2 newVelocity;
     public float lifeSpan = 1.5f;
 
+    private void Awake()
+    {
+        costMana = 40.0f;
+    }
+
     protected override void Start()
     {
         base.Start();

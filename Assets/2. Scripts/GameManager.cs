@@ -188,6 +188,8 @@ public class GameManager : MonoBehaviour
 
         PlayerCtrl.player.maxHP = DataManager.dataManager.playerData.maxHP;
         PlayerCtrl.player.currentHP = DataManager.dataManager.playerData.currentHP;
+        PlayerCtrl.player.maxMana = DataManager.dataManager.playerData.maxMana;
+        PlayerCtrl.player.currentMana = DataManager.dataManager.playerData.currentMana;
         PlayerCtrl.player.money = DataManager.dataManager.playerData.money;
         PlayerCtrl.player.playerMove.maxJump = DataManager.dataManager.playerData.maxJump;
         PlayerCtrl.player.playerAttack.attackDamage = DataManager.dataManager.playerData.attackDamage;
