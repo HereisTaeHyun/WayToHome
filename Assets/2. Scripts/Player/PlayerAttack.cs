@@ -113,7 +113,7 @@ public class PlayerAttack : MeleeAttack
         {
             magicComp = magic.GetComponentInChildren<PlayerMagicBase>();
             magicComp.SetPool(pool);
-            PlayerCtrl.player.currentMana -= magicComp.costMana;
+            PlayerCtrl.player.currentMana = Mathf.Clamp(PlayerCtrl.player.currentMana - magicComp.costMana, 0, PlayerCtrl.player.maxMana);
         }
 
         yield return new WaitForSeconds(0.3f);
