@@ -21,8 +21,6 @@ public class PlayerAttack : MeleeAttack
     private int selectedMagicIdx;
     private int maxMagic = 20;
 
-    private PlayerMagicBase magicComp;
-
     public override void Init()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -103,10 +101,18 @@ public class PlayerAttack : MeleeAttack
     // 마법 사용
     private IEnumerator CastMagic()
     {
+        // 마법 선택 후 선택할 마법이 없으면 break
         selectedMagic = UsingMagic[selectedMagicIdx];
+        if (selectedMagic == null)
+        {
+            yield break;
+        }
+
+        // 마법 마나 비용 추출
         var prefabComp = selectedMagic.GetComponent<PlayerMagicBase>();
         float cost = prefabComp.costMana;
 
+        // 플레이어가 가진 마나보다 비용이 많으면 break
         if (prefabComp.costMana > PlayerCtrl.player.currentMana)
         {
             yield break;
@@ -114,6 +120,7 @@ public class PlayerAttack : MeleeAttack
 
         yield return new WaitForSeconds(0.3f);
 
+        // 마법 실제 사용 부분
         var pool = UtilityManager.utility.CreatePlayerMagicPool(selectedMagic);
         var magicObject  = UtilityManager.utility.GetFromPool(pool, maxMagic);
 
@@ -122,6 +129,7 @@ public class PlayerAttack : MeleeAttack
             var instComp = magicObject.GetComponent<PlayerMagicBase>();
             instComp.SetPool(pool);
             PlayerCtrl.player.currentMana = Mathf.Clamp(PlayerCtrl.player.currentMana - cost, 0, PlayerCtrl.player.maxMana);
+            PlayerCtrl.player.DisplayMana();
         }
 
         yield return new WaitForSeconds(0.3f);

@@ -5814,7 +5814,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.7493973, y: 0.7085}
+  m_AnchoredPosition: {x: 1.5, y: 0.7085}
   m_SizeDelta: {x: 166.4782, y: 17.7938}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6343692622962027850
@@ -9256,9 +9256,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 0
   UsingMagic:
-  - {fileID: 7588971363049298109, guid: 87d41077ad02f14499fcdc9f155ca96c, type: 3}
-  - {fileID: 8769876182363008271, guid: 9fb1fa5165b27c54db3d1e764a60a3a2, type: 3}
+  - {fileID: 977657196193316008, guid: 1248336ae3f0f97419c04c8afbede2d3, type: 3}
+  - {fileID: 0}
   attackSFX: {fileID: 8300000, guid: 323e15cfe809e114ab92c9f4b25e8bc2, type: 3}
+  denySFX: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
 --- !u!114 &5538770494666226781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10075,7 +10076,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &9101148617147925975

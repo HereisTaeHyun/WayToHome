@@ -114,7 +114,7 @@ public class PlayerCtrl : MonoBehaviour
     public void Init()
     {
         StopAllCoroutines();
-        
+
         playerMove = GetComponent<PlayerMove>();
         playerAttack = GetComponent<PlayerAttack>();
         rb2D = GetComponent<Rigidbody2D>();
@@ -126,6 +126,7 @@ public class PlayerCtrl : MonoBehaviour
 
         // UI 관련
         HPBar = transform.Find("PlayerUI/GamePlayUI/HP/HPBar").GetComponent<Image>();
+        manaBar = transform.Find("PlayerUI/GamePlayUI/Mana/ManaBar").GetComponent<Image>();
         text = transform.Find("TextCanvas/Text").GetComponent<TextMeshProUGUI>();
         fadeUI = transform.Find("PlayerUI/FadeUI").gameObject;
         fadeImage = fadeUI.GetComponent<Image>();
@@ -151,8 +152,9 @@ public class PlayerCtrl : MonoBehaviour
         playerMove.Init();
         playerAttack.Init();
 
-        // HPBar 초기화, 다시 되살아날 때 필요
+        // Bar, 다시 되살아날 때 필요
         DisplayHP();
+        DisplayMana();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -294,8 +296,9 @@ public class PlayerCtrl : MonoBehaviour
     #region Unity 제공 메서드
     void Start()
     {
-        // HP바 초기화, 스탯 변수들 다 임포트 되고 초기화해야 해서 얘는 Start에서 한 번 호츌 필요
+        // 바 초기화, 스탯 변수들 다 임포트 되고 초기화해야 해서 얘는 Start에서 한 번 호츌 필요
         DisplayHP();
+        DisplayMana();
     }
 
     // 즉각 반응해야 하는 모듈들은 Update()에 배치
@@ -402,6 +405,11 @@ public class PlayerCtrl : MonoBehaviour
     private void DisplayHP()
     {
         HPBar.fillAmount = currentHP / maxHP;
+    }
+
+    public void DisplayMana()
+    {
+        manaBar.fillAmount = currentMana / maxMana;
     }
 
     // StatUI == Q, UI가 있으면 끄고 없으면 키기
