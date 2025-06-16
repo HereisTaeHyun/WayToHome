@@ -11,6 +11,7 @@ public class SavePoint : MonoBehaviour
         {
             // 스탯 저장 후 스폰 포인트를 해당 포인트로 설정
             isSaved = true;
+            PlayerCtrl.player.currentMana = PlayerCtrl.player.maxMana;
             GameManager.instance.SetSpawnPos(gameObject.transform.position);
             DataManager.dataManager.Save();
             UtilityManager.utility.PlaySFX(saveSfx);

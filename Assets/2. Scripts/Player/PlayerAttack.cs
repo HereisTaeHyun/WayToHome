@@ -104,20 +104,28 @@ public class PlayerAttack : MeleeAttack
     private IEnumerator CastMagic()
     {
         selectedMagic = UsingMagic[selectedMagicIdx];
-        
-        yield return new WaitForSeconds(0.3f);
+        var prefabComp = selectedMagic.GetComponent<PlayerMagicBase>();
+        float cost = prefabComp.costMana;
 
-        var pool = UtilityManager.utility.CreatePlayerMagicPool(selectedMagic, maxMagic, maxMagic);
-        var magic = UtilityManager.utility.GetFromPool(pool, maxMagic);
-        if (magic != null)
+        if (prefabComp.costMana > PlayerCtrl.player.currentMana)
         {
-            magicComp = magic.GetComponentInChildren<PlayerMagicBase>();
-            magicComp.SetPool(pool);
-            PlayerCtrl.player.currentMana = Mathf.Clamp(PlayerCtrl.player.currentMana - magicComp.costMana, 0, PlayerCtrl.player.maxMana);
+            yield break;
         }
 
         yield return new WaitForSeconds(0.3f);
-        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        var pool = UtilityManager.utility.CreatePlayerMagicPool(selectedMagic);
+        var magicObject  = UtilityManager.utility.GetFromPool(pool, maxMagic);
+
+        if (magicObject != null)
+        {
+            var instComp = magicObject.GetComponent<PlayerMagicBase>();
+            instComp.SetPool(pool);
+            PlayerCtrl.player.currentMana = Mathf.Clamp(PlayerCtrl.player.currentMana - cost, 0, PlayerCtrl.player.maxMana);
+        }
+
+        yield return new WaitForSeconds(0.3f);
+        rb2D.constraints          = RigidbodyConstraints2D.FreezeRotation;
         PlayerCtrl.player.canMove = true;
     }
 }
