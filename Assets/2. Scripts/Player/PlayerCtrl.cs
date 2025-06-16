@@ -61,6 +61,7 @@ public class PlayerCtrl : MonoBehaviour
 
     // UI 관련
     private Image HPBar;
+    private Image manaBar;
     private GameObject fadeUI;
     private Image fadeImage;
     private GameObject statUI;
@@ -124,7 +125,7 @@ public class PlayerCtrl : MonoBehaviour
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
         // UI 관련
-        HPBar = GameObject.FindGameObjectWithTag("HPBar").GetComponent<Image>();
+        HPBar = transform.Find("PlayerUI/GamePlayUI/HP/HPBar").GetComponent<Image>();
         text = transform.Find("TextCanvas/Text").GetComponent<TextMeshProUGUI>();
         fadeUI = transform.Find("PlayerUI/FadeUI").gameObject;
         fadeImage = fadeUI.GetComponent<Image>();
