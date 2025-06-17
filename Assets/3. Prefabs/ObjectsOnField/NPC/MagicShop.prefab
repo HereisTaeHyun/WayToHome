@@ -2029,6 +2029,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6487026841043799886}
   - component: {fileID: 4309884581629510629}
+  - component: {fileID: 6400235387107512971}
   m_Layer: 0
   m_Name: MagicShop
   m_TagString: Untagged
@@ -2100,6 +2101,23 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 3.070366, y: 1.0960885}
   m_EdgeRadius: 0
+--- !u!114 &6400235387107512971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263106563165880983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244da72f2f902184cbb34e21500ed203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UI: {fileID: 6411291253360599619}
+  sellingMagic: []
+  magicPrice: 
+  moneySFX: {fileID: 8300000, guid: abdbbfd33a46f4549987385f85c536b5, type: 3}
+  buyFailSFX: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
 --- !u!1 &4394479279394748506
 GameObject:
   m_ObjectHideFlags: 0

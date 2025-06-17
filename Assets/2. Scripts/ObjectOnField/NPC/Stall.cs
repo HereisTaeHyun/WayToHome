@@ -20,7 +20,6 @@ public class Stall : MonoBehaviour
     private Dictionary<GameObject, int> itemInformation = new Dictionary<GameObject, int>(); // 판매품, 가격 받는 딕셔너리
     private int useCount;
     private GameObject itemSpawnPoint;
-    private ObjectPool<GameObject> usingPool;
     
     void Start()
     {
