@@ -10,7 +10,7 @@ public class Stall : MonoBehaviour
     // 퍼블릭 변수
 
     // 프라이빗 변수
-    [SerializeField] private GameObject vendingUI;
+    [SerializeField] private GameObject UI;
     [SerializeField] private GameObject menu;
     [SerializeField] private TextMeshProUGUI statement;
     [SerializeField] private GameObject[] sellingItems;
@@ -24,7 +24,7 @@ public class Stall : MonoBehaviour
     
     void Start()
     {
-        vendingUI.SetActive(false);
+        UI.SetActive(false);
         useCount = 0;
         itemSpawnPoint = transform.Find("ItemSpawnPoint").gameObject;
 
@@ -48,7 +48,7 @@ public class Stall : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            vendingUI.SetActive(true);
+            UI.SetActive(true);
             PlayerCtrl.player.canAttack = false;
         }
     }
@@ -58,7 +58,7 @@ public class Stall : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            vendingUI.SetActive(false);
+            UI.SetActive(false);
             PlayerCtrl.player.canAttack = true;
         }
     }
