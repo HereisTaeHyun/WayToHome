@@ -5,6 +5,7 @@ using System.Collections;
 
 public class Portal : MonoBehaviour
 {
+    private bool usePortal;
     private Image UIImange;
     private float fadeOutTime = 1.5f;
     private const float FADE_OUT_ALPHA = 1.0f;
@@ -13,12 +14,13 @@ public class Portal : MonoBehaviour
     void Start()
     {
         UIImange = GameObject.FindGameObjectWithTag("GamePlayUI").GetComponent<Image>();
+        usePortal = false;
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
         // Player 감지, Submit(E에 할당)입력시 포탈 이동
-        if(other.gameObject.CompareTag("Player") && Input.GetButton("Submit"))
+        if(other.gameObject.CompareTag("Player") && PlayerCtrl.player.isSubmit == true && usePortal == false)
         {
             StartCoroutine(UsePortal());
         }
@@ -27,7 +29,8 @@ public class Portal : MonoBehaviour
     IEnumerator UsePortal()
     {
         // 포탈 사용 플래그 true
-        GameManager.instance.usePortal = true;
+        usePortal = true;
+        GameManager.instance.usePortal = usePortal;
         
         // ChangeAlpha로 페이드 아웃 및 SFX 재생
         UIImange.enabled = true;

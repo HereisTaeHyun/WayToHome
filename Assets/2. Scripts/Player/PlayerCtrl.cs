@@ -430,22 +430,12 @@ public class PlayerCtrl : MonoBehaviour
     private void WriteCurrentStat()
     {
         TextMeshProUGUI HPText = statUI.transform.Find("Text/HP").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI HPShadow = statUI.transform.Find("Text/HPShadow").GetComponent<TextMeshProUGUI>();
-
         TextMeshProUGUI MoneyText = statUI.transform.Find("Text/Money").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI MoneyShadow = statUI.transform.Find("Text/MoneyShadow").GetComponent<TextMeshProUGUI>();
-
         TextMeshProUGUI PowerText = statUI.transform.Find("Text/Damage").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI PowerShadow = statUI.transform.Find("Text/DamageShadow").GetComponent<TextMeshProUGUI>();
 
         HPText.text = $" :  {currentHP} / {maxHP}";
-        HPShadow.text = $" :  {currentHP} / {maxHP}";
-
         MoneyText.text = $" :  {money}";
-        MoneyShadow.text = $" :  {money}";
-
         PowerText.text = $" :  {-playerAttack.attackDamage}";
-        PowerShadow.text = $" :  {-playerAttack.attackDamage}";
     }
     private void DrawStatGem()
     {
