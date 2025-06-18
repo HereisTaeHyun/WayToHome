@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class MagicShop : MonoBehaviour
 {
@@ -50,6 +51,13 @@ public class MagicShop : MonoBehaviour
         // magicInformation에 buyingMagic이 있으면 magicPrice만큼 player.money 차감
         if(magicInformation.ContainsKey(buyingMagic))
         {
+            // 이미 보유한 마법은 구입 불가능
+            if (PlayerCtrl.player.playerAttack.UsingMagic.Contains(buyingMagic))
+            {
+                UtilityManager.utility.PlaySFX(buyFailSFX);
+                return;
+            }
+            
             int magicPrice = magicInformation[buyingMagic];
             if(PlayerCtrl.player.money >= magicPrice)
             {
