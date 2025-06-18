@@ -275,7 +275,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3790069233584146944}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6400235387107512971}
+        m_TargetAssemblyTypeName: MagicShop, Assembly-CSharp
+        m_MethodName: BuyMagic
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2087810266965711082, guid: 79a8890450ee60a47998fe5dead5c2bd, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &796503788275390492
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,7 +915,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 20$
+  m_text: 5$
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 69ed47145e9e09b42a3261cf47a99240, type: 2}
   m_sharedMaterial: {fileID: -779949713026888260, guid: 69ed47145e9e09b42a3261cf47a99240, type: 2}
@@ -1262,7 +1274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 20$
+  m_text: 10$
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 69ed47145e9e09b42a3261cf47a99240, type: 2}
   m_sharedMaterial: {fileID: -779949713026888260, guid: 69ed47145e9e09b42a3261cf47a99240, type: 2}
@@ -1560,7 +1572,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 20$
+  m_text: 10$
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 69ed47145e9e09b42a3261cf47a99240, type: 2}
   m_sharedMaterial: {fileID: -779949713026888260, guid: 69ed47145e9e09b42a3261cf47a99240, type: 2}
@@ -2114,8 +2126,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI: {fileID: 6411291253360599619}
-  sellingMagic: []
-  magicPrice: 
+  sellingMagic:
+  - {fileID: 977657196193316008, guid: 1248336ae3f0f97419c04c8afbede2d3, type: 3}
+  - {fileID: 2087810266965711082, guid: 79a8890450ee60a47998fe5dead5c2bd, type: 3}
+  - {fileID: 7588971363049298109, guid: 87d41077ad02f14499fcdc9f155ca96c, type: 3}
+  - {fileID: 8769876182363008271, guid: 9fb1fa5165b27c54db3d1e764a60a3a2, type: 3}
+  magicPrice: 05000000050000000a0000000a000000
   moneySFX: {fileID: 8300000, guid: abdbbfd33a46f4549987385f85c536b5, type: 3}
   buyFailSFX: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
 --- !u!1 &4394479279394748506
@@ -2517,7 +2533,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 20$
+  m_text: 5$
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 69ed47145e9e09b42a3261cf47a99240, type: 2}
   m_sharedMaterial: {fileID: -779949713026888260, guid: 69ed47145e9e09b42a3261cf47a99240, type: 2}
@@ -3115,7 +3131,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 528761587081223801}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6400235387107512971}
+        m_TargetAssemblyTypeName: MagicShop, Assembly-CSharp
+        m_MethodName: BuyMagic
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8769876182363008271, guid: 9fb1fa5165b27c54db3d1e764a60a3a2, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6724675814501784611
 GameObject:
   m_ObjectHideFlags: 0
@@ -3240,7 +3268,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1666627123424569528}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6400235387107512971}
+        m_TargetAssemblyTypeName: MagicShop, Assembly-CSharp
+        m_MethodName: BuyMagic
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7588971363049298109, guid: 87d41077ad02f14499fcdc9f155ca96c, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6773720109614731411
 GameObject:
   m_ObjectHideFlags: 0
@@ -3973,7 +4013,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7953038875065929060}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6400235387107512971}
+        m_TargetAssemblyTypeName: MagicShop, Assembly-CSharp
+        m_MethodName: BuyMagic
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 977657196193316008, guid: 1248336ae3f0f97419c04c8afbede2d3, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8106816757766045309
 GameObject:
   m_ObjectHideFlags: 0
