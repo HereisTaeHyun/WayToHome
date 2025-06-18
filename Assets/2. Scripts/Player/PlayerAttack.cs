@@ -12,8 +12,7 @@ public class PlayerAttack : MeleeAttack
     public GameObject[] UsingMagic = new GameObject[2];
 
     // private 변수
-    [SerializeField] private AudioClip attackSFX;
-    private readonly int attckHash = Animator.StringToHash("Attack");
+    [SerializeField] private AudioClip attackSFX;    
 
     // 마법 관련
     private GameObject selectedMagic;
