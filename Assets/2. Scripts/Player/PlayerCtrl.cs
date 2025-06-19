@@ -429,9 +429,9 @@ public class PlayerCtrl : MonoBehaviour
 
     private void WriteCurrentStat()
     {
-        TextMeshProUGUI HPText = statUI.transform.Find("Text/HP").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI MoneyText = statUI.transform.Find("Text/Money").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI PowerText = statUI.transform.Find("Text/Damage").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI HPText = statUI.transform.Find("HP/HPText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI MoneyText = statUI.transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI PowerText = statUI.transform.Find("Damage/DamageText").GetComponent<TextMeshProUGUI>();
 
         HPText.text = $" :  {currentHP} / {maxHP}";
         MoneyText.text = $" :  {money}";
