@@ -12,13 +12,16 @@ public class MagicShop : MonoBehaviour
     [SerializeField] private AudioClip moneySFX;
     [SerializeField] private AudioClip buyFailSFX;
     private Dictionary<GameObject, int> magicInformation = new Dictionary<GameObject, int>();
+    private Animator anim;
+    private readonly int sellMagicHash = Animator.StringToHash("SellMagic");
 
     void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         UI.SetActive(false);
 
         // 판매 아이템 정보 딕셔너리 형성 sellingItem이 Key, itemPrices가 value
-        for(int i = 0; i < sellingMagic.Length; i++)
+        for (int i = 0; i < sellingMagic.Length; i++)
         {
             magicInformation.Add(sellingMagic[i], magicPrice[i]);
         }
@@ -61,17 +64,16 @@ public class MagicShop : MonoBehaviour
             }
             
             int targetIdx = Array.FindIndex(PlayerCtrl.player.playerAttack.UsingMagic, m => m == null);
-
-            Debug.Log(targetIdx);
-
             if (targetIdx != -1)
             {
                 PlayerCtrl.player.playerAttack.UsingMagic[targetIdx] = buyingMagic;
+                anim.SetTrigger(sellMagicHash);
             }
             else if (targetIdx == -1)
             {
                 targetIdx = PlayerCtrl.player.playerAttack.selectedMagicIdx;
                 PlayerCtrl.player.playerAttack.UsingMagic[targetIdx] = buyingMagic;
+                anim.SetTrigger(sellMagicHash);
             }
 
             PlayerCtrl.player.money -= magicPrice;
