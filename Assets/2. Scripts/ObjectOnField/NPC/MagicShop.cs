@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class MagicShop : MonoBehaviour
 {
@@ -51,23 +52,30 @@ public class MagicShop : MonoBehaviour
         // magicInformation에 buyingMagic이 있으면 magicPrice만큼 player.money 차감
         if(magicInformation.ContainsKey(buyingMagic))
         {
-            // 이미 보유한 마법은 구입 불가능
-            if (PlayerCtrl.player.playerAttack.UsingMagic.Contains(buyingMagic))
+            // 이미 보유한 마법이거나 돈이 없으면 구입 불가능
+            int magicPrice = magicInformation[buyingMagic];
+            if (PlayerCtrl.player.playerAttack.UsingMagic.Contains(buyingMagic) || PlayerCtrl.player.money < magicPrice)
             {
                 UtilityManager.utility.PlaySFX(buyFailSFX);
                 return;
             }
             
-            int magicPrice = magicInformation[buyingMagic];
-            if(PlayerCtrl.player.money >= magicPrice)
+            int targetIdx = Array.FindIndex(PlayerCtrl.player.playerAttack.UsingMagic, m => m == null);
+
+            Debug.Log(targetIdx);
+
+            if (targetIdx != -1)
             {
-                PlayerCtrl.player.money -= magicPrice;
-                UtilityManager.utility.PlaySFX(moneySFX);
+                PlayerCtrl.player.playerAttack.UsingMagic[targetIdx] = buyingMagic;
             }
-            else
+            else if (targetIdx == -1)
             {
-                UtilityManager.utility.PlaySFX(buyFailSFX);
+                targetIdx = PlayerCtrl.player.playerAttack.selectedMagicIdx;
+                PlayerCtrl.player.playerAttack.UsingMagic[targetIdx] = buyingMagic;
             }
+
+            PlayerCtrl.player.money -= magicPrice;
+            UtilityManager.utility.PlaySFX(moneySFX);
         }
     }
 }

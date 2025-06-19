@@ -10,6 +10,7 @@ public class PlayerAttack : MeleeAttack
     // public 변수
     // 마법 관련
     public GameObject[] UsingMagic = new GameObject[2];
+    public int selectedMagicIdx;
 
     // private 변수
     [SerializeField] private AudioClip attackSFX;    
@@ -17,7 +18,6 @@ public class PlayerAttack : MeleeAttack
     // 마법 관련
     private GameObject selectedMagic;
     public Transform magicSpawnPos { get; private set; }
-    private int selectedMagicIdx;
     private int maxMagic = 20;
 
     public override void Init()
