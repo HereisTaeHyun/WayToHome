@@ -24,7 +24,7 @@ public class PlayerCtrl : MonoBehaviour
     public float maxMana;
     public float currentMana;
     public int money;
-    public SpriteRenderer spriteRenderer;
+    [NonSerialized] public SpriteRenderer spriteRenderer;
     [NonSerialized] public bool canMove;
     [NonSerialized] public State state;
     [NonSerialized] public bool canAttack;
