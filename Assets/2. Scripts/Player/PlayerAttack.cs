@@ -27,6 +27,7 @@ public class PlayerAttack : MeleeAttack
         attackCollier.SetActive(false);
 
         magicSpawnPos = transform.Find("MagicSpawnPos").transform;
+        PlayerCtrl.player.InvokeSelectMagic(selectedMagicIdx);
     }
 
     void OnEnable()

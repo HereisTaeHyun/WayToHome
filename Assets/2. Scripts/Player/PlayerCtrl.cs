@@ -232,6 +232,11 @@ public class PlayerCtrl : MonoBehaviour
             }
         }
     }
+
+    public void InvokeSelectMagic(int idx)      // 호출용 래퍼
+    {
+        SelectMagic?.Invoke(idx);
+    }
     #endregion
 
     #region 입력 감지

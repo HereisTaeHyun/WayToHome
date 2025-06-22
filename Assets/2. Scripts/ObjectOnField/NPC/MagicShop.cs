@@ -53,7 +53,7 @@ public class MagicShop : MonoBehaviour
     {
         // button으로 입력 받는 것은 key인 sellingMagic임
         // magicInformation에 buyingMagic이 있으면 magicPrice만큼 player.money 차감
-        if(magicInformation.ContainsKey(buyingMagic))
+        if (magicInformation.ContainsKey(buyingMagic))
         {
             // 이미 보유한 마법이거나 돈이 없으면 구입 불가능
             int magicPrice = magicInformation[buyingMagic];
@@ -62,7 +62,7 @@ public class MagicShop : MonoBehaviour
                 UtilityManager.utility.PlaySFX(buyFailSFX);
                 return;
             }
-            
+
             int targetIdx = Array.FindIndex(PlayerCtrl.player.playerAttack.usingMagic, m => m == null);
             if (targetIdx != -1)
             {
@@ -78,6 +78,7 @@ public class MagicShop : MonoBehaviour
 
             PlayerCtrl.player.money -= magicPrice;
             UtilityManager.utility.PlaySFX(moneySFX);
+            PlayerCtrl.player.InvokeSelectMagic(PlayerCtrl.player.playerAttack.selectedMagicIdx);
         }
     }
 }

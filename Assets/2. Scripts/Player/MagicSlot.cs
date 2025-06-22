@@ -5,14 +5,16 @@ using UnityEngine.UI;
 public class MagicSlot : MonoBehaviour
 {
     [SerializeField] private Image magicIcon;
+    private Color hiddenIcon = new Color32(255, 255, 255, 0);
+    private Color visibleIcon = new Color32(255, 255, 255, 255);
 
     private void OnEnable()
     {
-        PlayerCtrl.player.SelectMagic += ChangeMagic;          // 이벤트 구독
+        PlayerCtrl.player.SelectMagic += ChangeMagic;
     }
     private void OnDisable()
     {
-        PlayerCtrl.player.SelectMagic -= ChangeMagic;          // 해제
+        PlayerCtrl.player.SelectMagic -= ChangeMagic;
     }
 
 
@@ -23,7 +25,7 @@ public class MagicSlot : MonoBehaviour
             return;
         }
 
-        if (PlayerCtrl.player.playerAttack.usingMagic[idx] == null || PlayerCtrl.player.playerAttack.usingMagic.Length == 0)              // 아직 미구매
+        if (PlayerCtrl.player.playerAttack.usingMagic[idx] == null || PlayerCtrl.player.playerAttack.usingMagic.Length == 0)
         {
             return;
         }
@@ -31,15 +33,17 @@ public class MagicSlot : MonoBehaviour
         var magic = PlayerCtrl.player.playerAttack.usingMagic[idx].GetComponent<PlayerMagicBase>();
         RefreshMagicIcon(magic);
     }
-    public void RefreshMagicIcon(PlayerMagicBase magic)
+    private void RefreshMagicIcon(PlayerMagicBase magic)
     {
         if (magic == null)             // null 방어
         {
             magicIcon.enabled = false;
+            magicIcon.color = hiddenIcon;
             return;
         }
 
         magicIcon.enabled = true;
+        magicIcon.color = visibleIcon;
         magicIcon.sprite = magic.icon;
     }
 }
