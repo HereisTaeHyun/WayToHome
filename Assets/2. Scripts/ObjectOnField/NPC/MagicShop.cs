@@ -57,22 +57,22 @@ public class MagicShop : MonoBehaviour
         {
             // 이미 보유한 마법이거나 돈이 없으면 구입 불가능
             int magicPrice = magicInformation[buyingMagic];
-            if (PlayerCtrl.player.playerAttack.UsingMagic.Contains(buyingMagic) || PlayerCtrl.player.money < magicPrice)
+            if (PlayerCtrl.player.playerAttack.usingMagic.Contains(buyingMagic) || PlayerCtrl.player.money < magicPrice)
             {
                 UtilityManager.utility.PlaySFX(buyFailSFX);
                 return;
             }
             
-            int targetIdx = Array.FindIndex(PlayerCtrl.player.playerAttack.UsingMagic, m => m == null);
+            int targetIdx = Array.FindIndex(PlayerCtrl.player.playerAttack.usingMagic, m => m == null);
             if (targetIdx != -1)
             {
-                PlayerCtrl.player.playerAttack.UsingMagic[targetIdx] = buyingMagic;
+                PlayerCtrl.player.playerAttack.usingMagic[targetIdx] = buyingMagic;
                 anim.SetTrigger(sellMagicHash);
             }
             else if (targetIdx == -1)
             {
                 targetIdx = PlayerCtrl.player.playerAttack.selectedMagicIdx;
-                PlayerCtrl.player.playerAttack.UsingMagic[targetIdx] = buyingMagic;
+                PlayerCtrl.player.playerAttack.usingMagic[targetIdx] = buyingMagic;
                 anim.SetTrigger(sellMagicHash);
             }
 

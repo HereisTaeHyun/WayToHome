@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be2b16810b969c541948a1b3178d61c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  magicIcon: {fileID: 2430709601895119621}
 --- !u!1 &187277310596080226
 GameObject:
   m_ObjectHideFlags: 0
@@ -8614,9 +8615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 0
-  UsingMagic:
-  - {fileID: 0}
-  - {fileID: 0}
+  usingMagic: []
   selectedMagicIdx: 0
   attackSFX: {fileID: 8300000, guid: 323e15cfe809e114ab92c9f4b25e8bc2, type: 3}
 --- !u!114 &5538770494666226781

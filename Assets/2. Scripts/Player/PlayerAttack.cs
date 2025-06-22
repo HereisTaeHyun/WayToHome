@@ -9,7 +9,7 @@ public class PlayerAttack : MeleeAttack
 
     // public 변수
     // 마법 관련
-    public GameObject[] UsingMagic = new GameObject[2];
+    public GameObject[] usingMagic = new GameObject[2];
     public int selectedMagicIdx;
 
     // private 변수
@@ -31,11 +31,11 @@ public class PlayerAttack : MeleeAttack
 
     void OnEnable()
     {
-        PlayerCtrl.player.SelectMagic += SelectMagic;
+        PlayerCtrl.player.SelectMagic += SelectMagicIdx;
     }
     void OnDisable()
     {
-        PlayerCtrl.player.SelectMagic -= SelectMagic;
+        PlayerCtrl.player.SelectMagic -= SelectMagicIdx;
     }
 
     // 근접 공격, 공격 범위 콜라이더 생성 후 일정 시간 후 종료
@@ -92,7 +92,7 @@ public class PlayerAttack : MeleeAttack
         PlayerCtrl.player.canMove = true;
     }
 
-    private void SelectMagic(int idx)
+    private void SelectMagicIdx(int idx)
     {
         selectedMagicIdx = idx;
     }
@@ -101,7 +101,7 @@ public class PlayerAttack : MeleeAttack
     private IEnumerator CastMagic()
     {
         // 마법 선택 후 선택할 마법이 없으면 break
-        selectedMagic = UsingMagic[selectedMagicIdx];
+        selectedMagic = usingMagic[selectedMagicIdx];
         if (selectedMagic == null)
         {
             yield break;
