@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6559853035848178407}
   - component: {fileID: 7900755684581223588}
   - component: {fileID: 1234954195646983924}
+  - component: {fileID: 8588200747302611786}
   m_Layer: 5
   m_Name: MagicSlot
   m_TagString: Untagged
@@ -77,6 +78,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8588200747302611786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41298549103624671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be2b16810b969c541948a1b3178d61c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &187277310596080226
 GameObject:
   m_ObjectHideFlags: 0
@@ -3652,7 +3665,7 @@ GameObject:
   - component: {fileID: 1341606911679840821}
   - component: {fileID: 2430709601895119621}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: MagicIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3665,17 +3678,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3949660869346002712}
-  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6559853035848178407}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.00000333786, y: -0.0000004172325}
-  m_SizeDelta: {x: 120, y: 60}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1341606911679840821
 CanvasRenderer:

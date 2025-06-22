@@ -10,6 +10,7 @@ public enum PlayerMagicType
 }
 public class PlayerMagicBase : MonoBehaviour
 {
+    public Sprite icon;
     public float costMana;
     
     protected bool isPool;
