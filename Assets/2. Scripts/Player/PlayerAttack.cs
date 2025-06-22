@@ -100,7 +100,15 @@ public class PlayerAttack : MeleeAttack
     // 마법 사용
     private IEnumerator CastMagic()
     {
-        // 마법 선택 후 선택할 마법이 없으면 break
+        if (usingMagic == null)
+        {
+            yield break;
+        }
+        if (selectedMagicIdx < 0 || selectedMagicIdx >= usingMagic.Length)
+        {
+            yield break;
+        }
+
         selectedMagic = usingMagic[selectedMagicIdx];
         if (selectedMagic == null)
         {
