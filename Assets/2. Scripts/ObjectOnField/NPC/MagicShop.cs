@@ -78,7 +78,7 @@ public class MagicShop : MonoBehaviour
 
             PlayerCtrl.player.money -= magicPrice;
             UtilityManager.utility.PlaySFX(moneySFX);
-            PlayerCtrl.player.InvokeSelectMagic(PlayerCtrl.player.playerAttack.selectedMagicIdx);
+            StartCoroutine(PlayerCtrl.player.InvokeSelectMagic(PlayerCtrl.player.playerAttack.selectedMagicIdx));
         }
     }
 }

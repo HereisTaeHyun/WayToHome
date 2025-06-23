@@ -234,8 +234,9 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    public void InvokeSelectMagic(int idx)      // 호출용 래퍼
+    public IEnumerator InvokeSelectMagic(int idx)
     {
+        yield return null;
         SelectMagic?.Invoke(idx);
     }
     #endregion
