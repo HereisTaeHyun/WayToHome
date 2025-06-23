@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.Pool;
 
 // 지상 적에 대한 클래스, 현재는 버섯, 해골에 사용 생각 중
 public class GroundCtrl : EnemyCtrl

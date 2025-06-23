@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Pool;
 
 // 하늘을 날면서 타겟을 추적하는 적에 대한 클래스
 public class FlyingEyeCtrl : EnemyCtrl

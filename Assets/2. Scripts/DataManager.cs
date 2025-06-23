@@ -3,7 +3,6 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Security.Cryptography;
-using UnityEngine.LightTransport;
 using System.Text;
 using System;
 
@@ -101,7 +100,7 @@ public class DataManager : MonoBehaviour
         playerData.money = 0;
         playerData.maxJump = 1;
         playerData.attackDamage = -1.0f;
-        playerData.savedSpawnPos = new Vector2(-102.83f, -15.06f);
+        playerData.savedSpawnPos = new Vector2(-126f, -15.06f);
         playerData.savedStage = "1. First Stage";
         playerData.openedChests = new List<int>();
         playerData.didedEnemy = new List<int>();
