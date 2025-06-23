@@ -21,7 +21,23 @@ public class PlayerData
     public Vector2 savedSpawnPos;
     public string savedStage;
     public List<int> openedChests;
-    public List<int> didedEnemy;
+    public List<int> diedEnemy;
+    
+    public void Reset()
+    {
+        maxHP = 10f;
+        currentHP = maxHP;
+        maxMana = 100f;
+        currentMana = maxMana;
+        money = 0;
+        maxJump = 1;
+        attackDamage = -1f;
+        usingMagic = new GameObject[2];
+        savedSpawnPos = new(-126f, -15.06f);
+        savedStage = "1. First Stage";
+        openedChests = new List<int>();
+        diedEnemy = new List<int>();
+    }
 }
 
 public class DataManager : MonoBehaviour
@@ -95,18 +111,14 @@ public class DataManager : MonoBehaviour
 
     public void NewGame()
     {
-        playerData.maxHP = 10.0f;
-        playerData.currentHP = playerData.maxHP;
-        playerData.maxMana = 100.0f;
-        playerData.currentMana = playerData.maxMana;
-        playerData.money = 0;
-        playerData.maxJump = 1;
-        playerData.attackDamage = -1.0f;
-        playerData.usingMagic = new GameObject[2];
-        playerData.savedSpawnPos = new Vector2(-126f, -15.06f);
-        playerData.savedStage = "1. First Stage";
-        playerData.openedChests = new List<int>();
-        playerData.didedEnemy = new List<int>();
+        if (File.Exists(savePath))
+        {
+            File.Delete(savePath);
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+        }
+
+        playerData.Reset();
 
         string jsonData = JsonUtility.ToJson(playerData);
         string encryptedJson = Encryptor(jsonData);

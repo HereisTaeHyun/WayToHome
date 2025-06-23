@@ -62,7 +62,7 @@ public class EnemyCtrl : MonoBehaviour, IDamageable, IDie
             itemInformation.Add(dropItem[i], itemWeight[i]);
         }
         
-        if (DataManager.dataManager.playerData.didedEnemy.Contains(enemyID))
+        if (DataManager.dataManager.playerData.diedEnemy.Contains(enemyID))
         {
             gameObject.SetActive(false);
         }

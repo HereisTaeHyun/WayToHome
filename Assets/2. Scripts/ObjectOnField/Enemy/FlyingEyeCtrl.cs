@@ -92,7 +92,7 @@ public class FlyingEyeCtrl : EnemyCtrl
     private IEnumerator DieStart()
     {
         // 사망 및 중력 적용
-        DataManager.dataManager.playerData.didedEnemy.Add(enemyID);
+        DataManager.dataManager.playerData.diedEnemy.Add(enemyID);
         UtilityManager.utility.PlaySFX(enemyDieSFX);
 
         isDie = true;

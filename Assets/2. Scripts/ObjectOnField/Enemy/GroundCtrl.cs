@@ -136,7 +136,7 @@ public class GroundCtrl : EnemyCtrl
     // 사망 절차 진행, 사운드 재생 및 물리 영향 제거 후 사망 애니메이션 재생
     private IEnumerator DieStart()
     {
-        DataManager.dataManager.playerData.didedEnemy.Add(enemyID);
+        DataManager.dataManager.playerData.diedEnemy.Add(enemyID);
         UtilityManager.utility.PlaySFX(enemyDieSFX);
 
         isDie = true;
