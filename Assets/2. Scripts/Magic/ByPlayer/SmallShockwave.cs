@@ -21,7 +21,7 @@ public class SmallShockwave : PlayerMagicBase
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         moveSpeed = 5.0f;
-        damage = -0.5f;
+        damage = PlayerCtrl.player.playerAttack.attackDamage / 2;
     }
 
     private void FixedUpdate()

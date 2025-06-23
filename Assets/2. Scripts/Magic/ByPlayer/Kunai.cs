@@ -18,7 +18,7 @@ public class Kunai : PlayerMagicBase
         base.Start();
 
         moveSpeed = 5.0f;
-        damage = -1.0f;
+        damage = PlayerCtrl.player.playerAttack.attackDamage;
     }
 
     private void FixedUpdate()

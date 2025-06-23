@@ -17,7 +17,8 @@ public class Shuriken : PlayerMagicBase
         base.Start();
 
         moveSpeed = 5.0f;
-        damage = -2.0f;
+        damage = PlayerCtrl.player.playerAttack.attackDamage - 1;
+        Debug.Log(damage);
     }
 
     private void FixedUpdate()

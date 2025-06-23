@@ -20,7 +20,7 @@ public class WaterSplash : PlayerMagicBase
         anim = GetComponentInChildren<Animator>();
 
         coll2D.enabled = false;
-        damage = -1.0f;
+        damage = PlayerCtrl.player.playerAttack.attackDamage;
     }
 
     protected override void OnTriggerEnter2D(Collider2D other)
