@@ -86,6 +86,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private AudioClip attackPlusSFX;
     [SerializeField] private AudioClip jumpPlusSFX;
     [SerializeField] private AudioClip moneySFX;
+    [SerializeField] private AudioClip toggleAttackModeSFX;
 
     // 디버프 관련(스턴, 슬로우 생각 중)
     private float debuffTimer;
@@ -281,6 +282,7 @@ public class PlayerCtrl : MonoBehaviour
     private void ToggleAttackMode(InputAction.CallbackContext ctx)
     {
         isMagic = !isMagic;
+        UtilityManager.utility.PlaySFX(toggleAttackModeSFX);
     }
 
     private void OnDisPlayStat(InputAction.CallbackContext context)

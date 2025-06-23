@@ -17,6 +17,7 @@ public class PlayerData
     public int money = 0;
     public int maxJump = 1;
     public float attackDamage = -1.0f;
+    public GameObject[] usingMagic = new GameObject[2];
     public Vector2 savedSpawnPos;
     public string savedStage;
     public List<int> openedChests;
@@ -71,6 +72,7 @@ public class DataManager : MonoBehaviour
         playerData.money = PlayerCtrl.player.money;
         playerData.maxJump = PlayerCtrl.player.playerMove.maxJump;
         playerData.attackDamage = PlayerCtrl.player.playerAttack.attackDamage;
+        playerData.usingMagic = PlayerCtrl.player.playerAttack.usingMagic;
         playerData.savedSpawnPos = GameManager.instance.readCurrentSpawnPos;
         playerData.savedStage = SceneManager.GetActiveScene().name;
 
@@ -100,6 +102,7 @@ public class DataManager : MonoBehaviour
         playerData.money = 0;
         playerData.maxJump = 1;
         playerData.attackDamage = -1.0f;
+        playerData.usingMagic = new GameObject[2];
         playerData.savedSpawnPos = new Vector2(-126f, -15.06f);
         playerData.savedStage = "1. First Stage";
         playerData.openedChests = new List<int>();
