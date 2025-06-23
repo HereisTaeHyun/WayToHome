@@ -6,6 +6,7 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine.Pool;
 using Image = UnityEngine.UI.Image;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     // private 변수
     [SerializeField] private GameObject playerPrefab;
 
+    private PlayerInput playerInputActions;
     private GameObject screenUI;
     private GameObject screenPanel;
     private TextMeshProUGUI stateText;
@@ -52,6 +54,7 @@ public class GameManager : MonoBehaviour
             instance = this;
             isEnd = false;
             player = Instantiate(playerPrefab, currentSpawnPos, playerPrefab.transform.rotation);
+            playerInputActions = new PlayerInput();
 
             // 플레이어 초기화
             PlayerCtrl.player.Init();
@@ -66,17 +69,33 @@ public class GameManager : MonoBehaviour
     // Enable되면 함수 구독 및 UI 초기화
     void OnEnable()
     {
+        if (instance != this)
+        {
+            return;
+        }
+
         isGameOver = false;
         OnGameOver += GameOver;
         SceneManager.sceneLoaded += LoadPlayerStat;
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        playerInputActions.Enable();
+        playerInputActions.Player.Restart.performed += Restart;
     }
     // Disable되면 함수 구독 해제
     void OnDisable()
     {
+        if (instance != this)
+        {
+            return;
+        }
+
         OnGameOver -= GameOver;
         SceneManager.sceneLoaded -= LoadPlayerStat;
         SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        playerInputActions.Disable();
+        playerInputActions.Player.Restart.performed -= Restart;
     }
 
     // 씬 로드시 Player를 받아와 위치를 spawnPos에 설정
@@ -107,20 +126,20 @@ public class GameManager : MonoBehaviour
         PlayerSet();
         StartCoroutine(CameraSetAfterFrame());
     }
-
-    void Update()
+    
+    public void Restart(InputAction.CallbackContext context)
     {
-        // if isGameOver = true;일 경우 다시하기 진입 가능하도록
-        if(Input.GetButtonDown("Restart") && isGameOver == true && player.activeSelf == false)
+        if (isGameOver == true && player.activeSelf == false)
         {
+            // 죽은 후 재시작
             SceneManager.LoadScene(DataManager.dataManager.playerData.savedStage);
             isGameOver = false;
+            return;
         }
-        
-        // if isEnd = true;일 경우 첫 씬 진입 가능하도록
-        if(Input.GetButtonDown("Restart") && isEnd == true)
+
+        if (isEnd == true)
         {
-            // 싱글톤들 리셋
+            // 엔딩 이후 처음으로
             Destroy(GameManager.instance.gameObject);
             Destroy(UtilityManager.utility.gameObject);
             Destroy(ItemManager.itemManager.gameObject);
@@ -135,7 +154,7 @@ public class GameManager : MonoBehaviour
     // 다시하기 세팅에서 사용
     private void PlayerSet()
     {
-        if(PlayerCtrl.player != null && currentSpawnPos != null)
+        if (PlayerCtrl.player != null && currentSpawnPos != null)
         {
             PlayerCtrl.player.transform.position = currentSpawnPos;
         }

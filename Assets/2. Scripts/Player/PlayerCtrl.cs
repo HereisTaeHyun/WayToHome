@@ -10,7 +10,6 @@ public class PlayerCtrl : MonoBehaviour
 {
     // public 변수
     #region public
-    [NonSerialized] public PlayerInput inputActions;
     public Vector2 moveInput { get; private set; }
     public Vector2 lastMoveDir { get; private set; }
     public Vector2 aimPos { get; private set; }
@@ -47,6 +46,7 @@ public class PlayerCtrl : MonoBehaviour
     // private 변수
     public PlayerMove playerMove { get; private set; }
     public PlayerAttack playerAttack { get; private set; }
+    private PlayerInput inputActions;
     private Rigidbody2D rb2D;
     private bool isDie;
     private CapsuleCollider2D coll2D;

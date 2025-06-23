@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "ca6e91f5-d955-4941-9077-35e22c580c57",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "bff49308-b680-4a0e-8a31-123b4a372f78",
@@ -237,6 +246,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "AimPos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "18c50a0a-2494-4da4-b41f-fc776fa9ec9b",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
