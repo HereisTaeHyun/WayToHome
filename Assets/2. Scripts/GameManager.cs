@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviour
             Destroy(GameManager.instance.gameObject);
             Destroy(UtilityManager.utility.gameObject);
             Destroy(ItemManager.itemManager.gameObject);
+            Destroy(DataManager.dataManager.gameObject);
             Destroy(PlayerCtrl.player.gameObject);
 
             SceneManager.LoadScene(0);
