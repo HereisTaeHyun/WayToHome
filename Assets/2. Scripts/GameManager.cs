@@ -192,6 +192,7 @@ public class GameManager : MonoBehaviour
         PlayerCtrl.player.money = DataManager.dataManager.playerData.money;
         PlayerCtrl.player.playerMove.maxJump = DataManager.dataManager.playerData.maxJump;
         PlayerCtrl.player.playerAttack.attackDamage = DataManager.dataManager.playerData.attackDamage;
+        PlayerCtrl.player.playerAttack.usingMagic = DataManager.dataManager.playerData.usingMagic;
     }
 
     // SpawnPos 셋업
