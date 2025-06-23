@@ -19,22 +19,17 @@ public class MagicSlot : MonoBehaviour
 
     private void ChangeMagic(int idx)
     {
-        if (idx < 0 || idx >= PlayerCtrl.player.playerAttack.usingMagic.Length)
+        var magicObject = PlayerCtrl.player.playerAttack.usingMagic[idx];
+        PlayerMagicBase magic = null;
+        if (magicObject != null)
         {
-            return;
+            magic = magicObject.GetComponent<PlayerMagicBase>();
         }
-
-        if (PlayerCtrl.player.playerAttack.usingMagic[idx] == null || PlayerCtrl.player.playerAttack.usingMagic.Length == 0)
-        {
-            return;
-        }
-
-        var magic = PlayerCtrl.player.playerAttack.usingMagic[idx].GetComponent<PlayerMagicBase>();
         RefreshMagicIcon(magic);
     }
     private void RefreshMagicIcon(PlayerMagicBase magic)
     {
-        if (magic == null)             // null 방어
+        if (magic == null)
         {
             magicIcon.enabled = false;
             magicIcon.color = hiddenIcon;

@@ -99,15 +99,6 @@ public class PlayerAttack : MeleeAttack
     // 마법 사용
     private IEnumerator CastMagic()
     {
-        if (usingMagic == null)
-        {
-            yield break;
-        }
-        if (selectedMagicIdx < 0 || selectedMagicIdx >= usingMagic.Length)
-        {
-            yield break;
-        }
-
         selectedMagic = usingMagic[selectedMagicIdx];
         if (selectedMagic == null)
         {
