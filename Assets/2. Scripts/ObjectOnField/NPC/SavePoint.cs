@@ -12,6 +12,8 @@ public class SavePoint : MonoBehaviour
             // 스탯 저장 후 스폰 포인트를 해당 포인트로 설정
             isSaved = true;
 
+            PlayerCtrl.player.currentHP = PlayerCtrl.player.maxHP;
+            PlayerCtrl.player.DisplayHP();
             PlayerCtrl.player.currentMana = PlayerCtrl.player.maxMana;
             PlayerCtrl.player.DisplayMana();
             

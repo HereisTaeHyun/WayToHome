@@ -410,7 +410,7 @@ public class PlayerCtrl : MonoBehaviour
 
     #region UI 관련
     // HP 패널 표시
-    private void DisplayHP()
+    public void DisplayHP()
     {
         HPBar.fillAmount = currentHP / maxHP;
     }
