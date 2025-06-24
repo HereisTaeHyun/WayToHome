@@ -4,7 +4,6 @@ using UnityEngine.Pool;
 
 public class WaterSplash : PlayerMagicBase
 {
-    public PlayerMagicType playerMagicType;
     private Vector2 moveDir;
     private Collider2D coll2D;
 

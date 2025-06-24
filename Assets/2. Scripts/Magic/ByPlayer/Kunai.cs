@@ -3,7 +3,6 @@ using UnityEngine.Pool;
 
 public class Kunai : PlayerMagicBase
 {
-    public PlayerMagicType playerMagicType;
     private Vector2 moveDir;
     private Vector2 newVelocity;
     private float lifeSpan = 5.0f;

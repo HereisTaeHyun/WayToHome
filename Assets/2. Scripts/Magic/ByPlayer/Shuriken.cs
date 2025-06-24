@@ -3,7 +3,6 @@ using UnityEngine.Pool;
 
 public class Shuriken : PlayerMagicBase
 {
-    public PlayerMagicType playerMagicType;
     private Vector2 moveDir;
     private float lifeSpan = 5.0f;
 
@@ -18,7 +17,6 @@ public class Shuriken : PlayerMagicBase
 
         moveSpeed = 5.0f;
         damage = PlayerCtrl.player.playerAttack.attackDamage - 1;
-        Debug.Log(damage);
     }
 
     private void FixedUpdate()

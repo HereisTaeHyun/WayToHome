@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -21,6 +22,10 @@ public class GameManager : MonoBehaviour
 
     // private 변수
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject kunaiPrefab;
+    [SerializeField] private GameObject shurikenPrefab;
+    [SerializeField] private GameObject smallShockwavePrefab;
+    [SerializeField] private GameObject waterSplashPrefab;
 
     private PlayerInput playerInputActions;
     private GameObject screenUI;
@@ -32,6 +37,7 @@ public class GameManager : MonoBehaviour
     private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
 
     private GameObject player;
+    private Dictionary<PlayerMagicType, GameObject> magicPrefabs;
 
     private GameObject cam;
     private CinemachineCamera camComp;
@@ -58,6 +64,13 @@ public class GameManager : MonoBehaviour
 
             // 플레이어 초기화
             PlayerCtrl.player.Init();
+            magicPrefabs = new Dictionary<PlayerMagicType, GameObject>
+            {
+                {PlayerMagicType.Kunai, kunaiPrefab},
+                {PlayerMagicType.Shuriken, shurikenPrefab},
+                {PlayerMagicType.SmallShockwave, smallShockwavePrefab},
+                {PlayerMagicType.WaterSplash, waterSplashPrefab},
+            };
         }
         else if(instance != this)
         {
@@ -212,8 +225,34 @@ public class GameManager : MonoBehaviour
         PlayerCtrl.player.money = DataManager.dataManager.playerData.money;
         PlayerCtrl.player.playerMove.maxJump = DataManager.dataManager.playerData.maxJump;
         PlayerCtrl.player.playerAttack.attackDamage = DataManager.dataManager.playerData.attackDamage;
-        PlayerCtrl.player.playerAttack.usingMagic = DataManager.dataManager.playerData.usingMagic;
+
+        var playerMagic = PlayerCtrl.player.playerAttack.usingMagic;
+        var savedMagic = DataManager.dataManager.playerData.usingMagic;
+        for (int i = 0; i < playerMagic.Length; i++)
+        {
+            playerMagic[i] = null;  // 초기화
+
+            string id = savedMagic[i];
+            if (string.IsNullOrEmpty(id))
+            {
+                continue;
+            }
+
+            if (Enum.TryParse(id, out PlayerMagicType type) && magicPrefabs.TryGetValue(type, out var prefab))
+            {
+                playerMagic[i] = Instantiate(prefab);
+            }
+        }
     }
+
+    // public GameObject CreateMagic(PlayerMagicType type)
+    // {
+    //     if (magicPrefabs.TryGetValue(type, out var prefab) && prefab)
+    //     {
+    //         return Instantiate(prefab);
+    //     }
+    //     return null;
+    // }
 
     // SpawnPos 셋업
     public void SetSpawnPos(Vector2 newSpawnPos)

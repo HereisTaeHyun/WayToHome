@@ -3,7 +3,6 @@ using UnityEngine.Pool;
 
 public class SmallShockwave : PlayerMagicBase
 {
-    public PlayerMagicType playerMagicType;
     private SpriteRenderer spriteRenderer;
     private Vector2 moveDir;
     private Vector2 newVelocity;

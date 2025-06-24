@@ -17,11 +17,12 @@ public class PlayerData
     public int money = 0;
     public int maxJump = 1;
     public float attackDamage = -1.0f;
-    public GameObject[] usingMagic = new GameObject[2];
     public Vector2 savedSpawnPos;
     public string savedStage;
     public List<int> openedChests;
     public List<int> diedEnemy;
+    // public GameObject[] usingMagic = new GameObject[2];
+    public string[] usingMagic = new string[2];
     
     public void Reset()
     {
@@ -32,7 +33,7 @@ public class PlayerData
         money = 0;
         maxJump = 1;
         attackDamage = -1f;
-        usingMagic = new GameObject[2];
+        usingMagic = new string[2];
         savedSpawnPos = new(-126f, -15.06f);
         savedStage = "1. First Stage";
         openedChests = new List<int>();
@@ -88,9 +89,22 @@ public class DataManager : MonoBehaviour
         playerData.money = PlayerCtrl.player.money;
         playerData.maxJump = PlayerCtrl.player.playerMove.maxJump;
         playerData.attackDamage = PlayerCtrl.player.playerAttack.attackDamage;
-        playerData.usingMagic = PlayerCtrl.player.playerAttack.usingMagic;
         playerData.savedSpawnPos = GameManager.instance.readCurrentSpawnPos;
         playerData.savedStage = SceneManager.GetActiveScene().name;
+
+        var playerMagic = PlayerCtrl.player.playerAttack.usingMagic;
+        for(int i = 0; i < playerData.usingMagic.Length; i++)
+        {
+            if(playerMagic[i])
+            {
+                var magic = playerMagic[i].GetComponent<PlayerMagicBase>();
+                playerData.usingMagic[i] = magic.playerMagicType.ToString();
+            }
+            else
+            {
+                playerData.usingMagic[i] = "";
+            }
+        }
 
         string jsonData = JsonUtility.ToJson(playerData);
         string encryptedJson = Encryptor(jsonData);
