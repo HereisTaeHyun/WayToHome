@@ -21,7 +21,6 @@ public class PlayerData
     public string savedStage;
     public List<int> openedChests;
     public List<int> diedEnemy;
-    // public GameObject[] usingMagic = new GameObject[2];
     public string[] usingMagic = new string[2];
     
     public void Reset()

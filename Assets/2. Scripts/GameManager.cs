@@ -245,15 +245,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // public GameObject CreateMagic(PlayerMagicType type)
-    // {
-    //     if (magicPrefabs.TryGetValue(type, out var prefab) && prefab)
-    //     {
-    //         return Instantiate(prefab);
-    //     }
-    //     return null;
-    // }
-
     // SpawnPos 셋업
     public void SetSpawnPos(Vector2 newSpawnPos)
     {
