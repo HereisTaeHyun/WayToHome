@@ -244,6 +244,10 @@ public class GameManager : MonoBehaviour
                 playerMagic[i] = prefab;
             }
         }
+
+        // UI에 값 적용
+        PlayerCtrl.player.DisplayHP();
+        PlayerCtrl.player.DisplayMana();
     }
 
     // SpawnPos 셋업
