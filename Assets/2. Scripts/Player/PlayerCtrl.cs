@@ -17,6 +17,7 @@ public class PlayerCtrl : MonoBehaviour
     public bool isSubmit { get; private set; }
 
     public event Action<int> SelectMagic;
+    public event Action<bool> ToggleAttackModeEvent;
 
     public float maxHP;
     public float currentHP;
@@ -284,6 +285,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         isMagic = !isMagic;
         UtilityManager.utility.PlaySFX(toggleAttackModeSFX);
+        ToggleAttackModeEvent?.Invoke(isMagic); 
     }
 
     private void OnDisPlayStat(InputAction.CallbackContext context)
