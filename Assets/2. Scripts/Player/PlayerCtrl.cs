@@ -587,6 +587,7 @@ public class PlayerCtrl : MonoBehaviour
         yield return new WaitForSeconds(fadeOutTime);
 
         menuUI.SetActive(false);
+        DisplayHP();
         SceneManager.LoadScene(DataManager.dataManager.playerData.savedStage);
     }
     #endregion
