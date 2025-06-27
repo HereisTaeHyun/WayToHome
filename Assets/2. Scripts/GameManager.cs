@@ -240,9 +240,8 @@ public class GameManager : MonoBehaviour
 
             if (Enum.TryParse(id, out PlayerMagicType type) && magicPrefabs.TryGetValue(type, out var prefab))
             {
-                var pool = UtilityManager.utility.CreatePlayerMagicPool(prefab);
-                var magicObject  = UtilityManager.utility.GetFromPool(pool, PlayerCtrl.player.playerAttack.maxMagic);
-                playerMagic[i] = Instantiate(magicObject);
+                UtilityManager.utility.CreatePlayerMagicPool(prefab);
+                playerMagic[i] = prefab;
             }
         }
     }
