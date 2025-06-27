@@ -21,11 +21,6 @@ public class MagicSlot : MonoBehaviour
 
     private void ChangeMagic(int idx)
     {
-        // 마법 활성화 상태에서만 진입 가능
-        if (PlayerCtrl.player.isMagic == false)
-        {
-            return;
-        }
         var magicObject = PlayerCtrl.player.playerAttack.usingMagic[idx];
         PlayerMagicBase magic = null;
         if (magicObject != null)
@@ -40,6 +35,12 @@ public class MagicSlot : MonoBehaviour
         {
             magicIcon.enabled = false;
             magicIcon.color = hiddenIcon;
+            return;
+        }
+
+        // 마법 활성화 상태에서만 진입 가능
+        if (PlayerCtrl.player.isMagic == false)
+        {
             return;
         }
 

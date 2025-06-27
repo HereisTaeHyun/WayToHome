@@ -286,6 +286,7 @@ public class PlayerCtrl : MonoBehaviour
         isMagic = !isMagic;
         UtilityManager.utility.PlaySFX(toggleAttackModeSFX);
         ToggleAttackModeEvent?.Invoke(isMagic); 
+        SelectMagic?.Invoke(playerAttack.selectedMagicIdx);
     }
 
     private void OnDisPlayStat(InputAction.CallbackContext context)
