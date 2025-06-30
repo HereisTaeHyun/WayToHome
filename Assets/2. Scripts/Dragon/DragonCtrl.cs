@@ -19,7 +19,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
     [NonSerialized] public DragonState dragonState;
 
     // private 변수
-    private float maxHP = 50.0f;
+    private float maxHP = 100.0f;
     private float currentHP;
     public bool isDie { get; private set; }
     private Rigidbody2D rb2D;
