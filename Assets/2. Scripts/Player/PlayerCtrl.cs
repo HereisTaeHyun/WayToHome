@@ -149,6 +149,7 @@ public class PlayerCtrl : MonoBehaviour
         canAttack = true;
         state = State.Idle;
         rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+        lastMoveDir = Vector2.right;
 
         // 모듈 초기화
         playerMove.Init();
