@@ -355,7 +355,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
 
                 newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
                 rb2D.MovePosition(newPosition);
-                StartCoroutine(ZoomInOut(3.5f, 3.0f));
+                StartCoroutine(ZoomInOut(5.0f, 3.0f));
 
                 if (Mathf.Abs(transform.position.y - targetPos.position.y) < 0.1f)
                 {

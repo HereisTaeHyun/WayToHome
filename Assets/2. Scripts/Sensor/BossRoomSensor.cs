@@ -9,7 +9,7 @@ public class BossRoomSensor : PlayerSensor
     [SerializeField] GameObject leftWall;
     [SerializeField] GameObject rightWall;
     [SerializeField] GameObject[] rewards;
-    private EnemyCtrl bossCtrl;
+    private IDie bossCtrl;
     private int enemyID;
     public int readEnemyID {get {return enemyID;}}
 
@@ -20,7 +20,7 @@ public class BossRoomSensor : PlayerSensor
         base.Start();
         enemyID = Animator.StringToHash($"{SceneManager.GetActiveScene().name}_{gameObject.name}");
 
-        bossCtrl = boss.GetComponent<EnemyCtrl>();
+        bossCtrl = boss.GetComponent<IDie>();
         boss.SetActive(false);
 
         if (leftWall != null && rightWall != null)
