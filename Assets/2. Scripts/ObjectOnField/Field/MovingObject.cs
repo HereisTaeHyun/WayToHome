@@ -33,10 +33,10 @@ public class MovingObject : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // Timer가 0 미만이 될 경우 moveDir 역전
-        moveTimer -= Time.deltaTime;
+        moveTimer -= Time.fixedDeltaTime;
         if(moveTimer < 0)
         {
             moveDir = -moveDir;
@@ -46,11 +46,11 @@ public class MovingObject : MonoBehaviour
         // vertical == true면 상하 아니면 좌우
         if(vertical)
         {
-            pos.y = pos.y + (moveSpeed * moveDir * Time.deltaTime);
+            pos.y = pos.y + (moveSpeed * moveDir * Time.fixedDeltaTime);
         }
         else
         {
-            pos.x = pos.x + (moveSpeed * moveDir * Time.deltaTime);
+            pos.x = pos.x + (moveSpeed * moveDir * Time.fixedDeltaTime);
         }
         rb.MovePosition(pos);
     }
