@@ -526,7 +526,7 @@ public class PlayerCtrl : MonoBehaviour
 
     public void MaxHpPlus()
     {
-        maxHP += 1;
+        maxHP += 2;
         StartCoroutine(DisplayPlayerText("MaxHP+ !"));
         UtilityManager.utility.PlaySFX(maxHPPlusSFX);
         DisplayHP();
