@@ -16,7 +16,6 @@ public class EnemyCtrl : MonoBehaviour, IDamageable, IDie
 
     // protected 변수
     #region private
-    protected int enemyID;
     [SerializeField] protected float enemyPushPower;
     [SerializeField] protected float stunTime;
     [SerializeField] protected float maxHP;
@@ -39,6 +38,8 @@ public class EnemyCtrl : MonoBehaviour, IDamageable, IDie
     protected readonly int hitTrigger = Animator.StringToHash("TakeHit");
 
     // 다른 객체에서 읽기 위한 변수
+    protected int enemyID;
+    public int readEnemyID {get {return enemyID;}}
     protected Animator anim;
     public Animator readAnim {get {return anim;}}
     [SerializeField] protected float damage;

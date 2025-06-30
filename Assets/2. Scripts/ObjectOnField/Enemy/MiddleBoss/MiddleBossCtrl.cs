@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class MiddleBossCtrl : EnemyCtrl
 {
@@ -38,9 +39,11 @@ public class MiddleBossCtrl : EnemyCtrl
     void Start()
     {
         Init();
+        enemyID = Animator.StringToHash($"{SceneManager.GetActiveScene().name}_{gameObject.name}");
+
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        foreach(Transform warpPoint in warpPointSet)
+        foreach (Transform warpPoint in warpPointSet)
         {
             warpPoints.Add(warpPoint);
         }
@@ -48,7 +51,7 @@ public class MiddleBossCtrl : EnemyCtrl
         // 공격 관련 초기화
         middleBossMeleeAttack = GetComponent<MiddleBossMeleeAttack>();
         magicSpawnPosSet = transform.Find("MagicSpawnPosSet");
-        foreach(Transform elem in magicSpawnPosSet)
+        foreach (Transform elem in magicSpawnPosSet)
         {
             magicSpawnPoses.Add(elem);
         }
@@ -57,12 +60,17 @@ public class MiddleBossCtrl : EnemyCtrl
 
         canAttack = true;
         ableBlink = true;
+        
+        if (DataManager.dataManager.playerData.diedEnemy.Contains(enemyID))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     void Update()
     {
         // 게임 오버나 스턴이 아닐 경우 행동
-        if(GameManager.instance.readIsGameOver == true || isStun == true)
+        if(GameManager.instance.readIsGameOver == true || isStun == true || isDie == true)
         {
             return;
         }
@@ -244,6 +252,7 @@ public class MiddleBossCtrl : EnemyCtrl
     private IEnumerator DieStart()
     {
         isDie = true;
+        DataManager.dataManager.playerData.diedEnemy.Add(enemyID);
         UtilityManager.utility.PlaySFX(enemyDieSFX);
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.simulated = false;
