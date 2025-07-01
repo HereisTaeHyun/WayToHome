@@ -157,6 +157,7 @@ public class GameManager : MonoBehaviour
             Destroy(UtilityManager.utility.gameObject);
             Destroy(ItemManager.itemManager.gameObject);
             Destroy(DataManager.dataManager.gameObject);
+            Destroy(UIManager.uIManager.gameObject);
             Destroy(PlayerCtrl.player.gameObject);
 
             SceneManager.LoadScene(0);
@@ -198,7 +199,7 @@ public class GameManager : MonoBehaviour
 
     private void ScreeUISet()
     {
-        screenUI = GameObject.FindGameObjectWithTag("ScreenUI");
+        screenUI = UIManager.uIManager.transform.Find("ScreenUI").gameObject;
         screenPanel = screenUI.transform.Find("ScreenPanel").gameObject;
         stateText = screenPanel.transform.Find("StateText").gameObject.GetComponent<TextMeshProUGUI>();
         restartText = screenPanel.transform.Find("RestartText").gameObject.GetComponent<TextMeshProUGUI>();

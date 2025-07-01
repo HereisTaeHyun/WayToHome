@@ -259,6 +259,5 @@ public class MiddleBossCtrl : EnemyCtrl
         anim.SetTrigger(dieHash);
         yield return new WaitForSeconds(2.0f);
         gameObject.SetActive(false);
-        // Destroy(gameObject);
     }
 }

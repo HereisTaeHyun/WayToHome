@@ -61,7 +61,6 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private StatGemBar damageGemBar;
 
     // UI 관련
-    private const float FADE_OUT_ALPHA = 1.0f;
 
     // 무적 관련
     private bool invincible;
@@ -446,11 +445,13 @@ public class PlayerCtrl : MonoBehaviour
     //     yield return new WaitForSeconds(fadeOutTime);
 
     //     // 싱글톤들 리셋
-    //     Destroy(GameManager.instance.gameObject);
-    //     Destroy(UtilityManager.utility.gameObject);
-    //     Destroy(ItemManager.itemManager.gameObject);
-    //     Destroy(DataManager.dataManager.gameObject);
-    //     Destroy(PlayerCtrl.player.gameObject);
+            // Destroy(GameManager.instance.gameObject);
+            // Destroy(UtilityManager.utility.gameObject);
+            // Destroy(ItemManager.itemManager.gameObject);
+            // Destroy(DataManager.dataManager.gameObject);
+            // Destroy(UIManager.uIManager.gameObject);
+            // Destroy(PlayerCtrl.player.gameObject);
+
 
     //     SceneManager.LoadScene(0);
     // }
