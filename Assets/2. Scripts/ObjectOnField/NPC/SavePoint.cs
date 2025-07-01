@@ -13,9 +13,7 @@ public class SavePoint : MonoBehaviour
             isSaved = true;
 
             PlayerCtrl.player.currentHP = PlayerCtrl.player.maxHP;
-            PlayerCtrl.player.DisplayHP();
             PlayerCtrl.player.currentMana = PlayerCtrl.player.maxMana;
-            PlayerCtrl.player.DisplayMana();
             
             GameManager.instance.SetSpawnPos(gameObject.transform.position);
             DataManager.dataManager.Save();

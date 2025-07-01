@@ -6,14 +6,12 @@ using System.Collections;
 public class Portal : MonoBehaviour
 {
     private bool usePortal;
-    private Image UIImange;
     private float fadeOutTime = 1.5f;
     private const float FADE_OUT_ALPHA = 1.0f;
     [SerializeField] AudioClip usePortalSFX;
 
     void Start()
     {
-        UIImange = GameObject.FindGameObjectWithTag("GamePlayUI").GetComponent<Image>();
         usePortal = false;
     }
 
@@ -33,14 +31,11 @@ public class Portal : MonoBehaviour
         GameManager.instance.usePortal = usePortal;
         
         // ChangeAlpha로 페이드 아웃 및 SFX 재생
-        UIImange.enabled = true;
         UtilityManager.utility.PlaySFX(usePortalSFX);
-        StartCoroutine(UtilityManager.utility.ChangeAlpha(UIImange, FADE_OUT_ALPHA, fadeOutTime));
 
         //  플레이어 스탯 저장 후 로드 씬
         DataManager.dataManager.Save();
         yield return new WaitForSeconds(fadeOutTime);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        UIImange.enabled = false;
     }
 }

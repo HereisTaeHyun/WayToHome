@@ -61,15 +61,6 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private StatGemBar damageGemBar;
 
     // UI 관련
-    private Image HPBar;
-    private Image manaBar;
-    private GameObject fadeUI;
-    private Image fadeImage;
-    private GameObject statUI;
-    private GameObject menuUI;
-    private TextMeshProUGUI text;
-    private static float DISPLAY_ITEM_EFFECT_TIME = 1.0f;
-    private float fadeOutTime = 1.5f;
     private const float FADE_OUT_ALPHA = 1.0f;
 
     // 무적 관련
@@ -126,22 +117,6 @@ public class PlayerCtrl : MonoBehaviour
         physicsMaterial2D = new PhysicsMaterial2D();
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
-        // UI 관련
-        HPBar = transform.Find("PlayerUI/GamePlayUI/HP/HPBar").GetComponent<Image>();
-        manaBar = transform.Find("PlayerUI/GamePlayUI/Mana/ManaBar").GetComponent<Image>();
-        text = transform.Find("TextCanvas/Text").GetComponent<TextMeshProUGUI>();
-        fadeUI = transform.Find("PlayerUI/FadeUI").gameObject;
-        fadeImage = fadeUI.GetComponent<Image>();
-        statUI = transform.Find("PlayerUI/GamePlayUI/StatUI").gameObject;
-        menuUI = transform.Find("PlayerUI/MenuUI").gameObject;
-
-        Color newColor = fadeImage.color;
-        newColor.a = 0.0f;
-        fadeImage.color = newColor;
-        text.text = "";
-        statUI.SetActive(false);
-        menuUI.SetActive(false);
-
         // 상태 체커 시작 및 상태 변수 초기화
         StartCoroutine(ApplyState());
         isDie = false;
@@ -154,10 +129,6 @@ public class PlayerCtrl : MonoBehaviour
         // 모듈 초기화
         playerMove.Init();
         playerAttack.Init();
-
-        // Bar, 다시 되살아날 때 필요
-        DisplayHP();
-        DisplayMana();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -186,9 +157,6 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.AimPos.performed += OnAim;
         inputActions.Player.SelectMagic1.performed += ctx => SelectMagic(0);
         inputActions.Player.SelectMagic2.performed += ctx => SelectMagic(1);
-
-        inputActions.Player.DisplayStat.performed += OnDisPlayStat;
-        inputActions.Player.DisplayMenu.performed += OnDisPlayMenu;
     }
     void OnDisable()
     {
@@ -210,9 +178,6 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.AimPos.performed -= OnAim;
         inputActions.Player.SelectMagic1.performed -= ctx => SelectMagic(0);
         inputActions.Player.SelectMagic2.performed -= ctx => SelectMagic(1);
-
-        inputActions.Player.DisplayStat.performed -= OnDisPlayStat;
-        inputActions.Player.DisplayMenu.performed -= OnDisPlayMenu;
     }
 
     // 각 상태에 따라 필요한 변화 적용하는 곳
@@ -289,28 +254,11 @@ public class PlayerCtrl : MonoBehaviour
         ToggleAttackModeEvent?.Invoke(isMagic); 
         SelectMagic?.Invoke(playerAttack.selectedMagicIdx);
     }
-
-    private void OnDisPlayStat(InputAction.CallbackContext context)
-    {
-        if (canMove == false)
-        {
-            return;
-        }
-        DisplayStat();
-    }
-
-    private void OnDisPlayMenu(InputAction.CallbackContext context)
-    {
-        DisplayMenu();
-    }
     #endregion
 
     #region Unity 제공 메서드
     void Start()
     {
-        // 바 초기화, 스탯 변수들 다 임포트 되고 초기화해야 해서 얘는 Start에서 한 번 호츌 필요
-        DisplayHP();
-        DisplayMana();
     }
 
     // 즉각 반응해야 하는 모듈들은 Update()에 배치
@@ -374,7 +322,6 @@ public class PlayerCtrl : MonoBehaviour
         }
         // 체력 계산 및 체력바 표기
         currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
-        DisplayHP();
 
         // 데미지가 0이거나 그 이하일 경우 사망
         if (currentHP <= 0)
@@ -413,67 +360,6 @@ public class PlayerCtrl : MonoBehaviour
     #endregion
 
     #region UI 관련
-    // HP 패널 표시
-    public void DisplayHP()
-    {
-        HPBar.fillAmount = currentHP / maxHP;
-    }
-
-    public void DisplayMana()
-    {
-        manaBar.fillAmount = currentMana / maxMana;
-    }
-
-    // StatUI == Q, UI가 있으면 끄고 없으면 키기
-    private void DisplayStat()
-    {
-        if (statUI.activeSelf == false)
-        {
-            WriteCurrentStat();
-            DrawStatGem();
-            statUI.SetActive(true);
-        }
-        else if (statUI.activeSelf == true)
-        {
-            statUI.SetActive(false);
-        }
-    }
-
-    private void WriteCurrentStat()
-    {
-        TextMeshProUGUI HPText = statUI.transform.Find("HP/HPText").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI MoneyText = statUI.transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI PowerText = statUI.transform.Find("Damage/DamageText").GetComponent<TextMeshProUGUI>();
-
-        HPText.text = $" :  {currentHP} / {maxHP}";
-        MoneyText.text = $" :  {money}";
-        PowerText.text = $" :  {-playerAttack.attackDamage}";
-    }
-    private void DrawStatGem()
-    {
-        HPGemBar.RefreshGem(currentHP);
-        moneyGemBar.RefreshGem(money);
-        damageGemBar.RefreshGem(Mathf.Abs(playerAttack.attackDamage));
-    }
-
-    // esc로 메뉴 열고 닫기 가능 첫 화면으로, 리트라이 정도 기능 필요
-    private void DisplayMenu()
-    {
-        if (menuUI.activeSelf == false)
-        {
-            menuUI.SetActive(true);
-            canMove = false;
-            canAttack = false;
-            Time.timeScale = 0f;
-        }
-        else if (menuUI.activeSelf == true)
-        {
-            menuUI.SetActive(false);
-            canMove = true;
-            canAttack = true;
-            Time.timeScale = 1f;
-        }
-    }
     #endregion
 
     // 게임오버, GameManager 이벤트 호출 역할
@@ -527,9 +413,7 @@ public class PlayerCtrl : MonoBehaviour
     public void MaxHpPlus()
     {
         maxHP += 2;
-        StartCoroutine(DisplayPlayerText("MaxHP+ !"));
         UtilityManager.utility.PlaySFX(maxHPPlusSFX);
-        DisplayHP();
     }
     public void GetMoney(int plusMoney)
     {
@@ -539,60 +423,50 @@ public class PlayerCtrl : MonoBehaviour
     public void Attacklus()
     {
         playerAttack.attackDamage -= 1;
-        StartCoroutine(DisplayPlayerText("Attack+ !"));
         UtilityManager.utility.PlaySFX(attackPlusSFX);
     }
 
     public void MaxJumpPlus()
     {
         playerMove.maxJump += 1;
-        StartCoroutine(DisplayPlayerText("Jump+ !"));
         UtilityManager.utility.PlaySFX(jumpPlusSFX);
-    }
-
-    IEnumerator DisplayPlayerText(string displayText)
-    {
-        text.text = displayText;
-        yield return new WaitForSeconds(DISPLAY_ITEM_EFFECT_TIME);
-        text.text = "";
     }
 #endregion
 
 # region 메뉴 버튼 관련
-    public void ReturnToMenuButton()
-    {
-        Time.timeScale = 1f;
-        StartCoroutine(ReturnToMenu());
-    }
+    // public void ReturnToMenuButton()
+    // {
+    //     Time.timeScale = 1f;
+    //     StartCoroutine(ReturnToMenu());
+    // }
 
-    private IEnumerator ReturnToMenu()
-    {
-        StartCoroutine(UtilityManager.utility.ChangeAlpha(fadeImage, FADE_OUT_ALPHA, fadeOutTime));
-        yield return new WaitForSeconds(fadeOutTime);
+    // private IEnumerator ReturnToMenu()
+    // {
+    //     StartCoroutine(UtilityManager.utility.ChangeAlpha(fadeImage, FADE_OUT_ALPHA, fadeOutTime));
+    //     yield return new WaitForSeconds(fadeOutTime);
 
-        // 싱글톤들 리셋
-        Destroy(GameManager.instance.gameObject);
-        Destroy(UtilityManager.utility.gameObject);
-        Destroy(ItemManager.itemManager.gameObject);
-        Destroy(DataManager.dataManager.gameObject);
-        Destroy(PlayerCtrl.player.gameObject);
+    //     // 싱글톤들 리셋
+    //     Destroy(GameManager.instance.gameObject);
+    //     Destroy(UtilityManager.utility.gameObject);
+    //     Destroy(ItemManager.itemManager.gameObject);
+    //     Destroy(DataManager.dataManager.gameObject);
+    //     Destroy(PlayerCtrl.player.gameObject);
 
-        SceneManager.LoadScene(0);
-    }
+    //     SceneManager.LoadScene(0);
+    // }
 
-    public void ReloadSavedSceneButton()
-    {
-        Time.timeScale = 1f;
-        StartCoroutine(ReloadSavedScene());
-    }
-    private IEnumerator ReloadSavedScene()
-    {
-        StartCoroutine(UtilityManager.utility.ChangeAlpha(fadeImage, FADE_OUT_ALPHA, fadeOutTime));
-        yield return new WaitForSeconds(fadeOutTime);
+    // public void ReloadSavedSceneButton()
+    // {
+    //     Time.timeScale = 1f;
+    //     StartCoroutine(ReloadSavedScene());
+    // }
+    // private IEnumerator ReloadSavedScene()
+    // {
+    //     StartCoroutine(UtilityManager.utility.ChangeAlpha(fadeImage, FADE_OUT_ALPHA, fadeOutTime));
+    //     yield return new WaitForSeconds(fadeOutTime);
 
-        menuUI.SetActive(false);
-        DisplayHP();
-        SceneManager.LoadScene(DataManager.dataManager.playerData.savedStage);
-    }
+    //     menuUI.SetActive(false);
+    //     SceneManager.LoadScene(DataManager.dataManager.playerData.savedStage);
+    // }
     #endregion
 }
