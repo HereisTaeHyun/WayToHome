@@ -10,7 +10,6 @@ public class Stall : MonoBehaviour
 
     // 프라이빗 변수
     [SerializeField] private GameObject UI;
-    [SerializeField] private GameObject menu;
     [SerializeField] private TextMeshProUGUI statement;
     [SerializeField] private GameObject[] sellingItems;
     [SerializeField] private int[] itemPrices;
@@ -37,7 +36,6 @@ public class Stall : MonoBehaviour
         if(useCount >= 2)
         {
             statement.text = "Sold Out";
-            menu.SetActive(false);
         }
     }
 
