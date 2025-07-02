@@ -1,0 +1,4464 @@
+fileFormatVersion: 2
+guid: a28cfbafa614cf447982c59463b8aa98
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284292
+  packageName: Simple UI Kit
+  packageVersion: 1.0.1
+  assetPath: Assets/SimpleUIKit/Resources/FantasyGUIButtons.png
+  uploadId: 669184
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FantasyGUIButtons_0
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 4826
+        width: 360
+        height: 171
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41188051baed316408a04f7c9dc35619
+      internalID: -1380701218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_1
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 4820
+        width: 366
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1801ae5da17981b458507cfe924f4363
+      internalID: 1915370111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_2
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 4820
+        width: 368
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a6a3f33d8a475540a1eedcfc9aabb66
+      internalID: 2075227548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_3
+      rect:
+        serializedVersion: 2
+        x: 1336
+        y: 4828
+        width: 368
+        height: 171
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b410c3568d3ef1042b333fe524d52683
+      internalID: 912819463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_4
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 4617
+        width: 368
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4abae9c4e7eb86d42a1202bb95b959b6
+      internalID: -1194979111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_5
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 4617
+        width: 366
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5c59f87f25f83541950ceb228a44912
+      internalID: -286142870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_6
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 4617
+        width: 368
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e3539e5a64a0554ead11129432918f2
+      internalID: 1864894384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_7
+      rect:
+        serializedVersion: 2
+        x: 1329
+        y: 4617
+        width: 369
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bbe85b9d3d23f941acc6e547437b0bc
+      internalID: 1587346953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_8
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 4415
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca3f92bb7d242e846b539f002ac3f073
+      internalID: -377113689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_9
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 4415
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 173f0b9fa80be8f4d9610e9cf03dafe9
+      internalID: -425829551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_10
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 4415
+        width: 180
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 682f6ea02586a024e9b87a4adcc0b714
+      internalID: -1909154553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_11
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 4415
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 866ffd4f76e62964e95dc566e7204b56
+      internalID: -1735732313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_12
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 4415
+        width: 180
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b54b0541a287894eaf9bd17f84fb6f0
+      internalID: 55082985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4195
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86b8d4cc454883443a51474adad264a9
+      internalID: 619904686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_14
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 4195
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95f23df6f4a2e114bb53f3eee64b7436
+      internalID: 1412081611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_15
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 4195
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12faf181eae9c714bb9769df31344698
+      internalID: -166661889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_16
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 4195
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a1f50331622b9c41b6329bb5175f9c3
+      internalID: 1802615452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_17
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 4195
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0f7959b9aeb04f4abe744870fcb96f6
+      internalID: -1220540801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_18
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 4195
+        width: 182
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6609be1a3aedef44682580549192fb87
+      internalID: -1048335878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_19
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 4195
+        width: 181
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b90a07ad59d915d4ca1c4ba15482f951
+      internalID: -1320316845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_20
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 4195
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39123b49c51474347a0461a8181dbb15
+      internalID: 372920681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3982
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c66e1849849ea346b0d81622283215b
+      internalID: 1478580816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_22
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 3982
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1de52c2fdba437489b59f2aeb93a6b7
+      internalID: 1389647869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_23
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 3982
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef0287dd36d0dc6428636b2b8720f246
+      internalID: -856051681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_24
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 3982
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba38d6bb745cc424b91fa6bcd5a347ba
+      internalID: 1136522346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_25
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 3992
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e39bc6eb8969024c86109241793e285
+      internalID: -795800287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_26
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 3992
+        width: 182
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab21665f54e3a5741b0e3a7166cef809
+      internalID: 1985062100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_27
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 3992
+        width: 181
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40d36d8a2346bfd4eb995a0b10f82bd0
+      internalID: -1825300943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_28
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 3992
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d25a07202d6cf1747980bc3c02ccdbe4
+      internalID: -930828152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_29
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3780
+        width: 179
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2efdc7a50eab1fd4ca09e95e123955cc
+      internalID: -1766990009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_30
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 3780
+        width: 183
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f08e06dff8331774f8a5bd7e136b844d
+      internalID: -1537214714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_31
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 3780
+        width: 183
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6705f14c76ef484e973c26e2d3ddf9d
+      internalID: -359834821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_32
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 3780
+        width: 183
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8a24542fb52f4a4eb4394d3cc25dd0a
+      internalID: 96267113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_33
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 3785
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20ef41a59863960479f436546b21ffce
+      internalID: -573265066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_34
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 3785
+        width: 182
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89768c0030be32249bddacfabc3d0f10
+      internalID: -1197439931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_35
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 3785
+        width: 181
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2633408a96b2dc14ca4fe51b67b190f8
+      internalID: 1437271657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_36
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 3785
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65ded2395ea398342bb61cbafd2f71f0
+      internalID: -1684422730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_37
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3585
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69aa3ac79bdf66041abeae20aab6a538
+      internalID: -493165128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_38
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 3585
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dda3c48bf795ec84d932bc031f97be22
+      internalID: -1706163450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_39
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 3585
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56a696d3019921b4388c59bf5ce8857a
+      internalID: -855391197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_40
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 3585
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c671269062cd9b43ace7f5406fe3722
+      internalID: -814579050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_41
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 3587
+        width: 183
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eca728fc6d7fb2f48a7a5fe264686f1e
+      internalID: 750238126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_42
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 3587
+        width: 182
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a9edced3e4a197438b3070c14788072
+      internalID: -1355034108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_43
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 3587
+        width: 181
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 877fa6e53b258174ab291431465845ac
+      internalID: -255078283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_44
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 3587
+        width: 179
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 574795e750747354c92574c5a7174451
+      internalID: -134571934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3389
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1bfaea1c665d3640a8cddaf1c41bada
+      internalID: 2044823451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_46
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 3389
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5396b2a63f4326f4cb8b7909273c0ba1
+      internalID: -1470120356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_47
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 3389
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2b95a25f0930ce4fba0070b7fe09907
+      internalID: -1212772726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_48
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 3389
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b8e4ce3aae802c48bcc7475ae854d5c
+      internalID: -2047262304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_49
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 3392
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b6a4275fc9d0b34ba6b14f6bc03aec3
+      internalID: -498963354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_50
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 3392
+        width: 182
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea8fe204206ded94cb844a4a72481a5f
+      internalID: 1934336319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_51
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 3392
+        width: 181
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9183b06062c4f664ba8d4a41c325f45e
+      internalID: 2019772032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_52
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 3392
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12dbbed8dc5b1fe4b99463aae56578b2
+      internalID: -2103153567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_53
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3188
+        width: 179
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f861fc71ef819754c99b902a6f132dcf
+      internalID: 415498807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_54
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 3188
+        width: 183
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cfb6d79516d2264eae056b7ee95a65d
+      internalID: -677051437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_55
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 3188
+        width: 183
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec1396577a39c3c4387dff94caad99e2
+      internalID: -1759871062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_56
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 3188
+        width: 183
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce02d86e8d8c2e74a8484a976036a379
+      internalID: -452002112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_57
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 3187
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77b9b2f05e34c124594f3591035ea5df
+      internalID: -532958313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_58
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 3187
+        width: 182
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2392b3a60eef29b4085f2942c7afee18
+      internalID: -1292335866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_59
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 3187
+        width: 181
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7935d67c8a90ffa42bc7da9bf36b3b52
+      internalID: -2124710866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_60
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 3187
+        width: 179
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afd6c3469d3beec4691dbf7431b98f20
+      internalID: 1627040694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_61
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2992
+        width: 179
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d04a43a431d9914f9ecd24f8912062b
+      internalID: -294388741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_62
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 2992
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6802246a077eae843b0c4d831cf941b2
+      internalID: -821491376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_63
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 2992
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f9b5e6a794a01d4bb3da69e0029cf4f
+      internalID: 1125696325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_64
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 2992
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f4697771ee375b4a804bfd063f5a16a
+      internalID: -229277703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_65
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 2994
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c7d9b5860b42c04a96ba2acef0a034a
+      internalID: 1879923822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_66
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 2994
+        width: 182
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e21f9daa06bbfd44b88c31e2c8967e38
+      internalID: -1074060867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_67
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 2994
+        width: 181
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b5c0c383fd3ae347a4d45329a7f2728
+      internalID: 1053423667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_68
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 2994
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88bcf9a506653c044bef79033436e7f7
+      internalID: 1821882095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_69
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2799
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b7c822872c5c0b45b40e423245cde99
+      internalID: 235945230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_70
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 2799
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c10e5f96364cab4497ec58e4ecee9c1
+      internalID: -1712853234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_71
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 2799
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74372cf694725064485b2888e65bd706
+      internalID: 1567513784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_72
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 2799
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 807fe747aab74ea4186ac043f2b477f8
+      internalID: -1895036880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_73
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 2799
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a73c0c6bc528d0945a5895780d8dbcba
+      internalID: -492891961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_74
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 2799
+        width: 182
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 095e49e4592dafe41b93f2cbf268f5c6
+      internalID: -600948129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_75
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 2799
+        width: 181
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97fea2125bcd75741a7a31797ba67ade
+      internalID: -1498010998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_76
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 2799
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63a6e675efbc21e43ac14dd029adcb8c
+      internalID: 2028104597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_77
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2589
+        width: 179
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a137e7b3464dcb449ad0661cfd4bd8ec
+      internalID: -170831244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_78
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 2589
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d2de4be7419f85489029b780ce862ed
+      internalID: 2059369715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_79
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 2589
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8855ffb6d3595dc49913feb5f3e9d43a
+      internalID: 1089733911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_80
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 2589
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7268ad0f2b4e4a4da3dbbbf3a9a1d42
+      internalID: -1307344646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_81
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 2593
+        width: 183
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d06a029b5fc69e4a8082b68292ea8e6
+      internalID: 2027033888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_82
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 2593
+        width: 182
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c4d8c4963d9fdc4f9193fe335cb4a41
+      internalID: 1482283275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_83
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 2593
+        width: 181
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 571b2af94c97d4049a4932b38141da7d
+      internalID: -1988368352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_84
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 2593
+        width: 179
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd112db5561495348846523a634d81b9
+      internalID: -733222558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_85
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2396
+        width: 179
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed1743004ff236f4da7243298b1f1844
+      internalID: 1005805123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_86
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 2396
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bf2612a822766f4f9a8890013dea3dd
+      internalID: 95048135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_87
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 2396
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5d22d2b3b7f3804e9ba44bd2ce675c4
+      internalID: -1511272840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_88
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 2396
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfdec96cf6a456c428caf215c48a7993
+      internalID: -1313724890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_89
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 2396
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74849bba6c36173498fdec71cc4b8697
+      internalID: 519124668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_90
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 2396
+        width: 182
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2605a8d9a044b7b4fba265957a2e23b6
+      internalID: -1554999196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_91
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 2396
+        width: 181
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 214f494e37a33a349b8e540ca9071cc0
+      internalID: -2127125418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_92
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 2396
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 702b60eff01305d4c85778f217fc374d
+      internalID: 1246713049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_93
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2203
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4d5f6c5b30a7de4fabd8af3e02a7d22
+      internalID: -1235423935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_94
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 2203
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45e22ec376dd23d4b82c69784ee48a0d
+      internalID: -2091703368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_95
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 2203
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79e4046a14b528948aad4909fcb1a260
+      internalID: 13092237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_96
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 2203
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5c07c3b4d03ef644af5e5d649bb4fe5
+      internalID: -1990381081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_97
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 2203
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8019b3cca2a728a4eb78ce815c664908
+      internalID: 352589137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_98
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 2203
+        width: 182
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62aac48731cb461458e927e6d1a728a3
+      internalID: 69708081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_99
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 2203
+        width: 181
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24c683ff8383f3943a8a287a342a055a
+      internalID: -243092154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_100
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 2203
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79c78713a4e7031429d0777e471ddd8f
+      internalID: -326667513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_101
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2005
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ea4363362bc77646baf7dfe94d00f6d
+      internalID: 60236490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_102
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 2005
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e48b7cf14b6e3d443a3ec581537f8e37
+      internalID: -1331566064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_103
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 2005
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e871f2ce10509f4887fbee9cf43fc5c
+      internalID: -1207328125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_104
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 2005
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a8e54e62ca4f0742ab06f7b79063a64
+      internalID: 1859673957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_105
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 2005
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cecafba8a3e2a2a4c8bf7d270772859b
+      internalID: 1583783402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_106
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 2005
+        width: 182
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3a85069ee3a0d944a1f1c0506cb6b07
+      internalID: 1523130236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_107
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 2005
+        width: 181
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f450aa544220474d8c2585c935d320c
+      internalID: 418704139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_108
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 2005
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2eb5f5967279ae42997320a20931e19
+      internalID: -1146940196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_109
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1800
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90031f4954f8a86409fd3561d90f8895
+      internalID: 1309681021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_110
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 1800
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9347c91d9c28a234aaaf06e1e3a05663
+      internalID: -1933382112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_111
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 1800
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57f752409ad0d8047908c1c5e054a4c3
+      internalID: 1829128749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_112
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 1800
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61505637db2407c45a6000c8495c20fe
+      internalID: -1050984594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_113
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 1808
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c16fc854844d3ac42be8a4783209354f
+      internalID: 1351103501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_114
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 1808
+        width: 182
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7be2f6172dbc13f49bf970d8c57a68f6
+      internalID: -868598768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_115
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 1808
+        width: 181
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bffce2df065ed024585a9001f898e3d2
+      internalID: -691127983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_116
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 1808
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f5ba208a76c2164998ce9a7ca0edb16
+      internalID: 1595862443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_117
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1598
+        width: 179
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b25b2146af8e2d43a9406e454336e2d
+      internalID: -1584631065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_118
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 1598
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6687f9da173da44f886af90fc75855c
+      internalID: 241661668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_119
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 1598
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e240877eaa9bda48b4895b533ddcd71
+      internalID: -221933395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_120
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 1598
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 395df6c66e9c9db43b3358a937b00cf8
+      internalID: 2055387749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_121
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 1598
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a25ecff75255b7a4293e1dafe0ff1657
+      internalID: -995930053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_122
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 1598
+        width: 182
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ef067142fbf0954ba767f939bad90c1
+      internalID: -787491541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_123
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 1598
+        width: 181
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8009ab2b90bd3247a7a88a73877c64a
+      internalID: -359867830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_124
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 1598
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a95c1dbbbcf7d047a51f9e4fc2b0f21
+      internalID: -1458920706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_125
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1397
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7371d7ee53256e54c882c49667795ec1
+      internalID: 1794735252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_126
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 1397
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43924b1c8722a1f438182d787a92e164
+      internalID: 1325819332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_127
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 1397
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdf59bdae850e7f4fba0cf5f378843e5
+      internalID: 675892274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_128
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 1397
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55649b9fa1c77e14fa1dcef9e1b60e41
+      internalID: 156079614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_129
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 1395
+        width: 183
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04ed0341217ecab47847bdfff7d77604
+      internalID: -1257774026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_130
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 1395
+        width: 182
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb3ce0530dd8c154791c67f437fc7b9a
+      internalID: 1826755735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_131
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 1395
+        width: 181
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9aea2de0019a003478cee0b849b9207d
+      internalID: -1064408294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_132
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 1395
+        width: 179
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ace2673517d1d4549a84bb55c2b128f3
+      internalID: -1162151798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_133
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1195
+        width: 179
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74a0c5773166a074ebee7bf33de76297
+      internalID: -1926053619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_134
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 1195
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7383d4ac4d2565a4194dc9e918ab464f
+      internalID: -1514854757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_135
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 1195
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a50ec93d6e02ce54d84a4ce63fd6c332
+      internalID: -701629146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_136
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 1195
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6480a1770feaf549a4044393c7d32d9
+      internalID: 1028315344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_137
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 1195
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7c96d6fe56d4f64eb747ec78ce5b821
+      internalID: -1192790810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_138
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 1195
+        width: 182
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b860f38e5a2817845a503886dacc4800
+      internalID: 788658934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_139
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 1195
+        width: 181
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bc377a1b15b77648b43965d952a7722
+      internalID: 580047992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_140
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 1195
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6bdb843f35ee714d95c8456fc703742
+      internalID: 831879835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_141
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 996
+        width: 179
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c2c8d400470fe14e8b82b41d84c123b
+      internalID: -748721538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_142
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 996
+        width: 183
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e720258f1ab0ef54b90f83daee95cd02
+      internalID: -684317714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_143
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 996
+        width: 183
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d035440a74a12b448fa24d23ff77a2a
+      internalID: 2044543866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_144
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 996
+        width: 183
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f12d21f4507219e4cbcac09933e1bd91
+      internalID: 684947465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_145
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 997
+        width: 183
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f36fdd4d75de2b54ba3a7d26a066340b
+      internalID: -1971163207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_146
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 997
+        width: 182
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6083d494ff459054d948ba1d5c3e7137
+      internalID: 1194104229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_147
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 997
+        width: 181
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cb74afdcb4aba34a98f6852e364f930
+      internalID: 1577019859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_148
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 997
+        width: 179
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce5513fbdd3700840b881586a2016719
+      internalID: -1389762733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_149
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 802
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 747b9d91cdb7e344eb09ac60e8ec3cbb
+      internalID: -2091027985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_150
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 802
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8fcc8be75be5414290feb85f6ce6e39
+      internalID: 863253974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_151
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 802
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08bcb2dfabba28941aca9888bc3e3b73
+      internalID: 1372017788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_152
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 802
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b84ff6b5df8992c498d27c8b6b0e0b47
+      internalID: -1619125935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_153
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 802
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 705efa421e71ce24991ce8b2fd3ccf52
+      internalID: 256326192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_154
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 802
+        width: 182
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4da9acbae4d739f4a95185ee332ba68f
+      internalID: -1758188149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_155
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 802
+        width: 181
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1c23a92f0ac2894abb2bb5f42f444e1
+      internalID: 1986944189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_156
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 802
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 628d8b67dac07154cba1713f4a15aafa
+      internalID: 1068493243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_157
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 592
+        width: 179
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae54b85b18d3a8c42bffbe1df1b3a264
+      internalID: 1334542638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_158
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 592
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1956b90016aa7e24bbae83b33d587609
+      internalID: -70342504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_159
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 592
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69f122f73c5bfb74b872bd7f36603246
+      internalID: -1124808855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_160
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 592
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b9de79735c3cda499175dd64f5a9ca2
+      internalID: -89879793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_161
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 590
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d71361b51b93a64eb9ebaa39ac8e306
+      internalID: -97068053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_162
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 590
+        width: 182
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3912a84534d1cba4c80307b08c89a671
+      internalID: 1040395328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_163
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 590
+        width: 181
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 490097a84197fc449b698966ce11bc83
+      internalID: -1071205447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_164
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 590
+        width: 179
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: faa370dd023caba4ca4925d4dd1f56a0
+      internalID: 1850487954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_165
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 387
+        width: 179
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be3c76e23751a4740a61ebda5aa9124f
+      internalID: -84769287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_166
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 387
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7912b17c8f7d63e459f2a97411a850bf
+      internalID: -1554478805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_167
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 387
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4db1131ff0776240a73612745517338
+      internalID: 1898534724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_168
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 387
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23b8babc4ea744542b27b1600117fe3e
+      internalID: -598677308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_169
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 397
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 927a5f85535aa804eab476d1f78e62d5
+      internalID: 289043529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_170
+      rect:
+        serializedVersion: 2
+        x: 1295
+        y: 397
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af28ae9cc0c997049a04f2cbec1e3608
+      internalID: -1936748659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_171
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 397
+        width: 181
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 316c1985bd37ee94b8e1d2941c5a0b04
+      internalID: 1341973642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_172
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 397
+        width: 179
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02d224ba28e3d194b9bf8d0718a2c565
+      internalID: -1116913492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_173
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 194
+        width: 179
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 167559b41b75cee428cb2f10faf8e32a
+      internalID: 695951225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_174
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 194
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c11f7d6b161871447909c4024a72f0fa
+      internalID: 396815362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_175
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 194
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 238a23e0d4c346f4ba55b7e8d03b876e
+      internalID: 1641596285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_176
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 194
+        width: 183
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cda5273aa821fe4195eebfd9cb9c56b
+      internalID: 1972188614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_177
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 197
+        width: 183
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97355eb8e361bfc4395cd8fd8fe9992a
+      internalID: 1257314212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_178
+      rect:
+        serializedVersion: 2
+        x: 1297
+        y: 197
+        width: 181
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1d185907c7264c4c9815ce6c62a6e68
+      internalID: -708884936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_179
+      rect:
+        serializedVersion: 2
+        x: 1490
+        y: 197
+        width: 181
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a53a346433301e84c9821bfd153bc1bb
+      internalID: -1589624148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_180
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 197
+        width: 179
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cdec855e87278443bd332d122a8161c
+      internalID: -1544549658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_181
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 179
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce742c639c8669f43b5e52d2a074ebc3
+      internalID: -1758923888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_182
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 0
+        width: 376
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cef1bd852be2dad4c82ffb9863c95da0
+      internalID: 1145689348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_183
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 0
+        width: 327
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a88655b9273cfbd40babe56583b18d85
+      internalID: 688273208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_184
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 0
+        width: 317
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b042cc3eb264044c9e9edfd51990a09
+      internalID: 1153653663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_185
+      rect:
+        serializedVersion: 2
+        x: 1297
+        y: 0
+        width: 374
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55c1a11e1ae06d44c8292f48ed4f4909
+      internalID: -1696189998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FantasyGUIButtons_186
+      rect:
+        serializedVersion: 2
+        x: 1681
+        y: 0
+        width: 179
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1fadec4632855f46a2f9490421fb984
+      internalID: 667269567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      FantasyGUIButtons_0: -1380701218
+      FantasyGUIButtons_1: 1915370111
+      FantasyGUIButtons_10: -1909154553
+      FantasyGUIButtons_100: -326667513
+      FantasyGUIButtons_101: 60236490
+      FantasyGUIButtons_102: -1331566064
+      FantasyGUIButtons_103: -1207328125
+      FantasyGUIButtons_104: 1859673957
+      FantasyGUIButtons_105: 1583783402
+      FantasyGUIButtons_106: 1523130236
+      FantasyGUIButtons_107: 418704139
+      FantasyGUIButtons_108: -1146940196
+      FantasyGUIButtons_109: 1309681021
+      FantasyGUIButtons_11: -1735732313
+      FantasyGUIButtons_110: -1933382112
+      FantasyGUIButtons_111: 1829128749
+      FantasyGUIButtons_112: -1050984594
+      FantasyGUIButtons_113: 1351103501
+      FantasyGUIButtons_114: -868598768
+      FantasyGUIButtons_115: -691127983
+      FantasyGUIButtons_116: 1595862443
+      FantasyGUIButtons_117: -1584631065
+      FantasyGUIButtons_118: 241661668
+      FantasyGUIButtons_119: -221933395
+      FantasyGUIButtons_12: 55082985
+      FantasyGUIButtons_120: 2055387749
+      FantasyGUIButtons_121: -995930053
+      FantasyGUIButtons_122: -787491541
+      FantasyGUIButtons_123: -359867830
+      FantasyGUIButtons_124: -1458920706
+      FantasyGUIButtons_125: 1794735252
+      FantasyGUIButtons_126: 1325819332
+      FantasyGUIButtons_127: 675892274
+      FantasyGUIButtons_128: 156079614
+      FantasyGUIButtons_129: -1257774026
+      FantasyGUIButtons_13: 619904686
+      FantasyGUIButtons_130: 1826755735
+      FantasyGUIButtons_131: -1064408294
+      FantasyGUIButtons_132: -1162151798
+      FantasyGUIButtons_133: -1926053619
+      FantasyGUIButtons_134: -1514854757
+      FantasyGUIButtons_135: -701629146
+      FantasyGUIButtons_136: 1028315344
+      FantasyGUIButtons_137: -1192790810
+      FantasyGUIButtons_138: 788658934
+      FantasyGUIButtons_139: 580047992
+      FantasyGUIButtons_14: 1412081611
+      FantasyGUIButtons_140: 831879835
+      FantasyGUIButtons_141: -748721538
+      FantasyGUIButtons_142: -684317714
+      FantasyGUIButtons_143: 2044543866
+      FantasyGUIButtons_144: 684947465
+      FantasyGUIButtons_145: -1971163207
+      FantasyGUIButtons_146: 1194104229
+      FantasyGUIButtons_147: 1577019859
+      FantasyGUIButtons_148: -1389762733
+      FantasyGUIButtons_149: -2091027985
+      FantasyGUIButtons_15: -166661889
+      FantasyGUIButtons_150: 863253974
+      FantasyGUIButtons_151: 1372017788
+      FantasyGUIButtons_152: -1619125935
+      FantasyGUIButtons_153: 256326192
+      FantasyGUIButtons_154: -1758188149
+      FantasyGUIButtons_155: 1986944189
+      FantasyGUIButtons_156: 1068493243
+      FantasyGUIButtons_157: 1334542638
+      FantasyGUIButtons_158: -70342504
+      FantasyGUIButtons_159: -1124808855
+      FantasyGUIButtons_16: 1802615452
+      FantasyGUIButtons_160: -89879793
+      FantasyGUIButtons_161: -97068053
+      FantasyGUIButtons_162: 1040395328
+      FantasyGUIButtons_163: -1071205447
+      FantasyGUIButtons_164: 1850487954
+      FantasyGUIButtons_165: -84769287
+      FantasyGUIButtons_166: -1554478805
+      FantasyGUIButtons_167: 1898534724
+      FantasyGUIButtons_168: -598677308
+      FantasyGUIButtons_169: 289043529
+      FantasyGUIButtons_17: -1220540801
+      FantasyGUIButtons_170: -1936748659
+      FantasyGUIButtons_171: 1341973642
+      FantasyGUIButtons_172: -1116913492
+      FantasyGUIButtons_173: 695951225
+      FantasyGUIButtons_174: 396815362
+      FantasyGUIButtons_175: 1641596285
+      FantasyGUIButtons_176: 1972188614
+      FantasyGUIButtons_177: 1257314212
+      FantasyGUIButtons_178: -708884936
+      FantasyGUIButtons_179: -1589624148
+      FantasyGUIButtons_18: -1048335878
+      FantasyGUIButtons_180: -1544549658
+      FantasyGUIButtons_181: -1758923888
+      FantasyGUIButtons_182: 1145689348
+      FantasyGUIButtons_183: 688273208
+      FantasyGUIButtons_184: 1153653663
+      FantasyGUIButtons_185: -1696189998
+      FantasyGUIButtons_186: 667269567
+      FantasyGUIButtons_19: -1320316845
+      FantasyGUIButtons_2: 2075227548
+      FantasyGUIButtons_20: 372920681
+      FantasyGUIButtons_21: 1478580816
+      FantasyGUIButtons_22: 1389647869
+      FantasyGUIButtons_23: -856051681
+      FantasyGUIButtons_24: 1136522346
+      FantasyGUIButtons_25: -795800287
+      FantasyGUIButtons_26: 1985062100
+      FantasyGUIButtons_27: -1825300943
+      FantasyGUIButtons_28: -930828152
+      FantasyGUIButtons_29: -1766990009
+      FantasyGUIButtons_3: 912819463
+      FantasyGUIButtons_30: -1537214714
+      FantasyGUIButtons_31: -359834821
+      FantasyGUIButtons_32: 96267113
+      FantasyGUIButtons_33: -573265066
+      FantasyGUIButtons_34: -1197439931
+      FantasyGUIButtons_35: 1437271657
+      FantasyGUIButtons_36: -1684422730
+      FantasyGUIButtons_37: -493165128
+      FantasyGUIButtons_38: -1706163450
+      FantasyGUIButtons_39: -855391197
+      FantasyGUIButtons_4: -1194979111
+      FantasyGUIButtons_40: -814579050
+      FantasyGUIButtons_41: 750238126
+      FantasyGUIButtons_42: -1355034108
+      FantasyGUIButtons_43: -255078283
+      FantasyGUIButtons_44: -134571934
+      FantasyGUIButtons_45: 2044823451
+      FantasyGUIButtons_46: -1470120356
+      FantasyGUIButtons_47: -1212772726
+      FantasyGUIButtons_48: -2047262304
+      FantasyGUIButtons_49: -498963354
+      FantasyGUIButtons_5: -286142870
+      FantasyGUIButtons_50: 1934336319
+      FantasyGUIButtons_51: 2019772032
+      FantasyGUIButtons_52: -2103153567
+      FantasyGUIButtons_53: 415498807
+      FantasyGUIButtons_54: -677051437
+      FantasyGUIButtons_55: -1759871062
+      FantasyGUIButtons_56: -452002112
+      FantasyGUIButtons_57: -532958313
+      FantasyGUIButtons_58: -1292335866
+      FantasyGUIButtons_59: -2124710866
+      FantasyGUIButtons_6: 1864894384
+      FantasyGUIButtons_60: 1627040694
+      FantasyGUIButtons_61: -294388741
+      FantasyGUIButtons_62: -821491376
+      FantasyGUIButtons_63: 1125696325
+      FantasyGUIButtons_64: -229277703
+      FantasyGUIButtons_65: 1879923822
+      FantasyGUIButtons_66: -1074060867
+      FantasyGUIButtons_67: 1053423667
+      FantasyGUIButtons_68: 1821882095
+      FantasyGUIButtons_69: 235945230
+      FantasyGUIButtons_7: 1587346953
+      FantasyGUIButtons_70: -1712853234
+      FantasyGUIButtons_71: 1567513784
+      FantasyGUIButtons_72: -1895036880
+      FantasyGUIButtons_73: -492891961
+      FantasyGUIButtons_74: -600948129
+      FantasyGUIButtons_75: -1498010998
+      FantasyGUIButtons_76: 2028104597
+      FantasyGUIButtons_77: -170831244
+      FantasyGUIButtons_78: 2059369715
+      FantasyGUIButtons_79: 1089733911
+      FantasyGUIButtons_8: -377113689
+      FantasyGUIButtons_80: -1307344646
+      FantasyGUIButtons_81: 2027033888
+      FantasyGUIButtons_82: 1482283275
+      FantasyGUIButtons_83: -1988368352
+      FantasyGUIButtons_84: -733222558
+      FantasyGUIButtons_85: 1005805123
+      FantasyGUIButtons_86: 95048135
+      FantasyGUIButtons_87: -1511272840
+      FantasyGUIButtons_88: -1313724890
+      FantasyGUIButtons_89: 519124668
+      FantasyGUIButtons_9: -425829551
+      FantasyGUIButtons_90: -1554999196
+      FantasyGUIButtons_91: -2127125418
+      FantasyGUIButtons_92: 1246713049
+      FantasyGUIButtons_93: -1235423935
+      FantasyGUIButtons_94: -2091703368
+      FantasyGUIButtons_95: 13092237
+      FantasyGUIButtons_96: -1990381081
+      FantasyGUIButtons_97: 352589137
+      FantasyGUIButtons_98: 69708081
+      FantasyGUIButtons_99: -243092154
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

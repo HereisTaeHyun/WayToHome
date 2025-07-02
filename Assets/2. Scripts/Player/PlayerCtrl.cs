@@ -56,9 +56,6 @@ public class PlayerCtrl : MonoBehaviour
     private Vector2 mouseScreenPos;
     private readonly int dieHash = Animator.StringToHash("Die");
     [SerializeField] private GameObject graveStone;
-    [SerializeField] private StatGemBar HPGemBar;
-    [SerializeField] private StatGemBar moneyGemBar;
-    [SerializeField] private StatGemBar damageGemBar;
 
     // UI 관련
 
