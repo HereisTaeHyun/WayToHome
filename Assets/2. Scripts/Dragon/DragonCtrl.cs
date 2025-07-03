@@ -5,6 +5,7 @@ using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 using System;
 using Unity.Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class DragonCtrl : MonoBehaviour, IDamageable, IDie
 {
@@ -19,6 +20,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
     [NonSerialized] public DragonState dragonState;
 
     // private 변수
+    private int enemyID;
     private float maxHP = 50.0f;
     private float currentHP;
     public bool isDie { get; private set; }
@@ -108,6 +110,8 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
 
     void Start()
     {
+        enemyID = Animator.StringToHash($"{SceneManager.GetActiveScene().name}_{gameObject.name}");
+
         anim = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();

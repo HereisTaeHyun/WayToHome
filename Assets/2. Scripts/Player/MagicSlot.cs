@@ -7,7 +7,7 @@ public class MagicSlot : MonoBehaviour
     private Color hiddenIcon = new Color32(255, 255, 255, 0);
     private Color visibleIcon = new Color32(255, 255, 255, 255);
 
-    private void OnEnable()
+    private void Start()
     {
         PlayerCtrl.player.SelectMagic += ChangeMagic;
         PlayerCtrl.player.ToggleAttackModeEvent += ToggleAttackMode;

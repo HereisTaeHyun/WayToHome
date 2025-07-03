@@ -594,9 +594,6 @@ MonoBehaviour:
   currentMana: 0
   money: 0
   graveStone: {fileID: 3894529209947948738, guid: 8d3f9a110a49f7c498ca902310d02ee4, type: 3}
-  HPGemBar: {fileID: 0}
-  moneyGemBar: {fileID: 0}
-  damageGemBar: {fileID: 0}
   takeHitSFX: {fileID: 8300000, guid: fd25a15f9797641458336cccfb445343, type: 3}
   dieSFX: {fileID: 8300000, guid: f11db4559b3ffff45b62e9327fc5535d, type: 3}
   maxHPPlusSFX: {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}
@@ -619,7 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 0
   usingMagic:
-  - {fileID: 0}
+  - {fileID: 977657196193316008, guid: 1248336ae3f0f97419c04c8afbede2d3, type: 3}
   - {fileID: 0}
   selectedMagicIdx: 0
   maxMagic: 20
