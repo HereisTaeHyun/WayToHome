@@ -147,6 +147,8 @@ public class GameManager : MonoBehaviour
             // 죽은 후 재시작
             SceneManager.LoadScene(DataManager.dataManager.playerData.savedStage);
             isGameOver = false;
+            stateText.text = "";
+            restartText.text = "";
             return;
         }
 
@@ -204,11 +206,8 @@ public class GameManager : MonoBehaviour
         stateText = screenPanel.transform.Find("StateText").gameObject.GetComponent<TextMeshProUGUI>();
         restartText = screenPanel.transform.Find("RestartText").gameObject.GetComponent<TextMeshProUGUI>();
 
-        stateText.text = "You Died";
-        restartText.text = "Press R to Restart";
-
         screenImage = screenPanel.GetComponent<Image>();
-        Color currentColor = new Color32(255, 255, 255, 0);
+        Color currentColor = new Color32(0, 0, 0, 0);
         screenImage.color = currentColor; 
 
         screenPanel.SetActive(false);
@@ -259,6 +258,10 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         screenPanel.SetActive(true);
+
+        stateText.text = "You Died";
+        restartText.text = "Press R to Restart";
+
         // 사망시 UI 점진적으로 짙어지게
         Color currentColor = new Color32(255, 30, 30, 0);
         screenImage.color = currentColor; 
