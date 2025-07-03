@@ -66,7 +66,6 @@ public class PlayerCtrl : MonoBehaviour
     TextMeshProUGUI ManaText;
     TextMeshProUGUI MoneyText;
     TextMeshProUGUI DamageText;
-    // private Image screenImage;
     // private float fadeOutTime = 1.5f;
 
     // 무적 관련
@@ -145,7 +144,6 @@ public class PlayerCtrl : MonoBehaviour
 
         // screenUI = UIManager.uIManager.transform.Find("ScreenUI").gameObject;
         // screenPanel = screenUI.transform.Find("ScreenPanel").gameObject;
-        // screenImage = screenPanel.GetComponent<Image>();
 
         // 모듈 초기화
         playerMove.Init();
