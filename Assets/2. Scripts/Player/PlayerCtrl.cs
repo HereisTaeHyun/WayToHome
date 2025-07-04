@@ -63,9 +63,9 @@ public class PlayerCtrl : MonoBehaviour
     private GameObject screenUI;
     private GameObject screenPanel;
     TextMeshProUGUI HPText;
-    TextMeshProUGUI ManaText;
-    TextMeshProUGUI MoneyText;
-    TextMeshProUGUI DamageText;
+    TextMeshProUGUI manaText;
+    TextMeshProUGUI moneyText;
+    TextMeshProUGUI damageText;
     // private float fadeOutTime = 1.5f;
 
     // 무적 관련
@@ -271,12 +271,17 @@ public class PlayerCtrl : MonoBehaviour
         manaBar = playerUI.Find("Panel/BarPanel/Mana/Fill").GetComponent<Image>();
 
         HPText = playerUI.Find("Panel/BarPanel/HP/HPText").GetComponent<TextMeshProUGUI>();
-        ManaText = playerUI.Find("Panel/BarPanel/Mana/ManaText").GetComponent<TextMeshProUGUI>();
-        MoneyText = playerUI.Find("Panel/DataPanel/Money/MoneyText").GetComponent<TextMeshProUGUI>();
-        DamageText = playerUI.Find("Panel/DataPanel/Damage/DamageText").GetComponent<TextMeshProUGUI>();
+        manaText = playerUI.Find("Panel/BarPanel/Mana/ManaText").GetComponent<TextMeshProUGUI>();
+        moneyText = playerUI.Find("Panel/DataPanel/Money/MoneyText").GetComponent<TextMeshProUGUI>();
+        damageText = playerUI.Find("Panel/DataPanel/Damage/DamageText").GetComponent<TextMeshProUGUI>();
 
         screenUI = UIManager.uIManager.transform.Find("ScreenUI").gameObject;
         screenPanel = screenUI.transform.Find("ScreenPanel").gameObject;
+
+        DisplayHP();
+        DisplayMana();
+        moneyText.text = $": {money}";
+        damageText.text = $": {-playerAttack.attackDamage}";
     }
 
     // 즉각 반응해야 하는 모듈들은 Update()에 배치
@@ -388,7 +393,7 @@ public class PlayerCtrl : MonoBehaviour
     public void DisplayMana()
     {
         manaBar.fillAmount = currentMana / maxMana;
-        ManaText.text = $"{currentMana} / {maxMana}";
+        manaText.text = $"{currentMana} / {maxMana}";
     }
     
     #endregion
@@ -443,17 +448,19 @@ public class PlayerCtrl : MonoBehaviour
 
     public void MaxHpPlus()
     {
-        maxHP += 2;
+        maxHP += 10;
         UtilityManager.utility.PlaySFX(maxHPPlusSFX);
     }
     public void GetMoney(int plusMoney)
     {
         money += plusMoney;
+        moneyText.text = $": {money}";
         UtilityManager.utility.PlaySFX(moneySFX);
     }
     public void Attacklus()
     {
-        playerAttack.attackDamage -= 1;
+        playerAttack.attackDamage -= 5;
+        damageText.text = $": {-playerAttack.attackDamage}";
         UtilityManager.utility.PlaySFX(attackPlusSFX);
     }
 

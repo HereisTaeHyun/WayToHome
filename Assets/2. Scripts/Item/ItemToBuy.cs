@@ -69,7 +69,7 @@ public class ItemToBuy : ItemBase
                 case ItemToBuyType.PremiumHeal: // 체력 2 회복
                     if(PlayerCtrl.player.currentHP < PlayerCtrl.player.maxHP)
                     {
-                        PlayerCtrl.player.ChangeHP(2);
+                        PlayerCtrl.player.ChangeHP(20);
                         usingPool = ItemManager.itemManager.premiumHealPool;
                         UtilityManager.utility.ReturnToPool(usingPool, transform.parent.gameObject);
                     }
