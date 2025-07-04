@@ -131,20 +131,6 @@ public class PlayerCtrl : MonoBehaviour
         rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         lastMoveDir = Vector2.right;
 
-        // UI 관련
-        // Transform playerUI = UIManager.uIManager.transform.Find("PlayerUI");
-
-        // HPBar = playerUI.Find("Panel/BarPanel/HP/Fill").GetComponent<Image>();
-        // manaBar = playerUI.Find("Panel/BarPanel/Mana/Fill").GetComponent<Image>();
-
-        // HPText = playerUI.Find("Panel/BarPanel/HP/HPText").GetComponent<TextMeshProUGUI>();
-        // ManaText = playerUI.Find("Panel/BarPanel/Mana/ManaText").GetComponent<TextMeshProUGUI>();
-        // MoneyText = playerUI.Find("Panel/DataPanel/Money/MoneyText").GetComponent<TextMeshProUGUI>();
-        // DamageText = playerUI.Find("Panel/DataPanel/Damage/DamageText").GetComponent<TextMeshProUGUI>();
-
-        // screenUI = UIManager.uIManager.transform.Find("ScreenUI").gameObject;
-        // screenPanel = screenUI.transform.Find("ScreenPanel").gameObject;
-
         // 모듈 초기화
         playerMove.Init();
         playerAttack.Init();
@@ -278,6 +264,19 @@ public class PlayerCtrl : MonoBehaviour
     #region Unity 제공 메서드
     void Start()
     {
+        // UI 관련, 타이밍 이슈로 Start에서 진행
+        Transform playerUI = UIManager.uIManager.transform.Find("PlayerUI");
+
+        HPBar = playerUI.Find("Panel/BarPanel/HP/Fill").GetComponent<Image>();
+        manaBar = playerUI.Find("Panel/BarPanel/Mana/Fill").GetComponent<Image>();
+
+        HPText = playerUI.Find("Panel/BarPanel/HP/HPText").GetComponent<TextMeshProUGUI>();
+        ManaText = playerUI.Find("Panel/BarPanel/Mana/ManaText").GetComponent<TextMeshProUGUI>();
+        MoneyText = playerUI.Find("Panel/DataPanel/Money/MoneyText").GetComponent<TextMeshProUGUI>();
+        DamageText = playerUI.Find("Panel/DataPanel/Damage/DamageText").GetComponent<TextMeshProUGUI>();
+
+        screenUI = UIManager.uIManager.transform.Find("ScreenUI").gameObject;
+        screenPanel = screenUI.transform.Find("ScreenPanel").gameObject;
     }
 
     // 즉각 반응해야 하는 모듈들은 Update()에 배치
