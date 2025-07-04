@@ -340,6 +340,7 @@ public class PlayerCtrl : MonoBehaviour
         }
         // 체력 계산 및 체력바 표기
         currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
+        DisplayHP();
 
         // 데미지가 0이거나 그 이하일 경우 사망
         if (currentHP <= 0)
@@ -381,13 +382,13 @@ public class PlayerCtrl : MonoBehaviour
     public void DisplayHP()
     {
         HPBar.fillAmount = currentHP / maxHP;
-        HPText.text = $" :  {currentHP} / {maxHP}";
+        HPText.text = $"{currentHP} / {maxHP}";
     }
 
     public void DisplayMana()
     {
         manaBar.fillAmount = currentMana / maxMana;
-        ManaText.text = $" :  {currentMana} / {maxMana}";
+        ManaText.text = $"{currentMana} / {maxMana}";
     }
     
     #endregion
