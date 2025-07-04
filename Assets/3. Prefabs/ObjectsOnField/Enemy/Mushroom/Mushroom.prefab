@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPushPower: 0
   stunTime: 0
-  maxHP: 5
+  maxHP: 50
   moveSpeed: 3
   dropItem:
   - {fileID: 5719874273034391547, guid: c50a2965223d9b9408209efb5c3b0f4a, type: 3}
@@ -204,7 +204,7 @@ MonoBehaviour:
   enemyGetHitSFX: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
   enemyDieSFX: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
   scanningRadius: 10
-  damage: -2
+  damage: -20
   attackRange: 1.5
 --- !u!114 &5523733009988000673
 MonoBehaviour:

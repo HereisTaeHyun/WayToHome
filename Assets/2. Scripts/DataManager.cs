@@ -25,13 +25,13 @@ public class PlayerData
     
     public void Reset()
     {
-        maxHP = 10f;
+        maxHP = 100f;
         currentHP = maxHP;
         maxMana = 100f;
         currentMana = maxMana;
         money = 0;
         maxJump = 1;
-        attackDamage = -1f;
+        attackDamage = -10f;
         usingMagic = new string[2];
         savedSpawnPos = new(-126f, -15.06f);
         savedStage = "1. First Stage";

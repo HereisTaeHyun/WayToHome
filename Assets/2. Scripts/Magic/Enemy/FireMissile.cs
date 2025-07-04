@@ -19,7 +19,7 @@ public class FireMissile : MagicBase
         base.Start();
 
         moveSpeed = 20.0f;
-        damage = -1.0f;
+        damage = -10.0f;
     }
     protected override void FixedUpdate()
     {

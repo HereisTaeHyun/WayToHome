@@ -17,7 +17,7 @@ public class ShockWave : MagicBase
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         moveSpeed = 4.0f;
-        damage = -1.0f;
+        damage = -10.0f;
         anim.SetFloat(moveDirHash, moveDir.x);
     }
 

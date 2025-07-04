@@ -13,7 +13,7 @@ public class FireCannon : MagicBase
     {
         base.Start();
 
-        damage = -1.0f;
+        damage = -10.0f;
     }
     protected override void FixedUpdate()
     {

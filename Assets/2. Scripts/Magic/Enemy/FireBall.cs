@@ -23,7 +23,7 @@ public class FireBall : MagicBase
         base.Start();
 
         moveSpeed = 3.0f;
-        damage = -1.0f;
+        damage = -10.0f;
     }
 
     protected override void FixedUpdate()

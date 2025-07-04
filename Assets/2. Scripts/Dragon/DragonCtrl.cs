@@ -21,7 +21,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
 
     // private 변수
     private int enemyID;
-    private float maxHP = 50.0f;
+    private float maxHP = 500.0f;
     private float currentHP;
     public bool isDie { get; private set; }
     private Rigidbody2D rb2D;

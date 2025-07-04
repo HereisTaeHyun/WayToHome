@@ -14,7 +14,7 @@ public class Meteor : MagicBase
         base.Start();
 
         moveSpeed = 5.0f;
-        damage = -3.0f;
+        damage = -30.0f;
 
         meteorOff = GetComponentInChildren<MeteorOff>();
         spriteRenderer = GetComponent<SpriteRenderer>();
