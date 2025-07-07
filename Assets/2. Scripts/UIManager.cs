@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    private PlayerInput playerInputActions;
+
     [Header("PlayerUsingUI")]
     [SerializeField] private GameObject playerUI;
     [SerializeField] private Image hpBar;
@@ -26,6 +28,7 @@ public class UIManager : MonoBehaviour
 
     [Header("MagicShop")]
     [SerializeField] private GameObject magicShopUI;
+    public GameObject MagicShopUI => magicShopUI;
 
     public static UIManager uIManager = null;
     void Awake()
@@ -33,6 +36,7 @@ public class UIManager : MonoBehaviour
         if (uIManager == null)
         {
             uIManager = this;
+            playerInputActions = new PlayerInput();
         }
         else if (uIManager != this)
         {

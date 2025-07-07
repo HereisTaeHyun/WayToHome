@@ -29,13 +29,26 @@ public class MagicShop : MonoBehaviour
         text.text = "Welcome!";
     }
 
-    // 플레이어 접촉 시 UI 활성화, 기본은 start에서 비활성화하기
+    // 플레이어 접촉 및 Sumbit시 활성화
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             PlayerCtrl.player.canAttack = false;
             text.text = "Press E to Use!";
+
+             if (PlayerCtrl.player.isSubmit)
+            {
+                PlayerCtrl.player.isSubmit = false;
+                if (UIManager.uIManager.MagicShopUI.activeSelf)
+                {
+                    UIManager.uIManager.CloseMagicShopUI();
+                }
+                else
+                {
+                    UIManager.uIManager.OpenMagicShopUI();
+                }
+            }
         }
     }
 

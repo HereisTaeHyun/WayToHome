@@ -14,7 +14,7 @@ public class PlayerCtrl : MonoBehaviour
     public Vector2 lastMoveDir { get; private set; }
     public Vector2 aimPos { get; private set; }
     public bool isMagic { get; private set; }
-    public bool isSubmit { get; private set; }
+    public bool isSubmit;
 
     public event Action<int> SelectMagic;
     public event Action<bool> ToggleAttackModeEvent;
