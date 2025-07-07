@@ -28,7 +28,7 @@ public class PlayerAttack : MeleeAttack
         StartCoroutine(PlayerCtrl.player.InvokeSelectMagic(PlayerCtrl.player.playerAttack.selectedMagicIdx));
     }
 
-    void OnEnable()
+    void Start()
     {
         PlayerCtrl.player.SelectMagic += SelectMagicIdx;
     }

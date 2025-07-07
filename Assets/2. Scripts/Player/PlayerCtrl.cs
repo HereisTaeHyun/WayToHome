@@ -58,11 +58,11 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private GameObject graveStone;
 
     // UI 관련
-    private Image HPBar;
+    private Image hpBar;
     private Image manaBar;
     private GameObject screenUI;
     private GameObject screenPanel;
-    TextMeshProUGUI HPText;
+    TextMeshProUGUI hpText;
     TextMeshProUGUI manaText;
     TextMeshProUGUI moneyText;
     TextMeshProUGUI damageText;
@@ -122,6 +122,18 @@ public class PlayerCtrl : MonoBehaviour
         physicsMaterial2D = new PhysicsMaterial2D();
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
+        // UI 관련
+        hpBar = UIManager.uIManager.HpBar;
+        manaBar = UIManager.uIManager.ManaBar;
+
+        hpText = UIManager.uIManager.HpText;
+        manaText = UIManager.uIManager.ManaText;
+        moneyText = UIManager.uIManager.MoneyText;
+        damageText = UIManager.uIManager.DamageText;
+
+        screenUI = UIManager.uIManager.ScreenUI;
+        screenPanel = UIManager.uIManager.ScreenPanel;
+
         // 상태 체커 시작 및 상태 변수 초기화
         StartCoroutine(ApplyState());
         isDie = false;
@@ -134,6 +146,8 @@ public class PlayerCtrl : MonoBehaviour
         // 모듈 초기화
         playerMove.Init();
         playerAttack.Init();
+
+        UIManager.uIManager.RefreshPlayerUI();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -264,20 +278,6 @@ public class PlayerCtrl : MonoBehaviour
     #region Unity 제공 메서드
     void Start()
     {
-        // UI 관련, 타이밍 이슈로 Start에서 진행
-        Transform playerUI = UIManager.uIManager.transform.Find("PlayerUI");
-
-        HPBar = playerUI.Find("Panel/BarPanel/HP/Fill").GetComponent<Image>();
-        manaBar = playerUI.Find("Panel/BarPanel/Mana/Fill").GetComponent<Image>();
-
-        HPText = playerUI.Find("Panel/BarPanel/HP/HPText").GetComponent<TextMeshProUGUI>();
-        manaText = playerUI.Find("Panel/BarPanel/Mana/ManaText").GetComponent<TextMeshProUGUI>();
-        moneyText = playerUI.Find("Panel/DataPanel/Money/MoneyText").GetComponent<TextMeshProUGUI>();
-        damageText = playerUI.Find("Panel/DataPanel/Damage/DamageText").GetComponent<TextMeshProUGUI>();
-
-        screenUI = UIManager.uIManager.transform.Find("ScreenUI").gameObject;
-        screenPanel = screenUI.transform.Find("ScreenPanel").gameObject;
-
         DisplayHP();
         DisplayMana();
         moneyText.text = $": {money}";
@@ -386,8 +386,8 @@ public class PlayerCtrl : MonoBehaviour
     #region UI 관련
     public void DisplayHP()
     {
-        HPBar.fillAmount = currentHP / maxHP;
-        HPText.text = $"{currentHP} / {maxHP}";
+        hpBar.fillAmount = currentHP / maxHP;
+        hpText.text = $"{currentHP} / {maxHP}";
     }
 
     public void DisplayMana()

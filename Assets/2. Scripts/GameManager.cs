@@ -201,8 +201,8 @@ public class GameManager : MonoBehaviour
 
     private void ScreeUISet()
     {
-        screenUI = UIManager.uIManager.transform.Find("ScreenUI").gameObject;
-        screenPanel = screenUI.transform.Find("ScreenPanel").gameObject;
+        screenUI = UIManager.uIManager.ScreenUI;
+        screenPanel = UIManager.uIManager.ScreenPanel;
         stateText = screenPanel.transform.Find("StateText").gameObject.GetComponent<TextMeshProUGUI>();
         restartText = screenPanel.transform.Find("RestartText").gameObject.GetComponent<TextMeshProUGUI>();
 
@@ -258,6 +258,7 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         screenPanel.SetActive(true);
+        UIManager.uIManager.ClosePlayerUI();
 
         stateText.text = "You Died";
         restartText.text = "Press R to Restart";
