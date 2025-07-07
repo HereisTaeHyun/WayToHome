@@ -16,17 +16,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private TextMeshProUGUI damageText;
     public Image HpBar => hpBar;
-    public Image  ManaBar   => manaBar;
-    public TextMeshProUGUI HpText  => hpText;
-    public TextMeshProUGUI ManaText=> manaText;
-    public TextMeshProUGUI MoneyText  => moneyText;
+    public Image ManaBar => manaBar;
+    public TextMeshProUGUI HpText => hpText;
+    public TextMeshProUGUI ManaText => manaText;
+    public TextMeshProUGUI MoneyText => moneyText;
     public TextMeshProUGUI DamageText => damageText;
     public GameObject ScreenUI => screenUI;
     public GameObject ScreenPanel => screenPanel;
 
     [Header("MagicShop")]
     [SerializeField] private GameObject magicShopUI;
-    
+
     public static UIManager uIManager = null;
     void Awake()
     {
@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         playerUI.SetActive(true);
-        magicShopUI.SetActive(false);
+        // magicShopUI.SetActive(false);
     }
 
     public void ClosePlayerUI()
@@ -71,5 +71,14 @@ public class UIManager : MonoBehaviour
         playerUI.SetActive(true);
         PlayerCtrl.player.DisplayHP();
         PlayerCtrl.player.DisplayMana();
+    }
+
+    public void OnMagicShopUI()
+    {
+        magicShopUI.SetActive(true);
+    }
+    public void CloseMagicShopUI()
+    {
+        magicShopUI.SetActive(false);
     }
 }

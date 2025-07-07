@@ -6,7 +6,6 @@ using System;
 public class MagicShop : MonoBehaviour
 {
     // 프라이빗 변수
-    [SerializeField] private GameObject UI;
     [SerializeField] private GameObject[] sellingMagic;
     [SerializeField] private int[] magicPrice;
     [SerializeField] private AudioClip moneySFX;
@@ -18,7 +17,6 @@ public class MagicShop : MonoBehaviour
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
-        UI.SetActive(false);
 
         // 판매 아이템 정보 딕셔너리 형성 sellingItem이 Key, itemPrices가 value
         for (int i = 0; i < sellingMagic.Length; i++)
@@ -32,7 +30,6 @@ public class MagicShop : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            UI.SetActive(true);
             PlayerCtrl.player.canAttack = false;
         }
     }
@@ -42,7 +39,6 @@ public class MagicShop : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            UI.SetActive(false);
             PlayerCtrl.player.canAttack = true;
         }
     }

@@ -9,7 +9,6 @@ public class Stall : MonoBehaviour
     // 퍼블릭 변수
 
     // 프라이빗 변수
-    [SerializeField] private GameObject UI;
     [SerializeField] private TextMeshProUGUI statement;
     [SerializeField] private GameObject[] sellingItems;
     [SerializeField] private int[] itemPrices;
@@ -21,7 +20,6 @@ public class Stall : MonoBehaviour
     
     void Start()
     {
-        UI.SetActive(false);
         useCount = 0;
         itemSpawnPoint = transform.Find("ItemSpawnPoint").gameObject;
 
@@ -44,7 +42,6 @@ public class Stall : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            UI.SetActive(true);
             PlayerCtrl.player.canAttack = false;
         }
     }
@@ -54,7 +51,6 @@ public class Stall : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            UI.SetActive(false);
             PlayerCtrl.player.canAttack = true;
         }
     }
