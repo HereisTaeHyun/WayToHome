@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 2874816525926551543}
   - component: {fileID: 7105795112411711226}
   m_Layer: 5
-  m_Name: Statement
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,8 +440,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 0.6
+  m_fontSizeBase: 0.6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -752,7 +752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244da72f2f902184cbb34e21500ed203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UI: {fileID: 6411291253360599619}
+  text: {fileID: 7105795112411711226}
   sellingMagic:
   - {fileID: 977657196193316008, guid: 1248336ae3f0f97419c04c8afbede2d3, type: 3}
   - {fileID: 2087810266965711082, guid: 79a8890450ee60a47998fe5dead5c2bd, type: 3}

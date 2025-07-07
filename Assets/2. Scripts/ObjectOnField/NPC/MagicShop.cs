@@ -2,10 +2,12 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using TMPro;
 
 public class MagicShop : MonoBehaviour
 {
     // 프라이빗 변수
+    [SerializeField] TextMeshProUGUI text;
     [SerializeField] private GameObject[] sellingMagic;
     [SerializeField] private int[] magicPrice;
     [SerializeField] private AudioClip moneySFX;
@@ -23,23 +25,27 @@ public class MagicShop : MonoBehaviour
         {
             magicInformation.Add(sellingMagic[i], magicPrice[i]);
         }
+
+        text.text = "Welcome!";
     }
 
     // 플레이어 접촉 시 UI 활성화, 기본은 start에서 비활성화하기
     private void OnTriggerStay2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             PlayerCtrl.player.canAttack = false;
+            text.text = "Press E to Use!";
         }
     }
 
     // 플레이어 나가면 비활성화
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             PlayerCtrl.player.canAttack = true;
+            text.text = "Welcome!";
         }
     }
 

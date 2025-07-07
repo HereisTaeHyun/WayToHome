@@ -9,50 +9,46 @@ public class Stall : MonoBehaviour
     // 퍼블릭 변수
 
     // 프라이빗 변수
-    [SerializeField] private TextMeshProUGUI statement;
+    [SerializeField] TextMeshProUGUI text;
     [SerializeField] private GameObject[] sellingItems;
     [SerializeField] private int[] itemPrices;
     [SerializeField] private AudioClip moneySFX;
     [SerializeField] private AudioClip buyFailSFX;
     private Dictionary<GameObject, int> itemInformation = new Dictionary<GameObject, int>(); // 판매품, 가격 받는 딕셔너리
-    private int useCount;
     private GameObject itemSpawnPoint;
-    
+
     void Start()
     {
-        useCount = 0;
         itemSpawnPoint = transform.Find("ItemSpawnPoint").gameObject;
 
         // 판매 아이템 정보 딕셔너리 형성 sellingItem이 Key, itemPrices가 value
-        for(int i = 0; i < sellingItems.Length; i++)
+        for (int i = 0; i < sellingItems.Length; i++)
         {
             itemInformation.Add(sellingItems[i], itemPrices[i]);
         }
-    }
-    void Update()
-    {
-        if(useCount >= 2)
-        {
-            statement.text = "Sold Out";
-        }
+        
+        text.text = "Welcome!";
     }
 
     // 플레이어 접촉 시 UI 활성화, 기본은 start에서 비활성화하기
     private void OnTriggerStay2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             PlayerCtrl.player.canAttack = false;
+            text.text = "Press E to Use!";
         }
     }
 
     // 플레이어 나가면 비활성화
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             PlayerCtrl.player.canAttack = true;
         }
+        
+        text.text = "Welcome!";
     }
 
     // 버튼으로 입력 받은 아이템 구매
@@ -67,7 +63,6 @@ public class Stall : MonoBehaviour
             if(PlayerCtrl.player.money >= itemPrice)
             {
                 PlayerCtrl.player.money -= itemPrice;
-                useCount += 1;
                 UtilityManager.utility.PlaySFX(moneySFX);
                 UtilityManager.utility.SetItemFromPool(itemSpawnPoint.transform, buyingItem);
             }

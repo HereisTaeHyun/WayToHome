@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         playerUI.SetActive(true);
-        // magicShopUI.SetActive(false);
+        magicShopUI.SetActive(false);
     }
 
     public void ClosePlayerUI()
@@ -73,7 +73,7 @@ public class UIManager : MonoBehaviour
         PlayerCtrl.player.DisplayMana();
     }
 
-    public void OnMagicShopUI()
+    public void OpenMagicShopUI()
     {
         magicShopUI.SetActive(true);
     }

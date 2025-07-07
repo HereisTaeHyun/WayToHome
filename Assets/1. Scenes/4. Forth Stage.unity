@@ -33155,7 +33155,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 462434960, guid: c7aeaead388320c4ea3ee9f175de89c5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -51403,6 +51403,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f96701c40937747abd68daa148b0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerUI: {fileID: 4994249391425569041}
+  hpBar: {fileID: 88171238609165357}
+  manaBar: {fileID: 7539849552522124192}
+  screenUI: {fileID: 905551788182467895}
+  screenPanel: {fileID: 3549815278165591603}
+  hpText: {fileID: 8255388476322767095}
+  manaText: {fileID: 4188027651663915675}
+  moneyText: {fileID: 5576965339675781460}
+  damageText: {fileID: 1940762401736598521}
+  magicShopUI: {fileID: 1536970295385152647}
 --- !u!1 &9121220399891400930
 GameObject:
   m_ObjectHideFlags: 0
