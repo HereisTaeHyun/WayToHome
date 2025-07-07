@@ -59,6 +59,8 @@ public class MagicShop : MonoBehaviour
         {
             PlayerCtrl.player.canAttack = true;
             text.text = "Welcome!";
+
+            UIManager.uIManager.CloseMagicShopUI();
         }
     }
 
