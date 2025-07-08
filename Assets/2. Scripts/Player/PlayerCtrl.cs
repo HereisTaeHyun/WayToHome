@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -280,8 +281,8 @@ public class PlayerCtrl : MonoBehaviour
     {
         DisplayHP();
         DisplayMana();
-        moneyText.text = $": {money}";
-        damageText.text = $": {-playerAttack.attackDamage}";
+        DisplayMoney();
+        DisplayDamage();
     }
 
     // 즉각 반응해야 하는 모듈들은 Update()에 배치
@@ -395,6 +396,14 @@ public class PlayerCtrl : MonoBehaviour
         manaBar.fillAmount = currentMana / maxMana;
         manaText.text = $"{currentMana} / {maxMana}";
     }
+    public void DisplayMoney()
+    {
+        moneyText.text = $": {money}";
+    }
+    public void DisplayDamage()
+    {
+        damageText.text = $": {-playerAttack.attackDamage}";
+    }
     
     #endregion
 
@@ -454,13 +463,13 @@ public class PlayerCtrl : MonoBehaviour
     public void GetMoney(int plusMoney)
     {
         money += plusMoney;
-        moneyText.text = $": {money}";
+        DisplayMoney();
         UtilityManager.utility.PlaySFX(moneySFX);
     }
     public void Attacklus()
     {
         playerAttack.attackDamage -= 5;
-        damageText.text = $": {-playerAttack.attackDamage}";
+        DisplayDamage();
         UtilityManager.utility.PlaySFX(attackPlusSFX);
     }
 
