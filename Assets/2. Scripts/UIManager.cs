@@ -26,12 +26,18 @@ public class UIManager : MonoBehaviour
     public GameObject ScreenUI => screenUI;
     public GameObject ScreenPanel => screenPanel;
 
-    [Header("MagicShop")]
+    [Header("MagicShopUI")]
     [SerializeField] private GameObject magicShopUI;
     [SerializeField] private Button[] magicButtons;
     [SerializeField] private GameObject[] magicPrefabs;
     public GameObject MagicShopUI => magicShopUI;
     private MagicShop currentMagicShop;
+
+    [Header("StallUI")]
+    [SerializeField] private GameObject stallUI;
+    [SerializeField] private Button[] itemButtons;
+    public GameObject StallUI => stallUI;
+    private Stall currentStall;
 
     public static UIManager uIManager = null;
     void Awake()
@@ -72,6 +78,7 @@ public class UIManager : MonoBehaviour
     {
         playerUI.SetActive(true);
         magicShopUI.SetActive(false);
+        stallUI.SetActive(false);
     }
 
     public void ClosePlayerUI()
@@ -106,5 +113,16 @@ public class UIManager : MonoBehaviour
             return;
         }
         currentMagicShop.BuyMagic(magicPrefab);
+    }
+
+    public void OpenStallUI(Stall stall)
+    {
+        currentStall = stall;
+        stallUI.SetActive(true);
+    }
+    public void CloseStallUI()
+    {
+        currentStall = null;
+        stallUI.SetActive(false);
     }
 }

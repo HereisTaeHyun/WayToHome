@@ -37,6 +37,19 @@ public class Stall : MonoBehaviour
         {
             PlayerCtrl.player.canAttack = false;
             text.text = "Press E to Use!";
+
+            if (PlayerCtrl.player.isSubmit)
+            {
+                PlayerCtrl.player.isSubmit = false;
+                if (UIManager.uIManager.StallUI.activeSelf)
+                {
+                    UIManager.uIManager.CloseStallUI();
+                }
+                else
+                {
+                    UIManager.uIManager.OpenStallUI(this);
+                }
+            }
         }
     }
 
@@ -46,9 +59,10 @@ public class Stall : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerCtrl.player.canAttack = true;
+            text.text = "Welcome!";
+            
+            UIManager.uIManager.CloseStallUI();
         }
-        
-        text.text = "Welcome!";
     }
 
     // 버튼으로 입력 받은 아이템 구매
