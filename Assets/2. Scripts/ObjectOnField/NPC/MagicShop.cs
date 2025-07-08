@@ -46,7 +46,7 @@ public class MagicShop : MonoBehaviour
                 }
                 else
                 {
-                    UIManager.uIManager.OpenMagicShopUI();
+                    UIManager.uIManager.OpenMagicShopUI(this);
                 }
             }
         }

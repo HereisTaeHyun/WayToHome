@@ -28,7 +28,10 @@ public class UIManager : MonoBehaviour
 
     [Header("MagicShop")]
     [SerializeField] private GameObject magicShopUI;
+    [SerializeField] private Button[] magicButtons;
+    [SerializeField] private GameObject[] magicPrefabs;
     public GameObject MagicShopUI => magicShopUI;
+    private MagicShop currentMagicShop;
 
     public static UIManager uIManager = null;
     void Awake()
@@ -56,6 +59,15 @@ public class UIManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    void Start()
+    {
+        for (int i = 0; i < magicButtons.Length; i++)
+        {
+            int idx = i;
+            magicButtons[idx].onClick.AddListener(() => BuyMagic(magicPrefabs[idx]));
+        }
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         playerUI.SetActive(true);
@@ -77,12 +89,22 @@ public class UIManager : MonoBehaviour
         PlayerCtrl.player.DisplayMana();
     }
 
-    public void OpenMagicShopUI()
+    public void OpenMagicShopUI(MagicShop magicShop)
     {
+        currentMagicShop = magicShop;
         magicShopUI.SetActive(true);
     }
     public void CloseMagicShopUI()
     {
+        currentMagicShop = null;
         magicShopUI.SetActive(false);
+    }
+    private void BuyMagic(GameObject magicPrefab)
+    {
+        if (currentMagicShop == null)
+        {
+            return;
+        }
+        currentMagicShop.BuyMagic(magicPrefab);
     }
 }
