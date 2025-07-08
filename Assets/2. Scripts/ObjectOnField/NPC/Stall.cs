@@ -60,17 +60,14 @@ public class Stall : MonoBehaviour
         {
             PlayerCtrl.player.canAttack = true;
             text.text = "Welcome!";
-            
+
             UIManager.uIManager.CloseStallUI();
         }
     }
 
-    // 버튼으로 입력 받은 아이템 구매
+    // 버튼으로 입력 받은 아이템 구매 => 스탯 자체를 수정하는 방향으로 고민 중
     public void BuyItem(GameObject buyingItem)
     {
-        // button으로 입력 받는 것은 key인 sellingItem임
-        // itemInformation에 buyingItem이 있으면 itemPrice만큼 player.money 차감 및 자판기 사용 수 증가
-        // 이후 아이템을 itemSpawnPoint에 생성
         if(itemInformation.ContainsKey(buyingItem))
         {
             int itemPrice = itemInformation[buyingItem];
