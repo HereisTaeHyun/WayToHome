@@ -12,14 +12,15 @@ public class Stall : MonoBehaviour
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] private AudioClip moneySFX;
     [SerializeField] private AudioClip buyFailSFX;
-    private Dictionary<GameObject, int> itemInformation = new Dictionary<GameObject, int>(); // 판매품, 가격 받는 딕셔너리
-    private GameObject itemSpawnPoint;
+    private static readonly Dictionary<SellingStat, int> ItemPrice = new Dictionary<SellingStat, int>
+    {
+        { SellingStat.Hp,     10 },
+        { SellingStat.Mana,   10 },
+        { SellingStat.Damage, 15 }
+    };
 
     void Start()
     {
-        itemSpawnPoint = transform.Find("ItemSpawnPoint").gameObject;
-
-
         text.text = "Welcome!";
     }
 
@@ -79,20 +80,29 @@ public class Stall : MonoBehaviour
 
     public void BuyItem(SellingStat sellingStat)
     {
-        switch (sellingStat)
+        int cost = ItemPrice[sellingStat];
+        if (PlayerCtrl.player.money < cost)
         {
-            case SellingStat.Hp:
-                PlayerCtrl.player.money -= 10;
-                PlayerCtrl.player.MaxHpPlus();
-                break;
-            case SellingStat.Mana:
-                PlayerCtrl.player.money -= 10;
-                PlayerCtrl.player.MaxManaPlus();
-                break;
-            case SellingStat.Damage:
-                PlayerCtrl.player.money -= 15;
-                PlayerCtrl.player.DamagePlus();
-                break;
+            UtilityManager.utility.PlaySFX(buyFailSFX);
+            return;
         }
+        switch (sellingStat)
+            {
+                case SellingStat.Hp:
+                    PlayerCtrl.player.money -= 10;
+                    PlayerCtrl.player.DisplayMoney();
+                    PlayerCtrl.player.MaxHpPlus();
+                    break;
+                case SellingStat.Mana:
+                    PlayerCtrl.player.money -= 10;
+                    PlayerCtrl.player.DisplayMoney();
+                    PlayerCtrl.player.MaxManaPlus();
+                    break;
+                case SellingStat.Damage:
+                    PlayerCtrl.player.money -= 15;
+                    PlayerCtrl.player.DisplayMoney();
+                    PlayerCtrl.player.DamagePlus();
+                    break;
+            }
     }
 }
