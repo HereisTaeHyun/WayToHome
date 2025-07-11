@@ -261,7 +261,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &56767646
 RectTransform:
   m_ObjectHideFlags: 0
@@ -702,6 +702,7 @@ GameObject:
   - component: {fileID: 121036295}
   - component: {fileID: 121036294}
   - component: {fileID: 121036293}
+  - component: {fileID: 121036296}
   m_Layer: 5
   m_Name: MaxHPUpButton
   m_TagString: Untagged
@@ -724,9 +725,9 @@ RectTransform:
   - {fileID: 652000374}
   m_Father: {fileID: 1672284104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -65}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &121036293
@@ -811,6 +812,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121036291}
   m_CullTransparentMesh: 1
+--- !u!114 &121036296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121036291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a9feedfad43f84885277b2885a9883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sellingStat: 0
 --- !u!1 &138795385
 GameObject:
   m_ObjectHideFlags: 0
@@ -32839,6 +32853,7 @@ GameObject:
   - component: {fileID: 683148464}
   - component: {fileID: 683148463}
   - component: {fileID: 683148462}
+  - component: {fileID: 683148465}
   m_Layer: 5
   m_Name: DamageUpButton
   m_TagString: Untagged
@@ -32861,9 +32876,9 @@ RectTransform:
   - {fileID: 1767759125}
   m_Father: {fileID: 1672284104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -325}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &683148462
@@ -32948,6 +32963,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 683148460}
   m_CullTransparentMesh: 1
+--- !u!114 &683148465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683148460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a9feedfad43f84885277b2885a9883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sellingStat: 2
 --- !u!1001 &688083529
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40050,6 +40078,7 @@ GameObject:
   - component: {fileID: 1585914852}
   - component: {fileID: 1585914851}
   - component: {fileID: 1585914850}
+  - component: {fileID: 1585914853}
   m_Layer: 5
   m_Name: MaxManaUpButton
   m_TagString: Untagged
@@ -40072,9 +40101,9 @@ RectTransform:
   - {fileID: 1792690108}
   m_Father: {fileID: 1672284104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -195}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1585914850
@@ -40159,6 +40188,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1585914848}
   m_CullTransparentMesh: 1
+--- !u!114 &1585914853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585914848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a9feedfad43f84885277b2885a9883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sellingStat: 1
 --- !u!1001 &1594129187
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -67,11 +67,6 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < magicButtons.Length; i++)
-        {
-            int idx = i;
-            magicButtons[idx].onClick.AddListener(() => BuyMagic(magicPrefabs[idx]));
-        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -81,6 +76,7 @@ public class UIManager : MonoBehaviour
         stallUI.SetActive(false);
     }
 
+    #region PlayerUI
     public void ClosePlayerUI()
     {
         if (GameManager.instance.readIsGameOver == true)
@@ -95,9 +91,17 @@ public class UIManager : MonoBehaviour
         PlayerCtrl.player.DisplayHP();
         PlayerCtrl.player.DisplayMana();
     }
+    #endregion
 
+    #region MagicShop
     public void OpenMagicShopUI(MagicShop magicShop)
     {
+        for (int i = 0; i < magicButtons.Length; i++)
+        {
+            int idx = i;
+            magicButtons[idx].onClick.AddListener(() => BuyMagic(magicPrefabs[idx]));
+        }
+
         currentMagicShop = magicShop;
         magicShopUI.SetActive(true);
     }
@@ -114,6 +118,9 @@ public class UIManager : MonoBehaviour
         }
         currentMagicShop.BuyMagic(magicPrefab);
     }
+    #endregion
+
+    #region Stall
 
     public void OpenStallUI(Stall stall)
     {
@@ -125,4 +132,5 @@ public class UIManager : MonoBehaviour
         currentStall = null;
         stallUI.SetActive(false);
     }
+    #endregion
 }

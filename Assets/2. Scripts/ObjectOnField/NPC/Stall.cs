@@ -10,8 +10,6 @@ public class Stall : MonoBehaviour
 
     // 프라이빗 변수
     [SerializeField] TextMeshProUGUI text;
-    [SerializeField] private GameObject[] sellingItems;
-    [SerializeField] private int[] itemPrices;
     [SerializeField] private AudioClip moneySFX;
     [SerializeField] private AudioClip buyFailSFX;
     private Dictionary<GameObject, int> itemInformation = new Dictionary<GameObject, int>(); // 판매품, 가격 받는 딕셔너리
@@ -21,12 +19,7 @@ public class Stall : MonoBehaviour
     {
         itemSpawnPoint = transform.Find("ItemSpawnPoint").gameObject;
 
-        // 판매 아이템 정보 딕셔너리 형성 sellingItem이 Key, itemPrices가 value
-        for (int i = 0; i < sellingItems.Length; i++)
-        {
-            itemInformation.Add(sellingItems[i], itemPrices[i]);
-        }
-        
+
         text.text = "Welcome!";
     }
 
@@ -66,21 +59,37 @@ public class Stall : MonoBehaviour
     }
 
     // 버튼으로 입력 받은 아이템 구매 => 스탯 자체를 수정하는 방향으로 고민 중
-    public void BuyItem(GameObject buyingItem)
+    // public void BuyItem(GameObject buyingItem)
+    // {
+    //     if (itemInformation.ContainsKey(buyingItem))
+    //     {
+    //         int itemPrice = itemInformation[buyingItem];
+    //         if (PlayerCtrl.player.money >= itemPrice)
+    //         {
+    //             PlayerCtrl.player.money -= itemPrice;
+    //             UtilityManager.utility.PlaySFX(moneySFX);
+    //             UtilityManager.utility.SetItemFromPool(itemSpawnPoint.transform, buyingItem);
+    //         }
+    //         else
+    //         {
+    //             UtilityManager.utility.PlaySFX(buyFailSFX);
+    //         }
+    //     }
+    // }
+
+    public void BuyItem(SellingStat sellingStat)
     {
-        if(itemInformation.ContainsKey(buyingItem))
+        switch (sellingStat)
         {
-            int itemPrice = itemInformation[buyingItem];
-            if(PlayerCtrl.player.money >= itemPrice)
-            {
-                PlayerCtrl.player.money -= itemPrice;
-                UtilityManager.utility.PlaySFX(moneySFX);
-                UtilityManager.utility.SetItemFromPool(itemSpawnPoint.transform, buyingItem);
-            }
-            else
-            {
-                UtilityManager.utility.PlaySFX(buyFailSFX);
-            }
+            case SellingStat.Hp:
+                PlayerCtrl.player.MaxHpPlus();
+                break;
+            case SellingStat.Mana:
+                PlayerCtrl.player.MaxManaPlus();
+                break;
+            case SellingStat.Damage:
+                PlayerCtrl.player.DamagePlus();
+                break;
         }
     }
 }

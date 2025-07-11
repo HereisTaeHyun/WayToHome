@@ -76,7 +76,7 @@ public class ItemToBuy : ItemBase
                     break;
                 
                 case ItemToBuyType.AttackPlus: // 공격력 증가
-                    PlayerCtrl.player.Attacklus();
+                    PlayerCtrl.player.DamagePlus();
                     usingPool = ItemManager.itemManager.attackPlusPool;
                     UtilityManager.utility.ReturnToPool(usingPool, transform.parent.gameObject);
                     break;

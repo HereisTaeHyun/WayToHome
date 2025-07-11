@@ -460,13 +460,18 @@ public class PlayerCtrl : MonoBehaviour
         maxHP += 10;
         UtilityManager.utility.PlaySFX(maxHPPlusSFX);
     }
+    public void MaxManaPlus()
+    {
+        maxMana += 10;
+        UtilityManager.utility.PlaySFX(maxHPPlusSFX);
+    }
     public void GetMoney(int plusMoney)
     {
         money += plusMoney;
         DisplayMoney();
         UtilityManager.utility.PlaySFX(moneySFX);
     }
-    public void Attacklus()
+    public void DamagePlus()
     {
         playerAttack.attackDamage -= 5;
         DisplayDamage();
