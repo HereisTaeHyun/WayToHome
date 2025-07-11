@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
     [Header("StallUI")]
     [SerializeField] private GameObject stallUI;
     [SerializeField] private Button[] itemButtons;
+    [SerializeField] private SellingStat[] sellingStats;
     public GameObject StallUI => stallUI;
     private Stall currentStall;
 
@@ -121,9 +122,14 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region Stall
-
     public void OpenStallUI(Stall stall)
     {
+        for (int i = 0; i < itemButtons.Length; i++)
+        {
+            int idx = i;
+            itemButtons[idx].onClick.AddListener(() => BuyItem(sellingStats[idx]));
+        }
+
         currentStall = stall;
         stallUI.SetActive(true);
     }
@@ -131,6 +137,14 @@ public class UIManager : MonoBehaviour
     {
         currentStall = null;
         stallUI.SetActive(false);
+    }
+    private void BuyItem(SellingStat sellingStat)
+    {
+        if (currentStall == null)
+        {
+            return;
+        }
+        currentStall.BuyItem(sellingStat);
     }
     #endregion
 }

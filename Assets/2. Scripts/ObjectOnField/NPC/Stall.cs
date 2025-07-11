@@ -82,12 +82,15 @@ public class Stall : MonoBehaviour
         switch (sellingStat)
         {
             case SellingStat.Hp:
+                PlayerCtrl.player.money -= 10;
                 PlayerCtrl.player.MaxHpPlus();
                 break;
             case SellingStat.Mana:
+                PlayerCtrl.player.money -= 10;
                 PlayerCtrl.player.MaxManaPlus();
                 break;
             case SellingStat.Damage:
+                PlayerCtrl.player.money -= 15;
                 PlayerCtrl.player.DamagePlus();
                 break;
         }

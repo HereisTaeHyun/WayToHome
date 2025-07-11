@@ -458,11 +458,15 @@ public class PlayerCtrl : MonoBehaviour
     public void MaxHpPlus()
     {
         maxHP += 10;
+        currentHP += 10;
+        DisplayHP();
         UtilityManager.utility.PlaySFX(maxHPPlusSFX);
     }
     public void MaxManaPlus()
     {
         maxMana += 10;
+        currentMana += 10;
+        DisplayMana();
         UtilityManager.utility.PlaySFX(maxHPPlusSFX);
     }
     public void GetMoney(int plusMoney)
