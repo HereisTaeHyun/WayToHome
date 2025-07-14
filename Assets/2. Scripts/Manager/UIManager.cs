@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject screenUI;
     [SerializeField] private GameObject screenPanel;
     [SerializeField] private Image screenImage;
+    [SerializeField] private TextMeshProUGUI stateText;
+    [SerializeField] private TextMeshProUGUI explainText;
     [SerializeField] private TextMeshProUGUI hpText;
     [SerializeField] private TextMeshProUGUI manaText;
     [SerializeField] private TextMeshProUGUI moneyText;
@@ -44,8 +46,10 @@ public class UIManager : MonoBehaviour
 
     [Header("MenuUI")]
     [SerializeField] private GameObject menuUI;
-    private float fadeOutTime = 1.5f;
-    private const float FADE_OUT_ALPHA = 1.0f;
+
+    private float alphaChangeTime = 1.5f;
+    private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
+    private static float FADE_OUT_ALPHA = 1.0f;
 
     public static UIManager uIManager = null;
     void Awake()
@@ -78,6 +82,41 @@ public class UIManager : MonoBehaviour
         playerUI.SetActive(true);
         magicShopUI.SetActive(false);
         stallUI.SetActive(false);
+    }
+
+    
+    public void ScreeUISet()
+    {
+        StopAllCoroutines();
+
+        stateText.text = "";
+        explainText.text = "";
+
+        screenImage = screenPanel.GetComponent<Image>();
+        Color currentColor = new Color32(0, 0, 0, 0);
+        screenImage.color = currentColor; 
+    }
+
+    public void GameOverScreen()
+    {
+        stateText.text = "You Died";
+        explainText.text = "Press R to Restart";
+
+        // 사망시 UI 점진적으로 짙어지게
+        Color currentColor = new Color32(255, 30, 30, 0);
+        screenImage.color = currentColor; 
+        StartCoroutine(UtilityManager.utility.ChangeAlpha(screenImage, GAME_OVER_IMAGE_ALPHA, alphaChangeTime));
+    }
+
+    public void EndScreen()
+    {
+        stateText.text = "Thanks for your play";
+        explainText.text = "Press R to return to menu";
+
+        screenImage = screenPanel.GetComponent<Image>();
+        Color currentColor = new Color32(0, 0, 0, 0);
+        screenImage.color = currentColor; 
+        StartCoroutine(UtilityManager.utility.ChangeAlpha(screenImage, GAME_OVER_IMAGE_ALPHA, alphaChangeTime));
     }
 
     #region PlayerUI
@@ -154,24 +193,31 @@ public class UIManager : MonoBehaviour
     #region MenuUI
     public void OpenMenuUI()
     {
+        Time.timeScale = 0.0f;
         menuUI.SetActive(true);
     }
 
     public void CloseMenuUI()
     {
+        Time.timeScale = 1.0f;
         menuUI.SetActive(false);
     }
 
     public void ReturnToMenuButton()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = 1.0f;
         StartCoroutine(ReturnToMenu());
     }
     
     private IEnumerator ReturnToMenu()
     {
-        StartCoroutine(UtilityManager.utility.ChangeAlpha(screenImage, FADE_OUT_ALPHA, fadeOutTime));
-        yield return new WaitForSeconds(fadeOutTime);
+        menuUI.SetActive(false);
+
+        Color currentColor = new Color32(0, 0, 0, 0);
+        screenImage.color = currentColor; 
+        StartCoroutine(UtilityManager.utility.ChangeAlpha(screenImage, FADE_OUT_ALPHA, alphaChangeTime));
+
+        yield return new WaitForSeconds(alphaChangeTime);
 
         // 싱글톤들 리셋
         Destroy(GameManager.instance.gameObject);
@@ -184,18 +230,22 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void ReloadSavedSceneButton()
+    public void RestartFromSaveButton()
     {
-        Time.timeScale = 1f;
-        StartCoroutine(ReloadSavedScene());
+        Time.timeScale = 1.0f;
+        StartCoroutine(RestartFromSave());
     }
 
-    private IEnumerator ReloadSavedScene()
+    private IEnumerator RestartFromSave()
     {
-        StartCoroutine(UtilityManager.utility.ChangeAlpha(screenImage, FADE_OUT_ALPHA, fadeOutTime));
-        yield return new WaitForSeconds(fadeOutTime);
-
         menuUI.SetActive(false);
+        
+        Color currentColor = new Color32(0, 0, 0, 0);
+        screenImage.color = currentColor; 
+        StartCoroutine(UtilityManager.utility.ChangeAlpha(screenImage, FADE_OUT_ALPHA, alphaChangeTime));
+
+        yield return new WaitForSeconds(alphaChangeTime);
+
         SceneManager.LoadScene(DataManager.dataManager.playerData.savedStage);
     }
     #endregion

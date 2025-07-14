@@ -33,8 +33,6 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI stateText;
     private TextMeshProUGUI restartText;
     private Image screenImage;
-    private float alphaChangeTime = 1.5f;
-    private static float GAME_OVER_IMAGE_ALPHA = 0.8f;
 
     private GameObject player;
     private Dictionary<PlayerMagicType, GameObject> magicPrefabs;
@@ -116,7 +114,7 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // UI Set
-        ScreeUISet();
+        UIManager.uIManager.ScreeUISet();
 
         // 포탈을 통해서 넘어온 경우 해당 맵의 firstSpawnPos를 찾아야 함
         if(usePortal == true)
@@ -147,8 +145,6 @@ public class GameManager : MonoBehaviour
             // 죽은 후 재시작
             SceneManager.LoadScene(DataManager.dataManager.playerData.savedStage);
             isGameOver = false;
-            stateText.text = "";
-            restartText.text = "";
             return;
         }
 
@@ -199,20 +195,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void ScreeUISet()
-    {
-        screenUI = UIManager.uIManager.ScreenUI;
-        screenPanel = UIManager.uIManager.ScreenPanel;
-        stateText = screenPanel.transform.Find("StateText").gameObject.GetComponent<TextMeshProUGUI>();
-        restartText = screenPanel.transform.Find("RestartText").gameObject.GetComponent<TextMeshProUGUI>();
-
-        screenImage = screenPanel.GetComponent<Image>();
-        Color currentColor = new Color32(0, 0, 0, 0);
-        screenImage.color = currentColor; 
-
-        screenPanel.SetActive(false);
-    }
-
     // 저장된 스테이트 로드 및 적용
     public void LoadPlayerStat(Scene scene, LoadSceneMode mode)
     {
@@ -257,16 +239,8 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         isGameOver = true;
-        screenPanel.SetActive(true);
         UIManager.uIManager.ClosePlayerUI();
-
-        stateText.text = "You Died";
-        restartText.text = "Press R to Restart";
-
-        // 사망시 UI 점진적으로 짙어지게
-        Color currentColor = new Color32(255, 30, 30, 0);
-        screenImage.color = currentColor; 
-        StartCoroutine(UtilityManager.utility.ChangeAlpha(screenImage, GAME_OVER_IMAGE_ALPHA, alphaChangeTime));
+        UIManager.uIManager.GameOverScreen();
     }
 
     // 다른 객체에서 OnGameOver 호출 시에 사용
@@ -278,13 +252,6 @@ public class GameManager : MonoBehaviour
     public void End()
     {
         isEnd = true;
-        screenPanel.SetActive(true);
-        stateText.text = "Thanks for your play";
-        restartText.text = "Press R to return to menu";
-
-        screenImage = screenPanel.GetComponent<Image>();
-        Color currentColor = new Color32(0, 0, 0, 0);
-        screenImage.color = currentColor; 
-        StartCoroutine(UtilityManager.utility.ChangeAlpha(screenImage, GAME_OVER_IMAGE_ALPHA, alphaChangeTime));
+        UIManager.uIManager.EndScreen();
     }
 }
