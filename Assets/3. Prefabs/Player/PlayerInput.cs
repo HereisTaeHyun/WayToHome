@@ -73,16 +73,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DisplayStat"",
-                    ""type"": ""Button"",
-                    ""id"": ""8c3327a4-2633-4eba-9255-7be391528d38"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""DisplayMenu"",
+                    ""name"": ""Menu"",
                     ""type"": ""Button"",
                     ""id"": ""3a779fbf-e286-488f-be2d-8c923bdbfd66"",
                     ""expectedControlType"": """",
@@ -196,23 +187,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9e8d95a8-071a-451f-93ba-66225352fc6a"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DisplayStat"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""1ca0e09a-dbea-41b6-a81d-8a06e5a4185c"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""DisplayMenu"",
+                    ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -322,8 +302,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Submit = m_Player.FindAction("Submit", throwIfNotFound: true);
-        m_Player_DisplayStat = m_Player.FindAction("DisplayStat", throwIfNotFound: true);
-        m_Player_DisplayMenu = m_Player.FindAction("DisplayMenu", throwIfNotFound: true);
+        m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         m_Player_EnableMagic = m_Player.FindAction("EnableMagic", throwIfNotFound: true);
         m_Player_SelectMagic1 = m_Player.FindAction("SelectMagic1", throwIfNotFound: true);
         m_Player_SelectMagic2 = m_Player.FindAction("SelectMagic2", throwIfNotFound: true);
@@ -399,8 +378,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Submit;
-    private readonly InputAction m_Player_DisplayStat;
-    private readonly InputAction m_Player_DisplayMenu;
+    private readonly InputAction m_Player_Menu;
     private readonly InputAction m_Player_EnableMagic;
     private readonly InputAction m_Player_SelectMagic1;
     private readonly InputAction m_Player_SelectMagic2;
@@ -414,8 +392,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Submit => m_Wrapper.m_Player_Submit;
-        public InputAction @DisplayStat => m_Wrapper.m_Player_DisplayStat;
-        public InputAction @DisplayMenu => m_Wrapper.m_Player_DisplayMenu;
+        public InputAction @Menu => m_Wrapper.m_Player_Menu;
         public InputAction @EnableMagic => m_Wrapper.m_Player_EnableMagic;
         public InputAction @SelectMagic1 => m_Wrapper.m_Player_SelectMagic1;
         public InputAction @SelectMagic2 => m_Wrapper.m_Player_SelectMagic2;
@@ -444,12 +421,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Submit.started += instance.OnSubmit;
             @Submit.performed += instance.OnSubmit;
             @Submit.canceled += instance.OnSubmit;
-            @DisplayStat.started += instance.OnDisplayStat;
-            @DisplayStat.performed += instance.OnDisplayStat;
-            @DisplayStat.canceled += instance.OnDisplayStat;
-            @DisplayMenu.started += instance.OnDisplayMenu;
-            @DisplayMenu.performed += instance.OnDisplayMenu;
-            @DisplayMenu.canceled += instance.OnDisplayMenu;
+            @Menu.started += instance.OnMenu;
+            @Menu.performed += instance.OnMenu;
+            @Menu.canceled += instance.OnMenu;
             @EnableMagic.started += instance.OnEnableMagic;
             @EnableMagic.performed += instance.OnEnableMagic;
             @EnableMagic.canceled += instance.OnEnableMagic;
@@ -481,12 +455,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Submit.started -= instance.OnSubmit;
             @Submit.performed -= instance.OnSubmit;
             @Submit.canceled -= instance.OnSubmit;
-            @DisplayStat.started -= instance.OnDisplayStat;
-            @DisplayStat.performed -= instance.OnDisplayStat;
-            @DisplayStat.canceled -= instance.OnDisplayStat;
-            @DisplayMenu.started -= instance.OnDisplayMenu;
-            @DisplayMenu.performed -= instance.OnDisplayMenu;
-            @DisplayMenu.canceled -= instance.OnDisplayMenu;
+            @Menu.started -= instance.OnMenu;
+            @Menu.performed -= instance.OnMenu;
+            @Menu.canceled -= instance.OnMenu;
             @EnableMagic.started -= instance.OnEnableMagic;
             @EnableMagic.performed -= instance.OnEnableMagic;
             @EnableMagic.canceled -= instance.OnEnableMagic;
@@ -541,8 +512,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnSubmit(InputAction.CallbackContext context);
-        void OnDisplayStat(InputAction.CallbackContext context);
-        void OnDisplayMenu(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
         void OnEnableMagic(InputAction.CallbackContext context);
         void OnSelectMagic1(InputAction.CallbackContext context);
         void OnSelectMagic2(InputAction.CallbackContext context);

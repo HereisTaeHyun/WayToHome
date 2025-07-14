@@ -15,6 +15,7 @@ public class PlayerCtrl : MonoBehaviour
     public Vector2 lastMoveDir { get; private set; }
     public Vector2 aimPos { get; private set; }
     public bool isMagic { get; private set; }
+    public bool isMenu { get; private set; }
     public bool isSubmit;
 
     public event Action<int> SelectMagic;
@@ -41,7 +42,7 @@ public class PlayerCtrl : MonoBehaviour
         Stun,
         Slow,
     }
-    
+
     #endregion
 
     #region private
@@ -138,6 +139,7 @@ public class PlayerCtrl : MonoBehaviour
         // 상태 체커 시작 및 상태 변수 초기화
         StartCoroutine(ApplyState());
         isDie = false;
+        isMenu = false;
         canMove = true;
         canAttack = true;
         state = State.Idle;
@@ -172,6 +174,8 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.Submit.performed += ctx => isSubmit = true;
         inputActions.Player.Submit.canceled += ctx => isSubmit = false;
 
+        inputActions.Player.Menu.performed += ToggleMenuUI;
+
         inputActions.Player.Attack.performed += OnAttack;
         inputActions.Player.EnableMagic.performed += ToggleAttackMode;
         inputActions.Player.AimPos.performed += OnAim;
@@ -190,8 +194,10 @@ public class PlayerCtrl : MonoBehaviour
 
         inputActions.Player.Jump.performed -= OnJump;
 
-        inputActions.Player.Submit.performed += ctx => isSubmit = true;
-        inputActions.Player.Submit.canceled += ctx => isSubmit = false;
+        inputActions.Player.Submit.performed -= ctx => isSubmit = true;
+        inputActions.Player.Submit.canceled -= ctx => isSubmit = false;
+
+        inputActions.Player.Menu.performed -= ToggleMenuUI;
 
         inputActions.Player.Attack.performed -= OnAttack;
         inputActions.Player.EnableMagic.performed -= ToggleAttackMode;
@@ -267,12 +273,25 @@ public class PlayerCtrl : MonoBehaviour
         aimPos = ((Vector2)worldPos - (Vector2)transform.position);
     }
 
-    private void ToggleAttackMode(InputAction.CallbackContext ctx)
+    private void ToggleAttackMode(InputAction.CallbackContext context)
     {
         isMagic = !isMagic;
         UtilityManager.utility.PlaySFX(toggleAttackModeSFX);
-        ToggleAttackModeEvent?.Invoke(isMagic); 
+        ToggleAttackModeEvent?.Invoke(isMagic);
         SelectMagic?.Invoke(playerAttack.selectedMagicIdx);
+    }
+
+    private void ToggleMenuUI(InputAction.CallbackContext context)
+    {
+        isMenu = !isMenu;
+        if (isMenu)
+        {
+            UIManager.uIManager.OpenMenuUI();
+        }
+        else if (!isMenu)
+        {
+            UIManager.uIManager.CloseMenuUI();
+        }
     }
     #endregion
 
@@ -404,7 +423,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         damageText.text = $": {-playerAttack.attackDamage}";
     }
-    
+
     #endregion
 
     // 게임오버, GameManager 이벤트 호출 역할
@@ -487,9 +506,9 @@ public class PlayerCtrl : MonoBehaviour
         playerMove.maxJump += 1;
         UtilityManager.utility.PlaySFX(jumpPlusSFX);
     }
-#endregion
+    #endregion
 
-# region 메뉴 버튼 관련
+    #region 메뉴 버튼 관련
     // public void ReturnToMenuButton()
     // {
     //     Time.timeScale = 1f;
@@ -502,12 +521,12 @@ public class PlayerCtrl : MonoBehaviour
     //     yield return new WaitForSeconds(fadeOutTime);
 
     //     // 싱글톤들 리셋
-            // Destroy(GameManager.instance.gameObject);
-            // Destroy(UtilityManager.utility.gameObject);
-            // Destroy(ItemManager.itemManager.gameObject);
-            // Destroy(DataManager.dataManager.gameObject);
-            // Destroy(UIManager.uIManager.gameObject);
-            // Destroy(PlayerCtrl.player.gameObject);
+    // Destroy(GameManager.instance.gameObject);
+    // Destroy(UtilityManager.utility.gameObject);
+    // Destroy(ItemManager.itemManager.gameObject);
+    // Destroy(DataManager.dataManager.gameObject);
+    // Destroy(UIManager.uIManager.gameObject);
+    // Destroy(PlayerCtrl.player.gameObject);
 
 
     //     SceneManager.LoadScene(0);
