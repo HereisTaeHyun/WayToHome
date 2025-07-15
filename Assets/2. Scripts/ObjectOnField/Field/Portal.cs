@@ -38,7 +38,6 @@ public class Portal : MonoBehaviour
         GameManager.instance.usePortal = usePortal;
 
         // ChangeAlpha로 페이드 아웃 및 SFX 재생
-        screenPanel.SetActive(true);
         UtilityManager.utility.PlaySFX(usePortalSFX);
         StartCoroutine(UtilityManager.utility.ChangeAlpha(screenImage, FADE_OUT_ALPHA, fadeOutTime));
 
@@ -46,6 +45,5 @@ public class Portal : MonoBehaviour
         DataManager.dataManager.Save();
         yield return new WaitForSeconds(fadeOutTime);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        screenPanel.SetActive(false);
     }
 }
