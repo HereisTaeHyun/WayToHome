@@ -193,12 +193,18 @@ public class UIManager : MonoBehaviour
     #region MenuUI
     public void OpenMenuUI()
     {
+        PlayerCtrl.player.canMove = false;
+        PlayerCtrl.player.canAttack = false;
+
         Time.timeScale = 0.0f;
         menuUI.SetActive(true);
     }
 
     public void CloseMenuUI()
     {
+        PlayerCtrl.player.canMove = true;
+        PlayerCtrl.player.canAttack = true;
+
         Time.timeScale = 1.0f;
         menuUI.SetActive(false);
     }

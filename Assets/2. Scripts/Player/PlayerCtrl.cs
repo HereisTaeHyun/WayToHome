@@ -62,8 +62,6 @@ public class PlayerCtrl : MonoBehaviour
     // UI 관련
     private Image hpBar;
     private Image manaBar;
-    private GameObject screenUI;
-    private GameObject screenPanel;
     TextMeshProUGUI hpText;
     TextMeshProUGUI manaText;
     TextMeshProUGUI moneyText;
@@ -132,9 +130,6 @@ public class PlayerCtrl : MonoBehaviour
         manaText = UIManager.uIManager.ManaText;
         moneyText = UIManager.uIManager.MoneyText;
         damageText = UIManager.uIManager.DamageText;
-
-        screenUI = UIManager.uIManager.ScreenUI;
-        screenPanel = UIManager.uIManager.ScreenPanel;
 
         // 상태 체커 시작 및 상태 변수 초기화
         StartCoroutine(ApplyState());
