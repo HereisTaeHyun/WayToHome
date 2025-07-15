@@ -241,6 +241,11 @@ public class PlayerMove : MonoBehaviour
     // jumpCount가 있으며 Jump 입력 받으면
     public void Jump()
     {
+        if (PlayerCtrl.player.canMove == false)
+        {
+            return;
+        }
+        
         // jumpCount 추가 후 jump
         isJump = true;
         isGround = false;
