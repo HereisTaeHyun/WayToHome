@@ -298,7 +298,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
 
         // 사망 시 다음 스테이지로 가기 위한 포탈을 자기 위치에 생성
         portalOnScene.SetActive(true);
-        portalOnScene.transform.position = portalSpawnPoint.transform.position;
+        portalOnScene.transform.position = new Vector3(portalSpawnPoint.transform.position.x, portalSpawnPoint.transform.position.y, 0f);
     }
 
 #endregion
