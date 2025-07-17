@@ -20,8 +20,12 @@ public class PlayerMove : MonoBehaviour
     private Vector2 move;
     private Vector2 moveDir;
     private float jumpSpeed = 5.0f;
-    [SerializeField] private bool canDash;
+
+    [SerializeField] float dashSpeed = 13.0f;
+    [SerializeField] float dashTime = 0.5f;
     [SerializeField] private float postDashDelayTime;
+    private bool canDash;
+    private bool onDash;
 
     // 땅인지 체크하는 Ray 시작 위치
     private Vector2 checkPos;
@@ -101,6 +105,10 @@ public class PlayerMove : MonoBehaviour
         VerticalSlopeCheck(checkPos);
 
         // 실제 이동 적용 부분
+        if (onDash == true)
+        {
+            return;
+        }
         ApplyMove(move, moveDir);
     }
 
@@ -128,13 +136,21 @@ public class PlayerMove : MonoBehaviour
         PlayerCtrl.player.playerAnim.SetFloat(speedHash, move.x);
     }
 
-    public void Dash()
+    public IEnumerator Dash()
     {
         if (canDash == true)
         {
+            onDash = true;
             canDash = false;
+
+            rb2D.linearVelocity = Vector2.zero;
+            newVelocity.Set(moveDir.x * dashSpeed, rb2D.linearVelocity.y);
+            rb2D.linearVelocity = newVelocity;
+            
+            yield return new WaitForSeconds(dashTime);
+            onDash = false;
+
             StartCoroutine(PostDashDelay());
-            Debug.Log("Dash");
         }
     }
 

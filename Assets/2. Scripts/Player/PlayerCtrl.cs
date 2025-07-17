@@ -259,7 +259,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (canMove == true)
         {
-            playerMove.Dash();
+            StartCoroutine(playerMove.Dash());
         }
     }
 
