@@ -69,8 +69,8 @@ public class PlayerCtrl : MonoBehaviour
     // private float fadeOutTime = 1.5f;
 
     // 무적 관련
-    private bool invincible;
-    public bool readInvincible { get { return invincible; } } // 적 관련 객체에서 가끔 참고
+    private bool isInvincible;
+    public bool readIsInvincible { get { return isInvincible; } } // 적 관련 객체에서 가끔 참고
     private static float INVINCIBLE_TIME = 2.0f;
     private float invincibleTimer;
     private static float BLINK_TIME = 0.1f;
@@ -314,12 +314,12 @@ public class PlayerCtrl : MonoBehaviour
     {
         // 타이머는 움직임 제어 권한 위에, 안그러면 디버프나 무적 안풀릴떄 생김
         // 무적시간일 경우 무적 타이머 초마다 차감하여 통상상태로 되돌림
-        if (invincible == true)
+        if (isInvincible == true)
         {
             invincibleTimer -= Time.deltaTime;
             if (invincibleTimer <= 0)
             {
-                invincible = false;
+                isInvincible = false;
             }
         }
         // (debuffTimer > 0) == getDebuff를 당함, 이 경우도 타이머 차감하여 통상 상태로
@@ -353,13 +353,13 @@ public class PlayerCtrl : MonoBehaviour
         if (value < 0)
         {
             // 이미 무적 시간이면 다음 단계 진입하지 않음
-            if (invincible == true)
+            if (isInvincible == true)
             {
                 return;
             }
             // 무적 시간이 아니었으면 사운드 재생 및 무적으로 만든 후 Timer 설정
             UtilityManager.utility.PlaySFX(takeHitSFX);
-            invincible = true;
+            isInvincible = true;
             invincibleTimer = INVINCIBLE_TIME;
             // 데미지 입으면 무적 시간 동안 깜빡임
             StartCoroutine(BlinkUntilInvincible());
@@ -385,7 +385,7 @@ public class PlayerCtrl : MonoBehaviour
         bool isBlink = false;
         Color color = spriteRenderer.color;
         // 무적이고 == 데미지를 입었고, 사망이 아니라면 깜빡임 시작
-        while (invincible == true && isDie == false)
+        while (isInvincible == true && isDie == false)
         {
             // 이전 상태 깜빡이면 되돌리기, 일반이면 깜빡임 반복시켜서 효과 적용
             if (isBlink == true)
@@ -511,44 +511,5 @@ public class PlayerCtrl : MonoBehaviour
         playerMove.maxJump += 1;
         UtilityManager.utility.PlaySFX(jumpPlusSFX);
     }
-    #endregion
-
-    #region 메뉴 버튼 관련
-    // public void ReturnToMenuButton()
-    // {
-    //     Time.timeScale = 1f;
-    //     StartCoroutine(ReturnToMenu());
-    // }
-
-    // private IEnumerator ReturnToMenu()
-    // {
-    //     StartCoroutine(UtilityManager.utility.ChangeAlpha(fadeImage, FADE_OUT_ALPHA, fadeOutTime));
-    //     yield return new WaitForSeconds(fadeOutTime);
-
-    //     // 싱글톤들 리셋
-    // Destroy(GameManager.instance.gameObject);
-    // Destroy(UtilityManager.utility.gameObject);
-    // Destroy(ItemManager.itemManager.gameObject);
-    // Destroy(DataManager.dataManager.gameObject);
-    // Destroy(UIManager.uIManager.gameObject);
-    // Destroy(PlayerCtrl.player.gameObject);
-
-
-    //     SceneManager.LoadScene(0);
-    // }
-
-    // public void ReloadSavedSceneButton()
-    // {
-    //     Time.timeScale = 1f;
-    //     StartCoroutine(ReloadSavedScene());
-    // }
-    // private IEnumerator ReloadSavedScene()
-    // {
-    //     StartCoroutine(UtilityManager.utility.ChangeAlpha(fadeImage, FADE_OUT_ALPHA, fadeOutTime));
-    //     yield return new WaitForSeconds(fadeOutTime);
-
-    //     menuUI.SetActive(false);
-    //     SceneManager.LoadScene(DataManager.dataManager.playerData.savedStage);
-    // }
     #endregion
 }

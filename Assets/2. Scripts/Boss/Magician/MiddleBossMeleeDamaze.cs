@@ -13,7 +13,7 @@ public class MagicianMeleeDamaze : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Player") && PlayerCtrl.player.readInvincible == false)
+        if(other.gameObject.CompareTag("Player") && PlayerCtrl.player.readIsInvincible == false)
         {
             // 데미지 가해
             PlayerCtrl.player.ChangeHP(magicianCtrl.readDamage);

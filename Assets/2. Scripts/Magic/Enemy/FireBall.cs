@@ -75,7 +75,7 @@ public class FireBall : MagicBase
             {
 
                 // 플레이어가 무적이 아니라면 공격
-                if(PlayerCtrl.player.readInvincible != true && canAttack == true)
+                if(PlayerCtrl.player.readIsInvincible != true && canAttack == true)
                 {
                     PlayerCtrl.player.ChangeHP(damage);
                     ReturnToOriginPool();

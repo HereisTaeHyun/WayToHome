@@ -35,7 +35,7 @@ public class TrackingMine : MonoBehaviour
                 playerRb = other.collider.GetComponent<Rigidbody2D>();
 
                 // 플레이어가 무적이 아니라면 공격
-                if(PlayerCtrl.player.readInvincible != true)
+                if(PlayerCtrl.player.readIsInvincible != true)
                 {
                     flyingEyeCtrl.readAnim.SetTrigger(attackHash);
                     StartCoroutine(Attack(other));
