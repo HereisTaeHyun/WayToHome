@@ -20,6 +20,8 @@ public class PlayerMove : MonoBehaviour
     private Vector2 move;
     private Vector2 moveDir;
     private float jumpSpeed = 5.0f;
+    [SerializeField] private bool canDash;
+    [SerializeField] private float postDashDelayTime;
 
     // 땅인지 체크하는 Ray 시작 위치
     private Vector2 checkPos;
@@ -63,6 +65,7 @@ public class PlayerMove : MonoBehaviour
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
 
+        canDash = true;
         isPlatform = false;
 
         coll2D = GetComponent<CapsuleCollider2D>();
@@ -124,9 +127,25 @@ public class PlayerMove : MonoBehaviour
         move = Vector2.zero;
         PlayerCtrl.player.playerAnim.SetFloat(speedHash, move.x);
     }
+
+    public void Dash()
+    {
+        if (canDash == true)
+        {
+            canDash = false;
+            StartCoroutine(PostDashDelay());
+            Debug.Log("Dash");
+        }
+    }
+
+    private IEnumerator PostDashDelay()
+    {
+        yield return new WaitForSeconds(postDashDelayTime);
+        canDash = true;
+    }
 #endregion
 
-#region slopeChecker
+    #region slopeChecker
     // 수평 언덕 체크 메서드
     private void HorizontalSlopeCheck(Vector2 checkPos)
     {

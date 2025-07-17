@@ -165,6 +165,7 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.Move.canceled += CancelMove;
 
         inputActions.Player.Jump.performed += OnJump;
+        inputActions.Player.Dash.performed += OnDash;
 
         inputActions.Player.Submit.performed += ctx => isSubmit = true;
         inputActions.Player.Submit.canceled += ctx => isSubmit = false;
@@ -188,6 +189,7 @@ public class PlayerCtrl : MonoBehaviour
         inputActions.Player.Move.canceled -= CancelMove;
 
         inputActions.Player.Jump.performed -= OnJump;
+        inputActions.Player.Dash.performed -= OnDash;
 
         inputActions.Player.Submit.performed -= ctx => isSubmit = true;
         inputActions.Player.Submit.canceled -= ctx => isSubmit = false;
@@ -250,6 +252,14 @@ public class PlayerCtrl : MonoBehaviour
         if (playerMove.jumpCount < playerMove.maxJump)
         {
             playerMove.Jump();
+        }
+    }
+
+    private void OnDash(InputAction.CallbackContext context)
+    {
+        if (canMove == true)
+        {
+            playerMove.Dash();
         }
     }
 

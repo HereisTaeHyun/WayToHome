@@ -64,6 +64,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""795d53c1-caa6-416c-8072-c3aaddc32f85"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
                     ""id"": ""90c20e6f-cddb-4086-813d-fd47806b5068"",
@@ -261,6 +270,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32fb7214-08b7-4d70-8085-5e4a229d2b19"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -301,6 +321,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Restart = m_Player.FindAction("Restart", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Submit = m_Player.FindAction("Submit", throwIfNotFound: true);
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         m_Player_EnableMagic = m_Player.FindAction("EnableMagic", throwIfNotFound: true);
@@ -377,6 +398,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Restart;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Submit;
     private readonly InputAction m_Player_Menu;
     private readonly InputAction m_Player_EnableMagic;
@@ -391,6 +413,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Restart => m_Wrapper.m_Player_Restart;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Submit => m_Wrapper.m_Player_Submit;
         public InputAction @Menu => m_Wrapper.m_Player_Menu;
         public InputAction @EnableMagic => m_Wrapper.m_Player_EnableMagic;
@@ -418,6 +441,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
             @Submit.started += instance.OnSubmit;
             @Submit.performed += instance.OnSubmit;
             @Submit.canceled += instance.OnSubmit;
@@ -452,6 +478,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
             @Submit.started -= instance.OnSubmit;
             @Submit.performed -= instance.OnSubmit;
             @Submit.canceled -= instance.OnSubmit;
@@ -511,6 +540,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnRestart(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
         void OnSubmit(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnEnableMagic(InputAction.CallbackContext context);
