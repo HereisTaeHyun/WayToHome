@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     [NonSerialized] public float moveSpeed = 7.0f;
     [NonSerialized] public int maxJump;
     [NonSerialized] public int jumpCount = 0;
+    private Ghost ghost;
 
 #region private
     // private 변수
@@ -50,7 +51,7 @@ public class PlayerMove : MonoBehaviour
     private readonly int dirHash = Animator.StringToHash("MoveDir");
     private readonly int jumpHash = Animator.StringToHash("Jump");
 
-    // 다른 객체에서 읽기 필요한 변수
+    // 프로퍼티
     private bool isGround;
     public bool readIsGround {get {return isGround;}}
     private bool isJump;
@@ -66,6 +67,7 @@ public class PlayerMove : MonoBehaviour
     public void Init()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        ghost = GetComponent<Ghost>();
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
 
@@ -143,6 +145,7 @@ public class PlayerMove : MonoBehaviour
             canDash = false;
             onDash = true;
             PlayerCtrl.player.canAttack = false;
+            ghost.makeGhost = true;
 
             // 이전 속도 영향 제거 후 대쉬, 대쉬 후 그 시간 동안은 무적
             rb2D.linearVelocity = Vector2.zero;
@@ -155,6 +158,7 @@ public class PlayerMove : MonoBehaviour
             yield return new WaitForSeconds(dashTime);
             onDash = false;
             PlayerCtrl.player.canAttack = true;
+            ghost.makeGhost = false;
 
             StartCoroutine(PostDashDelay());
         }

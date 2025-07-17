@@ -431,6 +431,7 @@ GameObject:
   - component: {fileID: 1220307346567023135}
   - component: {fileID: 6892243267348438624}
   - component: {fileID: 5538770494666226781}
+  - component: {fileID: 1726993139331560173}
   - component: {fileID: 4351479393740784646}
   m_Layer: 3
   m_Name: Player
@@ -588,7 +589,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1bb6c1b24a8add4f9f9e6d49ecd32e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSubmit: 0
   maxHP: 0
   currentHP: 0
   maxMana: 0
@@ -621,7 +621,6 @@ MonoBehaviour:
   - {fileID: 0}
   selectedMagicIdx: 0
   maxMagic: 20
-  postAttackDelayTime: 0.25
   attackSFX: {fileID: 8300000, guid: 323e15cfe809e114ab92c9f4b25e8bc2, type: 3}
 --- !u!114 &5538770494666226781
 MonoBehaviour:
@@ -635,11 +634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1258170956c2667418390013ee9a5507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashSpeed: 13
-  dashTime: 0.5
-  canDash: 0
-  onDash: 0
-  postDashDelayTime: 1.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -647,6 +641,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8192
   jumpSFX: {fileID: 8300000, guid: 4e349dc959014a845b9aa317d1c2b7f0, type: 3}
+--- !u!114 &1726993139331560173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8167438280805672438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50fa2092aa30e854789ec2d4a7573924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostDelay: 0.1
+  ghost: {fileID: 7018264645186413588, guid: 5f34b6dbd6e7fcb45931d15c5d6456d2, type: 3}
+  makeGhost: 0
 --- !u!95 &4351479393740784646
 Animator:
   serializedVersion: 7
