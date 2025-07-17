@@ -69,8 +69,8 @@ public class PlayerCtrl : MonoBehaviour
     // private float fadeOutTime = 1.5f;
 
     // 무적 관련
-    [SerializeField] private bool damageInvincible;
-    [SerializeField] private bool dashInvincible;
+    private bool damageInvincible;
+    private bool dashInvincible;
     private bool isInvincible { get { return damageInvincible || dashInvincible; } }
     public bool readIsInvincible { get { return isInvincible; } } // 적 관련 객체에서 가끔 참고
     private static float DAMAGE_INVINCIBLE_TIMER = 2.0f;
