@@ -10,11 +10,12 @@ public class PlayerAttack : MeleeAttack
     public GameObject[] usingMagic = new GameObject[2];
     public int selectedMagicIdx;
     public int maxMagic = 20;
-    private float postAttackDelayTime = 0.25f;
-    private readonly int speedHash = Animator.StringToHash("Speed");
 
     // private 변수
-    [SerializeField] private AudioClip attackSFX;    
+    [SerializeField] private AudioClip attackSFX;
+    private bool canAttack;
+    private float postAttackDelayTime = 0.25f;
+    private readonly int speedHash = Animator.StringToHash("Speed");
 
     // 마법 관련
     private GameObject selectedMagic;
@@ -25,6 +26,7 @@ public class PlayerAttack : MeleeAttack
         rb2D = GetComponent<Rigidbody2D>();
         attackCollier = transform.Find("MeleeAttack").gameObject;
         attackCollier.SetActive(false);
+        canAttack = true;
 
         magicSpawnPos = transform.Find("MagicSpawnPos").transform;
         StartCoroutine(PlayerCtrl.player.InvokeSelectMagic(PlayerCtrl.player.playerAttack.selectedMagicIdx));
@@ -42,12 +44,17 @@ public class PlayerAttack : MeleeAttack
     // 근접 공격, 공격 범위 콜라이더 생성 후 일정 시간 후 종료
     public override void Attack()
     {
+        // 공격 중 재입력 방지
+        if (canAttack == false)
+        {
+            return;
+        }
+        
         // 공격 방향 설정
         Vector2 attackDir = PlayerCtrl.player.lastMoveDir;
 
-        if (attackCollier.activeSelf == false && PlayerCtrl.player.isMagic == false)
-        {
             // 공격시 해당 위치에 정지
+            canAttack = false;
             PlayerCtrl.player.playerAnim.SetFloat(speedHash, 0.0f);
             PlayerCtrl.player.canMove = false;
             rb2D.linearVelocity = Vector2.zero;
@@ -59,32 +66,19 @@ public class PlayerAttack : MeleeAttack
             attackCollier.transform.localPosition = attackCollierPos;
 
             // 공격 활성화
-            UtilityManager.utility.PlaySFX(attackSFX);
-            PlayerCtrl.player.playerAnim.SetTrigger(attackHash);
-            PlayerCtrl.player.playerAnim.SetFloat(attackDirHash, attackDir.x);
-        }
-        else if (PlayerCtrl.player.isMagic == true)
-        {
-            // 공격시 해당 위치에 정지, 제어권 반환은 코루틴 끝날때
-            PlayerCtrl.player.canMove = false;
-            rb2D.linearVelocity = Vector2.zero;
-            rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-
-            // 공격 방향에 따른 magicSpawnPos 위치 결정
-            Vector3 spawnPos = magicSpawnPos.localPosition;
-            spawnPos.x = Mathf.Abs(spawnPos.x) * attackDir.x;
-            magicSpawnPos.localPosition = spawnPos;
-
-            UtilityManager.utility.PlaySFX(attackSFX);
             PlayerCtrl.player.playerAnim.SetTrigger(attackHash);
             PlayerCtrl.player.playerAnim.SetFloat(attackDirHash, attackDir.x);
 
-            StartCoroutine(CastMagic());
-        }
+            // 마법 사용 가능이면 마법 시행
+            if (PlayerCtrl.player.isMagic == true)
+            {
+                StartCoroutine(CastMagic());
+            }
     }
     // 공격 coll 설정은 animation event로 사용 중
     protected override void EnableAttackCollider()
     {
+        UtilityManager.utility.PlaySFX(attackSFX);
         attackCollier.SetActive(true);
     }
     protected override void DisableAttackCollider()
@@ -98,6 +92,7 @@ public class PlayerAttack : MeleeAttack
         yield return new WaitForSeconds(postAttackDelayTime);
         rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         PlayerCtrl.player.canMove = true;
+        canAttack = true;
     }
 
     private void SelectMagicIdx(int idx)

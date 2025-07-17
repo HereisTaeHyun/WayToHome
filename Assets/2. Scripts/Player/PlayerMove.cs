@@ -21,8 +21,8 @@ public class PlayerMove : MonoBehaviour
     private Vector2 moveDir;
     private float jumpSpeed = 5.0f;
 
-    float dashSpeed = 13.0f;
-    float dashTime = 0.5f;
+    private float dashSpeed = 13.0f;
+    private float dashTime = 0.5f;
     private float postDashDelayTime = 1.5f;
     private bool canDash;
     private bool onDash;
@@ -140,8 +140,9 @@ public class PlayerMove : MonoBehaviour
     {
         if (canDash == true)
         {
-            onDash = true;
             canDash = false;
+            onDash = true;
+            PlayerCtrl.player.canAttack = false;
 
             // 이전 속도 영향 제거 후 대쉬, 대쉬 후 그 시간 동안은 무적
             rb2D.linearVelocity = Vector2.zero;
@@ -153,6 +154,7 @@ public class PlayerMove : MonoBehaviour
             
             yield return new WaitForSeconds(dashTime);
             onDash = false;
+            PlayerCtrl.player.canAttack = true;
 
             StartCoroutine(PostDashDelay());
         }
