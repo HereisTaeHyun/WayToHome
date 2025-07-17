@@ -74,9 +74,9 @@ public class PlayerCtrl : MonoBehaviour
     private bool isInvincible { get { return damageInvincible || dashInvincible; } }
     public bool readIsInvincible { get { return isInvincible; } } // 적 관련 객체에서 가끔 참고
     private static float DAMAGE_INVINCIBLE_TIMER = 2.0f;
-    private float damageInvincibleIimer;
+    private float damageInvincibleTimer;
     private static float BLINK_TIME = 0.1f;
-    private float dashInvincibleTime = 0.5f;
+    private float dashInvincibleTime = 0.25f;
 
     // 오디오 클립
     [SerializeField] private AudioClip takeHitSFX;
@@ -319,8 +319,8 @@ public class PlayerCtrl : MonoBehaviour
         // 무적시간일 경우 무적 타이머 초마다 차감하여 통상상태로 되돌림
         if (damageInvincible == true)
         {
-            damageInvincibleIimer -= Time.deltaTime;
-            if (damageInvincibleIimer <= 0)
+            damageInvincibleTimer -= Time.deltaTime;
+            if (damageInvincibleTimer <= 0)
             {
                 damageInvincible = false;;
             }
@@ -363,7 +363,7 @@ public class PlayerCtrl : MonoBehaviour
             // 무적 시간이 아니었으면 사운드 재생 및 무적으로 만든 후 Timer 설정
             UtilityManager.utility.PlaySFX(takeHitSFX);
             damageInvincible = true;
-            damageInvincibleIimer = DAMAGE_INVINCIBLE_TIMER;
+            damageInvincibleTimer = DAMAGE_INVINCIBLE_TIMER;
             // 데미지 입으면 무적 시간 동안 깜빡임
             StartCoroutine(BlinkUntilInvincible());
         }
