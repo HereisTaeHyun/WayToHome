@@ -21,9 +21,9 @@ public class PlayerMove : MonoBehaviour
     private Vector2 moveDir;
     private float jumpSpeed = 5.0f;
 
-    [SerializeField] float dashSpeed = 13.0f;
-    [SerializeField] float dashTime = 0.5f;
-    [SerializeField] private float postDashDelayTime;
+    float dashSpeed = 13.0f;
+    float dashTime = 0.5f;
+    private float postDashDelayTime = 1.5f;
     private bool canDash;
     private bool onDash;
 

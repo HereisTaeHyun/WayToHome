@@ -10,7 +10,7 @@ public class PlayerAttack : MeleeAttack
     public GameObject[] usingMagic = new GameObject[2];
     public int selectedMagicIdx;
     public int maxMagic = 20;
-    [SerializeField] private float postAttackDelayTime;
+    private float postAttackDelayTime = 0.25f;
     private readonly int speedHash = Animator.StringToHash("Speed");
 
     // private 변수

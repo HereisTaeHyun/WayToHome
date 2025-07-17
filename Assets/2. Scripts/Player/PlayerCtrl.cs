@@ -16,7 +16,7 @@ public class PlayerCtrl : MonoBehaviour
     public Vector2 aimPos { get; private set; }
     public bool isMagic { get; private set; }
     public bool isMenu { get; private set; }
-    public bool isSubmit;
+    [NonSerialized] public bool isSubmit;
 
     public event Action<int> SelectMagic;
     public event Action<bool> ToggleAttackModeEvent;
