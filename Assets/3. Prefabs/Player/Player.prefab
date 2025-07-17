@@ -588,6 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1bb6c1b24a8add4f9f9e6d49ecd32e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSubmit: 0
   maxHP: 0
   currentHP: 0
   maxMana: 0
@@ -620,6 +621,7 @@ MonoBehaviour:
   - {fileID: 0}
   selectedMagicIdx: 0
   maxMagic: 20
+  postAttackDelayTime: 0.25
   attackSFX: {fileID: 8300000, guid: 323e15cfe809e114ab92c9f4b25e8bc2, type: 3}
 --- !u!114 &5538770494666226781
 MonoBehaviour:

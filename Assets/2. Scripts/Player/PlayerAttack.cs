@@ -10,6 +10,8 @@ public class PlayerAttack : MeleeAttack
     public GameObject[] usingMagic = new GameObject[2];
     public int selectedMagicIdx;
     public int maxMagic = 20;
+    [SerializeField] private float postAttackDelayTime;
+    private readonly int speedHash = Animator.StringToHash("Speed");
 
     // private 변수
     [SerializeField] private AudioClip attackSFX;    
@@ -45,7 +47,8 @@ public class PlayerAttack : MeleeAttack
 
         if (attackCollier.activeSelf == false && PlayerCtrl.player.isMagic == false)
         {
-            // 공격시 해당 위치에 정지, 제어권 반환은 코루틴 끝날때
+            // 공격시 해당 위치에 정지
+            PlayerCtrl.player.playerAnim.SetFloat(speedHash, 0.0f);
             PlayerCtrl.player.canMove = false;
             rb2D.linearVelocity = Vector2.zero;
             rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
@@ -87,6 +90,12 @@ public class PlayerAttack : MeleeAttack
     protected override void DisableAttackCollider()
     {
         attackCollier.SetActive(false);
+        StartCoroutine(PostAttackDelay());
+    }
+
+    private IEnumerator PostAttackDelay()
+    {
+        yield return new WaitForSeconds(postAttackDelayTime);
         rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         PlayerCtrl.player.canMove = true;
     }
@@ -128,9 +137,5 @@ public class PlayerAttack : MeleeAttack
             PlayerCtrl.player.currentMana = Mathf.Clamp(PlayerCtrl.player.currentMana - cost, 0, PlayerCtrl.player.maxMana);
             PlayerCtrl.player.DisplayMana();
         }
-
-        yield return new WaitForSeconds(0.3f);
-        rb2D.constraints          = RigidbodyConstraints2D.FreezeRotation;
-        PlayerCtrl.player.canMove = true;
     }
 }
