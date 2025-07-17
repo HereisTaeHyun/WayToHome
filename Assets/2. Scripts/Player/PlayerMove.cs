@@ -52,6 +52,7 @@ public class PlayerMove : MonoBehaviour
     private readonly int jumpHash = Animator.StringToHash("Jump");
 
     // 프로퍼티
+    public Vector2 readMoveDir {get {return moveDir;}}
     private bool isGround;
     public bool readIsGround {get {return isGround;}}
     private bool isJump;

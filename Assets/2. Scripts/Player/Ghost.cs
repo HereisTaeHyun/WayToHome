@@ -8,9 +8,12 @@ public class Ghost : MonoBehaviour
     public GameObject ghost;
     public bool makeGhost;
 
+    private SpriteRenderer spriteRenderer;
+
     private void Start()
     {
         ghostDelayTime = ghostDelay;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
@@ -23,9 +26,13 @@ public class Ghost : MonoBehaviour
             }
             else
             {
+                spriteRenderer.flipX = PlayerCtrl.player.playerMove.readMoveDir.x < 0;
+
                 GameObject currentGhost = Instantiate(ghost, transform.position, transform.rotation);
-                Sprite currentSprite = GetComponent<SpriteRenderer>().sprite;
-                currentGhost.GetComponent<SpriteRenderer>().sprite = currentSprite;
+                SpriteRenderer ghostSR = currentGhost.GetComponent<SpriteRenderer>();
+                ghostSR.sprite = spriteRenderer.sprite;
+                ghostSR.flipX = spriteRenderer.flipX;
+
                 ghostDelayTime = ghostDelay;
                 Destroy(currentGhost, 1.0f);
             }
