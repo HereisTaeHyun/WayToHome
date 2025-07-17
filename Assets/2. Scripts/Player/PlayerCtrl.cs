@@ -69,11 +69,14 @@ public class PlayerCtrl : MonoBehaviour
     // private float fadeOutTime = 1.5f;
 
     // 무적 관련
-    private bool isInvincible;
+    [SerializeField] private bool damageInvincible;
+    [SerializeField] private bool dashInvincible;
+    private bool isInvincible { get { return damageInvincible || dashInvincible; } }
     public bool readIsInvincible { get { return isInvincible; } } // 적 관련 객체에서 가끔 참고
-    private static float INVINCIBLE_TIME = 2.0f;
-    private float invincibleTimer;
+    private static float DAMAGE_INVINCIBLE_TIMER = 2.0f;
+    private float damageInvincibleIimer;
     private static float BLINK_TIME = 0.1f;
+    private float dashInvincibleTime = 0.5f;
 
     // 오디오 클립
     [SerializeField] private AudioClip takeHitSFX;
@@ -314,12 +317,12 @@ public class PlayerCtrl : MonoBehaviour
     {
         // 타이머는 움직임 제어 권한 위에, 안그러면 디버프나 무적 안풀릴떄 생김
         // 무적시간일 경우 무적 타이머 초마다 차감하여 통상상태로 되돌림
-        if (isInvincible == true)
+        if (damageInvincible == true)
         {
-            invincibleTimer -= Time.deltaTime;
-            if (invincibleTimer <= 0)
+            damageInvincibleIimer -= Time.deltaTime;
+            if (damageInvincibleIimer <= 0)
             {
-                isInvincible = false;
+                damageInvincible = false;;
             }
         }
         // (debuffTimer > 0) == getDebuff를 당함, 이 경우도 타이머 차감하여 통상 상태로
@@ -359,8 +362,8 @@ public class PlayerCtrl : MonoBehaviour
             }
             // 무적 시간이 아니었으면 사운드 재생 및 무적으로 만든 후 Timer 설정
             UtilityManager.utility.PlaySFX(takeHitSFX);
-            isInvincible = true;
-            invincibleTimer = INVINCIBLE_TIME;
+            damageInvincible = true;
+            damageInvincibleIimer = DAMAGE_INVINCIBLE_TIMER;
             // 데미지 입으면 무적 시간 동안 깜빡임
             StartCoroutine(BlinkUntilInvincible());
         }
@@ -379,13 +382,13 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    // 무적 시간 동안 깜빡거리기 코루틴
+    // 데미지 입고 무적 시간 동안 깜빡거리기 코루틴
     IEnumerator BlinkUntilInvincible()
     {
         bool isBlink = false;
         Color color = spriteRenderer.color;
         // 무적이고 == 데미지를 입었고, 사망이 아니라면 깜빡임 시작
-        while (isInvincible == true && isDie == false)
+        while (damageInvincible == true && isDie == false)
         {
             // 이전 상태 깜빡이면 되돌리기, 일반이면 깜빡임 반복시켜서 효과 적용
             if (isBlink == true)
@@ -405,6 +408,13 @@ public class PlayerCtrl : MonoBehaviour
         // 기본 상태로 초기화
         color.a = 1.0f;
         spriteRenderer.color = color;
+    }
+
+    public IEnumerator DashInvincible()
+    {
+        dashInvincible = true;
+        yield return new WaitForSeconds(dashInvincibleTime);
+        dashInvincible = false;
     }
     #endregion
 

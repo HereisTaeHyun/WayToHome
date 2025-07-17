@@ -143,10 +143,11 @@ public class PlayerMove : MonoBehaviour
             onDash = true;
             canDash = false;
 
-            // 이전 속도 영향 제거 후 대쉬
+            // 이전 속도 영향 제거 후 대쉬, 대쉬 후 그 시간 동안은 무적
             rb2D.linearVelocity = Vector2.zero;
             UtilityManager.utility.PlaySFX(jumpSFX);
 
+            StartCoroutine(PlayerCtrl.player.DashInvincible());
             newVelocity.Set(moveDir.x * dashSpeed, rb2D.linearVelocity.y);
             rb2D.linearVelocity = newVelocity;
             
