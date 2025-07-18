@@ -63,6 +63,7 @@ public class MamaMush : EnemyCtrl
         // 타격 벡터 계산 및 sfx, anim 재생
         Vector2 hitVector =  UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
         UtilityManager.utility.PlaySFX(enemyGetHitSFX);
+        
         anim.SetTrigger(hitTrigger);
         anim.SetFloat(hitHash, hitVector.x);
 
