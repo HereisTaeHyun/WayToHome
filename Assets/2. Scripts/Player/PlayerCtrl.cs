@@ -30,6 +30,8 @@ public class PlayerCtrl : MonoBehaviour
     [NonSerialized] public bool canMove;
     [NonSerialized] public State state;
     [NonSerialized] public bool canAttack;
+    [NonSerialized] public bool canDash;
+    [NonSerialized] public bool onDash;
     [NonSerialized] public Animator playerAnim;
     public enum State
     {
@@ -140,6 +142,7 @@ public class PlayerCtrl : MonoBehaviour
         isMenu = false;
         canMove = true;
         canAttack = true;
+        canDash = true;
         state = State.Idle;
         rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         lastMoveDir = Vector2.right;

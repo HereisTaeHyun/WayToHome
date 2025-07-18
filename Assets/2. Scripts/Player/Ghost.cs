@@ -1,12 +1,18 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Ghost : MonoBehaviour
 {
     public float ghostDelay;
-    private float ghostDelayTime;
-
     public GameObject ghost;
     public bool makeGhost;
+
+    private float ghostDelayTime;
+    private ObjectPool<GameObject> ghostPool;
+    private int maxGhost = 20;
+    private float ghostFadeTime = 0.3f;
+    private Vector2 dashDir;
 
     private SpriteRenderer spriteRenderer;
 
@@ -14,9 +20,11 @@ public class Ghost : MonoBehaviour
     {
         ghostDelayTime = ghostDelay;
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        UtilityManager.utility.CreateDoNotDestroyPool(ref ghostPool, ghost, maxGhost, maxGhost);
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (makeGhost == true)
         {
@@ -26,19 +34,29 @@ public class Ghost : MonoBehaviour
             }
             else
             {
-                spriteRenderer.flipX = PlayerCtrl.player.playerMove.readMoveDir.x < 0;
+                spriteRenderer.flipX = PlayerCtrl.player.lastMoveDir.x < 0;
 
-                GameObject currentGhost = Instantiate(ghost, transform.position, transform.rotation);
+                GameObject currentGhost = UtilityManager.utility.GetFromPool(ghostPool, maxGhost);
                 SpriteRenderer ghostSprite = currentGhost.GetComponent<SpriteRenderer>();
+
+                ghostSprite.transform.position = PlayerCtrl.player.transform.position;
+                ghostSprite.transform.rotation = PlayerCtrl.player.transform.rotation;
+
                 ghostSprite.sprite = spriteRenderer.sprite;
                 ghostSprite.flipX = spriteRenderer.flipX;
 
-                ghostSprite.color = new Color(1, 1, 1, 0.5f);
-                StartCoroutine(UtilityManager.utility.ChangeAlpha(ghostSprite, 0f, 0.3f));
+                ghostSprite.color = new Color(1, 1, 1, 1.0f);
+                StartCoroutine(UtilityManager.utility.ChangeAlpha(ghostSprite, 0f, ghostFadeTime));
 
                 ghostDelayTime = ghostDelay;
-                // Destroy(currentGhost, 1.0f);
+                StartCoroutine(GhostReturn(currentGhost));
             }
         }
+    }
+
+    private IEnumerator GhostReturn(GameObject currentGhost)
+    {
+        yield return new WaitForSeconds(ghostFadeTime);
+        UtilityManager.utility.ReturnToPool(ghostPool, currentGhost);
     }
 }

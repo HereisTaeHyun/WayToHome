@@ -25,8 +25,6 @@ public class PlayerMove : MonoBehaviour
     private float dashSpeed = 13.0f;
     private float dashTime = 0.5f;
     private float postDashDelayTime = 1.5f;
-    private bool canDash;
-    private bool onDash;
 
     // 땅인지 체크하는 Ray 시작 위치
     private Vector2 checkPos;
@@ -52,7 +50,6 @@ public class PlayerMove : MonoBehaviour
     private readonly int jumpHash = Animator.StringToHash("Jump");
 
     // 프로퍼티
-    public Vector2 readMoveDir {get {return moveDir;}}
     private bool isGround;
     public bool readIsGround {get {return isGround;}}
     private bool isJump;
@@ -72,7 +69,6 @@ public class PlayerMove : MonoBehaviour
         moveSpeed = originSpeed;
         debuffedSpeed = moveSpeed * 0.5f;
 
-        canDash = true;
         isPlatform = false;
 
         coll2D = GetComponent<CapsuleCollider2D>();
@@ -108,7 +104,7 @@ public class PlayerMove : MonoBehaviour
         VerticalSlopeCheck(checkPos);
 
         // 실제 이동 적용 부분
-        if (onDash == true)
+        if (PlayerCtrl.player.onDash == true)
         {
             return;
         }
@@ -141,10 +137,10 @@ public class PlayerMove : MonoBehaviour
 
     public IEnumerator Dash()
     {
-        if (canDash == true)
+        if (PlayerCtrl.player.canDash == true)
         {
-            canDash = false;
-            onDash = true;
+            PlayerCtrl.player.canDash = false;
+            PlayerCtrl.player.onDash = true;
             PlayerCtrl.player.canAttack = false;
             ghost.makeGhost = true;
 
@@ -157,7 +153,7 @@ public class PlayerMove : MonoBehaviour
             rb2D.linearVelocity = newVelocity;
             
             yield return new WaitForSeconds(dashTime);
-            onDash = false;
+            PlayerCtrl.player.onDash = false;
             PlayerCtrl.player.canAttack = true;
             ghost.makeGhost = false;
 
@@ -168,7 +164,7 @@ public class PlayerMove : MonoBehaviour
     private IEnumerator PostDashDelay()
     {
         yield return new WaitForSeconds(postDashDelayTime);
-        canDash = true;
+        PlayerCtrl.player.canDash = true;
     }
 #endregion
 
