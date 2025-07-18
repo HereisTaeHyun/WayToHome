@@ -5,6 +5,7 @@ using System.Collections.Generic;
 // 하늘을 날면서 타겟을 추적하는 적에 대한 클래스
 public class FlyingEyeCtrl : EnemyCtrl
 {
+    [SerializeField] private float pushPower;
     private Collider2D coll;
     private Collider2D playerColl;
     private readonly int fallHash = Animator.StringToHash("Fall");
@@ -63,7 +64,7 @@ public class FlyingEyeCtrl : EnemyCtrl
         anim.SetFloat(hitHash, hitVector.x);
 
         // 타격 받은 방향으로 밀려남
-        rb2D.AddForce(hitVector * enemyPushPower, ForceMode2D.Impulse);
+        rb2D.AddForce(hitVector * pushPower, ForceMode2D.Impulse);
         yield return new WaitForSeconds(stunTime);
         rb2D.linearVelocity = Vector2.zero;
         canMove = true;
