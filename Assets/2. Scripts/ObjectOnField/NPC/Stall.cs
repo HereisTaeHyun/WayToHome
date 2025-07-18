@@ -59,25 +59,6 @@ public class Stall : MonoBehaviour
         }
     }
 
-    // 버튼으로 입력 받은 아이템 구매 => 스탯 자체를 수정하는 방향으로 고민 중
-    // public void BuyItem(GameObject buyingItem)
-    // {
-    //     if (itemInformation.ContainsKey(buyingItem))
-    //     {
-    //         int itemPrice = itemInformation[buyingItem];
-    //         if (PlayerCtrl.player.money >= itemPrice)
-    //         {
-    //             PlayerCtrl.player.money -= itemPrice;
-    //             UtilityManager.utility.PlaySFX(moneySFX);
-    //             UtilityManager.utility.SetItemFromPool(itemSpawnPoint.transform, buyingItem);
-    //         }
-    //         else
-    //         {
-    //             UtilityManager.utility.PlaySFX(buyFailSFX);
-    //         }
-    //     }
-    // }
-
     public void BuyItem(SellingStat sellingStat)
     {
         int cost = ItemPrice[sellingStat];

@@ -63,7 +63,7 @@ public class UtilityManager : MonoBehaviour
     }
 
 
-    // UI 알파 변경자   
+    // 알파 변경자   
     public IEnumerator ChangeAlpha(Image changeTarget, float targetAlpah, float changeTime)
     {
         Color currentColor = changeTarget.color;
@@ -74,6 +74,22 @@ public class UtilityManager : MonoBehaviour
         {
             time += Time.deltaTime / changeTime;
             currentColor.a = Mathf.Lerp(0.0f, targetAlpah, time);
+            changeTarget.color = currentColor;
+            yield return null;
+        }
+    }
+
+    public IEnumerator ChangeAlpha(SpriteRenderer changeTarget, float targetAlpah, float changeTime)
+    {
+        Color currentColor = changeTarget.color;
+        float startAlpha = currentColor.a;
+        float time = 0.0f;
+
+        // 현재 알파가 목표 알파보다 작은 동안 점진적으로 알파 값 변경
+        while (time < 1.0f)
+        {
+            time += Time.deltaTime / changeTime;
+            currentColor.a = Mathf.Lerp(startAlpha, targetAlpah, time);
             changeTarget.color = currentColor;
             yield return null;
         }
