@@ -44,7 +44,7 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
     private Vector2 newPosition;
     private SpriteRenderer spriteRenderer;
     private bool ableBlink;
-    private static float BLINK_TIME = 0.1f;
+    private float blinkTime = 0.1f;
 
     [SerializeField] private CinemachineCamera cam;
     CinemachineConfiner2D confiner;
@@ -238,9 +238,9 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
             return;
         }
         if (ableBlink == true)
-            {
-                StartCoroutine(BlinkOnDamage());
-            }
+        {
+            StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, ableBlink, blinkTime));
+        }
         currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
         UtilityManager.utility.PlaySFX(getHitSFX);
 
@@ -248,42 +248,6 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
         {
             StartCoroutine(EnemyDie());
         }
-    }
-
-    
-    // 데미지 입으면 깜빡거리기 코루틴
-    IEnumerator BlinkOnDamage()
-    {
-        ableBlink = false;
-        bool isBlink = false;
-        Color color = spriteRenderer.color;
-
-        float maxBlinkTime = 1.0f; // 깜빡이는 총 시간
-        float currentBlinkTIme = 0.0f;
-
-        // 데미지를 입으면 깜빡임
-        while(currentBlinkTIme < maxBlinkTime)
-        {
-            // 이전 상태 깜빡이면 되돌리기, 일반이면 깜빡임 반복시켜서 효과 적용
-            if(isBlink == true)
-            {
-                color.a = 0.0f;
-                spriteRenderer.color = color;
-                isBlink = false;
-            }
-            else if(isBlink == false)
-            {
-                color.a = 1.0f;
-                spriteRenderer.color = color;
-                isBlink = true;
-            }
-            currentBlinkTIme += BLINK_TIME;
-            yield return new WaitForSeconds(BLINK_TIME);
-        }
-        // 기본 상태로 초기화
-        ableBlink = true;
-        color.a = 1.0f;
-        spriteRenderer.color = color;
     }
 
     private IEnumerator EnemyDie()
