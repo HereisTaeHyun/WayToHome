@@ -18,7 +18,10 @@ public class MamaMush : BossCtrl
     // 마법 개별 컴포넌트
     private BodyImpact bodyImpactComp;
 
-    private float jumpSpeed = 5.0f;
+    // 마법 사운드
+    [SerializeField] private AudioClip bodyimpactSFX;
+
+    private float jumpSpeed = 10.0f;
     private bool isGround;
     private bool isMove;
     private Vector2 newVelocity;
@@ -55,7 +58,7 @@ public class MamaMush : BossCtrl
         {
             return;
         }
-
+ 
         if (canMove)
         {
             FollowingTarget(moveSpeed);
@@ -156,13 +159,20 @@ public class MamaMush : BossCtrl
 
 
     // BodyImpact 마법을 스폰 위치에 따라 생성 및 초기화
-    
     private IEnumerator UseBodyImpact()
     {
         isGround = false;
         Jump();
+
         yield return new WaitUntil(() => isGround);
         SpawnBodyImpact();
+
+        canMove = false;
+        rb2D.linearVelocity = Vector2.zero;
+        isMove = false;
+        anim.SetBool(moveOnHash, isMove);
+        yield return new WaitForSeconds(1.0f);
+        canMove = true;
     }
 
     private void SpawnBodyImpact()
@@ -173,6 +183,7 @@ public class MamaMush : BossCtrl
         bodyImpactComp = bodyImpact.GetComponent<BodyImpact>();
         bodyImpact.transform.position = bodyImpactSpawnPos.transform.position;
         bodyImpact.transform.rotation = bodyImpactSpawnPos.transform.rotation;
+        UtilityManager.utility.PlaySFX(bodyimpactSFX);
 
         bodyImpactComp.SetPool(bodyImpactPool);
     }

@@ -11652,7 +11652,7 @@ Transform:
   m_GameObject: {fileID: 1572177108}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.172, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31026,6 +31026,7 @@ MonoBehaviour:
   magicList:
   - {fileID: 179085287420400081, guid: f031e96227ea94c49b39c6403bb2fafd, type: 3}
   bodyImpactSpawnPos: {fileID: 1572177109}
+  bodyimpactSFX: {fileID: 8300000, guid: c91fcf414acc0344cb03b13996f1bf3b, type: 3}
 --- !u!61 &7769654071363705948
 BoxCollider2D:
   m_ObjectHideFlags: 0
