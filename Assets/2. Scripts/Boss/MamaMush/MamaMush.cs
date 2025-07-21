@@ -12,18 +12,7 @@ public class MamaMush : BossCtrl
 
     protected override void Init()
     {
-        enemyID = Animator.StringToHash($"{SceneManager.GetActiveScene().name}_{gameObject.name}");
-        rb2D = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        isDie = false;
-        canMove = true;
-        ableBlink = true;
-        isMove = false;
-
-        currentHP = maxHP;
-        detectLayer = LayerMask.GetMask("Player", "Ground", "Wall");
+        base.Init();
     }
 
     void Start()

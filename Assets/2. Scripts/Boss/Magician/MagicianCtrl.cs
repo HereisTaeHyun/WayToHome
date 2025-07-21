@@ -5,13 +5,12 @@ using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
 
-public class MagicianCtrl : EnemyCtrl
+public class MagicianCtrl : BossCtrl
 {
     // public 변수
     // private 변수
-    private SpriteRenderer spriteRenderer;
-    private bool ableBlink;
-    private float blinkTime = 0.1f;
+    [SerializeField] protected float stunTime;
+    [SerializeField] protected float scanningRadius = 10.0f;
     private float distance;
     [SerializeField] private Transform warpPointSet;
     private List<Transform> warpPoints = new List<Transform>();
@@ -31,18 +30,16 @@ public class MagicianCtrl : EnemyCtrl
     [SerializeField] private GameObject fireBall;
     private readonly int dieHash = Animator.StringToHash("Die");
 
-    private bool canAttack;
-    private float coolTime = 2.0f;
-
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
     private readonly int stunHash = Animator.StringToHash("Stun");
-    void Start()
+
+    [SerializeField] protected float damage;
+    public float readDamage {get {return damage;}}
+
+    protected override void Init()
     {
-        Init();
-        enemyID = Animator.StringToHash($"{SceneManager.GetActiveScene().name}_{gameObject.name}");
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
+        base.Init();
+        
         foreach (Transform warpPoint in warpPointSet)
         {
             warpPoints.Add(warpPoint);
@@ -60,11 +57,17 @@ public class MagicianCtrl : EnemyCtrl
 
         canAttack = true;
         ableBlink = true;
+        coolTime = 2.0f;
         
         if (DataManager.dataManager.playerData.diedEnemy.Contains(enemyID))
         {
             gameObject.SetActive(false);
         }
+    }
+
+    void Start()
+    {
+        Init();
     }
 
     void Update()

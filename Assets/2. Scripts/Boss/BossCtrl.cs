@@ -44,7 +44,17 @@ public class BossCtrl : MonoBehaviour, IDamageable, IDie
 
     protected virtual void Init()
     {
-        
+        enemyID = Animator.StringToHash($"{SceneManager.GetActiveScene().name}_{gameObject.name}");
+        rb2D = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        isDie = false;
+        canMove = true;
+        ableBlink = true;
+
+        currentHP = maxHP;
+        detectLayer = LayerMask.GetMask("Player", "Ground", "Wall");
     }
 
     public virtual void ChangeHP(float value)

@@ -30987,16 +30987,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2993418cece4e1f4da13cfef2aa67c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stunTime: 0
   maxHP: 500
   moveSpeed: 3
-  dropItem: []
-  itemWeight: []
   enemyGetHitSFX: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
   enemyDieSFX: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
-  scanningRadius: 0
-  damage: 0
-  attackRange: 0
 --- !u!61 &7769654071363705948
 BoxCollider2D:
   m_ObjectHideFlags: 0
