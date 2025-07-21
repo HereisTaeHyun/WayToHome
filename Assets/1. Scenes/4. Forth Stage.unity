@@ -46667,9 +46667,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1887225892}
     - target: {fileID: 7278813343581756725, guid: 08916b133ac81b543b3a12b19a3f234f, type: 3}
+      propertyPath: enemyDieSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 566d2ea6240b489479a6e9fd608c2621, type: 3}
+    - target: {fileID: 7278813343581756725, guid: 08916b133ac81b543b3a12b19a3f234f, type: 3}
       propertyPath: portalOnScene
       value: 
       objectReference: {fileID: 238991649}
+    - target: {fileID: 7278813343581756725, guid: 08916b133ac81b543b3a12b19a3f234f, type: 3}
+      propertyPath: enemyGetHitSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
     - target: {fileID: 7278813343581756725, guid: 08916b133ac81b543b3a12b19a3f234f, type: 3}
       propertyPath: standingPosSet
       value: 

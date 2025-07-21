@@ -517,6 +517,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40476a351aafc0b4ea19a911039f419d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 1000
+  moveSpeed: 0
+  enemyGetHitSFX: {fileID: 0}
+  enemyDieSFX: {fileID: 0}
   portalOnScene: {fileID: 0}
   standingPosSet: {fileID: 0}
   cam: {fileID: 0}

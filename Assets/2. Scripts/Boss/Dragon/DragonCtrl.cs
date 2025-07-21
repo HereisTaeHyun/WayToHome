@@ -5,9 +5,8 @@ using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 using System;
 using Unity.Cinemachine;
-using UnityEngine.SceneManagement;
 
-public class DragonCtrl : MonoBehaviour, IDamageable, IDie
+public class DragonCtrl : BossCtrl
 {
     // public 변수
     public enum DragonState
@@ -20,12 +19,6 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
     [NonSerialized] public DragonState dragonState;
 
     // private 변수
-    private int enemyID;
-    private float maxHP = 500.0f;
-    private float currentHP;
-    public bool isDie { get; private set; }
-    private Rigidbody2D rb2D;
-    private Animator anim;
 
     // 죽으면 Set할 포탈, 씬에 있는 active false해 둔 포탈임, 프레팝 아님
     [SerializeField] private GameObject portalOnScene;
@@ -42,18 +35,12 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
     private float flyUpDownSpeed = 5.0f;
     private float flyingSpeed = 10.0f;
     private Vector2 newPosition;
-    private SpriteRenderer spriteRenderer;
-    private bool ableBlink;
-    private float blinkTime = 0.1f;
 
     [SerializeField] private CinemachineCamera cam;
     CinemachineConfiner2D confiner;
 
     // 공격 조건 변수
     private bool isFly;
-    private bool canAttack;
-    private LayerMask detectLayer;
-    private RaycastHit2D[] rayHits = new RaycastHit2D[10];
 
     // 마법 사용시마다 증가, magicCount == 5이면 standingPos 중 하나로 이동
     private int magicCount;
@@ -65,7 +52,6 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
     private int magicCountInPool = 5;
     private static float MAGIC_WAIT_TIME = 0.5f; // 마법 사용과 애니메이션간 타이밍 맞추기에 사용
-    private float coolTime = 3.0f;
 
     // 위치 저장 셋
     [SerializeField] private List<Transform> fireBallSpawnPoses;
@@ -92,8 +78,6 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
      private Meteor meteorComp;
 
     // 오디오 관련
-    [SerializeField] private AudioClip getHitSFX;
-    [SerializeField] private AudioClip dieSFX;
     [SerializeField] private AudioClip UseFireMagic;
     [SerializeField] private AudioClip UseMeteorMagic;
     [SerializeField] private AudioClip ShockWaveSFX;
@@ -107,14 +91,10 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
     private readonly int flyStateHash = Animator.StringToHash("FlyState");
     private readonly int dieHash = Animator.StringToHash("Die");
 
-
-    void Start()
+    protected override void Init()
     {
-        enemyID = Animator.StringToHash($"{SceneManager.GetActiveScene().name}_{gameObject.name}");
-
-        anim = GetComponent<Animator>();
-        rb2D = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        base.Init();
+    
         portalSpawnPoint = transform.Find("PortalSpawnPoint").gameObject;
         dragonState = DragonState.Idle;
 
@@ -147,7 +127,13 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
         canAttack = true;
         ableBlink = true;
         magicCount = 0;
+        coolTime = 3.0f;
         detectLayer = LayerMask.GetMask("Player", "Ground", "Wall");
+    }
+
+    void Start()
+    {
+        Init();
     }
 
     void Update()
@@ -207,31 +193,8 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
         }
     }
 
-    // ray를 쏘아 첫 대상이 플레이어인지 감지 = 시야 개념
-    private bool SeeingPlayer()
-    {
-        Vector2 direction = PlayerCtrl.player.transform.position - transform.position;
-        Vector2 directionNorm = UtilityManager.utility.AllDirSet(direction);
-        float distance = Vector2.Distance(transform.position, PlayerCtrl.player.transform.position);
-        int count = Physics2D.RaycastNonAlloc(transform.position, directionNorm, rayHits, distance, detectLayer);
-
-        Debug.DrawRay(transform.position, directionNorm * distance, Color.red, 0.1f); 
-
-        // ray에 닿은 존재가 있으며 첫 충돌이 playerLayer라면 true
-        if (count > 0)
-        {
-            var hit = rayHits[0];
-
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
 #region HP, Die
-    public virtual void ChangeHP(float value)
+    public override void ChangeHP(float value)
     {
         if (isFly == true)
         {
@@ -242,17 +205,22 @@ public class DragonCtrl : MonoBehaviour, IDamageable, IDie
             StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, ableBlink, blinkTime));
         }
         currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
-        UtilityManager.utility.PlaySFX(getHitSFX);
+        UtilityManager.utility.PlaySFX(enemyGetHitSFX);
 
         if (currentHP <= 0)
         {
-            StartCoroutine(EnemyDie());
+            EnemyDie();
         }
     }
 
-    private IEnumerator EnemyDie()
+    protected override void EnemyDie()
     {
-        UtilityManager.utility.PlaySFX(dieSFX);
+        StartCoroutine(DieStart());
+    }
+
+    private IEnumerator DieStart()
+    {
+        UtilityManager.utility.PlaySFX(enemyDieSFX);
         isDie = true;
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.simulated = false;
