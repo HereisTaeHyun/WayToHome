@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 937554057940481880}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MagicSpawnPosSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9153165407955765044}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MagicSpawnPos (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 536483487818766698}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MagicSpawnPos (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 7522304831393510261}
   - component: {fileID: 4750250472026167828}
   - component: {fileID: 7812688569377833671}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MeleeAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 2995235987185132521}
   - component: {fileID: 5836171181390998666}
   - component: {fileID: 1595233922274359546}
-  m_Layer: 9
+  m_Layer: 14
   m_Name: Magician
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -391,7 +391,7 @@ MonoBehaviour:
   warpSFX: {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
   stunSFX: {fileID: 8300000, guid: 5c7b6d4002009e842bd2621585546d19, type: 3}
   fireBall: {fileID: 7442625623315705553, guid: 455d84a056f7a404dbf2019e3d50d4c9, type: 3}
-  damage: -1
+  damage: -10
 --- !u!114 &1595233922274359546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,7 +415,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7154000819419583528}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MagicSpawnPos (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,7 +446,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2346574280781383793}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MagicSpawnPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
