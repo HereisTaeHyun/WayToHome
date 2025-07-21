@@ -1,37 +1,47 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class MamaMush : EnemyCtrl
+public class MamaMush : BossCtrl
 {
-    private SpriteRenderer spriteRenderer;
-    private bool ableBlink;
-    private float blinkTime = 0.1f;
     private bool isMove;
     private Vector2 newVelocity;
-    [SerializeField] float attackRange;
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
     private readonly int moveOnHash = Animator.StringToHash("OnMove");
     private readonly int dieHash = Animator.StringToHash("Die");
 
+    protected override void Init()
+    {
+        enemyID = Animator.StringToHash($"{SceneManager.GetActiveScene().name}_{gameObject.name}");
+        rb2D = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        isDie = false;
+        canMove = true;
+        ableBlink = true;
+        isMove = false;
+
+        currentHP = maxHP;
+        detectLayer = LayerMask.GetMask("Player", "Ground", "Wall");
+    }
+
     void Start()
     {
         Init();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        ableBlink = true;
-        isMove = false;
     }
 
     void FixedUpdate()
     {
         if (canMove)
         {
-            FollowingTarget(moveSpeed, scanningRadius);
+            FollowingTarget(moveSpeed);
         }
     }
 
     // 이동 및 점프 처리
     // enemyMoveDir이 음수면 왼쪽 양수면 오른쪽
-    protected override void FollowingTarget(float moveSpeed, float scanningRadius)
+    private void FollowingTarget(float moveSpeed)
     {
         // 타겟이 존재하고 살아 있을 경우 움직임
         if(GameManager.instance.readIsGameOver == false && isDie == false)
@@ -61,15 +71,15 @@ public class MamaMush : EnemyCtrl
     }
 
     // HP 변경 처리
-    // HP 변경 처리
     public override void ChangeHP(float value)
     {
-        if(ableBlink == true)
-        {
-            StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, ableBlink, blinkTime));
-        }
         currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
+
+        // 타격 벡터 계산 및 sfx, anim 재생
+        Vector2 hitVector = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
         UtilityManager.utility.PlaySFX(enemyGetHitSFX);
+        anim.SetTrigger(hitTrigger);
+        anim.SetFloat(hitHash, hitVector.x);
 
         // 체력 0 이하면 사망처리
         if (currentHP <= 0)
