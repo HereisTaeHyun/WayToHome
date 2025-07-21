@@ -36,7 +36,7 @@ public class Meteor : MagicBase
         }
     }
 
-    // Player, Wall, Ground 등에 닿으면 풀 리턴
+    // Wall, Ground 등에 닿으면 풀 리턴
     protected override void OnTriggerStay2D(Collider2D other)
     {    
         if(GameManager.instance.readIsGameOver == false)

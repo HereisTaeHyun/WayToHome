@@ -1,9 +1,25 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
 
 public class MamaMush : BossCtrl
 {
+    private ObjectPool<GameObject> bodyImpactPool;
+
+    private List<MagicType> usingMagic;
+    [SerializeField] private List<GameObject> magicList = new List<GameObject>();
+    private int magicCountInPool = 5;
+
+    // 위치 저장 셋
+    [SerializeField] private Transform bodyImpactSpawnPos;
+
+    // 마법 개별 컴포넌트
+    private BodyImpact bodyImpactComp;
+
+    private float jumpSpeed = 5.0f;
+    private bool isGround;
     private bool isMove;
     private Vector2 newVelocity;
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
@@ -18,13 +34,47 @@ public class MamaMush : BossCtrl
     void Start()
     {
         Init();
+
+        usingMagic = new List<MagicType>()
+        {
+            {MagicType.BodyImpact},
+        };
+
+        // 마법 풀 생성
+        // 인덱스 번호는 위 마법 위치 딕셔너리와 같은 순서
+        UtilityManager.utility.CreatePool(ref bodyImpactPool, magicList[0], magicCountInPool, magicCountInPool);
+
+        isGround = true;
+        coolTime = 10.0f;
     }
 
-    void FixedUpdate()
+    void Update()
     {
+        // 보스 또는 플레이어가 사망이면 return
+        if (GameManager.instance.readIsGameOver == true || isDie == true)
+        {
+            return;
+        }
+
         if (canMove)
         {
             FollowingTarget(moveSpeed);
+        }
+
+        if (canAttack == true && SeeingPlayer())
+        {
+            // 마법을 선택 후 스위칭하여 마법 함수 실행
+            int magicIdx = Random.Range(0, usingMagic.Count);
+            MagicType currentMagic = usingMagic[magicIdx];
+            switch (currentMagic)
+            {
+                case MagicType.BodyImpact:
+                    StartCoroutine(UseBodyImpact());
+                    break;
+            }
+
+            // 공격 후 다음 공격까지 휴식
+            StartCoroutine(CoolTimeCheck());
         }
     }
 
@@ -33,10 +83,10 @@ public class MamaMush : BossCtrl
     private void FollowingTarget(float moveSpeed)
     {
         // 타겟이 존재하고 살아 있을 경우 움직임
-        if(GameManager.instance.readIsGameOver == false && isDie == false)
+        if (GameManager.instance.readIsGameOver == false && isDie == false)
         {
             // 플레이어가 존 내부면 moveSpeed만큼씩 이동 시작
-            if(SeeingPlayer())
+            if (SeeingPlayer())
             {
                 // 움직이는 방향 벡터 받아 오기
                 Vector2 enemyMoveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
@@ -94,4 +144,59 @@ public class MamaMush : BossCtrl
         yield return new WaitForSeconds(2.0f);
         gameObject.SetActive(false);
     }
+
+    #region 패턴 관련
+    // 마법 공격 후 일정 시간 동안 쿨타임 처리
+    private IEnumerator CoolTimeCheck()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(coolTime);
+        canAttack = true;
+    }
+
+
+    // BodyImpact 마법을 스폰 위치에 따라 생성 및 초기화
+    
+    private IEnumerator UseBodyImpact()
+    {
+        isGround = false;
+        Jump();
+        yield return new WaitUntil(() => isGround);
+        SpawnBodyImpact();
+    }
+
+    private void SpawnBodyImpact()
+    {
+        GameObject bodyImpact = UtilityManager.utility.GetFromPool(bodyImpactPool, magicCountInPool);
+        if (bodyImpact == null) return;
+
+        bodyImpactComp = bodyImpact.GetComponent<BodyImpact>();
+        bodyImpact.transform.position = bodyImpactSpawnPos.transform.position;
+        bodyImpact.transform.rotation = bodyImpactSpawnPos.transform.rotation;
+
+        bodyImpactComp.SetPool(bodyImpactPool);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Ground"))
+        {
+            isGround = true;
+        }
+    }
+
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Ground"))
+        {
+            isGround = false;
+        }
+    }
+
+    private void Jump()
+    {
+        rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, jumpSpeed);
+    }
+    #endregion
 }

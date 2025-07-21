@@ -7,7 +7,8 @@ public enum MagicType
     FireCannon,
     FireMissile,
     Meteor,
-    ShockWave
+    ShockWave,
+    BodyImpact,
 }
 
 public class MagicBase : MonoBehaviour

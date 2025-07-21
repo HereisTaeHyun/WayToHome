@@ -138,7 +138,7 @@ public class DragonCtrl : BossCtrl
 
     void Update()
     {
-        if(isDie == true)
+        if(GameManager.instance.readIsGameOver == true || isDie == true)
         {
             return;
         }
@@ -331,7 +331,7 @@ public class DragonCtrl : BossCtrl
 
 #endregion
 
-#region magic
+#region 패턴
     // 마법 공격 후 일정 시간 동안 쿨타임 처리
     private IEnumerator CoolTimeCheck()
     {
