@@ -9,6 +9,7 @@ public enum MagicType
     Meteor,
     ShockWave,
     BodyImpact,
+    Poison,
 }
 
 public class MagicBase : MonoBehaviour

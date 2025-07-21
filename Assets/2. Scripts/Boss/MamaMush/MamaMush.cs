@@ -7,16 +7,20 @@ using UnityEngine.SceneManagement;
 public class MamaMush : BossCtrl
 {
     private ObjectPool<GameObject> bodyImpactPool;
+    private ObjectPool<GameObject> poisonPool;
 
     private List<MagicType> usingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
     private int magicCountInPool = 5;
+    
 
     // 위치 저장 셋
     [SerializeField] private Transform bodyImpactSpawnPos;
+    [SerializeField] private Transform poisonSpawnPos;
 
     // 마법 개별 컴포넌트
     private BodyImpact bodyImpactComp;
+    private Poison poisonComp;
 
     // 마법 사운드
     [SerializeField] private AudioClip bodyimpactSFX;
@@ -25,6 +29,7 @@ public class MamaMush : BossCtrl
     private bool isGround;
     private bool isMove;
     private Vector2 newVelocity;
+    private Vector2 enemyMoveDir;
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
     private readonly int moveOnHash = Animator.StringToHash("OnMove");
     private readonly int dieHash = Animator.StringToHash("Die");
@@ -41,11 +46,13 @@ public class MamaMush : BossCtrl
         usingMagic = new List<MagicType>()
         {
             {MagicType.BodyImpact},
+            {MagicType.Poison},
         };
 
         // 마법 풀 생성
         // 인덱스 번호는 위 마법 위치 딕셔너리와 같은 순서
         UtilityManager.utility.CreatePool(ref bodyImpactPool, magicList[0], magicCountInPool, magicCountInPool);
+        UtilityManager.utility.CreatePool(ref poisonPool, magicList[1], magicCountInPool, magicCountInPool);
 
         isGround = true;
         coolTime = 10.0f;
@@ -58,7 +65,7 @@ public class MamaMush : BossCtrl
         {
             return;
         }
- 
+
         if (canMove)
         {
             FollowingTarget(moveSpeed);
@@ -69,10 +76,14 @@ public class MamaMush : BossCtrl
             // 마법을 선택 후 스위칭하여 마법 함수 실행
             int magicIdx = Random.Range(0, usingMagic.Count);
             MagicType currentMagic = usingMagic[magicIdx];
+
             switch (currentMagic)
             {
                 case MagicType.BodyImpact:
                     StartCoroutine(UseBodyImpact());
+                    break;
+                case MagicType.Poison:
+                    StartCoroutine(UsePosion());
                     break;
             }
 
@@ -92,7 +103,7 @@ public class MamaMush : BossCtrl
             if (SeeingPlayer())
             {
                 // 움직이는 방향 벡터 받아 오기
-                Vector2 enemyMoveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
+                enemyMoveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
 
                 // 움직임 적용
                 isMove = true;
@@ -209,5 +220,22 @@ public class MamaMush : BossCtrl
     {
         rb2D.linearVelocity = new Vector2(rb2D.linearVelocity.x, jumpSpeed);
     }
+
+    // Poison 마법을 스폰 위치에 따라 생성 및 초기화
+    private IEnumerator UsePosion()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GameObject poison = UtilityManager.utility.GetFromPool(poisonPool, magicCountInPool);
+
+        if(poison != null)
+        {
+            poisonComp = poison.GetComponent<Poison>();
+            poison.transform.position = poisonSpawnPos.transform.position;
+            poison.transform.rotation = poisonSpawnPos.transform.rotation;
+
+            poisonComp.SetPool(poisonPool);
+        }
+    }
+    
     #endregion
 }
