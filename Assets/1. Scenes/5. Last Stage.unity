@@ -3657,7 +3657,7 @@ Transform:
   m_GameObject: {fileID: 1996653295}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.421867, y: 0.0000042915344, z: 0}
+  m_LocalPosition: {x: -15.288876, y: 0.0000042915344, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3675,8 +3675,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e2c8fd0b5de274ab783abad94327f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageBGM: {fileID: 8300000, guid: af0bba35dc59c4df0861b6fd27ccee83, type: 3}
-  dieBGM: {fileID: 8300000, guid: 54f73ac6cb99a49a7b2f84d79b54ca64, type: 3}
+  stageBGM: {fileID: 8300000, guid: 919ab21e0f92a4aa492915577aa9328d, type: 3}
+  dieBGM: {fileID: 8300000, guid: 86b2f44255caa4b32a2f5de24966ae9d, type: 3}
 --- !u!82 &1996653298
 AudioSource:
   m_ObjectHideFlags: 0
