@@ -55,7 +55,7 @@ public class MamaMush : BossCtrl
         UtilityManager.utility.CreatePool(ref poisonPool, magicList[1], magicCountInPool, magicCountInPool);
 
         isGround = true;
-        coolTime = 10.0f;
+        coolTime = 5.0f;
     }
 
     void Update()
@@ -83,7 +83,7 @@ public class MamaMush : BossCtrl
                     StartCoroutine(UseBodyImpact());
                     break;
                 case MagicType.Poison:
-                    StartCoroutine(UsePosion());
+                    StartCoroutine(UsePoison());
                     break;
             }
 
@@ -225,18 +225,24 @@ public class MamaMush : BossCtrl
     }
 
     // Poison 마법을 스폰 위치에 따라 생성 및 초기화
-    private IEnumerator UsePosion()
+    private IEnumerator UsePoison(int repeat = 3, float interval = 0.2f)
     {
-        yield return new WaitForSeconds(0.5f);
-        GameObject poison = UtilityManager.utility.GetFromPool(poisonPool, magicCountInPool);
+        WaitForSeconds wait = new WaitForSeconds(interval);
 
-        if(poison != null)
+        for (int i = 0; i < repeat; i++)
         {
-            poisonComp = poison.GetComponent<Poison>();
-            poison.transform.position = poisonSpawnPos.transform.position;
-            poison.transform.rotation = poisonSpawnPos.transform.rotation;
-
-            poisonComp.SetPool(poisonPool);
+            GameObject poison = UtilityManager.utility.GetFromPool(poisonPool, magicCountInPool);
+            if (poison != null)
+            {
+                Poison poisonComp = poison.GetComponent<Poison>();
+                poison.transform.position  = poisonSpawnPos.transform.position;
+                poison.transform.rotation = poisonSpawnPos.transform.rotation;
+                poisonComp.SetPool(poisonPool);
+            }
+            if (i < repeat - 1)
+            {
+                yield return wait;
+            }    
         }
     }
     

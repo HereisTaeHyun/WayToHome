@@ -53,6 +53,9 @@ public class DragonCtrl : BossCtrl
     private int magicCountInPool = 5;
     private static float MAGIC_WAIT_TIME = 0.5f; // 마법 사용과 애니메이션간 타이밍 맞추기에 사용
 
+    private WaitForSeconds waitMagic;
+    private readonly WaitForSeconds waitShockWave = new WaitForSeconds(1.7f);
+
     // 위치 저장 셋
     [SerializeField] private List<Transform> fireBallSpawnPoses;
     [SerializeField] private List<Transform> fireMissileSpawnPoses;
@@ -128,6 +131,7 @@ public class DragonCtrl : BossCtrl
         ableBlink = true;
         magicCount = 0;
         coolTime = 3.0f;
+        waitMagic = new WaitForSeconds(MAGIC_WAIT_TIME);
         detectLayer = LayerMask.GetMask("Player", "Ground", "Wall");
     }
 
@@ -347,7 +351,7 @@ public class DragonCtrl : BossCtrl
     // FireBall 마법을 스폰 위치에 따라 생성 및 초기화
     private IEnumerator UseFireBall()
     {
-        yield return new WaitForSeconds(MAGIC_WAIT_TIME);
+        yield return waitMagic;
         UtilityManager.utility.PlaySFX(UseFireMagic);
         foreach(Transform fireBallSpawnPos in fireBallSpawnPoses)
         {
@@ -366,7 +370,7 @@ public class DragonCtrl : BossCtrl
     // FireMissile 마법을 각 지정된 위치에 생성 및 초기화
     private IEnumerator UseFireMissile()
     {
-        yield return new WaitForSeconds(MAGIC_WAIT_TIME);
+        yield return waitMagic;
         UtilityManager.utility.PlaySFX(UseFireMagic);
         foreach(Transform fireMissileSpawnPos in fireMissileSpawnPoses)
         {
@@ -385,7 +389,7 @@ public class DragonCtrl : BossCtrl
     // FireCannon 마법을 플레이어 방향에 따라 좌/우 위치에 생성
     private IEnumerator UseFireCannon()
     {
-        yield return new WaitForSeconds(MAGIC_WAIT_TIME);
+        yield return waitMagic;
         UtilityManager.utility.PlaySFX(UseFireMagic);
         GameObject fireCannon = UtilityManager.utility.GetFromPool(fireCannonPool, magicCountInPool);
 
@@ -411,7 +415,7 @@ public class DragonCtrl : BossCtrl
     // ShockWave 마법을 플레이어 방향에 따라 좌/우 위치에 생성
     private IEnumerator UseShockWave()
     {
-        yield return new WaitForSeconds(1.7f);
+        yield return waitShockWave;
         UtilityManager.utility.PlaySFX(ShockWaveSFX);
         GameObject shockWave = UtilityManager.utility.GetFromPool(shockWavePool, magicCountInPool);
 
@@ -437,7 +441,7 @@ public class DragonCtrl : BossCtrl
     // Meteor 마법을 플레이어 머리 위에 생성
     private IEnumerator UseMeteor()
     {
-        yield return new WaitForSeconds(MAGIC_WAIT_TIME);
+        yield return waitMagic;
         UtilityManager.utility.PlaySFX(UseMeteorMagic);
         GameObject meteor = UtilityManager.utility.GetFromPool(meteorPool, magicCountInPool);
 
