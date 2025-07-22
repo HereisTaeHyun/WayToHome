@@ -20,6 +20,8 @@ public class MamaMush : BossCtrl
     // 위치 저장 셋
     [SerializeField] private Transform bodyImpactSpawnPos;
     [SerializeField] private Transform poisonSpawnPos;
+    [SerializeField] private GameObject poisonRainSpawnPos;
+    private BoxCollider2D poisonRainSpawnBound;
 
     // 마법 개별 컴포넌트
     private BodyImpact bodyImpactComp;
@@ -62,6 +64,7 @@ public class MamaMush : BossCtrl
         isGround = true;
         ableBlink = true;
         coolTime = 5.0f;
+        poisonRainSpawnBound = poisonRainSpawnPos.GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -80,21 +83,25 @@ public class MamaMush : BossCtrl
         if (canAttack == true && SeeingPlayer())
         {
             // 마법을 선택 후 스위칭하여 마법 함수 실행
-            int magicIdx = Random.Range(0, usingMagic.Count);
-            MagicType currentMagic = usingMagic[magicIdx];
+            // int magicIdx = Random.Range(0, usingMagic.Count);
+            // MagicType currentMagic = usingMagic[magicIdx];
 
-            switch (currentMagic)
-            {
-                case MagicType.BodyImpact:
-                    StartCoroutine(UseBodyImpact());
-                    break;
-                case MagicType.Poison:
-                    StartCoroutine(UsePoison());
-                    break;
-                case MagicType.PoisonRain:
-                    StartCoroutine(UsePoisonRain());
-                    break;
-            }
+            // switch (currentMagic)
+            // {
+            //     case MagicType.BodyImpact:
+            //         StartCoroutine(UseBodyImpact());
+            //         break;
+            //     case MagicType.Poison:
+            //         StartCoroutine(UsePoison());
+            //         break;
+            //     case MagicType.PoisonRain:
+            //         StartCoroutine(UsePoisonRain());
+            //         break;
+            // }
+
+            StartCoroutine(UsePoisonRain());
+            Vector2 setRandonPosTest = SetRandomPos();
+            Debug.Log($"{setRandonPosTest.x}, {setRandonPosTest.y}");
 
             // 공격 후 다음 공격까지 휴식
             StartCoroutine(CoolTimeCheck());
@@ -278,6 +285,28 @@ public class MamaMush : BossCtrl
     }
 
     // PoisonRain 마법을 스폰 위치에 따라 생성 및 초기화
+    // private IEnumerator UsePoisonRain()
+    // {
+    //     yield return new WaitForSeconds(0.1f);
+
+    //     GameObject poisonRain = UtilityManager.utility.GetFromPool(poisonRainPool, magicCountInPool);
+
+    //     if(poisonRain != null)
+    //     {
+    //         poisonRainComp = poisonRain.GetComponent<PoisonRain>();
+
+    //         Vector3 spawnPos = new Vector3
+    //         (PlayerCtrl.player.transform.position.x, 
+    //         PlayerCtrl.player.transform.position.y + 10f, 
+    //         PlayerCtrl.player.transform.position.z);
+
+    //         poisonRain.transform.position = spawnPos;
+
+    //         poisonRainComp.SetPool(poisonRainPool);
+    //     }
+    // }
+
+    // PoisonRain 마법을 스폰 위치에 따라 생성 및 초기화
     private IEnumerator UsePoisonRain()
     {
         yield return new WaitForSeconds(0.1f);
@@ -287,16 +316,20 @@ public class MamaMush : BossCtrl
         if(poisonRain != null)
         {
             poisonRainComp = poisonRain.GetComponent<PoisonRain>();
-
-            Vector3 spawnPos = new Vector3
-            (PlayerCtrl.player.transform.position.x, 
-            PlayerCtrl.player.transform.position.y + 10f, 
-            PlayerCtrl.player.transform.position.z);
-
-            poisonRain.transform.position = spawnPos;
-
+            poisonRain.transform.position = SetRandomPos();
             poisonRainComp.SetPool(poisonRainPool);
         }
+    }
+
+    // PoisonRain 마법의 위치를 무작위로 생성
+    private Vector2 SetRandomPos()
+    {
+        Bounds spawnBound = poisonRainSpawnBound.bounds;
+
+        float x = Random.Range(spawnBound.min.x, spawnBound.max.x);
+        float y = spawnBound.center.y;
+
+        return new Vector2(x, y);
     }
 
     #endregion
