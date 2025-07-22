@@ -15,6 +15,7 @@ public class MamaMush : BossCtrl
     private List<MagicType> usingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
     private int magicCountInPool = 20;
+    private float poisonRainSpawnDuration = 5.0f;
 
 
     // 위치 저장 셋
@@ -101,8 +102,6 @@ public class MamaMush : BossCtrl
             // }
 
             StartCoroutine(UsePoisonRain());
-            Vector2 setRandonPosTest = SetRandomPos();
-            Debug.Log($"{setRandonPosTest.x}, {setRandonPosTest.y}");
 
             // 공격 후 다음 공격까지 휴식
             StartCoroutine(CoolTimeCheck());
@@ -312,14 +311,21 @@ public class MamaMush : BossCtrl
     {
         yield return new WaitForSeconds(0.1f);
 
-        GameObject poisonRain = UtilityManager.utility.GetFromPool(poisonRainPool, magicCountInPool);
+        float time = 0.0f;
 
-        if(poisonRain != null)
+        while (time < poisonRainSpawnDuration)
         {
-            poisonRainComp = poisonRain.GetComponent<PoisonRain>();
-            poisonRain.transform.position = SetRandomPos();
-            poisonRainComp.SetPool(poisonRainPool);
+            time += Time.deltaTime;
+
+            GameObject poisonRain = UtilityManager.utility.GetFromPool(poisonRainPool, magicCountInPool);
+            if (poisonRain != null)
+            {
+                poisonRainComp = poisonRain.GetComponent<PoisonRain>();
+                poisonRain.transform.position = SetRandomPos();
+                poisonRainComp.SetPool(poisonRainPool);
+            }
         }
+        
     }
 
     // PoisonRain 마법의 위치를 무작위로 생성
