@@ -85,23 +85,21 @@ public class MamaMush : BossCtrl
         if (canAttack == true && SeeingPlayer())
         {
             // 마법을 선택 후 스위칭하여 마법 함수 실행
-            // int magicIdx = Random.Range(0, usingMagic.Count);
-            // MagicType currentMagic = usingMagic[magicIdx];
+            int magicIdx = Random.Range(0, usingMagic.Count);
+            MagicType currentMagic = usingMagic[magicIdx];
 
-            // switch (currentMagic)
-            // {
-            //     case MagicType.BodyImpact:
-            //         StartCoroutine(UseBodyImpact());
-            //         break;
-            //     case MagicType.Poison:
-            //         StartCoroutine(UsePoison());
-            //         break;
-            //     case MagicType.PoisonRain:
-            //         StartCoroutine(UsePoisonRain());
-            //         break;
-            // }
-
-            StartCoroutine(UsePoisonRain());
+            switch (currentMagic)
+            {
+                case MagicType.BodyImpact:
+                    StartCoroutine(UseBodyImpact());
+                    break;
+                case MagicType.Poison:
+                    StartCoroutine(UsePoison());
+                    break;
+                case MagicType.PoisonRain:
+                    StartCoroutine(UsePoisonRain());
+                    break;
+            }
 
             // 공격 후 다음 공격까지 휴식
             StartCoroutine(CoolTimeCheck());
@@ -283,28 +281,6 @@ public class MamaMush : BossCtrl
             }
         }
     }
-
-    // PoisonRain 마법을 스폰 위치에 따라 생성 및 초기화
-    // private IEnumerator UsePoisonRain()
-    // {
-    //     yield return new WaitForSeconds(0.1f);
-
-    //     GameObject poisonRain = UtilityManager.utility.GetFromPool(poisonRainPool, magicCountInPool);
-
-    //     if(poisonRain != null)
-    //     {
-    //         poisonRainComp = poisonRain.GetComponent<PoisonRain>();
-
-    //         Vector3 spawnPos = new Vector3
-    //         (PlayerCtrl.player.transform.position.x, 
-    //         PlayerCtrl.player.transform.position.y + 10f, 
-    //         PlayerCtrl.player.transform.position.z);
-
-    //         poisonRain.transform.position = spawnPos;
-
-    //         poisonRainComp.SetPool(poisonRainPool);
-    //     }
-    // }
 
     // PoisonRain 마법을 스폰 위치에 따라 생성 및 초기화
     private IEnumerator UsePoisonRain()
