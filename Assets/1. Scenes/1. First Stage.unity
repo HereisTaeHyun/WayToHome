@@ -25235,7 +25235,7 @@ GameObject:
   - component: {fileID: 1668177248}
   - component: {fileID: 1668177249}
   m_Layer: 14
-  m_Name: PoisonRainSoawnPos
+  m_Name: PoisonRainSoawnArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31161,7 +31161,7 @@ MonoBehaviour:
   - {fileID: 449061563540388070, guid: be9af0c827e8ef5408f1369d4a546e7c, type: 3}
   bodyImpactSpawnPos: {fileID: 1572177109}
   poisonSpawnPos: {fileID: 1524361328}
-  poisonRainSpawnPos: {fileID: 1668177247}
+  poisonRainSpawnArea: {fileID: 1668177247}
   bodyimpactSFX: {fileID: 8300000, guid: c91fcf414acc0344cb03b13996f1bf3b, type: 3}
 --- !u!61 &7769654071363705948
 BoxCollider2D:

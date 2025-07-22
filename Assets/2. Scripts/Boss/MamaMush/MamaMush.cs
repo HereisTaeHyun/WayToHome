@@ -20,8 +20,9 @@ public class MamaMush : BossCtrl
     // 위치 저장 셋
     [SerializeField] private Transform bodyImpactSpawnPos;
     [SerializeField] private Transform poisonSpawnPos;
-    [SerializeField] private GameObject poisonRainSpawnPos;
-    private BoxCollider2D poisonRainSpawnBound;
+    [SerializeField] private GameObject poisonRainSpawnArea;
+    private BoxCollider2D poisonSpawnAreaCollider;
+    private Bounds poisonSpawnAreaBounds;
 
     // 마법 개별 컴포넌트
     private BodyImpact bodyImpactComp;
@@ -64,7 +65,7 @@ public class MamaMush : BossCtrl
         isGround = true;
         ableBlink = true;
         coolTime = 5.0f;
-        poisonRainSpawnBound = poisonRainSpawnPos.GetComponent<BoxCollider2D>();
+        poisonSpawnAreaCollider = poisonRainSpawnArea.GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -324,10 +325,10 @@ public class MamaMush : BossCtrl
     // PoisonRain 마법의 위치를 무작위로 생성
     private Vector2 SetRandomPos()
     {
-        Bounds spawnBound = poisonRainSpawnBound.bounds;
+        poisonSpawnAreaBounds = poisonSpawnAreaCollider.bounds;
 
-        float x = Random.Range(spawnBound.min.x, spawnBound.max.x);
-        float y = spawnBound.center.y;
+        float x = Random.Range(poisonSpawnAreaBounds.min.x, poisonSpawnAreaBounds.max.x);
+        float y = poisonSpawnAreaBounds.center.y;
 
         return new Vector2(x, y);
     }
