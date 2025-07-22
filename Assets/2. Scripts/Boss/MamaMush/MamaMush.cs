@@ -10,10 +10,11 @@ public class MamaMush : BossCtrl
 {
     private ObjectPool<GameObject> bodyImpactPool;
     private ObjectPool<GameObject> poisonPool;
+    private ObjectPool<GameObject> poisonRainPool;
 
     private List<MagicType> usingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
-    private int magicCountInPool = 5;
+    private int magicCountInPool = 20;
 
 
     // 위치 저장 셋
@@ -23,6 +24,7 @@ public class MamaMush : BossCtrl
     // 마법 개별 컴포넌트
     private BodyImpact bodyImpactComp;
     private Poison poisonComp;
+    private PoisonRain poisonRainComp;
 
     // 마법 사운드
     [SerializeField] private AudioClip bodyimpactSFX;
@@ -48,12 +50,14 @@ public class MamaMush : BossCtrl
         {
             {MagicType.BodyImpact},
             {MagicType.Poison},
+            {MagicType.PoisonRain},
         };
 
         // 마법 풀 생성
         // 인덱스 번호는 위 마법 위치 딕셔너리와 같은 순서
         UtilityManager.utility.CreatePool(ref bodyImpactPool, magicList[0], magicCountInPool, magicCountInPool);
         UtilityManager.utility.CreatePool(ref poisonPool, magicList[1], magicCountInPool, magicCountInPool);
+        UtilityManager.utility.CreatePool(ref poisonRainPool, magicList[2], magicCountInPool, magicCountInPool);
 
         isGround = true;
         ableBlink = true;
@@ -86,6 +90,9 @@ public class MamaMush : BossCtrl
                     break;
                 case MagicType.Poison:
                     StartCoroutine(UsePoison());
+                    break;
+                case MagicType.PoisonRain:
+                    StartCoroutine(UsePoisonRain());
                     break;
             }
 
@@ -213,7 +220,10 @@ public class MamaMush : BossCtrl
     private void SpawnBodyImpact()
     {
         GameObject bodyImpact = UtilityManager.utility.GetFromPool(bodyImpactPool, magicCountInPool);
-        if (bodyImpact == null) return;
+        if (bodyImpact == null)
+        {
+            return;
+        }
 
         bodyImpactComp = bodyImpact.GetComponent<BodyImpact>();
         bodyImpact.transform.position = bodyImpactSpawnPos.transform.position;
@@ -255,7 +265,7 @@ public class MamaMush : BossCtrl
             GameObject poison = UtilityManager.utility.GetFromPool(poisonPool, magicCountInPool);
             if (poison != null)
             {
-                Poison poisonComp = poison.GetComponent<Poison>();
+                poisonComp = poison.GetComponent<Poison>();
                 poison.transform.position = poisonSpawnPos.transform.position;
                 poison.transform.rotation = poisonSpawnPos.transform.rotation;
                 poisonComp.SetPool(poisonPool);
@@ -264,6 +274,28 @@ public class MamaMush : BossCtrl
             {
                 yield return wait;
             }
+        }
+    }
+
+    // PoisonRain 마법을 스폰 위치에 따라 생성 및 초기화
+    private IEnumerator UsePoisonRain()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        GameObject poisonRain = UtilityManager.utility.GetFromPool(poisonRainPool, magicCountInPool);
+
+        if(poisonRain != null)
+        {
+            poisonRainComp = poisonRain.GetComponent<PoisonRain>();
+
+            Vector3 spawnPos = new Vector3
+            (PlayerCtrl.player.transform.position.x, 
+            PlayerCtrl.player.transform.position.y + 10f, 
+            PlayerCtrl.player.transform.position.z);
+
+            poisonRain.transform.position = spawnPos;
+
+            poisonRainComp.SetPool(poisonRainPool);
         }
     }
 
