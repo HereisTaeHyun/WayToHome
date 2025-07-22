@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class MamaMush : BossCtrl
 {
@@ -12,7 +14,7 @@ public class MamaMush : BossCtrl
     private List<MagicType> usingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
     private int magicCountInPool = 5;
-    
+
 
     // 위치 저장 셋
     [SerializeField] private Transform bodyImpactSpawnPos;
@@ -29,8 +31,7 @@ public class MamaMush : BossCtrl
     private bool isGround;
     private bool isMove;
     private Vector2 newVelocity;
-    private Vector2 enemyMoveDir;
-    private readonly int moveDirHash = Animator.StringToHash("MoveDir");
+    private Vector2 moveDir;
     private readonly int moveOnHash = Animator.StringToHash("OnMove");
     private readonly int dieHash = Animator.StringToHash("Die");
 
@@ -55,6 +56,7 @@ public class MamaMush : BossCtrl
         UtilityManager.utility.CreatePool(ref poisonPool, magicList[1], magicCountInPool, magicCountInPool);
 
         isGround = true;
+        ableBlink = true;
         coolTime = 5.0f;
     }
 
@@ -93,7 +95,7 @@ public class MamaMush : BossCtrl
     }
 
     // 이동 및 점프 처리
-    // enemyMoveDir이 음수면 왼쪽 양수면 오른쪽
+    // moveDir이 음수면 왼쪽 양수면 오른쪽
     private void FollowingTarget(float moveSpeed)
     {
         // 타겟이 존재하고 살아 있을 경우 움직임
@@ -103,19 +105,30 @@ public class MamaMush : BossCtrl
             if (SeeingPlayer())
             {
                 // 움직이는 방향 벡터 받아 오기
-                enemyMoveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
+                moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
 
-                // 움직임 적용
-                isMove = true;
+                if (Math.Abs(PlayerCtrl.player.transform.position.x - transform.position.x) >= 0.15)
+                {
+                    // 움직임 적용
+                    isMove = true;
 
-                anim.SetBool(moveOnHash, isMove);
-                anim.SetFloat(moveDirHash, enemyMoveDir.x);
+                    anim.SetBool(moveOnHash, isMove);
+                    anim.SetFloat(dirHash, moveDir.x);
 
-                newVelocity.Set(enemyMoveDir.x * moveSpeed, rb2D.linearVelocity.y);
-                rb2D.linearVelocity = newVelocity;
+                    newVelocity.Set(moveDir.x * moveSpeed, rb2D.linearVelocity.y);
+                    rb2D.linearVelocity = newVelocity;
+                }
+                else
+                {
+                    isMove = false;
+                    anim.SetBool(moveOnHash, isMove);
+
+                    newVelocity.Set(0f, rb2D.linearVelocity.y);
+                    rb2D.linearVelocity = newVelocity;
+                }
             }
         }
-        // 적이 죽었다면 움직일 필요 없음
+        // 플레이어가 시야에 없으면 움직일 필요 없음
         else
         {
             isMove = false;
@@ -131,8 +144,16 @@ public class MamaMush : BossCtrl
         // 타격 벡터 계산 및 sfx, anim 재생
         Vector2 hitVector = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
         UtilityManager.utility.PlaySFX(enemyGetHitSFX);
-        anim.SetTrigger(hitTrigger);
-        anim.SetFloat(hitHash, hitVector.x);
+        if (ableBlink == true)
+        {
+            StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, ableBlink, blinkTime));
+        }
+
+        if (currentHP % 100 == 0)
+        {
+            anim.SetTrigger(hitTrigger);
+            anim.SetFloat(hitHash, hitVector.x);
+        }
 
         // 체력 0 이하면 사망처리
         if (currentHP <= 0)
@@ -154,7 +175,7 @@ public class MamaMush : BossCtrl
 
         bossRoomSensor.SetBossClear();
         UtilityManager.utility.PlaySFX(enemyDieSFX);
-        
+
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.simulated = false;
         anim.SetTrigger(dieHash);
@@ -235,16 +256,16 @@ public class MamaMush : BossCtrl
             if (poison != null)
             {
                 Poison poisonComp = poison.GetComponent<Poison>();
-                poison.transform.position  = poisonSpawnPos.transform.position;
+                poison.transform.position = poisonSpawnPos.transform.position;
                 poison.transform.rotation = poisonSpawnPos.transform.rotation;
                 poisonComp.SetPool(poisonPool);
             }
             if (i < repeat - 1)
             {
                 yield return wait;
-            }    
+            }
         }
     }
-    
+
     #endregion
 }
