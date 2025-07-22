@@ -769,6 +769,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2963152762691772200, guid: 68c02fc6a237a4e49932ead747e7dea4, type: 3}
+      propertyPath: bGMCtrl
+      value: 
+      objectReference: {fileID: 1996653297}
     - target: {fileID: 4086721569186333235, guid: 68c02fc6a237a4e49932ead747e7dea4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3676,7 +3680,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageBGM: {fileID: 8300000, guid: 919ab21e0f92a4aa492915577aa9328d, type: 3}
-  dieBGM: {fileID: 8300000, guid: 86b2f44255caa4b32a2f5de24966ae9d, type: 3}
+  gameoverBGM: {fileID: 0}
+  bossBGM: {fileID: 0}
 --- !u!82 &1996653298
 AudioSource:
   m_ObjectHideFlags: 0

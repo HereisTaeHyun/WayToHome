@@ -9,6 +9,7 @@ public class BossRoomSensor : PlayerSensor
     [SerializeField] GameObject leftWall;
     [SerializeField] GameObject rightWall;
     [SerializeField] GameObject[] rewards;
+    [SerializeField] BGMCtrl bGMCtrl;
     private IDie bossCtrl;
     private int enemyID;
     public int readEnemyID {get {return enemyID;}}
@@ -41,30 +42,31 @@ public class BossRoomSensor : PlayerSensor
     }
 
      // 보스가 사망했을 때 보상 오브젝트 활성화
-    void Update()
+    public void SetBossClear()
     {
-        if (bossCtrl.isDie == true)
+        bGMCtrl.PlayStageBGM();
+        DataManager.dataManager.playerData.diedEnemy.Add(enemyID);
+        if (leftWall != null && rightWall != null)
         {
-            DataManager.dataManager.playerData.diedEnemy.Add(enemyID);
-            if (leftWall != null && rightWall != null)
-            {
-                leftWall.SetActive(false);
-                rightWall.SetActive(false);
-            }
-            foreach (var reward in rewards)
-            {
-                reward.SetActive(true);
-            }
+            leftWall.SetActive(false);
+            rightWall.SetActive(false);
+        }
+        foreach (var reward in rewards)
+        {
+            reward.SetActive(true);
         }
     }
 
     // 플레이어가 센서 진입 시 보스룸 요소들 활성화
     protected override void OnTriggerEnter2D(Collider2D collision)
-    {   
+    {
         if (collision.gameObject.CompareTag("Player") && boss != null && isEntered == false)
         {
             isEntered = true;
+
             UtilityManager.utility.PlaySFX(encounterSFX);
+            bGMCtrl.PlayBossBGM();
+
             boss.SetActive(true);
             if (leftWall != null && rightWall != null)
             {

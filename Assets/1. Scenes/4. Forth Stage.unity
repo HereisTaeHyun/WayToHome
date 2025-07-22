@@ -355,7 +355,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageBGM: {fileID: 8300000, guid: 2d2b8b1eb628b4805a48ef1ec4f1247f, type: 3}
-  dieBGM: {fileID: 8300000, guid: 86b2f44255caa4b32a2f5de24966ae9d, type: 3}
+  gameoverBGM: {fileID: 8300000, guid: 86b2f44255caa4b32a2f5de24966ae9d, type: 3}
+  bossBGM: {fileID: 8300000, guid: 5f454f11711d64f8b9416274a6b247fa, type: 3}
 --- !u!82 &100514153
 AudioSource:
   m_ObjectHideFlags: 0
@@ -31734,6 +31735,10 @@ PrefabInstance:
       propertyPath: boss
       value: 
       objectReference: {fileID: 2517684661880302925}
+    - target: {fileID: 5900289222988949193, guid: 19d288a33fee0194d817094a2a8c4ab3, type: 3}
+      propertyPath: bGMCtrl
+      value: 
+      objectReference: {fileID: 100514152}
     - target: {fileID: 6032923446347516366, guid: 19d288a33fee0194d817094a2a8c4ab3, type: 3}
       propertyPath: m_Name
       value: BossRoomSensor
@@ -31748,6 +31753,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5397785306588814496, guid: 19d288a33fee0194d817094a2a8c4ab3, type: 3}
   m_PrefabInstance: {fileID: 522015668}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &522015670 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5900289222988949193, guid: 19d288a33fee0194d817094a2a8c4ab3, type: 3}
+  m_PrefabInstance: {fileID: 522015668}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 195bafa2f24872a48a987af8cc5369e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &539392001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36825,6 +36841,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2963152762691772200, guid: 68c02fc6a237a4e49932ead747e7dea4, type: 3}
+      propertyPath: bGMCtrl
+      value: 
+      objectReference: {fileID: 100514152}
     - target: {fileID: 4086721569186333235, guid: 68c02fc6a237a4e49932ead747e7dea4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -46670,6 +46690,10 @@ PrefabInstance:
       propertyPath: portalOnScene
       value: 
       objectReference: {fileID: 238991649}
+    - target: {fileID: 7278813343581756725, guid: 08916b133ac81b543b3a12b19a3f234f, type: 3}
+      propertyPath: bossRoomSensor
+      value: 
+      objectReference: {fileID: 522015670}
     - target: {fileID: 7278813343581756725, guid: 08916b133ac81b543b3a12b19a3f234f, type: 3}
       propertyPath: standingPosSet
       value: 

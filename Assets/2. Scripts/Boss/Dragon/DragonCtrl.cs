@@ -222,6 +222,10 @@ public class DragonCtrl : BossCtrl
     {
         UtilityManager.utility.PlaySFX(enemyDieSFX);
         isDie = true;
+
+        bossRoomSensor.SetBossClear();
+        UtilityManager.utility.PlaySFX(enemyDieSFX);
+
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.simulated = false;
         anim.SetTrigger(dieHash);

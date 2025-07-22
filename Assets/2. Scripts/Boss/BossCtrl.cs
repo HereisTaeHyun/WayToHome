@@ -21,6 +21,7 @@ public class BossCtrl : MonoBehaviour, IDamageable, IDie
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected AudioClip enemyGetHitSFX;
     [SerializeField] protected AudioClip enemyDieSFX;
+    [SerializeField] protected BossRoomSensor bossRoomSensor;
     protected float currentHP;
     protected readonly int dirHash = Animator.StringToHash("MoveDir");
     protected readonly int hitHash = Animator.StringToHash("HitDir");

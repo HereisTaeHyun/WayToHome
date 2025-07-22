@@ -26,13 +26,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject shurikenPrefab;
     [SerializeField] private GameObject smallShockwavePrefab;
     [SerializeField] private GameObject waterSplashPrefab;
+    [SerializeField] BGMCtrl bGMCtrl;
 
     private PlayerInput playerInputActions;
-    private GameObject screenUI;
-    private GameObject screenPanel;
-    private TextMeshProUGUI stateText;
-    private TextMeshProUGUI restartText;
-    private Image screenImage;
 
     private GameObject player;
     private Dictionary<PlayerMagicType, GameObject> magicPrefabs;
@@ -239,6 +235,7 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         isGameOver = true;
+        bGMCtrl.PlayGameOverBGM();
         UIManager.uIManager.ClosePlayerUI();
         UIManager.uIManager.GameOverScreen();
     }

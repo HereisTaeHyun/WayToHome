@@ -8907,7 +8907,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageBGM: {fileID: 8300000, guid: ffc95b83c9f8344ebb6214eb5b0b3087, type: 3}
-  dieBGM: {fileID: 8300000, guid: 86b2f44255caa4b32a2f5de24966ae9d, type: 3}
+  gameoverBGM: {fileID: 8300000, guid: 86b2f44255caa4b32a2f5de24966ae9d, type: 3}
+  bossBGM: {fileID: 8300000, guid: ceaf9b8aadbc14b2895f863dd4da7368, type: 3}
 --- !u!82 &931818730
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20802,6 +20803,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2963152762691772200, guid: 68c02fc6a237a4e49932ead747e7dea4, type: 3}
+      propertyPath: bGMCtrl
+      value: 
+      objectReference: {fileID: 931818729}
     - target: {fileID: 4086721569186333235, guid: 68c02fc6a237a4e49932ead747e7dea4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

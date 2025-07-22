@@ -982,6 +982,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3970398111758929971}
     - target: {fileID: 5900289222988949193, guid: 19d288a33fee0194d817094a2a8c4ab3, type: 3}
+      propertyPath: bGMCtrl
+      value: 
+      objectReference: {fileID: 931818730}
+    - target: {fileID: 5900289222988949193, guid: 19d288a33fee0194d817094a2a8c4ab3, type: 3}
       propertyPath: leftWall
       value: 
       objectReference: {fileID: 1246101894}
@@ -1473,6 +1477,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1631919611545012873, guid: 19f65ec9d88209145901b0c82de19289, type: 3}
   m_PrefabInstance: {fileID: 218692023}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &227664638 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5900289222988949193, guid: 19d288a33fee0194d817094a2a8c4ab3, type: 3}
+  m_PrefabInstance: {fileID: 129635195}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 195bafa2f24872a48a987af8cc5369e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &257913956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8517,7 +8532,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageBGM: {fileID: 8300000, guid: 73493c1f678bf4f18a7174b39872d0bc, type: 3}
-  dieBGM: {fileID: 8300000, guid: 86b2f44255caa4b32a2f5de24966ae9d, type: 3}
+  gameoverBGM: {fileID: 8300000, guid: 86b2f44255caa4b32a2f5de24966ae9d, type: 3}
+  bossBGM: {fileID: 8300000, guid: ceaf9b8aadbc14b2895f863dd4da7368, type: 3}
 --- !u!1 &942522195
 GameObject:
   m_ObjectHideFlags: 0
@@ -31041,6 +31057,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2963152762691772200, guid: 68c02fc6a237a4e49932ead747e7dea4, type: 3}
+      propertyPath: bGMCtrl
+      value: 
+      objectReference: {fileID: 931818730}
     - target: {fileID: 4086721569186333235, guid: 68c02fc6a237a4e49932ead747e7dea4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -31151,6 +31171,7 @@ MonoBehaviour:
   moveSpeed: 3
   enemyGetHitSFX: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
   enemyDieSFX: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
+  bossRoomSensor: {fileID: 227664638}
   magicList:
   - {fileID: 179085287420400081, guid: f031e96227ea94c49b39c6403bb2fafd, type: 3}
   - {fileID: 449061563540388070, guid: feaa33b4385b9404f8daf31ed4fb1f1c, type: 3}

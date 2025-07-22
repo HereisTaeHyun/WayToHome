@@ -151,7 +151,10 @@ public class MamaMush : BossCtrl
     {
         isDie = true;
         DataManager.dataManager.playerData.diedEnemy.Add(enemyID);
+
+        bossRoomSensor.SetBossClear();
         UtilityManager.utility.PlaySFX(enemyDieSFX);
+        
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.simulated = false;
         anim.SetTrigger(dieHash);
