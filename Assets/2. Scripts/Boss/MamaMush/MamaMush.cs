@@ -15,10 +15,12 @@ public class MamaMush : BossCtrl
     private List<MagicType> usingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
     private int magicCountInPool = 5;
+
     private int poisongRainCountInPool = 20;
     private float poisonRainSpawnDuration = 5.0f;
     private float minPoisonRainInterval = 0.05f;
     private float maxPoisonRainInterval = 0.25f;
+    [SerializeField] private ParticleSystem poisonRainParticle;
 
 
     // 위치 저장 셋
@@ -69,6 +71,7 @@ public class MamaMush : BossCtrl
         isGround = true;
         ableBlink = true;
         coolTime = 5.0f;
+        poisonRainParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         poisonSpawnAreaCollider = poisonRainSpawnArea.GetComponent<BoxCollider2D>();
     }
 
@@ -288,7 +291,13 @@ public class MamaMush : BossCtrl
     // PoisonRain 마법을 스폰 위치에 따라 생성 및 초기화
     private IEnumerator UsePoisonRain()
     {
-        yield return new WaitForSeconds(0.1f);
+        poisonRainParticle.Clear(true);
+        poisonRainParticle.Play(true);
+
+        yield return new WaitForSeconds(3.0f);
+
+        poisonRainParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        yield return new WaitUntil(() => poisonRainParticle.IsAlive(true) == false);
 
         float time = 0.0f;
 
