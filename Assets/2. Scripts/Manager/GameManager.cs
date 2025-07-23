@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject shurikenPrefab;
     [SerializeField] private GameObject smallShockwavePrefab;
     [SerializeField] private GameObject waterSplashPrefab;
-    [SerializeField] BGMCtrl bGMCtrl;
+    private BGMCtrl bGMCtrl;
 
     private PlayerInput playerInputActions;
 
@@ -111,9 +111,10 @@ public class GameManager : MonoBehaviour
     {
         // UI Set
         UIManager.uIManager.ScreeUISet();
+        bGMCtrl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<BGMCtrl>();
 
         // 포탈을 통해서 넘어온 경우 해당 맵의 firstSpawnPos를 찾아야 함
-        if(usePortal == true)
+        if (usePortal == true)
         {
             firstSpawnPos = GameObject.FindGameObjectWithTag("FirstSpawnPos").transform;
             currentSpawnPos = new Vector2(firstSpawnPos.position.x, firstSpawnPos.position.y);
