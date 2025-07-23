@@ -14,8 +14,11 @@ public class MamaMush : BossCtrl
 
     private List<MagicType> usingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
-    private int magicCountInPool = 20;
+    private int magicCountInPool = 5;
+    private int poisongRainCountInPool = 20;
     private float poisonRainSpawnDuration = 5.0f;
+    private float minPoisonRainInterval = 0.05f;
+    private float maxPoisonRainInterval = 0.25f;
 
 
     // 위치 저장 셋
@@ -61,7 +64,7 @@ public class MamaMush : BossCtrl
         // 인덱스 번호는 위 마법 위치 딕셔너리와 같은 순서
         UtilityManager.utility.CreatePool(ref bodyImpactPool, magicList[0], magicCountInPool, magicCountInPool);
         UtilityManager.utility.CreatePool(ref poisonPool, magicList[1], magicCountInPool, magicCountInPool);
-        UtilityManager.utility.CreatePool(ref poisonRainPool, magicList[2], magicCountInPool, magicCountInPool);
+        UtilityManager.utility.CreatePool(ref poisonRainPool, magicList[2], poisongRainCountInPool, poisongRainCountInPool);
 
         isGround = true;
         ableBlink = true;
@@ -291,17 +294,18 @@ public class MamaMush : BossCtrl
 
         while (time < poisonRainSpawnDuration)
         {
-            time += Time.deltaTime;
+            float wait = Random.Range(minPoisonRainInterval, maxPoisonRainInterval);
+            yield return new WaitForSeconds(wait);
+            time += wait;
 
-            GameObject poisonRain = UtilityManager.utility.GetFromPool(poisonRainPool, magicCountInPool);
+            GameObject poisonRain = UtilityManager.utility.GetFromPool(poisonRainPool, poisongRainCountInPool);
             if (poisonRain != null)
             {
                 poisonRainComp = poisonRain.GetComponent<PoisonRain>();
                 poisonRain.transform.position = SetRandomPos();
                 poisonRainComp.SetPool(poisonRainPool);
             }
-        }
-        
+        } 
     }
 
     // PoisonRain 마법의 위치를 무작위로 생성
