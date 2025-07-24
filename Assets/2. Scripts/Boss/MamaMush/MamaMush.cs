@@ -8,6 +8,10 @@ using Random = UnityEngine.Random;
 
 public class MamaMush : BossCtrl
 {
+    private float rageHP;
+    [SerializeField] AudioClip rageSFX;
+    private Coroutine blinkRoutine;
+
     private ObjectPool<GameObject> bodyImpactPool;
     private ObjectPool<GameObject> poisonPool;
     private ObjectPool<GameObject> poisonRainPool;
@@ -65,8 +69,9 @@ public class MamaMush : BossCtrl
         UtilityManager.utility.CreatePool(ref poisonPool, magicList[1], magicCountInPool, magicCountInPool);
         UtilityManager.utility.CreatePool(ref poisonRainPool, magicList[2], poisongRainCountInPool, poisongRainCountInPool);
 
+        rageHP = maxHP * 0.6f;
+
         isGround = true;
-        ableBlink = true;
         coolTime = 5.0f;
         poisonRainParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         poisonSpawnAreaCollider = poisonRainSpawnArea.GetComponent<BoxCollider2D>();
@@ -106,12 +111,15 @@ public class MamaMush : BossCtrl
         anim.SetBool(moveOnHash, isMove);
         anim.SetFloat(dirHash, moveDir.x);
 
-        while (Mathf.Abs(PlayerCtrl.player.transform.position.x - transform.position.x) > 5.0f)
+        while (Mathf.Abs(PlayerCtrl.player.transform.position.x - transform.position.x) > 10.0f)
         {
             newVelocity.Set(moveDir.x * moveSpeed, rb2D.linearVelocity.y);
             rb2D.linearVelocity = newVelocity;
             yield return null;
         }
+
+        PlayerCtrl.player.playerMove.ForceIdle();
+        PlayerCtrl.player.canMove = false;
 
         isMove = false;
         canMove = false;
@@ -120,7 +128,11 @@ public class MamaMush : BossCtrl
 
         yield return new WaitForSeconds(2.0f);
 
-        canAttack = true;
+        // 얘가 개막 패턴으로 적합함
+        StartCoroutine(UseBodyImpact());
+        StartCoroutine(CoolTimeCheck());
+
+        PlayerCtrl.player.canMove = true;
         canMove = true;
     }
 
@@ -174,10 +186,12 @@ public class MamaMush : BossCtrl
         // 타격 벡터 계산 및 sfx, anim 재생
         Vector2 hitVector = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
         UtilityManager.utility.PlaySFX(enemyGetHitSFX);
-        if (ableBlink == true)
+
+        if (blinkRoutine != null)
         {
-            StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, ableBlink, blinkTime));
+            StopCoroutine(blinkRoutine);
         }
+        blinkRoutine = StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, blinkTime));
 
         if (currentHP % 100 == 0)
         {
@@ -185,10 +199,9 @@ public class MamaMush : BossCtrl
             anim.SetFloat(hitHash, hitVector.x);
         }
 
-        if (isRage == false && currentHP <= 300)
+        if (isRage == false && currentHP <= rageHP)
         {
-            isRage = true;
-            usingMagic = phase2UsingMagic;
+            GetRage();
         }
 
         // 체력 0 이하면 사망처리
@@ -220,6 +233,20 @@ public class MamaMush : BossCtrl
     }
 
     #region 패턴 관련
+    // 분노
+    private void GetRage()
+    {
+        if (blinkRoutine != null)
+        {
+            StopCoroutine(blinkRoutine); 
+        }
+        isRage = true;
+        UtilityManager.utility.PlaySFX(rageSFX);
+        usingMagic = phase2UsingMagic;
+        moveSpeed = 5.0f;
+        spriteRenderer.color = new Color32(255, 140, 140, 255);
+    }
+
     // 마법 공격 후 일정 시간 동안 쿨타임 처리
     private IEnumerator CoolTimeCheck()
     {
@@ -251,7 +278,7 @@ public class MamaMush : BossCtrl
             switch (currentMagic)
             {
                 case MagicType.BodyImpact:
-                    StartCoroutine(UseBodyImpact());
+                    StartCoroutine(UseBodyImpact(3));
                     break;
                 case MagicType.Poison:
                     StartCoroutine(UsePoison(9));
@@ -264,20 +291,23 @@ public class MamaMush : BossCtrl
     }
 
     // BodyImpact 마법을 스폰 위치에 따라 생성 및 초기화
-    private IEnumerator UseBodyImpact()
+    private IEnumerator UseBodyImpact(int repeat = 1)
     {
-        isGround = false;
-        Jump();
+        for (int i = 0; i < repeat; i++)
+        {
+            isGround = false;
+            Jump();
 
-        yield return new WaitUntil(() => isGround);
-        SpawnBodyImpact();
+            yield return new WaitUntil(() => isGround);
+            SpawnBodyImpact();
 
-        canMove = false;
-        rb2D.linearVelocity = Vector2.zero;
-        isMove = false;
-        anim.SetBool(moveOnHash, isMove);
-        yield return new WaitForSeconds(1.0f);
-        canMove = true;
+            canMove = false;
+            rb2D.linearVelocity = Vector2.zero;
+            isMove = false;
+            anim.SetBool(moveOnHash, isMove);
+            yield return new WaitForSeconds(1.0f);
+            canMove = true;
+        }
     }
 
     private void SpawnBodyImpact()

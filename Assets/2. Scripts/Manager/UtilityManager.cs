@@ -97,9 +97,8 @@ public class UtilityManager : MonoBehaviour
     }
 
     // 데미지 입으면 깜빡거리기 코루틴
-    public IEnumerator BlinkOnDamage(SpriteRenderer spriteRenderer, bool ableBlink, float blinkTime)
+    public IEnumerator BlinkOnDamage(SpriteRenderer spriteRenderer, float blinkTime)
     {
-        ableBlink = false;
         bool isBlink = false;
         Color color = spriteRenderer.color;
 
@@ -126,7 +125,6 @@ public class UtilityManager : MonoBehaviour
             yield return new WaitForSeconds(blinkTime);
         }
         // 기본 상태로 초기화
-        ableBlink = true;
         color.a = 1.0f;
         spriteRenderer.color = color;
     }

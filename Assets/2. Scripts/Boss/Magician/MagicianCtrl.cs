@@ -56,7 +56,6 @@ public class MagicianCtrl : BossCtrl
         UtilityManager.utility.CreatePool(ref magicPool, fireBall, maxMagic, maxMagic);
 
         canAttack = true;
-        ableBlink = true;
         coolTime = 2.0f;
         
         if (DataManager.dataManager.playerData.diedEnemy.Contains(enemyID))
@@ -211,10 +210,9 @@ public class MagicianCtrl : BossCtrl
     // HP 변경 처리
     public override void ChangeHP(float value)
     {
-        if(ableBlink == true)
-        {
-            StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, ableBlink, blinkTime));
-        }
+
+        StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, blinkTime));
+
         currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
         UtilityManager.utility.PlaySFX(enemyGetHitSFX);
 

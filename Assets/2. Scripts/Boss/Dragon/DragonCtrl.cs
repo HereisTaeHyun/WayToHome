@@ -128,7 +128,6 @@ public class DragonCtrl : BossCtrl
         currentHP = maxHP;
         isFly = false;
         canAttack = true;
-        ableBlink = true;
         magicCount = 0;
         coolTime = 3.0f;
         waitMagic = new WaitForSeconds(MAGIC_WAIT_TIME);
@@ -187,10 +186,9 @@ public class DragonCtrl : BossCtrl
         {
             return;
         }
-        if (ableBlink == true)
-        {
-            StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, ableBlink, blinkTime));
-        }
+
+        StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, blinkTime));
+        
         currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
         UtilityManager.utility.PlaySFX(enemyGetHitSFX);
 

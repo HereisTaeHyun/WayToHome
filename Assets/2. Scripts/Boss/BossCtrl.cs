@@ -29,7 +29,6 @@ public class BossCtrl : MonoBehaviour, IDamageable, IDie
     protected SpriteRenderer spriteRenderer;
     protected bool isRage = false;
     protected bool isPlayerEntered = false;
-    protected bool ableBlink = true;
     protected float blinkTime = 0.1f;
     protected bool canAttack = true;
     protected bool canMove = true;
@@ -54,7 +53,6 @@ public class BossCtrl : MonoBehaviour, IDamageable, IDie
 
         isDie = false;
         canMove = true;
-        ableBlink = true;
 
         currentHP = maxHP;
         detectLayer = LayerMask.GetMask("Player", "Ground", "Wall");
