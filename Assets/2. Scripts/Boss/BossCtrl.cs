@@ -27,6 +27,8 @@ public class BossCtrl : MonoBehaviour, IDamageable, IDie
     protected readonly int hitHash = Animator.StringToHash("HitDir");
     protected readonly int hitTrigger = Animator.StringToHash("TakeHit");
     protected SpriteRenderer spriteRenderer;
+    protected bool isRage = false;
+    protected bool isPlayerEntered = false;
     protected bool ableBlink = true;
     protected float blinkTime = 0.1f;
     protected bool canAttack = true;
@@ -56,6 +58,11 @@ public class BossCtrl : MonoBehaviour, IDamageable, IDie
 
         currentHP = maxHP;
         detectLayer = LayerMask.GetMask("Player", "Ground", "Wall");
+    }
+
+    public virtual void PlayerEntered()
+    {
+
     }
 
     public virtual void ChangeHP(float value)

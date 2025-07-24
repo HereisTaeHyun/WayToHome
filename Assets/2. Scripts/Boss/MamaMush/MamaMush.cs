@@ -12,9 +12,11 @@ public class MamaMush : BossCtrl
     private ObjectPool<GameObject> poisonPool;
     private ObjectPool<GameObject> poisonRainPool;
 
-    private List<MagicType> usingMagic;
+    [SerializeField] private List<MagicType> usingMagic;
+    [SerializeField] private List<MagicType> phase1UsingMagic;
+    [SerializeField] private List<MagicType> phase2UsingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
-    private int magicCountInPool = 5;
+    private int magicCountInPool = 10;
 
     private int poisongRainCountInPool = 20;
     private float poisonRainSpawnDuration = 5.0f;
@@ -55,12 +57,7 @@ public class MamaMush : BossCtrl
     {
         Init();
 
-        usingMagic = new List<MagicType>()
-        {
-            {MagicType.BodyImpact},
-            {MagicType.Poison},
-            {MagicType.PoisonRain},
-        };
+        usingMagic = phase1UsingMagic;
 
         // 마법 풀 생성
         // 인덱스 번호는 위 마법 위치 딕셔너리와 같은 순서
@@ -90,26 +87,24 @@ public class MamaMush : BossCtrl
 
         if (canAttack == true && SeeingPlayer())
         {
-            // 마법을 선택 후 스위칭하여 마법 함수 실행
-            int magicIdx = Random.Range(0, usingMagic.Count);
-            MagicType currentMagic = usingMagic[magicIdx];
-
-            switch (currentMagic)
-            {
-                case MagicType.BodyImpact:
-                    StartCoroutine(UseBodyImpact());
-                    break;
-                case MagicType.Poison:
-                    StartCoroutine(UsePoison());
-                    break;
-                case MagicType.PoisonRain:
-                    StartCoroutine(UsePoisonRain());
-                    break;
-            }
-
             // 공격 후 다음 공격까지 휴식
+            UseRandomMagic();
             StartCoroutine(CoolTimeCheck());
         }
+    }
+
+    public override void PlayerEntered()
+    {
+        StartCoroutine(EnterRoutine());
+    }
+
+    protected IEnumerator EnterRoutine()
+    {
+        canAttack = false;
+        canMove = false;
+        yield return new WaitForSeconds(2.0f);
+        canAttack = true;
+        canMove = true;
     }
 
     // 이동 및 점프 처리
@@ -173,6 +168,12 @@ public class MamaMush : BossCtrl
             anim.SetFloat(hitHash, hitVector.x);
         }
 
+        if (isRage == false && currentHP <= 300)
+        {
+            isRage = true;
+            usingMagic = phase2UsingMagic;
+        }
+
         // 체력 0 이하면 사망처리
         if (currentHP <= 0)
         {
@@ -209,7 +210,41 @@ public class MamaMush : BossCtrl
         yield return new WaitForSeconds(coolTime);
         canAttack = true;
     }
+    
+    // 마법을 선택 후 스위칭하여 마법 함수 실행
+    private void UseRandomMagic()
+    {
+        int magicIdx = Random.Range(0, usingMagic.Count);
+        MagicType currentMagic = usingMagic[magicIdx];
 
+        if (isRage == false)
+        {
+            switch (currentMagic)
+            {
+                case MagicType.BodyImpact:
+                    StartCoroutine(UseBodyImpact());
+                    break;
+                case MagicType.Poison:
+                    StartCoroutine(UsePoison(3));
+                    break;
+            }
+        }
+        else if (isRage == true)
+        {
+            switch (currentMagic)
+            {
+                case MagicType.BodyImpact:
+                    StartCoroutine(UseBodyImpact());
+                    break;
+                case MagicType.Poison:
+                    StartCoroutine(UsePoison(9));
+                    break;
+                case MagicType.PoisonRain:
+                    StartCoroutine(UsePoisonRain());
+                    break;
+            }
+        }
+    }
 
     // BodyImpact 마법을 스폰 위치에 따라 생성 및 초기화
     private IEnumerator UseBodyImpact()

@@ -159,42 +159,25 @@ public class DragonCtrl : BossCtrl
 
         if(canAttack == true && SeeingPlayer())
         {
-            // 마법을 선택 후 스위칭하여 마법 함수 실행
-            int magicIdx = Random.Range(0, usingMagic.Count);
-            MagicType currentMagic = usingMagic[magicIdx];
-            switch(currentMagic)
-            {
-                case MagicType.FireBall:
-                    StartCoroutine(UseFireBall());
-                    anim.SetTrigger(attackHash);
-                    anim.SetFloat(attackTypeHash, -1);
-                    break;
-                case MagicType.FireMissile:
-                    StartCoroutine(UseFireMissile());
-                    anim.SetTrigger(attackHash);
-                    anim.SetFloat(attackTypeHash, -1);
-                    break;
-                case MagicType.FireCannon:
-                    StartCoroutine(UseFireCannon());
-                    anim.SetTrigger(attackHash);
-                    anim.SetFloat(attackTypeHash, -1);
-                    break;
-                case MagicType.ShockWave:
-                    StartCoroutine(UseShockWave());
-                    anim.SetTrigger(attackHash);
-                    anim.SetFloat(attackTypeHash, 1);
-                    break;
-                case MagicType.Meteor:
-                    StartCoroutine(UseMeteor());
-                    anim.SetTrigger(attackHash);
-                    anim.SetFloat(attackTypeHash, -1);
-                    break;
-            }
-
-            // 공격 후 3초간 휴식
+            // 공격 및 3초간 휴식
+            UseRandomMagic();
             magicCount += 1;
             StartCoroutine(CoolTimeCheck());
         }
+    }
+
+    public override void PlayerEntered()
+    {
+        StartCoroutine(EnterRoutine());
+    }
+
+    protected IEnumerator EnterRoutine()
+    {
+        canAttack = false;
+        canMove = false;
+        yield return new WaitForSeconds(2.0f);
+        canAttack = true;
+        canMove = true;
     }
 
 #region HP, Die
@@ -348,17 +331,53 @@ public class DragonCtrl : BossCtrl
         canAttack = true;
     }
 
+    // 마법을 선택 후 스위칭하여 마법 함수 실행
+    private void UseRandomMagic()
+    {
+
+        int magicIdx = Random.Range(0, usingMagic.Count);
+        MagicType currentMagic = usingMagic[magicIdx];
+        switch (currentMagic)
+        {
+            case MagicType.FireBall:
+                StartCoroutine(UseFireBall());
+                anim.SetTrigger(attackHash);
+                anim.SetFloat(attackTypeHash, -1);
+                break;
+            case MagicType.FireMissile:
+                StartCoroutine(UseFireMissile());
+                anim.SetTrigger(attackHash);
+                anim.SetFloat(attackTypeHash, -1);
+                break;
+            case MagicType.FireCannon:
+                StartCoroutine(UseFireCannon());
+                anim.SetTrigger(attackHash);
+                anim.SetFloat(attackTypeHash, -1);
+                break;
+            case MagicType.ShockWave:
+                StartCoroutine(UseShockWave());
+                anim.SetTrigger(attackHash);
+                anim.SetFloat(attackTypeHash, 1);
+                break;
+            case MagicType.Meteor:
+                StartCoroutine(UseMeteor());
+                anim.SetTrigger(attackHash);
+                anim.SetFloat(attackTypeHash, -1);
+                break;
+        }
+    }
+
     // FireBall 마법을 스폰 위치에 따라 생성 및 초기화
     private IEnumerator UseFireBall()
     {
         yield return waitMagic;
         UtilityManager.utility.PlaySFX(UseFireMagic);
-        foreach(Transform fireBallSpawnPos in fireBallSpawnPoses)
+        foreach (Transform fireBallSpawnPos in fireBallSpawnPoses)
         {
             GameObject fireBall = UtilityManager.utility.GetFromPool(fireBallPool, magicCountInPool);
-            
-            if(fireBall != null)
-            { 
+
+            if (fireBall != null)
+            {
                 fireBallComp = fireBall.GetComponent<FireBall>();
                 fireBall.transform.position = fireBallSpawnPos.position;
                 fireBall.transform.rotation = fireBallSpawnPos.rotation;

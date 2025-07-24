@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 607197035471585823}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -140.07304, y: 41.24, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
@@ -206,6 +206,9 @@ MonoBehaviour:
   enemyGetHitSFX: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
   enemyDieSFX: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
   bossRoomSensor: {fileID: 0}
+  usingMagic: 
+  phase1UsingMagic: 0500000006000000
+  phase2UsingMagic: 050000000600000007000000
   magicList:
   - {fileID: 179085287420400081, guid: f031e96227ea94c49b39c6403bb2fafd, type: 3}
   - {fileID: 449061563540388070, guid: feaa33b4385b9404f8daf31ed4fb1f1c, type: 3}
@@ -327,7 +330,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:

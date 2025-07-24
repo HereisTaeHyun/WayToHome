@@ -104,6 +104,20 @@ public class MagicianCtrl : BossCtrl
         }
     }
 
+    public override void PlayerEntered()
+    {
+        StartCoroutine(EnterRoutine());
+    }
+
+    protected IEnumerator EnterRoutine()
+    {
+        canAttack = false;
+        canMove = false;
+        yield return new WaitForSeconds(2.0f);
+        canAttack = true;
+        canMove = true;
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("FireBall"))
