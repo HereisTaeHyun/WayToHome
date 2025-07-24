@@ -93,6 +93,7 @@ public class MamaMush : BossCtrl
         }
     }
 
+    // 플레이어가 보스룸에 진입시 할 행동
     public override void PlayerEntered()
     {
         StartCoroutine(EnterRoutine());
@@ -101,8 +102,24 @@ public class MamaMush : BossCtrl
     protected IEnumerator EnterRoutine()
     {
         canAttack = false;
+        isMove = true;
+        anim.SetBool(moveOnHash, isMove);
+        anim.SetFloat(dirHash, moveDir.x);
+
+        while (Mathf.Abs(PlayerCtrl.player.transform.position.x - transform.position.x) > 5.0f)
+        {
+            newVelocity.Set(moveDir.x * moveSpeed, rb2D.linearVelocity.y);
+            rb2D.linearVelocity = newVelocity;
+            yield return null;
+        }
+
+        isMove = false;
         canMove = false;
+        rb2D.linearVelocity = Vector2.zero;
+        anim.SetBool(moveOnHash, isMove);
+
         yield return new WaitForSeconds(2.0f);
+
         canAttack = true;
         canMove = true;
     }
