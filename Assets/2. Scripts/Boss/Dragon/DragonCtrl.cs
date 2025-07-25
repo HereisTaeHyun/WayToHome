@@ -81,9 +81,9 @@ public class DragonCtrl : BossCtrl
      private Meteor meteorComp;
 
     // 오디오 관련
-    [SerializeField] private AudioClip UseFireMagic;
-    [SerializeField] private AudioClip UseMeteorMagic;
-    [SerializeField] private AudioClip ShockWaveSFX;
+    [SerializeField] private AudioClip useFireMagicSFX;
+    [SerializeField] private AudioClip useMeteorSFX;
+    [SerializeField] private AudioClip shockWaveSFX;
 
     // 애니메이션 관련
     private readonly int seeDirHash = Animator.StringToHash("SeeDir");
@@ -369,7 +369,7 @@ public class DragonCtrl : BossCtrl
     private IEnumerator UseFireBall()
     {
         yield return waitMagic;
-        UtilityManager.utility.PlaySFX(UseFireMagic);
+        UtilityManager.utility.PlaySFX(useFireMagicSFX);
         foreach (Transform fireBallSpawnPos in fireBallSpawnPoses)
         {
             GameObject fireBall = UtilityManager.utility.GetFromPool(fireBallPool, magicCountInPool);
@@ -388,7 +388,7 @@ public class DragonCtrl : BossCtrl
     private IEnumerator UseFireMissile()
     {
         yield return waitMagic;
-        UtilityManager.utility.PlaySFX(UseFireMagic);
+        UtilityManager.utility.PlaySFX(useFireMagicSFX);
         foreach(Transform fireMissileSpawnPos in fireMissileSpawnPoses)
         {
             GameObject fireMissile = UtilityManager.utility.GetFromPool(fireMissilePool, 10);
@@ -407,7 +407,7 @@ public class DragonCtrl : BossCtrl
     private IEnumerator UseFireCannon()
     {
         yield return waitMagic;
-        UtilityManager.utility.PlaySFX(UseFireMagic);
+        UtilityManager.utility.PlaySFX(useFireMagicSFX);
         GameObject fireCannon = UtilityManager.utility.GetFromPool(fireCannonPool, magicCountInPool);
 
         if(fireCannon != null)
@@ -433,7 +433,7 @@ public class DragonCtrl : BossCtrl
     private IEnumerator UseShockWave()
     {
         yield return waitShockWave;
-        UtilityManager.utility.PlaySFX(ShockWaveSFX);
+        UtilityManager.utility.PlaySFX(shockWaveSFX);
         GameObject shockWave = UtilityManager.utility.GetFromPool(shockWavePool, magicCountInPool);
 
         if(shockWave != null)
@@ -459,7 +459,7 @@ public class DragonCtrl : BossCtrl
     private IEnumerator UseMeteor()
     {
         yield return waitMagic;
-        UtilityManager.utility.PlaySFX(UseMeteorMagic);
+        UtilityManager.utility.PlaySFX(useMeteorSFX);
         GameObject meteor = UtilityManager.utility.GetFromPool(meteorPool, magicCountInPool);
 
         if(meteor != null)

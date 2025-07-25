@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -8,6 +9,12 @@ public class OrbitingKunai : MagicBase
     private Vector2 newVelocity;
     private float lifeSpan = 3.0f;
 
+    private float orbitRadius = 1.2f;
+    private float orbitSpeed = 180f;
+    private float orbitHeight = 1.0f;
+    private float aimTime = 3.0f;
+    private Vector2 orbitCenter;
+
     protected override void Start()
     {
         base.Start();
@@ -17,8 +24,13 @@ public class OrbitingKunai : MagicBase
     }
     protected override void FixedUpdate()
     {
+        orbitCenter = PlayerCtrl.player.transform.position + Vector3.up * orbitHeight;
+        transform.RotateAround(orbitCenter, Vector3.forward, orbitSpeed * Time.deltaTime);
+
+        aimTime -= Time.deltaTime;
+
         // 이동 로직 및 바라봄 축 설정
-        if (isLaunch)
+        if (isLaunch == true)
         {
             MoveMagic();
             lifeSpan -= Time.deltaTime;
@@ -30,15 +42,32 @@ public class OrbitingKunai : MagicBase
         }
     }
 
+        // aimTime 동안 플레이어 바라보다 발사되는 로직
+    private IEnumerator Aim()
+    {
+        while (aimTime >= 0)
+        {
+            // 바라봄 축 설정
+            orbitCenter = PlayerCtrl.player.transform.position + Vector3.up * orbitHeight;
+            transform.RotateAround(orbitCenter, Vector3.forward, orbitSpeed * Time.deltaTime);
+            aimTime -= Time.deltaTime;
+            yield return null;
+        }
+        isLaunch = true;
+    }
+
     public override void SetPool(ObjectPool<GameObject> pool)
     {
         originPool = pool;
         isPool = false;
-        lifeSpan = 5.0f;
+        aimTime = 3.0f;
+        lifeSpan = 3.0f;
 
         moveDir = UtilityManager.utility.AllDirSet(PlayerCtrl.player.transform.position - transform.position);
-        float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        orbitCenter = PlayerCtrl.player.transform.position + Vector3.up * orbitHeight;
+        transform.position = orbitCenter + Vector2.right * orbitRadius;
+
+        StartCoroutine(Aim());
     }
 
     private void MoveMagic()

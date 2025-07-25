@@ -26436,9 +26436,11 @@ MonoBehaviour:
   bossRoomSensor: {fileID: 1973309590}
   rageSFX: {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
   usingMagic: 
-  phase1UsingMagic: 
+  phase1UsingMagic: 08000000
   phase2UsingMagic: 
-  magicList: []
+  magicList:
+  - {fileID: 977657196193316008, guid: acb57b2b8cb20e245b2e4658a5832596, type: 3}
+  warpSFX: {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
 --- !u!61 &1845534789
 BoxCollider2D:
   m_ObjectHideFlags: 0

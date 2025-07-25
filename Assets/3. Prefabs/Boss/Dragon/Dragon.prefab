@@ -521,6 +521,7 @@ MonoBehaviour:
   moveSpeed: 0
   enemyGetHitSFX: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
   enemyDieSFX: {fileID: 8300000, guid: 566d2ea6240b489479a6e9fd608c2621, type: 3}
+  bossRoomSensor: {fileID: 0}
   portalOnScene: {fileID: 0}
   standingPosSet: {fileID: 0}
   cam: {fileID: 0}
@@ -546,9 +547,9 @@ MonoBehaviour:
   shockWaveSpawnPoses:
   - {fileID: 3185317479032096677}
   - {fileID: 8967131154930068682}
-  UseFireMagic: {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
-  UseMeteorMagic: {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
-  ShockWaveSFX: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
+  useFireMagicSFX: {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
+  useMeteorSFX: {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
+  shockWaveSFX: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
 --- !u!1 &5971215287156173289
 GameObject:
   m_ObjectHideFlags: 0

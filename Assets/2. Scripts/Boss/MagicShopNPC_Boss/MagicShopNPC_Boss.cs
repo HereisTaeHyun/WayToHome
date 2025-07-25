@@ -11,11 +11,22 @@ public class MagicShopNPC_Boss : BossCtrl
     [SerializeField] AudioClip rageSFX;
     private Coroutine blinkRoutine;
 
+    private ObjectPool<GameObject> orbitingKunaiPool;
+
     [SerializeField] private List<MagicType> usingMagic;
     [SerializeField] private List<MagicType> phase1UsingMagic;
     [SerializeField] private List<MagicType> phase2UsingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
     private int magicCountInPool = 10;
+
+    private static float MAGIC_WAIT_TIME = 0.5f; // 마법 사용과 애니메이션간 타이밍 맞추기에 사용
+    private WaitForSeconds waitMagic;
+
+    // 마법 개별 컴포넌트
+    private OrbitingKunai orbitingKunaiComp;
+
+    // 오디오 관련
+    [SerializeField] private AudioClip warpSFX;
 
     private bool isMove;
     private Vector2 newVelocity;
@@ -35,10 +46,12 @@ public class MagicShopNPC_Boss : BossCtrl
         usingMagic = phase1UsingMagic;
 
         // 마법 풀 생성
+        UtilityManager.utility.CreatePool(ref orbitingKunaiPool, magicList[0], magicCountInPool, magicCountInPool);
 
         rageHP = maxHP * 0.6f;
 
         coolTime = 5.0f;
+        waitMagic = new WaitForSeconds(MAGIC_WAIT_TIME);
     }
 
     void Update()
@@ -57,7 +70,7 @@ public class MagicShopNPC_Boss : BossCtrl
         if (canAttack == true && SeeingPlayer())
         {
             // 공격 후 다음 공격까지 휴식
-            // UseRandomMagic();
+            UseRandomMagic();
             StartCoroutine(CoolTimeCheck());
         }
     }
@@ -94,6 +107,7 @@ public class MagicShopNPC_Boss : BossCtrl
 
         PlayerCtrl.player.canMove = true;
         canMove = true;
+        canAttack = true;
     }
 
 
@@ -221,6 +235,47 @@ public class MagicShopNPC_Boss : BossCtrl
     {
         int magicIdx = Random.Range(0, usingMagic.Count);
         MagicType currentMagic = usingMagic[magicIdx];
+
+        switch (currentMagic)
+        {
+            case MagicType.OrbitingKunai:
+                StartCoroutine(UseOrbitingKunai());
+                break;
+        }
+    }
+
+    // FireMissile 마법을 각 지정된 위치에 생성 및 초기화
+    // private IEnumerator UseFireMissile()
+    // {
+    //     yield return waitMagic;
+    //     UtilityManager.utility.PlaySFX(UseFireMagic);
+    //     foreach(Transform fireMissileSpawnPos in fireMissileSpawnPoses)
+    //     {
+    //         GameObject fireMissile = UtilityManager.utility.GetFromPool(fireMissilePool, 10);
+
+    //         if(fireMissile != null)
+    //         {
+    //             fireMissileComp = fireMissile.GetComponent<FireMissile>();
+    //             fireMissile.transform.position = fireMissileSpawnPos.transform.position;
+    //             fireMissile.transform.rotation = fireMissileSpawnPos.transform.rotation;
+    //             fireMissileComp.SetPool(fireMissilePool);
+    //         }
+    //     }
+    // }
+    private IEnumerator UseOrbitingKunai(int repeat = 1)
+    {
+        yield return waitMagic;
+        UtilityManager.utility.PlaySFX(warpSFX);
+
+        for (int i = 0; i < repeat; i++)
+        {
+            GameObject orbitingKunai = UtilityManager.utility.GetFromPool(orbitingKunaiPool, magicCountInPool);
+            if (orbitingKunai != null)
+            {
+                orbitingKunaiComp = orbitingKunai.GetComponent<OrbitingKunai>();
+                orbitingKunaiComp.SetPool(orbitingKunaiPool);
+            }
+        }
     }
     #endregion
 }
