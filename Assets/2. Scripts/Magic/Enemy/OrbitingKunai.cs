@@ -6,7 +6,7 @@ public class OrbitingKunai : MagicBase
     public MagicType magicType;
     private Vector2 moveDir;
     private Vector2 newVelocity;
-    private float lifeSpan = 5.0f;
+    private float lifeSpan = 3.0f;
 
     protected override void Start()
     {
