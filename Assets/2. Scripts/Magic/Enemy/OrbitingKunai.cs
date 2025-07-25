@@ -1,30 +1,30 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class FireCannon : MagicBase
+public class OrbitingKunai : MagicBase
 {
     public MagicType magicType;
     private Vector2 moveDir;
     private Vector2 newVelocity;
     private float lifeSpan = 5.0f;
-    private readonly int fireMagicOffHash = Animator.StringToHash("FireMagicOff");
 
     protected override void Start()
     {
         base.Start();
 
         damage = -10.0f;
+        moveSpeed = 3.0f;
     }
     protected override void FixedUpdate()
     {
         // 이동 로직 및 바라봄 축 설정
-        MoveMagic();
-
-        // 날아감에 따라 빨라짐
-        moveSpeed += Time.deltaTime * 3;
-
-        lifeSpan -= Time.deltaTime;
-        if(lifeSpan <= 0)
+        if (isLaunch)
+        {
+            MoveMagic();
+            lifeSpan -= Time.deltaTime;
+        }
+        
+        if (lifeSpan <= 0)
         {
             ReturnToOriginPool();
         }
@@ -34,7 +34,6 @@ public class FireCannon : MagicBase
     {
         originPool = pool;
         isPool = false;
-        moveSpeed = 1.0f;
         lifeSpan = 5.0f;
 
         moveDir = UtilityManager.utility.AllDirSet(PlayerCtrl.player.transform.position - transform.position);

@@ -108,7 +108,7 @@ public class FireBall : MagicBase
             rb2D.simulated = false;
             isLaunch = false;
             canAttack = false;
-            anim.SetTrigger(fireMagicOffHash);
+            anim.SetTrigger(magicOffHash);
         }
     }
     // FireMagicOff 애니메이션 이벤트로 재생

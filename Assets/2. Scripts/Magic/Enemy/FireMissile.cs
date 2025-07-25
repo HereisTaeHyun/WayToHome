@@ -116,7 +116,7 @@ public class FireMissile : MagicBase
             isPool = true;
             rb2D.linearVelocity = Vector2.zero;
             rb2D.simulated = false;
-            anim.SetTrigger(fireMagicOffHash);
+            anim.SetTrigger(magicOffHash);
         }
     }
     // FireMagicOff 애니메이션 이벤트로 재생

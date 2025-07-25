@@ -11,6 +11,7 @@ public enum MagicType
     BodyImpact,
     Poison,
     PoisonRain,
+    OrbitingKunai,
 }
 
 public class MagicBase : MonoBehaviour
@@ -23,6 +24,7 @@ public class MagicBase : MonoBehaviour
     protected Animator anim;
     protected Rigidbody2D rb2D;
     protected ObjectPool<GameObject> originPool;
+    protected readonly int magicOffHash = Animator.StringToHash("MagicOff");
 
     // moveSpeed, damage는 자식 객체에서 정할 것
     // isLaunch 플래그는 마법 타입에 따라 SetPool에서 결정할 것
