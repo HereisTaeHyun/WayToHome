@@ -244,24 +244,7 @@ public class MagicShopNPC_Boss : BossCtrl
         }
     }
 
-    // FireMissile 마법을 각 지정된 위치에 생성 및 초기화
-    // private IEnumerator UseFireMissile()
-    // {
-    //     yield return waitMagic;
-    //     UtilityManager.utility.PlaySFX(UseFireMagic);
-    //     foreach(Transform fireMissileSpawnPos in fireMissileSpawnPoses)
-    //     {
-    //         GameObject fireMissile = UtilityManager.utility.GetFromPool(fireMissilePool, 10);
-
-    //         if(fireMissile != null)
-    //         {
-    //             fireMissileComp = fireMissile.GetComponent<FireMissile>();
-    //             fireMissile.transform.position = fireMissileSpawnPos.transform.position;
-    //             fireMissile.transform.rotation = fireMissileSpawnPos.transform.rotation;
-    //             fireMissileComp.SetPool(fireMissilePool);
-    //         }
-    //     }
-    // }
+    // UOrbitingKunai 배치, 얘는 위치 셋업이 마법 쪽에서 이루어지니 소환까지만
     private IEnumerator UseOrbitingKunai(int repeat = 1)
     {
         yield return waitMagic;
