@@ -21,7 +21,7 @@ public class OrbitingKunai : MagicBase
         base.Start();
 
         damage = -10.0f;
-        moveSpeed = 10.0f;
+        moveSpeed = 8.0f;
     }
     protected override void FixedUpdate()
     {
@@ -65,17 +65,25 @@ public class OrbitingKunai : MagicBase
 
     public override void SetPool(ObjectPool<GameObject> pool)
     {
-        originPool = pool;
-        isPool = false;
-        lifeSpan = 3.0f;
+    originPool = pool;
+    isPool = false;
+    isLaunch = false;
+    isOrbit = true;
+    lifeSpan = 3.0f;
 
-        isLaunch = false;
-        isOrbit = true;
+    moveDir = Vector2.zero;
+    newVelocity = Vector2.zero;
+    orbitAngle = 0f;
 
-        orbitCenter = PlayerCtrl.player.transform.position + Vector3.up;
-        transform.position = orbitCenter + Vector2.right * orbitRadius;
+    // 위치 및 회전 초기화
+    transform.position = Vector3.zero;
+    transform.rotation = Quaternion.identity;
 
-        StartCoroutine(Aim());
+    // 궤도 중심 설정
+    orbitCenter = PlayerCtrl.player.transform.position + Vector3.up;
+    transform.position = orbitCenter + Vector2.right * orbitRadius;
+
+    StartCoroutine(Aim());
     }
 
     public void Fire()
@@ -94,7 +102,7 @@ public class OrbitingKunai : MagicBase
         }
     }
 
-    // Player, Wall, Ground 등에 닿으면 풀 리턴
+    // Player에 닿으면 공격
     protected override void OnTriggerStay2D(Collider2D other)
     {    
         if(GameManager.instance.readIsGameOver == false)
@@ -106,7 +114,6 @@ public class OrbitingKunai : MagicBase
                 if(PlayerCtrl.player.readIsInvincible != true)
                 {
                     PlayerCtrl.player.ChangeHP(damage);
-                    ReturnToOriginPool();
                 }
             }
         }
