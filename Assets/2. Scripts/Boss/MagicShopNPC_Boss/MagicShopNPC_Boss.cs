@@ -17,7 +17,7 @@ public class MagicShopNPC_Boss : BossCtrl
     [SerializeField] private List<MagicType> phase1UsingMagic;
     [SerializeField] private List<MagicType> phase2UsingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
-    private int magicCountInPool = 20;
+    private int magicCountInPool = 50;
 
     private static float MAGIC_WAIT_TIME = 0.5f; // 마법 사용과 애니메이션간 타이밍 맞추기에 사용
     private WaitForSeconds waitMagic;
@@ -50,7 +50,7 @@ public class MagicShopNPC_Boss : BossCtrl
 
         rageHP = maxHP * 0.6f;
 
-        coolTime = 5.0f;
+        coolTime = 10.0f;
         waitMagic = new WaitForSeconds(MAGIC_WAIT_TIME);
     }
 
@@ -258,9 +258,9 @@ public class MagicShopNPC_Boss : BossCtrl
             GameObject orbitingKunai = UtilityManager.utility.GetFromPool(orbitingKunaiPool, magicCountInPool);
             if (orbitingKunai != null)
             {
-                orbitingKunaiList.Add(orbitingKunaiComp);
                 orbitingKunaiComp = orbitingKunai.GetComponent<OrbitingKunai>();
                 orbitingKunaiComp.SetPool(orbitingKunaiPool);
+                orbitingKunaiList.Add(orbitingKunaiComp);
             }
             if (i < repeat - 1)
             {

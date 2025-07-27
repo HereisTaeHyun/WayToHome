@@ -14,6 +14,7 @@ public class OrbitingKunai : MagicBase
     private float orbitSpeed = 180.0f;
     private Vector2 orbitCenter;
     private bool isOrbit;
+    private float orbitAngle;
 
     protected override void Start()
     {
@@ -40,16 +41,24 @@ public class OrbitingKunai : MagicBase
     {
         while (isOrbit)
         {
-            // 바라봄 축 설정
-            moveDir = UtilityManager.utility.AllDirSet(PlayerCtrl.player.transform.position - transform.position);
-            float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+         // 바라봄 축 설정
+        moveDir = UtilityManager.utility.AllDirSet(PlayerCtrl.player.transform.position - transform.position);
+        float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            // 회전할 궤도 설정
-            orbitCenter = PlayerCtrl.player.transform.position + Vector3.up;
-            transform.RotateAround(orbitCenter, Vector3.forward, orbitSpeed * Time.deltaTime);
-            yield return null;
+        // 회전 궤도 설정
+        orbitCenter = PlayerCtrl.player.transform.position + Vector3.up;
+        orbitAngle += orbitSpeed * Time.deltaTime;
+
+        Vector2 offset = new Vector2(
+            Mathf.Cos(orbitAngle * Mathf.Deg2Rad),
+            Mathf.Sin(orbitAngle * Mathf.Deg2Rad)
+        ) * orbitRadius;
+        transform.position = (Vector2)orbitCenter + offset;
+
+        yield return null;
         }
+
 
         isLaunch = true;
     }
