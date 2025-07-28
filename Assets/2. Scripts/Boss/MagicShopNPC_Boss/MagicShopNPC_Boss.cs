@@ -22,7 +22,7 @@ public class MagicShopNPC_Boss : BossCtrl
     // 위치 저장 셋
     [SerializeField] private Transform flyingShurikenSpawnPos;
 
-    [SerializeField] private float warpCharginDistance;
+    [SerializeField] private float warpChargingDistance;
     [SerializeField] private float warpChargingTime;
     [SerializeField] private Transform warpPointSet;
     private List<Transform> warpPoints = new List<Transform>();
