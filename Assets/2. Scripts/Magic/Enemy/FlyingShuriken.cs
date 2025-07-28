@@ -12,6 +12,7 @@ public class FlyingShuriken : MagicBase
     private float orbitSpeed = 180.0f;
     private Vector2 orbitCenter;
     private bool isOrbit;
+    private bool ableReturn;
     private float orbitAngle;
 
 
@@ -48,10 +49,16 @@ public class FlyingShuriken : MagicBase
 
         lifeSpan = 6.0f;
         isOrbit = false;
+        ableReturn = false;
+
         startPos = castingPos;
+        targetPos = PlayerCtrl.player.transform.position;
 
         orbitCenter = (startPos + targetPos) * 0.5f;
         orbitRadius = Vector2.Distance(startPos, orbitCenter);
+
+        Vector2 dirToCenter = (startPos - orbitCenter).normalized;
+        orbitAngle = Mathf.Atan2(dirToCenter.y, dirToCenter.x) * Mathf.Rad2Deg;
 
         transform.position = Vector3.zero;
         transform.rotation = Quaternion.identity;
@@ -80,7 +87,11 @@ public class FlyingShuriken : MagicBase
         ) * orbitRadius;
         transform.position = orbitCenter + offset;
 
-        if (Vector2.Distance(transform.position, startPos) < 0.05f)
+        if (Vector2.Distance(transform.position, targetPos) < 0.05f)
+        {
+            ableReturn = true;
+        }
+        else if (Vector2.Distance(transform.position, startPos) < 0.05f && ableReturn == true)
         {
             ReturnToOriginPool();
             yield break;

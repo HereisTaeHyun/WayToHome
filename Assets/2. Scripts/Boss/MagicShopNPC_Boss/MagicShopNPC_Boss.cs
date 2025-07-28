@@ -12,18 +12,22 @@ public class MagicShopNPC_Boss : BossCtrl
     private Coroutine blinkRoutine;
 
     private ObjectPool<GameObject> orbitingKunaiPool;
+    private ObjectPool<GameObject> flyingShurikenPool;
 
     [SerializeField] private List<MagicType> usingMagic;
     [SerializeField] private List<MagicType> phase1UsingMagic;
-    [SerializeField] private List<MagicType> phase2UsingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
-    private int magicCountInPool = 50;
+    private int magicCountInPool = 20;
+
+    // 위치 저장 셋
+    [SerializeField] private Transform flyingShurikenSpawnPos;
 
     private static float MAGIC_WAIT_TIME = 0.5f; // 마법 사용과 애니메이션간 타이밍 맞추기에 사용
     private WaitForSeconds waitMagic;
 
     // 마법 개별 컴포넌트
     private OrbitingKunai orbitingKunaiComp;
+    private FlyingShuriken flyingShurikenComp;
 
     // 오디오 관련
     [SerializeField] private AudioClip warpSFX;
@@ -47,6 +51,7 @@ public class MagicShopNPC_Boss : BossCtrl
 
         // 마법 풀 생성
         UtilityManager.utility.CreatePool(ref orbitingKunaiPool, magicList[0], magicCountInPool, magicCountInPool);
+        UtilityManager.utility.CreatePool(ref flyingShurikenPool, magicList[1], magicCountInPool, magicCountInPool);
 
         rageHP = maxHP * 0.6f;
 
@@ -217,8 +222,6 @@ public class MagicShopNPC_Boss : BossCtrl
         }
         isRage = true;
         UtilityManager.utility.PlaySFX(rageSFX);
-        usingMagic = phase2UsingMagic;
-        moveSpeed = 5.0f;
         spriteRenderer.color = new Color32(255, 140, 140, 255);
     }
 
@@ -241,10 +244,13 @@ public class MagicShopNPC_Boss : BossCtrl
             case MagicType.OrbitingKunai:
                 StartCoroutine(UseOrbitingKunai());
                 break;
+            case MagicType.FlyingShuriken:
+                StartCoroutine(UseFlyingShuriken());
+                break;
         }
     }
 
-    // UOrbitingKunai 배치, 얘는 위치 셋업이 마법 쪽에서 이루어지니 소환까지만
+    // OrbitingKunai 배치, 얘는 위치 셋업이 마법 쪽에서 이루어지니 소환까지만
     private IEnumerator UseOrbitingKunai(int repeat = 10, float interval = 0.2f)
     {
         yield return waitMagic;
@@ -276,6 +282,20 @@ public class MagicShopNPC_Boss : BossCtrl
             {
                 kunai.Fire();
             }
+        }
+    }
+
+    // OrbitingKunai 배치, 얘는 위치 셋업이 마법 쪽에서 이루어지니 소환까지만
+    private IEnumerator UseFlyingShuriken()
+    {
+        yield return waitMagic;
+        UtilityManager.utility.PlaySFX(warpSFX);
+
+        GameObject flyingShuriken = UtilityManager.utility.GetFromPool(flyingShurikenPool, magicCountInPool);
+        if (flyingShuriken != null)
+        {
+            flyingShurikenComp = flyingShuriken.GetComponent<FlyingShuriken>();
+            flyingShurikenComp.SetPool(flyingShurikenPool, (Vector2)flyingShurikenSpawnPos.position);
         }
     }
     #endregion

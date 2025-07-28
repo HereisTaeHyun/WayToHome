@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -1950038489080210110}
   - component: {fileID: -3173161753509718200}
   - component: {fileID: 7717075167515464362}
+  - component: {fileID: -4313863930066437501}
   m_Layer: 0
   m_Name: FlyingShuriken
   m_TagString: Untagged
@@ -175,3 +176,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.8
+--- !u!114 &-4313863930066437501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087810266965711082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5786a015561cc9e45b4c3caf5a8f9b48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magicType: 9

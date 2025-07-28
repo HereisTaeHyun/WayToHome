@@ -12,6 +12,7 @@ public enum MagicType
     Poison,
     PoisonRain,
     OrbitingKunai,
+    FlyingShuriken,
 }
 
 public class MagicBase : MonoBehaviour
