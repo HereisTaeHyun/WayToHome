@@ -22,10 +22,13 @@ public class MagicShopNPC_Boss : BossCtrl
     // 위치 저장 셋
     [SerializeField] private Transform flyingShurikenSpawnPos;
 
-    [SerializeField] private float warpChargingDistance;
-    [SerializeField] private float warpChargingTime;
     [SerializeField] private Transform warpPointSet;
+    private float warpChargingDistance = 8.0f;
+    private float warpChargingTime = 10.0f;
     private List<Transform> warpPoints = new List<Transform>();
+    [SerializeField] private float distanceToPlayer;
+    [SerializeField] private bool isWarpCharging;
+    private int lastWarpIdx;
 
     private static float MAGIC_WAIT_TIME = 0.5f; // 마법 사용과 애니메이션간 타이밍 맞추기에 사용
     private WaitForSeconds waitMagic;
@@ -79,6 +82,13 @@ public class MagicShopNPC_Boss : BossCtrl
         {
             moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
             anim.SetFloat(dirHash, moveDir.x);
+
+            // 플레이어가 일정 거리 이내면 워프 준비
+            distanceToPlayer = Vector2.Distance(transform.position, PlayerCtrl.player.transform.position);
+            if (distanceToPlayer <= warpChargingDistance && isWarpCharging == false)
+            {
+                StartCoroutine(ChargingWarp());
+            }
         }
 
         if (canAttack == true && SeeingPlayer())
@@ -168,6 +178,41 @@ public class MagicShopNPC_Boss : BossCtrl
         yield return new WaitForSeconds(2.0f);
         gameObject.SetActive(false);
     }
+
+    #region 이동 관련(워프)
+    private IEnumerator ChargingWarp()
+    {
+        isWarpCharging = true;
+        float time = 0f;
+
+        while (time < warpChargingTime)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        UseWarp();
+    }
+
+    private void UseWarp()
+    {
+        isWarpCharging = false;
+
+        // 이동해야 하는 포인트 초기화
+        int warpPointIdx;
+        do
+        {
+            warpPointIdx = Random.Range(0, warpPoints.Count);
+        }
+        while (warpPointIdx == lastWarpIdx);
+        lastWarpIdx = warpPointIdx;
+
+        // 워프
+        Transform pointToWarp = warpPoints[warpPointIdx];
+        transform.position = pointToWarp.position;
+        UtilityManager.utility.PlaySFX(warpSFX);
+    }
+    #endregion
 
     #region 패턴 관련
     // 분노
