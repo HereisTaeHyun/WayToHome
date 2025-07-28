@@ -17,7 +17,7 @@ public class MagicShopNPC_Boss : BossCtrl
     [SerializeField] private List<MagicType> usingMagic;
     [SerializeField] private List<MagicType> phase1UsingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
-    private int magicCountInPool = 20;
+    private int magicCountInPool = 50;
 
     // 위치 저장 셋
     [SerializeField] private Transform flyingShurikenSpawnPos;
@@ -37,6 +37,7 @@ public class MagicShopNPC_Boss : BossCtrl
     private Vector2 moveDir;
     private readonly int moveOnHash = Animator.StringToHash("OnMove");
     private readonly int dieHash = Animator.StringToHash("Die");
+    private readonly int attackHash = Animator.StringToHash("Attack");
 
     protected override void Init()
     {
@@ -55,7 +56,7 @@ public class MagicShopNPC_Boss : BossCtrl
 
         rageHP = maxHP * 0.6f;
 
-        coolTime = 10.0f;
+        coolTime = 8.0f;
         waitMagic = new WaitForSeconds(MAGIC_WAIT_TIME);
     }
 
@@ -222,6 +223,9 @@ public class MagicShopNPC_Boss : BossCtrl
         }
         isRage = true;
         UtilityManager.utility.PlaySFX(rageSFX);
+
+        coolTime = 4.0f;
+
         spriteRenderer.color = new Color32(255, 140, 140, 255);
     }
 
@@ -239,23 +243,44 @@ public class MagicShopNPC_Boss : BossCtrl
         int magicIdx = Random.Range(0, usingMagic.Count);
         MagicType currentMagic = usingMagic[magicIdx];
 
-        switch (currentMagic)
+        if (isRage == false)
         {
-            case MagicType.OrbitingKunai:
-                StartCoroutine(UseOrbitingKunai());
-                break;
-            case MagicType.FlyingShuriken:
-                StartCoroutine(UseFlyingShuriken());
-                break;
+            switch (currentMagic)
+            {
+                case MagicType.OrbitingKunai:
+                    StartCoroutine(UseOrbitingKunai());
+                    anim.SetTrigger(attackHash);
+                    break;
+                case MagicType.FlyingShuriken:
+                    StartCoroutine(UseFlyingShuriken());
+                    anim.SetTrigger(attackHash);
+                    break;
+            }
+        }
+        else if (isRage == true)
+        {
+                switch (currentMagic)
+            {
+                case MagicType.OrbitingKunai:
+                    StartCoroutine(UseOrbitingKunai());
+                    anim.SetTrigger(attackHash);
+                    break;
+                case MagicType.FlyingShuriken:
+                    StartCoroutine(UseFlyingShuriken(3));
+                    anim.SetTrigger(attackHash);
+                    break;
+            }
         }
     }
 
     // OrbitingKunai 배치, 얘는 위치 셋업이 마법 쪽에서 이루어지니 소환까지만
     private IEnumerator UseOrbitingKunai(int repeat = 10, float interval = 0.2f)
     {
+        canMove = false;
         yield return waitMagic;
         WaitForSeconds wait = new WaitForSeconds(interval);
         UtilityManager.utility.PlaySFX(warpSFX);
+        canMove = true;
 
         List<OrbitingKunai> orbitingKunaiList = new List<OrbitingKunai>();
 
@@ -286,16 +311,26 @@ public class MagicShopNPC_Boss : BossCtrl
     }
 
     // OrbitingKunai 배치, 얘는 위치 셋업이 마법 쪽에서 이루어지니 소환까지만
-    private IEnumerator UseFlyingShuriken()
+    private IEnumerator UseFlyingShuriken(int repeat = 1, float interval = 0.2f)
     {
+        canMove = false;
         yield return waitMagic;
+        WaitForSeconds wait = new WaitForSeconds(interval);
         UtilityManager.utility.PlaySFX(warpSFX);
+        canMove = true;
 
-        GameObject flyingShuriken = UtilityManager.utility.GetFromPool(flyingShurikenPool, magicCountInPool);
-        if (flyingShuriken != null)
+        for (int i = 0; i < repeat; i++)
         {
-            flyingShurikenComp = flyingShuriken.GetComponent<FlyingShuriken>();
-            flyingShurikenComp.SetPool(flyingShurikenPool, (Vector2)flyingShurikenSpawnPos.position);
+            GameObject flyingShuriken = UtilityManager.utility.GetFromPool(flyingShurikenPool, magicCountInPool);
+            if (flyingShuriken != null)
+            {
+                flyingShurikenComp = flyingShuriken.GetComponent<FlyingShuriken>();
+                flyingShurikenComp.SetPool(flyingShurikenPool, (Vector2)flyingShurikenSpawnPos.position);
+            }
+            if (i < repeat - 1)
+            {
+                yield return wait;
+            }
         }
     }
     #endregion
