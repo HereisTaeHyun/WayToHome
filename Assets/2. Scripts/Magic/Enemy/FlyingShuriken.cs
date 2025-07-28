@@ -87,11 +87,11 @@ public class FlyingShuriken : MagicBase
         ) * orbitRadius;
         transform.position = orbitCenter + offset;
 
-        if (Vector2.Distance(transform.position, targetPos) < 0.05f)
+        if (Vector2.Distance(transform.position, targetPos) < 0.1f)
         {
             ableReturn = true;
         }
-        else if (Vector2.Distance(transform.position, startPos) < 0.05f && ableReturn == true)
+        else if (Vector2.Distance(transform.position, startPos) < 0.1f && ableReturn == true)
         {
             ReturnToOriginPool();
             yield break;
