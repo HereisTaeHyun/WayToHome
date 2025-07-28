@@ -37,7 +37,6 @@ public class MagicShopNPC_Boss : BossCtrl
     // 오디오 관련
     [SerializeField] private AudioClip warpSFX;
 
-    private Vector2 newVelocity;
     private Vector2 moveDir;
     private readonly int dieHash = Animator.StringToHash("Die");
     private readonly int attackHash = Animator.StringToHash("Attack");
