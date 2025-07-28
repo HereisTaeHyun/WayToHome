@@ -22,6 +22,11 @@ public class MagicShopNPC_Boss : BossCtrl
     // 위치 저장 셋
     [SerializeField] private Transform flyingShurikenSpawnPos;
 
+    [SerializeField] private float warpCharginDistance;
+    [SerializeField] private float warpChargingTime;
+    [SerializeField] private Transform warpPointSet;
+    private List<Transform> warpPoints = new List<Transform>();
+
     private static float MAGIC_WAIT_TIME = 0.5f; // 마법 사용과 애니메이션간 타이밍 맞추기에 사용
     private WaitForSeconds waitMagic;
 
@@ -32,10 +37,8 @@ public class MagicShopNPC_Boss : BossCtrl
     // 오디오 관련
     [SerializeField] private AudioClip warpSFX;
 
-    private bool isMove;
     private Vector2 newVelocity;
     private Vector2 moveDir;
-    private readonly int moveOnHash = Animator.StringToHash("OnMove");
     private readonly int dieHash = Animator.StringToHash("Die");
     private readonly int attackHash = Animator.StringToHash("Attack");
 
@@ -49,6 +52,11 @@ public class MagicShopNPC_Boss : BossCtrl
         Init();
 
         usingMagic = phase1UsingMagic;
+
+        foreach (Transform warpPoint in warpPointSet)
+        {
+            warpPoints.Add(warpPoint);
+        }
 
         // 마법 풀 생성
         UtilityManager.utility.CreatePool(ref orbitingKunaiPool, magicList[0], magicCountInPool, magicCountInPool);
@@ -70,7 +78,8 @@ public class MagicShopNPC_Boss : BossCtrl
 
         if (canMove)
         {
-            FollowingTarget(moveSpeed);
+            moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
+            anim.SetFloat(dirHash, moveDir.x);
         }
 
         if (canAttack == true && SeeingPlayer())
@@ -90,73 +99,21 @@ public class MagicShopNPC_Boss : BossCtrl
     protected IEnumerator EnterRoutine()
     {
         canAttack = false;
-        isMove = true;
-        anim.SetBool(moveOnHash, isMove);
-        anim.SetFloat(dirHash, moveDir.x);
 
-        while (Mathf.Abs(PlayerCtrl.player.transform.position.x - transform.position.x) > 8.0f)
-        {
-            newVelocity.Set(moveDir.x * moveSpeed, rb2D.linearVelocity.y);
-            rb2D.linearVelocity = newVelocity;
-            yield return null;
-        }
+        moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
+        anim.SetFloat(dirHash, moveDir.x);
 
         PlayerCtrl.player.playerMove.ForceIdle();
         PlayerCtrl.player.canMove = false;
 
-        isMove = false;
         canMove = false;
         rb2D.linearVelocity = Vector2.zero;
-        anim.SetBool(moveOnHash, isMove);
 
         yield return new WaitForSeconds(2.0f);
 
         PlayerCtrl.player.canMove = true;
         canMove = true;
         canAttack = true;
-    }
-
-
-    // 이동 및 점프 처리
-    // moveDir이 음수면 왼쪽 양수면 오른쪽
-    private void FollowingTarget(float moveSpeed)
-    {
-        // 타겟이 존재하고 살아 있을 경우 움직임
-        if (GameManager.instance.readIsGameOver == false && isDie == false)
-        {
-            // 플레이어가 존 내부면 moveSpeed만큼씩 이동 시작
-            if (SeeingPlayer())
-            {
-                // 움직이는 방향 벡터 받아 오기
-                moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
-
-                if (Math.Abs(PlayerCtrl.player.transform.position.x - transform.position.x) >= 0.15)
-                {
-                    // 움직임 적용
-                    isMove = true;
-
-                    anim.SetBool(moveOnHash, isMove);
-                    anim.SetFloat(dirHash, moveDir.x);
-
-                    newVelocity.Set(moveDir.x * moveSpeed, rb2D.linearVelocity.y);
-                    rb2D.linearVelocity = newVelocity;
-                }
-                else
-                {
-                    isMove = false;
-                    anim.SetBool(moveOnHash, isMove);
-
-                    newVelocity.Set(0f, rb2D.linearVelocity.y);
-                    rb2D.linearVelocity = newVelocity;
-                }
-            }
-        }
-        // 플레이어가 시야에 없으면 움직일 필요 없음
-        else
-        {
-            isMove = false;
-            anim.SetBool(moveOnHash, isMove);
-        }
     }
 
     // HP 변경 처리
@@ -310,8 +267,8 @@ public class MagicShopNPC_Boss : BossCtrl
         }
     }
 
-    // OrbitingKunai 배치, 얘는 위치 셋업이 마법 쪽에서 이루어지니 소환까지만
-    private IEnumerator UseFlyingShuriken(int repeat = 1, float interval = 0.2f)
+    // FlyingShuriken 배치
+    private IEnumerator UseFlyingShuriken(int repeat = 1, float interval = 0.4f)
     {
         canMove = false;
         yield return waitMagic;
