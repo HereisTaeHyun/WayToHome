@@ -87,11 +87,6 @@ public class FireBall : MagicBase
                 isHited = true;
                 GetHit(-1);
             }
-            // 플레이어에게 맞고 튕겨져 나간 파이어볼이 적과 부딪힘
-            else if(other.gameObject.CompareTag("Enemy") && isHited == true)
-            {
-                GetHit(-2);
-            }
         }
     }
 

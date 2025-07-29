@@ -134,10 +134,21 @@ public class MagicianCtrl : BossCtrl
     protected IEnumerator EnterRoutine()
     {
         canAttack = false;
+
+        moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
+        anim.SetFloat(dirHash, moveDir.x);
+
+        PlayerCtrl.player.playerMove.ForceIdle();
+        PlayerCtrl.player.canMove = false;
+
         canMove = false;
+        rb2D.linearVelocity = Vector2.zero;
+
         yield return new WaitForSeconds(2.0f);
-        canAttack = true;
+
+        PlayerCtrl.player.canMove = true;
         canMove = true;
+        canAttack = true;
     }
 
 
