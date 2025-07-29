@@ -31,7 +31,7 @@ public class MagicianCtrl : BossCtrl
     private int lastWarpIdx;
 
 
-    private Transform magicSpawnPosSet;
+    [SerializeField] private Transform magicSpawnPosSet;
     private List<Transform> magicSpawnPoses = new List<Transform>();
     private Transform magicSpawnPos;
 
@@ -70,7 +70,6 @@ public class MagicianCtrl : BossCtrl
         // 공격 관련 초기화
         usingMagic = phase1UsingMagic;
         magicianMeleeAttack = GetComponent<MagicianMeleeAttack>();
-        magicSpawnPosSet = transform.Find("MagicSpawnPosSet");
 
         foreach (Transform elem in magicSpawnPosSet)
         {
