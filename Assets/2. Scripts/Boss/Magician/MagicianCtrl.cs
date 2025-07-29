@@ -4,11 +4,20 @@ using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
+using System;
 
 public class MagicianCtrl : BossCtrl
 {
     // public 변수
     // private 변수
+
+    public enum MagicainState
+    {
+        Idle,
+        OnFly,
+    }
+    [NonSerialized] public MagicainState magicainState;
+
     private Coroutine blinkRoutine;
 
     private float rageHP;
@@ -39,7 +48,6 @@ public class MagicianCtrl : BossCtrl
 
     
     private ObjectPool<GameObject> fireBallPool;
-
     private FireBall fireBallComp;
 
 
@@ -61,6 +69,8 @@ public class MagicianCtrl : BossCtrl
     {
         Init();
 
+        magicainState = MagicainState.Idle;
+
         
         foreach (Transform warpPoint in warpPointSet)
         {
@@ -78,6 +88,7 @@ public class MagicianCtrl : BossCtrl
 
         UtilityManager.utility.CreatePool(ref fireBallPool, magicList[0], magicCountInPool, magicCountInPool);
 
+        rageHP = maxHP * 0.6f;
         canAttack = true;
         coolTime = 2.0f;
 
