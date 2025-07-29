@@ -96,7 +96,7 @@ public class PlayerCtrl : MonoBehaviour
     protected readonly int takeHitHash = Animator.StringToHash("TakeHit");
     #endregion
 
-    #region 초기화
+    #region Init
     // 싱글톤 선언
     public static PlayerCtrl player = null;
     void Awake()
@@ -237,7 +237,7 @@ public class PlayerCtrl : MonoBehaviour
     }
     #endregion
 
-    #region 입력 감지
+    #region InputSyetem
     private void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -306,7 +306,7 @@ public class PlayerCtrl : MonoBehaviour
     }
     #endregion
 
-    #region Unity 제공 메서드
+    #region Unity Method
     void Start()
     {
         DisplayHP();
@@ -351,7 +351,7 @@ public class PlayerCtrl : MonoBehaviour
     }
     #endregion
 
-    #region 체력, 게임 오버 관련
+    #region HP & GameOver
     // 플레이어 체력 수정
     public void ChangeHP(float value)
     {
@@ -421,7 +421,7 @@ public class PlayerCtrl : MonoBehaviour
     }
     #endregion
 
-    #region UI 관련
+    #region UI
     public void DisplayHP()
     {
         hpBar.fillAmount = currentHP / maxHP;
@@ -489,7 +489,7 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    #region 스탯
+    #region StatChange
     // Stat 수정 관련
 
     private void ShowStatChange(string message)

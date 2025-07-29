@@ -342,7 +342,7 @@ private readonly int dieHash = Animator.StringToHash("Die");
 
 #endregion
 
-#region 패턴
+#region Pattern
     // 마법 공격 후 일정 시간 동안 쿨타임 처리
     private IEnumerator CoolTimeCheck()
     {

@@ -78,7 +78,7 @@ public class DataManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    #region 세이브로드
+    #region Save & Load
     public void Save()
     {
         playerData.maxHP = PlayerCtrl.player.maxHP;
@@ -139,7 +139,7 @@ public class DataManager : MonoBehaviour
     }
     #endregion
 
-    #region 암복호화
+    #region Crypt
     private void InitCrypto()
     {
         if (File.Exists(keyPath) && File.Exists(ivPath))

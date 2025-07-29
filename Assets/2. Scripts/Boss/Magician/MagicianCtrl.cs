@@ -156,7 +156,7 @@ public class MagicianCtrl : BossCtrl
     }
 
 
-    #region 이동 관련(워프)
+    #region Movement & Position
     private IEnumerator ChargingWarp()
     {
         isWarpCharging = true;
@@ -191,7 +191,7 @@ public class MagicianCtrl : BossCtrl
     }
     #endregion
 
-    #region 패텬 관련
+    #region Pattern
     // 분노
     private void GetRage()
     {

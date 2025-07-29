@@ -237,7 +237,7 @@ public class MamaMush : BossCtrl
         gameObject.SetActive(false);
     }
 
-    #region 패턴 관련
+    #region Pattern
     // 분노
     private void GetRage()
     {

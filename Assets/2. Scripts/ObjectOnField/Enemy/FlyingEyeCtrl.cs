@@ -75,7 +75,7 @@ public class FlyingEyeCtrl : EnemyCtrl
         return base.ItemDrop(item);
     }
 
-#region 사망 처리 관련
+#region Die
     // 사망 처리
     protected override void EnemyDie()
     {

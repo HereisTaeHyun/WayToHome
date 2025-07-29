@@ -78,7 +78,7 @@ public class MagicShopNPC_Boss : BossCtrl
     void Update()
     {
         moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
-        
+
         // 보스 또는 플레이어가 사망이면 return
         if (GameManager.instance.readIsGameOver == true || isDie == true)
         {
@@ -185,7 +185,7 @@ public class MagicShopNPC_Boss : BossCtrl
         gameObject.SetActive(false);
     }
 
-    #region 이동 관련(워프)
+    #region Movement & Position
     private IEnumerator ChargingWarp()
     {
         isWarpCharging = true;
@@ -220,7 +220,7 @@ public class MagicShopNPC_Boss : BossCtrl
     }
     #endregion
 
-    #region 패턴 관련
+    #region Pattern
     // 분노
     private void GetRage()
     {
