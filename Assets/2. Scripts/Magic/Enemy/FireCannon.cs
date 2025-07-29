@@ -6,7 +6,7 @@ public class FireCannon : MagicBase
     public MagicType magicType;
     private Vector2 moveDir;
     private Vector2 newVelocity;
-    private float lifeSpan = 5.0f;
+    private float lifeSpan = 8.0f;
     private readonly int fireMagicOffHash = Animator.StringToHash("FireMagicOff");
 
     protected override void Start()
@@ -17,6 +17,9 @@ public class FireCannon : MagicBase
     }
     protected override void FixedUpdate()
     {
+        // 날아감에 따라 빨라짐
+        moveSpeed += Time.deltaTime * 3;
+
         // 이동 로직 및 바라봄 축 설정
         MoveMagic();
 

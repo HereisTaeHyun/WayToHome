@@ -95,14 +95,13 @@ public class MagicianCtrl : BossCtrl
     void Update()
     {
         moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
+        distanceToPlayer = Vector2.Distance(transform.position, PlayerCtrl.player.transform.position);
 
         // 게임 오버나 스턴이 아닐 경우 행동
         if (GameManager.instance.readIsGameOver == true || isDie == true)
         {
             return;
         }
-
-        distanceToPlayer = Vector2.Distance(transform.position, PlayerCtrl.player.transform.position);
 
         if (canMove)
         {
