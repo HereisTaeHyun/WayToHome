@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MeleeAttack
@@ -19,6 +20,8 @@ public class PlayerAttack : MeleeAttack
 
     // 마법 관련
     private GameObject selectedMagic;
+
+    [SerializeField] private List<Transform> magicSpawnPoses;
     public Transform magicSpawnPos { get; private set; }
 
     public override void Init()
@@ -28,7 +31,6 @@ public class PlayerAttack : MeleeAttack
         attackCollier.SetActive(false);
         canAttack = true;
 
-        magicSpawnPos = transform.Find("MagicSpawnPos").transform;
         StartCoroutine(PlayerCtrl.player.InvokeSelectMagic(PlayerCtrl.player.playerAttack.selectedMagicIdx));
     }
 
@@ -53,27 +55,37 @@ public class PlayerAttack : MeleeAttack
         // 공격 방향 설정
         Vector2 attackDir = PlayerCtrl.player.lastMoveDir;
 
-            // 공격시 해당 위치에 정지
-            canAttack = false;
-            PlayerCtrl.player.playerAnim.SetFloat(speedHash, 0.0f);
-            PlayerCtrl.player.canMove = false;
-            rb2D.linearVelocity = Vector2.zero;
-            rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        // 공격시 해당 위치에 정지
+        canAttack = false;
+        PlayerCtrl.player.playerAnim.SetFloat(speedHash, 0.0f);
+        PlayerCtrl.player.canMove = false;
+        rb2D.linearVelocity = Vector2.zero;
+        rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 
-            // 공격 방향에 따른 attackCollier 위치 결정
-            attackCollierPos = attackCollier.transform.localPosition;
-            attackCollierPos.x = Mathf.Abs(attackCollierPos.x) * attackDir.x;
-            attackCollier.transform.localPosition = attackCollierPos;
+        // 공격 방향에 따른 attackCollier 위치 결정
+        attackCollierPos = attackCollier.transform.localPosition;
+        attackCollierPos.x = Mathf.Abs(attackCollierPos.x) * attackDir.x;
+        attackCollier.transform.localPosition = attackCollierPos;
 
-            // 공격 활성화
-            PlayerCtrl.player.playerAnim.SetTrigger(attackHash);
-            PlayerCtrl.player.playerAnim.SetFloat(attackDirHash, attackDir.x);
+        // 공격 방향에 따른 magicSpawnPos 위치 결정
+        if(attackDir.x < 0)
+        {
+            magicSpawnPos = magicSpawnPoses[0];
+        }
+        else if(attackDir.x > 0)
+        {
+            magicSpawnPos = magicSpawnPoses[1];
+        }
 
-            // 마법 사용 가능이면 마법 시행
-            if (PlayerCtrl.player.isMagic == true)
-            {
-                StartCoroutine(CastMagic());
-            }
+        // 공격 활성화
+        PlayerCtrl.player.playerAnim.SetTrigger(attackHash);
+        PlayerCtrl.player.playerAnim.SetFloat(attackDirHash, attackDir.x);
+
+        // 마법 사용 가능이면 마법 시행
+        if (PlayerCtrl.player.isMagic == true)
+        {
+            StartCoroutine(CastMagic());
+        }
     }
     // 공격 coll 설정은 animation event로 사용 중
     protected override void EnableAttackCollider()
