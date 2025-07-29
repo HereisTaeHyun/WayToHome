@@ -9,8 +9,7 @@ using System;
 public class MagicianCtrl : BossCtrl
 {
     // public 변수
-    // private 변수
-
+    // 지상에 있는가, 비행인가, 분노인가 아닌가에 따라 패턴 나눌 예정
     public enum MagicainState
     {
         Idle,
@@ -18,6 +17,7 @@ public class MagicianCtrl : BossCtrl
     }
     [NonSerialized] public MagicainState magicainState;
 
+    // private 변수
     private Coroutine blinkRoutine;
 
     private float rageHP;
