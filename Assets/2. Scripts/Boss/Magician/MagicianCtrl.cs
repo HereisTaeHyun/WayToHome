@@ -9,7 +9,6 @@ public class MagicianCtrl : BossCtrl
 {
     // public 변수
     // private 변수
-    [SerializeField] protected float stunTime;
     private Coroutine blinkRoutine;
 
     private float rageHP;
@@ -44,16 +43,12 @@ public class MagicianCtrl : BossCtrl
     private FireBall fireBallComp;
 
 
-    [SerializeField] float meleeAtackRange;
+    [SerializeField] float meleeAttackRange;
     [SerializeField] private AudioClip warpSFX;
-    [SerializeField] private AudioClip stunSFX;
     private readonly int dieHash = Animator.StringToHash("Die");
 
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
-    private readonly int stunHash = Animator.StringToHash("Stun");
-
     [SerializeField] protected float damage;
-    private bool isStun;
 
     public float readDamage {get {return damage;}}
     
@@ -96,10 +91,12 @@ public class MagicianCtrl : BossCtrl
     void Update()
     {
         // 게임 오버나 스턴이 아닐 경우 행동
-        if(GameManager.instance.readIsGameOver == true || isStun == true || isDie == true)
+        if(GameManager.instance.readIsGameOver == true || isDie == true)
         {
             return;
         }
+
+        distanceToPlayer = Vector2.Distance(transform.position, PlayerCtrl.player.transform.position);
 
         if (canMove)
         {
@@ -107,17 +104,24 @@ public class MagicianCtrl : BossCtrl
             anim.SetFloat(dirHash, moveDir.x);
 
             // 플레이어가 일정 거리 이내면 워프 준비
-            distanceToPlayer = Vector2.Distance(transform.position, PlayerCtrl.player.transform.position);
             if (distanceToPlayer <= warpChargingDistance && isWarpCharging == false)
             {
                 StartCoroutine(ChargingWarp());
             }
         }
 
-        if (canAttack == true && SeeingPlayer())
+        if (canAttack && SeeingPlayer())
         {
-            // 공격 후 다음 공격까지 휴식
-            UseRandomMagic();
+
+            if (distanceToPlayer <= meleeAttackRange)
+            {
+                MeleeAttackAble(moveDir);
+            }
+            else
+            {
+                UseRandomMagic();
+            }
+            // 공격 실행 후 쿨타임 진입
             StartCoroutine(CoolTimeCheck());
         }
     }
@@ -134,20 +138,6 @@ public class MagicianCtrl : BossCtrl
         yield return new WaitForSeconds(2.0f);
         canAttack = true;
         canMove = true;
-    }
-
-
-    // 특정 체력마다 스턴 발생
-    private IEnumerator StunTimer()
-    {
-        isStun = true;
-        anim.SetBool(stunHash, true);
-        UtilityManager.utility.PlaySFX(stunSFX);
-
-        yield return new WaitForSeconds(stunTime);
-
-        isStun = false;
-        anim.SetBool(stunHash, false);
     }
 
 

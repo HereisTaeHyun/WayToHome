@@ -385,17 +385,14 @@ MonoBehaviour:
   enemyGetHitSFX: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
   enemyDieSFX: {fileID: 8300000, guid: 566d2ea6240b489479a6e9fd608c2621, type: 3}
   bossRoomSensor: {fileID: 0}
-  stunTime: 3
   rageSFX: {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
   usingMagic: 
   phase1UsingMagic: 00000000
   magicList:
   - {fileID: 7442625623315705553, guid: 455d84a056f7a404dbf2019e3d50d4c9, type: 3}
   warpPointSet: {fileID: 0}
-  meleeAtackRange: 0
+  meleeAttackRange: 4
   warpSFX: {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
-  stunSFX: {fileID: 8300000, guid: 5c7b6d4002009e842bd2621585546d19, type: 3}
-  fireBall: {fileID: 7442625623315705553, guid: 455d84a056f7a404dbf2019e3d50d4c9, type: 3}
   damage: -10
 --- !u!114 &1595233922274359546
 MonoBehaviour:
