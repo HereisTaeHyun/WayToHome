@@ -64,11 +64,11 @@ public class PlayerCtrl : MonoBehaviour
     // UI 관련
     private Image hpBar;
     private Image manaBar;
-    TextMeshProUGUI hpText;
-    TextMeshProUGUI manaText;
-    TextMeshProUGUI moneyText;
-    TextMeshProUGUI damageText;
-    // private float fadeOutTime = 1.5f;
+    private TextMeshProUGUI hpText;
+    private TextMeshProUGUI manaText;
+    private TextMeshProUGUI moneyText;
+    private TextMeshProUGUI damageText;
+    [SerializeField] private TextMeshProUGUI statText;
 
     // 무적 관련
     private bool damageInvincible;

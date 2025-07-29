@@ -9,11 +9,11 @@ public class PlayerAttack : MeleeAttack
     // 마법 관련
     public GameObject[] usingMagic = new GameObject[2];
     public int selectedMagicIdx;
-    public int maxMagic = 20;
 
     // private 변수
     [SerializeField] private AudioClip attackSFX;
     private bool canAttack;
+    private int maxMagic = 20;
     private float postAttackDelayTime = 0.25f;
     private readonly int speedHash = Animator.StringToHash("Speed");
 
