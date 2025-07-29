@@ -492,10 +492,24 @@ public class PlayerCtrl : MonoBehaviour
     #region 스탯
     // Stat 수정 관련
 
+    private void ShowStatChange(string message)
+    {
+        statText.text = message;
+        StopCoroutine(nameof(ClearStatText));
+        StartCoroutine(ClearStatText());
+    }
+
+    private IEnumerator ClearStatText()
+    {
+        yield return new WaitForSeconds(2.0f);
+        statText.text = "";
+    }
     public void MaxHpPlus()
     {
         maxHP += 10;
         currentHP += 10;
+
+        ShowStatChange("MaxHP +");
         DisplayHP();
         UtilityManager.utility.PlaySFX(maxHPPlusSFX);
     }
@@ -503,6 +517,8 @@ public class PlayerCtrl : MonoBehaviour
     {
         maxMana += 10;
         currentMana += 10;
+
+        ShowStatChange("MaxMana +");
         DisplayMana();
         UtilityManager.utility.PlaySFX(maxHPPlusSFX);
     }
@@ -515,6 +531,8 @@ public class PlayerCtrl : MonoBehaviour
     public void DamagePlus()
     {
         playerAttack.attackDamage -= 5;
+
+        ShowStatChange("Damage +");
         DisplayDamage();
         UtilityManager.utility.PlaySFX(attackPlusSFX);
     }
@@ -522,6 +540,8 @@ public class PlayerCtrl : MonoBehaviour
     public void MaxJumpPlus()
     {
         playerMove.maxJump += 1;
+
+        ShowStatChange("MaxJump +");
         UtilityManager.utility.PlaySFX(jumpPlusSFX);
     }
     #endregion
