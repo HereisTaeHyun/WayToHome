@@ -26,8 +26,8 @@ public class MagicShopNPC_Boss : BossCtrl
     private float warpChargingDistance = 8.0f;
     private float warpChargingTime = 10.0f;
     private List<Transform> warpPoints = new List<Transform>();
-    [SerializeField] private float distanceToPlayer;
-    [SerializeField] private bool isWarpCharging;
+    private float distanceToPlayer;
+    private bool isWarpCharging;
     private int lastWarpIdx;
 
     private static float MAGIC_WAIT_TIME = 0.5f; // 마법 사용과 애니메이션간 타이밍 맞추기에 사용
@@ -68,6 +68,11 @@ public class MagicShopNPC_Boss : BossCtrl
 
         coolTime = 8.0f;
         waitMagic = new WaitForSeconds(MAGIC_WAIT_TIME);
+
+        if (DataManager.dataManager.playerData.diedEnemy.Contains(enemyID))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     void Update()

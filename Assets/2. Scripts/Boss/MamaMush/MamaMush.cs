@@ -75,6 +75,11 @@ public class MamaMush : BossCtrl
         coolTime = 5.0f;
         poisonRainParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         poisonSpawnAreaCollider = poisonRainSpawnArea.GetComponent<BoxCollider2D>();
+
+        if (DataManager.dataManager.playerData.diedEnemy.Contains(enemyID))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     void Update()

@@ -10,35 +10,62 @@ public class MagicianCtrl : BossCtrl
     // public 변수
     // private 변수
     [SerializeField] protected float stunTime;
-    [SerializeField] protected float scanningRadius = 10.0f;
-    private float distance;
-    [SerializeField] private Transform warpPointSet;
-    private List<Transform> warpPoints = new List<Transform>();
+    private Coroutine blinkRoutine;
+
+    private float rageHP;
+    [SerializeField] AudioClip rageSFX;
+
+
     private MagicianMeleeAttack magicianMeleeAttack;
+
+    [SerializeField] private List<MagicType> usingMagic;
+    [SerializeField] private List<MagicType> phase1UsingMagic;
+    [SerializeField] private List<GameObject> magicList = new List<GameObject>();
+    private int magicCountInPool = 20;
+
+    [SerializeField] private Transform warpPointSet;
+    private float warpChargingDistance = 8.0f;
+    private float warpChargingTime = 10.0f;
+    private List<Transform> warpPoints = new List<Transform>();
+    private float distanceToPlayer;
+    private bool isWarpCharging;
+    private int lastWarpIdx;
+
+
     private Transform magicSpawnPosSet;
     private List<Transform> magicSpawnPoses = new List<Transform>();
     private Transform magicSpawnPos;
-    private ObjectPool<GameObject> magicPool;
-    private int maxMagic = 3;
+
+    private Vector2 moveDir;
+
+    
+    private ObjectPool<GameObject> fireBallPool;
+
     private FireBall fireBallComp;
-    private bool isStun;
-    private int maxMagicResist = 3;
-    private int getHitbyMagic; // 일정 이상 마법에 타격시 isStun
-    [SerializeField] float melleAttackRange;
+
+
+    [SerializeField] float meleeAtackRange;
     [SerializeField] private AudioClip warpSFX;
     [SerializeField] private AudioClip stunSFX;
-    [SerializeField] private GameObject fireBall;
     private readonly int dieHash = Animator.StringToHash("Die");
 
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
     private readonly int stunHash = Animator.StringToHash("Stun");
 
     [SerializeField] protected float damage;
-    public float readDamage {get {return damage;}}
+    private bool isStun;
 
+    public float readDamage {get {return damage;}}
+    
     protected override void Init()
     {
         base.Init();
+    }
+
+    void Start()
+    {
+        Init();
+
         
         foreach (Transform warpPoint in warpPointSet)
         {
@@ -46,27 +73,24 @@ public class MagicianCtrl : BossCtrl
         }
 
         // 공격 관련 초기화
+        usingMagic = phase1UsingMagic;
         magicianMeleeAttack = GetComponent<MagicianMeleeAttack>();
         magicSpawnPosSet = transform.Find("MagicSpawnPosSet");
+
         foreach (Transform elem in magicSpawnPosSet)
         {
             magicSpawnPoses.Add(elem);
         }
 
-        UtilityManager.utility.CreatePool(ref magicPool, fireBall, maxMagic, maxMagic);
+        UtilityManager.utility.CreatePool(ref fireBallPool, magicList[0], magicCountInPool, magicCountInPool);
 
         canAttack = true;
         coolTime = 2.0f;
-        
+
         if (DataManager.dataManager.playerData.diedEnemy.Contains(enemyID))
         {
             gameObject.SetActive(false);
         }
-    }
-
-    void Start()
-    {
-        Init();
     }
 
     void Update()
@@ -77,29 +101,24 @@ public class MagicianCtrl : BossCtrl
             return;
         }
 
-        // distance에 따라 행동 분리
-        distance = Vector2.Distance(PlayerCtrl.player.transform.position, transform.position);
-
-        if(distance > scanningRadius)
+        if (canMove)
         {
-            Warp();
+            moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
+            anim.SetFloat(dirHash, moveDir.x);
+
+            // 플레이어가 일정 거리 이내면 워프 준비
+            distanceToPlayer = Vector2.Distance(transform.position, PlayerCtrl.player.transform.position);
+            if (distanceToPlayer <= warpChargingDistance && isWarpCharging == false)
+            {
+                StartCoroutine(ChargingWarp());
+            }
         }
-        if(distance <= scanningRadius)
-        {
-            // radious 내부라면 바라보기 + 공격
-            Vector2 moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
-            anim.SetFloat(moveDirHash, moveDir.x);
 
-            // 사거리 내부면 근접 공격, 외부면 마법 공격
-            if(distance < melleAttackRange && canAttack == true)
-            {
-                MeleeAttackAble(moveDir);
-            }
-            else if(distance > melleAttackRange && canAttack == true)
-            {
-                UseFireBall();
-                StartCoroutine(CoolTimeCheck());
-            }
+        if (canAttack == true && SeeingPlayer())
+        {
+            // 공격 후 다음 공격까지 휴식
+            UseRandomMagic();
+            StartCoroutine(CoolTimeCheck());
         }
     }
 
@@ -117,25 +136,9 @@ public class MagicianCtrl : BossCtrl
         canMove = true;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("FireBall"))
-        {
-            fireBallComp = collision.gameObject.GetComponent<FireBall>();
-            if(fireBallComp.isHited == true)
-            {
-                ChangeHP(-0.00001f);
-                getHitbyMagic += 1;
-                if(getHitbyMagic == maxMagicResist)
-                {
-                    StartCoroutine(MagicStunTimer());
-                }
-            }
-        }
-    }
 
-    // 마법에 연속해서 맞으면 스턴 발생
-    IEnumerator MagicStunTimer()
+    // 특정 체력마다 스턴 발생
+    private IEnumerator StunTimer()
     {
         isStun = true;
         anim.SetBool(stunHash, true);
@@ -145,45 +148,105 @@ public class MagicianCtrl : BossCtrl
 
         isStun = false;
         anim.SetBool(stunHash, false);
-        getHitbyMagic = 0;
     }
 
-    private void Warp()
-    {
-        // 이동해야 하는 포인트 초기화
-        Transform pointAbleAttack = null;
 
-        // 이동 가능한 포인트 순회
-        foreach(Transform point in warpPoints)
+    #region 이동 관련(워프)
+    private IEnumerator ChargingWarp()
+    {
+        isWarpCharging = true;
+        float time = 0f;
+
+        while (time < warpChargingTime)
         {
-            // 포인트가 타겟을 공격 가능한 거리에 있게 하면 변수에 할당
-            float currentChecking = Vector2.Distance(PlayerCtrl.player.transform.position, point.position);
-            if(currentChecking < scanningRadius)
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        UseWarp();
+    }
+
+    private void UseWarp()
+    {
+        isWarpCharging = false;
+
+        // 이동해야 하는 포인트 초기화
+        int warpPointIdx;
+        do
+        {
+            warpPointIdx = Random.Range(0, warpPoints.Count);
+        }
+        while (warpPointIdx == lastWarpIdx);
+        lastWarpIdx = warpPointIdx;
+
+        // 워프
+        Transform pointToWarp = warpPoints[warpPointIdx];
+        transform.position = pointToWarp.position;
+        UtilityManager.utility.PlaySFX(warpSFX);
+    }
+    #endregion
+
+    #region 패텬 관련
+        // 분노
+    private void GetRage()
+    {
+        if (blinkRoutine != null)
+        {
+            StopCoroutine(blinkRoutine);
+        }
+        isRage = true;
+        UtilityManager.utility.PlaySFX(rageSFX);
+
+        coolTime = 4.0f;
+
+        spriteRenderer.color = new Color32(255, 140, 140, 255);
+    }
+
+    // 마법 공격 후 일정 시간 동안 쿨타임 처리
+    private IEnumerator CoolTimeCheck()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(coolTime);
+        canAttack = true;
+    }
+
+    // 마법을 선택 후 스위칭하여 마법 함수 실행
+    private void UseRandomMagic()
+    {
+        int magicIdx = Random.Range(0, usingMagic.Count);
+        MagicType currentMagic = usingMagic[magicIdx];
+
+        if (isRage == false)
+        {
+            switch (currentMagic)
             {
-                pointAbleAttack = point;
+                case MagicType.FireBall:
+                    UseFireBall();
+                    break;
             }
         }
-
-        // 할당된 변수로 이동
-        if(pointAbleAttack != null)
+        else if (isRage == true)
         {
-            UtilityManager.utility.PlaySFX(warpSFX);
-            transform.position = pointAbleAttack.position;
+        switch (currentMagic)
+            {
+                case MagicType.FireBall:
+                    UseFireBall();
+                    break;
+            }
         }
     }
-
     // 마법 공격
     private void UseFireBall()
     {
         // 풀 오브젝트 가져오기
-        GameObject fireBall = UtilityManager.utility.GetFromPool(magicPool, maxMagic);
+        GameObject fireBall = UtilityManager.utility.GetFromPool(fireBallPool, magicCountInPool);
 
-        if(fireBall != null)
-        { 
+        if (fireBall != null)
+        {
             fireBallComp = fireBall.GetComponent<FireBall>();
 
             // fireBall에개 돌아와야 하는 풀 전달하기, 초기화
-            fireBallComp.SetPool(magicPool);
+            fireBallComp.SetPool(fireBallPool);
 
             // 파이어볼 셋업
             int idx = Random.Range(0, magicSpawnPoses.Count);
@@ -199,22 +262,33 @@ public class MagicianCtrl : BossCtrl
         magicianMeleeAttack.Attack();
         anim.SetFloat(moveDirHash, moveDir.x);
     }
-
-    private IEnumerator CoolTimeCheck()
-    {
-        canAttack = false;
-        yield return new WaitForSeconds(coolTime);
-        canAttack = true;
-    }
+    #endregion
 
     // HP 변경 처리
     public override void ChangeHP(float value)
     {
-
-        StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, blinkTime));
-
         currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
+
+        // 타격 벡터 계산 및 sfx, anim 재생
+        Vector2 hitVector = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
         UtilityManager.utility.PlaySFX(enemyGetHitSFX);
+
+        if (blinkRoutine != null)
+        {
+            StopCoroutine(blinkRoutine);
+        }
+        blinkRoutine = StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, blinkTime));
+
+        if (currentHP % 100 == 0)
+        {
+            anim.SetTrigger(hitTrigger);
+            anim.SetFloat(hitHash, hitVector.x);
+        }
+
+        if (isRage == false && currentHP <= rageHP)
+        {
+            GetRage();
+        }
 
         // 체력 0 이하면 사망처리
         if (currentHP <= 0)
