@@ -8,91 +8,113 @@ using Unity.Cinemachine;
 
 public class DragonCtrl : BossCtrl
 {
-    // public 변수
-    public enum DragonState
-    {
-        Idle,
-        StartFly,
-        OnFly,
-        EndFly,
-    }
-    [NonSerialized] public DragonState dragonState;
+#region Dragon State
+public enum DragonState
+{
+    Idle,
+    StartFly,
+    OnFly,
+    EndFly,
+}
+[NonSerialized] public DragonState dragonState;
+#endregion
 
-    // private 변수
+#region Portal
+[Header("Portal References")]
+[SerializeField] private GameObject portalOnScene;
+private GameObject portalSpawnPoint;
+#endregion
 
-    // 죽으면 Set할 포탈, 씬에 있는 active false해 둔 포탈임, 프레팝 아님
-    [SerializeField] private GameObject portalOnScene;
-    private GameObject portalSpawnPoint;
+#region Movement & Position
+private Vector2 seeDir;
+private Vector2 moveDir;
 
-    // 이동 및 상태 관련 변수
-    private Vector2 seeDir;
-    private Vector2 moveDir;
+[Header("Standing Positions")]
+[SerializeField] private Transform standingPosSet;
+private List<Transform> standingPoses = new List<Transform>();
 
-    [SerializeField] private Transform standingPosSet;
-    private List<Transform> standingPoses = new List<Transform>();
-    private Vector2 nextPos;
-    private Transform targetPos;
-    private float flyUpDownSpeed = 5.0f;
-    private float flyingSpeed = 10.0f;
-    private Vector2 newPosition;
+private Vector2 nextPos;
+private Transform targetPos;
 
-    [SerializeField] private CinemachineCamera cam;
-    CinemachineConfiner2D confiner;
+[Header("Flight Parameters")]
+private float flyUpDownSpeed = 5.0f;
+private float flyingSpeed = 10.0f;
+private Vector2 newPosition;
+#endregion
 
-    // 공격 조건 변수
-    private bool isFly;
+#region Camera
+[Header("Camera")]
+[SerializeField] private CinemachineCamera cam;
+private CinemachineConfiner2D confiner;
+#endregion
 
-    // 마법 사용시마다 증가, magicCount == 5이면 standingPos 중 하나로 이동
-    private int magicCount;
-    private int magicCountUntilMove = 5;
+#region Attack State
+private bool isFly;
 
+[Header("Magic Counters")]
+private int magicCount;
+private int magicCountUntilMove = 5;
+#endregion
 
-    // magic List에 마법 저장
-    private List<MagicType> usingMagic;
-    [SerializeField] private List<GameObject> magicList = new List<GameObject>();
-    private int magicCountInPool = 5;
-    private static float MAGIC_WAIT_TIME = 0.5f; // 마법 사용과 애니메이션간 타이밍 맞추기에 사용
+#region Magic Settings
+private List<MagicType> usingMagic;
 
-    private WaitForSeconds waitMagic;
-    private readonly WaitForSeconds waitShockWave = new WaitForSeconds(1.7f);
+[Header("Magic Prefabs")]
+[SerializeField] private List<GameObject> magicList = new List<GameObject>();
 
-    // 위치 저장 셋
-    [SerializeField] private List<Transform> fireBallSpawnPoses;
-    [SerializeField] private List<Transform> fireMissileSpawnPoses;
-    [SerializeField] private List<Transform> fireCannonSpawnPoses;
-    [SerializeField] private List<Transform> shockWaveSpawnPoses;
+[Header("Magic Pool Settings")]
+private int magicCountInPool = 5;
+private static float MAGIC_WAIT_TIME = 0.5f;
 
-    // 마법이 실제 시행될 개별 위치, ball과 missile은 개별 생성이 아니기에 여기 없음
-    private Transform fireCannonSpawnPos;
-    private Transform shockWaveSpawnPos;
-    private Vector3 meteorSpawnPos;
+[Header("Magic Timing")]
+private WaitForSeconds waitMagic;
+private readonly WaitForSeconds waitShockWave = new WaitForSeconds(1.7f);
+#endregion
 
-    private ObjectPool<GameObject> fireBallPool;
-    private ObjectPool<GameObject> fireMissilePool;
-    private ObjectPool<GameObject> fireCannonPool;
-    private ObjectPool<GameObject> shockWavePool;
-    private ObjectPool<GameObject> meteorPool;
+#region Spawn Positions
+[Header("Magic Spawn Points")]
+[SerializeField] private List<Transform> fireBallSpawnPoses;
+[SerializeField] private List<Transform> fireMissileSpawnPoses;
+[SerializeField] private List<Transform> fireCannonSpawnPoses;
+[SerializeField] private List<Transform> shockWaveSpawnPoses;
 
-    // 마법 개별 컴포넌트
-    private FireBall fireBallComp;
-    private FireMissile fireMissileComp;
-    private FireCannon fireCannonComp;
-    private ShockWave shockWaveComp;
-     private Meteor meteorComp;
+private Transform fireCannonSpawnPos;
+private Transform shockWaveSpawnPos;
+private Vector3 meteorSpawnPos;
+#endregion
 
-    // 오디오 관련
-    [SerializeField] private AudioClip useFireMagicSFX;
-    [SerializeField] private AudioClip useMeteorSFX;
-    [SerializeField] private AudioClip shockWaveSFX;
+#region Object Pools
+private ObjectPool<GameObject> fireBallPool;
+private ObjectPool<GameObject> fireMissilePool;
+private ObjectPool<GameObject> fireCannonPool;
+private ObjectPool<GameObject> shockWavePool;
+private ObjectPool<GameObject> meteorPool;
+#endregion
 
-    // 애니메이션 관련
-    private readonly int seeDirHash = Animator.StringToHash("SeeDir");
-    private readonly int moveDirHash = Animator.StringToHash("MoveDir");
-    private readonly int attackHash = Animator.StringToHash("Attack");
-    private readonly int attackTypeHash = Animator.StringToHash("AttackType");
-    private readonly int flyHash = Animator.StringToHash("Fly");
-    private readonly int flyStateHash = Animator.StringToHash("FlyState");
-    private readonly int dieHash = Animator.StringToHash("Die");
+#region Magic Components
+private FireBall fireBallComp;
+private FireMissile fireMissileComp;
+private FireCannon fireCannonComp;
+private ShockWave shockWaveComp;
+private Meteor meteorComp;
+#endregion
+
+#region Audio Clips
+[Header("Audio Clips")]
+[SerializeField] private AudioClip useFireMagicSFX;
+[SerializeField] private AudioClip useMeteorSFX;
+[SerializeField] private AudioClip shockWaveSFX;
+#endregion
+
+#region Animation Hashes
+private readonly int seeDirHash = Animator.StringToHash("SeeDir");
+private readonly int moveDirHash = Animator.StringToHash("MoveDir");
+private readonly int attackHash = Animator.StringToHash("Attack");
+private readonly int attackTypeHash = Animator.StringToHash("AttackType");
+private readonly int flyHash = Animator.StringToHash("Fly");
+private readonly int flyStateHash = Animator.StringToHash("FlyState");
+private readonly int dieHash = Animator.StringToHash("Die");
+#endregion
 
     protected override void Init()
     {
