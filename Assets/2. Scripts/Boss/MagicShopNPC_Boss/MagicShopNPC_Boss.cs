@@ -77,6 +77,8 @@ public class MagicShopNPC_Boss : BossCtrl
 
     void Update()
     {
+        moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
+        
         // 보스 또는 플레이어가 사망이면 return
         if (GameManager.instance.readIsGameOver == true || isDie == true)
         {
@@ -85,7 +87,6 @@ public class MagicShopNPC_Boss : BossCtrl
 
         if (canMove)
         {
-            moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
             anim.SetFloat(dirHash, moveDir.x);
 
             // 플레이어가 일정 거리 이내면 워프 준비
@@ -145,7 +146,7 @@ public class MagicShopNPC_Boss : BossCtrl
         }
         blinkRoutine = StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, blinkTime));
 
-        if (currentHP % 100 == 0)
+        if (currentHP != 0 && currentHP % 100 == 0)
         {
             anim.SetTrigger(hitTrigger);
             anim.SetFloat(hitHash, hitVector.x);

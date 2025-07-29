@@ -39,7 +39,7 @@ public class MagicianCtrl : BossCtrl
 
     private Vector2 moveDir;
 
-    
+
     private ObjectPool<GameObject> fireBallPool;
     private FireBall fireBallComp;
 
@@ -51,8 +51,8 @@ public class MagicianCtrl : BossCtrl
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
     [SerializeField] protected float damage;
 
-    public float readDamage {get {return damage;}}
-    
+    public float readDamage { get { return damage; } }
+
     protected override void Init()
     {
         base.Init();
@@ -62,7 +62,7 @@ public class MagicianCtrl : BossCtrl
     {
         Init();
 
-        
+
         foreach (Transform warpPoint in warpPointSet)
         {
             warpPoints.Add(warpPoint);
@@ -91,8 +91,10 @@ public class MagicianCtrl : BossCtrl
 
     void Update()
     {
+        moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
+
         // 게임 오버나 스턴이 아닐 경우 행동
-        if(GameManager.instance.readIsGameOver == true || isDie == true)
+        if (GameManager.instance.readIsGameOver == true || isDie == true)
         {
             return;
         }
@@ -101,7 +103,6 @@ public class MagicianCtrl : BossCtrl
 
         if (canMove)
         {
-            moveDir = UtilityManager.utility.HorizontalDirSet(PlayerCtrl.player.transform.position - transform.position);
             anim.SetFloat(dirHash, moveDir.x);
 
             // 플레이어가 일정 거리 이내면 워프 준비
@@ -189,7 +190,7 @@ public class MagicianCtrl : BossCtrl
     #endregion
 
     #region 패텬 관련
-        // 분노
+    // 분노
     private void GetRage()
     {
         if (blinkRoutine != null)
@@ -229,7 +230,7 @@ public class MagicianCtrl : BossCtrl
         }
         else if (isRage == true)
         {
-        switch (currentMagic)
+            switch (currentMagic)
             {
                 case MagicType.FireBall:
                     UseFireBall();
@@ -281,7 +282,7 @@ public class MagicianCtrl : BossCtrl
         }
         blinkRoutine = StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, blinkTime));
 
-        if (currentHP % 100 == 0)
+        if (currentHP != 0 && currentHP % 100 == 0)
         {
             anim.SetTrigger(hitTrigger);
             anim.SetFloat(hitHash, hitVector.x);
