@@ -42,6 +42,8 @@ public class MagicianCtrl : BossCtrl
 
     private ObjectPool<GameObject> fireBallPool;
     private FireBall fireBallComp;
+    private ObjectPool<GameObject> fireCannonPool;
+    private FireCannon fireCannonComp;
 
 
     [SerializeField] float meleeAttackRange;
@@ -78,10 +80,11 @@ public class MagicianCtrl : BossCtrl
         }
 
         UtilityManager.utility.CreatePool(ref fireBallPool, magicList[0], magicCountInPool, magicCountInPool);
+        UtilityManager.utility.CreatePool(ref fireCannonPool, magicList[1], magicCountInPool, magicCountInPool);
 
         rageHP = maxHP * 0.6f;
         canAttack = true;
-        coolTime = 2.0f;
+        coolTime = 4.0f;
 
         if (DataManager.dataManager.playerData.diedEnemy.Contains(enemyID))
         {
@@ -226,6 +229,9 @@ public class MagicianCtrl : BossCtrl
                 case MagicType.FireBall:
                     UseFireBall();
                     break;
+                case MagicType.FireCannon:
+                    UseFireCannon();
+                    break;
             }
         }
         else if (isRage == true)
@@ -234,6 +240,9 @@ public class MagicianCtrl : BossCtrl
             {
                 case MagicType.FireBall:
                     UseFireBall();
+                    break;
+                case MagicType.FireCannon:
+                    UseFireCannon();
                     break;
             }
         }
@@ -256,6 +265,23 @@ public class MagicianCtrl : BossCtrl
             magicSpawnPos = magicSpawnPoses[idx];
             fireBall.transform.position = magicSpawnPos.position;
             fireBall.transform.rotation = magicSpawnPos.rotation;
+        }
+    }
+
+    // FireCannon 배치
+    private void UseFireCannon()
+    {
+        foreach (Transform magicSpawnPos in magicSpawnPoses)
+        {
+            GameObject fireCannon = UtilityManager.utility.GetFromPool(fireCannonPool, magicCountInPool);
+
+            if (fireCannon != null)
+            {
+                fireCannonComp = fireCannon.GetComponent<FireCannon>();
+                fireCannon.transform.position = magicSpawnPos.position;
+                fireCannon.transform.rotation = magicSpawnPos.rotation;
+                fireCannonComp.SetPool(fireCannonPool);
+            }
         }
     }
 

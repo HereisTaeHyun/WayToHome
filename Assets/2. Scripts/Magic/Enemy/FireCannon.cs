@@ -20,9 +20,6 @@ public class FireCannon : MagicBase
         // 이동 로직 및 바라봄 축 설정
         MoveMagic();
 
-        // 날아감에 따라 빨라짐
-        moveSpeed += Time.deltaTime * 3;
-
         lifeSpan -= Time.deltaTime;
         if(lifeSpan <= 0)
         {
@@ -34,7 +31,7 @@ public class FireCannon : MagicBase
     {
         originPool = pool;
         isPool = false;
-        moveSpeed = 1.0f;
+        moveSpeed = 8.0f;
         lifeSpan = 5.0f;
 
         moveDir = UtilityManager.utility.AllDirSet(PlayerCtrl.player.transform.position - transform.position);
