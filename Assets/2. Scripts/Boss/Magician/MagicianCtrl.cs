@@ -44,6 +44,8 @@ public class MagicianCtrl : BossCtrl
     private FireBall fireBallComp;
     private ObjectPool<GameObject> fireCannonPool;
     private FireCannon fireCannonComp;
+    private ObjectPool<GameObject> fireVortexPool;
+    private FireVortex fireVortexComp;
 
 
     [SerializeField] float meleeAttackRange;
@@ -81,6 +83,7 @@ public class MagicianCtrl : BossCtrl
 
         UtilityManager.utility.CreatePool(ref fireBallPool, magicList[0], magicCountInPool, magicCountInPool);
         UtilityManager.utility.CreatePool(ref fireCannonPool, magicList[1], magicCountInPool, magicCountInPool);
+        UtilityManager.utility.CreatePool(ref fireVortexPool, magicList[2], magicCountInPool, magicCountInPool);
 
         rageHP = maxHP * 0.6f;
         canAttack = true;
@@ -233,6 +236,9 @@ public class MagicianCtrl : BossCtrl
                 case MagicType.FireCannon:
                     StartCoroutine(UseFireCannon(2));
                     break;
+                case MagicType.FireVortex:
+                    StartCoroutine(UseFireVortex(3));
+                    break;
             }
         }
         else if (isRage == true)
@@ -241,6 +247,9 @@ public class MagicianCtrl : BossCtrl
             {
                 case MagicType.FireCannon:
                     StartCoroutine(UseFireCannon(3));
+                    break;
+                case MagicType.FireVortex:
+                    StartCoroutine(UseFireVortex(6));
                     break;
             }
         }
@@ -316,6 +325,34 @@ public class MagicianCtrl : BossCtrl
                     fireCannon.transform.rotation = magicSpawnPos.rotation;
                     fireCannonComp.SetPool(fireCannonPool);
                 }
+            }
+            if (i < repeat - 1)
+            {
+                yield return wait;
+            }
+        }
+    }
+
+    // FireCannon 배치
+    private IEnumerator UseFireVortex(int repeat = 1, float interval = 0.4f)
+    {
+        WaitForSeconds wait = new WaitForSeconds(interval);
+        for (int i = 0; i < repeat; i++)
+        {
+            GameObject fireVortex = UtilityManager.utility.GetFromPool(fireVortexPool, magicCountInPool);
+
+            if (fireVortex != null)
+            {
+                fireVortexComp = fireVortex.GetComponent<FireVortex>();
+
+                Vector2 fireVortexSpawnPos = new Vector3
+                (PlayerCtrl.player.transform.position.x, 
+                PlayerCtrl.player.transform.position.y + 1.5f, 
+                PlayerCtrl.player.transform.position.z);
+
+                fireVortex.transform.position = fireVortexSpawnPos;
+                fireVortex.transform.rotation = PlayerCtrl.player.transform.rotation;
+                fireVortexComp.SetPool(fireVortexPool);
             }
             if (i < repeat - 1)
             {

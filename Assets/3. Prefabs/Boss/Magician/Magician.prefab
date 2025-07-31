@@ -387,10 +387,11 @@ MonoBehaviour:
   bossRoomSensor: {fileID: 0}
   rageSFX: {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
   usingMagic: 
-  phase1UsingMagic: 0000000001000000
+  phase1UsingMagic: 000000000100000003000000
   magicList:
   - {fileID: 7442625623315705553, guid: 455d84a056f7a404dbf2019e3d50d4c9, type: 3}
   - {fileID: 6997166447179216951, guid: 51c199c7e9122f34ca48414cea60d6a6, type: 3}
+  - {fileID: 7510891381318915731, guid: 1b63f9d22fc840c409299df6fccc9d7b, type: 3}
   warpPointSet: {fileID: 0}
   magicSpawnPosSet: {fileID: 937554057940481880}
   meleeAttackRange: 2
