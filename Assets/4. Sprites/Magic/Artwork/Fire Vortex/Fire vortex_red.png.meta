@@ -252,6 +252,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -259,10 +285,10 @@ TextureImporter:
       name: Fire vortex_red_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 70
-        width: 129
-        height: 67
+        x: 0
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,10 +307,10 @@ TextureImporter:
       name: Fire vortex_red_1
       rect:
         serializedVersion: 2
-        x: 149
-        y: 96
-        width: 35
-        height: 41
+        x: 96
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -303,10 +329,10 @@ TextureImporter:
       name: Fire vortex_red_2
       rect:
         serializedVersion: 2
-        x: 206
-        y: 119
-        width: 10
-        height: 13
+        x: 192
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -325,10 +351,10 @@ TextureImporter:
       name: Fire vortex_red_3
       rect:
         serializedVersion: 2
-        x: 211
-        y: 116
-        width: 12
-        height: 14
+        x: 288
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -347,10 +373,10 @@ TextureImporter:
       name: Fire vortex_red_4
       rect:
         serializedVersion: 2
-        x: 221
-        y: 118
-        width: 11
-        height: 11
+        x: 384
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -369,10 +395,10 @@ TextureImporter:
       name: Fire vortex_red_5
       rect:
         serializedVersion: 2
-        x: 243
-        y: 128
-        width: 16
-        height: 9
+        x: 480
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -391,10 +417,10 @@ TextureImporter:
       name: Fire vortex_red_6
       rect:
         serializedVersion: 2
-        x: 259
-        y: 121
-        width: 8
-        height: 13
+        x: 576
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -413,10 +439,10 @@ TextureImporter:
       name: Fire vortex_red_7
       rect:
         serializedVersion: 2
-        x: 271
-        y: 114
-        width: 6
-        height: 16
+        x: 672
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -435,10 +461,10 @@ TextureImporter:
       name: Fire vortex_red_8
       rect:
         serializedVersion: 2
-        x: 275
-        y: 122
-        width: 6
-        height: 14
+        x: 768
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -457,10 +483,10 @@ TextureImporter:
       name: Fire vortex_red_9
       rect:
         serializedVersion: 2
-        x: 303
-        y: 72
-        width: 76
-        height: 65
+        x: 864
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -479,10 +505,10 @@ TextureImporter:
       name: Fire vortex_red_10
       rect:
         serializedVersion: 2
-        x: 405
-        y: 76
-        width: 69
-        height: 64
+        x: 960
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -501,10 +527,10 @@ TextureImporter:
       name: Fire vortex_red_11
       rect:
         serializedVersion: 2
-        x: 507
-        y: 90
-        width: 49
-        height: 44
+        x: 1056
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -523,10 +549,10 @@ TextureImporter:
       name: Fire vortex_red_12
       rect:
         serializedVersion: 2
-        x: 608
-        y: 96
-        width: 36
-        height: 33
+        x: 1152
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -545,10 +571,10 @@ TextureImporter:
       name: Fire vortex_red_13
       rect:
         serializedVersion: 2
-        x: 1949
-        y: 55
-        width: 39
-        height: 74
+        x: 1248
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -567,10 +593,10 @@ TextureImporter:
       name: Fire vortex_red_14
       rect:
         serializedVersion: 2
-        x: 2038
-        y: 15
-        width: 47
-        height: 113
+        x: 1344
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -589,10 +615,10 @@ TextureImporter:
       name: Fire vortex_red_15
       rect:
         serializedVersion: 2
-        x: 228
-        y: 116
-        width: 7
-        height: 11
+        x: 1440
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -611,10 +637,10 @@ TextureImporter:
       name: Fire vortex_red_16
       rect:
         serializedVersion: 2
-        x: 234
-        y: 115
-        width: 10
-        height: 12
+        x: 1536
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -633,10 +659,10 @@ TextureImporter:
       name: Fire vortex_red_17
       rect:
         serializedVersion: 2
-        x: 247
-        y: 113
-        width: 13
-        height: 9
+        x: 1632
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -655,10 +681,10 @@ TextureImporter:
       name: Fire vortex_red_18
       rect:
         serializedVersion: 2
-        x: 705
-        y: 100
-        width: 29
-        height: 27
+        x: 1728
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -677,10 +703,10 @@ TextureImporter:
       name: Fire vortex_red_19
       rect:
         serializedVersion: 2
-        x: 804
-        y: 99
-        width: 25
-        height: 27
+        x: 1824
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -699,10 +725,10 @@ TextureImporter:
       name: Fire vortex_red_20
       rect:
         serializedVersion: 2
-        x: 903
-        y: 101
-        width: 19
-        height: 21
+        x: 1920
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -721,10 +747,10 @@ TextureImporter:
       name: Fire vortex_red_21
       rect:
         serializedVersion: 2
-        x: 1000
-        y: 104
-        width: 15
-        height: 17
+        x: 2016
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -743,10 +769,10 @@ TextureImporter:
       name: Fire vortex_red_22
       rect:
         serializedVersion: 2
-        x: 1098
-        y: 107
-        width: 13
-        height: 13
+        x: 2112
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -765,10 +791,10 @@ TextureImporter:
       name: Fire vortex_red_23
       rect:
         serializedVersion: 2
-        x: 1194
-        y: 109
-        width: 13
-        height: 13
+        x: 2208
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -787,10 +813,10 @@ TextureImporter:
       name: Fire vortex_red_24
       rect:
         serializedVersion: 2
-        x: 1290
-        y: 109
-        width: 13
-        height: 13
+        x: 2304
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -809,10 +835,10 @@ TextureImporter:
       name: Fire vortex_red_25
       rect:
         serializedVersion: 2
-        x: 1750
-        y: 1
-        width: 50
-        height: 122
+        x: 2400
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -831,10 +857,10 @@ TextureImporter:
       name: Fire vortex_red_26
       rect:
         serializedVersion: 2
-        x: 1862
-        y: 98
-        width: 14
-        height: 27
+        x: 2496
+        y: 0
+        width: 96
+        height: 144
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -849,583 +875,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_27
-      rect:
-        serializedVersion: 2
-        x: 2134
-        y: 16
-        width: 47
-        height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b94e2120d85c65970800000000000000
-      internalID: 8743392936002249883
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_28
-      rect:
-        serializedVersion: 2
-        x: 2230
-        y: 16
-        width: 315
-        height: 109
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: be1aea18c85cb2cc0800000000000000
-      internalID: -3734674258711895573
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_29
-      rect:
-        serializedVersion: 2
-        x: 216
-        y: 100
-        width: 8
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cc09954b8b2001bf0800000000000000
-      internalID: -355781378239262516
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_30
-      rect:
-        serializedVersion: 2
-        x: 229
-        y: 95
-        width: 8
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 09dfd43b267a44ae0800000000000000
-      internalID: -1565942728061223536
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_31
-      rect:
-        serializedVersion: 2
-        x: 239
-        y: 102
-        width: 11
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ced168c75531ff590800000000000000
-      internalID: -7638365185114759700
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_32
-      rect:
-        serializedVersion: 2
-        x: 251
-        y: 96
-        width: 12
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: da7add09405f16730800000000000000
-      internalID: 3990740144786089901
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_33
-      rect:
-        serializedVersion: 2
-        x: 260
-        y: 101
-        width: 14
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6df3bde81291eea70800000000000000
-      internalID: 8858045149005692886
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_34
-      rect:
-        serializedVersion: 2
-        x: 1582
-        y: 93
-        width: 7
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 582ea0901f1ec7c50800000000000000
-      internalID: 6664449973956567685
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_35
-      rect:
-        serializedVersion: 2
-        x: 1651
-        y: 1
-        width: 59
-        height: 109
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ff6ea0bd2fe102e40800000000000000
-      internalID: 5629533562618963711
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_36
-      rect:
-        serializedVersion: 2
-        x: 116
-        y: 82
-        width: 14
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d2afa8eee03904ef0800000000000000
-      internalID: -125939097225463251
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_37
-      rect:
-        serializedVersion: 2
-        x: 210
-        y: 84
-        width: 7
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 05145dbe9523ae7b0800000000000000
-      internalID: -5194283858428346032
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_38
-      rect:
-        serializedVersion: 2
-        x: 223
-        y: 83
-        width: 7
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 40711adcc8e589430800000000000000
-      internalID: 3789883045270591236
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_39
-      rect:
-        serializedVersion: 2
-        x: 230
-        y: 74
-        width: 12
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9b7f8464faf990550800000000000000
-      internalID: 6127604343161550777
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_40
-      rect:
-        serializedVersion: 2
-        x: 1386
-        y: 19
-        width: 13
-        height: 74
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d6e89a33e9ad545c0800000000000000
-      internalID: -4231735901838274963
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_41
-      rect:
-        serializedVersion: 2
-        x: 1554
-        y: 2
-        width: 57
-        height: 97
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e62b6f885d9b31bc0800000000000000
-      internalID: -3813500132675636626
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_42
-      rect:
-        serializedVersion: 2
-        x: 1845
-        y: 2
-        width: 49
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 703c112ca5d533240800000000000000
-      internalID: 4770259074699870983
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_43
-      rect:
-        serializedVersion: 2
-        x: 138
-        y: 70
-        width: 24
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 732e9f34943b1eaa0800000000000000
-      internalID: -6133424090247470537
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_44
-      rect:
-        serializedVersion: 2
-        x: 243
-        y: 71
-        width: 13
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4b6c8287a7ce7eba0800000000000000
-      internalID: -6059614762857609548
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_45
-      rect:
-        serializedVersion: 2
-        x: 1462
-        y: 4
-        width: 47
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f0510a1a0dfb3a900800000000000000
-      internalID: 694609670330914063
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_46
-      rect:
-        serializedVersion: 2
-        x: 1941
-        y: 20
-        width: 10
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bf92d81554251c8c0800000000000000
-      internalID: -3980810137944380933
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_47
-      rect:
-        serializedVersion: 2
-        x: 1952
-        y: 15
-        width: 19
-        height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 63945854f25bb90d0800000000000000
-      internalID: -3414936677795935946
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_48
-      rect:
-        serializedVersion: 2
-        x: 1975
-        y: 38
-        width: 15
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6a3668710ee6f5440800000000000000
-      internalID: 4926778426113024934
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_49
-      rect:
-        serializedVersion: 2
-        x: 1949
-        y: 10
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 08f3368cf806cd2e0800000000000000
-      internalID: -2099697155602956416
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_50
-      rect:
-        serializedVersion: 2
-        x: 1975
-        y: 16
-        width: 10
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f12c6e923f6b5bc90800000000000000
-      internalID: -7154611277511867873
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_51
-      rect:
-        serializedVersion: 2
-        x: 2062
-        y: 13
-        width: 16
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ac379048e132115e0800000000000000
-      internalID: -1940731350448770102
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire vortex_red_52
-      rect:
-        serializedVersion: 2
-        x: 2152
-        y: 12
-        width: 11
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 22fab2d001998b240800000000000000
-      internalID: 4807760896437497634
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 781d9a92a10dac540a0dc44a16a13ce8
     internalID: 0
     vertices: []
     indices: 
@@ -1434,7 +888,34 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Fire vortex_red_0: 5971238895544392931
+      Fire vortex_red_1: 3870485394162482367
+      Fire vortex_red_10: 2978282675345465921
+      Fire vortex_red_11: -3641105901559471450
+      Fire vortex_red_12: -4275341318717743438
+      Fire vortex_red_13: -2868097050986742505
+      Fire vortex_red_14: 2317187252689325140
+      Fire vortex_red_15: -3115577564412766859
+      Fire vortex_red_16: -7593058561725646094
+      Fire vortex_red_17: -6036190089792200043
+      Fire vortex_red_18: 2245554509803641791
+      Fire vortex_red_19: 4592023713694515575
+      Fire vortex_red_2: 7599094124779464583
+      Fire vortex_red_20: 5191491223319258603
+      Fire vortex_red_21: -1937318477299765312
+      Fire vortex_red_22: 4475132994743907105
+      Fire vortex_red_23: 1176621374351794872
+      Fire vortex_red_24: 2203168010502675661
+      Fire vortex_red_25: -499962502637005025
+      Fire vortex_red_26: 6631333042877636363
+      Fire vortex_red_3: -8077494097874771929
+      Fire vortex_red_4: -5815883166638605479
+      Fire vortex_red_5: -8478597743846855002
+      Fire vortex_red_6: -950012329250082336
+      Fire vortex_red_7: -4710101052465749522
+      Fire vortex_red_8: 3486926059880837967
+      Fire vortex_red_9: -594017615428102845
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

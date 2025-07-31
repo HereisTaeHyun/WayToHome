@@ -297,6 +297,32 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -304,12 +330,12 @@ TextureImporter:
       name: FireSlash-Sheet_0
       rect:
         serializedVersion: 2
-        x: 157
-        y: 100
-        width: 9
-        height: 12
+        x: 0
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -326,12 +352,12 @@ TextureImporter:
       name: FireSlash-Sheet_1
       rect:
         serializedVersion: 2
-        x: 283
-        y: 56
-        width: 33
-        height: 58
+        x: 128
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -348,12 +374,12 @@ TextureImporter:
       name: FireSlash-Sheet_2
       rect:
         serializedVersion: 2
-        x: 410
-        y: 55
-        width: 36
-        height: 65
+        x: 256
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -370,12 +396,12 @@ TextureImporter:
       name: FireSlash-Sheet_3
       rect:
         serializedVersion: 2
-        x: 530
-        y: 55
-        width: 46
-        height: 69
+        x: 384
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -392,12 +418,12 @@ TextureImporter:
       name: FireSlash-Sheet_4
       rect:
         serializedVersion: 2
-        x: 656
-        y: 51
-        width: 48
-        height: 74
+        x: 512
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -414,12 +440,12 @@ TextureImporter:
       name: FireSlash-Sheet_5
       rect:
         serializedVersion: 2
-        x: 780
-        y: 48
-        width: 51
-        height: 77
+        x: 640
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -436,12 +462,12 @@ TextureImporter:
       name: FireSlash-Sheet_6
       rect:
         serializedVersion: 2
-        x: 912
-        y: 48
-        width: 47
-        height: 77
+        x: 768
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -458,12 +484,12 @@ TextureImporter:
       name: FireSlash-Sheet_7
       rect:
         serializedVersion: 2
-        x: 1062
-        y: 3
-        width: 79
-        height: 121
+        x: 896
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -480,12 +506,12 @@ TextureImporter:
       name: FireSlash-Sheet_8
       rect:
         serializedVersion: 2
-        x: 1198
-        y: 111
-        width: 14
-        height: 9
+        x: 1024
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -502,12 +528,12 @@ TextureImporter:
       name: FireSlash-Sheet_9
       rect:
         serializedVersion: 2
-        x: 1199
-        y: 103
-        width: 15
-        height: 9
+        x: 1152
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -524,12 +550,12 @@ TextureImporter:
       name: FireSlash-Sheet_10
       rect:
         serializedVersion: 2
-        x: 1213
-        y: 107
-        width: 16
-        height: 9
+        x: 1280
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -546,12 +572,12 @@ TextureImporter:
       name: FireSlash-Sheet_11
       rect:
         serializedVersion: 2
-        x: 1336
-        y: 99
-        width: 21
-        height: 16
+        x: 1408
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -568,12 +594,12 @@ TextureImporter:
       name: FireSlash-Sheet_12
       rect:
         serializedVersion: 2
-        x: 1462
-        y: 76
-        width: 33
-        height: 37
+        x: 1536
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -590,12 +616,12 @@ TextureImporter:
       name: FireSlash-Sheet_13
       rect:
         serializedVersion: 2
-        x: 1596
-        y: 17
-        width: 36
-        height: 97
+        x: 1664
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -612,12 +638,12 @@ TextureImporter:
       name: FireSlash-Sheet_14
       rect:
         serializedVersion: 2
-        x: 1724
-        y: 7
-        width: 695
-        height: 110
+        x: 1792
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -634,12 +660,12 @@ TextureImporter:
       name: FireSlash-Sheet_15
       rect:
         serializedVersion: 2
-        x: 31
-        y: 102
-        width: 6
-        height: 7
+        x: 1920
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -656,12 +682,12 @@ TextureImporter:
       name: FireSlash-Sheet_16
       rect:
         serializedVersion: 2
-        x: 1060
-        y: 94
-        width: 13
-        height: 8
+        x: 2048
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -678,12 +704,12 @@ TextureImporter:
       name: FireSlash-Sheet_17
       rect:
         serializedVersion: 2
-        x: 1206
-        y: 4
-        width: 62
-        height: 106
+        x: 2176
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -700,12 +726,12 @@ TextureImporter:
       name: FireSlash-Sheet_18
       rect:
         serializedVersion: 2
-        x: 1339
-        y: 96
-        width: 6
-        height: 8
+        x: 2304
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -718,1089 +744,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_19
-      rect:
-        serializedVersion: 2
-        x: 1351
-        y: 100
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ebcdbd444803d5e50800000000000000
-      internalID: 6799644357048392894
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_20
-      rect:
-        serializedVersion: 2
-        x: 1361
-        y: 98
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4a61e0bd1e74a75c0800000000000000
-      internalID: -4216979065710700892
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_21
-      rect:
-        serializedVersion: 2
-        x: 1499
-        y: 90
-        width: 6
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d03f8a33887b5b110800000000000000
-      internalID: 1276127865039549197
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_22
-      rect:
-        serializedVersion: 2
-        x: 1634
-        y: 79
-        width: 15
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0fcbcd01fa96685a0800000000000000
-      internalID: -6519407209949119248
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_23
-      rect:
-        serializedVersion: 2
-        x: 167
-        y: 84
-        width: 8
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4bb415cf9dcd293d0800000000000000
-      internalID: -3201253556307801164
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_24
-      rect:
-        serializedVersion: 2
-        x: 1200
-        y: 92
-        width: 11
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dcec22dd1901fd7d0800000000000000
-      internalID: -2891574217082220851
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_25
-      rect:
-        serializedVersion: 2
-        x: 1330
-        y: 4
-        width: 65
-        height: 97
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e90bf83388717c050800000000000000
-      internalID: 5820646917147701406
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_26
-      rect:
-        serializedVersion: 2
-        x: 1334
-        y: 91
-        width: 7
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ca60758306c86e2f0800000000000000
-      internalID: -943912726997563732
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_27
-      rect:
-        serializedVersion: 2
-        x: 1478
-        y: 79
-        width: 10
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 029c6ef8ef54543a0800000000000000
-      internalID: -6681857512495986400
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_28
-      rect:
-        serializedVersion: 2
-        x: 1494
-        y: 87
-        width: 7
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9918a006181d41d50800000000000000
-      internalID: 6707216098653798809
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_29
-      rect:
-        serializedVersion: 2
-        x: 1506
-        y: 94
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ab2ff0c3442481a00800000000000000
-      internalID: 727404200653222586
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_30
-      rect:
-        serializedVersion: 2
-        x: 41
-        y: 85
-        width: 6
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fd997e00e1287eea0800000000000000
-      internalID: -5843558926114121249
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_31
-      rect:
-        serializedVersion: 2
-        x: 1201
-        y: 81
-        width: 11
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f25ea4a52a498c7d0800000000000000
-      internalID: -2897902935192443601
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_32
-      rect:
-        serializedVersion: 2
-        x: 1468
-        y: 4
-        width: 53
-        height: 85
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b668453723b6ffc90800000000000000
-      internalID: -7133865420304120213
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_33
-      rect:
-        serializedVersion: 2
-        x: 1476
-        y: 80
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 94c93ac2e7eafa760800000000000000
-      internalID: 7471382163768974409
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_34
-      rect:
-        serializedVersion: 2
-        x: 1490
-        y: 78
-        width: 7
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2a3570c08de034560800000000000000
-      internalID: 7296692142347867042
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_35
-      rect:
-        serializedVersion: 2
-        x: 1506
-        y: 70
-        width: 9
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a8456a58544d16820800000000000000
-      internalID: 2909840229318153354
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_36
-      rect:
-        serializedVersion: 2
-        x: 1515
-        y: 82
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fbe6826e7db6cc520800000000000000
-      internalID: 2723670449675857599
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_37
-      rect:
-        serializedVersion: 2
-        x: 1763
-        y: 84
-        width: 7
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dc4ee8a6d173852c0800000000000000
-      internalID: -4442740432919665459
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_38
-      rect:
-        serializedVersion: 2
-        x: 45
-        y: 71
-        width: 6
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 858f524806ea669e0800000000000000
-      internalID: -1628422485690681256
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_39
-      rect:
-        serializedVersion: 2
-        x: 171
-        y: 64
-        width: 9
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4e6c2f29b8d7ab980800000000000000
-      internalID: -8522361306425932060
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_40
-      rect:
-        serializedVersion: 2
-        x: 1058
-        y: 69
-        width: 16
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 04c6b419d00b4a3f0800000000000000
-      internalID: -890393253993812928
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_41
-      rect:
-        serializedVersion: 2
-        x: 1195
-        y: 77
-        width: 12
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: de50ec4e7dfd3a7f0800000000000000
-      internalID: -602391806787844627
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_42
-      rect:
-        serializedVersion: 2
-        x: 1340
-        y: 69
-        width: 8
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9a0c1265c4be84640800000000000000
-      internalID: 5064556494073217193
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_43
-      rect:
-        serializedVersion: 2
-        x: 1469
-        y: 72
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9d07ea07c5683d090800000000000000
-      internalID: -8010911580576386855
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_44
-      rect:
-        serializedVersion: 2
-        x: 1609
-        y: 68
-        width: 6
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fce40bbd7a8f1a870800000000000000
-      internalID: 8692502155630759631
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_45
-      rect:
-        serializedVersion: 2
-        x: 1619
-        y: 67
-        width: 9
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b7c5771b87a6eb440800000000000000
-      internalID: 4953513706760133755
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_46
-      rect:
-        serializedVersion: 2
-        x: 1626
-        y: 75
-        width: 7
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5f5800d51aa559830800000000000000
-      internalID: 4077264686750402037
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_47
-      rect:
-        serializedVersion: 2
-        x: 1195
-        y: 64
-        width: 15
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e519df3dafe1495a0800000000000000
-      internalID: -6515548698250997410
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_48
-      rect:
-        serializedVersion: 2
-        x: 1331
-        y: 63
-        width: 10
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 344b9e03608c73eb0800000000000000
-      internalID: -4740100153868176317
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_49
-      rect:
-        serializedVersion: 2
-        x: 1341
-        y: 58
-        width: 9
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 11638c44307ef6610800000000000000
-      internalID: 1616764792474187281
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_50
-      rect:
-        serializedVersion: 2
-        x: 1465
-        y: 51
-        width: 12
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f17da6e9a7b061c20800000000000000
-      internalID: 3176739208428181279
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_51
-      rect:
-        serializedVersion: 2
-        x: 1623
-        y: 62
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4aa3ef540d8ef7f70800000000000000
-      internalID: 9187317746084231844
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_52
-      rect:
-        serializedVersion: 2
-        x: 1631
-        y: 66
-        width: 6
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3e4d645e0ba73bd50800000000000000
-      internalID: 6751875166537962723
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_53
-      rect:
-        serializedVersion: 2
-        x: 1632
-        y: 47
-        width: 18
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bec7dc479c683e660800000000000000
-      internalID: 7413917611388140779
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_54
-      rect:
-        serializedVersion: 2
-        x: 1199
-        y: 55
-        width: 11
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ea01b9e73096c78a0800000000000000
-      internalID: -6306049914495627090
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_55
-      rect:
-        serializedVersion: 2
-        x: 1336
-        y: 52
-        width: 9
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1327f1dad0f15d9d0800000000000000
-      internalID: -2750257853840264655
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_56
-      rect:
-        serializedVersion: 2
-        x: 1517
-        y: 51
-        width: 6
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 985300679847b3e90800000000000000
-      internalID: -7044909058351942263
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_57
-      rect:
-        serializedVersion: 2
-        x: 1621
-        y: 37
-        width: 11
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d23a44253f65fe0d0800000000000000
-      internalID: -3391396391329422547
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_58
-      rect:
-        serializedVersion: 2
-        x: 1636
-        y: 38
-        width: 6
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 18af3c200fb499460800000000000000
-      internalID: 7248908569440156289
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_59
-      rect:
-        serializedVersion: 2
-        x: 1621
-        y: 36
-        width: 6
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2aa5956269e510df0800000000000000
-      internalID: -215787308155577694
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_60
-      rect:
-        serializedVersion: 2
-        x: 1631
-        y: 35
-        width: 6
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b22daf77291346a20800000000000000
-      internalID: 3054620952411951659
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_61
-      rect:
-        serializedVersion: 2
-        x: 1633
-        y: 22
-        width: 9
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7f075d3599c125de0800000000000000
-      internalID: -1345981893768285961
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_62
-      rect:
-        serializedVersion: 2
-        x: 1641
-        y: 26
-        width: 9
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2313dca151a4ea070800000000000000
-      internalID: 8119508632700006706
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_63
-      rect:
-        serializedVersion: 2
-        x: 1761
-        y: 27
-        width: 6
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 61445fd7b47288c60800000000000000
-      internalID: 7820543958118122518
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_64
-      rect:
-        serializedVersion: 2
-        x: 1344
-        y: 23
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8a6405512b56edf10800000000000000
-      internalID: 2296384675541698216
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_65
-      rect:
-        serializedVersion: 2
-        x: 1617
-        y: 6
-        width: 24
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e9ba78deef1fe2380800000000000000
-      internalID: -8993985328603223138
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_66
-      rect:
-        serializedVersion: 2
-        x: 1627
-        y: 19
-        width: 6
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 57701a80246d36d40800000000000000
-      internalID: 5576536342715762549
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireSlash-Sheet_67
-      rect:
-        serializedVersion: 2
-        x: 1748
-        y: 6
-        width: 8
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 63608e8353a930170800000000000000
-      internalID: 8143522104594662966
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 61e2305758d1639499e86aca0aa356f4
     internalID: 0
     vertices: []
     indices: 
@@ -1809,7 +757,26 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FireSlash-Sheet_0: -5661246690255716972
+      FireSlash-Sheet_1: -2847018387007417586
+      FireSlash-Sheet_10: 7971625159454551836
+      FireSlash-Sheet_11: 8630964740205076643
+      FireSlash-Sheet_12: -4893165760344788592
+      FireSlash-Sheet_13: 3089363421555415744
+      FireSlash-Sheet_14: -5216453412635844322
+      FireSlash-Sheet_15: 5029783399744920981
+      FireSlash-Sheet_16: -3083775865353501711
+      FireSlash-Sheet_17: -6602529690917281769
+      FireSlash-Sheet_18: -5068712281544697099
+      FireSlash-Sheet_2: -3515501835582748688
+      FireSlash-Sheet_3: 2114049609096120395
+      FireSlash-Sheet_4: -2930749689736417554
+      FireSlash-Sheet_5: 2286652918852085454
+      FireSlash-Sheet_6: -1443960621369621881
+      FireSlash-Sheet_7: -3707604804515508802
+      FireSlash-Sheet_8: 329765969095325309
+      FireSlash-Sheet_9: 572631683162015879
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

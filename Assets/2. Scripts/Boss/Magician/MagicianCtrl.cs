@@ -121,9 +121,13 @@ public class MagicianCtrl : BossCtrl
             {
                 MeleeAttackAble(moveDir);
             }
+            else if (distanceToPlayer <= 10f)
+            {
+                UseCloseRangeMagic();
+            }
             else
             {
-                UseRandomMagic();
+                UseLongRangeMagic();
             }
             // 공격 실행 후 쿨타임 진입
             StartCoroutine(CoolTimeCheck());
@@ -216,7 +220,32 @@ public class MagicianCtrl : BossCtrl
     }
 
     // 마법을 선택 후 스위칭하여 마법 함수 실행
-    private void UseRandomMagic()
+
+    private void UseLongRangeMagic()
+    {
+        int magicIdx = Random.Range(0, usingMagic.Count);
+        MagicType currentMagic = usingMagic[magicIdx];
+
+        if (isRage == false)
+        {
+            switch (currentMagic)
+            {
+                case MagicType.FireCannon:
+                    StartCoroutine(UseFireCannon(2));
+                    break;
+            }
+        }
+        else if (isRage == true)
+        {
+            switch (currentMagic)
+            {
+                case MagicType.FireCannon:
+                    StartCoroutine(UseFireCannon(3));
+                    break;
+            }
+        }
+    }
+    private void UseCloseRangeMagic()
     {
         int magicIdx = Random.Range(0, usingMagic.Count);
         MagicType currentMagic = usingMagic[magicIdx];
@@ -226,10 +255,7 @@ public class MagicianCtrl : BossCtrl
             switch (currentMagic)
             {
                 case MagicType.FireBall:
-                    UseFireBall();
-                    break;
-                case MagicType.FireCannon:
-                    UseFireCannon();
+                    StartCoroutine(UseFireBall());
                     break;
             }
         }
@@ -238,48 +264,62 @@ public class MagicianCtrl : BossCtrl
             switch (currentMagic)
             {
                 case MagicType.FireBall:
-                    UseFireBall();
-                    break;
-                case MagicType.FireCannon:
-                    UseFireCannon();
+                    StartCoroutine(UseFireBall(3));
                     break;
             }
         }
     }
-    // 마법 공격
-    private void UseFireBall()
+
+    // UseFireBall 배치
+    private IEnumerator UseFireBall(int repeat = 1, float interval = 0.1f)
     {
         // 풀 오브젝트 가져오기
-        GameObject fireBall = UtilityManager.utility.GetFromPool(fireBallPool, magicCountInPool);
-
-        if (fireBall != null)
+        WaitForSeconds wait = new WaitForSeconds(interval);
+        for (int i = 0; i < repeat; i++)
         {
-            fireBallComp = fireBall.GetComponent<FireBall>();
+            GameObject fireBall = UtilityManager.utility.GetFromPool(fireBallPool, magicCountInPool);
 
-            // fireBall에개 돌아와야 하는 풀 전달하기, 초기화
-            fireBallComp.SetPool(fireBallPool);
+            if (fireBall != null)
+            {
+                fireBallComp = fireBall.GetComponent<FireBall>();
 
-            // 파이어볼 셋업
-            int idx = Random.Range(0, magicSpawnPoses.Count);
-            magicSpawnPos = magicSpawnPoses[idx];
-            fireBall.transform.position = magicSpawnPos.position;
-            fireBall.transform.rotation = magicSpawnPos.rotation;
+                // fireBall에개 돌아와야 하는 풀 전달하기, 초기화
+                fireBallComp.SetPool(fireBallPool);
+
+                // 파이어볼 셋업
+                int idx = Random.Range(0, magicSpawnPoses.Count);
+                magicSpawnPos = magicSpawnPoses[idx];
+                fireBall.transform.position = magicSpawnPos.position;
+                fireBall.transform.rotation = magicSpawnPos.rotation;
+            }
+            if (i < repeat - 1)
+            {
+                yield return wait;
+            }
         }
     }
 
     // FireCannon 배치
-    private void UseFireCannon()
+    private IEnumerator UseFireCannon(int repeat = 1, float interval = 0.4f)
     {
-        foreach (Transform magicSpawnPos in magicSpawnPoses)
+        WaitForSeconds wait = new WaitForSeconds(interval);
+        for (int i = 0; i < repeat; i++)
         {
-            GameObject fireCannon = UtilityManager.utility.GetFromPool(fireCannonPool, magicCountInPool);
-
-            if (fireCannon != null)
+            foreach (Transform magicSpawnPos in magicSpawnPoses)
             {
-                fireCannonComp = fireCannon.GetComponent<FireCannon>();
-                fireCannon.transform.position = magicSpawnPos.position;
-                fireCannon.transform.rotation = magicSpawnPos.rotation;
-                fireCannonComp.SetPool(fireCannonPool);
+                GameObject fireCannon = UtilityManager.utility.GetFromPool(fireCannonPool, magicCountInPool);
+
+                if (fireCannon != null)
+                {
+                    fireCannonComp = fireCannon.GetComponent<FireCannon>();
+                    fireCannon.transform.position = magicSpawnPos.position;
+                    fireCannon.transform.rotation = magicSpawnPos.rotation;
+                    fireCannonComp.SetPool(fireCannonPool);
+                }
+            }
+            if (i < repeat - 1)
+            {
+                yield return wait;
             }
         }
     }
