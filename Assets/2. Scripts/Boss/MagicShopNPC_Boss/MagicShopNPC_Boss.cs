@@ -250,34 +250,17 @@ public class MagicShopNPC_Boss : BossCtrl
         int magicIdx = Random.Range(0, usingMagic.Count);
         MagicType currentMagic = usingMagic[magicIdx];
 
-        if (isRage == false)
+        switch (currentMagic)
         {
-            switch (currentMagic)
-            {
-                case MagicType.OrbitingKunai:
-                    StartCoroutine(UseOrbitingKunai());
-                    anim.SetTrigger(attackHash);
-                    break;
-                case MagicType.FlyingShuriken:
-                    StartCoroutine(UseFlyingShuriken());
-                    anim.SetTrigger(attackHash);
-                    break;
-            }
+            case MagicType.OrbitingKunai:
+                StartCoroutine(UseOrbitingKunai());
+                break;
+
+            case MagicType.FlyingShuriken:
+                StartCoroutine(UseFlyingShuriken(isRage ? 3 : 1));
+                break;
         }
-        else if (isRage == true)
-        {
-                switch (currentMagic)
-            {
-                case MagicType.OrbitingKunai:
-                    StartCoroutine(UseOrbitingKunai());
-                    anim.SetTrigger(attackHash);
-                    break;
-                case MagicType.FlyingShuriken:
-                    StartCoroutine(UseFlyingShuriken(3));
-                    anim.SetTrigger(attackHash);
-                    break;
-            }
-        }
+        anim.SetTrigger(attackHash);
     }
 
     // OrbitingKunai 배치, 얘는 위치 셋업이 마법 쪽에서 이루어지니 소환까지만

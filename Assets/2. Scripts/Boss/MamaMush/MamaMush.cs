@@ -266,32 +266,20 @@ public class MamaMush : BossCtrl
         int magicIdx = Random.Range(0, usingMagic.Count);
         MagicType currentMagic = usingMagic[magicIdx];
 
-        if (isRage == false)
+        switch (currentMagic)
         {
-            switch (currentMagic)
-            {
-                case MagicType.BodyImpact:
-                    StartCoroutine(UseBodyImpact());
-                    break;
-                case MagicType.Poison:
-                    StartCoroutine(UsePoison(3));
-                    break;
-            }
-        }
-        else if (isRage == true)
-        {
-            switch (currentMagic)
-            {
-                case MagicType.BodyImpact:
-                    StartCoroutine(UseBodyImpact(3));
-                    break;
-                case MagicType.Poison:
-                    StartCoroutine(UsePoison(9));
-                    break;
-                case MagicType.PoisonRain:
-                    StartCoroutine(UsePoisonRain());
-                    break;
-            }
+            case MagicType.BodyImpact:
+                StartCoroutine(isRage ? UseBodyImpact(3) : UseBodyImpact());
+                break;
+
+            case MagicType.Poison:
+                StartCoroutine(UsePoison(isRage ? 9 : 3));
+                break;
+
+            // 얘는 Rage 시에만 사용, 어차피 phase2 list로 UsingMagic 지정하니 조건문으로 거를 필요는 없음
+            case MagicType.PoisonRain:
+                StartCoroutine(UsePoisonRain());
+                break;
         }
     }
 
