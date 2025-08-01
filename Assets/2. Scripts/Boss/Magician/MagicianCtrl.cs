@@ -266,6 +266,9 @@ public class MagicianCtrl : BossCtrl
                 case MagicType.FireBall:
                     StartCoroutine(UseFireBall());
                     break;
+                case MagicType.FireVortex:
+                    StartCoroutine(UseFireVortex());
+                    break;
             }
         }
         else if (isRage == true)
@@ -274,6 +277,9 @@ public class MagicianCtrl : BossCtrl
             {
                 case MagicType.FireBall:
                     StartCoroutine(UseFireBall(3));
+                    break;
+                case MagicType.FireVortex:
+                    StartCoroutine(UseFireVortex(3));
                     break;
             }
         }
@@ -334,7 +340,7 @@ public class MagicianCtrl : BossCtrl
     }
 
     // FireCannon 배치
-    private IEnumerator UseFireVortex(int repeat = 1, float interval = 0.4f)
+    private IEnumerator UseFireVortex(int repeat = 1, float interval = 0.8f)
     {
         WaitForSeconds wait = new WaitForSeconds(interval);
         for (int i = 0; i < repeat; i++)
