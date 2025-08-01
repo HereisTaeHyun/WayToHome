@@ -5,6 +5,7 @@ using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
 using System;
+using System.Linq;
 
 public class MagicianCtrl : BossCtrl
 {
@@ -22,6 +23,19 @@ public class MagicianCtrl : BossCtrl
     [SerializeField] private List<MagicType> usingMagic;
     [SerializeField] private List<MagicType> phase1UsingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
+
+    private enum RangeType
+    {
+        Close,
+        Long,
+    }
+    private Dictionary<RangeType, List<MagicType>> magicRangeInformation =
+    new Dictionary<RangeType, List<MagicType>>
+    {
+        { RangeType.Close, new List<MagicType>{ MagicType.FireBall, MagicType.FireVortex } },
+        { RangeType.Long,  new List<MagicType>{ MagicType.FireCannon, MagicType.FireVortex } },
+    };
+
     private int magicCountInPool = 20;
 
     [SerializeField] private Transform warpPointSet;
@@ -31,7 +45,6 @@ public class MagicianCtrl : BossCtrl
     private float distanceToPlayer;
     private bool isWarpCharging;
     private int lastWarpIdx;
-
 
     [SerializeField] private Transform magicSpawnPosSet;
     private List<Transform> magicSpawnPoses = new List<Transform>();
@@ -126,11 +139,11 @@ public class MagicianCtrl : BossCtrl
             }
             else if (distanceToPlayer <= 10f)
             {
-                UseCloseRangeMagic();
+                UseMagicByRange(RangeType.Close);
             }
             else
             {
-                UseLongRangeMagic();
+                UseMagicByRange(RangeType.Long);
             }
             // 공격 실행 후 쿨타임 진입
             StartCoroutine(CoolTimeCheck());
@@ -224,66 +237,35 @@ public class MagicianCtrl : BossCtrl
 
     // 마법을 선택 후 스위칭하여 마법 함수 실행
 
-    private void UseLongRangeMagic()
+    private void UseMagicByRange(RangeType rangeType)
     {
-        int magicIdx = Random.Range(0, usingMagic.Count);
-        MagicType currentMagic = usingMagic[magicIdx];
+        // usingMagic 중 rangeType을 가진 교집합의 리스트화
+        var selectedMagic = usingMagic.Intersect(magicRangeInformation[rangeType]).ToList();
 
-        if (isRage == false)
+        int magicIdx = Random.Range(0, selectedMagic.Count);
+        MagicType currentMagic = selectedMagic[magicIdx];
+
+        UseRandomMagic(currentMagic);
+    }
+
+    private void UseRandomMagic(MagicType magicType)
+    {
+        switch (magicType)
         {
-            switch (currentMagic)
-            {
-                case MagicType.FireCannon:
-                    StartCoroutine(UseFireCannon(2));
-                    break;
-                case MagicType.FireVortex:
-                    StartCoroutine(UseFireVortex(3));
-                    break;
-            }
-        }
-        else if (isRage == true)
-        {
-            switch (currentMagic)
-            {
-                case MagicType.FireCannon:
-                    StartCoroutine(UseFireCannon(3));
-                    break;
-                case MagicType.FireVortex:
-                    StartCoroutine(UseFireVortex(6));
-                    break;
-            }
+            case MagicType.FireBall:
+                StartCoroutine(isRage ? UseFireBall(3)   : UseFireBall());
+                break;
+
+            case MagicType.FireCannon:
+                StartCoroutine(isRage ? UseFireCannon(3) : UseFireCannon(2));
+                break;
+
+            case MagicType.FireVortex:
+                StartCoroutine(isRage ? UseFireVortex(6) : UseFireVortex(3));
+                break;
         }
     }
-    private void UseCloseRangeMagic()
-    {
-        int magicIdx = Random.Range(0, usingMagic.Count);
-        MagicType currentMagic = usingMagic[magicIdx];
 
-        if (isRage == false)
-        {
-            switch (currentMagic)
-            {
-                case MagicType.FireBall:
-                    StartCoroutine(UseFireBall());
-                    break;
-                case MagicType.FireVortex:
-                    StartCoroutine(UseFireVortex());
-                    break;
-            }
-        }
-        else if (isRage == true)
-        {
-            switch (currentMagic)
-            {
-                case MagicType.FireBall:
-                    StartCoroutine(UseFireBall(3));
-                    break;
-                case MagicType.FireVortex:
-                    StartCoroutine(UseFireVortex(3));
-                    break;
-            }
-        }
-    }
 
     // UseFireBall 배치
     private IEnumerator UseFireBall(int repeat = 1, float interval = 0.1f)
@@ -352,8 +334,8 @@ public class MagicianCtrl : BossCtrl
                 fireVortexComp = fireVortex.GetComponent<FireVortex>();
 
                 Vector2 fireVortexSpawnPos = new Vector3
-                (PlayerCtrl.player.transform.position.x, 
-                PlayerCtrl.player.transform.position.y + 1.5f, 
+                (PlayerCtrl.player.transform.position.x,
+                PlayerCtrl.player.transform.position.y + 1.5f,
                 PlayerCtrl.player.transform.position.z);
 
                 fireVortex.transform.position = fireVortexSpawnPos;
