@@ -63,6 +63,7 @@ public class MagicianCtrl : BossCtrl
 
     [SerializeField] float meleeAttackRange;
     [SerializeField] private AudioClip warpSFX;
+    [SerializeField] private AudioClip fireMagicSFX;
     private readonly int dieHash = Animator.StringToHash("Die");
 
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
@@ -291,6 +292,7 @@ public class MagicianCtrl : BossCtrl
             }
             if (i < repeat - 1)
             {
+                UtilityManager.utility.PlaySFX(fireMagicSFX);
                 yield return wait;
             }
         }
@@ -316,6 +318,7 @@ public class MagicianCtrl : BossCtrl
             }
             if (i < repeat - 1)
             {
+                UtilityManager.utility.PlaySFX(fireMagicSFX);
                 yield return wait;
             }
         }
@@ -341,6 +344,7 @@ public class MagicianCtrl : BossCtrl
                 fireVortex.transform.position = fireVortexSpawnPos;
                 fireVortex.transform.rotation = PlayerCtrl.player.transform.rotation;
                 fireVortexComp.SetPool(fireVortexPool);
+                UtilityManager.utility.PlaySFX(fireMagicSFX);
             }
             if (i < repeat - 1)
             {
