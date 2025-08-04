@@ -22,6 +22,7 @@ public class MagicianCtrl : BossCtrl
 
     [SerializeField] private List<MagicType> usingMagic;
     [SerializeField] private List<MagicType> phase1UsingMagic;
+    [SerializeField] private List<MagicType> phase2UsingMagic;
     [SerializeField] private List<GameObject> magicList = new List<GameObject>();
 
     private enum RangeType
@@ -49,6 +50,11 @@ public class MagicianCtrl : BossCtrl
     [SerializeField] private Transform magicSpawnPosSet;
     private List<Transform> magicSpawnPoses = new List<Transform>();
     private Transform magicSpawnPos;
+
+    [SerializeField] private Transform fireHammerSpawnPosSet;
+    private List<Transform> fireHammerSpawnPoses = new List<Transform>();
+    private Transform fireHammerSpawnPos;
+    private int lastfireHammerSpawnIdx;
 
     private Vector2 moveDir;
 
@@ -92,9 +98,14 @@ public class MagicianCtrl : BossCtrl
         usingMagic = phase1UsingMagic;
         magicianMeleeAttack = GetComponent<MagicianMeleeAttack>();
 
-        foreach (Transform elem in magicSpawnPosSet)
+        foreach (Transform magicSpawnPos in magicSpawnPosSet)
         {
-            magicSpawnPoses.Add(elem);
+            magicSpawnPoses.Add(magicSpawnPos);
+        }
+
+        foreach (Transform fireHammerSpawnPos in fireHammerSpawnPosSet)
+        {
+            fireHammerSpawnPoses.Add(fireHammerSpawnPos);
         }
 
         UtilityManager.utility.CreatePool(ref fireBallPool, magicList[0], magicCountInPool, magicCountInPool);
@@ -224,6 +235,7 @@ public class MagicianCtrl : BossCtrl
         }
         isRage = true;
         UtilityManager.utility.PlaySFX(rageSFX);
+        usingMagic = phase2UsingMagic;
 
         coolTime = 4.0f;
 
@@ -264,11 +276,11 @@ public class MagicianCtrl : BossCtrl
                 break;
 
             case MagicType.FireVortex:
-                StartCoroutine(isRage ? UseFireVortex(6) : UseFireVortex(3));
+                StartCoroutine(UseFireVortex(6));
                 break;
                 
             case MagicType.FireHammer:
-                StartCoroutine(isRage ? UseFireHammer(3) : UseFireHammer(1));
+                StartCoroutine(UseFireHammer(2));
                 break;
         }
     }
@@ -371,12 +383,17 @@ public class MagicianCtrl : BossCtrl
             {
                 fireHammerComp = fireHammer.GetComponent<FireHammer>();
 
-                Vector2 fireHammerSpawnPos = new Vector3
-                (PlayerCtrl.player.transform.position.x,
-                PlayerCtrl.player.transform.position.y + 1.5f,
-                PlayerCtrl.player.transform.position.z);
+                int fireHammerSpawnPosIdx;
+                do
+                {
+                    fireHammerSpawnPosIdx = Random.Range(0, fireHammerSpawnPoses.Count);
+                }
+                while (fireHammerSpawnPosIdx == lastfireHammerSpawnIdx);
+                lastfireHammerSpawnIdx = fireHammerSpawnPosIdx;
 
-                fireHammer.transform.position = fireHammerSpawnPos;
+                fireHammerSpawnPos = fireHammerSpawnPoses[fireHammerSpawnPosIdx];
+
+                fireHammer.transform.position = fireHammerSpawnPos.position;
                 fireHammer.transform.rotation = PlayerCtrl.player.transform.rotation;
                 fireHammerComp.SetPool(fireHammerPool);
                 UtilityManager.utility.PlaySFX(fireMagicSFX);
