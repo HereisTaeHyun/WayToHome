@@ -6,12 +6,15 @@ public class FireHammer : MagicBase
     public MagicType magicType;
     private Collider2D attackCollider;
     private float attackTriggerTime = 5.0f;
+    [SerializeField] private AudioClip attackSFX;
+    private int attackHash = Animator.StringToHash("Attack");
+    private int spawnHash = Animator.StringToHash("Spawn");
     
     protected override void Start()
     {
         base.Start();
-        damage = -10.0f;
 
+        damage = -10.0f;
         attackCollider = GetComponent<Collider2D>();
     }
 
@@ -21,19 +24,23 @@ public class FireHammer : MagicBase
         
         if (attackTriggerTime <= 0)
         {
+            UtilityManager.utility.PlaySFX(attackSFX);
             Attack();
         }
     }
 
     private void Attack()
     {
-        Debug.Log("Attack");
+        anim.SetTrigger(attackHash);
     }
-    
+
     public override void SetPool(ObjectPool<GameObject> pool)
     {
         originPool = pool;
         isPool = false;
+        attackTriggerTime = 5.0f;
+
+        anim.SetTrigger(spawnHash);
     }
 
     // Player에 닿으면 공격
@@ -60,6 +67,7 @@ public class FireHammer : MagicBase
     {
         attackCollider.enabled = false;
     }
+
     // 마법이 끝나고 리턴
     public void ReturnAfterAnim()
     {

@@ -33,7 +33,7 @@ public class MagicianCtrl : BossCtrl
     new Dictionary<RangeType, List<MagicType>>
     {
         { RangeType.Close, new List<MagicType>{ MagicType.FireBall, MagicType.FireVortex } },
-        { RangeType.Long,  new List<MagicType>{ MagicType.FireCannon, MagicType.FireVortex } },
+        { RangeType.Long,  new List<MagicType>{ MagicType.FireCannon, MagicType.FireVortex, MagicType.FireHammer } },
     };
 
     private int magicCountInPool = 20;
@@ -59,6 +59,8 @@ public class MagicianCtrl : BossCtrl
     private FireCannon fireCannonComp;
     private ObjectPool<GameObject> fireVortexPool;
     private FireVortex fireVortexComp;
+    private ObjectPool<GameObject> fireHammerPool;
+    private FireHammer fireHammerComp;
 
 
     [SerializeField] float meleeAttackRange;
@@ -98,6 +100,7 @@ public class MagicianCtrl : BossCtrl
         UtilityManager.utility.CreatePool(ref fireBallPool, magicList[0], magicCountInPool, magicCountInPool);
         UtilityManager.utility.CreatePool(ref fireCannonPool, magicList[1], magicCountInPool, magicCountInPool);
         UtilityManager.utility.CreatePool(ref fireVortexPool, magicList[2], magicCountInPool, magicCountInPool);
+        UtilityManager.utility.CreatePool(ref fireHammerPool, magicList[3], magicCountInPool, magicCountInPool);
 
         rageHP = maxHP * 0.6f;
         canAttack = true;
@@ -133,7 +136,6 @@ public class MagicianCtrl : BossCtrl
 
         if (canAttack && SeeingPlayer())
         {
-
             if (distanceToPlayer <= meleeAttackRange)
             {
                 MeleeAttackAble(moveDir);
@@ -254,7 +256,7 @@ public class MagicianCtrl : BossCtrl
         switch (magicType)
         {
             case MagicType.FireBall:
-                StartCoroutine(isRage ? UseFireBall(3)   : UseFireBall());
+                StartCoroutine(isRage ? UseFireBall(3) : UseFireBall(1));
                 break;
 
             case MagicType.FireCannon:
@@ -263,6 +265,10 @@ public class MagicianCtrl : BossCtrl
 
             case MagicType.FireVortex:
                 StartCoroutine(isRage ? UseFireVortex(6) : UseFireVortex(3));
+                break;
+                
+            case MagicType.FireHammer:
+                StartCoroutine(isRage ? UseFireHammer(3) : UseFireHammer(1));
                 break;
         }
     }
@@ -324,7 +330,7 @@ public class MagicianCtrl : BossCtrl
         }
     }
 
-    // FireCannon 배치
+    // FireVortex 배치
     private IEnumerator UseFireVortex(int repeat = 1, float interval = 0.8f)
     {
         WaitForSeconds wait = new WaitForSeconds(interval);
@@ -344,6 +350,35 @@ public class MagicianCtrl : BossCtrl
                 fireVortex.transform.position = fireVortexSpawnPos;
                 fireVortex.transform.rotation = PlayerCtrl.player.transform.rotation;
                 fireVortexComp.SetPool(fireVortexPool);
+                UtilityManager.utility.PlaySFX(fireMagicSFX);
+            }
+            if (i < repeat - 1)
+            {
+                yield return wait;
+            }
+        }
+    }
+
+    // FireHammer 배치
+    private IEnumerator UseFireHammer(int repeat = 1, float interval = 0.8f)
+    {
+        WaitForSeconds wait = new WaitForSeconds(interval);
+        for (int i = 0; i < repeat; i++)
+        {
+            GameObject fireHammer = UtilityManager.utility.GetFromPool(fireHammerPool, magicCountInPool);
+
+            if (fireHammer != null)
+            {
+                fireHammerComp = fireHammer.GetComponent<FireHammer>();
+
+                Vector2 fireHammerSpawnPos = new Vector3
+                (PlayerCtrl.player.transform.position.x,
+                PlayerCtrl.player.transform.position.y + 1.5f,
+                PlayerCtrl.player.transform.position.z);
+
+                fireHammer.transform.position = fireHammerSpawnPos;
+                fireHammer.transform.rotation = PlayerCtrl.player.transform.rotation;
+                fireHammerComp.SetPool(fireHammerPool);
                 UtilityManager.utility.PlaySFX(fireMagicSFX);
             }
             if (i < repeat - 1)
