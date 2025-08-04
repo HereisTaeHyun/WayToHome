@@ -5,27 +5,38 @@ public class FireHammer : MagicBase
 {
     public MagicType magicType;
     private Collider2D attackCollider;
+    private bool isAttack;
     private float attackTriggerTime = 5.0f;
     [SerializeField] private AudioClip attackSFX;
     private int attackHash = Animator.StringToHash("Attack");
     private int spawnHash = Animator.StringToHash("Spawn");
-    
+
+    private void Awake()
+    {
+        rb2D = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+    }
+
     protected override void Start()
     {
-        base.Start();
-
         damage = -10.0f;
         attackCollider = GetComponent<Collider2D>();
     }
 
     protected override void FixedUpdate()
     {
+        if (isAttack == true)
+        {
+            return;
+        }
+
         attackTriggerTime -= Time.deltaTime;
-        
+
         if (attackTriggerTime <= 0)
         {
-            UtilityManager.utility.PlaySFX(attackSFX);
             Attack();
+            UtilityManager.utility.PlaySFX(attackSFX);
+            isAttack = true;
         }
     }
 
@@ -38,6 +49,7 @@ public class FireHammer : MagicBase
     {
         originPool = pool;
         isPool = false;
+        isAttack = false;
         attackTriggerTime = 5.0f;
 
         anim.SetTrigger(spawnHash);
