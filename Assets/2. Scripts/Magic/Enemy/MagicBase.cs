@@ -7,6 +7,7 @@ public enum MagicType
     FireCannon,
     FireMissile,
     FireVortex,
+    FireHammer,
     Meteor,
     ShockWave,
     BodyImpact,
