@@ -278,6 +278,7 @@ public class DragonCtrl : BossCtrl
 
             // 비행 상태 공격, 5번의 마법 공격 후 이동
             case DragonState.FlyToAttack:
+                Debug.Log(magicCountFly);
                 if (canAttack == true)
                 {
                     // 공격 및 3초간 휴식
