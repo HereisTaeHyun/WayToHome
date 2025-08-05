@@ -62,7 +62,7 @@ public class DragonCtrl : BossCtrl
 
     #region Magic Settings
     [SerializeField] private List<MagicType> usingMagic;
-    [SerializeField] private List<MagicType> groungUsingMagic;
+    [SerializeField] private List<MagicType> groundUsingMagic;
     [SerializeField] private List<MagicType> flyUsingMagic;
 
     [Header("Magic Prefabs")]
@@ -133,7 +133,7 @@ public class DragonCtrl : BossCtrl
         {
             standingPoses.Add(standingPoint);
         }
-        usingMagic = groungUsingMagic;
+        usingMagic = groundUsingMagic;
 
         // 마법 풀 생성
         // 인덱스 번호는 위 마법 위치 딕셔너리와 같은 순서
