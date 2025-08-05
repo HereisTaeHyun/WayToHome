@@ -289,7 +289,7 @@ private readonly int dieHash = Animator.StringToHash("Die");
                 if (Mathf.Approximately(transform.position.y, nextPos.y))
                 {
                     magicCount = 0;
-                    dragonState = DragonState.OnFly;
+                    dragonState = DragonState.FlyToAttack;
                 }
                 break;
 
