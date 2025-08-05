@@ -8,76 +8,76 @@ using Unity.Cinemachine;
 
 public class DragonCtrl : BossCtrl
 {
-#region Dragon State
-public enum DragonState
-{
-    Idle = 0,
-    FlyIdle = 1,
-    FlyToAttack = 2,
-    OnFly = 3,
-    EndFly = 4,
-}
-[NonSerialized] public DragonState dragonState;
-#endregion
+    #region Dragon State
+    public enum DragonState
+    {
+        Idle = 0,
+        FlyIdle = 1,
+        FlyToAttack = 2,
+        OnFly = 3,
+        EndFly = 4,
+    }
+    [NonSerialized] public DragonState dragonState;
+    #endregion
 
-#region Portal
-[Header("Portal References")]
+    #region Portal
+    [Header("Portal References")]
     [SerializeField] private GameObject portalOnScene;
     private GameObject portalSpawnPoint;
-#endregion
+    #endregion
 
-#region Movement & Position
+    #region Movement & Position
     private Vector2 seeDir;
     private Vector2 moveDir;
 
-[Header("Standing Positions")]
+    [Header("Standing Positions")]
     [SerializeField] private Transform standingPosSet;
     private List<Transform> standingPoses = new List<Transform>();
     private int lastStandingIdx;
 
-private Vector2 nextPos;
-private Transform targetPos;
+    private Vector2 nextPos;
+    private Transform targetPos;
 
-[Header("Flight Parameters")]
+    [Header("Flight Parameters")]
     private float flyUpDownSpeed = 5.0f;
     private float flyingSpeed = 10.0f;
     private Vector2 newPosition;
-#endregion
+    #endregion
 
-#region Camera
-[Header("Camera")]
+    #region Camera
+    [Header("Camera")]
     [SerializeField] private CinemachineCamera cam;
     private CinemachineConfiner2D confiner;
-#endregion
+    #endregion
 
-#region Attack State
-private bool isFly;
+    #region Attack State
+    private bool isFly;
 
     [Header("Magic Counters")]
     private int magicCountGround;
     private int magicCountFly;
     private int magicCountUntilFly = 5;
     private int magicCountUntilMove = 5;
-#endregion
+    #endregion
 
-#region Magic Settings
+    #region Magic Settings
     [SerializeField] private List<MagicType> usingMagic;
     [SerializeField] private List<MagicType> groungUsingMagic;
     [SerializeField] private List<MagicType> flyUsingMagic;
 
-[Header("Magic Prefabs")]
-[SerializeField] private List<GameObject> magicList = new List<GameObject>();
+    [Header("Magic Prefabs")]
+    [SerializeField] private List<GameObject> magicList = new List<GameObject>();
 
-[Header("Magic Pool Settings")]
+    [Header("Magic Pool Settings")]
     private int magicCountInPool = 100;
     private float magicWaitTimeGround = 0.5f;
 
     private WaitForSeconds waitMagicGround;
     private readonly WaitForSeconds waitShockWave = new WaitForSeconds(1.7f);
-#endregion
+    #endregion
 
-#region Spawn Positions
-[Header("Magic Spawn Points")]
+    #region Spawn Positions
+    [Header("Magic Spawn Points")]
     [SerializeField] private List<Transform> fireBallSpawnPoses;
     [SerializeField] private List<Transform> fireMissileSpawnPoses;
     [SerializeField] private List<Transform> fireCannonSpawnPoses;
@@ -86,32 +86,32 @@ private bool isFly;
     private Transform fireCannonSpawnPos;
     private Transform shockWaveSpawnPos;
     private Vector3 meteorSpawnPos;
-#endregion
+    #endregion
 
-#region Object Pools
+    #region Object Pools
     private ObjectPool<GameObject> fireBallPool;
     private ObjectPool<GameObject> fireMissilePool;
     private ObjectPool<GameObject> fireCannonPool;
     private ObjectPool<GameObject> shockWavePool;
     private ObjectPool<GameObject> meteorPool;
-#endregion
+    #endregion
 
-#region Magic Components
+    #region Magic Components
     private FireBall fireBallComp;
     private FireMissile fireMissileComp;
     private FireCannon fireCannonComp;
     private ShockWave shockWaveComp;
     private Meteor meteorComp;
-#endregion
+    #endregion
 
-#region Audio Clips
-[Header("Audio Clips")]
+    #region Audio Clips
+    [Header("Audio Clips")]
     [SerializeField] private AudioClip useFireMagicSFX;
     [SerializeField] private AudioClip useMeteorSFX;
     [SerializeField] private AudioClip shockWaveSFX;
-#endregion
+    #endregion
 
-#region Animation Hashes
+    #region Animation Hashes
     private readonly int seeDirHash = Animator.StringToHash("SeeDir");
     private readonly int moveDirHash = Animator.StringToHash("MoveDir");
     private readonly int attackHash = Animator.StringToHash("Attack");
@@ -119,17 +119,17 @@ private bool isFly;
     private readonly int flyHash = Animator.StringToHash("Fly");
     private readonly int flyStateHash = Animator.StringToHash("FlyState");
     private readonly int dieHash = Animator.StringToHash("Die");
-#endregion
+    #endregion
 
     protected override void Init()
     {
         base.Init();
-    
+
         portalSpawnPoint = transform.Find("PortalSpawnPoint").gameObject;
         dragonState = DragonState.Idle;
 
         // 이동, 마법 필요 위치 전달 및 저장
-        foreach(Transform standingPoint in standingPosSet)
+        foreach (Transform standingPoint in standingPosSet)
         {
             standingPoses.Add(standingPoint);
         }
@@ -163,7 +163,7 @@ private bool isFly;
 
     void Update()
     {
-        if(GameManager.instance.readIsGameOver == true || isDie == true)
+        if (GameManager.instance.readIsGameOver == true || isDie == true)
         {
             return;
         }
@@ -173,13 +173,13 @@ private bool isFly;
 
         // 땅에 있는지 비행 상태인지 체크하여 분기
         // 마법을 5 회 사용하면 비행, 아니면 지상에서 바라보기
-        if(magicCountGround == magicCountUntilFly && !anim.GetCurrentAnimatorStateInfo(0).IsName("UseMagic") && !anim.IsInTransition(0))
+        if (magicCountGround == magicCountUntilFly && !anim.GetCurrentAnimatorStateInfo(0).IsName("UseMagic") && !anim.IsInTransition(0))
         {
             usingMagic = flyUsingMagic;
             Fly();
         }
 
-        if(canAttack == true && isFly == false)
+        if (canAttack == true && isFly == false)
         {
             // 공격 및 3초간 휴식
             UseGroundMagic();
@@ -202,7 +202,7 @@ private bool isFly;
         canMove = true;
     }
 
-#region HP, Die
+    #region HP, Die
     public override void ChangeHP(float value)
     {
         if (isFly == true)
@@ -211,7 +211,7 @@ private bool isFly;
         }
 
         StartCoroutine(UtilityManager.utility.BlinkOnDamage(spriteRenderer, blinkTime));
-        
+
         currentHP = Mathf.Clamp(currentHP + value, 0, maxHP);
         UtilityManager.utility.PlaySFX(enemyGetHitSFX);
 
@@ -245,10 +245,10 @@ private bool isFly;
         portalOnScene.transform.position = new Vector3(portalSpawnPoint.transform.position.x, portalSpawnPoint.transform.position.y, 0f);
     }
 
-#endregion
+    #endregion
 
-#region Fly
-// 드래곤이 공중으로 이동하는 비행 로직을 처리
+    #region Fly
+    // 드래곤이 공중으로 이동하는 비행 로직을 처리
     private void Fly()
     {
         isFly = true;
@@ -310,7 +310,7 @@ private bool isFly;
                     int standingPosIdx;
                     do
                     {
-                    standingPosIdx = Random.Range(0, standingPoses.Count);
+                        standingPosIdx = Random.Range(0, standingPoses.Count);
                     }
                     while (standingPosIdx == lastStandingIdx);
                     lastStandingIdx = standingPosIdx;
@@ -367,10 +367,10 @@ private bool isFly;
         var lens = cam.Lens;
         float currentSize = lens.OrthographicSize;
 
-        while(time <= changeTime)
+        while (time <= changeTime)
         {
             time += Time.deltaTime;
-            float t = time/changeTime;
+            float t = time / changeTime;
 
             lens.OrthographicSize = Mathf.Lerp(currentSize, targetSize, t);
             cam.Lens = lens;
@@ -383,9 +383,9 @@ private bool isFly;
         confiner?.InvalidateLensCache();
     }
 
-#endregion
+    #endregion
 
-#region Pattern
+    #region Pattern
     // 마법 공격 후 일정 시간 동안 쿨타임 처리
     private IEnumerator CoolTimeCheck()
     {
@@ -403,26 +403,26 @@ private bool isFly;
         switch (currentMagic)
         {
             case MagicType.FireBall:
-                StartCoroutine(UseFireBall());
+                StartCoroutine(UseFireBallGround());
                 anim.SetFloat(attackTypeHash, -1);
                 break;
             case MagicType.FireMissile:
-                StartCoroutine(UseFireMissile());
+                StartCoroutine(UseFireMissileGround());
                 anim.SetTrigger(attackHash);
                 anim.SetFloat(attackTypeHash, -1);
                 break;
             case MagicType.FireCannon:
-                StartCoroutine(UseFireCannon());
+                StartCoroutine(UseFireCannonGround());
                 anim.SetTrigger(attackHash);
                 anim.SetFloat(attackTypeHash, -1);
                 break;
             case MagicType.ShockWave:
-                StartCoroutine(UseShockWave());
+                StartCoroutine(UseShockwaveGround());
                 anim.SetTrigger(attackHash);
                 anim.SetFloat(attackTypeHash, 1);
                 break;
             case MagicType.Meteor:
-                StartCoroutine(UseMeteor());
+                StartCoroutine(UseMeteorGround());
                 anim.SetTrigger(attackHash);
                 anim.SetFloat(attackTypeHash, -1);
                 break;
@@ -437,22 +437,25 @@ private bool isFly;
         switch (currentMagic)
         {
             case MagicType.FireMissile:
-                StartCoroutine(UseFireMissile());
+                StartCoroutine(UseFireMissileGround());
                 anim.SetTrigger(attackHash);
                 break;
             case MagicType.FireCannon:
-                StartCoroutine(UseFireCannon());
+                StartCoroutine(UseFireCannonGround());
                 anim.SetTrigger(attackHash);
                 break;
             case MagicType.Meteor:
-                StartCoroutine(UseMeteor());
+                StartCoroutine(UseMeteorGround());
                 anim.SetTrigger(attackHash);
                 break;
         }
     }
+    #endregion
+
+    #region GroundPattern
 
     // FireBall 마법을 스폰 위치에 따라 생성 및 초기화
-    private IEnumerator UseFireBall()
+    private IEnumerator UseFireBallGround()
     {
         yield return waitMagicGround;
         UtilityManager.utility.PlaySFX(useFireMagicSFX);
@@ -471,15 +474,15 @@ private bool isFly;
     }
 
     // FireMissile 마법을 각 지정된 위치에 생성 및 초기화
-    private IEnumerator UseFireMissile()
+    private IEnumerator UseFireMissileGround()
     {
         yield return waitMagicGround;
         UtilityManager.utility.PlaySFX(useFireMagicSFX);
-        foreach(Transform fireMissileSpawnPos in fireMissileSpawnPoses)
+        foreach (Transform fireMissileSpawnPos in fireMissileSpawnPoses)
         {
             GameObject fireMissile = UtilityManager.utility.GetFromPool(fireMissilePool, 10);
 
-            if(fireMissile != null)
+            if (fireMissile != null)
             {
                 fireMissileComp = fireMissile.GetComponent<FireMissile>();
                 fireMissile.transform.position = fireMissileSpawnPos.transform.position;
@@ -490,20 +493,20 @@ private bool isFly;
     }
 
     // FireCannon 마법을 플레이어 방향에 따라 좌/우 위치에 생성
-    private IEnumerator UseFireCannon()
+    private IEnumerator UseFireCannonGround()
     {
         yield return waitMagicGround;
         UtilityManager.utility.PlaySFX(useFireMagicSFX);
         GameObject fireCannon = UtilityManager.utility.GetFromPool(fireCannonPool, magicCountInPool);
 
-        if(fireCannon != null)
+        if (fireCannon != null)
         {
             fireCannonComp = fireCannon.GetComponent<FireCannon>();
-            if(seeDir.x < 0)
+            if (seeDir.x < 0)
             {
                 fireCannonSpawnPos = fireCannonSpawnPoses[0];
             }
-            else if(seeDir.x > 0)
+            else if (seeDir.x > 0)
             {
                 fireCannonSpawnPos = fireCannonSpawnPoses[1];
             }
@@ -516,20 +519,20 @@ private bool isFly;
     }
 
     // ShockWave 마법을 플레이어 방향에 따라 좌/우 위치에 생성
-    private IEnumerator UseShockWave()
+    private IEnumerator UseShockwaveGround()
     {
         yield return waitShockWave;
         UtilityManager.utility.PlaySFX(shockWaveSFX);
         GameObject shockWave = UtilityManager.utility.GetFromPool(shockWavePool, magicCountInPool);
 
-        if(shockWave != null)
+        if (shockWave != null)
         {
             shockWaveComp = shockWave.GetComponent<ShockWave>();
-            if(seeDir.x < 0)
+            if (seeDir.x < 0)
             {
                 shockWaveSpawnPos = shockWaveSpawnPoses[0];
             }
-            else if(seeDir.x > 0)
+            else if (seeDir.x > 0)
             {
                 shockWaveSpawnPos = shockWaveSpawnPoses[1];
             }
@@ -542,19 +545,19 @@ private bool isFly;
     }
 
     // Meteor 마법을 플레이어 머리 위에 생성
-    private IEnumerator UseMeteor()
+    private IEnumerator UseMeteorGround()
     {
         yield return waitMagicGround;
         UtilityManager.utility.PlaySFX(useMeteorSFX);
         GameObject meteor = UtilityManager.utility.GetFromPool(meteorPool, magicCountInPool);
 
-        if(meteor != null)
+        if (meteor != null)
         {
             meteorComp = meteor.GetComponent<Meteor>();
 
             meteorSpawnPos = new Vector3
-            (PlayerCtrl.player.transform.position.x, 
-            PlayerCtrl.player.transform.position.y + 10f, 
+            (PlayerCtrl.player.transform.position.x,
+            PlayerCtrl.player.transform.position.y + 10f,
             PlayerCtrl.player.transform.position.z);
 
             meteor.transform.position = meteorSpawnPos;
@@ -562,5 +565,7 @@ private bool isFly;
             meteorComp.SetPool(meteorPool);
         }
     }
-#endregion
+    #endregion
+    #region FlyPattern
+    #endregion
 }
