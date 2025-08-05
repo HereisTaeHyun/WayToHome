@@ -12,7 +12,8 @@ public class DragonCtrl : BossCtrl
 public enum DragonState
 {
     Idle,
-    StartFly,
+    FlyIdle,
+    FlyToAttack,
     OnFly,
     EndFly,
 }
@@ -257,11 +258,11 @@ private readonly int dieHash = Animator.StringToHash("Die");
             // 비행 시작 전 대기 상태에서 초기 상승 위치 설정
             case DragonState.Idle:
                 nextPos = new Vector2(transform.position.x, transform.position.y + 13.0f);
-                dragonState = DragonState.StartFly;
+                dragonState = DragonState.FlyIdle;
                 break;
 
             // 위로 상승하면서 비행 시작, 목표 높이에 도달하면 다음 이동 위치 설정
-            case DragonState.StartFly:
+            case DragonState.FlyIdle:
                 anim.SetBool(flyHash, true);
                 anim.SetInteger(flyStateHash, 0);
 
