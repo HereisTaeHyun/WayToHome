@@ -54,17 +54,20 @@ private bool isFly;
 
 [Header("Magic Counters")]
 private int magicCount;
+private int magicCountUntilFly = 5;
 private int magicCountUntilMove = 5;
 #endregion
 
 #region Magic Settings
-private List<MagicType> usingMagic;
+    [SerializeField] private List<MagicType> usingMagic;
+    [SerializeField] private List<MagicType> groungUsingMagic;
+    [SerializeField] private List<MagicType> flyUsingMagic;
 
 [Header("Magic Prefabs")]
 [SerializeField] private List<GameObject> magicList = new List<GameObject>();
 
 [Header("Magic Pool Settings")]
-private int magicCountInPool = 5;
+private int magicCountInPool = 100;
 private static float MAGIC_WAIT_TIME = 0.5f;
 
 [Header("Magic Timing")]
@@ -129,14 +132,7 @@ private readonly int dieHash = Animator.StringToHash("Die");
         {
             standingPoses.Add(standingPoint);
         }
-        usingMagic = new List<MagicType>()
-        {
-            {MagicType.FireBall},
-            {MagicType.FireMissile},
-            {MagicType.FireCannon},
-            {MagicType.ShockWave},
-            {MagicType.Meteor},
-        };
+        usingMagic = groungUsingMagic;
 
         // 마법 풀 생성
         // 인덱스 번호는 위 마법 위치 딕셔너리와 같은 순서
@@ -174,16 +170,18 @@ private readonly int dieHash = Animator.StringToHash("Die");
 
         // 땅에 있는지 비행 상태인지 체크하여 분기
         // 마법을 5 회 사용하면 비행, 아니면 지상에서 바라보기
-        if(magicCount == magicCountUntilMove && !anim.GetCurrentAnimatorStateInfo(0).IsName("UseMagic") && !anim.IsInTransition(0))
+        if(magicCount == magicCountUntilFly && !anim.GetCurrentAnimatorStateInfo(0).IsName("UseMagic") && !anim.IsInTransition(0))
         {
+            usingMagic = flyUsingMagic;
             Fly();
         }
 
         if(canAttack == true && SeeingPlayer())
         {
             // 공격 및 3초간 휴식
-            UseRandomMagic();
+            UseGroundMagic();
             magicCount += 1;
+            Debug.Log(magicCount);
             StartCoroutine(CoolTimeCheck());
         }
     }
@@ -252,8 +250,9 @@ private readonly int dieHash = Animator.StringToHash("Die");
     private void Fly()
     {
         isFly = true;
-        canAttack = false;  
-        switch(dragonState)
+        canAttack = false;
+        Debug.Log(dragonState);
+        switch (dragonState)
         {
             // 비행 시작 전 대기 상태에서 초기 상승 위치 설정
             case DragonState.Idle:
@@ -262,6 +261,23 @@ private readonly int dieHash = Animator.StringToHash("Die");
                 break;
 
             // 위로 상승하면서 비행 시작, 목표 높이에 도달하면 다음 이동 위치 설정
+            // case DragonState.FlyIdle:
+            //     anim.SetBool(flyHash, true);
+            //     anim.SetInteger(flyStateHash, 0);
+
+            //     newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
+            //     rb2D.MovePosition(newPosition);
+            //     StartCoroutine(ZoomInOut(10.0f, 3.0f));
+
+            //     if (Mathf.Approximately(transform.position.y, nextPos.y))
+            //     {
+            //         dragonState = DragonState.OnFly;
+            //         int moveIdx = Random.Range(0, standingPoses.Count);
+            //         targetPos = standingPoses[moveIdx];
+            //     }
+            //     break;
+
+            // 위로 상승하면서 비행 시작, 목표 높이에 도달하면 비행 상태 마법 패턴 개시
             case DragonState.FlyIdle:
                 anim.SetBool(flyHash, true);
                 anim.SetInteger(flyStateHash, 0);
@@ -271,6 +287,18 @@ private readonly int dieHash = Animator.StringToHash("Die");
                 StartCoroutine(ZoomInOut(10.0f, 3.0f));
 
                 if (Mathf.Approximately(transform.position.y, nextPos.y))
+                {
+                    magicCount = 0;
+                    dragonState = DragonState.OnFly;
+                }
+                break;
+
+            // 비행 상태 공격, 5번의 마법 공격 후 이동
+            case DragonState.FlyToAttack:
+                UseFlyMagic();
+                magicCount += 1;
+
+                if (magicCount == magicCountUntilMove)
                 {
                     dragonState = DragonState.OnFly;
                     int moveIdx = Random.Range(0, standingPoses.Count);
@@ -353,7 +381,7 @@ private readonly int dieHash = Animator.StringToHash("Die");
     }
 
     // 마법을 선택 후 스위칭하여 마법 함수 실행
-    private void UseRandomMagic()
+    private void UseGroundMagic()
     {
 
         int magicIdx = Random.Range(0, usingMagic.Count);
@@ -384,6 +412,28 @@ private readonly int dieHash = Animator.StringToHash("Die");
                 StartCoroutine(UseMeteor());
                 anim.SetTrigger(attackHash);
                 anim.SetFloat(attackTypeHash, -1);
+                break;
+        }
+    }
+
+    // 마법을 선택 후 스위칭하여 마법 함수 실행
+    private void UseFlyMagic()
+    {
+        int magicIdx = Random.Range(0, usingMagic.Count);
+        MagicType currentMagic = usingMagic[magicIdx];
+        switch (currentMagic)
+        {
+            case MagicType.FireMissile:
+                StartCoroutine(UseFireMissile());
+                anim.SetTrigger(attackHash);
+                break;
+            case MagicType.FireCannon:
+                StartCoroutine(UseFireCannon());
+                anim.SetTrigger(attackHash);
+                break;
+            case MagicType.Meteor:
+                StartCoroutine(UseMeteor());
+                anim.SetTrigger(attackHash);
                 break;
         }
     }
