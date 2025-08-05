@@ -404,7 +404,6 @@ private bool isFly;
         {
             case MagicType.FireBall:
                 StartCoroutine(UseFireBall());
-                anim.SetTrigger(attackHash);
                 anim.SetFloat(attackTypeHash, -1);
                 break;
             case MagicType.FireMissile:
