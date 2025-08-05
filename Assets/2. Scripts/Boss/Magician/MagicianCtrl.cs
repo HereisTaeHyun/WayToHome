@@ -276,7 +276,7 @@ public class MagicianCtrl : BossCtrl
                 break;
 
             case MagicType.FireVortex:
-                StartCoroutine(UseFireVortex(6));
+                StartCoroutine(UseFireVortex(3));
                 break;
                 
             case MagicType.FireHammer:
