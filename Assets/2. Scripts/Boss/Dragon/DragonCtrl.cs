@@ -11,11 +11,11 @@ public class DragonCtrl : BossCtrl
 #region Dragon State
 public enum DragonState
 {
-    Idle,
-    FlyIdle,
-    FlyToAttack,
-    OnFly,
-    EndFly,
+    Idle = 0,
+    FlyIdle = 1,
+    FlyToAttack = 2,
+    OnFly = 3,
+    EndFly = 4,
 }
 [NonSerialized] public DragonState dragonState;
 #endregion
@@ -261,23 +261,6 @@ private readonly int dieHash = Animator.StringToHash("Die");
                 break;
 
             // 위로 상승하면서 비행 시작, 목표 높이에 도달하면 다음 이동 위치 설정
-            // case DragonState.FlyIdle:
-            //     anim.SetBool(flyHash, true);
-            //     anim.SetInteger(flyStateHash, 0);
-
-            //     newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
-            //     rb2D.MovePosition(newPosition);
-            //     StartCoroutine(ZoomInOut(10.0f, 3.0f));
-
-            //     if (Mathf.Approximately(transform.position.y, nextPos.y))
-            //     {
-            //         dragonState = DragonState.OnFly;
-            //         int moveIdx = Random.Range(0, standingPoses.Count);
-            //         targetPos = standingPoses[moveIdx];
-            //     }
-            //     break;
-
-            // 위로 상승하면서 비행 시작, 목표 높이에 도달하면 비행 상태 마법 패턴 개시
             case DragonState.FlyIdle:
                 anim.SetBool(flyHash, true);
                 anim.SetInteger(flyStateHash, 0);
@@ -288,23 +271,40 @@ private readonly int dieHash = Animator.StringToHash("Die");
 
                 if (Mathf.Approximately(transform.position.y, nextPos.y))
                 {
-                    magicCount = 0;
-                    dragonState = DragonState.FlyToAttack;
-                }
-                break;
-
-            // 비행 상태 공격, 5번의 마법 공격 후 이동
-            case DragonState.FlyToAttack:
-                UseFlyMagic();
-                magicCount += 1;
-
-                if (magicCount == magicCountUntilMove)
-                {
                     dragonState = DragonState.OnFly;
                     int moveIdx = Random.Range(0, standingPoses.Count);
                     targetPos = standingPoses[moveIdx];
                 }
                 break;
+
+            // // 위로 상승하면서 비행 시작, 목표 높이에 도달하면 비행 상태 마법 패턴 개시
+            // case DragonState.FlyIdle:
+            //     anim.SetBool(flyHash, true);
+            //     anim.SetInteger(flyStateHash, 0);
+
+            //     newPosition = Vector2.MoveTowards(transform.position, nextPos, flyUpDownSpeed * Time.fixedDeltaTime);
+            //     rb2D.MovePosition(newPosition);
+            //     StartCoroutine(ZoomInOut(10.0f, 3.0f));
+
+            //     if (Mathf.Approximately(transform.position.y, nextPos.y))
+            //     {
+            //         magicCount = 0;
+            //         dragonState = DragonState.FlyToAttack;
+            //     }
+            //     break;
+
+            // // 비행 상태 공격, 5번의 마법 공격 후 이동
+            // case DragonState.FlyToAttack:
+            //     UseFlyMagic();
+            //     magicCount += 1;
+
+            //     if (magicCount == magicCountUntilMove)
+            //     {
+            //         dragonState = DragonState.OnFly;
+            //         int moveIdx = Random.Range(0, standingPoses.Count);
+            //         targetPos = standingPoses[moveIdx];
+            //     }
+            //     break;
 
             // 비행 상태에서 수평 방향으로 목표 위치까지 이동
             case DragonState.OnFly:
